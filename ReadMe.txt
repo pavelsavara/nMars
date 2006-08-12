@@ -76,4 +76,4 @@ https://svn.sourceforge.net/svnroot/nmars/trunk
 
 Ideas, contributions and bug reports are welcome.
 Pavel Savara
-pavel.savara@gmail.com
+pavel (dot) savara (at) gmail (dot) com
