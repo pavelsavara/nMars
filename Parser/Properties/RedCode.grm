@@ -42,6 +42,9 @@ Comment Line  =  ';'
 
 <End> ::= End
         | End <nl>
+        | End Label
+        | End Label <nl>
+
 
 <Statements> ::= <StatementNl>
                | <StatementNl> <Statements>
@@ -96,8 +99,8 @@ Comment Line  =  ';'
 <Mode> ::= '#' | '$' | '@' | '<' | '>' | '{' | '}' | '*'
 
 <Operator0> ::= Nop 
-<Operator1> ::= Jmp 
-<Operator2> ::= Dat | Spl | Mov | Add | Sub | Mul | Div | Mod
+<Operator1> ::= Jmp | Spl | Dat 
+<Operator2> ::= Mov | Add | Sub | Mul | Div | Mod
               | Jmz | Jmn | Djn | Slt | Sne | Ldp | Stp
               | Cmp | Seq 
 
