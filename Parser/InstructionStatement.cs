@@ -20,7 +20,7 @@ namespace nMars.Parser
             get { return ToString(); }
         }
 
-        public int Address=-1;
+        public int Address = -1;
         public Operation Operation;
         public Modifier Modifier;
         public Parameter A;

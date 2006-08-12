@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 
 namespace nMars.RedCode
@@ -21,9 +20,15 @@ namespace nMars.RedCode
         string Name { get; }
 
         /// <summary>
+        /// PIN - P-Space identification number
+        /// (-1 is private)
+        /// </summary>
+        int Pin { get; }
+
+        /// <summary>
         /// Compiled with rules
         /// </summary>
-        Rules Rules { get;}
+        Rules Rules { get; }
 
         /// <summary>
         /// List of Instructions
@@ -35,6 +40,5 @@ namespace nMars.RedCode
         /// </summary>
         /// <param name="sw"></param>
         void Dump(StreamWriter sw);
-
     }
 }

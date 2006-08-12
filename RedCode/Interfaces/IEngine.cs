@@ -6,12 +6,8 @@ namespace nMars.RedCode
     public interface IEngine
     {
         /// <summary>
-        /// Run complete match
+        /// Run complete round
         /// </summary>
-        /// <param name="wariors"></param>
-        /// <param name="rules"></param>
-        /// <param name="random"></param>
-        /// <returns></returns>
-        IList<FightResult> Run(IList<IWarrior> wariors, Rules rules, Random random);
+        IList<FightResult> Run(IList<IWarrior> wariors, Rules rules, IPSpaces pSpaces, Random random, IList<int> forcedAddresses);
     }
 }

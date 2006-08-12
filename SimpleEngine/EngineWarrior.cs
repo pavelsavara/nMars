@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
@@ -16,7 +15,7 @@ namespace nMars.SimpleEngine
             this.loadAddress = loadAddress;
             Load();
         }
-        
+
         private void Load()
         {
             bool initpspace = false;
@@ -25,6 +24,11 @@ namespace nMars.SimpleEngine
             for (int a = 0; a < Length; a++)
             {
                 Instruction instruction = this[a];
+                if (instruction.ValueA >= core.CoreSize ||instruction.ValueA<=0-core.CoreSize ||
+                    instruction.ValueB >= core.CoreSize || instruction.ValueB <= 0 - core.CoreSize)
+                {
+                    throw new RulesException("operand value out of core size");
+                }
                 if (instruction.Operation == Operation.LDP ||
                     instruction.Operation == Operation.STP)
                 {
@@ -39,15 +43,27 @@ namespace nMars.SimpleEngine
             }
 
             if (initpspace)
-                InitPSpace();
+                InitPSpace(core.PSpaces);
 
             Tasks.Enqueue(core.mod(loadAddress + StartOffset));
         }
 
-        public void InitPSpace()
+        public void InitPSpace(IPSpaces pSpaces)
         {
-            pSpaceSize = core.Rules.PSpaceSize;
-            pSpace = new int[pSpaceSize];
+            string pName = Name;
+            if (Pin != -1)
+                pName = Pin.ToString();
+            if (pSpaces.ContainsKey(pName))
+            {
+                pSpace = pSpaces[pName];
+                pSpaceSize = pSpace.Length;
+            }
+            else
+            {
+                pSpaceSize = core.Rules.PSpaceSize;
+                pSpace = new int[pSpaceSize];
+                pSpaces[pName] = pSpace;
+            }
         }
 
         public int GetPSpace(int address)
@@ -80,6 +96,11 @@ namespace nMars.SimpleEngine
         public int StartOffset
         {
             get { return Warrior.StartOffset; }
+        }
+
+        public int Pin
+        {
+            get { return Warrior.Pin; }
         }
 
         public int LoadAddress

@@ -41,8 +41,9 @@
     <Compile Include="Instructions\Modifier.cs" />
     <Compile Include="Instructions\Operator.cs" />
     <Compile Include="Interfaces\IExtendedWarrior.cs" />
-    <Compile Include="Interfaces\IObserverSubject.cs" />
+    <Compile Include="Interfaces\IObservedEngine.cs" />
     <Compile Include="Interfaces\IParser.cs" />
+    <Compile Include="Interfaces\IPSpaces.cs" />
     <Compile Include="Interfaces\IStepEngine.cs" />
     <Compile Include="Interfaces\IWarrior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

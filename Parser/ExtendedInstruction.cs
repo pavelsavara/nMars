@@ -9,7 +9,7 @@ namespace nMars.Parser
         public ExtendedInstruction()
         {
         }
-        
+
         public ExtendedInstruction(
             Operation operation,
             Modifier modifier,
