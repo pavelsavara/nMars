@@ -121,6 +121,8 @@ namespace nMars.Parser
                 case (int) RuleConstants.RULE_NLOPT:
                 case (int) RuleConstants.RULE_END_END:
                 case (int) RuleConstants.RULE_END_END2:
+                case (int) RuleConstants.RULE_END_END_LABEL:
+                case (int) RuleConstants.RULE_END_END_LABEL2:
                     return null;
 
                 case (int) RuleConstants.RULE_START:
@@ -311,20 +313,20 @@ namespace nMars.Parser
                 case (int) RuleConstants.RULE_OPERATION1:
                     //<Operation1> ::= <Operator1> <Parameter>
                     op = (Operation) token.Tokens[0].UserObject;
-                    paramA = (Parameter) token.Tokens[1].UserObject;
-                    paramB = new Parameter();
+                    paramA = new Parameter();
+                    paramB = (Parameter)token.Tokens[1].UserObject; 
                     mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
                     return new InstructionStatement(op,
                                                     mod,
                                                     paramA,
-                                                    null);
+                                                    paramB);
 
                 case (int) RuleConstants.RULE_OPERATION1_DOT:
                     //<Operation1> ::= <Operator1> . <Modifier> <Parameter>
                     op = (Operation) token.Tokens[0].UserObject;
                     mod = (Modifier) token.Tokens[2].UserObject;
-                    paramA = (Parameter) token.Tokens[3].UserObject;
-                    paramB = new Parameter();
+                    paramA = new Parameter();
+                    paramB = (Parameter)token.Tokens[3].UserObject; 
                     return new InstructionStatement(op,
                                                     mod,
                                                     paramA,
@@ -435,11 +437,11 @@ namespace nMars.Parser
                     //<Operator1> ::= Jmp
                     return Operation.JMP;
 
-                case (int) RuleConstants.RULE_OPERATOR2_DAT:
+                case (int) RuleConstants.RULE_OPERATOR1_DAT:
                     //<Operator2> ::= Dat
                     return Operation.DAT;
 
-                case (int) RuleConstants.RULE_OPERATOR2_SPL:
+                case (int) RuleConstants.RULE_OPERATOR1_SPL:
                     //<Operator2> ::= Spl
                     return Operation.SPL;
 
@@ -633,7 +635,7 @@ namespace nMars.Parser
 
         private void ParseErrorEvent(LALRParser argParser, ParseErrorEventArgs args)
         {
-            string message = "Parse error caused by token: '" + args.UnexpectedToken.ToString() + "'";
+            string message = "Parse error caused by token: '" + args.UnexpectedToken.ToString() + "'" + " at " + args.UnexpectedToken.Location.ToString();
             throw new Exception(message);
         }
     }

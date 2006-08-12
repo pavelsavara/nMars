@@ -59,12 +59,11 @@ namespace Starter
         private static void Main()
         {
             Rules rules = new Rules();
-            rules.CoreSize = 40;
             Engine se = new Engine();
             RedCodeParser parser = new RedCodeParser(rules);
             List<IWarrior> rr = new List<IWarrior>();
             List<int> forcedaddr=new List<int>();
-            rr.Add(parser.Load(@"D:\Zamboch\Zdrojaky\nMars\rc\redcoder\stone.rc"));
+            rr.Add(parser.Load(@"D:\Zamboch\Zdrojaky\nMars\rc\pmars\validate.red"));
             forcedaddr.Add(10);
             //rr.Add(parser.Load(@"..\..\..\rc\blur\Ikarus.rc"));
             //rr.Add(parser.Load(@"..\..\..\rc\scanner\mischief.rc"));
