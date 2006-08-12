@@ -10,7 +10,7 @@ namespace nMars.RedCode
         protected Warrior()
         {
         }
-        
+
         public Warrior(Rules rules)
         {
             Instructions = new List<Instruction>();
@@ -20,8 +20,9 @@ namespace nMars.RedCode
 
         public List<Instruction> Instructions;
         public int StartOffset;
-        public string Name="";
+        public string Name = "";
         public Rules Rules;
+        public int Pin = -1;
 
         public void Dump(StreamWriter sw)
         {
@@ -49,6 +50,11 @@ namespace nMars.RedCode
         string IWarrior.Name
         {
             get { return Name; }
+        }
+
+        int IWarrior.Pin
+        {
+            get { return Pin; }
         }
 
         Rules IWarrior.Rules

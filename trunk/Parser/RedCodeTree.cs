@@ -12,6 +12,7 @@ namespace nMars.Parser
         protected Dictionary<string, InstructionStatement> labels;
         protected Dictionary<string, Expression> variables;
         protected string org;
+        protected Expression pin;
         protected Rules rules;
 
         protected RedCodeTree(Rules rules)
@@ -56,7 +57,7 @@ namespace nMars.Parser
         {
             if (!source.EndsWith("\n"))
                 source = source + "\n";
-            return (ContainerStatement)parser.Parse(source).UserObject;
+            return (ContainerStatement) parser.Parse(source).UserObject;
         }
 
         private void TokenReadEvent(LALRParser argParser, TokenReadEventArgs args)
@@ -134,33 +135,33 @@ namespace nMars.Parser
 
                     #region Statements
 
-                case (int)RuleConstants.RULE_STATEMENTSF:
-                // <StatementsF> ::= <StatementNl>
-                case (int)RuleConstants.RULE_STATEMENTS:
+                case (int) RuleConstants.RULE_STATEMENTSF:
+                    // <StatementsF> ::= <StatementNl>
+                case (int) RuleConstants.RULE_STATEMENTS:
                     //<Statements> ::= <StatementNl>
                     statement = (InstructionStatement) token.Tokens[0].UserObject;
                     statements = new ContainerStatement(statement);
                     return statements;
 
-                case (int)RuleConstants.RULE_STATEMENTSF2:
-                // <StatementsF> ::= <StatementNl> <StatementsF>
-                case (int)RuleConstants.RULE_STATEMENTS2:
+                case (int) RuleConstants.RULE_STATEMENTSF2:
+                    // <StatementsF> ::= <StatementNl> <StatementsF>
+                case (int) RuleConstants.RULE_STATEMENTS2:
                     //<Statements> ::= <StatementNl> <Statements> 
-                    statement = (InstructionStatement)token.Tokens[0].UserObject;
-                    statements = (ContainerStatement)token.Tokens[1].UserObject;
+                    statement = (InstructionStatement) token.Tokens[0].UserObject;
+                    statements = (ContainerStatement) token.Tokens[1].UserObject;
                     statements.Insert(statement);
                     return statements;
 
-                case (int)RuleConstants.RULE_STATEMENTS3:
+                case (int) RuleConstants.RULE_STATEMENTS3:
                     // <Statements> ::= <ForNl> <StatementsF> <RofNl>
-                    forrof = (ForRofContainerStatement)token.Tokens[0].UserObject;
-                    forrof.Add((ContainerStatement)token.Tokens[1].UserObject);
+                    forrof = (ForRofContainerStatement) token.Tokens[0].UserObject;
+                    forrof.Add((ContainerStatement) token.Tokens[1].UserObject);
                     return forrof;
                 case (int) RuleConstants.RULE_STATEMENTS4:
                     // <Statements> ::= <ForNl> <StatementsF> <RofNl> <Statements>
-                    forrof = (ForRofContainerStatement)token.Tokens[0].UserObject;
+                    forrof = (ForRofContainerStatement) token.Tokens[0].UserObject;
                     forrof.Add((ContainerStatement) token.Tokens[1].UserObject);
-                    statements = (ContainerStatement)token.Tokens[3].UserObject;
+                    statements = (ContainerStatement) token.Tokens[3].UserObject;
                     statements.Insert(forrof);
                     return statements;
 
@@ -221,21 +222,23 @@ namespace nMars.Parser
 
                 case (int) RuleConstants.RULE_FORNL:
                     // <ForNl> ::= <ForIn> <nl>
-                    return new ForRofContainerStatement((string)token.Tokens[0].UserObject, null);
-                case (int)RuleConstants.RULE_FORNL2:
+                    return new ForRofContainerStatement((string) token.Tokens[0].UserObject, null);
+                case (int) RuleConstants.RULE_FORNL2:
                     // <ForNl> ::= <ForIn> <Comment Line>
-                    return new ForRofContainerStatement((string)token.Tokens[0].UserObject, (string)token.Tokens[1].UserObject);
-                case (int)RuleConstants.RULE_FORIN_FOR:
+                    return
+                        new ForRofContainerStatement((string) token.Tokens[0].UserObject,
+                                                     (string) token.Tokens[1].UserObject);
+                case (int) RuleConstants.RULE_FORIN_FOR:
                     // <ForIn> ::= for <Expression>
-                    name = "_forofex"+variables.Count.ToString();
-                    expression = (Expression)token.Tokens[1].UserObject;
+                    name = "_forofex" + variables.Count.ToString();
+                    expression = (Expression) token.Tokens[1].UserObject;
                     CheckName(name);
                     variables[name] = expression;
                     return name;
                 case (int) RuleConstants.RULE_FORIN_LABEL_FOR:
                     // <ForIn> ::= Label for <Expression>
-                    name = ((string)token.Tokens[0].UserObject);
-                    expression = (Expression)token.Tokens[2].UserObject;
+                    name = ((string) token.Tokens[0].UserObject);
+                    expression = (Expression) token.Tokens[2].UserObject;
                     CheckName(name);
                     variables[name] = expression;
                     return name;
@@ -252,7 +255,7 @@ namespace nMars.Parser
 
                 case (int) RuleConstants.RULE_EQU_LABEL_EQU:
                     //<Equ> ::= Variable Equ <Expression>
-                    name = ((string)token.Tokens[0].UserObject); 
+                    name = ((string) token.Tokens[0].UserObject);
                     expression = (Expression) token.Tokens[2].UserObject;
                     CheckName(name);
                     variables[name] = expression;
@@ -261,6 +264,11 @@ namespace nMars.Parser
                 case (int) RuleConstants.RULE_ORG_ORG_LABEL:
                     //<Org> ::= Org Variable
                     org = ((string) token.Tokens[1].UserObject);
+                    return null;
+
+                case (int) RuleConstants.RULE_PIN_PIN:
+                    // <Pin> ::= Pin <Expression>
+                    pin = (Expression) token.Tokens[1].UserObject;
                     return null;
 
                     #endregion
@@ -274,9 +282,9 @@ namespace nMars.Parser
                     paramB = new Parameter();
                     mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
                     return new InstructionStatement(op,
-                                         mod,
-                                         paramA,
-                                         paramB);
+                                                    mod,
+                                                    paramA,
+                                                    paramB);
 
                 case (int) RuleConstants.RULE_OPERATION0_COMMA:
                     //<Operation0> ::= <Operator0> <Parameter> , <Parameter>
@@ -285,9 +293,9 @@ namespace nMars.Parser
                     paramB = (Parameter) token.Tokens[3].UserObject;
                     mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
                     return new InstructionStatement(op,
-                                         mod,
-                                         paramA,
-                                         paramB);
+                                                    mod,
+                                                    paramA,
+                                                    paramB);
 
                 case (int) RuleConstants.RULE_OPERATION0_DOT_COMMA:
                     //<Operation0> ::= <Operator0> . <Modifier> <Parameter> , <Parameter>
@@ -296,9 +304,9 @@ namespace nMars.Parser
                     paramA = (Parameter) token.Tokens[3].UserObject;
                     paramB = (Parameter) token.Tokens[5].UserObject;
                     return new InstructionStatement(op,
-                                         mod,
-                                         paramA,
-                                         paramB);
+                                                    mod,
+                                                    paramA,
+                                                    paramB);
 
                 case (int) RuleConstants.RULE_OPERATION1:
                     //<Operation1> ::= <Operator1> <Parameter>
@@ -307,9 +315,9 @@ namespace nMars.Parser
                     paramB = new Parameter();
                     mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
                     return new InstructionStatement(op,
-                                         mod,
-                                         paramA,
-                                         null);
+                                                    mod,
+                                                    paramA,
+                                                    null);
 
                 case (int) RuleConstants.RULE_OPERATION1_DOT:
                     //<Operation1> ::= <Operator1> . <Modifier> <Parameter>
@@ -318,9 +326,9 @@ namespace nMars.Parser
                     paramA = (Parameter) token.Tokens[3].UserObject;
                     paramB = new Parameter();
                     return new InstructionStatement(op,
-                                         mod,
-                                         paramA,
-                                         paramB);
+                                                    mod,
+                                                    paramA,
+                                                    paramB);
 
                 case (int) RuleConstants.RULE_OPERATION1_COMMA:
                     //<Operation1> ::= <Operator1> <Parameter> , <Parameter>
@@ -329,9 +337,9 @@ namespace nMars.Parser
                     paramB = (Parameter) token.Tokens[3].UserObject;
                     mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
                     return new InstructionStatement(op,
-                                         mod,
-                                         paramA,
-                                         paramB);
+                                                    mod,
+                                                    paramA,
+                                                    paramB);
 
                 case (int) RuleConstants.RULE_OPERATION1_DOT_COMMA:
                     //<Operation1> ::= <Operator1> . <Modifier> <Parameter> , <Parameter>
@@ -340,9 +348,9 @@ namespace nMars.Parser
                     paramA = (Parameter) token.Tokens[3].UserObject;
                     paramB = (Parameter) token.Tokens[5].UserObject;
                     return new InstructionStatement(op,
-                                         mod,
-                                         paramA,
-                                         paramB);
+                                                    mod,
+                                                    paramA,
+                                                    paramB);
 
                 case (int) RuleConstants.RULE_OPERATION2_COMMA:
                     //<Operation2> ::= <Operator2> <Parameter> , <Parameter>
@@ -351,9 +359,9 @@ namespace nMars.Parser
                     paramB = (Parameter) token.Tokens[3].UserObject;
                     mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
                     return new InstructionStatement(op,
-                                         mod,
-                                         paramA,
-                                         paramB);
+                                                    mod,
+                                                    paramA,
+                                                    paramB);
 
                 case (int) RuleConstants.RULE_OPERATION2_DOT_COMMA:
                     //<Operation2> ::= <Operator2> . <Modifier> <Parameter> , <Parameter>
@@ -362,9 +370,9 @@ namespace nMars.Parser
                     paramA = (Parameter) token.Tokens[3].UserObject;
                     paramB = (Parameter) token.Tokens[5].UserObject;
                     return new InstructionStatement(op,
-                                         mod,
-                                         paramA,
-                                         paramB);
+                                                    mod,
+                                                    paramA,
+                                                    paramB);
 
                     #endregion
 

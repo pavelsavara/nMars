@@ -12,10 +12,9 @@ namespace Starter
     {
         private static void LoaderTest()
         {
-
             List<IWarrior> wariors = new List<IWarrior>();
             RedCodeParser parser = new RedCodeParser(Rules.DefaultRules);
-            XmlSerializer ser = new XmlSerializer(typeof(ExtendedWarrior));
+            XmlSerializer ser = new XmlSerializer(typeof (ExtendedWarrior));
 
             foreach (string s in Directory.GetFiles(@"..\..\..\rc", "*.rc", SearchOption.AllDirectories))
             {
@@ -26,13 +25,13 @@ namespace Starter
 
         private static IWarrior LoadDumpOne(string s, RedCodeParser parser, XmlSerializer ser)
         {
-            IWarrior w=null; 
+            IWarrior w = null;
             try
             {
                 w = parser.Load(s);
                 IExtendedWarrior exw = w as IExtendedWarrior;
 
-                if (ser!=null)
+                if (ser != null)
                 {
                     StreamWriter sw = new StreamWriter(Path.ChangeExtension(s, ".xml"));
                     ser.Serialize(sw, w);
@@ -59,17 +58,19 @@ namespace Starter
 
         private static void Main()
         {
-
             Rules rules = new Rules();
-            rules.CoreSize = 50;
+            rules.CoreSize = 40;
             Engine se = new Engine();
             RedCodeParser parser = new RedCodeParser(rules);
             List<IWarrior> rr = new List<IWarrior>();
+            List<int> forcedaddr=new List<int>();
             rr.Add(parser.Load(@"D:\Zamboch\Zdrojaky\nMars\rc\redcoder\stone.rc"));
+            forcedaddr.Add(10);
             //rr.Add(parser.Load(@"..\..\..\rc\blur\Ikarus.rc"));
             //rr.Add(parser.Load(@"..\..\..\rc\scanner\mischief.rc"));
-            Random r=new Random(0);
-            se.Run(rr, rules, r);
+            PSpaces spaces = new PSpaces();
+            Random r = new Random(0);
+            se.Run(rr, rules, spaces, r, forcedaddr);
         }
     }
 }

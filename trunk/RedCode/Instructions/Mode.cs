@@ -13,13 +13,6 @@ namespace nMars.RedCode
         Direct,
 
         /// <summary>
-        /// #
-        /// An immediate mode operand merely serves as storage for data.  
-        /// An immediate A/B-mode in the current instruction sets the A/B-pointer to zero.
-        /// </summary>
-        Immediate,
-
-        /// <summary>
         /// @
         /// An indirect mode operand indicates the primary offset (relative to the 
         /// program counter) to the secondary offset (relative to the location 
@@ -101,7 +94,14 @@ namespace nMars.RedCode
         /// before the B-operand is evaluated (for post-increment A-mode), or
         /// the operation is executed (for post-increment indirect B-mode).
         /// </summary>
-        PostIncIndirectA
+        PostIncIndirectA,
+
+        /// <summary>
+        /// #
+        /// An immediate mode operand merely serves as storage for data.  
+        /// An immediate A/B-mode in the current instruction sets the A/B-pointer to zero.
+        /// </summary>
+        Immediate,
     }
 
     public class ModeHelper

@@ -4,7 +4,8 @@ namespace nMars.Parser
 {
     internal class Variable : Expression
     {
-        public Variable(string name, Dictionary<string, Expression> variables, Dictionary<string, InstructionStatement> labels)
+        public Variable(string name, Dictionary<string, Expression> variables,
+                        Dictionary<string, InstructionStatement> labels)
         {
             this.name = name;
             this.variables = variables;

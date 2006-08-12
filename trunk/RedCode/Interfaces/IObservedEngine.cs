@@ -18,7 +18,7 @@ namespace nMars.RedCode
 
     public delegate void AfterSPL(SPLEventArgs args);
 
-    public interface IObserverSubject
+    public interface IObservedEngine
     {
         event AfterStep OnAfterStep;
         event AfterSPL OnAfterSPL;

@@ -6,9 +6,9 @@ namespace nMars.SimpleEngine
 {
     public class StepEngine : Core, IStepEngine
     {
-        public void BeginMatch(IList<IWarrior> aWariors, Rules aRules, Random aRandom)
+        public void BeginMatch(IList<IWarrior> aWariors, Rules aRules, IPSpaces aPSpaces, Random aRandom, IList<int> forcedAddresses)
         {
-            Init(aWariors, aRules, aRandom);
+            Init(aWariors, aRules, aPSpaces, aRandom, forcedAddresses);
         }
 
         public bool NextStep()
@@ -28,9 +28,13 @@ namespace nMars.SimpleEngine
                 Cycles++;
             }
 
-            if (LiveWarriorsCount == 1 && WarriorsCount>1)
+            if (LiveWarriorsCount == 1 && WarriorsCount > 1)
             {
                 liveWarriors.Dequeue().Result = FightResult.Win;
+                return false;
+            }
+            if (LiveWarriorsCount == 0)
+            {
                 return false;
             }
             if (Cycles >= rules.maxCycles)
@@ -44,43 +48,23 @@ namespace nMars.SimpleEngine
         {
             EngineInstruction instruction = core[ip];
 
-            int da = GetEffectiveAddress(ip, instruction.ModeA, core[ip].ValueA);
-            int db = GetEffectiveAddress(ip, instruction.ModeB, core[ip].ValueB);
+            int indirectA;
+            int indirectB;
 
-            if (instruction.ModeA != Mode.Immediate)
-            {
-                if (instruction.ModeB != Mode.Immediate)
-                {
-                    Execute(warrior, instruction, ip, da, db,
-                            ref core[da].ValueA, ref core[da].ValueB,
-                            ref core[db].ValueA, ref core[db].ValueB);
-                }
-                else
-                {
-                    Execute(warrior, instruction, ip, da, db,
-                            ref core[da].ValueA, ref core[da].ValueB,
-                            ref core[da].ValueA, ref core[db].ValueB);
-                }
-            }
-            else
-            {
-                if (instruction.ModeB != Mode.Immediate)
-                {
-                    Execute(warrior, instruction, ip, da, db,
-                            ref core[da].ValueA, ref core[db].ValueB,
-                            ref core[db].ValueA, ref core[db].ValueB);
-                }
-                else
-                {
-                    Execute(warrior, instruction, ip, da, db,
-                            ref core[da].ValueA, ref core[db].ValueB,
-                            ref core[da].ValueA, ref core[db].ValueB);
-                }
-            }
+            GetEffectiveAddress(ip, instruction.ModeA, out indirectA, core[ip].ValueA);
+            GetEffectiveAddress(ip, instruction.ModeB, out indirectB, core[ip].ValueB);
+
+            Execute(warrior, instruction, ip, 
+                    indirectA, indirectB,
+                    ref core[indirectA].ValueA, ref core[indirectA].ValueB,
+                    ref core[indirectB].ValueA, ref core[indirectB].ValueB);
         }
 
-        private void Execute(EngineWarrior warrior, EngineInstruction instruction, int ip, int da, int db, ref int ra_a,
-                             ref int ra_b, ref int rb_a, ref int rb_b)
+        private void Execute(EngineWarrior warrior, EngineInstruction instruction, int ip, 
+                             //int directAadr, int directBadr,
+                             int indirectAadr, int indirectBadr,
+                             ref int indirectAvalA, ref int indirectAvalB, 
+                             ref int indirectBvalA, ref int indirectBvalB)
         {
             bool jump = false;
             bool die = false;
@@ -98,7 +82,7 @@ namespace nMars.SimpleEngine
                     if (warrior.LiveTasks < rules.maxProcesses)
                     {
                         warrior.Tasks.Enqueue(mod(ip + 1));
-                        ip = da; // as second to queue
+                        ip = indirectAadr; // as second to queue
                     }
                     else
                     {
@@ -106,7 +90,7 @@ namespace nMars.SimpleEngine
                     }
                     break;
                 case Operation.JMP:
-                    ip = da;
+                    ip = indirectAadr;
                     break;
 
                     #endregion
@@ -118,20 +102,20 @@ namespace nMars.SimpleEngine
                     {
                         case Modifier.BA:
                         case Modifier.A:
-                            jump = (rb_a == 0);
+                            jump = (indirectBvalA == 0);
                             break;
                         case Modifier.B:
                         case Modifier.AB:
-                            jump = (rb_b == 0);
+                            jump = (indirectBvalB == 0);
                             break;
                         case Modifier.F:
                         case Modifier.X:
                         case Modifier.I:
-                            jump = (rb_a == 0 && rb_b == 0);
+                            jump = (indirectBvalA == 0 && indirectBvalB == 0);
                             break;
                     }
                     if (jump)
-                        ip = da;
+                        ip = indirectAadr;
                     else
                         ip++;
                     break;
@@ -145,20 +129,20 @@ namespace nMars.SimpleEngine
                     {
                         case Modifier.BA:
                         case Modifier.A:
-                            jump = (rb_a != 0);
+                            jump = !(indirectBvalA == 0);
                             break;
                         case Modifier.B:
                         case Modifier.AB:
-                            jump = (rb_b != 0);
+                            jump = !(indirectBvalB == 0);
                             break;
                         case Modifier.F:
                         case Modifier.X:
                         case Modifier.I:
-                            jump = (rb_a != 0 && rb_b != 0);
+                            jump = !(indirectBvalA == 0 && indirectBvalB == 0);
                             break;
                     }
                     if (jump)
-                        ip = da;
+                        ip = indirectAadr;
                     else
                         ip++;
                     break;
@@ -172,20 +156,20 @@ namespace nMars.SimpleEngine
                     {
                         case Modifier.A:
                         case Modifier.BA:
-                            jump = !decz(ref rb_a);
+                            jump = !decz(ref indirectBvalA);
                             break;
                         case Modifier.B:
                         case Modifier.AB:
-                            jump = !decz(ref rb_b);
+                            jump = !decz(ref indirectBvalB);
                             break;
                         case Modifier.F:
                         case Modifier.X:
                         case Modifier.I:
-                            jump = !decz(ref rb_a) && decz(ref rb_b);
+                            jump = !(decz(ref indirectBvalA) && decz(ref indirectBvalB));
                             break;
                     }
                     if (jump)
-                        ip = da;
+                        ip = indirectAadr;
                     else
                         ip++;
                     break;
@@ -198,30 +182,30 @@ namespace nMars.SimpleEngine
                     switch (instruction.Modifier)
                     {
                         case Modifier.A:
-                            jump = (ra_a == rb_a);
+                            jump = (indirectAvalA == indirectBvalA);
                             break;
                         case Modifier.B:
-                            jump = (ra_b == rb_b);
+                            jump = (indirectAvalB == indirectBvalB);
                             break;
                         case Modifier.AB:
-                            jump = (ra_a == rb_b);
+                            jump = (indirectAvalA == indirectBvalB);
                             break;
                         case Modifier.BA:
-                            jump = (ra_b == rb_a);
+                            jump = (indirectAvalB == indirectBvalA);
                             break;
                         case Modifier.I:
-                            jump = (core[da].Operation == core[db].Operation &&
-                                    core[da].Modifier == core[db].Modifier &&
-                                    ra_a == rb_a &&
-                                    ra_b == rb_b);
+                            jump = (core[indirectAadr].Operation == core[indirectBadr].Operation &&
+                                    core[indirectAadr].Modifier == core[indirectBadr].Modifier &&
+                                    indirectAvalA == indirectBvalA &&
+                                    indirectAvalB == indirectBvalB);
                             break;
                         case Modifier.F:
-                            jump = (ra_a == rb_a &&
-                                    ra_b == rb_b);
+                            jump = (indirectAvalA == indirectBvalA &&
+                                    indirectAvalB == indirectBvalB);
                             break;
                         case Modifier.X:
-                            jump = (ra_a == rb_b &&
-                                    ra_b == rb_a);
+                            jump = (indirectAvalA == indirectBvalB &&
+                                    indirectAvalB == indirectBvalA);
                             break;
                     }
                     if (jump)
@@ -239,30 +223,30 @@ namespace nMars.SimpleEngine
                     switch (instruction.Modifier)
                     {
                         case Modifier.A:
-                            jump = (ra_a != rb_a);
+                            jump = (indirectAvalA != indirectBvalA);
                             break;
                         case Modifier.B:
-                            jump = (ra_b != rb_b);
+                            jump = (indirectAvalB != indirectBvalB);
                             break;
                         case Modifier.AB:
-                            jump = (ra_a != rb_b);
+                            jump = (indirectAvalA != indirectBvalB);
                             break;
                         case Modifier.BA:
-                            jump = (ra_b != rb_a);
+                            jump = (indirectAvalB != indirectBvalA);
                             break;
                         case Modifier.I:
-                            jump = (core[da].Operation != core[db].Operation ||
-                                    core[da].Modifier != core[db].Modifier ||
-                                    ra_a != rb_a ||
-                                    ra_b != rb_b);
+                            jump = (core[indirectAadr].Operation != core[indirectBadr].Operation ||
+                                    core[indirectAadr].Modifier != core[indirectBadr].Modifier ||
+                                    indirectAvalA != indirectBvalA ||
+                                    indirectAvalB != indirectBvalB);
                             break;
                         case Modifier.F:
-                            jump = (ra_a != rb_a ||
-                                    ra_b != rb_b);
+                            jump = (indirectAvalA != indirectBvalA ||
+                                    indirectAvalB != indirectBvalB);
                             break;
                         case Modifier.X:
-                            jump = (ra_a != rb_b ||
-                                    ra_b != rb_a);
+                            jump = (indirectAvalA != indirectBvalB ||
+                                    indirectAvalB != indirectBvalA);
                             break;
                     }
                     if (jump)
@@ -280,23 +264,25 @@ namespace nMars.SimpleEngine
                     switch (instruction.Modifier)
                     {
                         case Modifier.A:
-                            jump = (ra_a < rb_a);
+                            jump = (indirectAvalA < indirectBvalA);
                             break;
                         case Modifier.B:
-                            jump = (ra_b < rb_b);
+                            jump = (indirectAvalB < indirectBvalB);
                             break;
                         case Modifier.AB:
-                            jump = (ra_a < rb_b);
+                            jump = (indirectAvalA < indirectBvalB);
                             break;
                         case Modifier.BA:
-                            jump = (ra_b < rb_a);
+                            jump = (indirectAvalB < indirectBvalA);
                             break;
                         case Modifier.I:
                         case Modifier.F:
-                            jump = (ra_a < rb_a && ra_b < rb_b);
+                            jump = (indirectAvalA < indirectBvalA && 
+                                    indirectAvalB < indirectBvalB);
                             break;
                         case Modifier.X:
-                            jump = (ra_a < rb_b && ra_b < rb_a);
+                            jump = (indirectAvalA < indirectBvalB &&
+                                    indirectAvalB < indirectBvalA);
                             break;
                     }
                     if (jump)
@@ -311,13 +297,13 @@ namespace nMars.SimpleEngine
 
                 case Operation.MOD:
                 case Operation.DIV:
-                    die = BinaryOperation(instruction, ra_a, ra_b, rb_a, rb_b);
+                    die = BinaryOperation(instruction, ref indirectAvalA, ref indirectAvalB, ref indirectBvalA, ref indirectBvalB);
                     ip++;
                     break;
                 case Operation.SUB:
                 case Operation.ADD:
                 case Operation.MUL:
-                    BinaryOperation(instruction, ra_a, ra_b, rb_a, rb_b);
+                    BinaryOperation(instruction, ref indirectAvalA, ref indirectAvalB, ref indirectBvalA, ref indirectBvalB);
                     ip++;
                     break;
 
@@ -329,30 +315,30 @@ namespace nMars.SimpleEngine
                     switch (instruction.Modifier)
                     {
                         case Modifier.A:
-                            rb_a = ra_a;
+                            indirectBvalA = indirectAvalA;
                             break;
                         case Modifier.F:
-                            rb_a = ra_a;
-                            rb_b = ra_b;
+                            indirectBvalA = indirectAvalA;
+                            indirectBvalB = indirectAvalB;
                             break;
                         case Modifier.B:
-                            rb_b = ra_b;
+                            indirectBvalB = indirectAvalB;
                             break;
                         case Modifier.AB:
-                            rb_b = ra_a;
+                            indirectBvalB = indirectAvalA;
                             break;
                         case Modifier.X:
-                            rb_b = ra_a;
-                            rb_a = ra_b;
+                            indirectBvalB = indirectAvalA;
+                            indirectBvalA = indirectAvalB;
                             break;
                         case Modifier.BA:
-                            rb_a = ra_b;
+                            indirectBvalA = indirectAvalB;
                             break;
                         case Modifier.I:
-                            rb_a = ra_a;
-                            rb_b = ra_b;
-                            core[db].Operation = core[da].Operation;
-                            core[db].Modifier = core[da].Modifier;
+                            indirectBvalA = indirectAvalA;
+                            indirectBvalB = indirectAvalB;
+                            core[indirectBadr].Operation = core[indirectAadr].Operation;
+                            core[indirectBadr].Modifier = core[indirectAadr].Modifier;
                             break;
                     }
                     ip++;
@@ -367,19 +353,19 @@ namespace nMars.SimpleEngine
                     switch (instruction.Modifier)
                     {
                         case Modifier.A:
-                            ra_a = warrior.GetPSpace(ra_a);
+                            indirectAvalA = warrior.GetPSpace(indirectAvalA);
                             break;
                         case Modifier.AB:
-                            rb_b = warrior.GetPSpace(ra_a);
+                            indirectBvalB = warrior.GetPSpace(indirectAvalA);
                             break;
                         case Modifier.BA:
-                            rb_a = warrior.GetPSpace(ra_b);
+                            indirectBvalA = warrior.GetPSpace(indirectAvalB);
                             break;
                         case Modifier.F:
                         case Modifier.B:
                         case Modifier.X:
                         case Modifier.I:
-                            rb_b = warrior.GetPSpace(ra_b);
+                            indirectBvalB = warrior.GetPSpace(indirectAvalB);
                             break;
                     }
                     ip++;
@@ -394,19 +380,19 @@ namespace nMars.SimpleEngine
                     switch (instruction.Modifier)
                     {
                         case Modifier.A:
-                            warrior.SetPSpace(rb_a, ra_a);
+                            warrior.SetPSpace(indirectBvalA, indirectAvalA);
                             break;
                         case Modifier.AB:
-                            warrior.SetPSpace(rb_b, ra_a);
+                            warrior.SetPSpace(indirectBvalB, indirectAvalA);
                             break;
                         case Modifier.BA:
-                            warrior.SetPSpace(rb_a, ra_b);
+                            warrior.SetPSpace(indirectBvalA, indirectAvalB);
                             break;
                         case Modifier.F:
                         case Modifier.B:
                         case Modifier.X:
                         case Modifier.I:
-                            warrior.SetPSpace(rb_b, ra_b);
+                            warrior.SetPSpace(indirectBvalB, indirectAvalB);
                             break;
                     }
                     ip++;
@@ -424,72 +410,80 @@ namespace nMars.SimpleEngine
         /// <summary>
         /// (primary)-field effective address calculation
         /// </summary>
-        private int GetEffectiveAddress(int ip, Mode mode, int primary)
+        private void GetEffectiveAddress(int ip, Mode mode, out int ir, int primary)
         {
             int direct;
             int indirect;
             switch (mode)
             {
-                case Mode.Immediate:
-                    return ip;
                 case Mode.Direct:
                     direct = mod(ip + primary);
-                    return direct;
+                    ir = direct;
+                    return;
                 case Mode.PreDecIndirectA:
                     direct = mod(primary + ip);
                     indirect = mod(direct + predec(ref core[direct].ValueA));
-                    return indirect;
+                    ir = indirect;
+                    return;
                 case Mode.IndirectA:
                     direct = mod(ip + primary);
                     indirect = mod(direct + core[direct].ValueA);
-                    return indirect;
+                    ir = indirect;
+                    return;
                 case Mode.PostIncIndirectA:
                     direct = mod(ip + primary);
                     indirect = mod(direct + postinc(ref core[direct].ValueA));
-                    return indirect;
+                    ir = indirect;
+                    return;
                 case Mode.PreDecIndirectB:
                     direct = mod(primary + ip);
                     indirect = mod(direct + predec(ref core[direct].ValueB));
-                    return indirect;
+                    ir = indirect;
+                    return;
                 case Mode.IndirectB:
                     direct = mod(ip + primary);
                     indirect = mod(direct + core[direct].ValueB);
-                    return indirect;
+                    ir = indirect;
+                    return;
                 case Mode.PostIncIndirectB:
                     direct = mod(ip + primary);
                     indirect = mod(direct + postinc(ref core[direct].ValueB));
-                    return indirect;
+                    ir = indirect;
+                    return;
+                case Mode.Immediate:
+                    ir = ip;
+                    return;
                 default:
                     throw new InvalidOperationException("Unknown Mode");
             }
         }
 
         /// <returns>T- should die</returns>
-        private bool BinaryOperation(EngineInstruction instruction, int ra_a, int ra_b, int rb_a, int rb_b)
+        private bool BinaryOperation(EngineInstruction instruction, ref int indirectAvalA, ref int indirectAvalB, ref int indirectBvalA, ref int indirectBvalB)
         {
             bool die = false;
             switch (instruction.Modifier)
             {
                 case Modifier.I:
                 case Modifier.F:
-                    die |= oper(ref rb_b, rb_b, ra_b, instruction.Operation);
-                    die |= oper(ref rb_a, rb_a, ra_a, instruction.Operation);
+                    die |= oper(ref indirectBvalB, indirectBvalB, indirectAvalB, instruction.Operation);
+                    die |= oper(ref indirectBvalA, indirectBvalA, indirectAvalA, instruction.Operation);
                     break;
                 case Modifier.A:
-                    die = oper(ref rb_a, rb_a, ra_a, instruction.Operation);
+                    die = oper(ref indirectBvalA, indirectBvalA, indirectAvalA, instruction.Operation);
                     break;
                 case Modifier.B:
-                    die = oper(ref rb_b, rb_b, ra_b, instruction.Operation);
+                    die = oper(ref indirectBvalB, indirectBvalB, indirectAvalB, instruction.Operation);
                     break;
                 case Modifier.X:
-                    die |= oper(ref rb_a, rb_a, ra_b, instruction.Operation);
-                    die |= oper(ref rb_b, rb_b, ra_a, instruction.Operation);
+                    die |= oper(ref indirectBvalA, indirectBvalA, indirectAvalB, instruction.Operation);
+                    die |= oper(ref indirectBvalB, indirectBvalB, indirectAvalA, instruction.Operation);
                     break;
                 case Modifier.AB:
-                    die = oper(ref rb_b, rb_b, ra_a, instruction.Operation);
+                    die = oper(ref indirectBvalB, indirectBvalB, indirectAvalA, instruction.Operation);
                     break;
                 case Modifier.BA:
-                    die = oper(ref rb_a, rb_a, ra_b, instruction.Operation);
+                    die = oper(ref indirectBvalA, indirectBvalA, indirectAvalB, instruction.Operation);
                     break;
             }
             return die;

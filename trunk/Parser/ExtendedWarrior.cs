@@ -69,6 +69,11 @@ namespace nMars.Parser
             get { return StartOffset; }
         }
 
+        int IWarrior.Pin
+        {
+            get { return Pin; }
+        }
+
         string IWarrior.Name
         {
             get { return Name; }
@@ -93,12 +98,12 @@ namespace nMars.Parser
         {
             return Name;
         }
-        
-        [NonSerialized] 
-        internal Dictionary<string, Expression> Variables = null;
-        
+
+        [NonSerialized] internal Dictionary<string, Expression> Variables = null;
+
         public List<ExtendedInstruction> Instructions;
         public int StartOffset;
+        public int Pin;
         public string Name = "";
         public Rules Rules;
     }

@@ -40,6 +40,14 @@ namespace nMars.Parser
             {
                 warrior.StartOffset = 0;
             }
+            if (pin != null)
+            {
+                warrior.Pin = pin.Evaluate();
+            }
+            else
+            {
+                warrior.Pin = -1;
+            }
             warrior.Variables = variables;
             return warrior;
         }
@@ -104,6 +112,8 @@ namespace nMars.Parser
             {
                 valB = statement.B.Value;
             }
+            valA = valA%rules.CoreSize;
+            valB = valB%rules.CoreSize;
 
             ExtendedInstruction instruction = new ExtendedInstruction(
                 statement.Operation,

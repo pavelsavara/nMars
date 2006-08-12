@@ -10,12 +10,20 @@ namespace nMars.SimpleEngine
         {
         }
 
-        protected void Init(IList<IWarrior> aWarriors, Rules aRules, Random aRandom)
+        protected void Init(IList<IWarrior> aWarriors, Rules aRules, IPSpaces aPSpaces, Random aRandom, IList<int> forcedAddresses)
         {
             rules = aRules;
             random = aRandom;
+            pSpaces = aPSpaces;
             CleanCore();
-            PlaceWarriors(aWarriors);
+            if (forcedAddresses!=null)
+            {
+                PlaceWarriors(aWarriors, forcedAddresses);
+            }
+            else
+            {
+                RandomlyPlaceWarriors(aWarriors);
+            }
             Cycles = 0;
         }
 
@@ -26,7 +34,20 @@ namespace nMars.SimpleEngine
             warriors = new List<EngineWarrior>();
         }
 
-        private void PlaceWarriors(IList<IWarrior> aWarriors)
+        private void PlaceWarriors(IList<IWarrior> aWarriors, IList<int> forcedAddresses)
+        {
+            for(int i=0;i<aWarriors.Count;i++)
+            {
+                IWarrior warrior = aWarriors[i];
+                int loadAddress = forcedAddresses[i];
+                //add warrior
+                EngineWarrior engineWarrior = new EngineWarrior(warrior, this, warriors.Count, loadAddress);
+                liveWarriors.Enqueue(engineWarrior);
+                warriors.Add(engineWarrior);
+            }
+        }
+
+        private void RandomlyPlaceWarriors(IList<IWarrior> aWarriors)
         {
             foreach (IWarrior warrior in aWarriors)
             {
@@ -131,9 +152,14 @@ namespace nMars.SimpleEngine
             get { return warriors.Count; }
         }
 
-        public Rules Rules
+        internal Rules Rules
         {
             get { return rules; }
+        }
+
+        internal IPSpaces PSpaces
+        {
+            get { return pSpaces; }
         }
 
         internal EngineInstruction[] core;
@@ -142,6 +168,7 @@ namespace nMars.SimpleEngine
         protected IList<EngineWarrior> warriors;
         protected Queue<EngineWarrior> liveWarriors;
         protected Rules rules;
+        protected IPSpaces pSpaces;
         protected int Cycles;
     }
 }
