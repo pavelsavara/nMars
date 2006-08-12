@@ -1,0 +1,122 @@
+"Name"     = 'RedCode'
+"Author"   = 'Pavel Savara'
+"Version"  = '0.1'
+"About"    = 'CoreWars RedCode'
+
+"Start Symbol" = <Start>
+
+! ------------------------------------------------- Sets
+
+{WS}           = {Whitespace} - {CR} - {LF}
+
+! ------------------------------------------------- Terminals
+
+! The following defines the Whitespace terminal using the {WS}
+! set - which excludes the carriage return and line feed 
+! characters
+
+Whitespace    = {WS}+
+NewLine       = {CR}{LF} | {CR} | {LF}
+
+Label         = {Letter}{AlphaNumeric}*[:]*
+Integer       = {Number}+
+Comment Line  =  ';'
+
+! ------------------------------------------------- Rules
+
+! The following rule defines a series of newline tokens.
+! Use this rule rather than the newline terminal.
+
+<nl>     ::= NewLine <nl>          !One or more
+          |  NewLine
+
+<Comment Line> ::= Comment Line
+
+<nl Opt> ::= NewLine <nl Opt>      !Zero or more
+          |  !Empty
+
+! <nl opt> removes blank lines before first statement
+
+<Start>   ::= <nl opt> <Statements>
+            | <nl opt> <Statements> <End>
+
+<End> ::= End
+        | End <nl>
+
+<Statements> ::= <StatementNl>
+               | <StatementNl> <Statements>
+               | <ForNl> <StatementsF> <RofNl>
+               | <ForNl> <StatementsF> <RofNl> <Statements>
+
+<StatementsF> ::= <StatementNl>
+                | <StatementNl> <StatementsF>
+
+<StatementNl>  ::= <Statement> <Comment Line>
+                 | <Statement> <nl>
+
+<ForNl> ::= <ForIn> <nl>
+          | <ForIn> <Comment Line>
+
+<ForIn> ::= for <Expression>
+          | Label for <Expression>
+
+<RofNl> ::= rof <nl>
+          | rof <Comment Line>
+
+! statement separator
+
+<Statement> ::= <Operation>
+              | Label <Operation> 
+              | <Org>
+              | <Equ>
+
+<Operation> ::= <Operation0>
+              | <Operation1>
+              | <Operation2>
+
+<Operation0> ::= <Operator0> 
+               | <Operator0> <Parameter> ',' <Parameter>
+               | <Operator0> '.' <Modifier> <Parameter> ',' <Parameter>
+
+
+<Operation1> ::= <Operator1> <Parameter>
+               | <Operator1> '.' <Modifier> <Parameter>
+               | <Operator1> <Parameter> ',' <Parameter>
+               | <Operator1> '.' <Modifier> <Parameter> ',' <Parameter>
+
+
+<Operation2> ::= <Operator2> <Parameter> ',' <Parameter>
+               | <Operator2> '.' <Modifier> <Parameter> ',' <Parameter>
+
+<Parameter>   ::= <Expression>
+                | <Mode> <Expression>
+
+<Mode> ::= '#' | '$' | '@' | '<' | '>' | '{' | '}' | '*'
+
+<Operator0> ::= Nop 
+<Operator1> ::= Jmp 
+<Operator2> ::= Dat | Spl | Mov | Add | Sub | Mul | Div | Mod
+              | Jmz | Jmn | Djn | Slt | Sne | Ldp | Stp
+              | Cmp | Seq 
+
+<Org> ::= Org Label
+<Equ> ::= Label Equ <Expression>
+
+<Modifier> ::= I | A | B | AB | BA | F | X 
+
+<Expression>  ::= <Expression> '+' <Mult Exp>
+               |  <Expression> '-' <Mult Exp>
+               |  <Mult Exp> 
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp>
+               |  <Mult Exp> '/' <Negate Exp>
+               |  <Mult Exp> '%' <Negate Exp>
+               |  <Negate Exp> 
+
+<Negate Exp>  ::= '-' <Value>
+                |  <Value>
+
+<Value> ::= Integer
+          | Label
+          | '(' <Expression> ')'
+
