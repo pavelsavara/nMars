@@ -37,6 +37,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Parser.Test\Parser.Test.csproj">
+      <Project>{FA9132A5-6063-4269-89ED-5A5E8D57A7B8}</Project>
+      <Name>Parser.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parser\Parser.csproj">
       <Project>{DD04BC83-CC0A-4F52-A70B-FDB4C0991E3D}</Project>
       <Name>Parser</Name>

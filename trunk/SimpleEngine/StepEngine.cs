@@ -19,9 +19,13 @@ namespace nMars.SimpleEngine
             PerformInstruction(warrior, insructionPointer);
 
             if (warrior.LiveTasks > 0)
+            {
                 liveWarriors.Enqueue(warrior);
+            }
             else
+            {
                 warrior.Result = FightResult.Loose;
+            }
 
             if (warrior.Index == WarriorsCount - 1)
             {

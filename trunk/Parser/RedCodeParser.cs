@@ -77,10 +77,11 @@ namespace nMars.Parser
 
         private void Translate(ForRofContainerStatement statement, ExtendedWarrior warrior)
         {
-            int count = variables[statement.Label].Evaluate();
+            string cnt = statement.Labels[statement.Labels.Count - 1];
+            int count = variables[cnt].Evaluate();
             for (int i = 1; i <= count; i++)
             {
-                variables[statement.Label] = new Value(i);
+                variables[cnt] = new Value(i);
                 Translate(statement.Container, warrior);
             }
         }
@@ -123,7 +124,14 @@ namespace nMars.Parser
                 );
 
             instruction.Address = warrior.Length;
-            instruction.Label = statement.Label;
+            if (statement.Labels.Count>0)
+            {
+                instruction.Label = statement.Labels[statement.Labels.Count-1];
+            }
+            else
+            {
+                instruction.Label = "";
+            }
             instruction.Comment = statement.Comment;
             instruction.OriginalInstruction = statement.OriginalInstruction;
 

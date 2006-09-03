@@ -14,6 +14,7 @@ namespace nMars.Parser
         protected string org;
         protected Expression pin;
         protected Rules rules;
+        protected int counter;
 
         protected RedCodeTree(Rules rules)
         {
@@ -41,6 +42,7 @@ namespace nMars.Parser
             variables = new Dictionary<string, Expression>();
             labels = new Dictionary<string, InstructionStatement>();
             org = null;
+            counter = 0;
             variables["CORESIZE"] = new Value(rules.CoreSize);
             variables["MAXPROCESSES"] = new Value(rules.maxProcesses);
             variables["MAXCYCLES"] = new Value(rules.maxCycles);
@@ -99,7 +101,6 @@ namespace nMars.Parser
 
         public Object CreateObject(NonterminalToken token)
         {
-            string name;
             Expression expression;
             Operation op;
             Modifier mod;
@@ -108,174 +109,225 @@ namespace nMars.Parser
             InstructionStatement statement;
             ContainerStatement statements;
             ForRofContainerStatement forrof;
+            List<string> statementlabels;
 
             switch (token.Rule.Id)
             {
-                    #region Separators
+                    #region Null
+                case (int)RuleConstants.RULE_ENDOPTIONAL2:
+                    //<EndOptional> ::= 
 
-                case (int) RuleConstants.RULE_NL_NEWLINE:
-                case (int) RuleConstants.RULE_NL_NEWLINE2:
-                case (int) RuleConstants.RULE_COMMENTLINE_COMMENT_LINE:
+                case (int)RuleConstants.RULE_EOLOPTIONAL2:
+                    //<eolOptional> ::= 
+
+                case (int)RuleConstants.RULE_EOL:
+                    //<eol> ::= <eolSingle>
+
+                case (int)RuleConstants.RULE_EOL2:
+                    //<eol> ::= <eol> <eolSingle>
+
+                case (int)RuleConstants.RULE_EOLSINGLE_NEWLINE:
+                    //<eolSingle> ::= NewLine
+
+                case (int)RuleConstants.RULE_EOLOPTIONAL:
+                    //<eolOptional> ::= <eol>
+
+                case (int)RuleConstants.RULE_ENDOPTIONAL_END:
+                    //<EndOptional> ::= <eol> End <eolOptional>
+
+                case (int)RuleConstants.RULE_ENDOPTIONAL_END_LABEL:
+                    //<EndOptional> ::= <eol> End Label <eolOptional>
+
+                case (int)RuleConstants.RULE_ENDOPTIONAL:
+                    //<EndOptional> ::= <eol>
+
+                case (int)RuleConstants.RULE_STATEMENT:
+                    //<Statement> ::= <Pin>
+
+                case (int)RuleConstants.RULE_STATEMENT2:
+                    //<Statement> ::= <Org>
+
+                case (int)RuleConstants.RULE_STATEMENT3:
+                    //<Statement> ::= <Equ>
+
                     return null;
-                case (int) RuleConstants.RULE_NLOPT_NEWLINE:
-                case (int) RuleConstants.RULE_NLOPT:
-                case (int) RuleConstants.RULE_END_END:
-                case (int) RuleConstants.RULE_END_END2:
-                case (int) RuleConstants.RULE_END_END_LABEL:
-                case (int) RuleConstants.RULE_END_END_LABEL2:
-                    return null;
 
-                case (int) RuleConstants.RULE_START:
-                    // <StartOffset> ::= <nl Opt> <Statements> <End>
-                    return token.Tokens[1].UserObject;
+                    #endregion
+                    
+                    #region Forward
+                case (int)RuleConstants.RULE_EOLSINGLE_COMMENT_LINE:
+                    //<eolSingle> ::= Comment Line
 
-                case (int) RuleConstants.RULE_START2:
-                    // <StartOffset> ::= <nl Opt> <Statements> <End>
-                    return token.Tokens[1].UserObject;
+                case (int)RuleConstants.RULE_ALLSTATEMENTS2:
+                    //<AllStatements> ::= <For>
 
+                case (int)RuleConstants.RULE_INNERSTATEMENTSOPTIONAL2:
+                    //<InnerStatementsOptional> ::= 
+                    statements = new ContainerStatement();
+                    return statements;
+
+                case (int)RuleConstants.RULE_OPERATION:
+                    //<Operation> ::= <Operation0>
+
+                case (int)RuleConstants.RULE_OPERATION2:
+                    //<Operation> ::= <Operation1>
+
+                case (int)RuleConstants.RULE_OPERATION3:
+                    //<Operation> ::= <Operation2>
+
+                case (int)RuleConstants.RULE_INNERSTATEMENTSOPTIONAL:
+                    //<InnerStatementsOptional> ::= <InnerStatements> <eol>
+
+                    return token.Tokens[0].UserObject;
+                    
                     #endregion
 
                     #region Statements
+                    
+                case (int)RuleConstants.RULE_START:
+                    //<Start> ::= <eolOptional> <AllStatements> <EndOptional>
+                    return token.Tokens[1].UserObject;
 
-                case (int) RuleConstants.RULE_STATEMENTSF:
-                    // <StatementsF> ::= <StatementNl>
-                case (int) RuleConstants.RULE_STATEMENTS:
-                    //<Statements> ::= <StatementNl>
-                    statement = (InstructionStatement) token.Tokens[0].UserObject;
+                case (int)RuleConstants.RULE_INNERSTATEMENTS:
+                    //<InnerStatements> ::= <Statement>
+
+                case (int)RuleConstants.RULE_ALLSTATEMENTS:
+                    //<AllStatements> ::= <Statement>
+                    statement = (InstructionStatement)token.Tokens[0].UserObject;
                     statements = new ContainerStatement(statement);
                     return statements;
 
-                case (int) RuleConstants.RULE_STATEMENTSF2:
-                    // <StatementsF> ::= <StatementNl> <StatementsF>
-                case (int) RuleConstants.RULE_STATEMENTS2:
-                    //<Statements> ::= <StatementNl> <Statements> 
-                    statement = (InstructionStatement) token.Tokens[0].UserObject;
-                    statements = (ContainerStatement) token.Tokens[1].UserObject;
-                    statements.Insert(statement);
+                case (int)RuleConstants.RULE_INNERSTATEMENTS2:
+                    //<InnerStatements> ::= <InnerStatements> <eol> <Statement>
+                case (int)RuleConstants.RULE_ALLSTATEMENTS3:
+                    //<AllStatements> ::= <AllStatements> <eol> <Statement>
+                    statements = (ContainerStatement)token.Tokens[0].UserObject;
+                    statement = (InstructionStatement)token.Tokens[2].UserObject;
+                    statements.Add(statement);
                     return statements;
 
-                case (int) RuleConstants.RULE_STATEMENTS3:
-                    // <Statements> ::= <ForNl> <StatementsF> <RofNl>
-                    forrof = (ForRofContainerStatement) token.Tokens[0].UserObject;
-                    forrof.Add((ContainerStatement) token.Tokens[1].UserObject);
+                case (int)RuleConstants.RULE_ALLSTATEMENTS4:
+                    //<AllStatements> ::= <AllStatements> <eol> <For>
+                    statements = (ContainerStatement)token.Tokens[0].UserObject;
+                    forrof = (ForRofContainerStatement)token.Tokens[2].UserObject;
+                    statements.Add(forrof);
+                    return statements;
+
+                case (int)RuleConstants.RULE_FOR_FOR_ROF:
+                    //<For> ::= <LabelsOptional> for <Expression> <eol> <InnerStatementsOptional> rof
+                    statementlabels = ((List<string>)token.Tokens[0].UserObject);
+                    expression = (Expression)token.Tokens[2].UserObject;
+                    forrof = new ForRofContainerStatement(statementlabels,
+                                                        (string)token.Tokens[3].UserObject);
+                    forrof.Add((ContainerStatement)token.Tokens[4].UserObject);
+
+                    string l="forof"+counter.ToString();
+                    counter++;
+                    if (statementlabels.Count>0)
+                    {
+                        l = statementlabels[statementlabels.Count - 1];
+                    }
+                    else
+                    {
+                        statementlabels.Add(l);
+                    }
+                    
+                    CheckName(l);
+                    variables[l] = expression;
+                    
                     return forrof;
-                case (int) RuleConstants.RULE_STATEMENTS4:
-                    // <Statements> ::= <ForNl> <StatementsF> <RofNl> <Statements>
-                    forrof = (ForRofContainerStatement) token.Tokens[0].UserObject;
-                    forrof.Add((ContainerStatement) token.Tokens[1].UserObject);
-                    statements = (ContainerStatement) token.Tokens[3].UserObject;
-                    statements.Insert(forrof);
-                    return statements;
 
-                case (int) RuleConstants.RULE_STATEMENTNL:
-                    //<StatementNl> ::= <Statement> <Comment Line>
-                    statement = (InstructionStatement) token.Tokens[0].UserObject;
-                    statement.Comment = (string) token.Tokens[1].UserObject;
+
+                    #endregion
+
+                    #region Operation Statements
+                    
+                case (int)RuleConstants.RULE_STATEMENT4:
+                    //<Statement> ::= <LabelsOptional> <Operation>
+                    statementlabels = (List<string>)token.Tokens[0].UserObject;
+                    statement = (InstructionStatement)token.Tokens[1].UserObject;
+                    statement.Labels = statementlabels;
+                    foreach (string label in statementlabels)
+                    {
+                        labels[label] = statement;
+                    }
                     return statement;
 
-                case (int) RuleConstants.RULE_STATEMENTNL2:
-                    //<StatementNl> ::= <Statement> <nl>
-                    return token.Tokens[0].UserObject;
-
-                case (int) RuleConstants.RULE_STATEMENT:
-                    //<Statement> ::= <Operation>
-                    return token.Tokens[0].UserObject;
-
-                case (int) RuleConstants.RULE_STATEMENT_LABEL:
-                    //<Statement> ::= Label <Operation>
-                    //todo: Create a new object using the stored user objects.
-                    name = (string) token.Tokens[0].UserObject;
-                    if (variables.ContainsKey(name))
+                case (int)RuleConstants.RULE_STATEMENT5:
+                    //<Statement> ::= <Labels> <eol> <Operation>
+                    statementlabels = (List<string>)token.Tokens[0].UserObject;
+                    statement = (InstructionStatement)token.Tokens[2].UserObject;
+                    statement.Labels = statementlabels;
+                    foreach (string label in statementlabels)
                     {
-                        throw new ParserException("Variable already defined : " + name);
+                        labels[label] = statement;
                     }
-                    if (labels.ContainsKey(name))
-                    {
-                        throw new ParserException("Label already defined : " + name);
-                    }
-                    statement = (InstructionStatement) token.Tokens[1].UserObject;
-                    statement.Label = name;
-                    labels[name] = statement;
                     return statement;
 
-                case (int) RuleConstants.RULE_STATEMENT2:
-                    //<Statement> ::= <Org>
-                    return null;
-
-                case (int) RuleConstants.RULE_STATEMENT3:
-                    //<Statement> ::= <Equ>
-                    return null;
-
-                case (int) RuleConstants.RULE_OPERATION:
-                    //<Operation> ::= <Operation0>
-                    return token.Tokens[0].UserObject;
-
-                case (int) RuleConstants.RULE_OPERATION2:
-                    //<Operation> ::= <Operation1>
-                    return token.Tokens[0].UserObject;
-
-                case (int) RuleConstants.RULE_OPERATION3:
-                    //<Operation> ::= <Operation2>
-                    return token.Tokens[0].UserObject;
-
                     #endregion
-
-                    #region For/Rof
-
-                case (int) RuleConstants.RULE_FORNL:
-                    // <ForNl> ::= <ForIn> <nl>
-                    return new ForRofContainerStatement((string) token.Tokens[0].UserObject, null);
-                case (int) RuleConstants.RULE_FORNL2:
-                    // <ForNl> ::= <ForIn> <Comment Line>
-                    return
-                        new ForRofContainerStatement((string) token.Tokens[0].UserObject,
-                                                     (string) token.Tokens[1].UserObject);
-                case (int) RuleConstants.RULE_FORIN_FOR:
-                    // <ForIn> ::= for <Expression>
-                    name = "_forofex" + variables.Count.ToString();
-                    expression = (Expression) token.Tokens[1].UserObject;
-                    CheckName(name);
-                    variables[name] = expression;
-                    return name;
-                case (int) RuleConstants.RULE_FORIN_LABEL_FOR:
-                    // <ForIn> ::= Label for <Expression>
-                    name = ((string) token.Tokens[0].UserObject);
-                    expression = (Expression) token.Tokens[2].UserObject;
-                    CheckName(name);
-                    variables[name] = expression;
-                    return name;
-                case (int) RuleConstants.RULE_ROFNL_ROF:
-                    // <Rof> ::= rof <nl>
+                    
+                    #region Simple Statements
+                    
+                case (int)RuleConstants.RULE_PIN_PIN:
+                    //<Pin> ::= Pin <Expression>
+                    pin = (Expression)token.Tokens[1].UserObject;
                     return null;
-                case (int) RuleConstants.RULE_ROFNL_ROF2:
-                    // <Rof> ::= rof <Comment Line>
+
+                case (int)RuleConstants.RULE_ORG_ORG_LABEL:
+                    //<Org> ::= Org Label
+                    org = ((string)token.Tokens[1].UserObject);
+                    return null;
+
+                case (int)RuleConstants.RULE_EQU_EQU:
+                    //<Equ> ::= <Labels> Equ <Expression>
+                    statementlabels = (List<string>)token.Tokens[0].UserObject;
+                    expression = (Expression)token.Tokens[2].UserObject;
+                    foreach (string label in statementlabels)
+                    {
+                        CheckName(label);
+                        variables[label] = expression;
+                    }
+                    return null;
+
+                case (int)RuleConstants.RULE_EQU_EQU2:
+                    //<Equ> ::= <Labels> <eol> Equ <Expression>
+                    statementlabels = (List<string>)token.Tokens[0].UserObject;
+                    expression = (Expression)token.Tokens[3].UserObject;
+                    foreach (string label in statementlabels)
+                    {
+                        CheckName(label);
+                        variables[label] = expression;
+                    }
                     return null;
 
                     #endregion
+                    
+                    #region Labels
+                    
+                case (int)RuleConstants.RULE_LABELSOPTIONAL2:
+                    //<LabelsOptional> ::= 
+                    statementlabels = new List<string>();
+                    return statementlabels;
 
-                    #region Variables
+                case (int)RuleConstants.RULE_LABELSOPTIONAL:
+                    //<LabelsOptional> ::= <Labels>
+                    return token.Tokens[0].UserObject;
 
-                case (int) RuleConstants.RULE_EQU_LABEL_EQU:
-                    //<Equ> ::= Variable Equ <Expression>
-                    name = ((string) token.Tokens[0].UserObject);
-                    expression = (Expression) token.Tokens[2].UserObject;
-                    CheckName(name);
-                    variables[name] = expression;
-                    return null;
+                case (int)RuleConstants.RULE_LABELS_LABEL:
+                    //<Labels> ::= Label
+                    statementlabels = new List<string>();
+                    statementlabels.Add((string)token.Tokens[0].UserObject);
+                    return statementlabels;
 
-                case (int) RuleConstants.RULE_ORG_ORG_LABEL:
-                    //<Org> ::= Org Variable
-                    org = ((string) token.Tokens[1].UserObject);
-                    return null;
-
-                case (int) RuleConstants.RULE_PIN_PIN:
-                    // <Pin> ::= Pin <Expression>
-                    pin = (Expression) token.Tokens[1].UserObject;
-                    return null;
-
+                case (int)RuleConstants.RULE_LABELS_LABEL2:
+                    //<Labels> ::= <Labels> <eol> Label
+                    statementlabels = (List<string>)token.Tokens[0].UserObject;
+                    statementlabels.Add((string)token.Tokens[2].UserObject);
+                    return statementlabels;
+                
                     #endregion
 
-                    #region Instructions
+                    #region Operations
 
                 case (int) RuleConstants.RULE_OPERATION0:
                     //<Operation0> ::= <Operator0>

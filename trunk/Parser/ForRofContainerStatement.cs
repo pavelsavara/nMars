@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+
 namespace nMars.Parser
 {
     public class ForRofContainerStatement : Statement
     {
-        public ForRofContainerStatement(string label, string comment)
+        public ForRofContainerStatement(List<string> labels, string comment)
         {
-            Label = label;
+            Labels = labels;
             Comment = comment;
         }
 
@@ -15,7 +17,7 @@ namespace nMars.Parser
         }
 
         public ContainerStatement Container;
-        public string Label;
+        public List<string> Labels;
         public string Comment;
     }
 }
