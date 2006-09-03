@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using nMars.RedCode;
 
 namespace nMars.Parser
@@ -12,7 +13,7 @@ namespace nMars.Parser
             B = b;
         }
 
-        public string Label = "";
+        public List<string> Labels = null;
         public string Comment = "";
 
         public string OriginalInstruction
