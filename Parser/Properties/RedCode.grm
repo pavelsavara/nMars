@@ -11,69 +11,63 @@
 
 ! ------------------------------------------------- Terminals
 
-! The following defines the Whitespace terminal using the {WS}
-! set - which excludes the carriage return and line feed 
-! characters
-
 Whitespace    = {WS}+
 NewLine       = {CR}{LF} | {CR} | {LF}
+{LabelValid}  = {AlphaNumeric} + [_]
 
-Label         = {Letter}{AlphaNumeric}*[:]*
+Label         = {Letter}{LabelValid}*[:]*
 Integer       = {Number}+
 Comment Line  =  ';'
 
 ! ------------------------------------------------- Rules
 
-! The following rule defines a series of newline tokens.
-! Use this rule rather than the newline terminal.
+<eol> ::= <eolSingle>
+        | <eol> <eolSingle>
 
-<nl>     ::= NewLine <nl>          !One or more
-          |  NewLine
+<eolSingle> ::= NewLine
+              | Comment Line
 
-<Comment Line> ::= Comment Line
+<eolOptional> ::= <eol>
+                | !Empty
 
-<nl Opt> ::= NewLine <nl Opt>      !Zero or more
-          |  !Empty
+<Start>   ::= <eolOptional> <AllStatements> <EndOptional>
 
-! <nl opt> removes blank lines before first statement
+<EndOptional> ::= <eol> End <eolOptional>
+                | <eol> End Label <eolOptional>
+                | <eol>
+                | !Empty
 
-<Start>   ::= <nl opt> <Statements>
-            | <nl opt> <Statements> <End>
+<AllStatements> ::= <Statement>
+                  | <For>
+                  | <AllStatements> <eol> <Statement>
+                  | <AllStatements> <eol> <For>
 
-<End> ::= End
-        | End <nl>
-        | End Label
-        | End Label <nl>
+<For> ::= <LabelsOptional> for <Expression> <eol> <InnerStatementsOptional> rof
+!       | <LabelsOptional> for <Expression> <eol> <AllStatements> rof --- TODO nested for
 
 
-<Statements> ::= <StatementNl>
-               | <StatementNl> <Statements>
-               | <ForNl> <StatementsF> <RofNl>
-               | <ForNl> <StatementsF> <RofNl> <Statements>
+<InnerStatementsOptional> ::= <InnerStatements> <eol>
+                            | !Empty
 
-<StatementsF> ::= <StatementNl>
-                | <StatementNl> <StatementsF>
+<InnerStatements> ::= <Statement>
+                    | <InnerStatements> <eol> <Statement>
 
-<StatementNl>  ::= <Statement> <Comment Line>
-                 | <Statement> <nl>
-
-<ForNl> ::= <ForIn> <nl>
-          | <ForIn> <Comment Line>
-
-<ForIn> ::= for <Expression>
-          | Label for <Expression>
-
-<RofNl> ::= rof <nl>
-          | rof <Comment Line>
-
-! statement separator
-
-<Statement> ::= <Operation>
-              | Label <Operation> 
+<Statement> ::= <Pin>
               | <Org>
               | <Equ>
-              | <Pin>
+              | <LabelsOptional> <Operation>
+              | <Labels> <eol> <Operation>
 
+<Pin> ::= Pin <Expression>
+<Org> ::= Org Label
+<Equ> ::= <Labels> Equ <Expression>
+        | <Labels> <eol> Equ <Expression>
+
+<LabelsOptional> ::= <Labels>
+                   | !Empty
+
+<Labels> ::= Label 
+           | <Labels> <eol> Label 
 
 <Operation> ::= <Operation0>
               | <Operation1>
@@ -104,10 +98,6 @@ Comment Line  =  ';'
               | Jmz | Jmn | Djn | Slt | Sne | Ldp | Stp
               | Cmp | Seq 
 
-<Org> ::= Org Label
-<Pin> ::= Pin <Expression>
-<Equ> ::= Label Equ <Expression>
-
 <Modifier> ::= I | A | B | AB | BA | F | X 
 
 <Expression>  ::= <Expression> '+' <Mult Exp>
@@ -117,6 +107,8 @@ Comment Line  =  ';'
 <Mult Exp>    ::= <Mult Exp> '*' <Negate Exp>
                |  <Mult Exp> '/' <Negate Exp>
                |  <Mult Exp> '%' <Negate Exp>
+!               |  <Mult Exp> '&' <Negate Exp> --TODO and
+!               |  <Mult Exp> '|' <Negate Exp> --TODO or, solve priority
                |  <Negate Exp> 
 
 <Negate Exp>  ::= '-' <Value>
@@ -125,4 +117,3 @@ Comment Line  =  ';'
 <Value> ::= Integer
           | Label
           | '(' <Expression> ')'
-
