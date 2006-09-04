@@ -11,6 +11,11 @@ namespace nMars.Parser
             Multiply,
             Divide,
             Modulo,
+            Or,
+            Xor,
+            And,
+            Shl,
+            Shr,
         }
 
         public BinaryExpression(Expression left, Expression right, BinaryOperation operation)
@@ -42,6 +47,16 @@ namespace nMars.Parser
                 case BinaryOperation.Modulo:
                     if (r == 0) throw new ParserException("Divide by zero during evaluation of " + ToString());
                     return l%r;
+                case BinaryOperation.And:
+                    return l & r;
+                case BinaryOperation.Or:
+                    return l | r;
+                case BinaryOperation.Xor:
+                    return l ^ r;
+                case BinaryOperation.Shl:
+                    return l << r;
+                case BinaryOperation.Shr:
+                    return l >> r;
                 default:
                     throw new InvalidOperationException();
             }

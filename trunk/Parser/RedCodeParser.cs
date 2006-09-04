@@ -78,11 +78,11 @@ namespace nMars.Parser
         private void Translate(ForRofContainerStatement statement, ExtendedWarrior warrior)
         {
             string cnt = statement.Labels[statement.Labels.Count - 1];
-            int count = variables[cnt].Evaluate();
+            int count = variables[cnt + "#start"].Evaluate();
             for (int i = 1; i <= count; i++)
             {
                 variables[cnt] = new Value(i);
-                Translate(statement.Container, warrior);
+                Translate((ContainerStatement)statement, warrior);
             }
         }
 

@@ -26,12 +26,6 @@ namespace nMars.Parser
                 Statements.Add(instruction);
         }
 
-        public void Add(ContainerStatement container)
-        {
-            if (container != null)
-                Statements.AddRange(container.Statements);
-        }
-
         public List<Statement> Statements = new List<Statement>();
     }
 }

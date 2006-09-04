@@ -161,10 +161,8 @@ namespace nMars.Parser
                 case (int)RuleConstants.RULE_ALLSTATEMENTS2:
                     //<AllStatements> ::= <For>
 
-                case (int)RuleConstants.RULE_INNERSTATEMENTSOPTIONAL2:
-                    //<InnerStatementsOptional> ::= 
-                    statements = new ContainerStatement();
-                    return statements;
+                case (int)RuleConstants.RULE_ALLSTATEMENTSOPTIONAL:
+                    //<AllStatementsOptional> ::= <AllStatements> <eol>
 
                 case (int)RuleConstants.RULE_OPERATION:
                     //<Operation> ::= <Operation0>
@@ -174,9 +172,6 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_OPERATION3:
                     //<Operation> ::= <Operation2>
-
-                case (int)RuleConstants.RULE_INNERSTATEMENTSOPTIONAL:
-                    //<InnerStatementsOptional> ::= <InnerStatements> <eol>
 
                     return token.Tokens[0].UserObject;
                     
@@ -188,17 +183,12 @@ namespace nMars.Parser
                     //<Start> ::= <eolOptional> <AllStatements> <EndOptional>
                     return token.Tokens[1].UserObject;
 
-                case (int)RuleConstants.RULE_INNERSTATEMENTS:
-                    //<InnerStatements> ::= <Statement>
-
                 case (int)RuleConstants.RULE_ALLSTATEMENTS:
                     //<AllStatements> ::= <Statement>
                     statement = (InstructionStatement)token.Tokens[0].UserObject;
                     statements = new ContainerStatement(statement);
                     return statements;
 
-                case (int)RuleConstants.RULE_INNERSTATEMENTS2:
-                    //<InnerStatements> ::= <InnerStatements> <eol> <Statement>
                 case (int)RuleConstants.RULE_ALLSTATEMENTS3:
                     //<AllStatements> ::= <AllStatements> <eol> <Statement>
                     statements = (ContainerStatement)token.Tokens[0].UserObject;
@@ -213,15 +203,20 @@ namespace nMars.Parser
                     statements.Add(forrof);
                     return statements;
 
+                case (int)RuleConstants.RULE_ALLSTATEMENTSOPTIONAL2:
+                    //<AllStatementsOptional> ::= 
+                    statements = new ContainerStatement();
+                    return statements;
+
                 case (int)RuleConstants.RULE_FOR_FOR_ROF:
-                    //<For> ::= <LabelsOptional> for <Expression> <eol> <InnerStatementsOptional> rof
+                    // <For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof
                     statementlabels = ((List<string>)token.Tokens[0].UserObject);
                     expression = (Expression)token.Tokens[2].UserObject;
                     forrof = new ForRofContainerStatement(statementlabels,
                                                         (string)token.Tokens[3].UserObject);
-                    forrof.Add((ContainerStatement)token.Tokens[4].UserObject);
+                    forrof.Add((Statement)token.Tokens[4].UserObject);
 
-                    string l="forof"+counter.ToString();
+                    string l="#forof"+counter.ToString();
                     counter++;
                     if (statementlabels.Count>0)
                     {
@@ -234,7 +229,11 @@ namespace nMars.Parser
                     
                     CheckName(l);
                     variables[l] = expression;
-                    
+
+                    l = l + "#start";
+                    CheckName(l);
+                    variables[l] = expression;
+
                     return forrof;
 
 
@@ -323,6 +322,12 @@ namespace nMars.Parser
                     //<Labels> ::= <Labels> <eol> Label
                     statementlabels = (List<string>)token.Tokens[0].UserObject;
                     statementlabels.Add((string)token.Tokens[2].UserObject);
+                    return statementlabels;
+
+                case (int)RuleConstants.RULE_LABELS_LABEL3:
+                    // <Labels> ::= <Labels> Label
+                    statementlabels = (List<string>)token.Tokens[0].UserObject;
+                    statementlabels.Add((string)token.Tokens[1].UserObject);
                     return statementlabels;
                 
                     #endregion
@@ -593,25 +598,76 @@ namespace nMars.Parser
 
                     #region Expressions
 
-                case (int) RuleConstants.RULE_EXPRESSION_PLUS:
+                case (int)RuleConstants.RULE_EXPRESSION_PIPE:
+                    //<Expression> ::= <Expression> | <Xor Exp>
+                    return
+                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                                             (Expression)token.Tokens[2].UserObject,
+                                             BinaryExpression.BinaryOperation.Or);
+
+                case (int)RuleConstants.RULE_EXPRESSION:
+                    //<Expression> ::= <Xor Exp>
+                    return token.Tokens[0].UserObject;
+
+                case (int)RuleConstants.RULE_XOREXP_CARET:
+                    //<Xor Exp> ::= <Xor Exp> ^ <And Exp>
+                    return
+                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                                             (Expression)token.Tokens[2].UserObject,
+                                             BinaryExpression.BinaryOperation.Xor);
+
+                case (int)RuleConstants.RULE_XOREXP:
+                    //<Xor Exp> ::= <And Exp>
+                    return token.Tokens[0].UserObject;
+
+                case (int)RuleConstants.RULE_ANDEXP_AMP:
+                    //<And Exp> ::= <And Exp> & <Shift Exp>
+                    return
+                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                                             (Expression)token.Tokens[2].UserObject,
+                                             BinaryExpression.BinaryOperation.And);
+
+                case (int)RuleConstants.RULE_ANDEXP:
+                    //<And Exp> ::= <Shift Exp>
+                    return token.Tokens[0].UserObject;
+
+                case (int)RuleConstants.RULE_SHIFTEXP_LTLT:
+                    //<Shift Exp> ::= <Shift Exp> << <Add Exp>
+                    return
+                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                                             (Expression)token.Tokens[2].UserObject,
+                                             BinaryExpression.BinaryOperation.Shl);
+
+                case (int)RuleConstants.RULE_SHIFTEXP_GTGT:
+                    //<Shift Exp> ::= <Shift Exp> >> <Add Exp>
+                    return
+                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                                             (Expression)token.Tokens[2].UserObject,
+                                             BinaryExpression.BinaryOperation.Shr);
+
+                case (int)RuleConstants.RULE_SHIFTEXP:
+                    //<Shift Exp> ::= <Add Exp>
+                    return token.Tokens[0].UserObject;
+
+                case (int)RuleConstants.RULE_ADDEXP_PLUS:
                     //<Expression> ::= <Expression> + <Mult Exp>
                     return
                         new BinaryExpression((Expression) token.Tokens[0].UserObject,
                                              (Expression) token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.Plus);
 
-                case (int) RuleConstants.RULE_EXPRESSION_MINUS:
+                case (int)RuleConstants.RULE_ADDEXP_MINUS:
                     //<Expression> ::= <Expression> - <Mult Exp>
                     return
                         new BinaryExpression((Expression) token.Tokens[0].UserObject,
                                              (Expression) token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.Minus);
 
-                case (int) RuleConstants.RULE_EXPRESSION:
-                    //<Expression> ::= <Mult Exp>
+                case (int)RuleConstants.RULE_ADDEXP:
+                    //<Add Exp> ::= <Mult Exp>
                     return token.Tokens[0].UserObject;
 
-                case (int) RuleConstants.RULE_MULTEXP_TIMES:
+                case (int)RuleConstants.RULE_MULTEXP_TIMES:
                     //<Mult Exp> ::= <Mult Exp> * <Negate Exp>
                     return
                         new BinaryExpression((Expression) token.Tokens[0].UserObject,
@@ -682,13 +738,13 @@ namespace nMars.Parser
         private void TokenErrorEvent(LALRParser argParser, TokenErrorEventArgs args)
         {
             string message = "Token error with input: '" + args.Token.ToString() + "'";
-            throw new Exception(message);
+            throw new ParserException(message);
         }
 
         private void ParseErrorEvent(LALRParser argParser, ParseErrorEventArgs args)
         {
             string message = "Parse error caused by token: '" + args.UnexpectedToken.ToString() + "'" + " at " + args.UnexpectedToken.Location.ToString();
-            throw new Exception(message);
+            throw new ParserException(message);
         }
     }
 }
