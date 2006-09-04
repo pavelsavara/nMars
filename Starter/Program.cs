@@ -16,6 +16,7 @@ namespace Starter
             ParserTest t=new ParserTest();
             t.Loader();
             
+            /*
             Rules rules = new Rules();
             Engine se = new Engine();
             RedCodeParser parser = new RedCodeParser(rules);
@@ -28,6 +29,7 @@ namespace Starter
             PSpaces spaces = new PSpaces();
             Random r = new Random(0);
             se.Run(rr, rules, spaces, r, forcedaddr);
+             */
         }
     }
 }

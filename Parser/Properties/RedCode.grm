@@ -8,14 +8,15 @@
 ! ------------------------------------------------- Sets
 
 {WS}           = {Whitespace} - {CR} - {LF}
+{LabelHead}    = {Letter} + [_]
+{LabelTail}    = {Alphanumeric} + [_]
 
 ! ------------------------------------------------- Terminals
 
 Whitespace    = {WS}+
 NewLine       = {CR}{LF} | {CR} | {LF}
-{LabelValid}  = {AlphaNumeric} + [_]
 
-Label         = {Letter}{LabelValid}*[:]*
+Label         = {LabelHead}{LabelTail}*[:]*
 Integer       = {Number}+
 Comment Line  =  ';'
 
@@ -42,15 +43,10 @@ Comment Line  =  ';'
                   | <AllStatements> <eol> <Statement>
                   | <AllStatements> <eol> <For>
 
-<For> ::= <LabelsOptional> for <Expression> <eol> <InnerStatementsOptional> rof
-!       | <LabelsOptional> for <Expression> <eol> <AllStatements> rof --- TODO nested for
+<For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof
 
-
-<InnerStatementsOptional> ::= <InnerStatements> <eol>
+<AllStatementsOptional> ::= <AllStatements> <eol>
                             | !Empty
-
-<InnerStatements> ::= <Statement>
-                    | <InnerStatements> <eol> <Statement>
 
 <Statement> ::= <Pin>
               | <Org>
@@ -68,6 +64,8 @@ Comment Line  =  ';'
 
 <Labels> ::= Label 
            | <Labels> <eol> Label 
+           | <Labels> Label 
+
 
 <Operation> ::= <Operation0>
               | <Operation1>
@@ -100,19 +98,30 @@ Comment Line  =  ';'
 
 <Modifier> ::= I | A | B | AB | BA | F | X 
 
-<Expression>  ::= <Expression> '+' <Mult Exp>
-               |  <Expression> '-' <Mult Exp>
-               |  <Mult Exp> 
+<Expression> ::= <Expression> '|' <Xor Exp>
+               |  <Xor Exp>
+
+<Xor Exp> ::= <Xor Exp> '^' <And Exp>
+            | <And Exp>
+
+<And Exp> ::= <And Exp> '&' <Shift Exp>
+            | <Shift Exp>
+
+<Shift Exp> ::= <Shift Exp> '<<' <Add Exp>
+              | <Shift Exp> '>>' <Add Exp>
+              | <Add Exp>
+
+<Add Exp>  ::= <Add Exp> '+' <Mult Exp>
+             | <Add Exp> '-' <Mult Exp>
+             | <Mult Exp> 
 
 <Mult Exp>    ::= <Mult Exp> '*' <Negate Exp>
                |  <Mult Exp> '/' <Negate Exp>
                |  <Mult Exp> '%' <Negate Exp>
-!               |  <Mult Exp> '&' <Negate Exp> --TODO and
-!               |  <Mult Exp> '|' <Negate Exp> --TODO or, solve priority
                |  <Negate Exp> 
 
-<Negate Exp>  ::= '-' <Value>
-                |  <Value>
+<Negate Exp> ::= '-' <Value>
+               | <Value>
 
 <Value> ::= Integer
           | Label
