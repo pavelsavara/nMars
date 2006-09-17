@@ -1,0 +1,91 @@
+;redcode
+;assert CORESIZE==8000
+;name Tangle Trap 3
+;author David Moore
+;strategy .4c pit trapper with error-checking.
+;strategy If damaged, then deploy "airbag"
+;-------------------------------------------------------------------
+; Here's the main code after boot:
+;
+;     A   add   B,       check
+;     B   sub  #-step,   2
+;     C   mov  <check,  @D
+;     D   mov  <check,  @C - step * time
+;     E   jmz   A,       check
+;         jmp   clear,   0         ; go to core clear
+;
+;         ...
+;
+;         jmp skip + step, skip
+; check   jmp trap, 0
+;
+; There are 7 processes in the loop. They execute in this order:
+;
+;      CADBECA DBECADB ECADBEC ADBECAD BECADBE ...
+;
+; Look at that again:
+;
+;      CADBE CADBE CADBE CADBE CADBE CADBE CADBE ...
+;
+; Note that there are constant additions (+2) and subtractions (-1)
+; to "check". The sum of these changes is zero as long as
+; things work properly. When the loop is damaged, the count
+; is thrown off, causing line E to read a non-zero value.
+; This allows the warrior to leave the crippled code and go
+; quickly to the second phase: a core clear.
+;-------------------------------------------------------------------
+; The pit trap after boot:
+;
+;     X   spl  0, <2   ; <-- JMP bombs are aimed here
+;     Y   spl -1,  0
+;     Z   jmn -1, #MAXPROCESSES
+;         dat  0,  0
+;
+; Every new process in the pit lands on X once and only once.
+; Line Z is a counter for how many processes remain outside
+; of the pit. As soon as the count reaches 0, you can be sure
+; that all processes are at Y and Z. Next, they will all go
+; to Z and the DAT, with no chance to return to the pit. Checkmate!
+;-------------------------------------------------------------------
+; vamp numbers
+; boot distances
+       ORG      START
+       MOV.I  $    23, @    21     
+       MOV.I  $    24, @     4     
+       MOV.I  $    22, <     3     
+       MOV.I  $    19, $ -2957     
+       SPL.B  $     5, $ -2673     
+       SPL.B  $ -2892, $ -2849     
+       SPL.B  @     0, $ -2889     
+       MOV.I  <    -1, $    -2     
+       DAT.F  <    -4, <    -5     
+       SPL.B  $ -2895, $ -2936     
+       SPL.B  @     0, $ -2898     
+       MOV.I  <    -1, $    -2     
+       DAT.F  <    -2, <   957     
+START  SPL.B  $   -13, <   564     
+       SPL.B  $     2, < -1348     
+       SPL.B  $     1, <  -614     
+       MOV.I  <    11, <   -10     
+       MOV.I  <    10, <   -11     
+       MOV.I  <     9, <    -9     
+       MOV.I  <     8, <   -15     
+       DJN.B  @   -10, #     3     
+       DJN.B  @   -15, # -2955     
+       JMP.B  $     0, <     0     
+       DAT.F  <    -8, #   -10     
+       JMP.B  $   -67, $   -18     
+       JMP.B  $   458, $     2     
+       SPL.B  $     0, <     2     
+       SPL.B  $    -1, $    11     
+       JMN.B  $    -1, #     0     
+       SPL.B  $     0, <    -7     
+       MOV.I  $    -5, <    -5     
+       DJN.B  $    -1, <  3984     
+       ADD.F  $     1, $    45     
+       SUB.AB #    49, $     2     
+       MOV.I  <    43, @     1     
+       MOV.I  <    42, @  -177     
+       JMZ.B  $    -4, $    41     
+       JMP.B  $   -46, $     0     
+

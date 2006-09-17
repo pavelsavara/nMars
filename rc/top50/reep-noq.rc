@@ -1,0 +1,58 @@
+;redcode-94nop
+;name Reepicheep
+;author Grabun/Metcalf
+;strategy Q^4 -> Stone/Paper
+;assert CORESIZE==8000
+       ORG      START
+       SPL.B  $     1, } -1823     
+       SPL.B  $     1, } -3304     
+       SPL.B  $     1, }  3215     
+       SPL.B  @     0, >   535     
+       MOV.I  }    -1, >    -1     
+       SPL.B  $  3875, $     0     
+       MOV.I  >    -1, }    -1     
+       MOV.I  $     3, >  -401     
+       MOV.I  <    -3, <     1     
+       DJN.F  @     0, > -2840     
+       DAT.F  > -2666, >  2667     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       SPL.B  #     0, #     0     
+       MOV.I  $     9, }  2776     
+       MOV.I  $     8, @    -1     
+       ADD.AB #  2777, @    -1     
+       DJN.F  $    -3, { -1500     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  >    31, >     1     
+       DAT.F  $     0, $     0     
+START  MOV.I  $   -12, $  3892     
+       MOV.I  $    -3, $  3902     
+       SPL.B  $     2, }  3532     
+       SPL.B  $     2, }  2051     
+       SPL.B  $     1, $  3894     
+       MOV.I  <     2, <    -1     
+       DJN.B  @    -6, #     5     
+       JMP.B  $   -50, $   -14     
+

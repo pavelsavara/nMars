@@ -1,0 +1,110 @@
+;redcode-94nop
+;name Skin
+;strategy Two humans were used in the creation of this warrior
+;strategy But the paper is 100% evolved!
+;author Roy + bvowk
+;assert 1
+;optimax pap
+;constants for the quickscanner
+       ORG      START
+       SPL.B  $     2, > -1849     
+       SPL.B  $     1, >  2363     
+       SPL.B  $     1, > -1249     
+       SPL.B  @     0, >  2051     
+       MOV.I  }    -1, >    -1     
+       MOV.I  $     1, }  1775     
+       MOV.I  <  3715, >    -3     
+       MOV.I  {    -4, {     1     
+       DJN.F  $ -3048, < -1407     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  {   102, {     1     
+START  SEQ.I  $ -3766, $   234     
+       JMP.B  $    30, { -3751     
+       SNE.I  $ -2968, $  1032     
+       SEQ.I  $   831, {    36     
+       JMP.B  $    26, }    35     
+       SNE.I  $ -2371, $  1629     
+       SEQ.I  $  1428, {    32     
+       JMP.B  $    23, {    23     
+       SNE.I  $ -1974, $  2026     
+       SEQ.I  $  1825, {    31     
+       JMP.B  $    20, }    20     
+       SEQ.I  $ -3577, $   423     
+       JMP.B  $    18, {    27     
+       SEQ.I  $ -2779, $  1221     
+       DJN.A  $    16, {    16     
+       SEQ.I  $ -3381, $   619     
+       JMP.B  $    14, { -3366     
+       SNE.I  $ -1183, $  2817     
+       SEQ.I  $  2616, <    21     
+       JMP.B  $    10, >    20     
+       SNE.I  $  -586, $  3414     
+       SEQ.I  $  3213, <    17     
+       JMP.B  $     7, {     7     
+       SEQ.I  $ -1789, $  2211     
+       JMP.B  $     5, <    15     
+       SEQ.I  $  -991, $  3009     
+       DJN.B  $     3, {     3     
+       SNE.I  $ -1593, $  2407     
+       JMZ.B  $   -87, $ -1608     
+       MOV.BA $    10, $    10     
+       MUL.AB $     9, $     4     
+       SNE.I  $   -33, @     3     
+       ADD.AB #  4000, $     2     
+       MOV.I  $   -34, @     1     
+       MOV.I  $   -35, *   200     
+       SUB.AB #    14, $    -1     
+       DJN.B  $    -3, #     8     
+       JMP.B  $   -96, <  4000     
+       DAT.F  $ -2592, $  -783     
+       DAT.F  $ -3196, $ -1387     
+       DAT.F  $ -2190, $   -46     
+

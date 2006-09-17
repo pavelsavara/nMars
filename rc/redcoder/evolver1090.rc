@@ -1,0 +1,5 @@
+       ORG      START
+START  SPL.A  #  1992, {     1     
+       MOV.I  }  -125, }    -1     
+       DJN.A  $    -1, }    -2     
+

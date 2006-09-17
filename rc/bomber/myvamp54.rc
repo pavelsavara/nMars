@@ -1,0 +1,108 @@
+;redcode-94
+;name myVamp5.4
+;author Paulsson
+;strategy 5.0, Chasing SteppingStone
+;strategy 5.1, Spl/Spl/Dat CoreClear
+;strategy 5.2 small changes, + some points...
+;strategy 5.3&4 Decoy, small changes
+;strategy July, 1996
+;for Planar, vamp,scan,coreclear,decoy(?)
+;assert 1
+;optimax stn
+       ORG      START
+       JMP.B  $    83, #     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       JMP.B  *   904, $  -912     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $   100     
+       DAT.F  $   -20, $     0     
+       DAT.F  $     0, $     0     
+       JMP.B  $     7, $     0     
+       ADD.F  $     5, $    -7     
+       MOV.I  @     0, >    -8     
+       JMZ.A  $    -2, *    -9     
+       MOV.I  <    -9, *   -10     
+       JMN.B  $    -4, >   -10     
+       SPL.B  #   912, $  -913     
+       MOV.I  $     9, >   -10     
+       DJN.F  $    -1, >   -11     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $    18     
+       DAT.F  $     0, $    18     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $    20     
+       DAT.F  $     0, $    20     
+       DAT.F  $   -10, $    20     
+       DAT.F  $   -10, $    20     
+       SPL.B  #  4000, $    20     
+       MOV.I  @     2, >    -5     
+       MOV.I  @     1, >    -6     
+       DJN.B  $    -2, {    -3     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       JMP.B  $    48, $   -54     
+START  MOV.I  <  3942, { -2063     
+       MOV.I  <  3814, { -2191     
+       MOV.I  <  3686, { -2319     
+       MOV.I  <  3558, { -2447     
+       MOV.I  <  3430, { -2575     
+       MOV.I  <  3302, { -2703     
+       MOV.I  <  3174, { -2831     
+       MOV.I  <  3046, { -2959     
+       JMP.B  $   -66, $     0     
+       MOV.I  $   -10, @   -10     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #     0, $     0     
+

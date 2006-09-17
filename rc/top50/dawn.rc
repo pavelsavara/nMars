@@ -1,0 +1,132 @@
+;redcode-94nop
+;name Dawn
+;author Roy van Rijn
+;strategy q^4 into 2 papers (clearpaper and anti-imp/imp-paper)
+;assert 1
+; I made this warrior first as an update to Revenge of the Papers,
+; but after alot of programming only the first paper looks a bit like
+; the one from Revenge of the Papers.
+; So I decided to name it and submit,
+; currently its 5th on the nop hill and still looking strong.
+; I made it with in my mind the age,
+; and I was surprised to see it so high on the hill
+; This is a pointer for the qscan
+; Some highly optimized constants
+; Generate 8 processes
+; Split to the other paper
+; I changed some parts of the paper from < into }
+; It seems to work just slightly better
+; Some pointers, placed after optimization
+; The "easy to optimize" cut-n-paste Q-scan from Corewarrior #84
+; (Thanks Joonas!)
+; I tried some other ones but this one scored far better then the rest
+; Feel free to mail me with updates/patches/changes
+; The other paper is just Revenge of the Paper with other constants
+; But its still going well on the Hill, it has too much losses
+; So I added a "anti imp/imp-paper"
+; This paper comes for a part from Return of the Jedimp
+; But I made it more suitable for the hill today,
+; and I optimized the constants
+; This bomb is changed into an anti-imp bomb
+       ORG      START
+       SPL.B  $     1, < -1130     
+       SPL.B  $     1, <   153     
+       SPL.B  $     1, <  1436     
+       SPL.B  $    87, } -1676     
+       MOV.I  {     4, {     1     
+       SPL.B  $  2011, }  3048     
+       MOV.I  {    10, {     1     
+       JMP.B  $ -1991, } -1171     
+       SPL.B  @     8, }  3218     
+       MOV.I  }    -1, >    -1     
+       SPL.B  @     0, }  1857     
+       MOV.I  }    -1, >    -1     
+       SPL.B  @     0, }   851     
+       MOV.I  }    -1, >    -1     
+       MOV.I  #     1, <     1     
+       DJN.B  $    -2, < -3454     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $  -168, $  1888     
+       DAT.F  $  -169, $  3171     
+       DAT.F  $     0, $     0     
+       DAT.F  #     0, $     0     
+       DAT.F  $     7, $  -980     
+       MUL.B  *     2, $     6     
+       SNE.I  {    -5, @     5     
+       ADD.B  $   -52, $     4     
+       ADD.BA *    -4, $     3     
+       MOV.I  $     7, *     2     
+       MOV.I  $     6, @     1     
+       MOV.I  $    24, *  3948     
+       SUB.F  $     3, $    -1     
+       DJN.B  $    -4, #     6     
+       JMP.B  $   -60, $     0     
+       DAT.F  $   -15, $    21     
+       DAT.F  $    10, $     0     
+START  SEQ.I  $  3942, $ -3905     
+       JMP.B  $   -12, $     0     
+       SNE.I  $  2952, $  3105     
+       SEQ.I  <   -16, $  -844     
+       JMP.B  $   -16, }   -16     
+       SNE.I  $ -2187, $ -2034     
+       SEQ.I  <   -23, $  2017     
+       DJN.A  $   -19, {   -19     
+       SNE.I  $  -906, $  -753     
+       SEQ.I  <   -25, $  3298     
+       JMP.B  $   -22, {   -22     
+       SNE.I  $  2743, $  1613     
+       SEQ.I  <   -75, $ -2337     
+       JMP.B  $   -25, {   -23     
+       SEQ.I  $  2844, $  1712     
+       DJN.B  $   -27, {   -25     
+       SNE.I  $ -2694, $ -1258     
+       SEQ.I  <   -78, $  2792     
+       JMP.B  $   -30, }   -28     
+       SNE.I  $ -3981, $ -3828     
+       SEQ.I  <   -82, $   222     
+       JMP.B  $   -33, $     0     
+       JMP.B  $   -85, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       MOV.I  <     1, {     1     
+       JMP.B  $  1321, }     9     
+       SPL.B  @     0, }  -538     
+       MOV.I  }    -1, >    -1     
+       SPL.B  #  1143, $  3236     
+       MOV.I  $     3, >     2     
+       ADD.F  $    -2, $     1     
+       JMP.F  $ -1142, {  3231     
+       DAT.F  <  1143, <  2667     
+       MOV.I  #  1143, *     0     
+

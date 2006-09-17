@@ -1,0 +1,116 @@
+;redcode-94nop
+;author Lukasz Grabun
+;assert (CORESIZE==8000)
+;name Hammerhead
+;strategy Q^4 -> Stone/Imp
+;strategy improved version of Thunderstrike
+;optimax sbi
+; -- imp constants
+; -- imp launcher
+; -- stone constants
+; -- stone
+; -- boot
+; -- qscan constants
+; -- qscan
+       ORG      START
+       DAT.F  {    87, #  1569     
+       SPL.B  #   254, #     5     
+       SUB.F  # -2668, $     2     
+       MOV.I  $     2, }    -2     
+       JMP.B  $  2915, > -2666     
+       MOV.I  #     0, $  2667     
+       SPL.B  #  3510, < -3510     
+       MOV.I  {  3510, < -3553     
+       MOV.I  $     5, @    -1     
+       ADD.F  $    -3, $    -2     
+       DJN.F  @    -1, < -3514     
+       MOV.I  $     2, >   -11     
+       DJN.F  $    -1, >   -12     
+       DAT.F  <  2667, $    47     
+       MOV.I  $    -1, $ -3478     
+       MOV.I  {    -1, <    -1     
+       MOV.I  {    -2, <    -2     
+       SPL.B  $     2, } -1292     
+       SPL.B  $     2, }  2775     
+       SPL.B  $     1, } -1158     
+       MOV.I  {    -6, <    -6     
+       MOV.I  <   -20, {     3     
+       DJN.B  @    -8, #     5     
+       JMP.B  $  2010, }  -890     
+       DAT.F  $  2014, #  3177     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+START  SEQ.I  $  3429, $ -1796     
+       JMP.B  $    21, {  3435     
+       SNE.I  $  2191, $  1033     
+       SEQ.I  <   -55, $ -2373     
+       JMP.B  $    17, }    19     
+       SNE.I  $ -3104, $  -329     
+       SEQ.I  <   -77, $ -3734     
+       JMP.B  $    14, }    14     
+       SNE.I  $  2457, $ -2768     
+       SEQ.I  <   -57, $  1827     
+       DJN.A  $    11, {    11     
+       SNE.I  $ -1478, $  1297     
+       SEQ.I  <   -59, $ -2108     
+       DJN.A  $     8, *     0     
+       SNE.I  $  2043, $   751     
+       SEQ.I  <   -69, $ -2655     
+       JMP.B  $     5, {     7     
+       SEQ.I  $  3232, $  1938     
+       DJN.B  $     3, {     5     
+       SNE.I  $ -1894, $   881     
+       JMZ.F  $   -77, <   -73     
+       MUL.B  *     2, $     4     
+       SNE.I  *   -69, @     3     
+       ADD.B  $   -76, $     2     
+       MOV.I  $   -95, @     1     
+       MOV.I  $   -96, }  3404     
+       SUB.AB #     7, @    -4     
+       DJN.B  $    -3, #    16     
+       JMP.B  $   -85, {   400     
+

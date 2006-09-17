@@ -1,0 +1,104 @@
+;redcode-94nop
+;name Hazy Lazy ...
+;author Steve Gunnell
+;strategy Optimized and mildly altered version of 'The Machine' by 
+;strategy Anton Marsden.
+;strategy Especially hostile to anything with a DJN stram.
+;assert 1
+       ORG      START
+       MOV.I  $     7, > -2380     
+       MOV.I  $    12, >    -1     
+       SEQ.I  $  3240, $  3248     
+       MOV.AB $    -1, @    -2     
+       SUB.F  $     2, $    -2     
+       JMN.B  $    -4, @    -4     
+       SPL.I  #  2380, >  2380     
+       MOV.I  $     2, >    -6     
+       DJN.F  $    -1, >    -7     
+       DAT.F  <  2667, $    10     
+       DAT.F  $     0, $     0     
+       SPL.I  #  2380, >  2380     
+       DAT.F  $     0, $     0     
+       SPL.B  #     1, #     1     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       MOV.I  {    -3, <     6     
+       DAT.F  $     0, $     0     
+START  MOV.I  $    -9, <     9     
+       MOV.I  {    -1, <     8     
+       MOV.I  {    -2, <     7     
+       MOV.I  {    -3, <     6     
+       MOV.I  {    -4, <     5     
+       MOV.I  {    -5, <     4     
+       MOV.I  {    -6, <     3     
+       MOV.I  {    -7, <     2     
+       MOV.I  {    -8, <     1     
+       MOV.I  $   -14, *   345     
+       SPL.B  @    -1, { -1000     
+       MOV.I  {   -11, <    -2     
+       DAT.F  <    -3, <    -3     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.I  #     1, #     1     
+       SPL.A  #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.I  #     1, #     1     
+       SPL.A  #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.I  #     1, #     1     
+       SPL.A  #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.I  #     1, #     1     
+       SPL.A  #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.I  #     1, #     1     
+       SPL.A  #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.I  #     1, #     1     
+       SPL.A  #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.I  #     1, #     1     
+       SPL.A  #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+       SPL.I  #     1, #     1     
+       SPL.A  #     1, *     1     
+       SPL.B  #     1, $     1     
+       SPL.AB #     1, @     1     
+       SPL.BA #     1, *     1     
+

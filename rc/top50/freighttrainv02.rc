@@ -1,0 +1,97 @@
+;redcode
+;name Freight Train v0.2
+;author David Moore
+;assert 1
+;strategy make a 7 point imp and grow it with dual continuous launchers.
+;strategy add a stone that is a bit similar to Cannonade's.
+;strategy optional q^2 (set switch to make the non-scanning version).
+;strategy v0.2: Fixed a minor bug in the q^2
+;----------------------------------------------------------------
+; q^2 switch
+; qscan constants
+; boot distances relative to "launch"
+; imp copy step size
+; constants related to stone
+;----------------------------------------------------------------
+; continous launcher
+;----------------------------------------------------------------
+; q^2 fast scan/bomb
+;----------------------------------------------------------------
+; boot a stone, an imp, and two continuous launchers
+;----------------------------------------------------------------
+       ORG      START
+       SPL.B  $     0, $     0     
+       ADD.AB #  1144, $     1     
+       JMP.B  @     0, $ -3135     
+       JMP.B  $    44, $    91     
+       JMP.B  $    33, $    69     
+       JMP.B  $    22, $    47     
+       JMP.B  $    11, $    25     
+       ADD.F  @    22, $    11     
+       ADD.F  @    17, @    -1     
+       ADD.F  @    14, @    -2     
+       SEQ.I  @     8, $    64     
+       JMP.B  $     2, $    -4     
+       ADD.AB #   164, $     6     
+       MOV.I  $     8, @     5     
+       MOV.I  $    49, <     4     
+       MOV.I  $   -15, <     3     
+       SUB.AB #    10, $     2     
+       MOV.I  <    -6, <     1     
+       MOV.I  $    68, <  1778     
+       DJN.B  $    -3, #     4     
+       JMP.B  $    28, $   656     
+       JMP.B  $    -2, $  2296     
+START  SEQ.I  $  1774, $  1937     
+       JMP.B  $   -13, $    44     
+       SEQ.I  $  2100, $  2263     
+       JMP.B  $   -16, $    -4     
+       SEQ.I  $  3410, $  3573     
+       JMP.B  $   -18, <    -4     
+       SEQ.I  $ -3608, $ -3445     
+       JMP.B  $   -21, $    39     
+       SEQ.I  $  2750, $  2913     
+       JMP.B  $   -23, <    -6     
+       SEQ.I  $ -3940, $ -3777     
+       JMP.B  $   -25, <   -24     
+       SEQ.I  $ -2302, $ -2139     
+       JMP.B  $   -27, <   -12     
+       SEQ.I  $ -2632, $ -2469     
+       JMP.B  $   -30, $     0     
+       SEQ.I  $  3070, $  3233     
+       JMP.B  $   -32, <   -31     
+       SEQ.I  $  3724, $  3887     
+       JMP.B  $   -34, <   -16     
+       SEQ.I  $ -3294, $ -3131     
+       JMP.B  $   -36, <   -14     
+       SEQ.I  $ -2968, $ -2805     
+       JMP.B  $   -38, <   -36     
+       SEQ.I  $ -1330, $ -1167     
+       JMP.B  $   -40, <   -24     
+       SPL.B  $    18, $    18     
+       SPL.B  $     1, $   -46     
+       SPL.B  $     1, $   -47     
+       MOV.I  <    -3, <     3     
+       MOV.I  <    -3, <     5     
+       MOV.I  <    -3, <    16     
+       DJN.B  $  1495, #  1498     
+       MOV.I  $     6, $ -1137     
+       MOV.I  $     4, $  1499     
+       SPL.B  $  1995, $  1998     
+       MOV.AB #   363, $ -1500     
+       JMP.B  $ -1503, <     0     
+       DAT.F  <  2667, <     1     
+       MOV.I  $     0, $  1143     
+       MOV.I  < -3118, $  -163     
+       SPL.B  $    -1, <   -80     
+       ADD.F  $     1, $    -2     
+       DJN.B  $    -2, <   -82     
+       SPL.B  $   -11, $  1640     
+       SPL.B  $     1, $   328     
+       SPL.B  $     1, $   984     
+       SPL.B  $     1, $ -1510     
+       SPL.B  $     2, $     0     
+       JMP.B  @     0, $ -1153     
+       ADD.AB #  1143, $    -1     
+       JMP.B  $  1476, <     0     
+
