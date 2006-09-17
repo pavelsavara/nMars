@@ -24,6 +24,8 @@ namespace com.calitha.goldparser
             get { return userObject; }
             set { userObject = value; }
         }
+
+        public abstract Location Location { get; }
     }
 
     /// <summary>
@@ -77,7 +79,7 @@ namespace com.calitha.goldparser
         /// <summary>
         /// The location in the input that this token was found.
         /// </summary>
-        public Location Location
+        public override Location Location
         {
             get { return location; }
         }
@@ -90,16 +92,18 @@ namespace com.calitha.goldparser
     {
         private Token[] tokens;
         private Rule rule;
+        private Location location;
 
         /// <summary>
         /// Creates a new nonterminal token.
         /// </summary>
         /// <param name="rule">The reduction rule.</param>
         /// <param name="tokens">The tokens that are reduced.</param>
-        public NonterminalToken(Rule rule, Token[] tokens)
+        public NonterminalToken(Rule rule, Token[] tokens, Location location)
         {
             this.rule = rule;
             this.tokens = tokens;
+            this.location = location;
         }
 
         public void ClearTokens()
@@ -144,6 +148,14 @@ namespace com.calitha.goldparser
         public Rule Rule
         {
             get { return rule; }
+        }
+
+        /// <summary>
+        /// The rule that caused the reduction.
+        /// </summary>
+        public override Location Location
+        {
+            get { return location; }
         }
     }
 }
