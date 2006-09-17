@@ -1,1 +1,10 @@
+09/17/2006 - nMars0.2 - Parser more powerfull
+  - more expression operations
+  - label can be A B I ... <Modifier>
+  - dynamic label names name & order
+  - locations to pareser errors
+  - 2 pass label&variable evaluation
+  - unit test skeleton
+  - exaple warriors in directory rc
+
 08/12/2006 - nMars0.1 - First version

@@ -10,13 +10,14 @@ namespace nMars.SimpleEngine
         {
         }
 
-        protected void Init(IList<IWarrior> aWarriors, Rules aRules, IPSpaces aPSpaces, Random aRandom, IList<int> forcedAddresses)
+        protected void Init(IList<IWarrior> aWarriors, Rules aRules, IPSpaces aPSpaces, Random aRandom,
+                            IList<int> forcedAddresses)
         {
             rules = aRules;
             random = aRandom;
             pSpaces = aPSpaces;
             CleanCore();
-            if (forcedAddresses!=null)
+            if (forcedAddresses != null)
             {
                 PlaceWarriors(aWarriors, forcedAddresses);
             }
@@ -36,7 +37,7 @@ namespace nMars.SimpleEngine
 
         private void PlaceWarriors(IList<IWarrior> aWarriors, IList<int> forcedAddresses)
         {
-            for(int i=0;i<aWarriors.Count;i++)
+            for (int i = 0; i < aWarriors.Count; i++)
             {
                 IWarrior warrior = aWarriors[i];
                 int loadAddress = forcedAddresses[i];

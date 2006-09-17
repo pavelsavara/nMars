@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace nMars.Parser
 {
@@ -19,14 +20,14 @@ namespace nMars.Parser
         private UnaryOperation operation;
         private Expression sub;
 
-        public override int Evaluate()
+        public override int Evaluate(Dictionary<string, Expression> variables)
         {
             switch (operation)
             {
                 case UnaryOperation.Negate:
-                    return 0 - sub.Evaluate();
+                    return 0 - sub.Evaluate(variables);
                 case UnaryOperation.Brackets:
-                    return sub.Evaluate();
+                    return sub.Evaluate(variables);
                 default:
                     throw new InvalidOperationException();
             }

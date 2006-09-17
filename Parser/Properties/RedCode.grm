@@ -33,9 +33,13 @@ Comment Line  =  ';'
 
 <Start>   ::= <eolOptional> <AllStatements> <EndOptional>
 
-<EndOptional> ::= <eol> End <eolOptional>
-                | <eol> End Label <eolOptional>
-                | <eol>
+<EndOptional> ::= <eol>
+                | <eol> End <eolOptional>
+                | <eol> End <Labels> <eolOptional>
+                | <eol> <Labels> End <eolOptional>
+                | <eol> <Labels> End <Labels> <eolOptional>
+                | <eol> <Labels> <eol> End <eolOptional>
+                | <eol> <Labels> <eol> End <Labels> <eolOptional>
                 | !Empty
 
 <AllStatements> ::= <Statement>
@@ -43,7 +47,7 @@ Comment Line  =  ';'
                   | <AllStatements> <eol> <Statement>
                   | <AllStatements> <eol> <For>
 
-<For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof
+<For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof <ExpressionOptional>
 
 <AllStatementsOptional> ::= <AllStatements> <eol>
                             | !Empty
@@ -56,15 +60,21 @@ Comment Line  =  ';'
 
 <Pin> ::= Pin <Expression>
 <Org> ::= Org Label
-<Equ> ::= <Labels> Equ <Expression>
-        | <Labels> <eol> Equ <Expression>
+<Equ> ::= <Labels> Equ <ModeOptional> <Expression>
+        | <Labels> <eol> Equ <ModeOptional> <Expression>
 
 <LabelsOptional> ::= <Labels>
                    | !Empty
 
-<Labels> ::= Label 
-           | <Labels> <eol> Label 
-           | <Labels> Label 
+<Label> ::= Label
+          | <Modifier> ! because labels could be same tokens as modifiers
+          | Label '&' Label
+          | Label '&' <Modifier>
+          | <Modifier> '&' Label
+
+<Labels> ::= <Label>
+           | <Labels> <eol> <Label>
+           | <Labels> <Label>
 
 
 <Operation> ::= <Operation0>
@@ -88,6 +98,9 @@ Comment Line  =  ';'
 <Parameter>   ::= <Expression>
                 | <Mode> <Expression>
 
+<ModeOptional> ::= <Mode>
+                 | !Empty
+
 <Mode> ::= '#' | '$' | '@' | '<' | '>' | '{' | '}' | '*'
 
 <Operator0> ::= Nop 
@@ -98,31 +111,51 @@ Comment Line  =  ';'
 
 <Modifier> ::= I | A | B | AB | BA | F | X 
 
-<Expression> ::= <Expression> '|' <Xor Exp>
-               |  <Xor Exp>
+<ExpressionOptional> ::= <Expression>
+                       | !Empty
 
-<Xor Exp> ::= <Xor Exp> '^' <And Exp>
-            | <And Exp>
+<Expression>  ::= <Or Exp> '?' <Expression> ':' <Expression>
+                | <Or Exp>
 
-<And Exp> ::= <And Exp> '&' <Shift Exp>
-            | <Shift Exp>
+<Or Exp>      ::= <Or Exp> '||' <And Exp>
+                | <And Exp>
 
-<Shift Exp> ::= <Shift Exp> '<<' <Add Exp>
-              | <Shift Exp> '>>' <Add Exp>
-              | <Add Exp>
+<And Exp>     ::= <And Exp> '&&' <BinOr Exp>
+                | <BinOr Exp>
 
-<Add Exp>  ::= <Add Exp> '+' <Mult Exp>
-             | <Add Exp> '-' <Mult Exp>
-             | <Mult Exp> 
+<BinOr Exp>   ::= <BinOr Exp> '|' <BinXor Exp>
+                |  <BinXor Exp>
+
+<BinXor Exp>  ::= <BinXor Exp> '^' <Equate Exp>
+                | <Equate Exp>
+
+<Equate Exp>  ::= <Equate Exp> '==' <Compare Exp>
+                | <Equate Exp> '!=' <Compare Exp>
+                | <Equate Exp> '<>' <Compare Exp>
+                | <Compare Exp>
+
+<Compare Exp> ::= <Compare Exp> '<'  <Shift Exp>
+                | <Compare Exp> '>'  <Shift Exp>
+                | <Compare Exp> '<=' <Shift Exp>
+                | <Compare Exp> '>=' <Shift Exp>
+                | <Shift Exp>
+
+<Shift Exp>   ::= <Shift Exp> '<<' <Add Exp>
+                | <Shift Exp> '>>' <Add Exp>
+                | <Add Exp>
+
+<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
+                | <Add Exp> '-' <Mult Exp>
+                | <Mult Exp> 
 
 <Mult Exp>    ::= <Mult Exp> '*' <Negate Exp>
-               |  <Mult Exp> '/' <Negate Exp>
-               |  <Mult Exp> '%' <Negate Exp>
-               |  <Negate Exp> 
+                | <Mult Exp> '/' <Negate Exp>
+                | <Mult Exp> '%' <Negate Exp>
+                | <Negate Exp> 
 
-<Negate Exp> ::= '-' <Value>
-               | <Value>
+<Negate Exp>  ::= '-' <Value>
+                | <Value>
 
-<Value> ::= Integer
-          | Label
-          | '(' <Expression> ')'
+<Value>       ::= Integer
+                | <Label>
+                | '(' <Expression> ')'

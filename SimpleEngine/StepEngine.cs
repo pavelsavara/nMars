@@ -6,7 +6,8 @@ namespace nMars.SimpleEngine
 {
     public class StepEngine : Core, IStepEngine
     {
-        public void BeginMatch(IList<IWarrior> aWariors, Rules aRules, IPSpaces aPSpaces, Random aRandom, IList<int> forcedAddresses)
+        public void BeginMatch(IList<IWarrior> aWariors, Rules aRules, IPSpaces aPSpaces, Random aRandom,
+                               IList<int> forcedAddresses)
         {
             Init(aWariors, aRules, aPSpaces, aRandom, forcedAddresses);
         }
@@ -58,16 +59,16 @@ namespace nMars.SimpleEngine
             GetEffectiveAddress(ip, instruction.ModeA, out indirectA, core[ip].ValueA);
             GetEffectiveAddress(ip, instruction.ModeB, out indirectB, core[ip].ValueB);
 
-            Execute(warrior, instruction, ip, 
+            Execute(warrior, instruction, ip,
                     indirectA, indirectB,
                     ref core[indirectA].ValueA, ref core[indirectA].ValueB,
                     ref core[indirectB].ValueA, ref core[indirectB].ValueB);
         }
 
-        private void Execute(EngineWarrior warrior, EngineInstruction instruction, int ip, 
+        private void Execute(EngineWarrior warrior, EngineInstruction instruction, int ip,
                              //int directAadr, int directBadr,
                              int indirectAadr, int indirectBadr,
-                             ref int indirectAvalA, ref int indirectAvalB, 
+                             ref int indirectAvalA, ref int indirectAvalB,
                              ref int indirectBvalA, ref int indirectBvalB)
         {
             bool jump = false;
@@ -281,7 +282,7 @@ namespace nMars.SimpleEngine
                             break;
                         case Modifier.I:
                         case Modifier.F:
-                            jump = (indirectAvalA < indirectBvalA && 
+                            jump = (indirectAvalA < indirectBvalA &&
                                     indirectAvalB < indirectBvalB);
                             break;
                         case Modifier.X:
@@ -301,13 +302,16 @@ namespace nMars.SimpleEngine
 
                 case Operation.MOD:
                 case Operation.DIV:
-                    die = BinaryOperation(instruction, ref indirectAvalA, ref indirectAvalB, ref indirectBvalA, ref indirectBvalB);
+                    die =
+                        BinaryOperation(instruction, ref indirectAvalA, ref indirectAvalB, ref indirectBvalA,
+                                        ref indirectBvalB);
                     ip++;
                     break;
                 case Operation.SUB:
                 case Operation.ADD:
                 case Operation.MUL:
-                    BinaryOperation(instruction, ref indirectAvalA, ref indirectAvalB, ref indirectBvalA, ref indirectBvalB);
+                    BinaryOperation(instruction, ref indirectAvalA, ref indirectAvalB, ref indirectBvalA,
+                                    ref indirectBvalB);
                     ip++;
                     break;
 
@@ -463,7 +467,8 @@ namespace nMars.SimpleEngine
         }
 
         /// <returns>T- should die</returns>
-        private bool BinaryOperation(EngineInstruction instruction, ref int indirectAvalA, ref int indirectAvalB, ref int indirectBvalA, ref int indirectBvalB)
+        private bool BinaryOperation(EngineInstruction instruction, ref int indirectAvalA, ref int indirectAvalB,
+                                     ref int indirectBvalA, ref int indirectBvalB)
         {
             bool die = false;
             switch (instruction.Modifier)

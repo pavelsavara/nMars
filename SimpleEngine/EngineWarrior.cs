@@ -24,7 +24,7 @@ namespace nMars.SimpleEngine
             for (int a = 0; a < Length; a++)
             {
                 Instruction instruction = this[a];
-                if (instruction.ValueA >= core.CoreSize ||instruction.ValueA<=0-core.CoreSize ||
+                if (instruction.ValueA >= core.CoreSize || instruction.ValueA <= 0 - core.CoreSize ||
                     instruction.ValueB >= core.CoreSize || instruction.ValueB <= 0 - core.CoreSize)
                 {
                     throw new RulesException("operand value out of core size");

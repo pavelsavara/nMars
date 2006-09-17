@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace nMars.Parser
 {
@@ -16,7 +17,7 @@ namespace nMars.Parser
 
         private int value = 0;
 
-        public override int Evaluate()
+        public override int Evaluate(Dictionary<string, Expression> variables)
         {
             return value;
         }
