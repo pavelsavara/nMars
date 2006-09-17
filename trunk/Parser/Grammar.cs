@@ -46,199 +46,242 @@ namespace nMars.Parser
         SYMBOL_WHITESPACE = 2, // (Whitespace)
         SYMBOL_COMMENTLINE = 3, // (Comment Line)
         SYMBOL_MINUS = 4, // -
-        SYMBOL_NUM = 5, // #
-        SYMBOL_DOLLAR = 6, // $
-        SYMBOL_PERCENT = 7, // %
-        SYMBOL_AMP                   =  8, // &
-        SYMBOL_LPARAN                =  9, // (
-        SYMBOL_RPARAN                = 10, // )
-        SYMBOL_TIMES                 = 11, // *
-        SYMBOL_COMMA                 = 12, // ,
-        SYMBOL_DOT                   = 13, // .
-        SYMBOL_DIV                   = 14, // /
-        SYMBOL_AT                    = 15, // @
-        SYMBOL_CARET                 = 16, // ^
-        SYMBOL_LBRACE                = 17, // {
-        SYMBOL_PIPE                  = 18, // |
-        SYMBOL_RBRACE                = 19, // }
-        SYMBOL_PLUS                  = 20, // +
-        SYMBOL_LT                    = 21, // <
-        SYMBOL_LTLT                  = 22, // <<
-        SYMBOL_GT                    = 23, // >
-        SYMBOL_GTGT                  = 24, // >>
-        SYMBOL_A                     = 25, // A
-        SYMBOL_AB                    = 26, // AB
-        SYMBOL_ADD                   = 27, // Add
-        SYMBOL_B                     = 28, // B
-        SYMBOL_BA                    = 29, // BA
-        SYMBOL_CMP                   = 30, // Cmp
-        SYMBOL_COMMENT               = 31, // Comment
-        SYMBOL_DAT                   = 32, // Dat
-        SYMBOL_DIV2                  = 33, // Div
-        SYMBOL_DJN                   = 34, // Djn
-        SYMBOL_END                   = 35, // End
-        SYMBOL_EQU                   = 36, // Equ
-        SYMBOL_F                     = 37, // F
-        SYMBOL_FOR                   = 38, // for
-        SYMBOL_I                     = 39, // I
-        SYMBOL_INTEGER               = 40, // Integer
-        SYMBOL_JMN                   = 41, // Jmn
-        SYMBOL_JMP                   = 42, // Jmp
-        SYMBOL_JMZ                   = 43, // Jmz
-        SYMBOL_LABEL                 = 44, // Label
-        SYMBOL_LDP                   = 45, // Ldp
-        SYMBOL_LINE                  = 46, // Line
-        SYMBOL_MOD                   = 47, // Mod
-        SYMBOL_MOV                   = 48, // Mov
-        SYMBOL_MUL                   = 49, // Mul
-        SYMBOL_NEWLINE               = 50, // NewLine
-        SYMBOL_NOP                   = 51, // Nop
-        SYMBOL_ORG                   = 52, // Org
-        SYMBOL_PIN                   = 53, // Pin
-        SYMBOL_ROF                   = 54, // rof
-        SYMBOL_SEQ                   = 55, // Seq
-        SYMBOL_SLT                   = 56, // Slt
-        SYMBOL_SNE                   = 57, // Sne
-        SYMBOL_SPL                   = 58, // Spl
-        SYMBOL_STP                   = 59, // Stp
-        SYMBOL_SUB                   = 60, // Sub
-        SYMBOL_X                     = 61, // X
-        SYMBOL_ADDEXP                = 62, // <Add Exp>
-        SYMBOL_ALLSTATEMENTS         = 63, // <AllStatements>
-        SYMBOL_ALLSTATEMENTSOPTIONAL = 64, // <AllStatementsOptional>
-        SYMBOL_ANDEXP                = 65, // <And Exp>
-        SYMBOL_ENDOPTIONAL           = 66, // <EndOptional>
-        SYMBOL_EOL                   = 67, // <eol>
-        SYMBOL_EOLOPTIONAL           = 68, // <eolOptional>
-        SYMBOL_EOLSINGLE             = 69, // <eolSingle>
-        SYMBOL_EQU2                  = 70, // <Equ>
-        SYMBOL_EXPRESSION            = 71, // <Expression>
-        SYMBOL_FOR2                  = 72, // <For>
-        SYMBOL_LABELS                = 73, // <Labels>
-        SYMBOL_LABELSOPTIONAL        = 74, // <LabelsOptional>
-        SYMBOL_MODE                  = 75, // <Mode>
-        SYMBOL_MODIFIER              = 76, // <Modifier>
-        SYMBOL_MULTEXP               = 77, // <Mult Exp>
-        SYMBOL_NEGATEEXP             = 78, // <Negate Exp>
-        SYMBOL_OPERATION             = 79, // <Operation>
-        SYMBOL_OPERATION0            = 80, // <Operation0>
-        SYMBOL_OPERATION1            = 81, // <Operation1>
-        SYMBOL_OPERATION2            = 82, // <Operation2>
-        SYMBOL_OPERATOR0             = 83, // <Operator0>
-        SYMBOL_OPERATOR1             = 84, // <Operator1>
-        SYMBOL_OPERATOR2             = 85, // <Operator2>
-        SYMBOL_ORG2                  = 86, // <Org>
-        SYMBOL_PARAMETER             = 87, // <Parameter>
-        SYMBOL_PIN2                  = 88, // <Pin>
-        SYMBOL_SHIFTEXP              = 89, // <Shift Exp>
-        SYMBOL_START                 = 90, // <Start>
-        SYMBOL_STATEMENT             = 91, // <Statement>
-        SYMBOL_VALUE                 = 92, // <Value>
-        SYMBOL_XOREXP                = 93  // <Xor Exp>
+        SYMBOL_EXCLAMEQ = 5, // !=
+        SYMBOL_NUM = 6, // #
+        SYMBOL_DOLLAR = 7, // $
+        SYMBOL_PERCENT = 8, // %
+        SYMBOL_AMP = 9, // &
+        SYMBOL_AMPAMP = 10, // &&
+        SYMBOL_LPARAN = 11, // (
+        SYMBOL_RPARAN = 12, // )
+        SYMBOL_TIMES = 13, // *
+        SYMBOL_COMMA = 14, // ,
+        SYMBOL_DOT = 15, // .
+        SYMBOL_DIV = 16, // /
+        SYMBOL_COLON = 17, // :
+        SYMBOL_QUESTION = 18, // ?
+        SYMBOL_AT = 19, // @
+        SYMBOL_CARET = 20, // ^
+        SYMBOL_LBRACE = 21, // {
+        SYMBOL_PIPE = 22, // |
+        SYMBOL_PIPEPIPE = 23, // ||
+        SYMBOL_RBRACE = 24, // }
+        SYMBOL_PLUS = 25, // +
+        SYMBOL_LT = 26, // <
+        SYMBOL_LTLT = 27, // <<
+        SYMBOL_LTEQ = 28, // <=
+        SYMBOL_LTGT = 29, // <>
+        SYMBOL_EQEQ = 30, // ==
+        SYMBOL_GT = 31, // >
+        SYMBOL_GTEQ = 32, // >=
+        SYMBOL_GTGT = 33, // >>
+        SYMBOL_A = 34, // A
+        SYMBOL_AB = 35, // AB
+        SYMBOL_ADD = 36, // Add
+        SYMBOL_B = 37, // B
+        SYMBOL_BA = 38, // BA
+        SYMBOL_CMP = 39, // Cmp
+        SYMBOL_COMMENT = 40, // Comment
+        SYMBOL_DAT = 41, // Dat
+        SYMBOL_DIV2 = 42, // Div
+        SYMBOL_DJN = 43, // Djn
+        SYMBOL_END = 44, // End
+        SYMBOL_EQU = 45, // Equ
+        SYMBOL_F = 46, // F
+        SYMBOL_FOR = 47, // for
+        SYMBOL_I = 48, // I
+        SYMBOL_INTEGER = 49, // Integer
+        SYMBOL_JMN = 50, // Jmn
+        SYMBOL_JMP = 51, // Jmp
+        SYMBOL_JMZ = 52, // Jmz
+        SYMBOL_LABEL = 53, // Label
+        SYMBOL_LDP = 54, // Ldp
+        SYMBOL_LINE = 55, // Line
+        SYMBOL_MOD = 56, // Mod
+        SYMBOL_MOV = 57, // Mov
+        SYMBOL_MUL = 58, // Mul
+        SYMBOL_NEWLINE = 59, // NewLine
+        SYMBOL_NOP = 60, // Nop
+        SYMBOL_ORG = 61, // Org
+        SYMBOL_PIN = 62, // Pin
+        SYMBOL_ROF = 63, // rof
+        SYMBOL_SEQ = 64, // Seq
+        SYMBOL_SLT = 65, // Slt
+        SYMBOL_SNE = 66, // Sne
+        SYMBOL_SPL = 67, // Spl
+        SYMBOL_STP = 68, // Stp
+        SYMBOL_SUB = 69, // Sub
+        SYMBOL_X = 70, // X
+        SYMBOL_ADDEXP = 71, // <Add Exp>
+        SYMBOL_ALLSTATEMENTS = 72, // <AllStatements>
+        SYMBOL_ALLSTATEMENTSOPTIONAL = 73, // <AllStatementsOptional>
+        SYMBOL_ANDEXP = 74, // <And Exp>
+        SYMBOL_BINOREXP = 75, // <BinOr Exp>
+        SYMBOL_BINXOREXP = 76, // <BinXor Exp>
+        SYMBOL_COMPAREEXP = 77, // <Compare Exp>
+        SYMBOL_ENDOPTIONAL = 78, // <EndOptional>
+        SYMBOL_EOL = 79, // <eol>
+        SYMBOL_EOLOPTIONAL = 80, // <eolOptional>
+        SYMBOL_EOLSINGLE = 81, // <eolSingle>
+        SYMBOL_EQU2 = 82, // <Equ>
+        SYMBOL_EQUATEEXP = 83, // <Equate Exp>
+        SYMBOL_EXPRESSION = 84, // <Expression>
+        SYMBOL_EXPRESSIONOPTIONAL = 85, // <ExpressionOptional>
+        SYMBOL_FOR2 = 86, // <For>
+        SYMBOL_LABEL2 = 87, // <Label>
+        SYMBOL_LABELS = 88, // <Labels>
+        SYMBOL_LABELSOPTIONAL = 89, // <LabelsOptional>
+        SYMBOL_MODE = 90, // <Mode>
+        SYMBOL_MODEOPTIONAL = 91, // <ModeOptional>
+        SYMBOL_MODIFIER = 92, // <Modifier>
+        SYMBOL_MULTEXP = 93, // <Mult Exp>
+        SYMBOL_NEGATEEXP = 94, // <Negate Exp>
+        SYMBOL_OPERATION = 95, // <Operation>
+        SYMBOL_OPERATION0 = 96, // <Operation0>
+        SYMBOL_OPERATION1 = 97, // <Operation1>
+        SYMBOL_OPERATION2 = 98, // <Operation2>
+        SYMBOL_OPERATOR0 = 99, // <Operator0>
+        SYMBOL_OPERATOR1 = 100, // <Operator1>
+        SYMBOL_OPERATOR2 = 101, // <Operator2>
+        SYMBOL_OREXP = 102, // <Or Exp>
+        SYMBOL_ORG2 = 103, // <Org>
+        SYMBOL_PARAMETER = 104, // <Parameter>
+        SYMBOL_PIN2 = 105, // <Pin>
+        SYMBOL_SHIFTEXP = 106, // <Shift Exp>
+        SYMBOL_START = 107, // <Start>
+        SYMBOL_STATEMENT = 108, // <Statement>
+        SYMBOL_VALUE = 109 // <Value>
     } ;
 
     internal enum RuleConstants : int
     {
-        RULE_EOL                      =  0, // <eol> ::= <eolSingle>
-        RULE_EOL2                     =  1, // <eol> ::= <eol> <eolSingle>
-        RULE_EOLSINGLE_NEWLINE        =  2, // <eolSingle> ::= NewLine
-        RULE_EOLSINGLE_COMMENT_LINE   =  3, // <eolSingle> ::= Comment Line
-        RULE_EOLOPTIONAL              =  4, // <eolOptional> ::= <eol>
-        RULE_EOLOPTIONAL2             =  5, // <eolOptional> ::= 
-        RULE_START                    =  6, // <Start> ::= <eolOptional> <AllStatements> <EndOptional>
-        RULE_ENDOPTIONAL_END          =  7, // <EndOptional> ::= <eol> End <eolOptional>
-        RULE_ENDOPTIONAL_END_LABEL    =  8, // <EndOptional> ::= <eol> End Label <eolOptional>
-        RULE_ENDOPTIONAL              =  9, // <EndOptional> ::= <eol>
-        RULE_ENDOPTIONAL2             = 10, // <EndOptional> ::= 
-        RULE_ALLSTATEMENTS            = 11, // <AllStatements> ::= <Statement>
-        RULE_ALLSTATEMENTS2           = 12, // <AllStatements> ::= <For>
-        RULE_ALLSTATEMENTS3           = 13, // <AllStatements> ::= <AllStatements> <eol> <Statement>
-        RULE_ALLSTATEMENTS4           = 14, // <AllStatements> ::= <AllStatements> <eol> <For>
-        RULE_FOR_FOR_ROF            = 15, // <For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof
-        RULE_ALLSTATEMENTSOPTIONAL  = 16, // <AllStatementsOptional> ::= <AllStatements> <eol>
-        RULE_ALLSTATEMENTSOPTIONAL2 = 17, // <AllStatementsOptional> ::= 
-        RULE_STATEMENT              = 18, // <Statement> ::= <Pin>
-        RULE_STATEMENT2             = 19, // <Statement> ::= <Org>
-        RULE_STATEMENT3             = 20, // <Statement> ::= <Equ>
-        RULE_STATEMENT4             = 21, // <Statement> ::= <LabelsOptional> <Operation>
-        RULE_STATEMENT5             = 22, // <Statement> ::= <Labels> <eol> <Operation>
-        RULE_PIN_PIN                = 23, // <Pin> ::= Pin <Expression>
-        RULE_ORG_ORG_LABEL          = 24, // <Org> ::= Org Label
-        RULE_EQU_EQU                = 25, // <Equ> ::= <Labels> Equ <Expression>
-        RULE_EQU_EQU2               = 26, // <Equ> ::= <Labels> <eol> Equ <Expression>
-        RULE_LABELSOPTIONAL         = 27, // <LabelsOptional> ::= <Labels>
-        RULE_LABELSOPTIONAL2        = 28, // <LabelsOptional> ::= 
-        RULE_LABELS_LABEL           = 29, // <Labels> ::= Label
-        RULE_LABELS_LABEL2          = 30, // <Labels> ::= <Labels> <eol> Label
-        RULE_LABELS_LABEL3          =  31, // <Labels> ::= <Labels> Label
-        RULE_OPERATION              =  32, // <Operation> ::= <Operation0>
-        RULE_OPERATION2             =  33, // <Operation> ::= <Operation1>
-        RULE_OPERATION3             =  34, // <Operation> ::= <Operation2>
-        RULE_OPERATION0             =  35, // <Operation0> ::= <Operator0>
-        RULE_OPERATION0_COMMA       =  36, // <Operation0> ::= <Operator0> <Parameter> , <Parameter>
-        RULE_OPERATION0_DOT_COMMA   =  37, // <Operation0> ::= <Operator0> . <Modifier> <Parameter> , <Parameter>
-        RULE_OPERATION1             =  38, // <Operation1> ::= <Operator1> <Parameter>
-        RULE_OPERATION1_DOT         =  39, // <Operation1> ::= <Operator1> . <Modifier> <Parameter>
-        RULE_OPERATION1_COMMA       =  40, // <Operation1> ::= <Operator1> <Parameter> , <Parameter>
-        RULE_OPERATION1_DOT_COMMA   =  41, // <Operation1> ::= <Operator1> . <Modifier> <Parameter> , <Parameter>
-        RULE_OPERATION2_COMMA       =  42, // <Operation2> ::= <Operator2> <Parameter> , <Parameter>
-        RULE_OPERATION2_DOT_COMMA   =  43, // <Operation2> ::= <Operator2> . <Modifier> <Parameter> , <Parameter>
-        RULE_PARAMETER              =  44, // <Parameter> ::= <Expression>
-        RULE_PARAMETER2             =  45, // <Parameter> ::= <Mode> <Expression>
-        RULE_MODE_NUM               =  46, // <Mode> ::= #
-        RULE_MODE_DOLLAR            =  47, // <Mode> ::= $
-        RULE_MODE_AT                =  48, // <Mode> ::= @
-        RULE_MODE_LT                =  49, // <Mode> ::= <
-        RULE_MODE_GT                =  50, // <Mode> ::= >
-        RULE_MODE_LBRACE            =  51, // <Mode> ::= {
-        RULE_MODE_RBRACE            =  52, // <Mode> ::= }
-        RULE_MODE_TIMES             =  53, // <Mode> ::= *
-        RULE_OPERATOR0_NOP          =  54, // <Operator0> ::= Nop
-        RULE_OPERATOR1_JMP          =  55, // <Operator1> ::= Jmp
-        RULE_OPERATOR1_SPL          =  56, // <Operator1> ::= Spl
-        RULE_OPERATOR1_DAT          =  57, // <Operator1> ::= Dat
-        RULE_OPERATOR2_MOV          =  58, // <Operator2> ::= Mov
-        RULE_OPERATOR2_ADD          =  59, // <Operator2> ::= Add
-        RULE_OPERATOR2_SUB          =  60, // <Operator2> ::= Sub
-        RULE_OPERATOR2_MUL          =  61, // <Operator2> ::= Mul
-        RULE_OPERATOR2_DIV          =  62, // <Operator2> ::= Div
-        RULE_OPERATOR2_MOD          =  63, // <Operator2> ::= Mod
-        RULE_OPERATOR2_JMZ          =  64, // <Operator2> ::= Jmz
-        RULE_OPERATOR2_JMN          =  65, // <Operator2> ::= Jmn
-        RULE_OPERATOR2_DJN          =  66, // <Operator2> ::= Djn
-        RULE_OPERATOR2_SLT          =  67, // <Operator2> ::= Slt
-        RULE_OPERATOR2_SNE          =  68, // <Operator2> ::= Sne
-        RULE_OPERATOR2_LDP          =  69, // <Operator2> ::= Ldp
-        RULE_OPERATOR2_STP          =  70, // <Operator2> ::= Stp
-        RULE_OPERATOR2_CMP          =  71, // <Operator2> ::= Cmp
-        RULE_OPERATOR2_SEQ          =  72, // <Operator2> ::= Seq
-        RULE_MODIFIER_I             =  73, // <Modifier> ::= I
-        RULE_MODIFIER_A             =  74, // <Modifier> ::= A
-        RULE_MODIFIER_B             =  75, // <Modifier> ::= B
-        RULE_MODIFIER_AB            =  76, // <Modifier> ::= AB
-        RULE_MODIFIER_BA            =  77, // <Modifier> ::= BA
-        RULE_MODIFIER_F             =  78, // <Modifier> ::= F
-        RULE_MODIFIER_X             =  79, // <Modifier> ::= X
-        RULE_EXPRESSION_PIPE        =  80, // <Expression> ::= <Expression> | <Xor Exp>
-        RULE_EXPRESSION             =  81, // <Expression> ::= <Xor Exp>
-        RULE_XOREXP_CARET           =  82, // <Xor Exp> ::= <Xor Exp> ^ <And Exp>
-        RULE_XOREXP                 =  83, // <Xor Exp> ::= <And Exp>
-        RULE_ANDEXP_AMP             =  84, // <And Exp> ::= <And Exp> & <Shift Exp>
-        RULE_ANDEXP                 =  85, // <And Exp> ::= <Shift Exp>
-        RULE_SHIFTEXP_LTLT          =  86, // <Shift Exp> ::= <Shift Exp> << <Add Exp>
-        RULE_SHIFTEXP_GTGT          =  87, // <Shift Exp> ::= <Shift Exp> >> <Add Exp>
-        RULE_SHIFTEXP               =  88, // <Shift Exp> ::= <Add Exp>
-        RULE_ADDEXP_PLUS            =  89, // <Add Exp> ::= <Add Exp> + <Mult Exp>
-        RULE_ADDEXP_MINUS           =  90, // <Add Exp> ::= <Add Exp> - <Mult Exp>
-        RULE_ADDEXP                 =  91, // <Add Exp> ::= <Mult Exp>
-        RULE_MULTEXP_TIMES          =  92, // <Mult Exp> ::= <Mult Exp> * <Negate Exp>
-        RULE_MULTEXP_DIV            =  93, // <Mult Exp> ::= <Mult Exp> / <Negate Exp>
-        RULE_MULTEXP_PERCENT        =  94, // <Mult Exp> ::= <Mult Exp> % <Negate Exp>
-        RULE_MULTEXP                =  95, // <Mult Exp> ::= <Negate Exp>
-        RULE_NEGATEEXP_MINUS        =  96, // <Negate Exp> ::= - <Value>
-        RULE_NEGATEEXP              =  97, // <Negate Exp> ::= <Value>
-        RULE_VALUE_INTEGER          =  98, // <Value> ::= Integer
-        RULE_VALUE_LABEL            =  99, // <Value> ::= Label
-        RULE_VALUE_LPARAN_RPARAN    = 100  // <Value> ::= ( <Expression> )
+        RULE_EOL = 0, // <eol> ::= <eolSingle>
+        RULE_EOL2 = 1, // <eol> ::= <eol> <eolSingle>
+        RULE_EOLSINGLE_NEWLINE = 2, // <eolSingle> ::= NewLine
+        RULE_EOLSINGLE_COMMENT_LINE = 3, // <eolSingle> ::= Comment Line
+        RULE_EOLOPTIONAL = 4, // <eolOptional> ::= <eol>
+        RULE_EOLOPTIONAL2 = 5, // <eolOptional> ::= 
+        RULE_START = 6, // <Start> ::= <eolOptional> <AllStatements> <EndOptional>
+        RULE_ENDOPTIONAL = 7, // <EndOptional> ::= <eol>
+        RULE_ENDOPTIONAL_END = 8, // <EndOptional> ::= <eol> End <eolOptional>
+        RULE_ENDOPTIONAL_END2 = 9, // <EndOptional> ::= <eol> End <Labels> <eolOptional>
+        RULE_ENDOPTIONAL_END3 = 10, // <EndOptional> ::= <eol> <Labels> End <eolOptional>
+        RULE_ENDOPTIONAL_END4 = 11, // <EndOptional> ::= <eol> <Labels> End <Labels> <eolOptional>
+        RULE_ENDOPTIONAL_END5 = 12, // <EndOptional> ::= <eol> <Labels> <eol> End <eolOptional>
+        RULE_ENDOPTIONAL_END6 = 13, // <EndOptional> ::= <eol> <Labels> <eol> End <Labels> <eolOptional>
+        RULE_ENDOPTIONAL2 = 14, // <EndOptional> ::= 
+        RULE_ALLSTATEMENTS = 15, // <AllStatements> ::= <Statement>
+        RULE_ALLSTATEMENTS2 = 16, // <AllStatements> ::= <For>
+        RULE_ALLSTATEMENTS3 = 17, // <AllStatements> ::= <AllStatements> <eol> <Statement>
+        RULE_ALLSTATEMENTS4 = 18, // <AllStatements> ::= <AllStatements> <eol> <For>
+        RULE_FOR_FOR_ROF = 19,
+        // <For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof <ExpressionOptional>
+        RULE_ALLSTATEMENTSOPTIONAL = 20, // <AllStatementsOptional> ::= <AllStatements> <eol>
+        RULE_ALLSTATEMENTSOPTIONAL2 = 21, // <AllStatementsOptional> ::= 
+        RULE_STATEMENT = 22, // <Statement> ::= <Pin>
+        RULE_STATEMENT2 = 23, // <Statement> ::= <Org>
+        RULE_STATEMENT3 = 24, // <Statement> ::= <Equ>
+        RULE_STATEMENT4 = 25, // <Statement> ::= <LabelsOptional> <Operation>
+        RULE_STATEMENT5 = 26, // <Statement> ::= <Labels> <eol> <Operation>
+        RULE_PIN_PIN = 27, // <Pin> ::= Pin <Expression>
+        RULE_ORG_ORG_LABEL = 28, // <Org> ::= Org Label
+        RULE_EQU_EQU = 29, // <Equ> ::= <Labels> Equ <ModeOptional> <Expression>
+        RULE_EQU_EQU2 = 30, // <Equ> ::= <Labels> <eol> Equ <ModeOptional> <Expression>
+        RULE_LABELSOPTIONAL = 31, // <LabelsOptional> ::= <Labels>
+        RULE_LABELSOPTIONAL2 = 32, // <LabelsOptional> ::= 
+        RULE_LABEL_LABEL = 33, // <Label> ::= Label
+        RULE_LABEL = 34, // <Label> ::= <Modifier>
+        RULE_LABEL_LABEL_AMP_LABEL = 35, // <Label> ::= Label & Label
+        RULE_LABEL_LABEL_AMP = 36, // <Label> ::= Label & <Modifier>
+        RULE_LABEL_AMP_LABEL = 37, // <Label> ::= <Modifier> & Label
+        RULE_LABELS = 38, // <Labels> ::= <Label>
+        RULE_LABELS2 = 39, // <Labels> ::= <Labels> <eol> <Label>
+        RULE_LABELS3 = 40, // <Labels> ::= <Labels> <Label>
+        RULE_OPERATION = 41, // <Operation> ::= <Operation0>
+        RULE_OPERATION2 = 42, // <Operation> ::= <Operation1>
+        RULE_OPERATION3 = 43, // <Operation> ::= <Operation2>
+        RULE_OPERATION0 = 44, // <Operation0> ::= <Operator0>
+        RULE_OPERATION0_COMMA = 45, // <Operation0> ::= <Operator0> <Parameter> , <Parameter>
+        RULE_OPERATION0_DOT_COMMA = 46, // <Operation0> ::= <Operator0> . <Modifier> <Parameter> , <Parameter>
+        RULE_OPERATION1 = 47, // <Operation1> ::= <Operator1> <Parameter>
+        RULE_OPERATION1_DOT = 48, // <Operation1> ::= <Operator1> . <Modifier> <Parameter>
+        RULE_OPERATION1_COMMA = 49, // <Operation1> ::= <Operator1> <Parameter> , <Parameter>
+        RULE_OPERATION1_DOT_COMMA = 50, // <Operation1> ::= <Operator1> . <Modifier> <Parameter> , <Parameter>
+        RULE_OPERATION2_COMMA = 51, // <Operation2> ::= <Operator2> <Parameter> , <Parameter>
+        RULE_OPERATION2_DOT_COMMA = 52, // <Operation2> ::= <Operator2> . <Modifier> <Parameter> , <Parameter>
+        RULE_PARAMETER = 53, // <Parameter> ::= <Expression>
+        RULE_PARAMETER2 = 54, // <Parameter> ::= <Mode> <Expression>
+        RULE_MODEOPTIONAL = 55, // <ModeOptional> ::= <Mode>
+        RULE_MODEOPTIONAL2 = 56, // <ModeOptional> ::= 
+        RULE_MODE_NUM = 57, // <Mode> ::= #
+        RULE_MODE_DOLLAR = 58, // <Mode> ::= $
+        RULE_MODE_AT = 59, // <Mode> ::= @
+        RULE_MODE_LT = 60, // <Mode> ::= <
+        RULE_MODE_GT = 61, // <Mode> ::= >
+        RULE_MODE_LBRACE = 62, // <Mode> ::= {
+        RULE_MODE_RBRACE = 63, // <Mode> ::= }
+        RULE_MODE_TIMES = 64, // <Mode> ::= *
+        RULE_OPERATOR0_NOP = 65, // <Operator0> ::= Nop
+        RULE_OPERATOR1_JMP = 66, // <Operator1> ::= Jmp
+        RULE_OPERATOR1_SPL = 67, // <Operator1> ::= Spl
+        RULE_OPERATOR1_DAT = 68, // <Operator1> ::= Dat
+        RULE_OPERATOR2_MOV = 69, // <Operator2> ::= Mov
+        RULE_OPERATOR2_ADD = 70, // <Operator2> ::= Add
+        RULE_OPERATOR2_SUB = 71, // <Operator2> ::= Sub
+        RULE_OPERATOR2_MUL = 72, // <Operator2> ::= Mul
+        RULE_OPERATOR2_DIV = 73, // <Operator2> ::= Div
+        RULE_OPERATOR2_MOD = 74, // <Operator2> ::= Mod
+        RULE_OPERATOR2_JMZ = 75, // <Operator2> ::= Jmz
+        RULE_OPERATOR2_JMN = 76, // <Operator2> ::= Jmn
+        RULE_OPERATOR2_DJN = 77, // <Operator2> ::= Djn
+        RULE_OPERATOR2_SLT = 78, // <Operator2> ::= Slt
+        RULE_OPERATOR2_SNE = 79, // <Operator2> ::= Sne
+        RULE_OPERATOR2_LDP = 80, // <Operator2> ::= Ldp
+        RULE_OPERATOR2_STP = 81, // <Operator2> ::= Stp
+        RULE_OPERATOR2_CMP = 82, // <Operator2> ::= Cmp
+        RULE_OPERATOR2_SEQ = 83, // <Operator2> ::= Seq
+        RULE_MODIFIER_I = 84, // <Modifier> ::= I
+        RULE_MODIFIER_A = 85, // <Modifier> ::= A
+        RULE_MODIFIER_B = 86, // <Modifier> ::= B
+        RULE_MODIFIER_AB = 87, // <Modifier> ::= AB
+        RULE_MODIFIER_BA = 88, // <Modifier> ::= BA
+        RULE_MODIFIER_F = 89, // <Modifier> ::= F
+        RULE_MODIFIER_X = 90, // <Modifier> ::= X
+        RULE_EXPRESSIONOPTIONAL = 91, // <ExpressionOptional> ::= <Expression>
+        RULE_EXPRESSIONOPTIONAL2 = 92, // <ExpressionOptional> ::= 
+        RULE_EXPRESSION_QUESTION_COLON = 93, // <Expression> ::= <Or Exp> ? <Expression> : <Expression>
+        RULE_EXPRESSION = 94, // <Expression> ::= <Or Exp>
+        RULE_OREXP_PIPEPIPE = 95, // <Or Exp> ::= <Or Exp> || <And Exp>
+        RULE_OREXP = 96, // <Or Exp> ::= <And Exp>
+        RULE_ANDEXP_AMPAMP = 97, // <And Exp> ::= <And Exp> && <BinOr Exp>
+        RULE_ANDEXP = 98, // <And Exp> ::= <BinOr Exp>
+        RULE_BINOREXP_PIPE = 99, // <BinOr Exp> ::= <BinOr Exp> | <BinXor Exp>
+        RULE_BINOREXP = 100, // <BinOr Exp> ::= <BinXor Exp>
+        RULE_BINXOREXP_CARET = 101, // <BinXor Exp> ::= <BinXor Exp> ^ <Equate Exp>
+        RULE_BINXOREXP = 102, // <BinXor Exp> ::= <Equate Exp>
+        RULE_EQUATEEXP_EQEQ = 103, // <Equate Exp> ::= <Equate Exp> == <Compare Exp>
+        RULE_EQUATEEXP_EXCLAMEQ = 104, // <Equate Exp> ::= <Equate Exp> != <Compare Exp>
+        RULE_EQUATEEXP_LTGT = 105, // <Equate Exp> ::= <Equate Exp> <> <Compare Exp>
+        RULE_EQUATEEXP = 106, // <Equate Exp> ::= <Compare Exp>
+        RULE_COMPAREEXP_LT = 107, // <Compare Exp> ::= <Compare Exp> < <Shift Exp>
+        RULE_COMPAREEXP_GT = 108, // <Compare Exp> ::= <Compare Exp> > <Shift Exp>
+        RULE_COMPAREEXP_LTEQ = 109, // <Compare Exp> ::= <Compare Exp> <= <Shift Exp>
+        RULE_COMPAREEXP_GTEQ = 110, // <Compare Exp> ::= <Compare Exp> >= <Shift Exp>
+        RULE_COMPAREEXP = 111, // <Compare Exp> ::= <Shift Exp>
+        RULE_SHIFTEXP_LTLT = 112, // <Shift Exp> ::= <Shift Exp> << <Add Exp>
+        RULE_SHIFTEXP_GTGT = 113, // <Shift Exp> ::= <Shift Exp> >> <Add Exp>
+        RULE_SHIFTEXP = 114, // <Shift Exp> ::= <Add Exp>
+        RULE_ADDEXP_PLUS = 115, // <Add Exp> ::= <Add Exp> + <Mult Exp>
+        RULE_ADDEXP_MINUS = 116, // <Add Exp> ::= <Add Exp> - <Mult Exp>
+        RULE_ADDEXP = 117, // <Add Exp> ::= <Mult Exp>
+        RULE_MULTEXP_TIMES = 118, // <Mult Exp> ::= <Mult Exp> * <Negate Exp>
+        RULE_MULTEXP_DIV = 119, // <Mult Exp> ::= <Mult Exp> / <Negate Exp>
+        RULE_MULTEXP_PERCENT = 120, // <Mult Exp> ::= <Mult Exp> % <Negate Exp>
+        RULE_MULTEXP = 121, // <Mult Exp> ::= <Negate Exp>
+        RULE_NEGATEEXP_MINUS = 122, // <Negate Exp> ::= - <Value>
+        RULE_NEGATEEXP = 123, // <Negate Exp> ::= <Value>
+        RULE_VALUE_INTEGER = 124, // <Value> ::= Integer
+        RULE_VALUE = 125, // <Value> ::= <Label>
+        RULE_VALUE_LPARAN_RPARAN = 126 // <Value> ::= ( <Expression> )
     } ;
 }

@@ -8,7 +8,8 @@ namespace nMars.RedCode
         /// <summary>
         /// Initialize the engine
         /// </summary>
-        void BeginMatch(IList<IWarrior> wariors, Rules rules, IPSpaces pSpaces, Random random, IList<int> forcedAddresses);
+        void BeginMatch(IList<IWarrior> wariors, Rules rules, IPSpaces pSpaces, Random random,
+                        IList<int> forcedAddresses);
 
         /// <summary>
         /// make step

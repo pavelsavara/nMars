@@ -8,6 +8,7 @@ namespace nMars.RedCode
         /// <summary>
         /// Run complete round
         /// </summary>
-        IList<FightResult> Run(IList<IWarrior> wariors, Rules rules, IPSpaces pSpaces, Random random, IList<int> forcedAddresses);
+        IList<FightResult> Run(IList<IWarrior> wariors, Rules rules, IPSpaces pSpaces, Random random,
+                               IList<int> forcedAddresses);
     }
 }

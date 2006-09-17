@@ -1,11 +1,12 @@
+using System.Collections.Generic;
 using nMars.RedCode;
 
-namespace nMars.Parser
+namespace nMars.Parser.Statements
 {
     public class Parameter
     {
         public Parameter()
-            : this(Mode.Direct, Parser.Value.Zero)
+            : this(Mode.Direct, Value.Zero)
         {
         }
 
@@ -15,9 +16,9 @@ namespace nMars.Parser
             Expression = expression;
         }
 
-        public int Value
+        public int GetValue(Dictionary<string, Expression> variables)
         {
-            get { return Expression.Evaluate(); }
+            return Expression.Evaluate(variables);
         }
 
         public Mode Mode;

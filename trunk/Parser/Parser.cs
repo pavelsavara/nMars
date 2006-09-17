@@ -1,12 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using nMars.Parser.Statements;
+using nMars.Parser.Warrior;
 using nMars.RedCode;
 
 namespace nMars.Parser
 {
-    public class RedCodeParser : RedCodeTree, IParser
+    public class Parser : ParserBase, IParser
     {
-        public RedCodeParser(Rules rules)
+        public Parser(Rules rules)
             : base(rules)
         {
         }
@@ -22,19 +25,27 @@ namespace nMars.Parser
         public IWarrior Parse(string source, string implicitName)
         {
             Prepare();
-            ContainerStatement container = Parse(source);
+            Statement statement = Parse(source);
             ExtendedWarrior warrior = new ExtendedWarrior(rules);
+            int currentAddress;
 
-            Translate(container, warrior);
+            //first pass to expand for cycles
+            currentAddress = 0;
+            statement.ExpandStatements(warrior, variables, ref currentAddress, rules.CoreSize, false);
+            variables["MAXLENGTH"] = new Value(warrior.Length);
+
+            //second pass to evaluate variables/labels in context of for cycles
+            currentAddress = 0;
+            statement.ExpandStatements(warrior, variables, ref currentAddress, rules.CoreSize, true);
 
             warrior.Name = implicitName;
             if (org != null)
             {
-                if (!labels.ContainsKey(org))
+                if (!variables.ContainsKey(org))
                 {
-                    throw new Exception("Variable not defined : " + org);
+                    throw new Exception("LabelName not defined : " + org);
                 }
-                warrior.StartOffset = labels[org].Address;
+                warrior.StartOffset = variables[org].Evaluate(variables);
             }
             else
             {
@@ -42,7 +53,7 @@ namespace nMars.Parser
             }
             if (pin != null)
             {
-                warrior.Pin = pin.Evaluate();
+                warrior.Pin = pin.Evaluate(variables);
             }
             else
             {
@@ -52,90 +63,21 @@ namespace nMars.Parser
             return warrior;
         }
 
-        private void Translate(ContainerStatement container, ExtendedWarrior warrior)
+        protected void Prepare()
         {
-            foreach (Statement statement in container.Statements)
-            {
-                if (statement is InstructionStatement)
-                {
-                    Translate((InstructionStatement) statement, warrior);
-                }
-                else if (statement is ForRofContainerStatement)
-                {
-                    Translate((ForRofContainerStatement) statement, warrior);
-                }
-                else if (statement is ContainerStatement)
-                {
-                    Translate((ContainerStatement) statement, warrior);
-                }
-                else
-                {
-                    throw new InvalidOperationException("Unknown statement");
-                }
-            }
-        }
-
-        private void Translate(ForRofContainerStatement statement, ExtendedWarrior warrior)
-        {
-            string cnt = statement.Labels[statement.Labels.Count - 1];
-            int count = variables[cnt + "#start"].Evaluate();
-            for (int i = 1; i <= count; i++)
-            {
-                variables[cnt] = new Value(i);
-                Translate((ContainerStatement)statement, warrior);
-            }
-        }
-
-        private void Translate(InstructionStatement statement, ExtendedWarrior warrior)
-        {
-            int valA;
-            int valB;
-            if (statement.Address == -1)
-            {
-                statement.Address = warrior.Length;
-            }
-            variables["curline"] = new Value(warrior.Length);
-            Variable va = statement.A.Expression as Variable;
-            Variable vb = statement.B.Expression as Variable;
-            if (va != null && va.IsLabel)
-            {
-                valA = statement.A.Value - warrior.Length;
-            }
-            else
-            {
-                valA = statement.A.Value;
-            }
-            if (vb != null && vb.IsLabel)
-            {
-                valB = statement.B.Value - warrior.Length;
-            }
-            else
-            {
-                valB = statement.B.Value;
-            }
-            valA = valA%rules.CoreSize;
-            valB = valB%rules.CoreSize;
-
-            ExtendedInstruction instruction = new ExtendedInstruction(
-                statement.Operation,
-                statement.Modifier,
-                statement.A.Mode, valA,
-                statement.B.Mode, valB
-                );
-
-            instruction.Address = warrior.Length;
-            if (statement.Labels.Count>0)
-            {
-                instruction.Label = statement.Labels[statement.Labels.Count-1];
-            }
-            else
-            {
-                instruction.Label = "";
-            }
-            instruction.Comment = statement.Comment;
-            instruction.OriginalInstruction = statement.OriginalInstruction;
-
-            warrior.Instructions.Add(instruction);
+            variables = new Dictionary<string, Expression>();
+            org = null;
+            counter = 0;
+            variables["CORESIZE"] = new Value(rules.CoreSize);
+            variables["MAXPROCESSES"] = new Value(rules.maxProcesses);
+            variables["MAXCYCLES"] = new Value(rules.maxCycles);
+            variables["MAXLENGTH"] = new Value(rules.maxLength);
+            variables["MINDISTANCE"] = new Value(rules.minDistance);
+            variables["ROUNDS"] = new Value(rules.Rounds);
+            variables["PSPACESIZE"] = new Value(rules.PSpaceSize);
+            variables["VERSION"] = new Value(rules.Version);
+            variables["WARRIORS"] = new Value(rules.Warriors);
+            variables["CURLINE"] = new Value(0);
         }
     }
 }

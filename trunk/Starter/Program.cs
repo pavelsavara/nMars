@@ -1,10 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
-using nMars.Parser;
-using nMars.RedCode;
-using nMars.SimpleEngine;
 using Parser.Test;
 
 namespace Starter
@@ -13,9 +7,9 @@ namespace Starter
     {
         private static void Main()
         {
-            ParserTest t=new ParserTest();
+            ParserTest t = new ParserTest();
             t.Loader();
-            
+
             /*
             Rules rules = new Rules();
             Engine se = new Engine();
@@ -30,6 +24,8 @@ namespace Starter
             Random r = new Random(0);
             se.Run(rr, rules, spaces, r, forcedaddr);
              */
+            Console.WriteLine("\n\nDone");
+            Console.ReadKey();
         }
     }
 }
