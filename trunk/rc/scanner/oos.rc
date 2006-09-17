@@ -1,0 +1,18 @@
+;redcode-94x
+;name Origin of Storms
+;author John Metcalf
+;strategy unusual scanner variation
+;strategy .4c scan with .25c variable length spl carpet -> d-clear
+;assert CORESIZE==8000 || CORESIZE==800
+;optimax scn
+       ORG      START
+START  SNE.I  $   240, $  3262     
+       ADD.F  $     7, $    -1     
+       MOV.I  $     3, }    -2     
+       MOV.I  $     2, >    -3     
+       DJN.B  @    -2, #   285     
+       SPL.B  #     1, $     1     
+       MOV.I  $     2, >    -6     
+       DJN.F  $    -1, >    -7     
+       DAT.F  $    16, $    16     
+

@@ -1,0 +1,11 @@
+       ORG      START
+START  NOP.F  #  1992, {     1
+       NOP.F  <     2, #     1     
+       NOP.F  <     2, #     1     
+       NOP.F  <     2, #     1     
+       NOP.F  <     2, #     1     
+       NOP.F  <     2, #     1     
+       NOP.F  <     2, #     1     
+       MOV.I  }  -125, }    -1     
+       DJN.A  $    -1, }    -2     
+

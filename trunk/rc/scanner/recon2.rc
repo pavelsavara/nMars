@@ -1,0 +1,35 @@
+;redcode-94
+;assert CORESIZE==8000
+;name Recon 2
+;author David Moore
+;strategy SNE scanner / SPL wiper
+;optimax scn
+; Look at pairs of cells that are 6 apart.
+; When something is found, wipe it with 14 SPLs like this:
+; ..X.....X.....
+; distance between scanned pairs:
+;; step equ 2727  ; alternative; works on 3, 13, and 17 pt imps
+; 6557 * 231 = 2667   (2667 *  3 = 1)
+; 6557 *  99 = 1143   (1143 *  7 = 1)
+; 6557 *  77 =  889   ( 889 *  9 = 1)
+; 6557 *  63 = 5091   (5091 * 11 = 1)
+; 2727 * 221 = 2667   (2667 *  3 = 1)
+; 2727 *  51 = 3077   (3077 * 13 = 1)
+; 2727 *  39 = 2353   (2353 * 17 = 1)
+       ORG      START
+       DAT.F  $    19, $    19     
+       SPL.B  #  1443, #  1443     
+       MOV.I  $    -1, >    -4     
+       MOV.I  *    -1, >    -5     
+       DJN.A  $    -2, $     7     
+       SUB.F  $    -4, @     3     
+START  SNE.I  $ -2887, $ -2893     
+       SUB.F  $    -6, $    -1     
+       SEQ.I  *    -2, @    -2     
+       SLT.A  #    20, $    -3     
+       DJN.B  $    -5, # -3200     
+       SUB.BA #     0, #    -7     
+       MOV.AB @    -4, @   -10     
+       JMN.B  *   -10, $    -3     
+       DJN.A  <    -2, {    -1     
+

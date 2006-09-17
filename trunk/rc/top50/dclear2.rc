@@ -1,0 +1,7 @@
+;name dclear
+;assert 1
+
+spl.b  #    0, $  1
+mov.i  $    2, > -4
+djn.f  @   -2, > -5
+dat.f  $    0, $ 10

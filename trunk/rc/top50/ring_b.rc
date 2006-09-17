@@ -1,0 +1,8 @@
+;assert 1
+spl.f $    2, $ 0
+spl.f $    1, $ 0
+spl.f $    2, $ 0
+jmp.b $    3, $ 0
+add.a # 2667, $ -1
+dat.f $    0, $ 0
+mov.i #    0, $ 2667

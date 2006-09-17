@@ -1,0 +1,119 @@
+;redcode-94nop
+;name Digitalis 2003
+;author Christian Schmidt
+;strategy Mini Q^4 -> d-clear + 7pt imps
+;strategy multi-process bootstrapping
+;strategy boot away the clear AND the imps
+;strategy v0.1 new, optimized constants
+;strategy v0.2 fixing a bug in the imp-launcher
+;strategy v0.3 fixing a bug with the qscan
+;strategy v0.3a rearranging the components
+;strategy v0.4 new process allocation
+;strategy v0.5 imp-launcher 1 instruction smaller
+;strategy v0.6 changed back to v0.4 with some
+;strategy      additional constant optimizations
+;url http://de.geocities.com/fizmo_master/
+;assert 1
+;optimax clr
+       ORG      START
+       SPL.B  $     1, } -1823     
+       SPL.B  $     1, } -3304     
+       SPL.B  $     2, }  3215     
+       DJN.F  $     4, <  3227     
+       ADD.F  $     2, $    -1     
+       DJN.F  $   948, <   400     
+       NOP.F  #  1143, # -1072     
+       MOV.I  #     1, $  1143     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $  2849     
+       DAT.F  >  2667, $    25     
+       SPL.B  #     0, >   -17     
+       MOV.I  $   -17, >   -18     
+       DJN.F  $    -1, >   -19     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       MOV.I  $    -7, $ -2268     
+       MOV.I  $    -9, $ -2270     
+       SPL.B  $     2, }  -345     
+       SPL.B  $     1, }  -567     
+       MOV.I  $    -1, $     0     
+       MOV.I  {    -6, {     3     
+       MOV.I  {   -15, {     4     
+       MOV.I  {   -16, {     3     
+       SPL.B  $ -2255, $     0     
+       SPL.B  $     1, $     0     
+       JMP.B  $ -3205, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, }  3532     
+       DAT.F  $     0, }  2051     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  {    87, $   583     
+START  SNE.I  $ -1779, $  1436     
+       SEQ.I  <   -74, $ -1646     
+       JMP.B  $    15, }    17     
+       SNE.I  $  3658, $   354     
+       SEQ.I  <    -5, $ -2727     
+       JMP.B  $    12, }    12     
+       SNE.I  $ -1425, $  3271     
+       SEQ.I  <   -37, $   190     
+       DJN.A  $     9, {     9     
+       SNE.I  $ -2908, $  1788     
+       SEQ.I  <   -39, $ -1293     
+       DJN.A  $     6, *     0     
+       SNE.I  $  1169, $  -654     
+       SEQ.I  <   -88, $ -3736     
+       JMP.B  $     3, {     5     
+       SNE.I  $  -314, $ -3618     
+       JMZ.F  $   -72, <   -90     
+       MUL.B  *     2, $     4     
+       SNE.I  <   -47, @     3     
+       ADD.B  $   -93, $     2     
+       MOV.I  $   -21, @     1     
+       MOV.I  $   -22, }  3080     
+       SUB.AB #     7, @    -4     
+       DJN.B  $    -3, #    16     
+       DJN.F  $   -80, #     0     
+

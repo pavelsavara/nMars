@@ -1,0 +1,120 @@
+;redcode-94nop
+;name Return of Vanquisher
+;assert 1
+;author Lukasz Grabun
+; bomber constants 
+; clear constants
+; boot constants
+; bomber code
+; clear code
+; incendiary bombs
+; boot code
+;-- boot bombs and extra lines
+;-- boot clear
+;-- boot spare clear
+;-- boot bomber
+; filler
+; q-scan taken from Olivia
+; ----- q^4 scan -----
+       ORG      START
+       MOV.I  {     0, #     7     
+       MOV.I  $  -238, <     2     
+       MOV.I  $  -240, *     1     
+       MOV.I  $  1023, *  3067     
+       ADD.F  $     4, $    -1     
+       MOV.I  }  -241, @    -2     
+       JMZ.A  $    -5, {  -242     
+       JMZ.F  $   -77, >   -81     
+       JMZ.F  $  3070, @  3067     
+       SPL.B  #     0, #     0     
+       MOV.I  $     2, >    -3     
+       DJN.F  $    -1, >    -4     
+       DAT.F  > -2665, $     7     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       JMP.B  @  1022, $  1021     
+       SPL.B  # -1021, $     8     
+       MOV.I  @     0, <    -1     
+       MOV.I  $    -1, $  3155     
+       MOV.I  $    -3, $  3153     
+       MOV.I  $    -5, $  3151     
+       MOV.I  $   -14, $  3396     
+       MOV.I  $   -16, $  3394     
+       SPL.B  $     1, $  3393     
+       MOV.I  <     5, {  3393     
+       MOV.I  <     4, {  3392     
+       MOV.I  <     5, {  3390     
+       MOV.I  <     4, {  3389     
+       SPL.B  $     1, }     0     
+       SPL.B  $     1, $   -17     
+       MOV.I  <   -31, <    -7     
+       JMP.B  >    -8, $   -19     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $  1234, $ -1355     
+       DAT.F  $  1234, $ -3878     
+       SPL.B  #     0, #  1599     
+       DJN.F  $    -1, $    -1     
+START  SNE.I  $  3306, $ -3831     
+       SEQ.I  <    29, $  1753     
+       JMP.B  $    17, }    19     
+       SNE.I  $ -3993, $  -607     
+       SEQ.I  <    -6, $ -3022     
+       JMP.B  $    14, }    14     
+       SNE.I  $  1048, $ -3566     
+       SEQ.I  <   -11, $  2019     
+       DJN.A  $    11, {    11     
+       SNE.I  $ -1477, $  1909     
+       SEQ.I  <   -13, $  -506     
+       JMP.B  $     8, {     8     
+       SNE.I  $   338, $ -1753     
+       SEQ.I  <    15, $  3831     
+       JMP.B  $     5, {     7     
+       SEQ.I  $  3507, $  1414     
+       DJN.B  $     3, {     5     
+       SNE.I  $ -2189, $  1197     
+       JMZ.F  $   -68, <    11     
+       MUL.B  *     2, $     5     
+       SNE.I  *   -23, @     4     
+       ADD.B  $     8, $     3     
+       MOV.I  $   -24, >     2     
+       MOV.I  $   -24, >     1     
+       MOV.I  $     6, *  2414     
+       SUB.AB #    -7, @    -5     
+       MOV.I  $     4, @    -2     
+       DJN.B  $    -3, #    11     
+       JMP.B  $   -78, < -2091     
+       DAT.F  $     0, #  3386     
+       DAT.F  {   -77, #   863     
+

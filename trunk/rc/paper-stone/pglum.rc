@@ -1,0 +1,110 @@
+;redcode-94
+;name Puddleglum
+;author John Metcalf
+;strategy Q^3 -> Paper/Stone
+;assert CORESIZE==8000
+;optimax pws
+;    -+)>] 0/1 cycles [(<+-
+;    -+>)] 2 cycles [(<+-
+       ORG      START
+       SPL.B  $     1, {  1196     
+       MOV.I  {    13, {     4     
+       SPL.B  $     1, {  2739     
+       MOV.I  {    11, {     2     
+       SPL.B  $ -1353, {  2957     
+       SPL.B  $ -1348, { -3239     
+       SPL.B  @     0, {   220     
+       MOV.I  }    -1, >    -1     
+       MOV.I  }    -2, >    -2     
+       SPL.B  @     0, { -1828     
+       MOV.I  }    -1, >    -1     
+       MOV.I  {    -2, {     1     
+       JMP.B  $  3061, >  3057     
+       DAT.F  }     1, >     1     
+       SPL.B  #     6, $     0     
+       SPL.B  #     0, $     0     
+       MOV.I  $     3, @     2     
+       ADD.AB #  3039, $     1     
+       DJN.F  $    -2, { -1924     
+       DAT.F  $     2, >     1     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $    15, $    10     
+       DAT.F  $     7, $     4     
+       DAT.F  $    13, $    11     
+       DAT.F  {    67, {     1     
+START  SEQ.I  $ -3841, $   159     
+       JMP.B  $    55, { -3835     
+       SEQ.I  $ -3243, $   757     
+       JMP.B  $    52, { -3237     
+       SEQ.I  $ -3345, $   655     
+       JMP.B  $    50, {    -8     
+       SEQ.I  $ -3147, $   853     
+       JMP.B  $    48, }   -10     
+       SEQ.I  $ -2649, $  1351     
+       JMP.B  $    46, }    46     
+       SEQ.I  $ -2551, $  1449     
+       DJN.A  $    44, {    44     
+       SEQ.I  $ -2453, $  1547     
+       JMP.B  $    42, {    42     
+       SEQ.I  $ -3555, $   445     
+       JMP.B  >    40, { -3549     
+       SEQ.I  $ -3657, $   343     
+       JMP.B  >    38, <   -20     
+       SEQ.I  $ -3459, $   541     
+       JMP.B  >    36, >   -22     
+       SEQ.I  $ -3061, $   939     
+       DJN.B  >    34, {    33     
+       SEQ.I  $ -2963, $  1037     
+       JMP.B  >    32, {    31     
+       SEQ.I  $ -2865, $  1135     
+       JMP.B  >    30, }    29     
+       SEQ.I  $ -2167, $  1833     
+       DJN.F  $    27, $   -30     
+       SEQ.I  $ -1869, $  2131     
+       JMP.B  $    25, <   -32     
+       SEQ.I  $ -1571, $  2429     
+       JMP.B  $    23, {   -34     
+       SEQ.I  $  -773, $  3227     
+       JMP.B  $    21, }   -36     
+       SEQ.I  $  -475, $  3525     
+       JMP.B  $    19, >   -38     
+       SEQ.I  $   -77, $  3923     
+       DJN.B  $    17, }    18     
+       SEQ.I  $  1221, $ -2779     
+       JMP.B  $    15, }    16     
+       SEQ.I  $  1619, $ -2381     
+       DJN.A  $    13, {    14     
+       SEQ.I  $  2017, $ -1983     
+       JMP.B  $    11, {    12     
+       SEQ.I  $  2315, $ -1685     
+       DJN.B  $     9, {     9     
+       SEQ.I  $  2613, $ -1387     
+       DJN.A  $     7, }     7     
+       SEQ.I  $  3011, $  -989     
+       JMP.B  $     5, {     5     
+       SEQ.I  $  3709, $  -291     
+       JMP.B  $     3, }     3     
+       SNE.I  $ -1193, $  2807     
+       JMZ.B  $   -90, $ -1204     
+       MUL.B  $   -57, $     5     
+       MUL.AB $   -58, @    -1     
+       SNE.I  >  3456, @     3     
+       ADD.AB #  4000, $     2     
+       MOV.I  $   -59, @     1     
+       MOV.I  $   -60, *   100     
+       SUB.AB #     7, $    -1     
+       DJN.B  $    -3, #    11     
+       JMP.B  $   -99, > -3433     
+

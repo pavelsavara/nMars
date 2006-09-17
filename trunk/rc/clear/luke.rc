@@ -1,0 +1,120 @@
+;redcode-94
+;name LuckyLuke
+;author Philip Thorne
+;strategy John Metcalf's Spring/Summer 2002/3 Tournament 
+;strategy  Round 5 [Tri-Athelon] Entry #1 Lucky Luke
+;strategy
+;strategy   One-Shot scanner with S/S/D clear.
+;strategy   I'd have preferred to do a real scanner but didn't -
+;strategy   so here's a modified version of short-lived 94nop hill 
+;strategy   #20 Quincy [I think this version has improved spacing/
+;strategy   sizing=smaller]. Will be destroyed by the pspacers.
+;
+;strategy   R5 benchmark result over 400 rounds~132 [mid-table]
+;strategy       http://lcg-www.uia.ac.be/~erikt/comics/luke.html
+;
+;assert (CORESIZE==8000)
+;optimax clr
+;clean like Geist
+;find like Quincy
+;decoy from HeSCansAlone
+       ORG      START
+       DAT.F  $     1, $    24     
+       SPL.B  #   434, $    24     
+       DAT.F  $     0, $     0     
+       SPL.B  #   125, }   -18     
+       MOV.I  *    -4, >   -19     
+       MOV.I  *    -5, >   -20     
+       DJN.F  $    -2, }    -5     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       MUL.AB #   581, $     2     
+       JMZ.F  $    -1, @     1     
+       SPL.B  $   -83, $    73     
+       MOV.B  $    -1, $  -102     
+       MOV.I  $     5, @    -2     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       JMP.B  #     0, $     0     
+START  MOV.I  <   176, {   178     
+       MOV.I  <   178, {   180     
+       MOV.I  <   180, {   182     
+       DJN.F  $   -13, <   183     
+

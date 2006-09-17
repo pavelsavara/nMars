@@ -1,0 +1,111 @@
+;redcode-94
+;name Tornado 4
+;author Beppe Bezzi
+;strategy 60%c bomber
+;assert CORESIZE == 8000
+;optimax stn
+;--- Tornado
+;-break        
+;-break
+       ORG      START
+START  MOV.I  $    18, }    17     
+       MOV.I  $    17, *    16     
+       MOV.I  $    27, <    14     
+       MOV.I  {    13, <    13     
+       MOV.I  {    12, <    12     
+       MOV.I  {    11, <    11     
+       MOV.I  {    10, <    10     
+       MOV.I  {     9, <     9     
+       MOV.I  {     8, <     8     
+       MOV.I  {     7, <     7     
+       MOV.I  {     6, <     6     
+       MOV.I  {     5, <     5     
+       MOV.I  {     4, <     4     
+       SPL.B  @     3, <     3     
+       MOV.I  $     4, @     2     
+       DAT.F  $   -25, $    20     
+       DAT.F  #    13, # -3876     
+       DAT.F  # -3894, $     1     
+       DAT.F  $   -25, $    30     
+       SPL.B  #   -44, $    45     
+       SUB.F  $     8, @     3     
+       MOV.I  $     3, *   -42     
+       MOV.I  $    -3, @    -1     
+       MOV.I  $     6, *    -2     
+       JMZ.B  $    -4, #     0     
+       MOV.I  @     2, >   -11     
+       MOV.I  @     1, >   -12     
+       DJN.B  $    -2, {    -8     
+       DAT.F  >   135, >   135     
+       MOV.I  #     1, {     1     
+       DAT.F  #    40, #    40     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+       SPL.B  $     1, $     1     
+
