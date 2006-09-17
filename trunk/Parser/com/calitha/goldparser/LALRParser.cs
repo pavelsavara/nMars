@@ -108,7 +108,16 @@ namespace com.calitha.goldparser
                     stateStack.Pop();
                     tokens[reduceLength - i - 1] = tokenStack.Pop();
                 }
-                NonterminalToken nttoken = new NonterminalToken(action.Rule, tokens);
+                NonterminalToken nttoken;
+                if (reduceLength == 0)
+                {
+                    nttoken = new NonterminalToken(action.Rule, tokens, token.Location);
+                }
+                else
+                {
+                    nttoken = new NonterminalToken(action.Rule, tokens, tokens[reduceLength - 1].Location);
+                }
+
                 tokenStack.Push(nttoken);
                 currentState = stateStack.Peek();
 
