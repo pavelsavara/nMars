@@ -1,7 +1,7 @@
 using System;
 using nMars.RedCode;
 
-namespace nMars.Parser
+namespace nMars.Parser.Warrior
 {
     [Serializable]
     public class ExtendedInstruction : Instruction
