@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
 
-namespace nMars.Parser
+namespace nMars.Parser.Warrior
 {
     [Serializable]
     public class ExtendedWarrior : IExtendedWarrior, IWarrior
