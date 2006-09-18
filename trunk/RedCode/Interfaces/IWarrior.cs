@@ -20,6 +20,11 @@ namespace nMars.RedCode
         string Name { get; }
 
         /// <summary>
+        /// Warrior Name
+        /// </summary>
+        string Author { get; }
+
+        /// <summary>
         /// PIN - P-Space identification number
         /// (-1 is private)
         /// </summary>

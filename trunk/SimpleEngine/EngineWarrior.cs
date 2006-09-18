@@ -32,7 +32,7 @@ namespace nMars.SimpleEngine
                 if (instruction.Operation == Operation.LDP ||
                     instruction.Operation == Operation.STP)
                 {
-                    if (!core.Rules.EnablePSpace)
+                    if (!core.Rules.enablePSpace)
                     {
                         throw new RulesException("Current rules don't support p-space operations");
                     }
@@ -60,7 +60,7 @@ namespace nMars.SimpleEngine
             }
             else
             {
-                pSpaceSize = core.Rules.PSpaceSize;
+                pSpaceSize = core.Rules.pSpaceSize;
                 pSpace = new int[pSpaceSize];
                 pSpaces[pName] = pSpace;
             }
@@ -111,6 +111,11 @@ namespace nMars.SimpleEngine
         public string Name
         {
             get { return Warrior.Name; }
+        }
+
+        public string Author
+        {
+            get { return Warrior.Author; }
         }
 
         public Rules Rules

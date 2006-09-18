@@ -109,5 +109,37 @@ namespace nMars.RedCode
                     return Modifier.B;
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            Instruction o = obj as Instruction;
+            //TODO if (o == null) return false;
+
+            if (o.Operation != Operation) return false;
+            if (o.Modifier != Modifier) return false;
+            if (o.ModeA != ModeA) return false;
+            if (o.ValueA != ValueA) return false;
+            if (o.ModeB != ModeB) return false;
+            if (o.ValueB != ValueB) return false;
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return
+                Operation.GetHashCode() ^ Modifier.GetHashCode() ^ 
+                ModeA.GetHashCode() ^ ModeB.GetHashCode() ^
+                ValueA.GetHashCode() ^ ValueB.GetHashCode();
+        }
+        
+        public static bool operator !=(Instruction a, Instruction b)
+        {
+            return !a.Equals(b);
+        }
+        
+        public static bool operator ==(Instruction a, Instruction b)
+        {
+            return a.Equals(b);
+        }
     }
 }

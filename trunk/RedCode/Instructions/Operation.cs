@@ -1,3 +1,5 @@
+using System;
+
 namespace nMars.RedCode
 {
     public enum Operation
@@ -133,6 +135,55 @@ namespace nMars.RedCode
         STP
     }
 
+    public class OperationHelper
+    {
+        public static Operation Parse(string s)
+        {
+            switch (s.ToUpper())
+            {
+                case "DAT":
+                    return Operation.DAT;
+                case "SPL":
+                    return Operation.SPL;
+                case "MOV":
+                    return Operation.MOV;
+                case "DJN":
+                    return Operation.DJN;
+                case "ADD":
+                    return Operation.ADD;
+                case "JMZ":
+                    return Operation.JMZ;
+                case "SUB":
+                    return Operation.SUB;
+                case "SEQ":
+                case "CMP":
+                    return Operation.SEQ;
+                case "SNE":
+                    return Operation.SNE;
+                case "SLT":
+                    return Operation.SLT;
+                case "JMN":
+                    return Operation.JMN;
+                case "JMP":
+                    return Operation.JMP;
+                case "NOP":
+                    return Operation.NOP;
+                case "MUL":
+                    return Operation.MUL;
+                case "MOD":
+                    return Operation.MOD;
+                case "DIV":
+                    return Operation.DIV;
+                case "LDP":
+                    return Operation.LDP;
+                case "STP":
+                    return Operation.STP;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+    }
+    
     /*
             switch (instruction.Operation)
             {

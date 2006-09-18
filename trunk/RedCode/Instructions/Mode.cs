@@ -160,6 +160,31 @@ namespace nMars.RedCode
             throw new ArgumentException();
         }
 
+        public static Mode Parse(string s)
+        {
+            switch(s)
+            {
+                case "$":
+                    return Mode.Direct;
+                case "#":
+                    return Mode.Immediate;
+                case "*":
+                    return Mode.IndirectA;
+                case "@":
+                    return Mode.IndirectB;
+                case "}":
+                    return Mode.PostIncIndirectA;
+                case ">":
+                    return Mode.PostIncIndirectB;
+                case "{":
+                    return Mode.PreDecIndirectA;
+                case "<":
+                    return Mode.PreDecIndirectB;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+        
         public static string ToString(Mode mode)
         {
             switch (mode)
@@ -180,8 +205,9 @@ namespace nMars.RedCode
                     return "{";
                 case Mode.PreDecIndirectB:
                     return "<";
+                default:
+                    throw new ArgumentException();
             }
-            throw new ArgumentException();
         }
     }
 }

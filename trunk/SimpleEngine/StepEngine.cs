@@ -6,10 +6,10 @@ namespace nMars.SimpleEngine
 {
     public class StepEngine : Core, IStepEngine
     {
-        public void BeginMatch(IList<IWarrior> aWariors, Rules aRules, IPSpaces aPSpaces, Random aRandom,
+        public void BeginMatch(IList<IWarrior> aWariors, IPSpaces aPSpaces, Random aRandom,
                                IList<int> forcedAddresses)
         {
-            Init(aWariors, aRules, aPSpaces, aRandom, forcedAddresses);
+            Init(aWariors, aPSpaces, aRandom, forcedAddresses);
         }
 
         public bool NextStep()
