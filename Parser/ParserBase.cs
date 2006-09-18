@@ -8,13 +8,12 @@ using nMars.RedCode;
 
 namespace nMars.Parser
 {
-    public class ParserBase
+    public abstract class ParserBase : ParserRoot
     {
         private LALRParser parser;
         protected Dictionary<string, Expression> variables;
         protected string org;
         protected Expression pin;
-        protected Rules rules;
         protected int counter;
 
         protected ParserBase(Rules rules)
@@ -38,7 +37,7 @@ namespace nMars.Parser
             parser.OnParseError += new LALRParser.ParseErrorHandler(ParseErrorEvent);
         }
 
-        protected ContainerStatement Parse(string source)
+        protected ContainerStatement ParseInternal(string source)
         {
             if (!source.EndsWith("\n"))
                 source = source + "\n";

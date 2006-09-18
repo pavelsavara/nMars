@@ -1,6 +1,6 @@
-namespace nMars.Parser
+namespace Pmars.Parser
 {
-    public class ParserException : RedCode.ParserExceptionBase
+    public class ParserException : nMars.RedCode.ParserExceptionBase
     {
         public ParserException(string message)
             : base(message)

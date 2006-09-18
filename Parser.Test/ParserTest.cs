@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
-using nMars.Parser;
-using nMars.Parser.Warrior;
 using nMars.RedCode;
 using NUnit.Framework;
 
@@ -15,54 +12,59 @@ namespace Parser.Test
         [Test]
         public void Loader()
         {
-            List<IWarrior> wariors = new List<IWarrior>();
-            nMars.Parser.Parser parser = new nMars.Parser.Parser(Rules.DefaultRules);
-            XmlSerializer ser = new XmlSerializer(typeof (ExtendedWarrior));
+            nMars.Parser.Parser nparser = new nMars.Parser.Parser(Rules.DefaultRules);
+            Pmars.Parser.Parser pparser = new Pmars.Parser.Parser(Rules.DefaultRules);
             List<string> files =
                 new List<string>(Directory.GetFiles(@"..\..\..\rc", "*.rc", SearchOption.AllDirectories));
             files.AddRange(Directory.GetFiles(@"..\..\..\rc", "*.red", SearchOption.AllDirectories));
             files.Sort();
 
-            foreach (string s in files)
+            foreach (string file in files)
             {
-                Console.Write("Reading {0}          \r", s);
-                wariors.Add(LoadDumpOne(s, parser, ser));
+                Console.Write("Reading {0}          \r", file);
+                LoadDumpOne(file, nparser, pparser);
             }
         }
 
-
-        private static IWarrior LoadDumpOne(string s, nMars.Parser.Parser parser, XmlSerializer ser)
+        private static void LoadDumpOne(string file, nMars.Parser.Parser nparser, Pmars.Parser.Parser pparser)
         {
-            IWarrior w = null;
+            IWarrior nw;
+            IWarrior pw;
             try
             {
-                w = parser.Load(s);
-                IExtendedWarrior exw = w as IExtendedWarrior;
-
-                if (ser != null)
-                {
-                    StreamWriter sw = new StreamWriter(Path.ChangeExtension(s, ".xml"));
-                    ser.Serialize(sw, w);
-                    sw.Close();
-                }
-
-                StreamWriter swd = new StreamWriter(Path.ChangeExtension(s, ".dmp"));
-                if (exw != null)
-                {
-                    exw.Dump(swd);
-                }
-                else
-                {
-                    w.Dump(swd);
-                }
-                swd.Close();
+                pw = pparser.Parse(file);
             }
-            catch (ParserException ex)
+            catch (ParserExceptionBase ex)
             {
                 Console.WriteLine();
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("PmarsParser : " + ex.Message);
+                return;
             }
-            return w;
+
+            try
+            {
+                nw = nparser.Parse(file);
+            }
+            catch (ParserExceptionBase ex)
+            {
+                Console.WriteLine();
+                Console.WriteLine("nMarsParser : " +  ex.Message);
+                return;
+            }
+            
+            if (!Warrior.Equals(nw, pw))
+            {
+                Console.WriteLine();
+                Console.WriteLine("Warriors doesn't match");
+
+                StreamWriter nswd = new StreamWriter(Path.ChangeExtension(file, ".nDmp"));
+                nw.Dump(nswd);
+                nswd.Close();
+
+                StreamWriter pswd = new StreamWriter(Path.ChangeExtension(file, ".pDmp"));
+                pw.Dump(pswd);
+                pswd.Close();
+            }
         }
     }
 }

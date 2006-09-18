@@ -5,16 +5,18 @@
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DD04BC83-CC0A-4F52-A70B-FDB4C0991E3D}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>nMars.Parser</RootNamespace>
-    <AssemblyName>Parser</AssemblyName>
+    <AssemblyName>nMarsParser</AssemblyName>
+    <StartupObject>nMars.Parser.Module</StartupObject>
+    <ApplicationIcon>Properties\Parser.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -95,6 +97,7 @@
     <Compile Include="Expressions\TernaryExpression.cs" />
     <Compile Include="Expressions\UnaryExpression.cs" />
     <Compile Include="Expressions\Value.cs" />
+    <Compile Include="Module.cs" />
     <Compile Include="Statements\EquStatement.cs" />
     <Compile Include="Warrior\ExtendedWarrior.cs" />
     <Compile Include="Statements\ForRofContainerStatement.cs" />
@@ -117,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\icws94.html" />
+    <EmbeddedResource Include="Properties\Parser.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RedCode\RedCode.csproj">

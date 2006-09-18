@@ -10,10 +10,9 @@ namespace nMars.SimpleEngine
         {
         }
 
-        protected void Init(IList<IWarrior> aWarriors, Rules aRules, IPSpaces aPSpaces, Random aRandom,
+        protected void Init(IList<IWarrior> aWarriors, IPSpaces aPSpaces, Random aRandom,
                             IList<int> forcedAddresses)
         {
-            rules = aRules;
             random = aRandom;
             pSpaces = aPSpaces;
             CleanCore();
@@ -30,7 +29,7 @@ namespace nMars.SimpleEngine
 
         protected void CleanCore()
         {
-            core = new EngineInstruction[rules.CoreSize];
+            core = new EngineInstruction[rules.coreSize];
             liveWarriors = new Queue<EngineWarrior>();
             warriors = new List<EngineWarrior>();
         }
@@ -135,7 +134,7 @@ namespace nMars.SimpleEngine
 
         public int CoreSize
         {
-            get { return rules.CoreSize; }
+            get { return rules.coreSize; }
         }
 
         Instruction ICoreView.this[int address]

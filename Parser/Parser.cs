@@ -14,7 +14,7 @@ namespace nMars.Parser
         {
         }
 
-        public IWarrior Load(string fileName)
+        public override IWarrior Parse(string fileName)
         {
             StreamReader sr = new StreamReader(fileName);
             string source = sr.ReadToEnd();
@@ -22,21 +22,21 @@ namespace nMars.Parser
             return Parse(source, Path.GetFileNameWithoutExtension(fileName));
         }
 
-        public IWarrior Parse(string source, string implicitName)
+        public IWarrior Parse(string sourceText, string implicitName)
         {
             Prepare();
-            Statement statement = Parse(source);
+            Statement statement = ParseInternal(sourceText);
             ExtendedWarrior warrior = new ExtendedWarrior(rules);
             int currentAddress;
 
             //first pass to expand for cycles
             currentAddress = 0;
-            statement.ExpandStatements(warrior, variables, ref currentAddress, rules.CoreSize, false);
+            statement.ExpandStatements(warrior, variables, ref currentAddress, rules.coreSize, false);
             variables["MAXLENGTH"] = new Value(warrior.Length);
 
             //second pass to evaluate variables/labels in context of for cycles
             currentAddress = 0;
-            statement.ExpandStatements(warrior, variables, ref currentAddress, rules.CoreSize, true);
+            statement.ExpandStatements(warrior, variables, ref currentAddress, rules.coreSize, true);
 
             warrior.Name = implicitName;
             if (org != null)
@@ -68,15 +68,15 @@ namespace nMars.Parser
             variables = new Dictionary<string, Expression>();
             org = null;
             counter = 0;
-            variables["CORESIZE"] = new Value(rules.CoreSize);
+            variables["CORESIZE"] = new Value(rules.coreSize);
             variables["MAXPROCESSES"] = new Value(rules.maxProcesses);
             variables["MAXCYCLES"] = new Value(rules.maxCycles);
             variables["MAXLENGTH"] = new Value(rules.maxLength);
             variables["MINDISTANCE"] = new Value(rules.minDistance);
-            variables["ROUNDS"] = new Value(rules.Rounds);
-            variables["PSPACESIZE"] = new Value(rules.PSpaceSize);
-            variables["VERSION"] = new Value(rules.Version);
-            variables["WARRIORS"] = new Value(rules.Warriors);
+            variables["ROUNDS"] = new Value(rules.rounds);
+            variables["PSPACESIZE"] = new Value(rules.pSpaceSize);
+            variables["VERSION"] = new Value(rules.version);
+            variables["WARRIORS"] = new Value(rules.warriors);
             variables["CURLINE"] = new Value(0);
         }
     }

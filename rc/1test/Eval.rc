@@ -9,12 +9,11 @@ s3      EQU      s1*s2+10
 s4      EQU      ((s3+1)+(s3-1))*2
 fin     EQU      s4 ; 4392
 zero    EQU      0
-kill    DAT.F   #fin,     #e
-        DAT.F   #fin,     #0        
-        DAT.F   #fin,     #0        
-        DAT.F   #fin,     #0        
-        DAT.F   #fin,     #s4
-        DAT.F   #fin,     #0        
+kill    DAT.F   #s1,     #e
+        DAT.F   #s2,     #0        
+        DAT.F   #s3,     #0        
+        DAT.F   #s4,     #0        
+        DAT.F   #fin,    $0
         DAT.F   #0,     #kill
 e       DAT.F   #0,     #kill-zero-e
         END

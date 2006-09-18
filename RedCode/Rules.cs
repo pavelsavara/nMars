@@ -13,17 +13,17 @@ namespace nMars.RedCode
     [Serializable]
     public class Rules
     {
-        public int CoreSize = 8000;
-        public int PSpaceSize = 500; // CoreSize / 16 
+        public int coreSize = 8000;
+        public int pSpaceSize = 500; // coreSize / 16 
         public int maxCycles = 80000;
-        public int NumberOfFighters = 2;
+        public int numberOfFighters = 2;
         public int maxLength = 100;
         public int maxProcesses = 1000;
-        public bool EnablePSpace = false;
+        public bool enablePSpace = false;
         public int minDistance = 100;
-        public int Rounds = 1;
-        public int Warriors = 2;
-        public int Version = 60;
+        public int rounds = 1;
+        public int warriors = 2;
+        public int version = 60;
 
         public static readonly Rules DefaultRules = new Rules();
     }

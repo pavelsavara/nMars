@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleEngine", "SimpleEngin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Test", "Parser.Test\Parser.Test.csproj", "{FA9132A5-6063-4269-89ED-5A5E8D57A7B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pmParser", "pmParser\pmParser.csproj", "{9501D4F8-0878-462E-B3FB-190A7D6ED4DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Pmars", "Parser.Pmars\Parser.Pmars.csproj", "{9501D4F8-0878-462E-B3FB-190A7D6ED4DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -79,6 +79,11 @@ namespace nMars.Parser.Warrior
             get { return Name; }
         }
 
+        string IWarrior.Author
+        {
+            get { return Author; }
+        }
+
         Rules IWarrior.Rules
         {
             get { return Rules; }
@@ -105,6 +110,7 @@ namespace nMars.Parser.Warrior
         public int StartOffset;
         public int Pin;
         public string Name = "";
+        public string Author = "Anonymous";
         public Rules Rules;
     }
 }
