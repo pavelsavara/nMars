@@ -37,10 +37,10 @@ namespace nMars.Parser
         private Expression left;
         private Expression right;
 
-        public override int Evaluate(Dictionary<string, Expression> variables)
+        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
         {
-            int l = left.Evaluate(variables);
-            int r = right.Evaluate(variables);
+            int l = left.Evaluate(variables, currentAddress);
+            int r = right.Evaluate(variables, currentAddress);
             switch (operation)
             {
                 case BinaryOperation.Plus:

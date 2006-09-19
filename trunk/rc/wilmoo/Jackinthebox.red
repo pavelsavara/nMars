@@ -9,8 +9,8 @@ org     think
 
 PIN     0		;or something larger
 
-_RES    equ     #0
-_STR    equ     #111	;Not that obviously
+_RES    equ     0
+_STR    equ     111	;Not that obviously
 
 step    equ     85         
 count   equ     533
@@ -48,12 +48,12 @@ for 12
 rof
 
 think
-res     ldp.ab  _RES,   #0
-str     ldp.a   _STR,   str1    ;load strategy in use
+res     ldp.ab  #_RES,   #0
+str     ldp.a   #_STR,   str1    ;load strategy in use
 	sne.ab  #0,     res     ;check result
 lost    add.a   #1,     str1    ;lost change 
 	mod.a   #2,     str1    ;secure result
-win     stp.ab  str1,   _STR
+win     stp.ab  str1,   #_STR
 str1    jmp     @0,     tornado
 	dat     0,      marcia
 

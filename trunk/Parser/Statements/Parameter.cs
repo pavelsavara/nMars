@@ -16,9 +16,9 @@ namespace nMars.Parser.Statements
             Expression = expression;
         }
 
-        public int GetValue(Dictionary<string, Expression> variables)
+        public int GetValue(Dictionary<string, Expression> variables, int currentAddress)
         {
-            return Expression.Evaluate(variables);
+            return Expression.Evaluate(variables, currentAddress);
         }
 
         public Mode Mode;

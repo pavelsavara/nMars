@@ -20,14 +20,14 @@ namespace nMars.Parser
         private UnaryOperation operation;
         private Expression sub;
 
-        public override int Evaluate(Dictionary<string, Expression> variables)
+        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
         {
             switch (operation)
             {
                 case UnaryOperation.Negate:
-                    return 0 - sub.Evaluate(variables);
+                    return 0 - sub.Evaluate(variables, currentAddress);
                 case UnaryOperation.Brackets:
-                    return sub.Evaluate(variables);
+                    return sub.Evaluate(variables, currentAddress);
                 default:
                     throw new InvalidOperationException();
             }

@@ -18,11 +18,11 @@ namespace nMars.Parser.Expressions
             this.right = right;
         }
 
-        public override int Evaluate(Dictionary<string, Expression> variables)
+        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
         {
-            int l = left.Evaluate(variables);
-            int m = middle.Evaluate(variables);
-            int r = right.Evaluate(variables);
+            int l = left.Evaluate(variables, currentAddress);
+            int m = middle.Evaluate(variables, currentAddress);
+            int r = right.Evaluate(variables, currentAddress);
             switch (operation)
             {
                 case TernaryOperation.If:
@@ -31,7 +31,6 @@ namespace nMars.Parser.Expressions
                     throw new InvalidOperationException();
             }
         }
-
 
         public override string ToString()
         {

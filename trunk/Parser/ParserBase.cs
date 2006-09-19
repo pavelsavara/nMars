@@ -120,20 +120,11 @@ namespace nMars.Parser
                 case (int) RuleConstants.RULE_ENDOPTIONAL_END:
                     //<EndOptional> ::= <eol> End <eolOptional>
 
-                case (int) RuleConstants.RULE_ENDOPTIONAL_END2:
-                    //<EndOptional> ::= <eol> End <Labels> <eolOptional>
-
                 case (int) RuleConstants.RULE_ENDOPTIONAL_END3:
                     //<EndOptional> ::= <eol> <Labels> End <eolOptional>
 
-                case (int) RuleConstants.RULE_ENDOPTIONAL_END4:
-                    //<EndOptional> ::= <eol> <Labels> End <Labels> <eolOptional>
-
                 case (int) RuleConstants.RULE_ENDOPTIONAL_END5:
                     //<EndOptional> ::= <eol> <Labels> <eol> End <eolOptional>
-
-                case (int) RuleConstants.RULE_ENDOPTIONAL_END6:
-                    //<EndOptional> ::= <eol> <Labels> <eol> End <Labels> <eolOptional>
 
                 case (int) RuleConstants.RULE_ENDOPTIONAL2:
                     //<EndOptional> ::= 
@@ -325,8 +316,26 @@ namespace nMars.Parser
                     pin = (Expression) token.Tokens[1].UserObject;
                     return null;
 
-                case (int) RuleConstants.RULE_ORG_ORG_LABEL:
-                    //<Org> ::= Org LabelName
+                case (int)RuleConstants.RULE_ENDOPTIONAL_END2:
+                    //<EndOptional> ::= <eol> End <Labels> <eolOptional>
+                    statementlabels = (List<LabelName>)token.Tokens[2].UserObject;
+                    org = statementlabels[0].Name;
+                    return null;
+                    
+                case (int)RuleConstants.RULE_ENDOPTIONAL_END4:
+                    //<EndOptional> ::= <eol> <Labels> End <Labels> <eolOptional>
+                    statementlabels = (List<LabelName>)token.Tokens[3].UserObject;
+                    org = statementlabels[0].Name;
+                    return null;
+
+                case (int)RuleConstants.RULE_ENDOPTIONAL_END6:
+                    //<EndOptional> ::= <eol> <Labels> <eol> End <Labels> <eolOptional>
+                    statementlabels = (List<LabelName>)token.Tokens[4].UserObject;
+                    org = statementlabels[0].Name;
+                    return null;
+
+                case (int)RuleConstants.RULE_ORG_ORG_LABEL:
+                    //<Org> ::= Org Label
                     org = ((string) token.Tokens[1].UserObject);
                     return null;
 
@@ -467,8 +476,17 @@ namespace nMars.Parser
                 case (int) RuleConstants.RULE_OPERATION1:
                     //<Operation1> ::= <Operator1> <Parameter>
                     op = (Operation) token.Tokens[0].UserObject;
-                    paramA = new Parameter();
-                    paramB = (Parameter) token.Tokens[1].UserObject;
+                    if (op == Operation.DAT)
+                    {
+                        paramA = new Parameter();
+                        paramA.Mode = Mode.Immediate;
+                        paramB = (Parameter)token.Tokens[1].UserObject;
+                    }
+                    else
+                    {
+                        paramA = (Parameter)token.Tokens[1].UserObject;
+                        paramB = new Parameter();
+                    }
                     mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
                     return new InstructionStatement(op,
                                                     mod,
@@ -480,8 +498,17 @@ namespace nMars.Parser
                     //<Operation1> ::= <Operator1> . <Modifier> <Parameter>
                     op = (Operation) token.Tokens[0].UserObject;
                     mod = (Modifier) token.Tokens[2].UserObject;
-                    paramA = new Parameter();
-                    paramB = (Parameter) token.Tokens[3].UserObject;
+                    if (op == Operation.DAT)
+                    {
+                        paramA = new Parameter();
+                        paramA.Mode = Mode.Immediate;
+                        paramB = (Parameter)token.Tokens[3].UserObject;
+                    }
+                    else
+                    {
+                        paramA = (Parameter)token.Tokens[3].UserObject;
+                        paramB = new Parameter();
+                    }
                     return new InstructionStatement(op,
                                                     mod,
                                                     paramA,

@@ -15,8 +15,8 @@ namespace Parser.Test
             nMars.Parser.Parser nparser = new nMars.Parser.Parser(Rules.DefaultRules);
             Pmars.Parser.Parser pparser = new Pmars.Parser.Parser(Rules.DefaultRules);
             List<string> files =
-                new List<string>(Directory.GetFiles(@"..\..\..\rc", "*.rc", SearchOption.AllDirectories));
-            files.AddRange(Directory.GetFiles(@"..\..\..\rc", "*.red", SearchOption.AllDirectories));
+                new List<string>(Directory.GetFiles(@"rc", "*.rc", SearchOption.AllDirectories));
+            files.AddRange(Directory.GetFiles(@"rc", "*.red", SearchOption.AllDirectories));
             files.Sort();
 
             foreach (string file in files)

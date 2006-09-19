@@ -27,17 +27,17 @@ namespace nMars.RedCode
 
         public void Dump(StreamWriter sw)
         {
-            sw.WriteLine("           ORG       start");
+            sw.WriteLine("       ORG       START");
             for (int a = 0; a < Instructions.Count; a++)
             {
                 Instruction instruction = Instructions[a];
                 if (a == StartOffset)
                 {
-                    sw.Write("start      ");
+                    sw.Write("START  ");
                 }
                 else
                 {
-                    sw.Write("           ");
+                    sw.Write("       ");
                 }
                 sw.WriteLine(instruction.ToString());
             }
@@ -87,7 +87,7 @@ namespace nMars.RedCode
         {
             if (a.Length != b.Length) return false;
             if (a.StartOffset != b.StartOffset) return false;
-            if (a.Pin != b.Pin) return false;
+            //if (a.Pin != b.Pin) return false;
             //if (a.Name != b.Name) return false;
             //if (a.Author != b.Author) return false;
             for (int adr = 0; adr < b.Length; adr++)
