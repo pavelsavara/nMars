@@ -9,9 +9,9 @@ namespace nMars.Parser.Expressions
         {
         }
 
-        public override bool ContainsAddress(Dictionary<string, Expression> variables)
+        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
         {
-            return true;
+            return value - currentAddress;
         }
     }
 }

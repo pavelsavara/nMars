@@ -31,36 +31,43 @@ namespace nMars.Parser
 
             //first pass to expand for cycles
             currentAddress = 0;
+            variables["CURLINE"] = new Value(0);
             statement.ExpandStatements(warrior, variables, ref currentAddress, rules.coreSize, false);
-            variables["MAXLENGTH"] = new Value(warrior.Length);
 
             //second pass to evaluate variables/labels in context of for cycles
             currentAddress = 0;
+            variables["CURLINE"] = new Value(0);
             statement.ExpandStatements(warrior, variables, ref currentAddress, rules.coreSize, true);
 
+            SetOrg(warrior);
+            SetPin(warrior);
             warrior.Name = implicitName;
+            warrior.Variables = variables;
+            return warrior;
+        }
+
+        private void SetPin(ExtendedWarrior warrior)
+        {
+            if (pin != null)
+            {
+                warrior.Pin = pin.Evaluate(variables, 0);
+            }
+            else
+            {
+                warrior.Pin = -1;
+            }
+        }
+
+        private void SetOrg(ExtendedWarrior warrior)
+        {
             if (org != null)
             {
                 if (!variables.ContainsKey(org))
                 {
                     throw new Exception("LabelName not defined : " + org);
                 }
-                warrior.StartOffset = variables[org].Evaluate(variables);
+                warrior.StartOffset = variables[org].Evaluate(variables, 0);
             }
-            else
-            {
-                warrior.StartOffset = 0;
-            }
-            if (pin != null)
-            {
-                warrior.Pin = pin.Evaluate(variables);
-            }
-            else
-            {
-                warrior.Pin = -1;
-            }
-            warrior.Variables = variables;
-            return warrior;
         }
 
         protected void Prepare()
@@ -77,7 +84,6 @@ namespace nMars.Parser
             variables["PSPACESIZE"] = new Value(rules.pSpaceSize);
             variables["VERSION"] = new Value(rules.version);
             variables["WARRIORS"] = new Value(rules.warriors);
-            variables["CURLINE"] = new Value(0);
         }
     }
 }

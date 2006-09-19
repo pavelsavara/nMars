@@ -15,15 +15,14 @@ namespace nMars.Parser.Statements
                                               ref int currentAddress, int coreSize, bool evaluate)
         {
             //set labels, except last which is FOR expression
-            variables["CURLINE"] = new Address(currentAddress);
             for (int l = 0; l < Labels.Count - 1; l++)
             {
                 LabelName label = Labels[l];
-                variables[label.GetFullName(variables)] = new Address(currentAddress);
+                variables[label.GetFullName(variables, currentAddress)] = new Address(currentAddress);
             }
 
             string cnt = Labels[Labels.Count - 1].Name;
-            int count = variables[cnt + "#start"].Evaluate(variables);
+            int count = variables[cnt + "#start"].Evaluate(variables, currentAddress);
 
             for (int i = 1; i <= count; i++)
             {

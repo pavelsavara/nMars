@@ -17,7 +17,7 @@ namespace nMars.Parser.Expressions
             get { return name; }
         }
 
-        public override int Evaluate(Dictionary<string, Expression> variables)
+        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
         {
             if (inEval)
             {
@@ -25,7 +25,7 @@ namespace nMars.Parser.Expressions
             }
             try
             {
-                return EvaluateInternal(variables);
+                return EvaluateInternal(variables, currentAddress);
             }
             finally
             {
@@ -33,9 +33,9 @@ namespace nMars.Parser.Expressions
             }
         }
 
-        protected virtual int EvaluateInternal(Dictionary<string, Expression> variables)
+        protected virtual int EvaluateInternal(Dictionary<string, Expression> variables, int currentAddress)
         {
-            string fullName = GetFullName(variables);
+            string fullName = GetFullName(variables, currentAddress);
             if (variables.ContainsKey(fullName))
             {
                 Expression ex = variables[fullName];
@@ -43,7 +43,7 @@ namespace nMars.Parser.Expressions
                 {
                     throw new ParserException("Label not yet resolved: " + fullName);
                 }
-                return variables[fullName].Evaluate(variables);
+                return ex.Evaluate(variables, currentAddress);
             }
             else
             {
@@ -51,25 +51,7 @@ namespace nMars.Parser.Expressions
             }
         }
 
-        public override bool ContainsAddress(Dictionary<string, Expression> variables)
-        {
-            string fullName = GetFullName(variables);
-            if (variables.ContainsKey(fullName))
-            {
-                Expression ex = variables[fullName];
-                if (ex == this)
-                {
-                    throw new ParserException("Label not yet resolved: " + fullName);
-                }
-                return variables[fullName].ContainsAddress(variables);
-            }
-            else
-            {
-                throw new ParserException("Label not defined: " + fullName);
-            }
-        }
-
-        public virtual string GetFullName(Dictionary<string, Expression> variables)
+        public virtual string GetFullName(Dictionary<string, Expression> variables, int currentAddress)
         {
             return name;
         }

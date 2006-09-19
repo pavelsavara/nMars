@@ -4,16 +4,17 @@ namespace nMars.Parser
 {
     public abstract class Expression
     {
-        public abstract int Evaluate(Dictionary<string, Expression> variables);
+        public abstract int Evaluate(Dictionary<string, Expression> variables, int currentAddress);
 
-        public virtual bool ContainsAddress(Dictionary<string, Expression> variables)
+        public int Evaluate(Dictionary<string, Expression> variables, int currentAddress, int coreSize)
         {
-            return false;
-        }
-
-        public int Evaluate(Dictionary<string, Expression> variables, int coreSize, int currentAddress)
-        {
-            return (ContainsAddress(variables) ? (currentAddress - Evaluate(variables)) : Evaluate(variables))%coreSize;
+            int raw = Evaluate(variables, currentAddress);
+            int wrap = raw%coreSize;
+            if (wrap <= (coreSize / -2))
+                wrap += coreSize;
+            if (wrap > (coreSize / 2))
+                wrap -= coreSize;
+            return wrap;
         }
     }
 }

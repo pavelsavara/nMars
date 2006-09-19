@@ -15,17 +15,16 @@ namespace nMars.Parser.Statements
                                               ref int currentAddress, int coreSize, bool evaluate)
         {
             //set labels, except last which is EQU expression
-            variables["CURLINE"] = new Address(currentAddress);
             for (int l = 0; l < Labels.Count; l++)
             {
                 LabelName label = Labels[l];
                 if (l == Labels.Count-1)
                 {
-                    variables[label.GetFullName(variables)] = expression;
+                    variables[label.GetFullName(variables, currentAddress)] = expression;
                 }
                 else
                 {
-                    variables[label.GetFullName(variables)] = new Address(currentAddress);
+                    variables[label.GetFullName(variables, currentAddress)] = new Address(currentAddress);
                 }
             }
             return;

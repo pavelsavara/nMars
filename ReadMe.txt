@@ -33,10 +33,13 @@ Contain shared definitions of types and interfaces.
 Parser
 --------------------
 Targeting to be full ICWS '94 RedCode specification compliant.
-Current implementation yet doesn't support 
- - instructions in EQU substitutions.
+
+Current implementation doesn't support (yet?)
+ - EQU substitutions 
+   - instructions in EQU
+   - modifiers in EQU
  - FOR 0 comment-block ROF
- - in-place assignments i=i+1
+ - in-place assignments (k=k+1)
 
 Is based on GOLD parser by Devin Cook
 http://www.devincook.com/goldparser/

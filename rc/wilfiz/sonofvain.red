@@ -19,7 +19,7 @@ sdist   equ     (2599+ofs)              ; boot distance
 dgate   equ     (dclr-9)
 dwipeofs equ    (-947)                  ; offset of clear trail from stone
 ddist   equ     (7328+ofs)              ; boot distance
-dmopa   equ     <2667                   ; mop a-field
+dmopa   equ     2667                   ; mop a-field
 
 ; spin constants
 ldist   equ     (7426+ofs)              ; boot distance
@@ -82,7 +82,7 @@ t3      dat.a   qhop    ,       c2      ; t3 = qscan decode table
 
 imp     mov.i   #10     ,       2667
 db      dat.a   >hop    ,       >1      ; dat bomb for stone
-dmop    dat.a   dmopa   ,       dclr+8-dgate ; dat bomb for clear
+dmop    dat.a   <dmopa  ,       dclr+8-dgate ; dat bomb for clear
         dat     0,0
         dat     0,0
         dat     0,0

@@ -15,9 +15,9 @@ namespace nMars.Parser
             this.value = Int32.Parse(value);
         }
 
-        private int value = 0;
+        protected int value = 0;
 
-        public override int Evaluate(Dictionary<string, Expression> variables)
+        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
         {
             return value;
         }

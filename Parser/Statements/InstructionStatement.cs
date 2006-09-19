@@ -36,10 +36,9 @@ namespace nMars.Parser.Statements
                                               ref int currentAddress, int coreSize, bool evaluate)
         {
             //set all labels
-            variables["CURLINE"] = new Address(currentAddress);
             foreach (LabelName label in Labels)
             {
-                variables[label.GetFullName(variables)] = new Address(currentAddress);
+                variables[label.GetFullName(variables, currentAddress)] = new Address(currentAddress);
             }
 
             ExtendedInstruction instruction;
@@ -65,11 +64,12 @@ namespace nMars.Parser.Statements
             }
             else
             {
-                instruction = warrior.Instructions[currentAddress];
-                instruction.ValueA = A.Expression.Evaluate(variables, coreSize, currentAddress);
-                instruction.ValueB = B.Expression.Evaluate(variables, coreSize, currentAddress);
+                instruction = (ExtendedInstruction)warrior.Instructions[currentAddress];
+                instruction.ValueA = A.Expression.Evaluate(variables, currentAddress, coreSize);
+                instruction.ValueB = B.Expression.Evaluate(variables, currentAddress, coreSize);
             }
             currentAddress++;
+            variables["CURLINE"] = new Value(currentAddress);
         }
 
 

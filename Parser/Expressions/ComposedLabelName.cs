@@ -17,9 +17,9 @@ namespace nMars.Parser.Expressions
             get { return name + "&" + parameter; }
         }
 
-        public override string GetFullName(Dictionary<string, Expression> variables)
+        public override string GetFullName(Dictionary<string, Expression> variables, int currentAddress)
         {
-            return name + parameter.Evaluate(variables).ToString("00");
+            return name + parameter.Evaluate(variables, currentAddress).ToString("00");
         }
     }
 }
