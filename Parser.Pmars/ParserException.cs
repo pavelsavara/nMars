@@ -1,4 +1,4 @@
-namespace Pmars.Parser
+namespace nMars.pMars
 {
     public class ParserException : nMars.RedCode.ParserExceptionBase
     {

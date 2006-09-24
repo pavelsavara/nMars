@@ -64,7 +64,7 @@ namespace nMars.RedCode
         /// the next instruction is queued (PC + 1).
         /// </summary>
         /// <remarks>Same as SEQ</remarks>
-        SEQ,
+        CMP,
 
         /// <summary>
         /// skip if not equal (compares two instructions, and skips the next instruction if they aren't equal)
@@ -157,7 +157,7 @@ namespace nMars.RedCode
                     return Operation.SUB;
                 case "SEQ":
                 case "CMP":
-                    return Operation.SEQ;
+                    return Operation.CMP;
                 case "SNE":
                     return Operation.SNE;
                 case "SLT":

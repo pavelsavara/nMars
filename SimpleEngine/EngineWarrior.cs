@@ -133,9 +133,14 @@ namespace nMars.SimpleEngine
             get { return Warrior.Length; }
         }
 
-        public void Dump(StreamWriter sw)
+        public void Dump(TextWriter tw)
         {
-            Warrior.Dump(sw);
+            Warrior.Dump(tw);
+        }
+
+        public void Dump(TextWriter tw, DumpOptions options)
+        {
+            Warrior.Dump(tw, options);
         }
 
         public FightResult Result = FightResult.Tie;

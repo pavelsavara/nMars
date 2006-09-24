@@ -25,24 +25,32 @@ namespace nMars.RedCode
         public Rules Rules;
         public int Pin = -1;
 
-        public void Dump(StreamWriter sw)
+        public void Dump(TextWriter tw)
         {
-            sw.WriteLine("       ORG       START");
+            tw.WriteLine("Program \"" + Name + "\" (length "+Length.ToString()+") by \"" + Author + "\"");
+            tw.WriteLine();
+            tw.WriteLine("       ORG      START");
             for (int a = 0; a < Instructions.Count; a++)
             {
                 Instruction instruction = Instructions[a];
                 if (a == StartOffset)
                 {
-                    sw.Write("START  ");
+                    tw.Write("START  ");
                 }
                 else
                 {
-                    sw.Write("       ");
+                    tw.Write("       ");
                 }
-                sw.WriteLine(instruction.ToString());
+                tw.WriteLine(instruction.ToString());
             }
+            tw.WriteLine();
         }
 
+        public virtual void Dump(TextWriter tw, DumpOptions options)
+        {
+            Dump(tw);
+        }
+        
         int IWarrior.StartOffset
         {
             get { return StartOffset; }
