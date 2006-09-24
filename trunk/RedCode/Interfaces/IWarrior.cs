@@ -2,6 +2,17 @@ using System.IO;
 
 namespace nMars.RedCode
 {
+    public class DumpOptions
+    {
+        public bool Offset = false;
+        public bool Labels = false;
+        public bool Comments = false;
+        public bool IsDefault()
+        {
+            return !Offset && !Labels && !Comments;
+        }
+    }
+    
     public interface IWarrior
     {
         /// <summary>
@@ -43,7 +54,11 @@ namespace nMars.RedCode
         /// <summary>
         /// Dump
         /// </summary>
-        /// <param name="sw"></param>
-        void Dump(StreamWriter sw);
+        void Dump(TextWriter tw);
+
+        /// <summary>
+        /// Dump with extended options
+        /// </summary>
+        void Dump(TextWriter tw, DumpOptions options);
     }
 }

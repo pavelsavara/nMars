@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using nMars.Parser;
 using nMars.Parser.Statements;
 using nMars.Parser.Warrior;
 using nMars.RedCode;
 
-namespace nMars.Parser
+namespace nMars
 {
-    public class Parser : ParserBase, IParser
+    public class nMarsParser : ParserBase, IParser
     {
-        public Parser(Rules rules)
+        public nMarsParser(Rules rules)
             : base(rules)
         {
         }

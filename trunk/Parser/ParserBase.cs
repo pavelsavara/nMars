@@ -686,11 +686,11 @@ namespace nMars.Parser
 
                 case (int) RuleConstants.RULE_OPERATOR2_CMP:
                     //<Operator2> ::= Cmp
-                    return Operation.SEQ;
+                    return Operation.CMP;
 
                 case (int) RuleConstants.RULE_OPERATOR2_SEQ:
                     //<Operator2> ::= Seq
-                    return Operation.SEQ;
+                    return Operation.CMP;
 
                     #endregion
 

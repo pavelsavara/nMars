@@ -29,11 +29,11 @@ namespace nMars.Parser
 
         public IParser CreateParser(Rules rules)
         {
-            return new Parser(rules);
+            return new nMarsParser(rules);
         }
 
         private static Module instance;
-        private static string name = "nMars.Parser";
+        private static string name = "nMarsParser";
         private static string executable = "nMarsParser";
     }
 }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using nMars.RedCode;
 
 namespace nMars.Parser.Warrior
@@ -16,7 +18,7 @@ namespace nMars.Parser.Warrior
         {
         }
 
-        public string GetLabel(int instructionOffset)
+        public string GetLabels(int instructionOffset)
         {
             return ((ExtendedInstruction)Instructions[instructionOffset]).Label;
         }
@@ -31,15 +33,69 @@ namespace nMars.Parser.Warrior
             return ((ExtendedInstruction)Instructions[instructionOffset]).OriginalInstruction;
         }
 
-        public string GetOriginalLine(int instructionOffset)
+        public string GetExtendedLine(int instructionOffset, DumpOptions options)
         {
-            return GetLabel(instructionOffset).PadRight(12) + " "
-                   + Instructions[instructionOffset].ToString().PadRight(35) + " ;"
-                   + GetOriginalInstruction(instructionOffset).PadRight(35) + " :"
-                   + GetComment(instructionOffset);
+            StringBuilder sb = new StringBuilder();
+            if (options.Offset)
+            {
+                sb.Append(instructionOffset.ToString("00 "));
+            }
+            
+            if (options.Labels)
+            {
+                sb.Append(GetLabels(instructionOffset).PadRight(12));
+                sb.Append(" ");
+            }
+            else 
+            {
+                if (instructionOffset == StartOffset)
+                {
+                    sb.Append("START  ");
+                }
+                else
+                {
+                    sb.Append("       ");
+                }
+            }
+
+            sb.Append(Instructions[instructionOffset].ToString());
+            if (options.Comments)
+            {
+                string comment = GetComment(instructionOffset);
+                if (comment.Length>0)
+                {
+                    sb.Append("  ;");
+                    sb.Append(comment);
+                }
+            }
+            return sb.ToString();
         }
 
-        [NonSerialized] internal Dictionary<string, Expression> Variables = null;
+        public override void Dump(TextWriter tw, DumpOptions options)
+        {
+            tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
+            tw.WriteLine();
+            if (options.Offset)
+            {
+                tw.Write("   ");
+            }
+            if (options.Labels)
+            {
+                tw.WriteLine("             ORG      " + GetLabels(StartOffset));
+            }
+            else
+            {
+                tw.WriteLine("       ORG      START");
+            }
+            for (int a = 0; a < Instructions.Count; a++)
+            {
+                tw.WriteLine(GetExtendedLine(a, options));
+            }
+            tw.WriteLine();
+        }
+
+        [NonSerialized]
+        internal Dictionary<string, Expression> Variables = null;
 
     }
 }

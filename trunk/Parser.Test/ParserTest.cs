@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using nMars;
 using nMars.RedCode;
 using NUnit.Framework;
 
@@ -12,8 +13,8 @@ namespace Parser.Test
         [Test]
         public void Loader()
         {
-            nMars.Parser.Parser nparser = new nMars.Parser.Parser(Rules.DefaultRules);
-            Pmars.Parser.Parser pparser = new Pmars.Parser.Parser(Rules.DefaultRules);
+            nMarsParser nparser = new nMarsParser(Rules.DefaultRules);
+            pMarsParser pparser = new pMarsParser(Rules.DefaultRules);
             List<string> files =
                 new List<string>(Directory.GetFiles(@"rc", "*.rc", SearchOption.AllDirectories));
             files.AddRange(Directory.GetFiles(@"rc", "*.red", SearchOption.AllDirectories));
@@ -26,7 +27,7 @@ namespace Parser.Test
             }
         }
 
-        private static void LoadDumpOne(string file, nMars.Parser.Parser nparser, Pmars.Parser.Parser pparser)
+        private static void LoadDumpOne(string file, nMarsParser nparser, pMarsParser pparser)
         {
             IWarrior nw;
             IWarrior pw;

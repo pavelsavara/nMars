@@ -50,9 +50,9 @@ namespace nMars.RedCode
 
         public override string ToString()
         {
-            return Operation.ToString() + "." + Modifier.ToString().PadRight(5) +
+            return Operation.ToString() + "." + Modifier.ToString().PadRight(3) +
                    ModeHelper.ToString(ModeA) + ValueA.ToString().PadLeft(6) + ", " +
-                   ModeHelper.ToString(ModeB) + ValueB.ToString().PadLeft(6);
+                   ModeHelper.ToString(ModeB) + ValueB.ToString().PadLeft(6) + "     ";
         }
 
         public static Modifier DefaultModifier(Operation op, Mode modeA, Mode modeB)
@@ -64,7 +64,7 @@ namespace nMars.RedCode
                     return Modifier.F;
                 case Operation.MOV:
                 case Operation.SNE:
-                case Operation.SEQ:
+                case Operation.CMP:
                     if (modeA == Mode.Immediate)
                     {
                         return Modifier.AB;

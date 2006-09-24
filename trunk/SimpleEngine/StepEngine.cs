@@ -183,7 +183,7 @@ namespace nMars.SimpleEngine
 
                     #region SEQ
 
-                case Operation.SEQ:
+                case Operation.CMP:
                     switch (instruction.Modifier)
                     {
                         case Modifier.A:

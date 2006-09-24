@@ -1,8 +1,9 @@
+using nMars;
 using nMars.RedCode;
 using nMars.RedCode.CommandLine;
 using nMars.RedCode.Modules;
 
-namespace Pmars.Parser
+namespace nMars.pMars
 {
     class Module : IParserModule
     {
@@ -29,11 +30,11 @@ namespace Pmars.Parser
 
         public IParser CreateParser(Rules rules)
         {
-            return new Parser(rules);
+            return new pMarsParser(rules);
         }
 
         private static Module instance;
-        private static string name = "nMars.Parser";
-        private static string executable = "nMarsParser";
+        private static string name = "pMarsParser";
+        private static string executable = "pMarsParser";
     }
 }

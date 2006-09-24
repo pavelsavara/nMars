@@ -2,14 +2,14 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Threading;
+using nMars.pMars;
 using nMars.RedCode;
 
-namespace Pmars.Parser
+namespace nMars
 {
-    public class Parser : ParserRoot
+    public class pMarsParser : ParserRoot
     {
-        public Parser(Rules rules)
+        public pMarsParser(Rules rules)
         {
             this.rules = rules;
         }
@@ -80,7 +80,7 @@ namespace Pmars.Parser
         {
             get
             {
-                string module = typeof (Parser).Assembly.Location;
+                string module = typeof (pMarsParser).Assembly.Location;
                 return Path.Combine(Path.GetDirectoryName(module), pmarsvName);
             }
         }
