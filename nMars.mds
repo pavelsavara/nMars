@@ -1,0 +1,21 @@
+<Combine name="nMars" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="RedCode" configuration="Debug" />
+      <Entry build="True" name="Parser" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="RedCode" configuration="Release" />
+      <Entry build="True" name="Parser" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <DeployTargets />
+  <StartMode startupentry="Parser" single="True">
+    <Execute type="None" entry="RedCode" />
+    <Execute type="None" entry="Parser" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./RedCode/RedCode.mdp" />
+    <Entry filename="./Parser/Parser.mdp" />
+  </Entries>
+</Combine>
