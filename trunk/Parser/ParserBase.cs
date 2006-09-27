@@ -19,9 +19,22 @@ namespace nMars.Parser
         protected ParserBase(Rules rules)
         {
             this.rules = rules;
-            Stream redCode =
-                typeof (ParserBase).Assembly.GetManifestResourceStream("nMars.Parser.Properties.RedCode.cgt");
+            Stream redCode;
+            if (IsMono())
+            {
+            	redCode = typeof (ParserBase).Assembly.GetManifestResourceStream("RedCode.cgt");
+           	}
+           	else
+           	{
+            	redCode = typeof (ParserBase).Assembly.GetManifestResourceStream("nMars.Parser.Properties.RedCode.cgt");
+           	}
             Init(redCode);
+        }
+        
+        private static bool IsMono()
+        {
+            Type t=Type.GetType("System.Int32");
+            return t.GetType().ToString() == "System.MonoType";
         }
 
         private void Init(Stream stream)
