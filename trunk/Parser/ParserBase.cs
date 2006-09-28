@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using com.calitha.goldparser;
 using nMars.Parser.Expressions;
 using nMars.Parser.Statements;
@@ -26,22 +27,18 @@ namespace nMars.Parser
         protected ParserBase(Rules rules)
         {
             this.rules = rules;
-            Stream redCode;
-            if (IsMono())
+            
+            Assembly assembly = typeof(ParserBase).Assembly;
+            Stream redCode = assembly.GetManifestResourceStream("nMars.Parser.Properties.RedCode.cgt");
+            if (redCode == null)
             {
-                redCode = typeof (ParserBase).Assembly.GetManifestResourceStream("RedCode.cgt");
+                redCode = assembly.GetManifestResourceStream("RedCode.cgt");
             }
-            else
+            if (redCode == null)
             {
-                redCode = typeof (ParserBase).Assembly.GetManifestResourceStream("nMars.Parser.Properties.RedCode.cgt");
+                throw new ApplicationException("Couldn't load parser structures.");
             }
             Init(redCode);
-        }
-
-        private static bool IsMono()
-        {
-            Type t = Type.GetType("System.Int32");
-            return t.GetType().ToString() == "System.MonoType";
         }
 
         private void Init(Stream stream)
