@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,17 +25,17 @@ namespace nMars.Parser.Warrior
 
         public string GetLabels(int instructionOffset)
         {
-            return ((ExtendedInstruction)Instructions[instructionOffset]).Label;
+            return ((ExtendedInstruction) Instructions[instructionOffset]).Label;
         }
 
         public string GetComment(int instructionOffset)
         {
-            return ((ExtendedInstruction)Instructions[instructionOffset]).Comment;
+            return ((ExtendedInstruction) Instructions[instructionOffset]).Comment;
         }
 
         public string GetOriginalInstruction(int instructionOffset)
         {
-            return ((ExtendedInstruction)Instructions[instructionOffset]).OriginalInstruction;
+            return ((ExtendedInstruction) Instructions[instructionOffset]).OriginalInstruction;
         }
 
         public string GetExtendedLine(int instructionOffset, DumpOptions options)
@@ -40,13 +45,13 @@ namespace nMars.Parser.Warrior
             {
                 sb.Append(instructionOffset.ToString("00 "));
             }
-            
+
             if (options.Labels)
             {
                 sb.Append(GetLabels(instructionOffset).PadRight(12));
                 sb.Append(" ");
             }
-            else 
+            else
             {
                 if (instructionOffset == StartOffset)
                 {
@@ -62,7 +67,7 @@ namespace nMars.Parser.Warrior
             if (options.Comments)
             {
                 string comment = GetComment(instructionOffset);
-                if (comment.Length>0)
+                if (comment.Length > 0)
                 {
                     sb.Append("  ;");
                     sb.Append(comment);
@@ -94,8 +99,6 @@ namespace nMars.Parser.Warrior
             tw.WriteLine();
         }
 
-        [NonSerialized]
-        internal Dictionary<string, Expression> Variables = null;
-
+        [NonSerialized] internal Dictionary<string, Expression> Variables = null;
     }
 }

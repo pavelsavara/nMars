@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 
 namespace nMars.RedCode
@@ -127,16 +132,16 @@ namespace nMars.RedCode
         public override int GetHashCode()
         {
             return
-                Operation.GetHashCode() ^ Modifier.GetHashCode() ^ 
+                Operation.GetHashCode() ^ Modifier.GetHashCode() ^
                 ModeA.GetHashCode() ^ ModeB.GetHashCode() ^
                 ValueA.GetHashCode() ^ ValueB.GetHashCode();
         }
-        
+
         public static bool operator !=(Instruction a, Instruction b)
         {
             return !a.Equals(b);
         }
-        
+
         public static bool operator ==(Instruction a, Instruction b)
         {
             return a.Equals(b);

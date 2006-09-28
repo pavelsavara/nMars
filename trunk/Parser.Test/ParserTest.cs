@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,10 +54,10 @@ namespace Parser.Test
             catch (ParserExceptionBase ex)
             {
                 Console.WriteLine();
-                Console.WriteLine("nMarsParser : " +  ex.Message);
+                Console.WriteLine("nMarsParser : " + ex.Message);
                 return;
             }
-            
+
             if (!Warrior.Equals(nw, pw))
             {
                 Console.WriteLine();

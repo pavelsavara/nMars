@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System.IO;
 
 namespace nMars.RedCode
@@ -7,12 +12,13 @@ namespace nMars.RedCode
         public bool Offset = false;
         public bool Labels = false;
         public bool Comments = false;
+
         public bool IsDefault()
         {
             return !Offset && !Labels && !Comments;
         }
     }
-    
+
     public interface IWarrior
     {
         /// <summary>

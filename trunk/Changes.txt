@@ -1,3 +1,9 @@
+09/28/2006 - nMars0.3 - first binary
+  - Parser pmarsv compatible
+  - mono supported
+  - comments parsed
+  - unit tests
+  - pmarsv wrapper
 09/17/2006 - nMars0.2 - Parser more powerfull
   - more expression operations
   - label can be A B I ... <Modifier>

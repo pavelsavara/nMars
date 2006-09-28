@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System.Collections.Generic;
 using nMars.Parser.Expressions;
 using nMars.Parser.Warrior;
@@ -6,9 +11,8 @@ namespace nMars.Parser.Statements
 {
     public class ForRofContainerStatement : ContainerStatement
     {
-        public ForRofContainerStatement(string comment)
+        public ForRofContainerStatement()
         {
-            Comment = comment;
         }
 
         public override void ExpandStatements(ExtendedWarrior warrior, Dictionary<string, Expression> variables,
@@ -30,7 +34,5 @@ namespace nMars.Parser.Statements
                 base.ExpandStatements(warrior, variables, ref currentAddress, coreSize, evaluate);
             }
         }
-
-        public string Comment;
     }
 }

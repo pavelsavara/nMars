@@ -40,6 +40,7 @@ Current implementation doesn't support (yet?)
    - modifiers in EQU
  - FOR 0 comment-block ROF
  - in-place assignments (k=k+1)
+ - comments asserts
 
 Is based on GOLD parser by Devin Cook
 http://www.devincook.com/goldparser/
@@ -63,7 +64,7 @@ Architecture
 I'm trying to make it
 - easy to read
 - extensible, easy to build on top of it
-- portable
+- portable to Mono
 
 
 License

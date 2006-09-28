@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 
 namespace nMars.RedCode
@@ -162,7 +167,7 @@ namespace nMars.RedCode
 
         public static Mode Parse(string s)
         {
-            switch(s)
+            switch (s)
             {
                 case "$":
                     return Mode.Direct;
@@ -184,7 +189,7 @@ namespace nMars.RedCode
                     throw new ArgumentException();
             }
         }
-        
+
         public static string ToString(Mode mode)
         {
             switch (mode)

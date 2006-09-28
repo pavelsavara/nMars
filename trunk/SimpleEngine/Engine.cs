@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using nMars.RedCode;
@@ -10,7 +15,7 @@ namespace nMars.SimpleEngine
         {
             this.rules = rules;
         }
-        
+
         public IList<FightResult> Run(IList<IWarrior> aWarriors, IPSpaces pSpaces, Random aRandom,
                                       IList<int> forcedAddresses)
         {

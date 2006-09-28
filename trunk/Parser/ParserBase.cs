@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +20,8 @@ namespace nMars.Parser
         protected string org;
         protected Expression pin;
         protected int counter;
+        protected string name = null;
+        protected string author = null;
 
         protected ParserBase(Rules rules)
         {
@@ -22,18 +29,18 @@ namespace nMars.Parser
             Stream redCode;
             if (IsMono())
             {
-            	redCode = typeof (ParserBase).Assembly.GetManifestResourceStream("RedCode.cgt");
-           	}
-           	else
-           	{
-            	redCode = typeof (ParserBase).Assembly.GetManifestResourceStream("nMars.Parser.Properties.RedCode.cgt");
-           	}
+                redCode = typeof (ParserBase).Assembly.GetManifestResourceStream("RedCode.cgt");
+            }
+            else
+            {
+                redCode = typeof (ParserBase).Assembly.GetManifestResourceStream("nMars.Parser.Properties.RedCode.cgt");
+            }
             Init(redCode);
         }
-        
+
         private static bool IsMono()
         {
-            Type t=Type.GetType("System.Int32");
+            Type t = Type.GetType("System.Int32");
             return t.GetType().ToString() == "System.MonoType";
         }
 
@@ -57,6 +64,31 @@ namespace nMars.Parser
             return (ContainerStatement) parser.Parse(source).UserObject;
         }
 
+        protected void ProcessComments(List<string> comments)
+        {
+            foreach (string comment in comments)
+            {
+                string lcomment = comment.ToLower();
+                if (lcomment.StartsWith("assert "))
+                {
+                    CheckAssert(lcomment.Substring(7));
+                }
+                else if (lcomment.StartsWith("name "))
+                {
+                    name = comment.Substring(5).Trim();
+                }
+                else if (lcomment.StartsWith("author "))
+                {
+                    author = comment.Substring(7).Trim();
+                }
+            }
+        }
+
+        protected void CheckAssert(string assert)
+        {
+            //TODO
+        }
+
         private void TokenReadEvent(LALRParser argParser, TokenReadEventArgs args)
         {
             args.Token.UserObject = CreateObject(args.Token);
@@ -76,6 +108,9 @@ namespace nMars.Parser
                 case (int) SymbolConstants.SYMBOL_INTEGER:
                     //Integer
                     return token.Text;
+
+                case (int) SymbolConstants.SYMBOL_NEWLINE:
+                    return token.UserObject;
 
                 case (int) SymbolConstants.SYMBOL_LABEL:
                     //Variable
@@ -106,26 +141,46 @@ namespace nMars.Parser
             ContainerStatement statements;
             ForRofContainerStatement forrof;
             List<LabelName> statementlabels;
+            List<string> comments;
             string labell;
 
             switch (token.Rule.Id)
             {
-                    #region Null
-
-                case (int) RuleConstants.RULE_EOLOPTIONAL2:
-                    //<eolOptional> ::= 
+                    #region Comment
 
                 case (int) RuleConstants.RULE_EOL:
                     //<eol> ::= <eolSingle>
+                    comments = new List<string>();
+                    if (token.Tokens[0].UserObject != null)
+                        comments.Add((string) token.Tokens[0].UserObject);
+                    return comments;
 
                 case (int) RuleConstants.RULE_EOL2:
                     //<eol> ::= <eol> <eolSingle>
+                    comments = (List<string>) token.Tokens[0].UserObject;
+                    if (token.Tokens[1].UserObject != null)
+                        comments.Add((string) token.Tokens[1].UserObject);
+                    return comments;
 
                 case (int) RuleConstants.RULE_EOLSINGLE_NEWLINE:
                     //<eolSingle> ::= NewLine
+                    return token.Tokens[0].UserObject;
+
+                case (int) RuleConstants.RULE_EOLOPTIONAL2:
+                    //<eolOptional> ::= 
+                    comments = new List<string>();
+                    return comments;
 
                 case (int) RuleConstants.RULE_EOLOPTIONAL:
                     //<eolOptional> ::= <eol>
+                    return token.Tokens[0].UserObject;
+
+                    #endregion
+
+                    #region Null
+
+                case (int) RuleConstants.RULE_EOLSINGLE_COMMENT_LINE:
+                    //<eolSingle> ::= Comment Line
 
                 case (int) RuleConstants.RULE_ENDOPTIONAL:
                     //<EndOptional> ::= <eol>
@@ -165,12 +220,6 @@ namespace nMars.Parser
                     #endregion
 
                     #region Forward
-
-                case (int) RuleConstants.RULE_EOLSINGLE_COMMENT_LINE:
-                    //<eolSingle> ::= Comment Line
-
-                case (int) RuleConstants.RULE_ALLSTATEMENTSOPTIONAL:
-                    //<AllStatementsOptional> ::= <AllStatements> <eol>
 
                 case (int) RuleConstants.RULE_OPERATION:
                     //<Operation> ::= <Operation0>
@@ -231,6 +280,8 @@ namespace nMars.Parser
 
                 case (int) RuleConstants.RULE_START:
                     //<Start> ::= <eolOptional> <AllStatements> <EndOptional>
+                    comments = (List<string>) token.Tokens[0].UserObject;
+                    ProcessComments(comments);
                     return token.Tokens[1].UserObject;
 
                 case (int) RuleConstants.RULE_ALLSTATEMENTS:
@@ -239,16 +290,27 @@ namespace nMars.Parser
                     statements = new ContainerStatement(statement);
                     return statements;
 
+                case (int) RuleConstants.RULE_ALLSTATEMENTSOPTIONAL:
+                    //<AllStatementsOptional> ::= <AllStatements> <eol>
+                    statements = (ContainerStatement) token.Tokens[0].UserObject;
+                    comments = (List<string>) token.Tokens[1].UserObject;
+                    statements.AppendComments(comments);
+                    return statements;
+
                 case (int) RuleConstants.RULE_ALLSTATEMENTS3:
                     //<AllStatements> ::= <AllStatements> <eol> <Statement>
                     statements = (ContainerStatement) token.Tokens[0].UserObject;
                     statement = (Statement) token.Tokens[2].UserObject;
+                    comments = (List<string>) token.Tokens[1].UserObject;
+                    statements.AppendComments(comments);
                     statements.Add(statement);
                     return statements;
 
                 case (int) RuleConstants.RULE_ALLSTATEMENTS4:
                     //<AllStatements> ::= <AllStatements> <eol> <For>
                     statements = (ContainerStatement) token.Tokens[0].UserObject;
+                    comments = (List<string>) token.Tokens[1].UserObject;
+                    statements.AppendComments(comments);
                     forrof = (ForRofContainerStatement) token.Tokens[2].UserObject;
                     statements.Add(forrof);
                     return statements;
@@ -269,7 +331,9 @@ namespace nMars.Parser
                     // <For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof <ExpressionOptional>
                     statementlabels = ((List<LabelName>) token.Tokens[0].UserObject);
                     expression = (Expression) token.Tokens[2].UserObject;
-                    forrof = new ForRofContainerStatement((string) token.Tokens[3].UserObject);
+                    comments = (List<string>) token.Tokens[3].UserObject;
+                    forrof = new ForRofContainerStatement();
+                    forrof.Comments = comments;
                     forrof.Labels = statementlabels;
                     forrof.Add((Statement) token.Tokens[4].UserObject);
 
@@ -329,25 +393,25 @@ namespace nMars.Parser
                     pin = (Expression) token.Tokens[1].UserObject;
                     return null;
 
-                case (int)RuleConstants.RULE_ENDOPTIONAL_END2:
+                case (int) RuleConstants.RULE_ENDOPTIONAL_END2:
                     //<EndOptional> ::= <eol> End <Labels> <eolOptional>
-                    statementlabels = (List<LabelName>)token.Tokens[2].UserObject;
+                    statementlabels = (List<LabelName>) token.Tokens[2].UserObject;
                     org = statementlabels[0].Name;
                     return null;
-                    
-                case (int)RuleConstants.RULE_ENDOPTIONAL_END4:
+
+                case (int) RuleConstants.RULE_ENDOPTIONAL_END4:
                     //<EndOptional> ::= <eol> <Labels> End <Labels> <eolOptional>
-                    statementlabels = (List<LabelName>)token.Tokens[3].UserObject;
+                    statementlabels = (List<LabelName>) token.Tokens[3].UserObject;
                     org = statementlabels[0].Name;
                     return null;
 
-                case (int)RuleConstants.RULE_ENDOPTIONAL_END6:
+                case (int) RuleConstants.RULE_ENDOPTIONAL_END6:
                     //<EndOptional> ::= <eol> <Labels> <eol> End <Labels> <eolOptional>
-                    statementlabels = (List<LabelName>)token.Tokens[4].UserObject;
+                    statementlabels = (List<LabelName>) token.Tokens[4].UserObject;
                     org = statementlabels[0].Name;
                     return null;
 
-                case (int)RuleConstants.RULE_ORG_ORG_LABEL:
+                case (int) RuleConstants.RULE_ORG_ORG_LABEL:
                     //<Org> ::= Org Label
                     org = ((string) token.Tokens[1].UserObject);
                     return null;
@@ -493,11 +557,11 @@ namespace nMars.Parser
                     {
                         paramA = new Parameter();
                         paramA.Mode = Mode.Immediate;
-                        paramB = (Parameter)token.Tokens[1].UserObject;
+                        paramB = (Parameter) token.Tokens[1].UserObject;
                     }
                     else
                     {
-                        paramA = (Parameter)token.Tokens[1].UserObject;
+                        paramA = (Parameter) token.Tokens[1].UserObject;
                         paramB = new Parameter();
                     }
                     mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
@@ -515,11 +579,11 @@ namespace nMars.Parser
                     {
                         paramA = new Parameter();
                         paramA.Mode = Mode.Immediate;
-                        paramB = (Parameter)token.Tokens[3].UserObject;
+                        paramB = (Parameter) token.Tokens[3].UserObject;
                     }
                     else
                     {
-                        paramA = (Parameter)token.Tokens[3].UserObject;
+                        paramA = (Parameter) token.Tokens[3].UserObject;
                         paramB = new Parameter();
                     }
                     return new InstructionStatement(op,

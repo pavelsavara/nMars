@@ -7,7 +7,7 @@ using com.calitha.goldparser.lalr;
 using com.calitha.goldparser.structure;
 using DFA = com.calitha.goldparser.dfa;
 using State=com.calitha.goldparser.dfa.State;
-using StateCollection=com.calitha.goldparser.dfa.StateCollection;
+using StateCollection=com.calitha.goldparser.lalr.StateCollection;
 
 namespace com.calitha.goldparser
 {
@@ -20,8 +20,8 @@ namespace com.calitha.goldparser
         private Stream stream;
         private CGTStructure structure;
         private CGTContent content;
-        private StateCollection dfaStates;
-        private lalr.StateCollection parserStates;
+        private dfa.StateCollection dfaStates;
+        private StateCollection parserStates;
         private SymbolCollection symbols;
         private RuleCollection rules;
 
@@ -133,10 +133,10 @@ namespace com.calitha.goldparser
             return symbols;
         }
 
-        private StateCollection CreateDFAStates(CGTContent content)
+        private dfa.StateCollection CreateDFAStates(CGTContent content)
         {
             symbols = CreateSymbols(content);
-            StateCollection states = new StateCollection();
+            dfa.StateCollection states = new dfa.StateCollection();
             foreach (DFAStateRecord stateRecord in content.DFAStateTable)
             {
                 State state;
@@ -187,11 +187,11 @@ namespace com.calitha.goldparser
             return rules;
         }
 
-        private lalr.StateCollection CreateParserStates(CGTContent content)
+        private StateCollection CreateParserStates(CGTContent content)
         {
             rules = CreateRules(content);
 
-            lalr.StateCollection states = new lalr.StateCollection();
+            StateCollection states = new StateCollection();
             foreach (LALRStateRecord record in content.LALRStateTable)
             {
                 lalr.State state = new lalr.State(record.Index);

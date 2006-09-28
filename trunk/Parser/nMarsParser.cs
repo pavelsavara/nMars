@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,9 +47,30 @@ namespace nMars
 
             SetOrg(warrior);
             SetPin(warrior);
-            warrior.Name = implicitName;
+            SetName(warrior, implicitName);
+            SetAuthor(warrior);
             warrior.Variables = variables;
             return warrior;
+        }
+
+        private void SetAuthor(ExtendedWarrior warrior)
+        {
+            if (author != null)
+            {
+                warrior.Author = author;
+            }
+        }
+
+        private void SetName(ExtendedWarrior warrior, string implicitName)
+        {
+            if (name != null)
+            {
+                warrior.Name = name;
+            }
+            else
+            {
+                warrior.Name = implicitName;
+            }
         }
 
         private void SetPin(ExtendedWarrior warrior)
@@ -76,6 +102,8 @@ namespace nMars
             variables = new Dictionary<string, Expression>();
             org = null;
             counter = 0;
+            name = null;
+            author = null;
             variables["CORESIZE"] = new Value(rules.coreSize);
             variables["MAXPROCESSES"] = new Value(rules.maxProcesses);
             variables["MAXCYCLES"] = new Value(rules.maxCycles);

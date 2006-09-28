@@ -248,6 +248,10 @@ namespace com.calitha.goldparser
                 {
                     commentDepth--;
                 }
+                else if (token.Symbol is SymbolCommentStart)
+                {
+                    commentDepth++;
+                }
                 else if (token.Symbol is SymbolEnd)
                 {
                     FireEOFError();
@@ -266,9 +270,17 @@ namespace com.calitha.goldparser
             {
                 return lookahead;
             }
+            TerminalToken prevtoken = null;
             do
             {
                 TerminalToken token = tokenizer.RetrieveToken();
+                if (prevtoken != null &&
+                    token.Symbol.Name == "NewLine" &&
+                    (prevtoken.Symbol is SymbolCommentLine || prevtoken.Symbol is SymbolCommentStart))
+                {
+                    token.UserObject = prevtoken.UserObject;
+                }
+                prevtoken = token;
                 if (token.Symbol is SymbolCommentLine)
                 {
                     if (!ProcessCommentLine(token))
@@ -312,51 +324,47 @@ namespace com.calitha.goldparser
 
         private bool ProcessCommentLine(TerminalToken token)
         {
-            if (OnCommentRead == null)
+            Location start = tokenizer.GetCurrentLocation();
+            bool result = SkipToEndOfLine();
+            if (result)
             {
-                return SkipToEndOfLine();
-            }
-            else
-            {
-                Location start = tokenizer.GetCurrentLocation();
-                bool result = SkipToEndOfLine();
-                if (result)
+                Location end = tokenizer.GetCurrentLocation();
+                string str = tokenizer.GetInput();
+                int len = end.Position - start.Position;
+                string comment = str.Substring(start.Position, len);
+                token.UserObject = comment;
+                if (OnCommentRead != null)
                 {
-                    Location end = tokenizer.GetCurrentLocation();
-                    string str = tokenizer.GetInput();
-                    int len = end.Position - start.Position;
-                    string comment = str.Substring(start.Position, len);
-                    CommentReadEventArgs args = new CommentReadEventArgs(token.Text + comment,
+                    CommentReadEventArgs args = new CommentReadEventArgs(token.Text,
                                                                          comment,
                                                                          true);
                     OnCommentRead(this, args);
                 }
-                return result;
             }
+            return result;
         }
 
         private bool ProcessCommenStart(TerminalToken token)
         {
-            if (OnCommentRead == null)
-                return (SkipAfterCommentEnd() != null);
-            else
+            Location start = tokenizer.GetCurrentLocation();
+            TerminalToken commentEnd = SkipAfterCommentEnd();
+            bool result = commentEnd != null;
+            if (result)
             {
-                Location start = tokenizer.GetCurrentLocation();
-                TerminalToken commentEnd = SkipAfterCommentEnd();
-                bool result = commentEnd != null;
-                if (result)
+                Location end = tokenizer.GetCurrentLocation();
+                string str = tokenizer.GetInput();
+                int len = end.Position - start.Position;
+                string comment = str.Substring(start.Position, len - commentEnd.Text.Length);
+                token.UserObject = comment;
+                if (OnCommentRead != null)
                 {
-                    Location end = tokenizer.GetCurrentLocation();
-                    string str = tokenizer.GetInput();
-                    int len = end.Position - start.Position;
-                    string comment = str.Substring(start.Position, len - commentEnd.Text.Length);
                     CommentReadEventArgs args = new CommentReadEventArgs(token.Text + comment,
                                                                          comment,
                                                                          false);
                     OnCommentRead(this, args);
                 }
-                return result;
             }
+            return result;
         }
 
         private bool ProcessWhiteSpace(Token token)
