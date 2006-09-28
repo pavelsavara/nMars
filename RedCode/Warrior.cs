@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +32,7 @@ namespace nMars.RedCode
 
         public void Dump(TextWriter tw)
         {
-            tw.WriteLine("Program \"" + Name + "\" (length "+Length.ToString()+") by \"" + Author + "\"");
+            tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
             tw.WriteLine();
             tw.WriteLine("       ORG      START");
             for (int a = 0; a < Instructions.Count; a++)
@@ -50,7 +55,7 @@ namespace nMars.RedCode
         {
             Dump(tw);
         }
-        
+
         int IWarrior.StartOffset
         {
             get { return StartOffset; }

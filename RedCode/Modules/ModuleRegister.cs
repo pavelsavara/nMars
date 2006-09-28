@@ -1,6 +1,9 @@
-using System;
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System.Collections.Generic;
-using System.Text;
 
 namespace nMars.RedCode.Modules
 {
@@ -8,9 +11,9 @@ namespace nMars.RedCode.Modules
     {
         public static void Register(IModule module)
         {
-            lock(modules)
+            lock (modules)
             {
-                modules.Add(module.Name,module);
+                modules.Add(module.Name, module);
             }
         }
 

@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using com.calitha.goldparser;
@@ -17,8 +22,6 @@ namespace nMars.Parser.Statements
             B = b;
             Location = location;
         }
-
-        public string Comment = "";
 
         public string OriginalInstruction
         {
@@ -58,13 +61,20 @@ namespace nMars.Parser.Statements
                 {
                     instruction.Label = "";
                 }
-                instruction.Comment = Comment;
+                if (Comments != null)
+                {
+                    instruction.Comment = Comments[Comments.Count - 1];
+                }
+                else
+                {
+                    instruction.Comment = "";
+                }
                 instruction.OriginalInstruction = OriginalInstruction;
                 warrior.Instructions.Add(instruction);
             }
             else
             {
-                instruction = (ExtendedInstruction)warrior.Instructions[currentAddress];
+                instruction = (ExtendedInstruction) warrior.Instructions[currentAddress];
                 instruction.ValueA = A.Expression.Evaluate(variables, currentAddress, coreSize);
                 instruction.ValueB = B.Expression.Evaluate(variables, currentAddress, coreSize);
             }

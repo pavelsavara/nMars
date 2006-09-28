@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,36 +22,65 @@ namespace nMars.RedCode.CommandLine
                 return 0;
             }
 
-            Rules rules=new Rules();
-            List<string> files=new List<string>();
+            Rules rules = new Rules();
+            List<string> files = new List<string>();
             bool dumpFiles = false;
-            DumpOptions options=new DumpOptions();
+            DumpOptions options = new DumpOptions();
             string dumpext = ".dmp";
 
-            for(int p=0;p<args.Length;p++)
+            for (int p = 0; p < args.Length; p++)
             {
                 string param = args[p];
-                switch(param)
+                switch (param)
                 {
                     case "-h":
                         PrintParserHelp(parserModule.Executable);
                         return 0;
                     case "-p":
-                        if(args.Length<p+1 || !Int32.TryParse(args[p+1], out rules.maxProcesses) )
+                        if (!ReadNumber(args, ref p, out rules.maxProcesses))
                         {
-                            Console.WriteLine("Invalid parameter -p");
                             return -1;
                         }
-                        p++;
                         break;
                     case "-s":
-                        if (args.Length < p + 1 || !Int32.TryParse(args[p + 1], out rules.coreSize))
+                        if (!ReadNumber(args, ref p, out rules.coreSize))
                         {
-                            Console.WriteLine("Invalid parameter -s");
                             return -1;
                         }
-                        p++;
                         break;
+                    case "-r":
+                        if (!ReadNumber(args, ref p, out rules.rounds))
+                        {
+                            return -1;
+                        }
+                        break;
+                    case "-c":
+                        if (!ReadNumber(args, ref p, out rules.maxCycles))
+                        {
+                            return -1;
+                        }
+                        break;
+                    case "-l":
+                        if (!ReadNumber(args, ref p, out rules.maxLength))
+                        {
+                            return -1;
+                        }
+                        break;
+                    case "-d":
+                        if (!ReadNumber(args, ref p, out rules.minDistance))
+                        {
+                            return -1;
+                        }
+                        break;
+                    case "-S":
+                        if (!ReadNumber(args, ref p, out rules.pSpaceSize))
+                        {
+                            return -1;
+                        }
+                        break;
+                        
+                        
+                        
                     case "-u":
                         if (args.Length < p + 1)
                         {
@@ -73,7 +107,7 @@ namespace nMars.RedCode.CommandLine
                         }
                         else
                         {
-                            Console.WriteLine("Invalid file name "+param);
+                            Console.WriteLine("Invalid file name " + param);
                             return -1;
                         }
                         break;
@@ -85,7 +119,7 @@ namespace nMars.RedCode.CommandLine
                 IWarrior warrior = parser.Parse(file);
                 if (dumpFiles)
                 {
-                    StreamWriter sw =new StreamWriter(Path.ChangeExtension(file, dumpext));
+                    StreamWriter sw = new StreamWriter(Path.ChangeExtension(file, dumpext));
                     warrior.Dump(sw, options);
                     sw.Close();
                 }
@@ -97,18 +131,35 @@ namespace nMars.RedCode.CommandLine
             return 0;
         }
 
+        private static bool ReadNumber(string[] args,ref int p, out int number)
+        {
+            if (args.Length < p + 1 || !Int32.TryParse(args[p + 1], out number))
+            {
+                Console.WriteLine("Invalid parameter " + args[p]);
+                number = -1;
+                return false;
+            }
+            p++;
+            return true;
+        }
+
         private static void PrintParserHelp(string execName)
         {
-            Console.WriteLine("Usage   : "+execName+" [options] file1 [files]");
+            Console.WriteLine("Usage   : " + execName + " [options] file1 [files]");
             Console.WriteLine();
             Console.WriteLine("Options :");
-            Console.WriteLine("-h        This help page");
-            Console.WriteLine("-p #      Max. processes [8000]");
-            Console.WriteLine("-s #      Size of core [8000]");
-            Console.WriteLine("-u .ext   Dump to files with extension");
-            Console.WriteLine("-uo       Dump with offset [off]");
-            Console.WriteLine("-ul       Dump with labels [off]");
-            Console.WriteLine("-uc       Dump with comments [off]");
+            Console.WriteLine("  -r # Rounds to play [1]");
+            Console.WriteLine("  -s # Size of core [8000]");
+            Console.WriteLine("  -c # Cycles until tie [80000]");
+            Console.WriteLine("  -p # Max. processes [8000]");
+            Console.WriteLine("  -l # Max. warrior length [100]");
+            Console.WriteLine("  -d # Min. warriors distance");
+            Console.WriteLine("  -S # Size of P-space [500]");
+            Console.WriteLine();
+            Console.WriteLine("  -u .ext   Dump to files with extension");
+            Console.WriteLine("  -uo       Dump with offset [off]");
+            Console.WriteLine("  -ul       Dump with labels [off]");
+            Console.WriteLine("  -uc       Dump with comments [off]");
             Console.WriteLine();
         }
 

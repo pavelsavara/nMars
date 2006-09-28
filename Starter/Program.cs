@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using nMars.RedCode;
-using nMars.Parser;
 using nMars.SimpleEngine;
+using Parser.Test;
 
 namespace nMars.Starter
 {
@@ -10,8 +10,8 @@ namespace nMars.Starter
     {
         private static void Main()
         {
-            //ParserTest t = new ParserTest();
-            //t.Loader();
+            ParserTest t = new ParserTest();
+            t.Loader();
 
 
             Rules rules = new Rules();
@@ -19,7 +19,10 @@ namespace nMars.Starter
             nMarsParser parser = new nMarsParser(rules);
             List<IWarrior> rr = new List<IWarrior>();
             List<int> forcedaddr = new List<int>();
-            rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\rc\2test\mod1test.rc"));
+
+            rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\rc\pmars\aeka.red"));
+            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\rc\pmars\rave.red"));
+            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\rc\2test\mod1test.rc"));
             //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\rc\pmars\validate.red"));
             forcedaddr.Add(0);
 
