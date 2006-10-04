@@ -75,7 +75,7 @@ namespace Parser.Test
                 // no problem
                 return;
             }
-            File.Copy(file, problemsPath+".red");
+            File.Copy(file, problemsPath+".red", true);
         }
     }
 }
