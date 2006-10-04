@@ -4,7 +4,6 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
 
 namespace nMars.Parser
 {
@@ -22,7 +21,7 @@ namespace nMars.Parser
 
         protected int value = 0;
 
-        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
+        public override int Evaluate(nMarsParser parser, int currentAddress)
         {
             return value;
         }

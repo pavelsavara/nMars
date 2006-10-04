@@ -3,8 +3,6 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System.Collections.Generic;
-
 namespace nMars.Parser.Expressions
 {
     public class ComposedLabelName : LabelName
@@ -22,9 +20,9 @@ namespace nMars.Parser.Expressions
             get { return name + "&" + parameter; }
         }
 
-        public override string GetFullName(Dictionary<string, Expression> variables, int currentAddress)
+        public override string GetFullName(nMarsParser parser, int currentAddress)
         {
-            return name + parameter.Evaluate(variables, currentAddress).ToString("00");
+            return name + parameter.Evaluate(parser, currentAddress).ToString("00");
         }
     }
 }

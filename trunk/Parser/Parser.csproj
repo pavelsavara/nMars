@@ -102,7 +102,6 @@
     <Compile Include="Warrior\ExtendedWarrior.cs" />
     <Compile Include="Statements\ForRofContainerStatement.cs" />
     <Compile Include="Statements\Parameter.cs" />
-    <Compile Include="ParserException.cs" />
     <Compile Include="Warrior\ExtendedInstruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Grammar.cs" />

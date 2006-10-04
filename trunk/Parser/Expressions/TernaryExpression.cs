@@ -4,7 +4,6 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
 
 namespace nMars.Parser.Expressions
 {
@@ -23,11 +22,11 @@ namespace nMars.Parser.Expressions
             this.right = right;
         }
 
-        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
+        public override int Evaluate(nMarsParser parser, int currentAddress)
         {
-            int l = left.Evaluate(variables, currentAddress);
-            int m = middle.Evaluate(variables, currentAddress);
-            int r = right.Evaluate(variables, currentAddress);
+            int l = left.Evaluate(parser, currentAddress);
+            int m = middle.Evaluate(parser, currentAddress);
+            int r = right.Evaluate(parser, currentAddress);
             switch (operation)
             {
                 case TernaryOperation.If:

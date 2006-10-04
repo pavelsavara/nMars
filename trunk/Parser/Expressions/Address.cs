@@ -3,8 +3,6 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System.Collections.Generic;
-
 namespace nMars.Parser.Expressions
 {
     class Address : Value
@@ -14,7 +12,7 @@ namespace nMars.Parser.Expressions
         {
         }
 
-        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
+        public override int Evaluate(nMarsParser parser, int currentAddress)
         {
             return value - currentAddress;
         }

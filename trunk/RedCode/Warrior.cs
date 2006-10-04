@@ -32,12 +32,19 @@ namespace nMars.RedCode
 
         public void Dump(TextWriter tw)
         {
+            Dump(tw, DumpOptions.Default);
+        }
+
+        public virtual void Dump(TextWriter tw, DumpOptions options)
+        {
             tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
             tw.WriteLine();
             tw.WriteLine("       ORG      START");
             for (int a = 0; a < Instructions.Count; a++)
             {
                 Instruction instruction = Instructions[a];
+                if (options.Offset)
+                    tw.Write("   ");
                 if (a == StartOffset)
                 {
                     tw.Write("START  ");
@@ -46,14 +53,18 @@ namespace nMars.RedCode
                 {
                     tw.Write("       ");
                 }
+                if (options.Labels)
+                    tw.Write("      ");
                 tw.WriteLine(instruction.ToString());
             }
             tw.WriteLine();
         }
 
-        public virtual void Dump(TextWriter tw, DumpOptions options)
+        public virtual void Dump(string fileName, DumpOptions options)
         {
-            Dump(tw);
+            StreamWriter sw = new StreamWriter(fileName);
+            Dump(sw, options);
+            sw.Close();
         }
 
         int IWarrior.StartOffset

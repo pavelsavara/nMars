@@ -3,7 +3,6 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars.Parser;
@@ -20,52 +19,64 @@ namespace nMars
         {
         }
 
-        public override IWarrior Parse(string fileName)
+        public override IWarrior Parse(string fileName, TextWriter err)
         {
             StreamReader sr = new StreamReader(fileName);
             string source = sr.ReadToEnd();
             sr.Close();
-            return Parse(source, Path.GetFileNameWithoutExtension(fileName));
+            return Parse(source, err, Path.GetFileNameWithoutExtension(fileName));
         }
 
-        public IWarrior Parse(string sourceText, string implicitName)
+        public IWarrior Parse(string sourceText, TextWriter err, string implicitName)
         {
+            errOutput = err;
+            errCount = 0;
             Prepare();
-            Statement statement = ParseInternal(sourceText);
-            ExtendedWarrior warrior = new ExtendedWarrior(rules);
-            int currentAddress;
+            try
+            {
+                Statement statement = ParseInternal(sourceText);
+                ExtendedWarrior warrior = new ExtendedWarrior(rules);
+                int currentAddress;
 
-            //first pass to expand for cycles
-            currentAddress = 0;
-            variables["CURLINE"] = new Value(0);
-            statement.ExpandStatements(warrior, variables, ref currentAddress, rules.coreSize, false);
+                //first pass to expand for-rof cycles
+                currentAddress = 0;
+                variables["CURLINE"] = new Value(0);
+                statement.ExpandStatements(warrior, this, ref currentAddress, rules.coreSize, false);
 
-            //second pass to evaluate variables/labels in context of for cycles
-            currentAddress = 0;
-            variables["CURLINE"] = new Value(0);
-            statement.ExpandStatements(warrior, variables, ref currentAddress, rules.coreSize, true);
+                //second pass to evaluate variables/labels in context of for cycles
+                currentAddress = 0;
+                variables["CURLINE"] = new Value(0);
+                statement.ExpandStatements(warrior, this, ref currentAddress, rules.coreSize, true);
 
-            SetOrg(warrior);
-            SetPin(warrior);
-            SetName(warrior, implicitName);
-            SetAuthor(warrior);
-            warrior.Variables = variables;
-            return warrior;
+                SetOrg(warrior);
+                SetPin(warrior);
+                SetName(warrior, implicitName);
+                SetAuthor(warrior);
+                warrior.Variables = variables;
+                if (errCount > 0)
+                    return null;
+                return warrior;
+            }
+            catch (ParserException ex)
+            {
+                err.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         private void SetAuthor(ExtendedWarrior warrior)
         {
-            if (author != null)
+            if (authorName != null)
             {
-                warrior.Author = author;
+                warrior.Author = authorName;
             }
         }
 
         private void SetName(ExtendedWarrior warrior, string implicitName)
         {
-            if (name != null)
+            if (warriorName != null)
             {
-                warrior.Name = name;
+                warrior.Name = warriorName;
             }
             else
             {
@@ -77,7 +88,7 @@ namespace nMars
         {
             if (pin != null)
             {
-                warrior.Pin = pin.Evaluate(variables, 0);
+                warrior.Pin = pin.Evaluate(this, 0);
             }
             else
             {
@@ -91,9 +102,10 @@ namespace nMars
             {
                 if (!variables.ContainsKey(org))
                 {
-                    throw new Exception("LabelName not defined : " + org);
+                    WriteError("Label not defined : " + org);
+                    return;
                 }
-                warrior.StartOffset = variables[org].Evaluate(variables, 0);
+                warrior.StartOffset = variables[org].Evaluate(this, 0);
             }
         }
 
@@ -102,8 +114,8 @@ namespace nMars
             variables = new Dictionary<string, Expression>();
             org = null;
             counter = 0;
-            name = null;
-            author = null;
+            warriorName = null;
+            authorName = null;
             variables["CORESIZE"] = new Value(rules.coreSize);
             variables["MAXPROCESSES"] = new Value(rules.maxProcesses);
             variables["MAXCYCLES"] = new Value(rules.maxCycles);

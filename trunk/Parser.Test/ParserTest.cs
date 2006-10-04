@@ -20,6 +20,17 @@ namespace Parser.Test
         {
             nMarsParser nparser = new nMarsParser(Rules.DefaultRules);
             pMarsParser pparser = new pMarsParser(Rules.DefaultRules);
+
+            foreach (string file in Directory.GetFiles(@"rc", "*.?Dmp", SearchOption.AllDirectories))
+            {
+                File.Delete(file);
+            }
+            foreach (string file in Directory.GetFiles(@"rc", "*.?Err", SearchOption.AllDirectories))
+            {
+                File.Delete(file);
+            }
+             
+            
             List<string> files =
                 new List<string>(Directory.GetFiles(@"rc", "*.rc", SearchOption.AllDirectories));
             files.AddRange(Directory.GetFiles(@"rc", "*.red", SearchOption.AllDirectories));
@@ -36,40 +47,26 @@ namespace Parser.Test
         {
             IWarrior nw;
             IWarrior pw;
-            try
+            nw = nparser.Parse(file, Path.ChangeExtension(file, ".nErr"));
+            pw = pparser.Parse(file, Path.ChangeExtension(file, ".pErr"));
+
+            if (nw==null && pw==null) return;
+            if (pw==null)
             {
-                pw = pparser.Parse(file);
-            }
-            catch (ParserExceptionBase ex)
-            {
-                Console.WriteLine();
-                Console.WriteLine("PmarsParser : " + ex.Message);
+                nw.Dump(Path.ChangeExtension(file, ".nDmp"), DumpOptions.NoOffset);
                 return;
             }
 
-            try
+            if (nw == null)
             {
-                nw = nparser.Parse(file);
-            }
-            catch (ParserExceptionBase ex)
-            {
-                Console.WriteLine();
-                Console.WriteLine("nMarsParser : " + ex.Message);
+                pw.Dump(Path.ChangeExtension(file, ".pDmp"), DumpOptions.NoOffset);
                 return;
             }
 
             if (!Warrior.Equals(nw, pw))
             {
-                Console.WriteLine();
-                Console.WriteLine("Warriors doesn't match");
-
-                StreamWriter nswd = new StreamWriter(Path.ChangeExtension(file, ".nDmp"));
-                nw.Dump(nswd);
-                nswd.Close();
-
-                StreamWriter pswd = new StreamWriter(Path.ChangeExtension(file, ".pDmp"));
-                pw.Dump(pswd);
-                pswd.Close();
+                nw.Dump(Path.ChangeExtension(file, ".nDmp"), DumpOptions.NoOffset);
+                pw.Dump(Path.ChangeExtension(file, ".pDmp"), DumpOptions.NoOffset);
             }
         }
     }
