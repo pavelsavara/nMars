@@ -1,7 +1,0 @@
-;Program "PIN test #2 A" (length 2) by "Anonymous"
-	PIN	123
-
-       ORG      START
-START  STP.AB #  -773, #     0     
-       JMP.B  $     0, $     0     
-
