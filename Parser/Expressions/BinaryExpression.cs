@@ -4,7 +4,6 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
 
 namespace nMars.Parser
 {
@@ -42,10 +41,10 @@ namespace nMars.Parser
         private Expression left;
         private Expression right;
 
-        public override int Evaluate(Dictionary<string, Expression> variables, int currentAddress)
+        public override int Evaluate(nMarsParser parser, int currentAddress)
         {
-            int l = left.Evaluate(variables, currentAddress);
-            int r = right.Evaluate(variables, currentAddress);
+            int l = left.Evaluate(parser, currentAddress);
+            int r = right.Evaluate(parser, currentAddress);
             switch (operation)
             {
                 case BinaryOperation.Plus:
@@ -55,10 +54,18 @@ namespace nMars.Parser
                 case BinaryOperation.Multiply:
                     return l*r;
                 case BinaryOperation.Divide:
-                    if (r == 0) throw new ParserException("Divide by zero during evaluation of " + ToString());
+                    if (r == 0)
+                    {
+                        parser.WriteError("Divide by zero during evaluation of " + ToString());
+                        return 0;
+                    }
                     return l/r;
                 case BinaryOperation.Modulo:
-                    if (r == 0) throw new ParserException("Divide by zero during evaluation of " + ToString());
+                    if (r == 0)
+                    {
+                        parser.WriteError("Divide by zero during evaluation of " + ToString());
+                        return 0;
+                    }
                     return l%r;
                 case BinaryOperation.BinOr:
                     return l | r;

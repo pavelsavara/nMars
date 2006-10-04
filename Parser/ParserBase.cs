@@ -7,28 +7,32 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using com.calitha.goldparser;
 using nMars.Parser.Expressions;
 using nMars.Parser.Statements;
 using nMars.RedCode;
+using ParserException=nMars.RedCode.ParserException;
 
 namespace nMars.Parser
 {
     public abstract class ParserBase : ParserRoot
     {
         private LALRParser parser;
-        protected Dictionary<string, Expression> variables;
+        protected internal Dictionary<string, Expression> variables;
+        protected TextWriter errOutput;
+        protected int errCount;
         protected string org;
         protected Expression pin;
         protected int counter;
-        protected string name = null;
-        protected string author = null;
+        protected string warriorName = null;
+        protected string authorName = null;
 
         protected ParserBase(Rules rules)
         {
             this.rules = rules;
-            
-            Assembly assembly = typeof(ParserBase).Assembly;
+
+            Assembly assembly = typeof (ParserBase).Assembly;
             Stream redCode = assembly.GetManifestResourceStream("nMars.Parser.Properties.RedCode.cgt");
             if (redCode == null)
             {
@@ -54,11 +58,27 @@ namespace nMars.Parser
             parser.OnParseError += new LALRParser.ParseErrorHandler(ParseErrorEvent);
         }
 
+        private static Regex start = new Regex("^;redcode", RegexOptions.IgnoreCase);
         protected ContainerStatement ParseInternal(string source)
         {
+            Match s=start.Match(source);
+            if (s!=null && s.Success && s.Index>0)
+            {
+                source = source.Substring(s.Index);
+            }
             if (!source.EndsWith("\n"))
                 source = source + "\n";
-            return (ContainerStatement) parser.Parse(source).UserObject;
+            return (ContainerStatement)parser.Parse(source).UserObject;
+        }
+
+        protected internal void WriteError(string error)
+        {
+            errOutput.WriteLine(error);
+            errCount++;
+            if (errCount > 10)
+            {
+                throw new ParserException("Too much errors");
+            }
         }
 
         protected void ProcessComments(List<string> comments)
@@ -72,11 +92,11 @@ namespace nMars.Parser
                 }
                 else if (lcomment.StartsWith("name "))
                 {
-                    name = comment.Substring(5).Trim();
+                    warriorName = comment.Substring(5).Trim();
                 }
                 else if (lcomment.StartsWith("author "))
                 {
-                    author = comment.Substring(7).Trim();
+                    authorName = comment.Substring(7).Trim();
                 }
             }
         }
@@ -953,11 +973,11 @@ namespace nMars.Parser
             throw new RuleException("Unknown rule");
         }
 
-        private void CheckName(string name, Location location)
+        private void CheckName(string variableName, Location location)
         {
-            if (variables.ContainsKey(name))
+            if (variables.ContainsKey(variableName))
             {
-                throw new ParserException("Variable/label already defined : " + name + " at " + location.ToString());
+                WriteError("Variable/label already defined : " + variableName + " at " + location.ToString());
             }
         }
 
@@ -965,16 +985,17 @@ namespace nMars.Parser
 
         private void TokenErrorEvent(LALRParser argParser, TokenErrorEventArgs args)
         {
-            string message = "Parse error caused by token: '" + args.Token.Text + "'" + " at " +
-                             args.Token.Location.ToString();
-            throw new ParserException(message);
+            WriteError("Parse error caused by token: '" + args.Token.Text + "'" + " at " +
+                       args.Token.Location.ToString());
+
+            args.Continue = true;
         }
 
         private void ParseErrorEvent(LALRParser argParser, ParseErrorEventArgs args)
         {
-            string message = "Parse error caused by token: '" + args.UnexpectedToken.ToString() + "'" + " at " +
-                             args.UnexpectedToken.Location.ToString();
-            throw new ParserException(message);
+            WriteError("Parse error caused by token: '" + args.UnexpectedToken.ToString() + "'" + " at " +
+                       args.UnexpectedToken.Location.ToString());
+            args.Continue = ContinueMode.Insert;
         }
     }
 }

@@ -148,6 +148,11 @@ namespace nMars.SimpleEngine
             Warrior.Dump(tw, options);
         }
 
+        public void Dump(string fileName, DumpOptions options)
+        {
+            Warrior.Dump(fileName, options);
+        }
+
         public FightResult Result = FightResult.Tie;
 
         public override string ToString()

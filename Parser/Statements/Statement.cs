@@ -11,7 +11,7 @@ namespace nMars.Parser.Statements
 {
     public abstract class Statement
     {
-        public abstract void ExpandStatements(ExtendedWarrior warrior, Dictionary<string, Expression> variables,
+        public abstract void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser,
                                               ref int currentAddress, int coreSize, bool evaluate);
 
         public List<LabelName> Labels = null;

@@ -84,7 +84,7 @@ namespace nMars.Parser.Warrior
             {
                 tw.Write("   ");
             }
-            if (options.Labels)
+            if (options.Labels && Length>0)
             {
                 tw.WriteLine("             ORG      " + GetLabels(StartOffset));
             }

@@ -4,7 +4,6 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
 using com.calitha.goldparser;
 using nMars.Parser.Expressions;
 using nMars.Parser.Warrior;
@@ -35,13 +34,13 @@ namespace nMars.Parser.Statements
         public Location Location;
 
 
-        public override void ExpandStatements(ExtendedWarrior warrior, Dictionary<string, Expression> variables,
+        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser,
                                               ref int currentAddress, int coreSize, bool evaluate)
         {
             //set all labels
             foreach (LabelName label in Labels)
             {
-                variables[label.GetFullName(variables, currentAddress)] = new Address(currentAddress);
+                parser.variables[label.GetFullName(parser, currentAddress)] = new Address(currentAddress);
             }
 
             ExtendedInstruction instruction;
@@ -75,11 +74,11 @@ namespace nMars.Parser.Statements
             else
             {
                 instruction = (ExtendedInstruction) warrior.Instructions[currentAddress];
-                instruction.ValueA = A.Expression.Evaluate(variables, currentAddress, coreSize);
-                instruction.ValueB = B.Expression.Evaluate(variables, currentAddress, coreSize);
+                instruction.ValueA = A.Expression.Evaluate(parser, currentAddress, coreSize);
+                instruction.ValueB = B.Expression.Evaluate(parser, currentAddress, coreSize);
             }
             currentAddress++;
-            variables["CURLINE"] = new Value(currentAddress);
+            parser.variables["CURLINE"] = new Value(currentAddress);
         }
 
 

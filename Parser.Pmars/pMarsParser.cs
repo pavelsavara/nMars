@@ -7,7 +7,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using nMars.pMars;
 using nMars.RedCode;
 
 namespace nMars
@@ -19,7 +18,7 @@ namespace nMars
             this.rules = rules;
         }
 
-        public override IWarrior Parse(string fileName)
+        public override IWarrior Parse(string fileName, TextWriter err)
         {
             StringBuilder agrs = new StringBuilder();
             agrs.Append("-r 0 -k ");
@@ -29,11 +28,21 @@ namespace nMars
             pmarsv.StartInfo = new ProcessStartInfo(pmarsvPath, agrs.ToString());
             pmarsv.StartInfo.UseShellExecute = false;
             pmarsv.StartInfo.RedirectStandardOutput = true;
+            pmarsv.StartInfo.RedirectStandardError = true;
             pmarsv.Start();
             pmarsv.WaitForExit();
             if (pmarsv.ExitCode != 0)
             {
-                throw new ParserException("PMARSV.EXE exited with error #" + pmarsv.ExitCode.ToString());
+                err.WriteLine("PMARSV.EXE exited with error #" + pmarsv.ExitCode.ToString() + "\n");
+                string errline = pmarsv.StandardError.ReadLine();
+                while (errline != null)
+                {
+                    err.WriteLine(errline);
+                    errline = pmarsv.StandardError.ReadLine();
+                }
+                pmarsv.StandardOutput.Close();
+                pmarsv.StandardError.Close();
+                return null;
             }
             Warrior warrior = new Warrior(rules);
             warrior.Name = Path.GetFileNameWithoutExtension(fileName);
@@ -44,7 +53,12 @@ namespace nMars
                 ParseLine(line, warrior);
                 line = pmarsv.StandardOutput.ReadLine();
             }
+            pmarsv.StandardError.Close();
             pmarsv.StandardOutput.Close();
+            if (warrior.Length==0)
+            {
+                return null;
+            }
             return warrior;
         }
 

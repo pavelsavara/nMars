@@ -3,7 +3,6 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System.Collections.Generic;
 using nMars.Parser.Expressions;
 using nMars.Parser.Warrior;
 
@@ -16,7 +15,7 @@ namespace nMars.Parser.Statements
             this.expression = expression;
         }
 
-        public override void ExpandStatements(ExtendedWarrior warrior, Dictionary<string, Expression> variables,
+        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser,
                                               ref int currentAddress, int coreSize, bool evaluate)
         {
             //set labels, except last which is EQU expression
@@ -25,11 +24,11 @@ namespace nMars.Parser.Statements
                 LabelName label = Labels[l];
                 if (l == Labels.Count - 1)
                 {
-                    variables[label.GetFullName(variables, currentAddress)] = expression;
+                    parser.variables[label.GetFullName(parser, currentAddress)] = expression;
                 }
                 else
                 {
-                    variables[label.GetFullName(variables, currentAddress)] = new Address(currentAddress);
+                    parser.variables[label.GetFullName(parser, currentAddress)] = new Address(currentAddress);
                 }
             }
             return;

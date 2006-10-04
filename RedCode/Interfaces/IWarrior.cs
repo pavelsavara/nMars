@@ -9,6 +9,17 @@ namespace nMars.RedCode
 {
     public class DumpOptions
     {
+        public DumpOptions()
+        {
+        }
+
+        public DumpOptions(bool offset, bool labels, bool comments)
+        {
+            Offset = offset;
+            Labels = labels;
+            Comments = comments;
+        }
+
         public bool Offset = false;
         public bool Labels = false;
         public bool Comments = false;
@@ -17,6 +28,10 @@ namespace nMars.RedCode
         {
             return !Offset && !Labels && !Comments;
         }
+
+        public static readonly DumpOptions Default = new DumpOptions();
+        public static readonly DumpOptions Full = new DumpOptions(true, true, true);
+        public static readonly DumpOptions NoOffset = new DumpOptions(false, true, true);
     }
 
     public interface IWarrior
@@ -66,5 +81,10 @@ namespace nMars.RedCode
         /// Dump with extended options
         /// </summary>
         void Dump(TextWriter tw, DumpOptions options);
+
+        /// <summary>
+        /// Dump with extended options
+        /// </summary>
+        void Dump(string fileName, DumpOptions options);
     }
 }
