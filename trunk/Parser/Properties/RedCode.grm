@@ -131,7 +131,10 @@ Comment Line  =  ';'
 <BinOr Exp>   ::= <BinOr Exp> '|' <BinXor Exp>
                 |  <BinXor Exp>
 
-<BinXor Exp>  ::= <BinXor Exp> '^' <Equate Exp>
+<BinXor Exp>  ::= <BinXor Exp> '^' <BinAnd Exp>
+                | <BinAnd Exp>
+
+<BinAnd Exp>  ::= <BinAnd Exp> '&&&' <Equate Exp> ! This is extension
                 | <Equate Exp>
 
 <Equate Exp>  ::= <Equate Exp> '==' <Compare Exp>

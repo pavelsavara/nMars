@@ -18,6 +18,7 @@ namespace nMars.Parser
             Modulo,
             BinOr,
             BinXor,
+            BinAnd,
             Shl,
             Shr,
             Or,
@@ -71,6 +72,8 @@ namespace nMars.Parser
                     return l | r;
                 case BinaryOperation.BinXor:
                     return l ^ r;
+                case BinaryOperation.BinAnd:
+                    return l & r;
                 case BinaryOperation.Shl:
                     return l << r;
                 case BinaryOperation.Shr:
@@ -114,6 +117,8 @@ namespace nMars.Parser
                     return left.ToString() + "|" + left.ToString();
                 case BinaryOperation.BinXor:
                     return left.ToString() + "^" + left.ToString();
+                case BinaryOperation.BinAnd:
+                    return left.ToString() + "&&&" + left.ToString();
                 case BinaryOperation.Shl:
                     return left.ToString() + "<<" + left.ToString();
                 case BinaryOperation.Shr:

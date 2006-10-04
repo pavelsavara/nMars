@@ -258,11 +258,14 @@ namespace nMars.Parser
 
                 case (int) RuleConstants.RULE_BINOREXP:
                     //<BinOr Exp> ::= <BinXor Exp>
-
+                
                 case (int) RuleConstants.RULE_BINXOREXP:
                     //<BinXor Exp> ::= <BinAnd Exp>
 
-                case (int) RuleConstants.RULE_EQUATEEXP:
+                case (int)RuleConstants.RULE_BINANDEXP:
+                    // <BinAnd Exp> ::= <Equate Exp>
+
+                case (int)RuleConstants.RULE_EQUATEEXP:
                     //<Equate Exp> ::= <Compare Exp>
 
                 case (int) RuleConstants.RULE_COMPAREEXP:
@@ -858,7 +861,14 @@ namespace nMars.Parser
                                              (Expression) token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.BinXor);
 
-                case (int) RuleConstants.RULE_EQUATEEXP_EQEQ:
+                case (int)RuleConstants.RULE_BINANDEXP_AMPAMPAMP:
+                    // <BinAnd Exp> ::= <BinAnd Exp> &&& <Equate Exp>
+                    return
+                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                                             (Expression)token.Tokens[2].UserObject,
+                                             BinaryExpression.BinaryOperation.BinAnd);
+
+                case (int)RuleConstants.RULE_EQUATEEXP_EQEQ:
                     //<Equate Exp> ::= <Equate Exp> == <Compare Exp>
                     return
                         new BinaryExpression((Expression) token.Tokens[0].UserObject,

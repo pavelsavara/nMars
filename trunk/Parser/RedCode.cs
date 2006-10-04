@@ -60,105 +60,107 @@ namespace com.calitha.goldparser
         SYMBOL_PERCENT               =   8, // %
         SYMBOL_AMP                   =   9, // &
         SYMBOL_AMPAMP                =  10, // &&
-        SYMBOL_LPARAN                =  11, // (
-        SYMBOL_RPARAN                =  12, // )
-        SYMBOL_TIMES                 =  13, // *
-        SYMBOL_COMMA                 =  14, // ,
-        SYMBOL_DOT                   =  15, // .
-        SYMBOL_DIV                   =  16, // /
-        SYMBOL_COLON                 =  17, // :
-        SYMBOL_QUESTION              =  18, // ?
-        SYMBOL_AT                    =  19, // @
-        SYMBOL_CARET                 =  20, // ^
-        SYMBOL_LBRACE                =  21, // {
-        SYMBOL_PIPE                  =  22, // |
-        SYMBOL_PIPEPIPE              =  23, // ||
-        SYMBOL_RBRACE                =  24, // }
-        SYMBOL_PLUS                  =  25, // +
-        SYMBOL_LT                    =  26, // <
-        SYMBOL_LTLT                  =  27, // <<
-        SYMBOL_LTEQ                  =  28, // <=
-        SYMBOL_LTGT                  =  29, // <>
-        SYMBOL_EQEQ                  =  30, // ==
-        SYMBOL_GT                    =  31, // >
-        SYMBOL_GTEQ                  =  32, // >=
-        SYMBOL_GTGT                  =  33, // >>
-        SYMBOL_A                     =  34, // A
-        SYMBOL_AB                    =  35, // AB
-        SYMBOL_ADD                   =  36, // Add
-        SYMBOL_B                     =  37, // B
-        SYMBOL_BA                    =  38, // BA
-        SYMBOL_CMP                   =  39, // Cmp
-        SYMBOL_COMMENT               =  40, // Comment
-        SYMBOL_DAT                   =  41, // Dat
-        SYMBOL_DIV2                  =  42, // Div
-        SYMBOL_DJN                   =  43, // Djn
-        SYMBOL_END                   =  44, // End
-        SYMBOL_EQU                   =  45, // Equ
-        SYMBOL_F                     =  46, // F
-        SYMBOL_FOR                   =  47, // for
-        SYMBOL_I                     =  48, // I
-        SYMBOL_INTEGER               =  49, // Integer
-        SYMBOL_JMN                   =  50, // Jmn
-        SYMBOL_JMP                   =  51, // Jmp
-        SYMBOL_JMZ                   =  52, // Jmz
-        SYMBOL_LABEL                 =  53, // Label
-        SYMBOL_LDP                   =  54, // Ldp
-        SYMBOL_LINE                  =  55, // Line
-        SYMBOL_MOD                   =  56, // Mod
-        SYMBOL_MOV                   =  57, // Mov
-        SYMBOL_MUL                   =  58, // Mul
-        SYMBOL_NEWLINE               =  59, // NewLine
-        SYMBOL_NOP                   =  60, // Nop
-        SYMBOL_ORG                   =  61, // Org
-        SYMBOL_PIN                   =  62, // Pin
-        SYMBOL_ROF                   =  63, // rof
-        SYMBOL_SEQ                   =  64, // Seq
-        SYMBOL_SLT                   =  65, // Slt
-        SYMBOL_SNE                   =  66, // Sne
-        SYMBOL_SPL                   =  67, // Spl
-        SYMBOL_STP                   =  68, // Stp
-        SYMBOL_SUB                   =  69, // Sub
-        SYMBOL_X                     =  70, // X
-        SYMBOL_ADDEXP                =  71, // <Add Exp>
-        SYMBOL_ALLSTATEMENTS         =  72, // <AllStatements>
-        SYMBOL_ALLSTATEMENTSOPTIONAL =  73, // <AllStatementsOptional>
-        SYMBOL_ANDEXP                =  74, // <And Exp>
-        SYMBOL_BINOREXP              =  75, // <BinOr Exp>
-        SYMBOL_BINXOREXP             =  76, // <BinXor Exp>
-        SYMBOL_COMPAREEXP            =  77, // <Compare Exp>
-        SYMBOL_ENDOPTIONAL           =  78, // <EndOptional>
-        SYMBOL_EOL                   =  79, // <eol>
-        SYMBOL_EOLOPTIONAL           =  80, // <eolOptional>
-        SYMBOL_EOLSINGLE             =  81, // <eolSingle>
-        SYMBOL_EQU2                  =  82, // <Equ>
-        SYMBOL_EQUATEEXP             =  83, // <Equate Exp>
-        SYMBOL_EXPRESSION            =  84, // <Expression>
-        SYMBOL_EXPRESSIONOPTIONAL    =  85, // <ExpressionOptional>
-        SYMBOL_FOR2                  =  86, // <For>
-        SYMBOL_LABEL2                =  87, // <Label>
-        SYMBOL_LABELS                =  88, // <Labels>
-        SYMBOL_LABELSOPTIONAL        =  89, // <LabelsOptional>
-        SYMBOL_MODE                  =  90, // <Mode>
-        SYMBOL_MODEOPTIONAL          =  91, // <ModeOptional>
-        SYMBOL_MODIFIER              =  92, // <Modifier>
-        SYMBOL_MULTEXP               =  93, // <Mult Exp>
-        SYMBOL_NEGATEEXP             =  94, // <Negate Exp>
-        SYMBOL_OPERATION             =  95, // <Operation>
-        SYMBOL_OPERATION0            =  96, // <Operation0>
-        SYMBOL_OPERATION1            =  97, // <Operation1>
-        SYMBOL_OPERATION2            =  98, // <Operation2>
-        SYMBOL_OPERATOR0             =  99, // <Operator0>
-        SYMBOL_OPERATOR1             = 100, // <Operator1>
-        SYMBOL_OPERATOR2             = 101, // <Operator2>
-        SYMBOL_OREXP                 = 102, // <Or Exp>
-        SYMBOL_ORG2                  = 103, // <Org>
-        SYMBOL_PARAMETER             = 104, // <Parameter>
-        SYMBOL_PIN2                  = 105, // <Pin>
-        SYMBOL_SHIFTEXP              = 106, // <Shift Exp>
-        SYMBOL_START                 = 107, // <Start>
-        SYMBOL_STATEMENT             = 108, // <Statement>
-        SYMBOL_VALUE                 = 109  // <Value>
+        SYMBOL_AMPAMPAMP             =  11, // &&&
+        SYMBOL_LPARAN                =  12, // (
+        SYMBOL_RPARAN                =  13, // )
+        SYMBOL_TIMES                 =  14, // *
+        SYMBOL_COMMA                 =  15, // ,
+        SYMBOL_DOT                   =  16, // .
+        SYMBOL_DIV                   =  17, // /
+        SYMBOL_COLON                 =  18, // :
+        SYMBOL_QUESTION              =  19, // ?
+        SYMBOL_AT                    =  20, // @
+        SYMBOL_CARET                 =  21, // ^
+        SYMBOL_LBRACE                =  22, // {
+        SYMBOL_PIPE                  =  23, // |
+        SYMBOL_PIPEPIPE              =  24, // ||
+        SYMBOL_RBRACE                =  25, // }
+        SYMBOL_PLUS                  =  26, // +
+        SYMBOL_LT                    =  27, // <
+        SYMBOL_LTLT                  =  28, // <<
+        SYMBOL_LTEQ                  =  29, // <=
+        SYMBOL_LTGT                  =  30, // <>
+        SYMBOL_EQEQ                  =  31, // ==
+        SYMBOL_GT                    =  32, // >
+        SYMBOL_GTEQ                  =  33, // >=
+        SYMBOL_GTGT                  =  34, // >>
+        SYMBOL_A                     =  35, // A
+        SYMBOL_AB                    =  36, // AB
+        SYMBOL_ADD                   =  37, // Add
+        SYMBOL_B                     =  38, // B
+        SYMBOL_BA                    =  39, // BA
+        SYMBOL_CMP                   =  40, // Cmp
+        SYMBOL_COMMENT               =  41, // Comment
+        SYMBOL_DAT                   =  42, // Dat
+        SYMBOL_DIV2                  =  43, // Div
+        SYMBOL_DJN                   =  44, // Djn
+        SYMBOL_END                   =  45, // End
+        SYMBOL_EQU                   =  46, // Equ
+        SYMBOL_F                     =  47, // F
+        SYMBOL_FOR                   =  48, // for
+        SYMBOL_I                     =  49, // I
+        SYMBOL_INTEGER               =  50, // Integer
+        SYMBOL_JMN                   =  51, // Jmn
+        SYMBOL_JMP                   =  52, // Jmp
+        SYMBOL_JMZ                   =  53, // Jmz
+        SYMBOL_LABEL                 =  54, // Label
+        SYMBOL_LDP                   =  55, // Ldp
+        SYMBOL_LINE                  =  56, // Line
+        SYMBOL_MOD                   =  57, // Mod
+        SYMBOL_MOV                   =  58, // Mov
+        SYMBOL_MUL                   =  59, // Mul
+        SYMBOL_NEWLINE               =  60, // NewLine
+        SYMBOL_NOP                   =  61, // Nop
+        SYMBOL_ORG                   =  62, // Org
+        SYMBOL_PIN                   =  63, // Pin
+        SYMBOL_ROF                   =  64, // rof
+        SYMBOL_SEQ                   =  65, // Seq
+        SYMBOL_SLT                   =  66, // Slt
+        SYMBOL_SNE                   =  67, // Sne
+        SYMBOL_SPL                   =  68, // Spl
+        SYMBOL_STP                   =  69, // Stp
+        SYMBOL_SUB                   =  70, // Sub
+        SYMBOL_X                     =  71, // X
+        SYMBOL_ADDEXP                =  72, // <Add Exp>
+        SYMBOL_ALLSTATEMENTS         =  73, // <AllStatements>
+        SYMBOL_ALLSTATEMENTSOPTIONAL =  74, // <AllStatementsOptional>
+        SYMBOL_ANDEXP                =  75, // <And Exp>
+        SYMBOL_BINANDEXP             =  76, // <BinAnd Exp>
+        SYMBOL_BINOREXP              =  77, // <BinOr Exp>
+        SYMBOL_BINXOREXP             =  78, // <BinXor Exp>
+        SYMBOL_COMPAREEXP            =  79, // <Compare Exp>
+        SYMBOL_ENDOPTIONAL           =  80, // <EndOptional>
+        SYMBOL_EOL                   =  81, // <eol>
+        SYMBOL_EOLOPTIONAL           =  82, // <eolOptional>
+        SYMBOL_EOLSINGLE             =  83, // <eolSingle>
+        SYMBOL_EQU2                  =  84, // <Equ>
+        SYMBOL_EQUATEEXP             =  85, // <Equate Exp>
+        SYMBOL_EXPRESSION            =  86, // <Expression>
+        SYMBOL_EXPRESSIONOPTIONAL    =  87, // <ExpressionOptional>
+        SYMBOL_FOR2                  =  88, // <For>
+        SYMBOL_LABEL2                =  89, // <Label>
+        SYMBOL_LABELS                =  90, // <Labels>
+        SYMBOL_LABELSOPTIONAL        =  91, // <LabelsOptional>
+        SYMBOL_MODE                  =  92, // <Mode>
+        SYMBOL_MODEOPTIONAL          =  93, // <ModeOptional>
+        SYMBOL_MODIFIER              =  94, // <Modifier>
+        SYMBOL_MULTEXP               =  95, // <Mult Exp>
+        SYMBOL_NEGATEEXP             =  96, // <Negate Exp>
+        SYMBOL_OPERATION             =  97, // <Operation>
+        SYMBOL_OPERATION0            =  98, // <Operation0>
+        SYMBOL_OPERATION1            =  99, // <Operation1>
+        SYMBOL_OPERATION2            = 100, // <Operation2>
+        SYMBOL_OPERATOR0             = 101, // <Operator0>
+        SYMBOL_OPERATOR1             = 102, // <Operator1>
+        SYMBOL_OPERATOR2             = 103, // <Operator2>
+        SYMBOL_OREXP                 = 104, // <Or Exp>
+        SYMBOL_ORG2                  = 105, // <Org>
+        SYMBOL_PARAMETER             = 106, // <Parameter>
+        SYMBOL_PIN2                  = 107, // <Pin>
+        SYMBOL_SHIFTEXP              = 108, // <Shift Exp>
+        SYMBOL_START                 = 109, // <Start>
+        SYMBOL_STATEMENT             = 110, // <Statement>
+        SYMBOL_VALUE                 = 111  // <Value>
     };
 
     enum RuleConstants : int
@@ -264,32 +266,34 @@ namespace com.calitha.goldparser
         RULE_ANDEXP                    =  98, // <And Exp> ::= <BinOr Exp>
         RULE_BINOREXP_PIPE             =  99, // <BinOr Exp> ::= <BinOr Exp> | <BinXor Exp>
         RULE_BINOREXP                  = 100, // <BinOr Exp> ::= <BinXor Exp>
-        RULE_BINXOREXP_CARET           = 101, // <BinXor Exp> ::= <BinXor Exp> ^ <Equate Exp>
-        RULE_BINXOREXP                 = 102, // <BinXor Exp> ::= <Equate Exp>
-        RULE_EQUATEEXP_EQEQ            = 103, // <Equate Exp> ::= <Equate Exp> == <Compare Exp>
-        RULE_EQUATEEXP_EXCLAMEQ        = 104, // <Equate Exp> ::= <Equate Exp> != <Compare Exp>
-        RULE_EQUATEEXP_LTGT            = 105, // <Equate Exp> ::= <Equate Exp> <> <Compare Exp>
-        RULE_EQUATEEXP                 = 106, // <Equate Exp> ::= <Compare Exp>
-        RULE_COMPAREEXP_LT             = 107, // <Compare Exp> ::= <Compare Exp> < <Shift Exp>
-        RULE_COMPAREEXP_GT             = 108, // <Compare Exp> ::= <Compare Exp> > <Shift Exp>
-        RULE_COMPAREEXP_LTEQ           = 109, // <Compare Exp> ::= <Compare Exp> <= <Shift Exp>
-        RULE_COMPAREEXP_GTEQ           = 110, // <Compare Exp> ::= <Compare Exp> >= <Shift Exp>
-        RULE_COMPAREEXP                = 111, // <Compare Exp> ::= <Shift Exp>
-        RULE_SHIFTEXP_LTLT             = 112, // <Shift Exp> ::= <Shift Exp> << <Add Exp>
-        RULE_SHIFTEXP_GTGT             = 113, // <Shift Exp> ::= <Shift Exp> >> <Add Exp>
-        RULE_SHIFTEXP                  = 114, // <Shift Exp> ::= <Add Exp>
-        RULE_ADDEXP_PLUS               = 115, // <Add Exp> ::= <Add Exp> + <Mult Exp>
-        RULE_ADDEXP_MINUS              = 116, // <Add Exp> ::= <Add Exp> - <Mult Exp>
-        RULE_ADDEXP                    = 117, // <Add Exp> ::= <Mult Exp>
-        RULE_MULTEXP_TIMES             = 118, // <Mult Exp> ::= <Mult Exp> * <Negate Exp>
-        RULE_MULTEXP_DIV               = 119, // <Mult Exp> ::= <Mult Exp> / <Negate Exp>
-        RULE_MULTEXP_PERCENT           = 120, // <Mult Exp> ::= <Mult Exp> % <Negate Exp>
-        RULE_MULTEXP                   = 121, // <Mult Exp> ::= <Negate Exp>
-        RULE_NEGATEEXP_MINUS           = 122, // <Negate Exp> ::= - <Value>
-        RULE_NEGATEEXP                 = 123, // <Negate Exp> ::= <Value>
-        RULE_VALUE_INTEGER             = 124, // <Value> ::= Integer
-        RULE_VALUE                     = 125, // <Value> ::= <Label>
-        RULE_VALUE_LPARAN_RPARAN       = 126  // <Value> ::= ( <Expression> )
+        RULE_BINXOREXP_CARET           = 101, // <BinXor Exp> ::= <BinXor Exp> ^ <BinAnd Exp>
+        RULE_BINXOREXP                 = 102, // <BinXor Exp> ::= <BinAnd Exp>
+        RULE_BINANDEXP_AMPAMPAMP       = 103, // <BinAnd Exp> ::= <BinAnd Exp> &&& <Equate Exp>
+        RULE_BINANDEXP                 = 104, // <BinAnd Exp> ::= <Equate Exp>
+        RULE_EQUATEEXP_EQEQ            = 105, // <Equate Exp> ::= <Equate Exp> == <Compare Exp>
+        RULE_EQUATEEXP_EXCLAMEQ        = 106, // <Equate Exp> ::= <Equate Exp> != <Compare Exp>
+        RULE_EQUATEEXP_LTGT            = 107, // <Equate Exp> ::= <Equate Exp> <> <Compare Exp>
+        RULE_EQUATEEXP                 = 108, // <Equate Exp> ::= <Compare Exp>
+        RULE_COMPAREEXP_LT             = 109, // <Compare Exp> ::= <Compare Exp> < <Shift Exp>
+        RULE_COMPAREEXP_GT             = 110, // <Compare Exp> ::= <Compare Exp> > <Shift Exp>
+        RULE_COMPAREEXP_LTEQ           = 111, // <Compare Exp> ::= <Compare Exp> <= <Shift Exp>
+        RULE_COMPAREEXP_GTEQ           = 112, // <Compare Exp> ::= <Compare Exp> >= <Shift Exp>
+        RULE_COMPAREEXP                = 113, // <Compare Exp> ::= <Shift Exp>
+        RULE_SHIFTEXP_LTLT             = 114, // <Shift Exp> ::= <Shift Exp> << <Add Exp>
+        RULE_SHIFTEXP_GTGT             = 115, // <Shift Exp> ::= <Shift Exp> >> <Add Exp>
+        RULE_SHIFTEXP                  = 116, // <Shift Exp> ::= <Add Exp>
+        RULE_ADDEXP_PLUS               = 117, // <Add Exp> ::= <Add Exp> + <Mult Exp>
+        RULE_ADDEXP_MINUS              = 118, // <Add Exp> ::= <Add Exp> - <Mult Exp>
+        RULE_ADDEXP                    = 119, // <Add Exp> ::= <Mult Exp>
+        RULE_MULTEXP_TIMES             = 120, // <Mult Exp> ::= <Mult Exp> * <Negate Exp>
+        RULE_MULTEXP_DIV               = 121, // <Mult Exp> ::= <Mult Exp> / <Negate Exp>
+        RULE_MULTEXP_PERCENT           = 122, // <Mult Exp> ::= <Mult Exp> % <Negate Exp>
+        RULE_MULTEXP                   = 123, // <Mult Exp> ::= <Negate Exp>
+        RULE_NEGATEEXP_MINUS           = 124, // <Negate Exp> ::= - <Value>
+        RULE_NEGATEEXP                 = 125, // <Negate Exp> ::= <Value>
+        RULE_VALUE_INTEGER             = 126, // <Value> ::= Integer
+        RULE_VALUE                     = 127, // <Value> ::= <Label>
+        RULE_VALUE_LPARAN_RPARAN       = 128  // <Value> ::= ( <Expression> )
     };
 
     public class MyParser
@@ -411,6 +415,11 @@ namespace com.calitha.goldparser
 
                 case (int)SymbolConstants.SYMBOL_AMPAMP :
                 //&&
+                //todo: Create a new object that corresponds to the symbol
+                return null;
+
+                case (int)SymbolConstants.SYMBOL_AMPAMPAMP :
+                //&&&
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
@@ -731,6 +740,11 @@ namespace com.calitha.goldparser
 
                 case (int)SymbolConstants.SYMBOL_ANDEXP :
                 //<And Exp>
+                //todo: Create a new object that corresponds to the symbol
+                return null;
+
+                case (int)SymbolConstants.SYMBOL_BINANDEXP :
+                //<BinAnd Exp>
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
@@ -1436,12 +1450,22 @@ namespace com.calitha.goldparser
                 return null;
 
                 case (int)RuleConstants.RULE_BINXOREXP_CARET :
-                //<BinXor Exp> ::= <BinXor Exp> ^ <Equate Exp>
+                //<BinXor Exp> ::= <BinXor Exp> ^ <BinAnd Exp>
                 //todo: Create a new object using the stored user objects.
                 return null;
 
                 case (int)RuleConstants.RULE_BINXOREXP :
-                //<BinXor Exp> ::= <Equate Exp>
+                //<BinXor Exp> ::= <BinAnd Exp>
+                //todo: Create a new object using the stored user objects.
+                return null;
+
+                case (int)RuleConstants.RULE_BINANDEXP_AMPAMPAMP :
+                //<BinAnd Exp> ::= <BinAnd Exp> &&& <Equate Exp>
+                //todo: Create a new object using the stored user objects.
+                return null;
+
+                case (int)RuleConstants.RULE_BINANDEXP :
+                //<BinAnd Exp> ::= <Equate Exp>
                 //todo: Create a new object using the stored user objects.
                 return null;
 
