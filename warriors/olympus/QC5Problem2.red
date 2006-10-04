@@ -1,0 +1,19 @@
+;redcode
+;name QC#5 Problem 2
+;author Mark A. Durham
+;assert CORESIZE==8192
+
+SEED	DAT		#7
+RND	DAT		#0
+ONE	DAT		#1
+TOP	MOV	 SEED,	 RND
+	ADD	 SEED,	 RND
+	ADD	 RND,	 RND
+	ADD	 RND,	 SEED
+	ADD	 ONE,	 SEED
+	CMP	 SEED,	#12
+	JMP	 HIT
+	MOV	#36,	 SEED
+HIT	MOV	 SEED,	@SEED
+	JMP	 TOP
+	END	 TOP

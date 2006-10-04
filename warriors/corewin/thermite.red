@@ -13,7 +13,7 @@
  
 SPC     equ 7700            ; (CORESIZE-MAXLENGTH-MINDISTANCE*2) 
 STP1     equ 81              ; (SPC / (RAM/2) / 2)              
-Lookat  equ look+237+8*(qscan1-1)*STP1                        
+Lookat  equ look+237+8*(qscan-1)*STP1                        
 
 ; First scan at 237; last at -67?
 
@@ -23,7 +23,7 @@ bite    jmp     @traptr,    0         ; Vampire bite.
 ; Lots of pointers to these, so keep them away from trap!
 
 look
-qscan1  for     6  
+qscan   for     6  
 	sne.i   Lookat+0*STP1, Lookat+2*STP1
 	seq.i   Lookat+4*STP1, Lookat+6*STP1
 	mov.ab  #Lookat-bite-2*STP1, @bite
@@ -31,7 +31,7 @@ qscan1  for     6
 
 	jmn     test+1, bite   ; Save a few cycles
 
-qscan2  for     6  
+qscan   for     6  
 	sne.i   Lookat+48*STP1, Lookat+50*STP1
 	seq.i   Lookat+52*STP1, Lookat+54*STP1
 	mov.ab  #Lookat-bite+46*STP1, @bite
@@ -39,7 +39,7 @@ qscan2  for     6
 
 	jmn     test+1, bite   ; Save a few cycles
 
-qscan3  for     6  
+qscan   for     6  
 	sne.i   Lookat+1*STP1, Lookat+3*STP1
 	seq.i   Lookat+5*STP1, Lookat+7*STP1
 	mov.ab  #Lookat-bite-STP1, @bite
@@ -47,7 +47,7 @@ qscan3  for     6
 
 	jmn     test+1, bite   ; Save a few cycles
 
-qscan4  for     6   ; Should be 7 if I had space...  
+qscan   for     6   ; Should be 7 if I had space...  
 	sne.i   Lookat+49*STP1, Lookat+51*STP1
 	seq.i   Lookat+53*STP1, Lookat+55*STP1
 	mov.ab  #Lookat-bite+47*STP1, @bite

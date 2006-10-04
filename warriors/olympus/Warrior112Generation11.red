@@ -1,0 +1,25 @@
+;redcode-94x
+;name Warrior #112 / Generation #11
+;author Evolution
+;assert CORESIZE==800
+SEQ.F <171,#273
+SPL.AB #616,$664
+JMZ.F <6,$4
+SPL.AB #616,$664
+MUL.X {17,}201
+SLT.AB *14,{9
+SPL.AB #616,$664
+MOV.A >244,$10
+SPL.AB #616,$664
+JMZ.F <6,$4
+SPL.AB #616,$664
+MUL.X {17,}201
+SLT.AB *14,{9
+SPL.AB #616,$664
+SPL.AB #616,$664
+DJN.AB {1,<530
+SEQ.I #589,<643
+DIV.X @436,$0
+SUB.F $118,}133
+SUB.F $118,}133
+END 0

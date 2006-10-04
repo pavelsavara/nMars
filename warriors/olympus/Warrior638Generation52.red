@@ -1,0 +1,26 @@
+;redcode-94x
+;name Warrior #638 / Generation #52
+;author Evolution
+;strategy ??? Random ???
+;assert CORESIZE==800
+JMZ.AB {755,$13
+NOP.AB {391,$15
+JMN.F #450,>780
+SPL.AB #616,$664
+SEQ.AB {789,$685
+DJN.BA $261,$799
+MOV.AB <794,{404
+JMZ.AB @294,>16
+SLT.AB <799,#3
+SNE.A }14,@80
+SPL.A *18,$4
+SNE.A }14,@80
+SPL.BA }168,<0
+NOP.X #797,@18
+MUL.I *782,}786
+SPL.AB #616,$664
+SPL.AB #616,$664
+SPL.AB #616,$664
+MOV.I >7,}4
+DJN.F #795,{505
+END 9

@@ -1,0 +1,37 @@
+;SMARTFRIAR
+:Random
+JMP 0 19
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+JMP 0 333
+MOV #4 2
+JMP 0 4
+DAT 0 0
+DAT 0 17         
+DAT 0 #-1
+ADD #9 -2
+CMC -2 @-3
+JMP 0 -2
+CMP @-5 -16 { -> skip if header found, -> attack if not}
+JMP 0 5
+MOV #0 @-7
+ADD #2 -8
+DJZ -10 -12
+JMP 0 -3            <Program by: Michael A. Luxton, 2/1/93>
+ADD #27 -11
+JMP 0 -15
