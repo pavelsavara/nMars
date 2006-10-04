@@ -21,31 +21,43 @@ namespace Parser.Test
             nMarsParser nparser = new nMarsParser(Rules.DefaultRules);
             pMarsParser pparser = new pMarsParser(Rules.DefaultRules);
             string basePath = Path.GetFullPath(@"Warriors");
+            if (!Directory.Exists(basePath))
+            {
+                basePath = Path.GetFullPath(@"..\Warriors");
+            }
+            if (!Directory.Exists(basePath))
+            {
+                basePath = Path.GetFullPath(@"..\..\Warriors");
+            }
+            if (!Directory.Exists(basePath))
+            {
+                basePath = Path.GetFullPath(@"..\..\..\Warriors");
+            }
+            if (!Directory.Exists(basePath))
+            {
+                throw new ApplicationException("Could not find Warrirors at: " + basePath);
+            }
+            if (Directory.Exists(basePath + @"\_problems\"))
+            {
+                Directory.Delete(basePath + @"\_problems\", true);
+            }
             Directory.CreateDirectory(basePath + @"\_problems\");
 
-            foreach (string file in Directory.GetFiles(basePath, "*.?Dmp", SearchOption.AllDirectories))
-            {
-                File.Delete(file);
-            }
-            foreach (string file in Directory.GetFiles(basePath, "*.?Err", SearchOption.AllDirectories))
-            {
-                File.Delete(file);
-            }
-             
-            
             List<string> files =
                 new List<string>(Directory.GetFiles(basePath, "*.rc", SearchOption.AllDirectories));
             files.AddRange(Directory.GetFiles(basePath, "*.red", SearchOption.AllDirectories));
             files.Sort();
-
+            bool allOK = true;
             foreach (string file in files)
             {
                 Console.Write("Reading {0}          \r", file);
-                LoadDumpOne(file, basePath, nparser, pparser);
+                allOK &= LoadDumpOne(file, basePath, nparser, pparser);
             }
+            if (!allOK)
+                throw new ParserException("Some warriors failed.");
         }
 
-        private static void LoadDumpOne(string file, string basePath, nMarsParser nparser, pMarsParser pparser)
+        private static bool LoadDumpOne(string file, string basePath, nMarsParser nparser, pMarsParser pparser)
         {
             IWarrior nw;
             IWarrior pw;
@@ -53,29 +65,30 @@ namespace Parser.Test
             nw = nparser.Parse(file, problemsPath + ".nErr");
             pw = pparser.Parse(file, problemsPath + ".pErr");
 
-            if (nw==null && pw==null)
+            if (nw == null && pw == null)
             {
                 //both failed
             }
-            else if (pw==null)
+            else if (pw == null)
             {
-                nw.Dump(Path.ChangeExtension(file, ".nDmp"), DumpOptions.NoOffset);
+                nw.Dump(problemsPath + ".nDmp", DumpOptions.NoOffset);
             }
             else if (nw == null)
             {
-                pw.Dump(Path.ChangeExtension(file, ".pDmp"), DumpOptions.NoOffset);
+                pw.Dump(problemsPath + ".pDmp", DumpOptions.NoOffset);
             }
             else if (!Warrior.Equals(nw, pw))
             {
-                nw.Dump(Path.ChangeExtension(file, ".nDmp"), DumpOptions.NoOffset);
-                pw.Dump(Path.ChangeExtension(file, ".pDmp"), DumpOptions.NoOffset);
+                nw.Dump(problemsPath + ".nDmp", DumpOptions.NoOffset);
+                pw.Dump(problemsPath + ".pDmp", DumpOptions.NoOffset);
             }
             else
             {
                 // no problem
-                return;
+                return true;
             }
-            File.Copy(file, problemsPath+".red", true);
+            File.Copy(file, problemsPath + ".red", true);
+            return false;
         }
     }
 }
