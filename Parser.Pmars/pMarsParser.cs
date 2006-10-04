@@ -22,15 +22,37 @@ namespace nMars
         {
             StringBuilder agrs = new StringBuilder();
             agrs.Append("-r 0 -k ");
-            agrs.Append(fileName);
+            agrs.Append("-p ");
+            agrs.Append(rules.maxProcesses.ToString());
+            agrs.Append(" -s ");
+            agrs.Append(rules.coreSize.ToString());
+            agrs.Append(" -c ");
+            agrs.Append(rules.maxCycles.ToString());
+            agrs.Append(" -l ");
+            agrs.Append(rules.maxLength.ToString());
+            agrs.Append(" -d ");
+            agrs.Append(rules.minDistance.ToString());
+            agrs.Append(" -S ");
+            agrs.Append(rules.pSpaceSize.ToString());
+            agrs.Append(" ");
+            agrs.Append(Path.GetFileName(fileName));
 
             Process pmarsv = new Process();
             pmarsv.StartInfo = new ProcessStartInfo(pmarsvPath, agrs.ToString());
             pmarsv.StartInfo.UseShellExecute = false;
             pmarsv.StartInfo.RedirectStandardOutput = true;
             pmarsv.StartInfo.RedirectStandardError = true;
-            pmarsv.Start();
-            pmarsv.WaitForExit();
+            pmarsv.StartInfo.WorkingDirectory = Path.GetDirectoryName(fileName);
+            try
+            {
+                pmarsv.Start();
+                pmarsv.WaitForExit();
+            }
+            catch(Exception ex)
+            {
+                err.WriteLine("PMARSV.EXE wrapper exited with exception " + ex.ToString() + "\n");
+                return null;
+            }
             if (pmarsv.ExitCode != 0)
             {
                 err.WriteLine("PMARSV.EXE exited with error #" + pmarsv.ExitCode.ToString() + "\n");
@@ -100,7 +122,11 @@ namespace nMars
             get
             {
                 string module = typeof (pMarsParser).Assembly.Location;
-                return Path.Combine(Path.GetDirectoryName(module), pmarsvName);
+                string path=Path.Combine(Path.GetDirectoryName(module), pmarsvName);
+                if (File.Exists(path)) return path;
+                path = Path.Combine(Directory.GetCurrentDirectory(), pmarsvName);
+                if (File.Exists(path)) return path;
+                return pmarsvName;
             }
         }
 
