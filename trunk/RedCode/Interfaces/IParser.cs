@@ -51,7 +51,7 @@ namespace nMars.RedCode
             
             if (res==null)
             {
-                Stream fs = File.Create(errFileName);
+                FileStream fs = new FileStream(errFileName, FileMode.Create);
                 ms.WriteTo(fs);
                 fs.Close();
             }

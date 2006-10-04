@@ -20,10 +20,10 @@ namespace nMars.Starter
             List<IWarrior> rr = new List<IWarrior>();
             List<int> forcedaddr = new List<int>();
 
-            rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\rc\pmars\aeka.red"));
-            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\rc\pmars\rave.red"));
-            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\rc\2test\mod1test.rc"));
-            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\rc\pmars\validate.red"));
+            rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\pmars\aeka.red"));
+            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\pmars\rave.red"));
+            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\2test\mod1test.rc"));
+            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\pmars\validate.red"));
             forcedaddr.Add(0);
 
             Engine se = new Engine(rules);
