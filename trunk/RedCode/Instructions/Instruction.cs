@@ -4,10 +4,12 @@
 // 2006 Pavel Savara
 
 using System;
+using System.Runtime.InteropServices;
 
 namespace nMars.RedCode
 {
     [Serializable]
+    [ComVisible(true)]
     public class Instruction
     {
         public Instruction(
@@ -145,6 +147,16 @@ namespace nMars.RedCode
         public static bool operator ==(Instruction a, Instruction b)
         {
             return a.Equals(b);
+        }
+        
+        public static int Wrap(int raw, int coreSize)
+        {
+            int wrap = raw % coreSize;
+            if (wrap <= (coreSize / -2))
+                wrap += coreSize;
+            if (wrap > (coreSize / 2))
+                wrap -= coreSize;
+            return wrap;
         }
     }
 }

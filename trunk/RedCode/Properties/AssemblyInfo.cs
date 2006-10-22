@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly : AssemblyTitle("RedCode")]
-[assembly : AssemblyDescription("")]
+[assembly: AssemblyDescription("nMars Library")]
 [assembly : AssemblyConfiguration("")]
-[assembly : AssemblyCompany("")]
+[assembly: AssemblyCompany("Pavel Savara")]
 [assembly : AssemblyProduct("RedCode")]
 [assembly : AssemblyCopyright("Copyright ©  2006")]
 [assembly : AssemblyTrademark("")]
@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
-[assembly : ComVisible(false)]
+[assembly: ComVisible(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly : Guid("401c7f86-321f-4492-885b-52f0e70ceb4a")]

@@ -4,17 +4,18 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace nMars.RedCode
 {
+    [ComVisible(true)]
     public interface IStepEngine
     {
         /// <summary>
         /// Initialize the engine
         /// </summary>
-        void BeginMatch(IList<IWarrior> wariors, IPSpaces pSpaces, Random random,
-                        IList<int> forcedAddresses);
+        void BeginMatch(IWarrior[] wariors, IPSpaces aPSpaces, Random random,
+                        int[] forcedAddresses);
 
         /// <summary>
         /// make step
@@ -25,6 +26,6 @@ namespace nMars.RedCode
         /// <summary>
         /// returns results of the match
         /// </summary>
-        IList<FightResult> EndMatch();
+        FightResult[] EndMatch();
     }
 }

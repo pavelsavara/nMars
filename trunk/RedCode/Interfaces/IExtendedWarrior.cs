@@ -3,8 +3,11 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System.Runtime.InteropServices;
+
 namespace nMars.RedCode
 {
+    [ComVisible(true)]
     public interface IExtendedWarrior : IWarrior
     {
         string GetLabels(int instructionOffset);

@@ -4,9 +4,11 @@
 // 2006 Pavel Savara
 
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace nMars.RedCode
 {
+    [ComVisible(true)]
     public class DumpOptions
     {
         public DumpOptions()
@@ -34,6 +36,7 @@ namespace nMars.RedCode
         public static readonly DumpOptions NoOffset = new DumpOptions(false, true, true);
     }
 
+    [ComVisible(true)]
     public interface IWarrior
     {
         /// <summary>
@@ -55,6 +58,21 @@ namespace nMars.RedCode
         /// Warrior Name
         /// </summary>
         string Author { get; }
+
+        /// <summary>
+        /// Date created
+        /// </summary>
+        string Date { get; }
+        
+        /// <summary>
+        /// pMars version
+        /// </summary>
+        string Version { get; }
+        
+        /// <summary>
+        /// Loaded from file
+        /// </summary>
+        string FileName { get; }
 
         /// <summary>
         /// PIN - P-Space identification number

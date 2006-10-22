@@ -28,10 +28,8 @@ namespace nMars.Parser
         protected string warriorName = null;
         protected string authorName = null;
 
-        protected ParserBase(Rules rules)
+        protected ParserBase()
         {
-            this.rules = rules;
-
             Assembly assembly = typeof (ParserBase).Assembly;
             Stream redCode = assembly.GetManifestResourceStream("nMars.Parser.Properties.RedCode.cgt");
             if (redCode == null)

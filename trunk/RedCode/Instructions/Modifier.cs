@@ -3,29 +3,13 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System.Runtime.InteropServices;
+
 namespace nMars.RedCode
 {
+    [ComVisible(true)]
     public enum Modifier
     {
-        /// <summary>
-        /// Instruction execution proceeds with the A-value set to both the
-        /// A-number and B-number of the A-instruction (in that order) and the
-        /// B-value set to both the A-number and B-number of the B-instruction
-        /// (also in that order).  A write to core replaces both the A-number and
-        /// the B-number of the instruction pointed to by the B-pointer (in that
-        /// order).
-        /// </summary>
-        /// <example>
-        /// For example, a SEQ.F instruction would compare the A-number of the
-        /// A-instruction to the A-number of the B-instruction and the B-number of
-        /// the A-instruction to B-number of the B-instruction.  A MOV.F instruction
-        /// would replace the A-number of the instruction pointed to by the
-        /// B-pointer with the A-number of the A-instruction and would also replace
-        /// the B-number of the instruction pointed to by the B-pointer with the
-        /// B-number of the A-instruction.
-        /// </example>
-        F,
-
         /// <summary>
         /// Instruction execution proceeds with the A-value set to the A-number of
         /// the A-instruction and the B-value set to the A-number of the
@@ -81,6 +65,25 @@ namespace nMars.RedCode
         /// by the B-pointer with the B-number of the A-instruction.
         /// </example>
         BA,
+
+        /// <summary>
+        /// Instruction execution proceeds with the A-value set to both the
+        /// A-number and B-number of the A-instruction (in that order) and the
+        /// B-value set to both the A-number and B-number of the B-instruction
+        /// (also in that order).  A write to core replaces both the A-number and
+        /// the B-number of the instruction pointed to by the B-pointer (in that
+        /// order).
+        /// </summary>
+        /// <example>
+        /// For example, a SEQ.F instruction would compare the A-number of the
+        /// A-instruction to the A-number of the B-instruction and the B-number of
+        /// the A-instruction to B-number of the B-instruction.  A MOV.F instruction
+        /// would replace the A-number of the instruction pointed to by the
+        /// B-pointer with the A-number of the A-instruction and would also replace
+        /// the B-number of the instruction pointed to by the B-pointer with the
+        /// B-number of the A-instruction.
+        /// </example>
+        F,
 
         /// <summary>
         /// Instruction execution proceeds with the A-value set to both the

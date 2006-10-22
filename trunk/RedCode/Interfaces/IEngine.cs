@@ -4,19 +4,21 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
+    [ComVisible(true)]
     public interface IEngine
     {
         /// <summary>
         /// Run complete round
         /// </summary>
-        IList<FightResult> Run(IList<IWarrior> wariors, IPSpaces pSpaces, Random random, IList<int> forcedAddresses);
+        FightResult[] Run(IWarrior[] wariors, IPSpaces aPSpaces, Random random, int[] forcedAddresses);
     }
 
+    [ComVisible(true)]
     public interface IEngineModule : IModule
     {
         IEngine CreateEngine(Rules rules);

@@ -16,7 +16,7 @@ namespace nMars.SimpleEngine
             this.rules = rules;
         }
 
-        public IList<FightResult> Run(IList<IWarrior> aWarriors, IPSpaces pSpaces, Random aRandom,
+        public IList<FightResult> Run(IList<IWarrior> aWarriors, IPSpaces aPSpaces, Random aRandom,
                                       IList<int> forcedAddresses)
         {
             BeginMatch(aWarriors, pSpaces, aRandom, forcedAddresses);
@@ -24,6 +24,12 @@ namespace nMars.SimpleEngine
             {
             }
             return EndMatch();
+        }
+
+        public FightResult[] Run(IWarrior[] aWarriors, IPSpaces aPSpaces, Random aRandom,
+                                      int[] forcedAddresses)
+        {
+            return Run(aWarriors, pSpaces, aRandom, forcedAddresses);
         }
     }
 }

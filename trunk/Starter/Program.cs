@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using nMars.pMarsDll;
 using nMars.RedCode;
 using nMars.SimpleEngine;
 using Parser.Test;
@@ -16,14 +17,15 @@ namespace nMars.Starter
 
             Rules rules = new Rules();
 
-            nMarsParser parser = new nMarsParser(rules);
+            //nMarsParser parser = new nMarsParser(rules);
+            pMarsDllParser parser = new pMarsDllParser(rules);
             List<IWarrior> rr = new List<IWarrior>();
             List<int> forcedaddr = new List<int>();
 
-            rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\pmars\aeka.red"));
-            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\pmars\rave.red"));
-            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\2test\mod1test.rc"));
-            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\pmars\validate.red"));
+            rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\warriors\corewin\bluefunk.red"));
+            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\warriors\pmars\rave.red"));
+            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\warriors\2test\mod1test.rc"));
+            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\warriors\pmars\validate.red"));
             forcedaddr.Add(0);
 
             Engine se = new Engine(rules);
