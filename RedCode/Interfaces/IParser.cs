@@ -5,11 +5,13 @@
 
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
+    [ComVisible(true)]
     public class ParserException : Exception
     {
         public ParserException(string message)
@@ -18,8 +20,10 @@ namespace nMars.RedCode
         }
     }
 
+    [ComVisible(true)]
     public interface IParser
     {
+        void InitParser(Rules aRules);
         IWarrior Parse(string fileName);
         IWarrior Parse(string fileName, TextWriter err);
         IWarrior Parse(string fileName, string errFileName);
@@ -28,6 +32,11 @@ namespace nMars.RedCode
     public abstract class ParserRoot : IParser
     {
         public abstract IWarrior Parse(string fileName, TextWriter err);
+
+        public void InitParser(Rules aRules)
+        {
+            this.rules = aRules;
+        }
 
         public IWarrior Parse(string fileName)
         {
@@ -42,7 +51,7 @@ namespace nMars.RedCode
             return res;
         }
 
-        public IWarrior Parse(string fileName, string errFileName)
+        public virtual IWarrior Parse(string fileName, string errFileName)
         {
             MemoryStream ms=new MemoryStream();
             StreamWriter sw=new StreamWriter(ms);
@@ -61,6 +70,7 @@ namespace nMars.RedCode
         protected Rules rules;
     }
 
+    [ComVisible(true)]
     public interface IParserModule : IModule
     {
         IParser CreateParser(Rules rules);

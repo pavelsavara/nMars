@@ -4,11 +4,20 @@
 // 2006 Pavel Savara
 
 using System;
+using System.Runtime.InteropServices;
 
 namespace nMars.RedCode
 {
+    [ComVisible(true)]
     public enum Mode
     {
+        /// <summary>
+        /// #
+        /// An immediate mode operand merely serves as storage for data.  
+        /// An immediate A/B-mode in the current instruction sets the A/B-pointer to zero.
+        /// </summary>
+        Immediate,
+
         /// <summary>
         /// $
         /// A direct mode operand indicates the offset from the program counter.
@@ -100,13 +109,6 @@ namespace nMars.RedCode
         /// the operation is executed (for post-increment indirect B-mode).
         /// </summary>
         PostIncIndirectA,
-
-        /// <summary>
-        /// #
-        /// An immediate mode operand merely serves as storage for data.  
-        /// An immediate A/B-mode in the current instruction sets the A/B-pointer to zero.
-        /// </summary>
-        Immediate,
     }
 
     public class ModeHelper

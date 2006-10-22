@@ -14,9 +14,9 @@ namespace nMars
 {
     public class nMarsParser : ParserBase, IParser
     {
-        public nMarsParser(Rules rules)
-            : base(rules)
+        public nMarsParser(Rules aRules)
         {
+            InitParser(aRules);
         }
 
         public override IWarrior Parse(string fileName, TextWriter err)
@@ -24,7 +24,9 @@ namespace nMars
             StreamReader sr = new StreamReader(fileName);
             string source = sr.ReadToEnd();
             sr.Close();
-            return Parse(source, err, Path.GetFileNameWithoutExtension(fileName));
+            ExtendedWarrior res = (ExtendedWarrior)Parse(source, err, Path.GetFileNameWithoutExtension(fileName));
+            res.FileName = fileName;
+            return res;
         }
 
         public IWarrior Parse(string sourceText, TextWriter err, string implicitName)

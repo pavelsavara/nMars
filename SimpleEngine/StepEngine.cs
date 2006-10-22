@@ -11,6 +11,12 @@ namespace nMars.SimpleEngine
 {
     public class StepEngine : Core, IStepEngine
     {
+        public void BeginMatch(IWarrior[] aWariors, IPSpaces aPSpaces, Random aRandom,
+                               int[] forcedAddresses)
+        {
+            BeginMatch((IList<IWarrior>) aWariors, aPSpaces, aRandom, forcedAddresses);
+        }
+
         public void BeginMatch(IList<IWarrior> aWariors, IPSpaces aPSpaces, Random aRandom,
                                IList<int> forcedAddresses)
         {
@@ -503,13 +509,15 @@ namespace nMars.SimpleEngine
             return die;
         }
 
-        public IList<FightResult> EndMatch()
+        public FightResult[] EndMatch()
         {
-            List<FightResult> res = new List<FightResult>();
+            FightResult[] res = new FightResult[warriors.Count];
+            int i = 0;
 
             foreach (EngineWarrior warrior in warriors)
             {
-                res.Add(warrior.Result);
+                res[i] = warrior.Result;
+                i++;
             }
 
             return res;

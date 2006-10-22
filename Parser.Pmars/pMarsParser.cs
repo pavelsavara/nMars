@@ -50,12 +50,12 @@ namespace nMars
             }
             catch(Exception ex)
             {
-                err.WriteLine("PMARSV.EXE wrapper exited with exception " + ex.ToString() + "\n");
+                err.WriteLine(pmarsvName + " wrapper exited with exception " + ex.ToString() + "\n");
                 return null;
             }
             if (pmarsv.ExitCode != 0)
             {
-                err.WriteLine("PMARSV.EXE exited with error #" + pmarsv.ExitCode.ToString() + "\n");
+                err.WriteLine(pmarsvName + " exited with error #" + pmarsv.ExitCode.ToString() + "\n");
                 string errline = pmarsv.StandardError.ReadLine();
                 while (errline != null)
                 {
@@ -68,6 +68,7 @@ namespace nMars
             }
             Warrior warrior = new Warrior(rules);
             warrior.Name = Path.GetFileNameWithoutExtension(fileName);
+            warrior.FileName = fileName;
 
             string line = pmarsv.StandardOutput.ReadLine();
             while (line != null)
@@ -130,6 +131,7 @@ namespace nMars
             }
         }
 
-        private static string pmarsvName = "PMARSV.EXE";
+        //private static string pmarsvName = "PMARSV.EXE";
+        private static string pmarsvName = "PMARS.EXE";
     }
 }

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars;
+using nMars.pMarsDll;
 using nMars.RedCode;
 using NUnit.Framework;
 
@@ -18,8 +19,9 @@ namespace Parser.Test
         [Test]
         public void Loader()
         {
-            nMarsParser nparser = new nMarsParser(Rules.DefaultRules);
-            pMarsParser pparser = new pMarsParser(Rules.DefaultRules);
+            IParser nparser = new pMarsDllParser(Rules.DefaultRules);
+            //IParser nparser = new nMarsParser(Rules.DefaultRules);
+            IParser pparser = new pMarsParser(Rules.DefaultRules);
             string basePath = Path.GetFullPath(@"Warriors");
             if (!Directory.Exists(basePath))
             {
@@ -39,8 +41,16 @@ namespace Parser.Test
             }
             if (Directory.Exists(basePath + @"\_problems\"))
             {
-                Directory.Delete(basePath + @"\_problems\", true);
+                try
+                {
+                    Directory.Delete(basePath + @"\_problems\", true);
+                }
+                catch(Exception)
+                {
+                    //swalow
+                }
             }
+            
             Directory.CreateDirectory(basePath + @"\_problems\");
 
             List<string> files =
@@ -57,13 +67,13 @@ namespace Parser.Test
                 throw new ParserException("Some warriors failed.");
         }
 
-        private static bool LoadDumpOne(string file, string basePath, nMarsParser nparser, pMarsParser pparser)
+        private static bool LoadDumpOne(string file, string basePath, IParser nparser, IParser pparser)
         {
             IWarrior nw;
             IWarrior pw;
             string problemsPath = basePath + @"\_problems\" + Path.GetFileNameWithoutExtension(file);
-            nw = nparser.Parse(file, problemsPath + ".nErr");
             pw = pparser.Parse(file, problemsPath + ".pErr");
+            nw = nparser.Parse(file, problemsPath + ".nErr");
 
             if (nw == null && pw == null)
             {
@@ -81,6 +91,7 @@ namespace Parser.Test
             {
                 nw.Dump(problemsPath + ".nDmp", DumpOptions.NoOffset);
                 pw.Dump(problemsPath + ".pDmp", DumpOptions.NoOffset);
+                nw = nparser.Parse(file, problemsPath + ".nErr");
             }
             else
             {

@@ -3,6 +3,8 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using nMars.RedCode;
+
 namespace nMars.Parser
 {
     public abstract class Expression
@@ -12,12 +14,7 @@ namespace nMars.Parser
         public int Evaluate(nMarsParser parser, int currentAddress, int coreSize)
         {
             int raw = Evaluate(parser, currentAddress);
-            int wrap = raw%coreSize;
-            if (wrap <= (coreSize/-2))
-                wrap += coreSize;
-            if (wrap > (coreSize/2))
-                wrap -= coreSize;
-            return wrap;
+            return Instruction.Wrap(raw, coreSize);
         }
     }
 }

@@ -27,8 +27,12 @@ namespace nMars.RedCode
         public int StartOffset;
         public string Name = "";
         public string Author = "Anonymous";
+        public string Date = "";
+        public string Version = "";
+        public string FileName = null;
         public Rules Rules;
-        public int Pin = -1;
+        public int Pin = UnsharedPin;
+        public const int UnsharedPin = -1;
 
         public void Dump(TextWriter tw)
         {
@@ -80,6 +84,21 @@ namespace nMars.RedCode
         string IWarrior.Author
         {
             get { return Author; }
+        }
+
+        string IWarrior.Date
+        {
+            get { return Date; }
+        }
+
+        string IWarrior.Version
+        {
+            get { return Version; }
+        }
+
+        string IWarrior.FileName
+        {
+            get { return FileName; }
         }
 
         int IWarrior.Pin
