@@ -25,7 +25,7 @@ namespace nMars
             string source = sr.ReadToEnd();
             sr.Close();
             ExtendedWarrior res = (ExtendedWarrior)Parse(source, err, Path.GetFileNameWithoutExtension(fileName));
-            res.FileName = fileName;
+            if (res!=null) res.FileName = fileName;
             return res;
         }
 
