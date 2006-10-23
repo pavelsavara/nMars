@@ -19,9 +19,9 @@ namespace Parser.Test
         [Test]
         public void Loader()
         {
-            IParser nparser = new pMarsDllParser(Rules.DefaultRules);
-            //IParser nparser = new nMarsParser(Rules.DefaultRules);
-            IParser pparser = new pMarsParser(Rules.DefaultRules);
+            IParser nparser = new nMarsParser(Rules.DefaultRules);
+            IParser pparser = new pMarsDllParser(Rules.DefaultRules);
+            //IParser pparser = new pMarsParser(Rules.DefaultRules);
             string basePath = Path.GetFullPath(@"Warriors");
             if (!Directory.Exists(basePath))
             {

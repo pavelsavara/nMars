@@ -123,6 +123,21 @@ namespace nMars.SimpleEngine
             get { return Warrior.Author; }
         }
 
+        public string Date
+        {
+            get { return Warrior.Date; }
+        }
+
+        public string Version
+        {
+            get { return Warrior.Version; }
+        }
+
+        public string FileName
+        {
+            get { return Warrior.FileName; }
+        }
+
         public Rules Rules
         {
             get { return Warrior.Rules; }

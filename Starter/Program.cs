@@ -13,7 +13,7 @@ namespace nMars.Starter
         {
             ParserTest t = new ParserTest();
             t.Loader();
-
+            return;
 
             Rules rules = new Rules();
 
