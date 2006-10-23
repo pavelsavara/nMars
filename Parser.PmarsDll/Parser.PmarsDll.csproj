@@ -7,7 +7,7 @@
     <ProjectGuid>{9D9C6AB6-BDF3-483B-A11C-DE7C15EB4814}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pmars.ParserDll</RootNamespace>
+    <RootNamespace>nMars.pMarsDll</RootNamespace>
     <AssemblyName>PmarsParserDll</AssemblyName>
     <StartupObject>nMars.pMarsDll.Module</StartupObject>
     <ApplicationIcon>Properties\Parser.ico</ApplicationIcon>
@@ -36,6 +36,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Module.cs" />
+    <Compile Include="pMarsDll.cs" />
+    <Compile Include="pMarsDllEngine.cs" />
     <Compile Include="pMarsDllParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

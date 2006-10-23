@@ -34,7 +34,7 @@ namespace nMars.SimpleEngine
 
         public IEngine CreateEngine(Rules rules)
         {
-            return new Engine(rules);
+            return new Engine();
         }
 
         private static Module instance;

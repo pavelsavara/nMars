@@ -15,9 +15,10 @@ namespace nMars.SimpleEngine
         {
         }
 
-        protected void Init(IList<IWarrior> aWarriors, IPSpaces aPSpaces, Random aRandom,
+        protected void Init(Rules aRules, IList<IWarrior> aWarriors, IPSpaces aPSpaces, Random aRandom,
                             IList<int> forcedAddresses)
         {
+            rules = aRules;
             random = aRandom;
             pSpaces = aPSpaces;
             CleanCore();

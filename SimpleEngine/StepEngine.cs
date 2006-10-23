@@ -11,16 +11,16 @@ namespace nMars.SimpleEngine
 {
     public class StepEngine : Core, IStepEngine
     {
-        public void BeginMatch(IWarrior[] aWariors, IPSpaces aPSpaces, Random aRandom,
+        public void BeginMatch(Rules aRules, IWarrior[] aWariors, IPSpaces aPSpaces, Random aRandom,
                                int[] forcedAddresses)
         {
-            BeginMatch((IList<IWarrior>) aWariors, aPSpaces, aRandom, forcedAddresses);
+            BeginMatch(aRules, (IList<IWarrior>)aWariors, aPSpaces, aRandom, forcedAddresses);
         }
 
-        public void BeginMatch(IList<IWarrior> aWariors, IPSpaces aPSpaces, Random aRandom,
+        public void BeginMatch(Rules aRules, IList<IWarrior> aWariors, IPSpaces aPSpaces, Random aRandom,
                                IList<int> forcedAddresses)
         {
-            Init(aWariors, aPSpaces, aRandom, forcedAddresses);
+            Init(aRules, aWariors, aPSpaces, aRandom, forcedAddresses);
         }
 
         public bool NextStep()
