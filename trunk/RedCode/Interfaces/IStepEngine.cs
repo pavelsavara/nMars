@@ -14,7 +14,7 @@ namespace nMars.RedCode
         /// <summary>
         /// Initialize the engine
         /// </summary>
-        void BeginMatch(IWarrior[] wariors, IPSpaces aPSpaces, Random random,
+        void BeginMatch(Rules aRules, IWarrior[] wariors, IPSpaces aPSpaces, Random random,
                         int[] forcedAddresses);
 
         /// <summary>

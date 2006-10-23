@@ -15,7 +15,7 @@ namespace nMars.RedCode
         /// <summary>
         /// Run complete round
         /// </summary>
-        FightResult[] Run(IWarrior[] wariors, IPSpaces aPSpaces, Random random, int[] forcedAddresses);
+        FightResult[] Run(Rules aRules, IWarrior[] wariors, IPSpaces aPSpaces, Random random, int[] forcedAddresses);
     }
 
     [ComVisible(true)]

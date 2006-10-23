@@ -7,6 +7,11 @@ using System;
 
 namespace nMars.RedCode
 {
+    public interface IObservedEngine
+    {
+        Instruction this[int offset] { get; }
+    }
+    
     public class StepEventArgs : EventArgs
     {
         public int oldAddress;
@@ -23,7 +28,7 @@ namespace nMars.RedCode
 
     public delegate void AfterSPL(SPLEventArgs args);
 
-    public interface IObservedEngine
+    public interface IObservedEventsEngine : IObservedEngine
     {
         event AfterStep OnAfterStep;
         event AfterSPL OnAfterSPL;

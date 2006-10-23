@@ -12,8 +12,8 @@ namespace nMars.Starter
         private static void Main()
         {
             ParserTest t = new ParserTest();
-            t.Loader();
-            return;
+            //t.Loader();
+            //return;
 
             Rules rules = new Rules();
 
@@ -23,15 +23,16 @@ namespace nMars.Starter
             List<int> forcedaddr = new List<int>();
 
             rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\warriors\corewin\bluefunk.red"));
-            //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\warriors\pmars\rave.red"));
+            rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\warriors\pmars\rave.red"));
             //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\warriors\2test\mod1test.rc"));
             //rr.Add(parser.Parse(@"D:\Zamboch\Zdrojaky\nMars\Warriors\warriors\pmars\validate.red"));
-            forcedaddr.Add(0);
+            //forcedaddr.Add(0);
 
-            Engine se = new Engine(rules);
+            //Engine se = new Engine();
+            pMarsDllEngine pe=new pMarsDllEngine();
             PSpaces spaces = new PSpaces();
             Random r = new Random(0);
-            se.Run(rr, spaces, r, forcedaddr);
+            pe.Run(rules, rr, spaces, r, forcedaddr);
 
             /*
             Rules rules = new Rules();
