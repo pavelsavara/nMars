@@ -15,7 +15,10 @@
 extern "C"
 {
 	#include "..\src\global.h"
-	void init();
 
 	PMARSDLL_API warrior_struct* pMarsParse(int argc, char** argv, char* errFile);
+	PMARSDLL_API int pMarsBeginMatch(int argc, char** argv, char* errFile);
+	PMARSDLL_API int pMarsStepMatch();
+	PMARSDLL_API void pMarsEndMatch();
+	PMARSDLL_API void pMarsGetCore(mem_struct** core, int* size);
 }

@@ -194,11 +194,9 @@ init()
 #endif
 }
 
-void
-body()
+void body_load()
 {
   int     i, j;
-
   for (i = 0; (i < warriors) && (errorcode == SUCCESS); i++)
     if ((!assemble(warrior[i].fileName, i)) && (!SWITCH_b)) {
       fprintf(STDOUT, info01, warrior[i].name, warrior[i].instLen,
@@ -209,8 +207,11 @@ body()
 #ifdef PSPACE                        /* set up pSpace */
   pspace_init();
 #endif
-  if (rounds && (errorcode == SUCCESS)) {
-    simulator1();
+}
+
+void body_results()
+{
+	int     i, j;
     if (SWITCH_k) {
       set_reg('W', (long) warriors);        /* 'W' used in score calculation */
       if (warriors == 2)        /* standard 2-warrior game */
@@ -226,6 +227,16 @@ body()
         }
     } else                        /* ! SWITCH_k */
       results(stdout);
+}
+
+void
+body()
+{
+  
+  body_load();
+  if (rounds && (errorcode == SUCCESS)) {
+    simulator1();
+	body_results();
   }
 }
 

@@ -228,19 +228,16 @@ checksum_warriors()
   return checksum;
 }
 
-void
-simulator1()
-{
 #ifdef PERMUTATE
   int permidx = 0, permtmp, *permbuf = NULL;
 #endif
   /* range for random number generator */
   warrior_struct *oldW;                /* the previous living warrior to execute */
-  ADDR_T  positions = coreSize + 1 - (separation << 1);
-  ADDR_T  coreSize1 = coreSize - 1;
-  warrior_struct *starter = warrior;        /* pointer to warrior that starts
-					 * round */
-  U32_T   cycles2 = warriors * cycles;
+  ADDR_T  positions;// = coreSize + 1 - (separation << 1);
+  ADDR_T  coreSize1;// = coreSize - 1;
+  warrior_struct *starter;// = warrior;        /* pointer to warrior that starts
+					 /* round */
+  U32_T   cycles2;// = warriors * cycles;
 #ifndef SERVER
   char    outs[60];                /* for cdb() entering message */
 #endif
@@ -256,7 +253,13 @@ register  int     temp;                        /* general purpose temporary vari
   ADDR_T FAR *offsPtr;                /* temporary pointer used in op decode phase */
 #endif
 
+void init_core()
+{
   endWar = warrior + warriors;
+  cycles2 = warriors * cycles;
+  coreSize1 = coreSize - 1;
+  positions = coreSize + 1 - (separation << 1);
+  starter = warrior;
 
 #ifdef PERMUTATE
   if (SWITCH_P) {
@@ -320,7 +323,10 @@ register  int     temp;                        /* general purpose temporary vari
 
   display_init();
   round = 1;
-  do {                                /* each round */
+}
+
+void init_round()
+{
 #if defined(DOS16) && !defined(SERVER) && !defined(DOSTXTGRAPHX) && !defined(DOSGRXGRAPHX) && !defined(DJGPP)
     fputc('\r', stdout);        /* enable interruption by Ctrl-C */
 #else
@@ -388,8 +394,12 @@ register  int     temp;                        /* general purpose temporary vari
     } while (++temp < warriors);
 
     display_clear();
+}
+
+int run_step()
+{   
     /* the inner loop of execution */
-    do {                        /* each cycle */
+                                /* each cycle */
       display_cycle();
      // progCnt = *(W->taskHead++);
      // IR = memory[progCnt];        /* copy instruction into register */
@@ -1186,7 +1196,7 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 	W->score[warriorsLeft + warriors - 2]++;
 	cycle = cycle - 1 - (cycle - 1) / (warriorsLeft--);
 	if (warriorsLeft < 2)
-	  goto nextround;        /* can't use break because in switch */
+	  return 1;        /* can't use break because in switch */
 
 #ifndef SERVER
 	if (debugState == BREAK) {
@@ -1195,7 +1205,7 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 	}
 #endif                                /* SERVER */
 	oldW->nextWarrior = W = W->nextWarrior;
-	continue;
+	return 0;
 
 	/* $EXT$ insert code for new opcodes here */
 
@@ -1308,8 +1318,11 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
       oldW = W;
       W = W->nextWarrior;
 //      --cycle;
-    } while (--cycle);                /* next cycle */
-nextround:
+	return 0;
+}
+
+void finalize_round()
+{
     for (temp = 0; temp < warriors; temp++) {
       if (warrior[temp].tasks) {
 	warrior[temp].score[warriorsLeft - 1]++;
@@ -1334,8 +1347,11 @@ nextround:
       debugState = cdb(outs);
     }
 #endif
-  } while (++round <= rounds);
+}
 
+
+void finalize_core()
+{
   display_close();
 #ifdef PERMUTATE
   if(permbuf) {
@@ -1349,4 +1365,58 @@ nextround:
   free(taskQueue);
   alloc_p = 0;
 #endif
+}
+
+void run_round()
+{
+	init_round();
+	do {                        /* each cycle */
+		if (run_step()!=0)
+		{
+			break;
+		}
+	} while (--cycle);                /* next cycle */
+	finalize_round();
+}
+
+void begin_match()
+{
+	init_core();
+	init_round();
+}
+
+void end_match()
+{
+	display_close();
+	finalize_core();
+}
+
+// 0 next step
+// 1 next round
+// 2 end match
+int step_match()
+{
+	int res=run_step();
+	--cycle;
+	if (res !=0 || cycle==0) 
+	{
+		finalize_round();
+		++round;
+		if (round>rounds) 
+		{
+			return 2;
+		}
+		init_round();
+		return 1;
+	}
+	return 0;
+}
+
+void simulator1()
+{
+	begin_match();
+	while(step_match()!=2)
+	{
+	}
+	end_match();
 }
