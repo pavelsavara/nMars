@@ -419,6 +419,7 @@ extern void init();
 extern void body();
 extern void body_load();
 extern void body_results();
+extern void body_finalize();
 //extern void sort_by_score();
 extern void Exit(int code);
 extern void reset_regs(void);
