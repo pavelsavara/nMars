@@ -76,6 +76,7 @@ void    Exit(int);
 int     returninfo(void);
 #ifdef PSPACE
 void    pspace_init(void);
+void    pspace_finalize(void);
 #endif
 #if defined(unix) || defined(__MSDOS__) || defined(SDLGRAPHX) || defined(VMS)
 void    sighandler(int dummy);
@@ -229,6 +230,37 @@ void body_results()
       results(stdout);
 }
 
+void body_finalize()
+{
+	int w ;
+	for (w = 0; (w < MAXWARRIOR); w++)
+	{
+		FREE(warrior[w].authorName);
+		FREE(warrior[w].fileName);
+		FREE(warrior[w].date);
+		FREE(warrior[w].version);
+		FREE(warrior[w].name);
+		FREE(warrior[w].instBank);
+		warrior[w].offset=0;
+		warrior[w].instLen=0;
+		warrior[w].tasks=0;
+		warrior[w].pSpaceIDNumber=0;
+		warrior[w].lastResult=0;
+		warrior[w].taskHead=NULL;
+		warrior[w].taskTail=NULL;
+		warrior[w].nextWarrior=NULL;
+		warrior[w].authorName=NULL;
+		warrior[w].fileName=NULL;
+		warrior[w].date=NULL;
+		warrior[w].version=NULL;
+		warrior[w].name=NULL;
+		warrior[w].instBank=NULL;
+	}
+#ifdef PSPACE                        /* teardown up pSpace */
+	pspace_finalize();
+#endif
+}
+
 void
 body()
 {
@@ -238,6 +270,7 @@ body()
     simulator1();
 	body_results();
   }
+  body_finalize();
 }
 
 /* called when ctrl-c is pressed; prepares for debugger entry */
@@ -442,4 +475,17 @@ pspace_init()
     }
   }
 }                                /* pspace_init() */
+
+void pspace_finalize()
+{
+  int     i, j;
+  for (i = 0; i < warriors; ++i) {
+	j = warrior[i].pSpaceIndex;
+    if (pSpace[j])
+	{
+		free(pSpace[j]);
+		pSpace[j]=NULL;
+	}
+  }
+}
 #endif

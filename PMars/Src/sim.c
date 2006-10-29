@@ -281,6 +281,7 @@ void init_core()
     taskQueue = farmalloc(65528L);        /* allocate an entire 64K segment */
     if (!taskQueue) {
       farfree(memory);
+	  memory=NULL;
       errout(outOfMemory);
       Exit(MEMERR);
     }
@@ -301,6 +302,7 @@ void init_core()
     taskQueue = (ADDR_T *) malloc((size_t) totaltask * sizeof(ADDR_T));
     if (!taskQueue) {
       free(memory);
+	  memory=NULL;
       errout(outOfMemory);
       Exit(MEMERR);
     }
@@ -1300,7 +1302,10 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 #ifndef DOS16
 	/* DOS taskQueue may not be free'd because of segment wrap-around */
 	free(memory);
+	memory=NULL;
 	free(taskQueue);
+	taskQueue=NULL;
+    endQueue=NULL;
 	alloc_p = 0;
 #endif
 	Exit(SERIOUS);
@@ -1362,21 +1367,15 @@ void finalize_core()
 #ifndef DOS16
   /* DOS taskQueue may not be free'd because of segment wrap-around */
   free(memory);
+  memory=NULL;
   free(taskQueue);
+  taskQueue=NULL;
+  endQueue=NULL;
+  W=warrior;
+  warriors=0;
+  warriorsLeft=0;
   alloc_p = 0;
 #endif
-}
-
-void run_round()
-{
-	init_round();
-	do {                        /* each cycle */
-		if (run_step()!=0)
-		{
-			break;
-		}
-	} while (--cycle);                /* next cycle */
-	finalize_round();
 }
 
 void begin_match()
