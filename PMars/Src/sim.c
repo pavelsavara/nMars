@@ -1371,9 +1371,6 @@ void finalize_core()
   free(taskQueue);
   taskQueue=NULL;
   endQueue=NULL;
-  W=warrior;
-  warriors=0;
-  warriorsLeft=0;
   alloc_p = 0;
 #endif
 }
