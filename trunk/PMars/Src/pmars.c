@@ -108,7 +108,7 @@ extern char *cantInitSvga, *cantOpenConsole, *tcgetattrFails;
 #endif
 
 /* global variables */
-int     pspP = 0;                /* contains number of P-spaces allocated, <
+int     pspP;                /* contains number of P-spaces allocated, <
                                  * warriors with PIN */
 
 #if defined(__BORLANDC__) && defined(CHECK386)
@@ -233,6 +233,7 @@ void body_results()
 void body_finalize()
 {
 	int w ;
+	warriors=0;
 	for (w = 0; (w < MAXWARRIOR); w++)
 	{
 		FREE(warrior[w].authorName);
@@ -448,6 +449,7 @@ void
 pspace_init()
 {
   int     i, j;
+  pspP=0;
   for (i = 0; i < warriors; ++i) {
     if (warrior[i].pSpaceIndex == UNSHARED)
       warrior[i].pSpaceIndex = pspP++;
