@@ -12,48 +12,9 @@
 #pragma managed(pop)
 #endif
 
-void initWarrior(int w)
-{
-	warrior[w].offset=0;
-	warrior[w].instLen=0;
-	warrior[w].authorName=NULL;
-	warrior[w].fileName=NULL;
-	warrior[w].date=NULL;
-	warrior[w].version=NULL;
-	warrior[w].name=NULL;
-	warrior[w].instBank=NULL;
-}
-
-void cleanWarrior(int w)
-{
-	warrior[w].offset=0;
-	warrior[w].instLen=0;
-	delete warrior[w].authorName;
-	delete warrior[w].fileName;
-	delete warrior[w].date;
-	delete warrior[w].version;
-	delete warrior[w].name;
-	delete warrior[w].instBank;
-}
-void initAllWarriors()
-{
-	for(int w=0;w<MAXWARRIOR;w++)
-	{
-		initWarrior(w);
-	}
-}
-void cleanAllWarriors()
-{
-	for(int w=0;w<MAXWARRIOR;w++)
-	{
-		cleanWarrior(w);
-	}
-}
-
 PMARSDLL_API warrior_struct* pMarsParse(int argc, char** argv, char* errFile)
 {
 	warrior_struct* res=NULL;
-	cleanAllWarriors();
 	freopen( errFile, "w", stderr );
 	if (parse_param(argc,argv)==SUCCESS) 
 	{
@@ -71,10 +32,14 @@ PMARSDLL_API warrior_struct* pMarsParse(int argc, char** argv, char* errFile)
 	return res;
 }
 
+PMARSDLL_API void pMarsFreeParsed()
+{
+	body_finalize();
+}
+
 
 PMARSDLL_API int pMarsBeginMatch(int argc, char** argv, char* errFile)
 {
-	cleanAllWarriors();
 	freopen( errFile, "w", stderr );
 	if (parse_param(argc,argv)==SUCCESS) 
 	{
@@ -97,6 +62,24 @@ PMARSDLL_API int pMarsBeginMatch(int argc, char** argv, char* errFile)
 }
 
 
+PMARSDLL_API void pMarsWatchMatch(mem_struct** aCore, int* aCoreSize, long** aCyclesLeft, int** aRound,
+								  warrior_struct** aWarriors, int* aWarriorsCount, 
+								  int** aWarriorsLeft, warrior_struct*** aNextWarrior, //warriors
+								  int** aTaskQueue, int** aEndQueue //tasks
+								  )
+{
+	*aCore=memory;
+	*aCoreSize=coreSize;
+	*aWarriors=warrior;
+	*aWarriorsCount=warriors;
+	*aTaskQueue=taskQueue;
+	*aEndQueue=endQueue;
+	*aWarriorsLeft=&warriorsLeft;
+	*aCyclesLeft=&cycle;
+	*aNextWarrior=&W;
+	*aRound=&round;
+}
+
 PMARSDLL_API int pMarsStepMatch()
 {
 	return step_match();
@@ -105,16 +88,12 @@ PMARSDLL_API int pMarsStepMatch()
 PMARSDLL_API void pMarsEndMatch()
 {
 	end_match();
-	body_results();
+	if(errorcode == SUCCESS)
+	{
+		body_results();
+	}
+	body_finalize();
 	freopen( "CON", "w", stderr );
-	cleanAllWarriors();
-}
-
-
-PMARSDLL_API void pMarsGetCore(mem_struct** core, int* size)
-{
-	*core=memory;
-	*size=coreSize;
 }
 
 
@@ -126,7 +105,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
-		initAllWarriors();
 		break;
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:

@@ -15,10 +15,16 @@
 extern "C"
 {
 	#include "..\src\global.h"
+	#include "..\src\sim.h"
 
 	PMARSDLL_API warrior_struct* pMarsParse(int argc, char** argv, char* errFile);
+    PMARSDLL_API void pMarsFreeParsed();
 	PMARSDLL_API int pMarsBeginMatch(int argc, char** argv, char* errFile);
 	PMARSDLL_API int pMarsStepMatch();
+	PMARSDLL_API void pMarsWatchMatch(mem_struct** aCore, int* aCoreSize, long** aCyclesLeft, int** aRound,
+									  warrior_struct** aWarriors, int* aWarriorsCount, 
+									  int** aWarriorsLeft, warrior_struct*** aNextWarrior,//warriors
+									  int** aTaskQueue, int** aEndQueue //tasks
+									  );
 	PMARSDLL_API void pMarsEndMatch();
-	PMARSDLL_API void pMarsGetCore(mem_struct** core, int* size);
 }
