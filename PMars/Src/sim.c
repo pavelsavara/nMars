@@ -1197,8 +1197,6 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 	display_die(W - warrior);
 	W->score[warriorsLeft + warriors - 2]++;
 	cycle = cycle - 1 - (cycle - 1) / (warriorsLeft--);
-	if (warriorsLeft < 2)
-	  return 1;        /* can't use break because in switch */
 
 #ifndef SERVER
 	if (debugState == BREAK) {
@@ -1207,6 +1205,8 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 	}
 #endif                                /* SERVER */
 	oldW->nextWarrior = W = W->nextWarrior;
+	if (warriorsLeft < 2)
+	  return 1;        /* can't use break because in switch */
 	return 0;
 
 	/* $EXT$ insert code for new opcodes here */
