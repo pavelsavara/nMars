@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -63,12 +64,12 @@ namespace nMars.RedCode
         /// Date created
         /// </summary>
         string Date { get; }
-        
+
         /// <summary>
         /// pMars version
         /// </summary>
         string Version { get; }
-        
+
         /// <summary>
         /// Loaded from file
         /// </summary>
@@ -88,7 +89,7 @@ namespace nMars.RedCode
         /// <summary>
         /// List of Instructions
         /// </summary>
-        Instruction this[int offset] { get; }
+        IInstruction this[int offset] { get; }
 
         /// <summary>
         /// Dump
@@ -104,5 +105,14 @@ namespace nMars.RedCode
         /// Dump with extended options
         /// </summary>
         void Dump(string fileName, DumpOptions options);
+    }
+
+    [ComVisible(true)]
+    public interface IRunningWarrior : IWarrior
+    {
+        IInstruction NextInstruction { get; }
+        int NextInstructionIndex { get; }
+        int LiveTasksCount { get; }
+        IList<int> Tasks { get; }
     }
 }

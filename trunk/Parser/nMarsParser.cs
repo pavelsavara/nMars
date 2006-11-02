@@ -14,11 +14,6 @@ namespace nMars
 {
     public class nMarsParser : ParserBase, IParser
     {
-        public nMarsParser(Rules aRules)
-        {
-            InitParser(aRules);
-        }
-
         public override IWarrior Parse(string fileName, TextWriter err)
         {
             StreamReader sr = new StreamReader(fileName);
@@ -43,12 +38,12 @@ namespace nMars
                 //first pass to expand for-rof cycles
                 currentAddress = 0;
                 variables["CURLINE"] = new Value(0);
-                statement.ExpandStatements(warrior, this, ref currentAddress, rules.coreSize, false);
+                statement.ExpandStatements(warrior, this, ref currentAddress, rules.CoreSize, false);
 
                 //second pass to evaluate variables/labels in context of for cycles
                 currentAddress = 0;
                 variables["CURLINE"] = new Value(0);
-                statement.ExpandStatements(warrior, this, ref currentAddress, rules.coreSize, true);
+                statement.ExpandStatements(warrior, this, ref currentAddress, rules.CoreSize, true);
 
                 SetOrg(warrior);
                 SetPin(warrior);
@@ -118,15 +113,15 @@ namespace nMars
             counter = 0;
             warriorName = null;
             authorName = null;
-            variables["CORESIZE"] = new Value(rules.coreSize);
-            variables["MAXPROCESSES"] = new Value(rules.maxProcesses);
-            variables["MAXCYCLES"] = new Value(rules.maxCycles);
-            variables["MAXLENGTH"] = new Value(rules.maxLength);
-            variables["MINDISTANCE"] = new Value(rules.minDistance);
-            variables["ROUNDS"] = new Value(rules.rounds);
-            variables["PSPACESIZE"] = new Value(rules.pSpaceSize);
-            variables["VERSION"] = new Value(rules.version);
-            variables["WARRIORS"] = new Value(rules.warriors);
+            variables["CORESIZE"] = new Value(rules.CoreSize);
+            variables["MAXPROCESSES"] = new Value(rules.MaxProcesses);
+            variables["MAXCYCLES"] = new Value(rules.MaxCycles);
+            variables["MAXLENGTH"] = new Value(rules.MaxLength);
+            variables["MINDISTANCE"] = new Value(rules.MinDistance);
+            variables["ROUNDS"] = new Value(rules.Rounds);
+            variables["PSPACESIZE"] = new Value(rules.PSpaceSize);
+            variables["VERSION"] = new Value(rules.Version);
+            variables["WARRIORS"] = new Value(rules.WarriorsCount);
         }
     }
 }

@@ -16,13 +16,16 @@ namespace Parser.Test
     [TestFixture]
     public class ParserTest
     {
-        [Test]
-        public void Loader()
+        IParser nparser;
+        IParser pparser;
+        string basePath;
+
+        void Init()
         {
-            IParser nparser = new nMarsParser(Rules.DefaultRules);
-            IParser pparser = new pMarsDllParser(Rules.DefaultRules);
-            //IParser pparser = new pMarsParser(Rules.DefaultRules);
-            string basePath = Path.GetFullPath(@"Warriors");
+            nparser = new nMarsParser();
+            pparser = new pMarsDllParser();
+            //pparser = new pMarsParser(Rules.DefaultRules);
+            basePath = Path.GetFullPath(@"Warriors");
             if (!Directory.Exists(basePath))
             {
                 basePath = Path.GetFullPath(@"..\Warriors");
@@ -45,13 +48,27 @@ namespace Parser.Test
                 {
                     Directory.Delete(basePath + @"\_problems\", true);
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     //swalow
                 }
             }
-            
+
             Directory.CreateDirectory(basePath + @"\_problems\");
+        }
+
+        [Test]
+        public void Single()
+        {
+            Init();
+            if (!LoadDumpOne(basePath + @"\warriors\corewin\irongate.red"))
+                throw new ParserException("Some warriors failed.");
+        }
+
+        [Test]
+        public void Full()
+        {
+            Init();
 
             List<string> files =
                 new List<string>(Directory.GetFiles(basePath, "*.rc", SearchOption.AllDirectories));
@@ -60,20 +77,19 @@ namespace Parser.Test
             bool allOK = true;
             foreach (string file in files)
             {
-                Console.Write("Reading {0}          \r", file);
-                allOK &= LoadDumpOne(file, basePath, nparser, pparser);
+                allOK &= LoadDumpOne(file);
             }
             if (!allOK)
                 throw new ParserException("Some warriors failed.");
         }
 
-        private static bool LoadDumpOne(string file, string basePath, IParser nparser, IParser pparser)
+        private bool LoadDumpOne(string file)
         {
-            IWarrior nw;
-            IWarrior pw;
-            string problemsPath = basePath + @"\_problems\" + Path.GetFileNameWithoutExtension(file);
-            pw = pparser.Parse(file, problemsPath + ".pErr");
-            nw = nparser.Parse(file, problemsPath + ".nErr");
+            string shortName = Path.GetFileNameWithoutExtension(file);
+            Console.Write("Reading {0}          \r", shortName);
+            string problemsPath = basePath + @"\_problems\" + shortName;
+            IWarrior pw = pparser.Parse(file, problemsPath + ".pErr");
+            IWarrior nw = nparser.Parse(file, problemsPath + ".nErr");
 
             if (nw == null && pw == null)
             {
@@ -91,7 +107,6 @@ namespace Parser.Test
             {
                 nw.Dump(problemsPath + ".nDmp", DumpOptions.NoOffset);
                 pw.Dump(problemsPath + ".pDmp", DumpOptions.NoOffset);
-                nw = nparser.Parse(file, problemsPath + ".nErr");
             }
             else
             {

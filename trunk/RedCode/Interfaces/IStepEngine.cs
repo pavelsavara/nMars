@@ -9,6 +9,14 @@ using System.Runtime.InteropServices;
 namespace nMars.RedCode
 {
     [ComVisible(true)]
+    public enum StepResult
+    {
+        Continue = 0,
+        NextRound = 1,
+        Finished = 2,
+    }
+
+    [ComVisible(true)]
     public interface IStepEngine
     {
         /// <summary>
@@ -21,11 +29,16 @@ namespace nMars.RedCode
         /// make step
         /// </summary>
         /// <returns>true when there is next step to process</returns>
-        bool NextStep();
+        StepResult NextStep();
 
         /// <summary>
         /// returns results of the match
         /// </summary>
-        FightResult[] EndMatch();
+        MatchResult EndMatch();
+    }
+
+    [ComVisible(true)]
+    public interface IExtendedStepEngine : IStepEngine, ICoreView, ITaskView, IWarriorsView, ITimeView
+    {
     }
 }

@@ -11,22 +11,18 @@ namespace nMars.SimpleEngine
 {
     public class Engine : StepEngine, IEngine
     {
-        public Engine()
-        {
-        }
-
-        public IList<FightResult> Run(Rules aRules, IList<IWarrior> aWarriors, IPSpaces aPSpaces, Random aRandom,
-                                      IList<int> forcedAddresses)
+        public MatchResult Run(Rules aRules, IList<IWarrior> aWarriors, IPSpaces aPSpaces, Random aRandom,
+                               IList<int> forcedAddresses)
         {
             BeginMatch(aRules, aWarriors, aPSpaces, aRandom, forcedAddresses);
-            while (NextStep())
+            while (NextStep() != StepResult.Finished)
             {
             }
             return EndMatch();
         }
 
-        public FightResult[] Run(Rules aRules, IWarrior[] aWarriors, IPSpaces aPSpaces, Random aRandom,
-                                      int[] forcedAddresses)
+        public MatchResult Run(Rules aRules, IWarrior[] aWarriors, IPSpaces aPSpaces, Random aRandom,
+                               int[] forcedAddresses)
         {
             return Run(aRules, aWarriors, aPSpaces, aRandom, forcedAddresses);
         }

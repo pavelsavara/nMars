@@ -18,12 +18,12 @@ namespace nMars.RedCode
 
         public Warrior(Rules rules)
         {
-            Instructions = new List<Instruction>();
+            Instructions = new List<IInstruction>();
             StartOffset = 0;
             Rules = rules;
         }
 
-        public List<Instruction> Instructions;
+        public List<IInstruction> Instructions;
         public int StartOffset;
         public string Name = "";
         public string Author = "Anonymous";
@@ -46,20 +46,7 @@ namespace nMars.RedCode
             tw.WriteLine("       ORG      START");
             for (int a = 0; a < Instructions.Count; a++)
             {
-                Instruction instruction = Instructions[a];
-                if (options.Offset)
-                    tw.Write("   ");
-                if (a == StartOffset)
-                {
-                    tw.Write("START  ");
-                }
-                else
-                {
-                    tw.Write("       ");
-                }
-                if (options.Labels)
-                    tw.Write("      ");
-                tw.WriteLine(instruction.ToString());
+                tw.WriteLine(Instructions[a].GetLine(options, a == StartOffset));
             }
             tw.WriteLine();
         }
@@ -111,7 +98,7 @@ namespace nMars.RedCode
             get { return Rules; }
         }
 
-        public Instruction this[int offset]
+        IInstruction IWarrior.this[int offset]
         {
             get { return Instructions[offset]; }
         }
@@ -135,7 +122,7 @@ namespace nMars.RedCode
             //if (a.Author != b.Author) return false;
             for (int adr = 0; adr < b.Length; adr++)
             {
-                if (a[adr] != b[adr]) return false;
+                if (!a[adr].Equals(b[adr])) return false;
             }
             return true;
         }

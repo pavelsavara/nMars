@@ -109,7 +109,7 @@ namespace nMars.RedCode
         /// next instruction is queued.
         /// </summary>
         SPL = 11,
-        
+
         /// <summary>
         /// No additional processing takes place.  This effectively removes the
         /// current task from the current warrior's task queue.
@@ -125,7 +125,6 @@ namespace nMars.RedCode
         /// skip if equal (compares two instructions, and skips the next instruction if they are equal)
         /// </summary>
         //SEQ = 14,
-
         /// <summary>
         /// skip if not equal (compares two instructions, and skips the next instruction if they aren't equal)
         /// </summary>
@@ -154,7 +153,7 @@ namespace nMars.RedCode
             if (i == 14) return Operation.CMP;
             return (Operation) i;
         }
-        
+
         public static Operation Parse(string s)
         {
             switch (s.ToUpper())

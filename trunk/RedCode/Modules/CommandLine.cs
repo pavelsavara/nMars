@@ -37,50 +37,49 @@ namespace nMars.RedCode.CommandLine
                         PrintParserHelp(parserModule.Executable);
                         return 0;
                     case "-p":
-                        if (!ReadNumber(args, ref p, out rules.maxProcesses))
+                        if (!ReadNumber(args, ref p, out rules.MaxProcesses))
                         {
                             return -1;
                         }
                         break;
                     case "-s":
-                        if (!ReadNumber(args, ref p, out rules.coreSize))
+                        if (!ReadNumber(args, ref p, out rules.CoreSize))
                         {
                             return -1;
                         }
                         break;
                     case "-r":
-                        if (!ReadNumber(args, ref p, out rules.rounds))
+                        if (!ReadNumber(args, ref p, out rules.Rounds))
                         {
                             return -1;
                         }
                         break;
                     case "-c":
-                        if (!ReadNumber(args, ref p, out rules.maxCycles))
+                        if (!ReadNumber(args, ref p, out rules.MaxCycles))
                         {
                             return -1;
                         }
                         break;
                     case "-l":
-                        if (!ReadNumber(args, ref p, out rules.maxLength))
+                        if (!ReadNumber(args, ref p, out rules.MaxLength))
                         {
                             return -1;
                         }
                         break;
                     case "-d":
-                        if (!ReadNumber(args, ref p, out rules.minDistance))
+                        if (!ReadNumber(args, ref p, out rules.MinDistance))
                         {
                             return -1;
                         }
                         break;
                     case "-S":
-                        if (!ReadNumber(args, ref p, out rules.pSpaceSize))
+                        if (!ReadNumber(args, ref p, out rules.PSpaceSize))
                         {
                             return -1;
                         }
                         break;
-                        
-                        
-                        
+
+
                     case "-u":
                         if (args.Length < p + 1)
                         {
@@ -113,7 +112,7 @@ namespace nMars.RedCode.CommandLine
                         break;
                 }
             }
-            IParser parser = parserModule.CreateParser(rules);
+            IParser parser = parserModule.CreateParser();
             foreach (string file in files)
             {
                 IWarrior warrior = parser.Parse(file);
@@ -131,7 +130,7 @@ namespace nMars.RedCode.CommandLine
             return 0;
         }
 
-        private static bool ReadNumber(string[] args,ref int p, out int number)
+        private static bool ReadNumber(string[] args, ref int p, out int number)
         {
             if (args.Length < p + 1 || !Int32.TryParse(args[p + 1], out number))
             {

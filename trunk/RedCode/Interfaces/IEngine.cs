@@ -10,17 +10,26 @@ using nMars.RedCode.Modules;
 namespace nMars.RedCode
 {
     [ComVisible(true)]
+    public class EngineException : Exception
+    {
+        public EngineException(string message)
+            : base(message)
+        {
+        }
+    }
+
+    [ComVisible(true)]
     public interface IEngine
     {
         /// <summary>
         /// Run complete round
         /// </summary>
-        FightResult[] Run(Rules aRules, IWarrior[] wariors, IPSpaces aPSpaces, Random random, int[] forcedAddresses);
+        MatchResult Run(Rules aRules, IWarrior[] wariors, IPSpaces aPSpaces, Random random, int[] forcedAddresses);
     }
 
     [ComVisible(true)]
     public interface IEngineModule : IModule
     {
-        IEngine CreateEngine(Rules rules);
+        IEngine CreateEngine();
     }
 }

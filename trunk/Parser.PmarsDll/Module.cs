@@ -3,7 +3,6 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using nMars.RedCode;
 using nMars.RedCode.CommandLine;
 using nMars.RedCode.Modules;
@@ -33,12 +32,12 @@ namespace nMars.pMarsDll
             get { return executable; }
         }
 
-        public IParser CreateParser(Rules rules)
+        public IParser CreateParser()
         {
-            return new pMarsDllParser(rules);
+            return new pMarsDllParser();
         }
 
-        public IEngine CreateEngine(Rules rules)
+        public IEngine CreateEngine()
         {
             return new pMarsDllEngine();
         }
@@ -46,6 +45,5 @@ namespace nMars.pMarsDll
         private static Module instance;
         private static string name = "pMarsDll";
         private static string executable = "pMarsDll";
-
     }
 }

@@ -32,7 +32,7 @@ namespace nMars.SimpleEngine
             get { return executable; }
         }
 
-        public IEngine CreateEngine(Rules rules)
+        public IEngine CreateEngine()
         {
             return new Engine();
         }

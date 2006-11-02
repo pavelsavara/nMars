@@ -9,11 +9,13 @@ namespace nMars.pMarsDll
     {
         static pMarsDll()
         {
-            instructionSize = Marshal.SizeOf(typeof (MemStruct));
+            instructionSize = Marshal.SizeOf(typeof (PmarsInstruction));
+            warrirorSize = Marshal.SizeOf(typeof (PmarsWarrior));
+            pointerSize = Marshal.SizeOf(typeof (IntPtr));
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemStruct
+        public struct PmarsInstruction : IInstruction
         {
             public int A_value;
             public int B_value;
@@ -21,10 +23,74 @@ namespace nMars.pMarsDll
             public byte A_mode;
             public byte B_mode;
             public byte debuginfo;
+
+            public static Mode ConvertMode(int mode)
+            {
+                switch (mode)
+                {
+                    case 0x00:
+                        return Mode.Immediate;
+                    case 0x01:
+                        return Mode.Direct;
+                    case 0x02:
+                        return Mode.IndirectB;
+                    case 0x03:
+                        return Mode.PreDecIndirectB;
+                    case 0x04:
+                        return Mode.PostIncIndirectB;
+                    case 0x82:
+                        return Mode.IndirectA;
+                    case 0x83:
+                        return Mode.PreDecIndirectA;
+                    case 0x84:
+                        return Mode.PostIncIndirectA;
+                    default:
+                        throw new InvalidOperationException("Unknown mode");
+                }
+            }
+
+            #region IInstruction
+
+            public Operation Operation
+            {
+                get { return OperationHelper.Convert(((opcode & 0xf8)) >> 3); }
+            }
+
+            public Modifier Modifier
+            {
+                get { return (Modifier) (opcode & 0x07); }
+            }
+
+            public Mode ModeA
+            {
+                get { return ConvertMode(A_mode); }
+            }
+
+            public int ValueA
+            {
+                get { return A_value; }
+            }
+
+            public Mode ModeB
+            {
+                get { return ConvertMode(B_mode); }
+            }
+
+            public int ValueB
+            {
+                get { return B_value; }
+            }
+
+            public string GetLine(DumpOptions options, bool start)
+            {
+                throw new NotImplementedException();
+            }
+
+            #endregion
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public class WarriorStruct
+        public class PmarsWarrior
         {
             public int pSpaceIDNumber;
             public IntPtr taskHead;
@@ -34,31 +100,25 @@ namespace nMars.pMarsDll
             public int pSpaceIndex;
             public int position; //load position in core
             public int instLen;
-
             public int offset;
 
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 71)]
-            public short[] score;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 71)] public short[] score;
 
-            [MarshalAs(UnmanagedType.LPStr)]
-            public string name;
-            [MarshalAs(UnmanagedType.LPStr)]
-            public string version;
-            [MarshalAs(UnmanagedType.LPStr)]
-            public string date;
-            [MarshalAs(UnmanagedType.LPStr)]
-            public string fileName;
-            [MarshalAs(UnmanagedType.LPStr)]
-            public string authorName;
+            [MarshalAs(UnmanagedType.LPStr)] public string name;
+            [MarshalAs(UnmanagedType.LPStr)] public string version;
+            [MarshalAs(UnmanagedType.LPStr)] public string date;
+            [MarshalAs(UnmanagedType.LPStr)] public string fileName;
+            [MarshalAs(UnmanagedType.LPStr)] public string authorName;
 
             public IntPtr instBank;
 
             public IntPtr nextWarrior;
         }
 
+        #region Dll
 
         [DllImport("pMars.dll")]
-        public static extern WarriorStruct pMarsParse(
+        public static extern PmarsWarrior pMarsParse(
             [In] int argc,
             [In, MarshalAs(UnmanagedType.LPArray)] string[] argv,
             [In, MarshalAs(UnmanagedType.LPStr)] string errFile);
@@ -73,68 +133,88 @@ namespace nMars.pMarsDll
         public static extern int pMarsStepMatch();
 
         [DllImport("pMars.dll")]
-        public static extern void pMarsEndMatch();
-        
-        /*[DllImport("pMars.dll")]
-        public static extern void pMarsGetCore(
-            [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] MemStruct[] argv,
-            [Out] int size);*/
+        public static extern void pMarsWatchMatch(
+            [Out] out IntPtr aCore, [Out] out int aCoreSize, [Out] out IntPtr aCyclesLeft, [Out] out IntPtr aRound,
+            [Out] out IntPtr aWarriors, [Out] out int aWarriorsCount, [Out] out IntPtr aWarrirosLeft,
+            [Out] out IntPtr aNextWarrior,
+            [Out] out IntPtr aTaskQueue, [Out] out IntPtr aEndQueue);
 
         [DllImport("pMars.dll")]
-        public static extern void pMarsGetCore(
-            [Out] out IntPtr core,
-            [Out] out int size);
+        public static extern void pMarsEndMatch();
 
-        public static Mode ConvertMode(int mode)
-        {
-            switch (mode)
-            {
-                case 0x00:
-                    return Mode.Immediate;
-                case 0x01:
-                    return Mode.Direct;
-                case 0x02:
-                    return Mode.IndirectB;
-                case 0x03:
-                    return Mode.PreDecIndirectB;
-                case 0x04:
-                    return Mode.PostIncIndirectB;
-                case 0x82:
-                    return Mode.IndirectA;
-                case 0x83:
-                    return Mode.PreDecIndirectA;
-                case 0x84:
-                    return Mode.PostIncIndirectA;
-                default:
-                    throw new InvalidOperationException("Unknown mode");
-            }
-        }
+        [DllImport("pMars.dll")]
+        public static extern void pMarsFreeParsed();
+
+        #endregion
 
         public static int instructionSize;
-        public static void FillInstructions(IList<Instruction> list, IntPtr first, int length, int coreSize)
+        public static int warrirorSize;
+        public static int pointerSize;
+
+        public static void FillInstructions(IList<IInstruction> list, IntPtr first, int length, int coreSize)
         {
             for (int i = 0; i < length; i++)
             {
-                IntPtr instructionPtr = (IntPtr)(((int)first) + (i * instructionSize));
-                MemStruct m = (MemStruct)Marshal.PtrToStructure(instructionPtr, typeof(MemStruct));
-                Instruction inst = ConvertInstruction(m, coreSize);
-                list.Add(inst);
+                IntPtr instructionPtr = (IntPtr) ((int) first + (i*instructionSize));
+                PmarsInstruction m =
+                    (PmarsInstruction) Marshal.PtrToStructure(instructionPtr, typeof (PmarsInstruction));
+
+                Instruction c = new Instruction(m);
+                //c.ValueA = Instruction.Wrap(c.ValueA, coreSize);
+                //c.ValueB = Instruction.Wrap(c.ValueB, coreSize);
+                list.Add(c);
             }
-
         }
 
-        public static Instruction ConvertInstruction(MemStruct m, int coreSize)
+        public static void FillWarrirors(List<PmarsWarrior> list, IntPtr first, int length)
         {
-            int op = ((m.opcode & 0xf8)) >> 3;
-            int mod = (m.opcode & 0x07);
-
-
-            return new Instruction(OperationHelper.Convert(op), (Modifier)mod,
-                                   ConvertMode(m.A_mode), Instruction.Wrap(m.A_value, coreSize),
-                                   ConvertMode(m.B_mode), Instruction.Wrap(m.B_value, coreSize));
+            for (int w = 0; w < length; w++)
+            {
+                IntPtr warrirorPtr = (IntPtr) ((int) first + (w*warrirorSize));
+                list.Add((PmarsWarrior) Marshal.PtrToStructure(warrirorPtr, typeof (PmarsWarrior)));
+            }
         }
 
-        public static List<string> BuildParams(Rules rules, bool parser,params string[] fileNames)
+        public static void FillTasks(List<int> list, IntPtr first, IntPtr last, IntPtr start, IntPtr end, int length)
+        {
+            IntPtr taskPtr = first;
+            for (int a = 0; a < length; a++)
+            {
+                int task = Marshal.ReadInt32(taskPtr);
+                list.Add(task);
+                taskPtr = (IntPtr) ((int) taskPtr + pointerSize);
+                if (taskPtr == end)
+                    taskPtr = start;
+            }
+        }
+
+        public static int WarrirorIndex(IntPtr first, IntPtr currentPtr)
+        {
+            IntPtr current = Marshal.ReadIntPtr(currentPtr);
+            return ((int) current - (int) first)/warrirorSize;
+        }
+
+        public static int InstructionAddress(IntPtr taskPtr)
+        {
+            return Marshal.ReadInt32(taskPtr);
+        }
+
+        public static Warrior ConvertWarrior(string fileName, PmarsWarrior w, Rules rules)
+        {
+            Warrior warrior;
+            warrior = new Warrior(rules);
+            warrior.StartOffset = w.offset;
+            warrior.Name = w.name;
+            warrior.Author = w.authorName;
+            warrior.Date = w.date;
+            warrior.Version = w.version;
+            warrior.FileName = fileName;
+            FillInstructions(warrior.Instructions, w.instBank, w.instLen, rules.CoreSize);
+            return warrior;
+        }
+
+        public static List<string> BuildParams(Rules rules, bool parser, int[] forcedAddresses,
+                                               params string[] fileNames)
         {
             List<string> r = new List<string>();
 
@@ -146,24 +226,32 @@ namespace nMars.pMarsDll
             }
             else
             {
-                r.Add(rules.rounds.ToString());
+                r.Add(rules.Rounds.ToString());
+                r.Add("-b");
             }
             r.Add("-k");
             r.Add("-p");
-            r.Add(rules.maxProcesses.ToString());
+            r.Add(rules.MaxProcesses.ToString());
             r.Add("-s");
-            r.Add(rules.coreSize.ToString());
+            r.Add(rules.CoreSize.ToString());
             r.Add("-c");
-            r.Add(rules.maxCycles.ToString());
+            r.Add(rules.MaxCycles.ToString());
             r.Add("-l");
-            r.Add(rules.maxLength.ToString());
+            r.Add(rules.MaxLength.ToString());
             r.Add("-d");
-            r.Add(rules.minDistance.ToString());
+            r.Add(rules.MinDistance.ToString());
             r.Add("-S");
-            r.Add(rules.pSpaceSize.ToString());
-            r.AddRange(fileNames);
+            r.Add(rules.PSpaceSize.ToString());
+            for (int w = 0; w < fileNames.Length; w++)
+            {
+                r.Add(fileNames[w]);
+                if (forcedAddresses != null && w == 1)
+                {
+                    r.Add("-F");
+                    r.Add(forcedAddresses[w].ToString());
+                }
+            }
             return r;
         }
-        
     }
 }

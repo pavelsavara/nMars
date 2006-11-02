@@ -5,13 +5,16 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace nMars.RedCode
 {
     [Serializable]
     [ComVisible(true)]
-    public class Instruction
+    public class Instruction : IInstruction
     {
+        #region Constructors
+
         public Instruction(
             Operation operation,
             Modifier modifier,
@@ -28,7 +31,7 @@ namespace nMars.RedCode
             ValueB = valueB;
         }
 
-        public Instruction(Instruction src)
+        public Instruction(IInstruction src)
         {
             Operation = src.Operation;
             Modifier = src.Modifier;
@@ -48,18 +51,36 @@ namespace nMars.RedCode
             ValueB = 0;
         }
 
-        public Operation Operation;
-        public Modifier Modifier;
-        public Mode ModeA;
-        public int ValueA;
-        public Mode ModeB;
-        public int ValueB;
+        #endregion
 
-        public override string ToString()
+        #region Public methods
+
+        public static int Mod(int raw, int coreSize)
         {
-            return Operation.ToString() + "." + Modifier.ToString().PadRight(3) +
-                   ModeHelper.ToString(ModeA) + ValueA.ToString().PadLeft(6) + ", " +
-                   ModeHelper.ToString(ModeB) + ValueB.ToString().PadLeft(6) + "     ";
+            int res = raw%coreSize;
+            if (res < 0) res += coreSize;
+            return res;
+        }
+
+        public static int Wrap(int raw, int coreSize)
+        {
+            int wrap = raw%coreSize;
+            if (wrap <= (coreSize/-2))
+                wrap += coreSize;
+            if (wrap > (coreSize/2))
+                wrap -= coreSize;
+            return wrap;
+        }
+
+        public static bool Equals(IInstruction a, IInstruction b, int coreSize)
+        {
+            if (a.Operation != b.Operation) return false;
+            if (a.Modifier != b.Modifier) return false;
+            if (a.ModeA != b.ModeA) return false;
+            if (a.ModeB != b.ModeB) return false;
+            if (Mod(a.ValueA, coreSize) != Mod(b.ValueA, coreSize)) return false;
+            if (Mod(a.ValueB, coreSize) != Mod(b.ValueB, coreSize)) return false;
+            return true;
         }
 
         public static Modifier DefaultModifier(Operation op, Mode modeA, Mode modeB)
@@ -117,18 +138,21 @@ namespace nMars.RedCode
             }
         }
 
+        #endregion
+
+        #region Extensions
+
+        public override string ToString()
+        {
+            return Operation.ToString() + "." + Modifier.ToString().PadRight(3) +
+                   ModeHelper.ToString(ModeA) + ValueA.ToString().PadLeft(6) + ", " +
+                   ModeHelper.ToString(ModeB) + ValueB.ToString().PadLeft(6) + "     ";
+        }
+
         public override bool Equals(object obj)
         {
-            Instruction o = obj as Instruction;
-            //TODO if (o == null) return false;
-
-            if (o.Operation != Operation) return false;
-            if (o.Modifier != Modifier) return false;
-            if (o.ModeA != ModeA) return false;
-            if (o.ValueA != ValueA) return false;
-            if (o.ModeB != ModeB) return false;
-            if (o.ValueB != ValueB) return false;
-            return true;
+            IInstruction o = obj as IInstruction;
+            return Equals(this, o, Rules.DefaultRules.CoreSize);
         }
 
         public override int GetHashCode()
@@ -137,6 +161,11 @@ namespace nMars.RedCode
                 Operation.GetHashCode() ^ Modifier.GetHashCode() ^
                 ModeA.GetHashCode() ^ ModeB.GetHashCode() ^
                 ValueA.GetHashCode() ^ ValueB.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            return Equals(obj) ? 0 : 1;
         }
 
         public static bool operator !=(Instruction a, Instruction b)
@@ -148,15 +177,88 @@ namespace nMars.RedCode
         {
             return a.Equals(b);
         }
-        
-        public static int Wrap(int raw, int coreSize)
+
+        public static bool operator ==(Instruction a, IInstruction b)
         {
-            int wrap = raw % coreSize;
-            if (wrap <= (coreSize / -2))
-                wrap += coreSize;
-            if (wrap > (coreSize / 2))
-                wrap -= coreSize;
-            return wrap;
+            return a.Equals(b);
         }
+
+        public static bool operator !=(Instruction a, IInstruction b)
+        {
+            return !a.Equals(b);
+        }
+
+        public static bool operator ==(IInstruction a, Instruction b)
+        {
+            return b.Equals(a);
+        }
+
+        public static bool operator !=(IInstruction a, Instruction b)
+        {
+            return !b.Equals(a);
+        }
+
+        #endregion
+
+        #region IInstruction
+
+        public virtual string GetLine(DumpOptions options, bool start)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (options.Offset)
+                sb.Append("   ");
+            if (start)
+            {
+                sb.Append("START  ");
+            }
+            else
+            {
+                sb.Append("       ");
+            }
+            if (options.Labels)
+                sb.Append("      ");
+            sb.Append(ToString());
+            return sb.ToString();
+        }
+
+        Operation IInstruction.Operation
+        {
+            get { return Operation; }
+        }
+
+        Modifier IInstruction.Modifier
+        {
+            get { return Modifier; }
+        }
+
+        Mode IInstruction.ModeA
+        {
+            get { return ModeA; }
+        }
+
+        int IInstruction.ValueA
+        {
+            get { return ValueA; }
+        }
+
+        Mode IInstruction.ModeB
+        {
+            get { return ModeB; }
+        }
+
+        int IInstruction.ValueB
+        {
+            get { return ValueB; }
+        }
+
+        #endregion
+
+        public Operation Operation;
+        public Modifier Modifier;
+        public Mode ModeA;
+        public int ValueA;
+        public Mode ModeB;
+        public int ValueB;
     }
 }
