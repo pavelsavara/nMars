@@ -9,11 +9,11 @@ using nMars.RedCode;
 
 namespace nMars.SimpleEngine
 {
-    public class EngineWarrior : IWarrior
+    public class EngineWarrior : IRunningWarrior
     {
         public EngineWarrior(IWarrior warrior, Core core, int index, int loadAddress)
         {
-            Warrior = warrior;
+            SourceWarrior = warrior;
             Index = index;
             Tasks = new Queue<int>();
             this.core = core;
@@ -28,7 +28,7 @@ namespace nMars.SimpleEngine
             //copy warrior to core
             for (int a = 0; a < Length; a++)
             {
-                Instruction instruction = this[a];
+                IInstruction instruction = this[a];
                 if (instruction.ValueA >= core.CoreSize || instruction.ValueA <= 0 - core.CoreSize ||
                     instruction.ValueB >= core.CoreSize || instruction.ValueB <= 0 - core.CoreSize)
                 {
@@ -37,7 +37,7 @@ namespace nMars.SimpleEngine
                 if (instruction.Operation == Operation.LDP ||
                     instruction.Operation == Operation.STP)
                 {
-                    if (!core.Rules.enablePSpace)
+                    if (!core.Rules.EnablePSpace)
                     {
                         throw new RulesException("Current rules don't support p-space operations");
                     }
@@ -65,7 +65,7 @@ namespace nMars.SimpleEngine
             }
             else
             {
-                pSpaceSize = core.Rules.pSpaceSize;
+                pSpaceSize = core.Rules.PSpaceSize;
                 pSpace = new int[pSpaceSize];
                 pSpaces[pName] = pSpace;
             }
@@ -87,7 +87,7 @@ namespace nMars.SimpleEngine
 
         public Queue<int> Tasks;
         public int Index;
-        public IWarrior Warrior;
+        public IWarrior SourceWarrior;
         private int[] pSpace = null;
         private int pSpaceSize = 0;
         private Core core;
@@ -100,12 +100,12 @@ namespace nMars.SimpleEngine
 
         public int StartOffset
         {
-            get { return Warrior.StartOffset; }
+            get { return SourceWarrior.StartOffset; }
         }
 
         public int Pin
         {
-            get { return Warrior.Pin; }
+            get { return SourceWarrior.Pin; }
         }
 
         public int LoadAddress
@@ -115,57 +115,57 @@ namespace nMars.SimpleEngine
 
         public string Name
         {
-            get { return Warrior.Name; }
+            get { return SourceWarrior.Name; }
         }
 
         public string Author
         {
-            get { return Warrior.Author; }
+            get { return SourceWarrior.Author; }
         }
 
         public string Date
         {
-            get { return Warrior.Date; }
+            get { return SourceWarrior.Date; }
         }
 
         public string Version
         {
-            get { return Warrior.Version; }
+            get { return SourceWarrior.Version; }
         }
 
         public string FileName
         {
-            get { return Warrior.FileName; }
+            get { return SourceWarrior.FileName; }
         }
 
         public Rules Rules
         {
-            get { return Warrior.Rules; }
+            get { return SourceWarrior.Rules; }
         }
 
-        public Instruction this[int offset]
+        public IInstruction this[int offset]
         {
-            get { return Warrior[offset]; }
+            get { return SourceWarrior[offset]; }
         }
 
         public int Length
         {
-            get { return Warrior.Length; }
+            get { return SourceWarrior.Length; }
         }
 
         public void Dump(TextWriter tw)
         {
-            Warrior.Dump(tw);
+            SourceWarrior.Dump(tw);
         }
 
         public void Dump(TextWriter tw, DumpOptions options)
         {
-            Warrior.Dump(tw, options);
+            SourceWarrior.Dump(tw, options);
         }
 
         public void Dump(string fileName, DumpOptions options)
         {
-            Warrior.Dump(fileName, options);
+            SourceWarrior.Dump(fileName, options);
         }
 
         public FightResult Result = FightResult.Tie;
@@ -173,6 +173,34 @@ namespace nMars.SimpleEngine
         public override string ToString()
         {
             return Name + " (" + LiveTasks.ToString() + ")";
+        }
+
+        public int NextInstructionIndex
+        {
+            get { return Tasks.Peek(); }
+        }
+
+        public IInstruction NextInstruction
+        {
+            get { return core.core[NextInstructionIndex]; }
+        }
+
+        public int LiveTasksCount
+        {
+            get { return Tasks.Count; }
+        }
+
+        IList<int> IRunningWarrior.Tasks
+        {
+            get
+            {
+                List<int> tasks = new List<int>();
+                foreach (int i in Tasks)
+                {
+                    tasks.Add(i);
+                }
+                return tasks;
+            }
         }
     }
 }

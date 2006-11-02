@@ -34,6 +34,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EngineTest.cs" />
     <Compile Include="ParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,6 +54,10 @@
     <ProjectReference Include="..\RedCode\RedCode.csproj">
       <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
       <Name>RedCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleEngine\SimpleEngine.csproj">
+      <Project>{8C680360-97C6-475A-B047-D9E52348990C}</Project>
+      <Name>SimpleEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

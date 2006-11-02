@@ -6,13 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using nMars.RedCode;
 
 namespace nMars.Parser.Warrior
 {
     [Serializable]
-    public class ExtendedWarrior : RedCode.Warrior, IExtendedWarrior
+    public class ExtendedWarrior : RedCode.Warrior
     {
         protected ExtendedWarrior()
         {
@@ -22,58 +21,13 @@ namespace nMars.Parser.Warrior
             : base(rules)
         {
         }
-
-        public string GetLabels(int instructionOffset)
+        
+        public new ExtendedInstruction this[int offset]
         {
-            return ((ExtendedInstruction) Instructions[instructionOffset]).Label;
-        }
-
-        public string GetComment(int instructionOffset)
-        {
-            return ((ExtendedInstruction) Instructions[instructionOffset]).Comment;
-        }
-
-        public string GetOriginalInstruction(int instructionOffset)
-        {
-            return ((ExtendedInstruction) Instructions[instructionOffset]).OriginalInstruction;
-        }
-
-        public string GetExtendedLine(int instructionOffset, DumpOptions options)
-        {
-            StringBuilder sb = new StringBuilder();
-            if (options.Offset)
+            get
             {
-                sb.Append(instructionOffset.ToString("00 "));
+                return (ExtendedInstruction)Instructions[offset];
             }
-
-            if (options.Labels)
-            {
-                sb.Append(GetLabels(instructionOffset).PadRight(12));
-                sb.Append(" ");
-            }
-            else
-            {
-                if (instructionOffset == StartOffset)
-                {
-                    sb.Append("START  ");
-                }
-                else
-                {
-                    sb.Append("       ");
-                }
-            }
-
-            sb.Append(Instructions[instructionOffset].ToString());
-            if (options.Comments)
-            {
-                string comment = GetComment(instructionOffset);
-                if (comment.Length > 0)
-                {
-                    sb.Append("  ;");
-                    sb.Append(comment);
-                }
-            }
-            return sb.ToString();
         }
 
         public override void Dump(TextWriter tw, DumpOptions options)
@@ -86,7 +40,7 @@ namespace nMars.Parser.Warrior
             }
             if (options.Labels && Length>0)
             {
-                tw.WriteLine("             ORG      " + GetLabels(StartOffset));
+                tw.WriteLine("             ORG      " + this[StartOffset].Label);
             }
             else
             {
@@ -94,7 +48,7 @@ namespace nMars.Parser.Warrior
             }
             for (int a = 0; a < Instructions.Count; a++)
             {
-                tw.WriteLine(GetExtendedLine(a, options));
+                tw.WriteLine(this[a].GetLine(options, a == StartOffset));
             }
             tw.WriteLine();
         }

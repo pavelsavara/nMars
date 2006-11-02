@@ -13,9 +13,8 @@ namespace nMars
 {
     public class pMarsParser : ParserRoot
     {
-        public pMarsParser(Rules rules)
+        public pMarsParser()
         {
-            this.rules = rules;
         }
 
         public override IWarrior Parse(string fileName, TextWriter err)
@@ -23,17 +22,17 @@ namespace nMars
             StringBuilder agrs = new StringBuilder();
             agrs.Append("-r 0 -k ");
             agrs.Append("-p ");
-            agrs.Append(rules.maxProcesses.ToString());
+            agrs.Append(rules.MaxProcesses.ToString());
             agrs.Append(" -s ");
-            agrs.Append(rules.coreSize.ToString());
+            agrs.Append(rules.CoreSize.ToString());
             agrs.Append(" -c ");
-            agrs.Append(rules.maxCycles.ToString());
+            agrs.Append(rules.MaxCycles.ToString());
             agrs.Append(" -l ");
-            agrs.Append(rules.maxLength.ToString());
+            agrs.Append(rules.MaxLength.ToString());
             agrs.Append(" -d ");
-            agrs.Append(rules.minDistance.ToString());
+            agrs.Append(rules.MinDistance.ToString());
             agrs.Append(" -S ");
-            agrs.Append(rules.pSpaceSize.ToString());
+            agrs.Append(rules.PSpaceSize.ToString());
             agrs.Append(" ");
             agrs.Append(Path.GetFileName(fileName));
 

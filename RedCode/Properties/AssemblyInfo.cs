@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly : AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Pavel Savara")]
 [assembly : AssemblyProduct("RedCode")]
-[assembly : AssemblyCopyright("Copyright ©  2006")]
+[assembly : AssemblyCopyright("Copyright �  2006")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
 

@@ -4,12 +4,13 @@
 // 2006 Pavel Savara
 
 using System;
+using System.Text;
 using nMars.RedCode;
 
 namespace nMars.Parser.Warrior
 {
     [Serializable]
-    public class ExtendedInstruction : Instruction
+    public class ExtendedInstruction : Instruction, IExtendedInstruction
     {
         public ExtendedInstruction()
         {
@@ -30,6 +31,53 @@ namespace nMars.Parser.Warrior
         public ExtendedInstruction(Instruction src)
             : base(src)
         {
+        }
+
+        public override string GetLine(DumpOptions options, bool start)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (options.Offset)
+            {
+                sb.Append(Address.ToString("00 "));
+            }
+
+            if (options.Labels)
+            {
+                sb.Append(Label.PadRight(12));
+                sb.Append(" ");
+            }
+            else
+            {
+                if (start)
+                {
+                    sb.Append("START  ");
+                }
+                else
+                {
+                    sb.Append("       ");
+                }
+            }
+
+            sb.Append(ToString());
+            if (options.Comments)
+            {
+                if (Comment.Length > 0)
+                {
+                    sb.Append("  ;");
+                    sb.Append(Comment);
+                }
+            }
+            return sb.ToString();
+        }
+
+        string IExtendedInstruction.Label
+        {
+            get { return Label; }
+        }
+
+        string IExtendedInstruction.Comment
+        {
+            get { return Comment; }
         }
 
         public int Address;

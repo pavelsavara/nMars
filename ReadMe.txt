@@ -7,6 +7,9 @@ Currently it consist of
 - Redcode Definitions
 - Parser
 - Simple Engine core simulator    
+- Parser & core engine unit tests
+- Library of warriors
+- Modularized/SDL/Windows/Dll 0.9.2 pMars
 
 Planned components are
 - simple IDE with debuger
@@ -14,10 +17,9 @@ Planned components are
 - evolver - engine for Darwinistic evolution
 - screensaver - visualisation for evolver
 - p2p evolver - distributed version of evolver
-- parser & core engine unit tests
 - faster core engine - array of C# delegates as implementation of instructions
 
-* More info about Corewars can be found here http://www.koth.org/
+* More info about Corewars can be found here http://www.koth.org/, http://groups.google.com/group/rec.games.corewar
 
 
 Redcode Definitions library

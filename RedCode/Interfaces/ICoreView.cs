@@ -10,8 +10,11 @@ namespace nMars.RedCode
     [ComVisible(true)]
     public interface ICoreView
     {
-        Instruction this[int address] { get; }
+        IInstruction this[int address] { get; }
         int CoreSize { get; }
+        int Round { get; }
+        int Cycles { get; }
+        int CyclesLeft { get; }
         int LiveWarriorsCount { get; }
     }
 }

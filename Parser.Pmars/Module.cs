@@ -32,9 +32,9 @@ namespace nMars.pMars
             get { return executable; }
         }
 
-        public IParser CreateParser(Rules rules)
+        public IParser CreateParser()
         {
-            return new pMarsParser(rules);
+            return new pMarsParser();
         }
 
         private static Module instance;

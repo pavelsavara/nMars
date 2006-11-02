@@ -9,38 +9,42 @@ using nMars.RedCode;
 
 namespace nMars.SimpleEngine
 {
-    public class Core : ICoreView
+    public class Core : ICoreView, ITaskView, ITimeView
     {
         protected Core()
         {
         }
 
-        protected void Init(Rules aRules, IList<IWarrior> aWarriors, IPSpaces aPSpaces, Random aRandom,
-                            IList<int> forcedAddresses)
+        protected void InitRound()
         {
-            rules = aRules;
-            random = aRandom;
-            pSpaces = aPSpaces;
             CleanCore();
             if (forcedAddresses != null)
             {
-                PlaceWarriors(aWarriors, forcedAddresses);
+                PlaceWarriors(sourceWarriors);
             }
             else
             {
-                RandomlyPlaceWarriors(aWarriors);
+                RandomlyPlaceWarriors(sourceWarriors);
             }
-            Cycles = 0;
         }
 
         protected void CleanCore()
         {
-            core = new EngineInstruction[rules.coreSize];
+            core = new EngineInstruction[rules.CoreSize];
             liveWarriors = new Queue<EngineWarrior>();
             warriors = new List<EngineWarrior>();
+            iWarriors = new List<IWarrior>();
+            tasksCopyLoaded = false;
+            cyclesLeft = rules.MaxCycles*rules.WarriorsCount;
+            for (int a = 0; a < rules.CoreSize; a++)
+            {
+                core[a] = EngineInstruction.DefaultInstruction;
+                core[a].Address = a;
+            }
+            cycles = 0;
         }
 
-        private void PlaceWarriors(IList<IWarrior> aWarriors, IList<int> forcedAddresses)
+        private void PlaceWarriors(IList<IWarrior> aWarriors)
         {
             for (int i = 0; i < aWarriors.Count; i++)
             {
@@ -50,6 +54,7 @@ namespace nMars.SimpleEngine
                 EngineWarrior engineWarrior = new EngineWarrior(warrior, this, warriors.Count, loadAddress);
                 liveWarriors.Enqueue(engineWarrior);
                 warriors.Add(engineWarrior);
+                iWarriors.Add(engineWarrior);
             }
         }
 
@@ -80,14 +85,8 @@ namespace nMars.SimpleEngine
                 EngineWarrior engineWarrior = new EngineWarrior(warrior, this, warriors.Count, loadAddress);
                 liveWarriors.Enqueue(engineWarrior);
                 warriors.Add(engineWarrior);
+                iWarriors.Add(engineWarrior);
             }
-        }
-
-        public int mod(int address)
-        {
-            int res = (address%CoreSize);
-            if (res >= 0) return res;
-            return res + CoreSize;
         }
 
         protected int predec(ref int address)
@@ -96,17 +95,30 @@ namespace nMars.SimpleEngine
             return address;
         }
 
-        protected int postinc(ref int address)
+        protected void postinc(ref int address)
         {
-            int cpy = address;
             address = mod(address + 1);
-            return cpy;
         }
 
         protected bool decz(ref int address)
         {
             address = mod(address - 1);
-            return address == 0;
+            return address == 1;
+        }
+
+        protected void dec(ref int address)
+        {
+            address = mod(address - 1);
+        }
+
+        public int wrap(int value)
+        {
+            return Instruction.Wrap(value, CoreSize);
+        }
+
+        public int mod(int value)
+        {
+            return Instruction.Mod(value, CoreSize);
         }
 
         /// <returns>T- should die</returns>
@@ -116,12 +128,15 @@ namespace nMars.SimpleEngine
             {
                 case Operation.ADD:
                     res = a + b;
+                    if (res >= CoreSize) res -= CoreSize;
                     break;
                 case Operation.SUB:
                     res = a - b;
+                    if (res < 0) res += CoreSize;
                     break;
                 case Operation.MUL:
                     res = a*b;
+                    res %= CoreSize;
                     break;
                 case Operation.MOD:
                     if (b == 0) return true;
@@ -134,18 +149,62 @@ namespace nMars.SimpleEngine
                 default:
                     throw new InvalidOperationException("Unknown instruction");
             }
-            res = mod(res);
             return false;
         }
 
         public int CoreSize
         {
-            get { return rules.coreSize; }
+            get { return rules.CoreSize; }
         }
 
-        Instruction ICoreView.this[int address]
+        IInstruction ICoreView.this[int address]
         {
-            get { return core[mod(address)].Source; }
+            get { return core[mod(address)]; }
+        }
+
+        public IList<IList<int>> Tasks
+        {
+            get
+            {
+                CopyTasks();
+                return tasksCopy;
+            }
+        }
+
+        private List<IList<int>> tasksCopy;
+        protected bool tasksCopyLoaded = false;
+
+        private void CopyTasks()
+        {
+            if (!tasksCopyLoaded)
+            {
+                tasksCopy = new List<IList<int>>(WarriorsCount);
+                foreach (IRunningWarrior warrior in warriors)
+                {
+                    tasksCopy.Add(warrior.Tasks);
+                }
+                tasksCopyLoaded = true;
+            }
+        }
+
+        public int NextWarriorIndex
+        {
+            get { return liveWarriors.Peek().Index; }
+        }
+
+        IWarrior ITaskView.NextWarrior
+        {
+            get { return liveWarriors.Peek(); }
+        }
+
+        protected EngineWarrior NextWarrior
+        {
+            get { return liveWarriors.Peek(); }
+        }
+
+        public IInstruction NextInstruction
+        {
+            get { return core[NextWarrior.Tasks.Peek()]; }
         }
 
         public int LiveWarriorsCount
@@ -153,9 +212,22 @@ namespace nMars.SimpleEngine
             get { return liveWarriors.Count; }
         }
 
+        public IInstruction LastInstruction
+        {
+            get { return lastInstruction; }
+        }
+
+        protected IInstruction lastInstruction = null;
+
+
         public int WarriorsCount
         {
             get { return warriors.Count; }
+        }
+
+        public IList<IWarrior> Warriors
+        {
+            get { return iWarriors; }
         }
 
         internal Rules Rules
@@ -168,13 +240,33 @@ namespace nMars.SimpleEngine
             get { return pSpaces; }
         }
 
+        public int Cycles
+        {
+            get { return cycles; }
+        }
+
+        public int CyclesLeft
+        {
+            get { return cyclesLeft; }
+        }
+
+        public int Round
+        {
+            get { return round; }
+        }
+
         internal EngineInstruction[] core;
-        private Random random;
+        protected Random random;
+        protected IList<int> forcedAddresses;
 
         protected IList<EngineWarrior> warriors;
+        protected IList<IWarrior> iWarriors;
+        protected IList<IWarrior> sourceWarriors;
         protected Queue<EngineWarrior> liveWarriors;
         protected Rules rules;
         protected IPSpaces pSpaces;
-        protected int Cycles;
+        protected int cycles;
+        protected int cyclesLeft;
+        protected int round;
     }
 }

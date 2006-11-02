@@ -35,7 +35,7 @@ namespace nMars.RedCode
 
         public void InitParser(Rules aRules)
         {
-            this.rules = aRules;
+            rules = aRules;
         }
 
         public IWarrior Parse(string fileName)
@@ -44,7 +44,7 @@ namespace nMars.RedCode
             StringWriter sw = new StringWriter(sb);
             IWarrior res = Parse(fileName, sw);
             sw.Close();
-            if (sb.Length>0)
+            if (sb.Length > 0)
             {
                 throw new ParserException(sb.ToString());
             }
@@ -53,12 +53,12 @@ namespace nMars.RedCode
 
         public virtual IWarrior Parse(string fileName, string errFileName)
         {
-            MemoryStream ms=new MemoryStream();
-            StreamWriter sw=new StreamWriter(ms);
-            IWarrior res=Parse(fileName, sw);
+            MemoryStream ms = new MemoryStream();
+            StreamWriter sw = new StreamWriter(ms);
+            IWarrior res = Parse(fileName, sw);
             sw.Flush();
-            
-            if (res==null)
+
+            if (res == null)
             {
                 Stream fs = File.Create(errFileName);
                 ms.WriteTo(fs);
@@ -67,12 +67,13 @@ namespace nMars.RedCode
             sw.Close();
             return res;
         }
-        protected Rules rules;
+
+        protected Rules rules = Rules.DefaultRules;
     }
 
     [ComVisible(true)]
     public interface IParserModule : IModule
     {
-        IParser CreateParser(Rules rules);
+        IParser CreateParser();
     }
 }
