@@ -1,0 +1,100 @@
+<Project name="Parser" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Debug" assembly="Parser" />
+      <Build debugmode="True" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="nMars.Parser.Module" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Release" assembly="Parser" />
+      <Build debugmode="False" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <DeployTargets />
+  <Contents>
+    <File name="./Grammar.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Module.cs" subtype="Code" buildaction="Compile" />
+    <File name="./nMarsParser.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ParserBase.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ParserException.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ReadMe.txt" subtype="Code" buildaction="Nothing" />
+    <File name="./Warrior/ExtendedInstruction.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Warrior/ExtendedWarrior.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Statements/ContainerStatement.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Statements/EquStatement.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Statements/ForRofContainerStatement.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Statements/InstructionStatement.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Statements/Parameter.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Statements/Statement.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/AbstractSet.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/ArraySet.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/BinaryReader.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/FileUtil.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/HashSet.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/IntegerList.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/ISet.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/ResourceUtil.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/StringUtil.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/commons/Util.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/LALRParser.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/Location.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/ParserEvents.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/ParserException.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/Reader.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/Rule.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/StateStack.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/StringTokenizer.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/Symbol.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/SymbolFactory.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/Token.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/TokenStack.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/ActionSubRecord.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/CGTContent.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/CGTContentException.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/CharacterSetRecord.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/CharacterSetTable.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/DFAStateRecord.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/DFAStateTable.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/EdgeSubRecord.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/InitialStatesRecord.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/LALRStateRecord.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/LALRStateTable.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/Parameters.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/RuleRecord.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/RuleTable.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/SymbolRecord.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/SymbolTable.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/content/TableCounts.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/dfa/DFA.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/dfa/State.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/dfa/Transition.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/lalr/AcceptAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/lalr/Action.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/lalr/ActionFactory.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/lalr/GotoAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/lalr/ReduceAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/lalr/ShiftAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/lalr/State.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/structure/CGTStructure.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/structure/CGTStructureException.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/structure/Entry.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/structure/EntryFactory.cs" subtype="Code" buildaction="Compile" />
+    <File name="./com/calitha/goldparser/structure/Record.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Expressions/Address.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Expressions/BinaryExpression.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Expressions/ComposedLabelName.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Expressions/Expression.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Expressions/LabelName.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Expressions/TernaryExpression.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Expressions/UnaryExpression.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Expressions/Value.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Properties/RedCode.cgt" subtype="Code" buildaction="EmbedAsResource" />
+  </Contents>
+  <References>
+    <ProjectReference type="Project" localcopy="True" refto="RedCode" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  </References>
+</Project>

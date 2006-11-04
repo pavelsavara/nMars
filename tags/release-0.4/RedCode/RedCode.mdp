@@ -1,0 +1,42 @@
+<Project name="RedCode" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Debug" assembly="RedCode" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Release" assembly="RedCode" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <DeployTargets />
+  <Contents>
+    <File name="./FightResult.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Rules.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Warrior.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Instructions/Instruction.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Instructions/Mode.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Instructions/Modifier.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Instructions/Operation.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Interfaces/ICoreView.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Interfaces/IEngine.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Interfaces/IExtendedWarrior.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Interfaces/IObservedEngine.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Interfaces/IParser.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Interfaces/IPSpaces.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Interfaces/IStepEngine.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Interfaces/IWarrior.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Modules/CommandLine.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Modules/IModule.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Modules/ModuleRegister.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Properties/RedCode.ico" subtype="Code" buildaction="Nothing" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  </References>
+</Project>
