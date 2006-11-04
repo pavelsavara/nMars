@@ -7,12 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars;
-using nMars.pMarsDll;
 using nMars.RedCode;
-using nMars.SimpleEngine;
+using nMars.Engine;
 using NUnit.Framework;
+using pMars.DllWrapper;
 
-namespace Parser.Test
+namespace nMars.Test
 {
     public class EngineDifferException : Exception
     {
@@ -65,7 +65,7 @@ namespace Parser.Test
             nparser = new nMarsParser();
             nparser.InitParser(rules);
             engineOne = new pMarsDllEngine();
-            engineTwo = new Engine();
+            engineTwo = new Engine.Engine();
             spaces = new PSpaces();
             random = new Random(0);
             basePath = Path.GetFullPath(@"Warriors");

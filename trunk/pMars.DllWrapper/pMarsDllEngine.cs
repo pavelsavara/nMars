@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using nMars.RedCode;
 
-namespace nMars.pMarsDll
+namespace pMars.DllWrapper
 {
     public class pMarsDllEngine : IEngine, IExtendedStepEngine
     {

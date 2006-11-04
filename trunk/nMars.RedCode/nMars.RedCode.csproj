@@ -4,22 +4,22 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9501D4F8-0878-462E-B3FB-190A7D6ED4DB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pmars.Parser</RootNamespace>
-    <AssemblyName>PmarsParser</AssemblyName>
-    <StartupObject>nMars.pMars.Module</StartupObject>
-    <ApplicationIcon>Properties\Parser.ico</ApplicationIcon>
+    <RootNamespace>nMars.RedCode</RootNamespace>
+    <AssemblyName>nMars.RedCode</AssemblyName>
+    <ApplicationIcon>Properties\RedCode.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,23 +35,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Module.cs" />
+    <Compile Include="Interfaces\IInstruction.cs" />
+    <Compile Include="Interfaces\ITaskView.cs" />
+    <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Modules\CommandLine.cs" />
+    <Compile Include="FightResult.cs" />
+    <Compile Include="Interfaces\ICoreView.cs" />
+    <Compile Include="Interfaces\IEngine.cs" />
+    <Compile Include="Instructions\Instruction.cs" />
+    <Compile Include="Instructions\Mode.cs" />
+    <Compile Include="Instructions\Modifier.cs" />
+    <Compile Include="Instructions\Operation.cs" />
+    <Compile Include="Interfaces\IObservedEngine.cs" />
+    <Compile Include="Interfaces\IParser.cs" />
+    <Compile Include="Interfaces\IPSpaces.cs" />
+    <Compile Include="Interfaces\IStepEngine.cs" />
+    <Compile Include="Interfaces\IWarrior.cs" />
+    <Compile Include="Modules\ModuleRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="pMarsParser.cs" />
+    <Compile Include="Rules.cs" />
+    <Compile Include="Utils\SerializableDictionary.cs" />
+    <Compile Include="Warrior.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RedCode\RedCode.csproj">
-      <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
-      <Name>RedCode</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="PMARSV.EXE">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Parser.ico" />
+    <EmbeddedResource Include="Properties\RedCode.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -61,4 +68,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

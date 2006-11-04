@@ -9,7 +9,7 @@ using System.IO;
 using System.Text;
 using nMars.RedCode;
 
-namespace nMars
+namespace pMars.ShellWrapper
 {
     public class pMarsParser : ParserRoot
     {

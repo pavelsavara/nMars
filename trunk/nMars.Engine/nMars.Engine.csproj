@@ -7,10 +7,10 @@
     <ProjectGuid>{8C680360-97C6-475A-B047-D9E52348990C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>nMars.SimpleEngine</RootNamespace>
-    <AssemblyName>nMarsSimpleEngine</AssemblyName>
+    <RootNamespace>nMars.Engine</RootNamespace>
+    <AssemblyName>nMars.Engine</AssemblyName>
     <ApplicationIcon>Properties\Engine.ico</ApplicationIcon>
-    <StartupObject>nMars.SimpleEngine.Module</StartupObject>
+    <StartupObject>nMars.Engine.Module</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,9 +44,9 @@
     <Compile Include="EngineWarrior.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RedCode\RedCode.csproj">
+    <ProjectReference Include="..\nMars.RedCode\nMars.RedCode.csproj">
       <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
-      <Name>RedCode</Name>
+      <Name>nMars.RedCode</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

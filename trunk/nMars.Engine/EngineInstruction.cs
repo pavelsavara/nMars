@@ -6,7 +6,7 @@
 using System.Text;
 using nMars.RedCode;
 
-namespace nMars.SimpleEngine
+namespace nMars.Engine
 {
     public struct EngineInstruction : IInstruction
     {

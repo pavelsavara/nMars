@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
 
-namespace nMars.SimpleEngine
+namespace nMars.Engine
 {
     public class EngineWarrior : IRunningWarrior
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using nMars.RedCode;
 
-namespace nMars.pMarsDll
+namespace pMars.DllWrapper
 {
     static class pMarsDll
     {

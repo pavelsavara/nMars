@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
 
-namespace nMars.pMarsDll
+namespace pMars.DllWrapper
 {
     public class pMarsDllParser : ParserRoot
     {
