@@ -33,7 +33,6 @@
     <File name="./Modules/IModule.cs" subtype="Code" buildaction="Compile" />
     <File name="./Modules/ModuleRegister.cs" subtype="Code" buildaction="Compile" />
     <File name="./Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Properties/RedCode.ico" subtype="Code" buildaction="Nothing" />
     <File name="./Interfaces/IInstruction.cs" subtype="Code" buildaction="Compile" />
     <File name="./Interfaces/ITaskView.cs" subtype="Code" buildaction="Compile" />
     <File name="./Utils/SerializableDictionary.cs" subtype="Code" buildaction="Compile" />

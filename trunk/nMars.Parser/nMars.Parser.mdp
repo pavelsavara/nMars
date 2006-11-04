@@ -92,7 +92,7 @@
     <File name="./Expressions/Value.cs" subtype="Code" buildaction="Compile" />
     <File name="./Properties/RedCode.cgt" subtype="Code" buildaction="EmbedAsResource" />
     <File name="./Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="../nMars.RedCode/Properties/VersionInfo.cs" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="./Properties/VersionInfo.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Project" localcopy="True" refto="nMars.RedCode" />
