@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>nMars.Parser</RootNamespace>
-    <AssemblyName>nMarsParser</AssemblyName>
+    <AssemblyName>nMars.Parser</AssemblyName>
     <StartupObject>nMars.Parser.Module</StartupObject>
     <ApplicationIcon>Properties\Parser.ico</ApplicationIcon>
   </PropertyGroup>
@@ -122,9 +122,9 @@
     <EmbeddedResource Include="Properties\Parser.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RedCode\RedCode.csproj">
+    <ProjectReference Include="..\nMars.RedCode\nMars.RedCode.csproj">
       <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
-      <Name>RedCode</Name>
+      <Name>nMars.RedCode</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

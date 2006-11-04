@@ -7,7 +7,7 @@ using nMars.RedCode;
 using nMars.RedCode.CommandLine;
 using nMars.RedCode.Modules;
 
-namespace nMars.pMarsDll
+namespace pMars.DllWrapper
 {
     class Module : IParserModule, IEngineModule
     {

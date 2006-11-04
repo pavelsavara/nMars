@@ -7,11 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars;
-using nMars.pMarsDll;
 using nMars.RedCode;
 using NUnit.Framework;
+using pMars.DllWrapper;
 
-namespace Parser.Test
+namespace nMars.Test
 {
     [TestFixture]
     public class ParserTest

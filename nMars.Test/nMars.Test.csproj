@@ -7,8 +7,8 @@
     <ProjectGuid>{FA9132A5-6063-4269-89ED-5A5E8D57A7B8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>nMars.Parser.Test</RootNamespace>
-    <AssemblyName>Parser.Test</AssemblyName>
+    <RootNamespace>nMars.Test</RootNamespace>
+    <AssemblyName>nMars.Test</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,25 +39,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Parser.PmarsDll\Parser.PmarsDll.csproj">
-      <Project>{9D9C6AB6-BDF3-483B-A11C-DE7C15EB4814}</Project>
-      <Name>Parser.PmarsDll</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Parser.Pmars\Parser.Pmars.csproj">
-      <Project>{9501D4F8-0878-462E-B3FB-190A7D6ED4DB}</Project>
-      <Name>Parser.Pmars</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Parser\Parser.csproj">
-      <Project>{DD04BC83-CC0A-4F52-A70B-FDB4C0991E3D}</Project>
-      <Name>Parser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RedCode\RedCode.csproj">
-      <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
-      <Name>RedCode</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SimpleEngine\SimpleEngine.csproj">
+    <ProjectReference Include="..\nMars.Engine\nMars.Engine.csproj">
       <Project>{8C680360-97C6-475A-B047-D9E52348990C}</Project>
-      <Name>SimpleEngine</Name>
+      <Name>nMars.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.Parser\nMars.Parser.csproj">
+      <Project>{DD04BC83-CC0A-4F52-A70B-FDB4C0991E3D}</Project>
+      <Name>nMars.Parser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.RedCode\nMars.RedCode.csproj">
+      <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
+      <Name>nMars.RedCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\pMars.DllWrapper\pMars.DllWrapper.csproj">
+      <Project>{9D9C6AB6-BDF3-483B-A11C-DE7C15EB4814}</Project>
+      <Name>pMars.DllWrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

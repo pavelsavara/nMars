@@ -7,7 +7,7 @@ using nMars.RedCode;
 using nMars.RedCode.CommandLine;
 using nMars.RedCode.Modules;
 
-namespace nMars.SimpleEngine
+namespace nMars.Engine
 {
     class Module : IEngineModule
     {

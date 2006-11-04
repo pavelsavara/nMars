@@ -7,7 +7,7 @@ using nMars.RedCode;
 using nMars.RedCode.CommandLine;
 using nMars.RedCode.Modules;
 
-namespace nMars.pMars
+namespace pMars.ShellWrapper
 {
     class Module : IParserModule
     {
@@ -38,7 +38,7 @@ namespace nMars.pMars
         }
 
         private static Module instance;
-        private static string name = "pMarsParser";
-        private static string executable = "pMarsParser";
+        private static string name = "pMarsShellParser";
+        private static string executable = "pMarsShellParser";
     }
 }

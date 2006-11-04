@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using nMars.RedCode;
 
-namespace nMars.SimpleEngine
+namespace nMars.Engine
 {
     public class Core : ICoreView, ITaskView, ITimeView
     {
