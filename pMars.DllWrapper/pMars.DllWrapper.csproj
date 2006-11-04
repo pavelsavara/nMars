@@ -35,6 +35,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Module.cs" />
     <Compile Include="pMarsDll.cs" />
     <Compile Include="pMarsDllEngine.cs" />
