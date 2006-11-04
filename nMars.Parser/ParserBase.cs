@@ -167,14 +167,21 @@ namespace nMars.Parser
                     //<eol> ::= <eolSingle>
                     comments = new List<string>();
                     if (token.Tokens[0].UserObject != null)
-                        comments.Add((string) token.Tokens[0].UserObject);
+                    {
+                        string c = (string)token.Tokens[0].UserObject;
+                        comments.Add(c.Replace("\r", ""));
+                        
+                    }
                     return comments;
 
                 case (int) RuleConstants.RULE_EOL2:
                     //<eol> ::= <eol> <eolSingle>
                     comments = (List<string>) token.Tokens[0].UserObject;
                     if (token.Tokens[1].UserObject != null)
-                        comments.Add((string) token.Tokens[1].UserObject);
+                    {
+                        string c = (string) token.Tokens[1].UserObject;
+                        comments.Add(c.Replace("\r",""));
+                    }
                     return comments;
 
                 case (int) RuleConstants.RULE_EOLSINGLE_NEWLINE:
