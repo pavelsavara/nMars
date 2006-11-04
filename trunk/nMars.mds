@@ -3,19 +3,23 @@
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="nMars.RedCode" configuration="Debug" />
       <Entry build="True" name="nMars.Parser" configuration="Debug" />
+      <Entry build="True" name="nMars.Test" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="nMars.RedCode" configuration="Release" />
       <Entry build="True" name="nMars.Parser" configuration="Release" />
+      <Entry build="True" name="nMars.Test" configuration="Release" />
     </Configuration>
   </Configurations>
   <DeployTargets />
   <StartMode startupentry="nMars.Parser" single="True">
     <Execute type="None" entry="nMars.RedCode" />
     <Execute type="None" entry="nMars.Parser" />
+    <Execute type="None" entry="nMars.Test" />
   </StartMode>
   <Entries>
     <Entry filename="./nMars.RedCode/nMars.RedCode.mdp" />
     <Entry filename="./nMars.Parser/nMars.Parser.mdp" />
+    <Entry filename="./nMars.Test/nMars.Test.mdp" />
   </Entries>
 </Combine>

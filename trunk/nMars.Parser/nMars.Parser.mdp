@@ -19,7 +19,6 @@
     <File name="./Module.cs" subtype="Code" buildaction="Compile" />
     <File name="./nMarsParser.cs" subtype="Code" buildaction="Compile" />
     <File name="./ParserBase.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ParserException.cs" subtype="Code" buildaction="Compile" />
     <File name="./ReadMe.txt" subtype="Code" buildaction="Nothing" />
     <File name="./Warrior/ExtendedInstruction.cs" subtype="Code" buildaction="Compile" />
     <File name="./Warrior/ExtendedWarrior.cs" subtype="Code" buildaction="Compile" />
@@ -92,6 +91,8 @@
     <File name="./Expressions/UnaryExpression.cs" subtype="Code" buildaction="Compile" />
     <File name="./Expressions/Value.cs" subtype="Code" buildaction="Compile" />
     <File name="./Properties/RedCode.cgt" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="./Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="../nMars.RedCode/Properties/VersionInfo.cs" subtype="Code" buildaction="EmbedAsResource" />
   </Contents>
   <References>
     <ProjectReference type="Project" localcopy="True" refto="nMars.RedCode" />
