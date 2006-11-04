@@ -24,7 +24,6 @@
     <File name="./Instructions/Operation.cs" subtype="Code" buildaction="Compile" />
     <File name="./Interfaces/ICoreView.cs" subtype="Code" buildaction="Compile" />
     <File name="./Interfaces/IEngine.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Interfaces/IExtendedWarrior.cs" subtype="Code" buildaction="Compile" />
     <File name="./Interfaces/IObservedEngine.cs" subtype="Code" buildaction="Compile" />
     <File name="./Interfaces/IParser.cs" subtype="Code" buildaction="Compile" />
     <File name="./Interfaces/IPSpaces.cs" subtype="Code" buildaction="Compile" />
@@ -35,8 +34,13 @@
     <File name="./Modules/ModuleRegister.cs" subtype="Code" buildaction="Compile" />
     <File name="./Properties/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="./Properties/RedCode.ico" subtype="Code" buildaction="Nothing" />
+    <File name="./Interfaces/IInstruction.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Interfaces/ITaskView.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Utils/SerializableDictionary.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Properties/VersionInfo.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   </References>
 </Project>
