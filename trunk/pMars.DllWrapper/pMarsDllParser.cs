@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
@@ -23,10 +24,22 @@ namespace pMars.DllWrapper
         {
             List<string> r = pMarsDll.BuildParams(rules, true, null, fileName);
 
-            pMarsDll.PmarsWarrior w = pMarsDll.pMarsParse(r.Count, r.ToArray(), errFileName);
-            if (w == null) return null;
+            Warrior warrior;
+            try
+            {
+                pMarsDll.PmarsWarrior dllWarrior;
+                dllWarrior = pMarsDll.pMarsParse(r.Count, r.ToArray(), errFileName);
+                if (dllWarrior == null) return null;
+                warrior = pMarsDll.ConvertWarrior(fileName, dllWarrior, rules);
+            }
+            catch (Exception ex)
+            {
+                StreamWriter err=new StreamWriter(errFileName, true);
+                err.WriteLine("pMars.DllWrapper exited with exception " + ex.ToString() + "\n");
+                err.Close();
+                return null;
+            }
 
-            Warrior warrior = pMarsDll.ConvertWarrior(fileName, w, rules);
 
             pMarsDll.pMarsFreeParsed();
 

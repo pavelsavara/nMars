@@ -53,6 +53,7 @@ namespace nMars.Test
         PSpaces spaces;
         Random random;
         string basePath;
+        string problemsPath;
         int[] forcedArdresses;
         Rules rules;
 
@@ -68,36 +69,10 @@ namespace nMars.Test
             engineTwo = new Engine.Engine();
             spaces = new PSpaces();
             random = new Random(0);
-            basePath = Path.GetFullPath(@"Warriors");
-            if (!Directory.Exists(basePath))
-            {
-                basePath = Path.GetFullPath(@"..\Warriors");
-            }
-            if (!Directory.Exists(basePath))
-            {
-                basePath = Path.GetFullPath(@"..\..\Warriors");
-            }
-            if (!Directory.Exists(basePath))
-            {
-                basePath = Path.GetFullPath(@"..\..\..\Warriors");
-            }
-            if (!Directory.Exists(basePath))
-            {
-                throw new ApplicationException("Could not find Warrirors at: " + basePath);
-            }
-            if (Directory.Exists(basePath + @"\_problems\"))
-            {
-                try
-                {
-                    Directory.Delete(basePath + @"\_problems\", true);
-                }
-                catch (Exception)
-                {
-                    //swalow
-                }
-            }
 
-            Directory.CreateDirectory(basePath + @"\_problems\");
+            basePath = Utils.GetWarrirorsDirectory();
+            problemsPath = Utils.CleanProblems(basePath, "!problems");
+
             forcedArdresses = new int[2];
             forcedArdresses[0] = 0;
             forcedArdresses[1] = rules.CoreSize/2;
@@ -108,15 +83,15 @@ namespace nMars.Test
         {
             Init();
             rules.WarriorsCount = 1;
-            LoadRunOne(basePath + @"\warriors\corewin\irongate.red");
+            LoadRunOne(Path.Combine(Path.Combine(basePath, "corewin"), "irongate.red"));
         }
 
         [Test]
         public void Pair()
         {
             Init();
-            LoadRunPair(basePath + @"\warriors\kendall\BackfromtheGrave.red",
-                        basePath + @"\warriors\kendall\BigBrother.red");
+            LoadRunPair(Path.Combine(Path.Combine(basePath, "kendall"), "BackfromtheGrave.red"),
+                        Path.Combine(Path.Combine(basePath, "kendall"), "BigBrother.red"));
         }
 
         [Test]
@@ -152,8 +127,9 @@ namespace nMars.Test
         {
             IWarrior warriorOne;
             string shortOne = Path.GetFileNameWithoutExtension(fileOne);
-            Console.Write("Reading {0}      \r", shortOne);
-            string problemsPathOne = basePath + @"\!problems\" + shortOne;
+            string midleOne = fileOne.Substring(basePath.Length);
+            Console.Write("Reading {0}      \r", midleOne);
+            string problemsPathOne = Path.Combine(problemsPath, shortOne); 
             warriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr");
             IWarrior[] project = new IWarrior[1];
             project[0] = warriorOne;
@@ -169,9 +145,11 @@ namespace nMars.Test
             IWarrior nwarriorTwo;
             string shortOne = Path.GetFileNameWithoutExtension(fileOne);
             string shortTwo = Path.GetFileNameWithoutExtension(fileTwo);
-            Console.Write("Reading {0} and {1}         \r", shortOne, shortTwo);
-            string problemsPathOne = basePath + @"\!problems\" + shortOne;
-            string problemsPathTwo = basePath + @"\!problems\" + shortTwo;
+            string midleOne = fileOne.Substring(basePath.Length);
+            string midleTwo = fileTwo.Substring(basePath.Length);
+            Console.Write("Reading {0} and {1}         \r", midleOne, midleTwo);
+            string problemsPathOne = Path.Combine(problemsPath, shortOne);
+            string problemsPathTwo = Path.Combine(problemsPath, shortTwo);
             pwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
             pwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".nErr2");
             nwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
