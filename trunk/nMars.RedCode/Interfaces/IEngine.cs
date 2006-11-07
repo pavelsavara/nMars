@@ -24,7 +24,7 @@ namespace nMars.RedCode
         /// <summary>
         /// Run complete round
         /// </summary>
-        MatchResult Run(Rules aRules, IWarrior[] wariors, IPSpaces aPSpaces, Random random, int[] forcedAddresses);
+        MatchResult Run(IProject project, IPSpaces pSpaces, Random random);
     }
 
     [ComVisible(true)]

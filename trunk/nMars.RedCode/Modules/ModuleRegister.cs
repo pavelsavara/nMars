@@ -3,7 +3,9 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace nMars.RedCode.Modules
 {
@@ -21,6 +23,11 @@ namespace nMars.RedCode.Modules
         {
             lock (modules)
             {
+                if (!modules.ContainsKey(name))
+                {
+                    Assembly a=Assembly.Load(name);
+                    a.CreateInstance(name + ".Module");
+                }
                 return modules[name];
             }
         }

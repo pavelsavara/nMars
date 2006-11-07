@@ -60,6 +60,9 @@ namespace nMars.Engine
 
         private void RandomlyPlaceWarriors(IList<IWarrior> aWarriors)
         {
+            if (random==null)
+                random=new Random();
+            
             foreach (IWarrior warrior in aWarriors)
             {
                 int loadAddress;

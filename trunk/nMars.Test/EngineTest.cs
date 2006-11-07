@@ -131,8 +131,8 @@ namespace nMars.Test
             Console.Write("Reading {0}      \r", midleOne);
             string problemsPathOne = Path.Combine(problemsPath, shortOne); 
             warriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr");
-            IWarrior[] project = new IWarrior[1];
-            project[0] = warriorOne;
+            Project project = new Project(rules);
+            project.Warriors.Add(warriorOne);
 
             RunProject(project);
         }
@@ -154,17 +154,17 @@ namespace nMars.Test
             pwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".nErr2");
             nwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
             nwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".nErr2");
-            IWarrior[] pproject = new IWarrior[2];
-            IWarrior[] nproject = new IWarrior[2];
-            pproject[0] = pwarriorOne;
-            pproject[1] = pwarriorTwo;
-            nproject[0] = nwarriorOne;
-            nproject[1] = nwarriorTwo;
-            CheckWarriors(nproject, pproject);
+            Project pproject = new Project(rules);
+            Project nproject = new Project(rules);
+            pproject.Warriors.Add(pwarriorOne);
+            pproject.Warriors.Add(pwarriorTwo);
+            nproject.Warriors.Add(nwarriorOne);
+            nproject.Warriors.Add(nwarriorTwo);
+            CheckWarriors(nproject.Warriors, pproject.Warriors);
             RunProject(pproject);
         }
 
-        private void RunProject(IWarrior[] project)
+        private void RunProject(Project project)
         {
             bool res;
             int fromCycle = int.MaxValue;
@@ -188,10 +188,10 @@ namespace nMars.Test
             } while (!res);
         }
 
-        private void CompareEngines(IWarrior[] project, int fromCycle, int toCycle)
+        private void CompareEngines(Project project, int fromCycle, int toCycle)
         {
-            engineOne.BeginMatch(rules, project, spaces, random, forcedArdresses);
-            engineTwo.BeginMatch(rules, project, spaces, random, forcedArdresses);
+            engineOne.BeginMatch(project, spaces, random);
+            engineTwo.BeginMatch(project, spaces, random);
 
 
             MatchResult matchOne;
