@@ -4,29 +4,21 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
 using nMars.RedCode;
 
 namespace nMars.Engine
 {
     public class StepEngine : Core, IExtendedStepEngine
     {
-        public void BeginMatch(Rules aRules, IWarrior[] aWariors, IPSpaces aPSpaces, Random aRandom,
-                               int[] aForcedAddresses)
-        {
-            BeginMatch(aRules, (IList<IWarrior>) aWariors, aPSpaces, aRandom, aForcedAddresses);
-        }
-
-        public void BeginMatch(Rules aRules, IList<IWarrior> aWariors, IPSpaces aPSpaces, Random aRandom,
-                               IList<int> aForcedAddresses)
+        public void BeginMatch(IProject project, IPSpaces pspaces, Random aRandom)
         {
             round = 0;
             cycles = 0;
-            rules = aRules;
+            rules = project.Rules;
             random = aRandom;
-            pSpaces = aPSpaces;
-            forcedAddresses = aForcedAddresses;
-            sourceWarriors = aWariors;
+            pSpaces = pspaces;
+            forcedAddresses = project.ForcedAddresses;
+            sourceWarriors = project.Warriors;
             InitRound();
             results = new MatchResult(rules);
         }

@@ -8,25 +8,93 @@ using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode.Modules;
 
-namespace nMars.RedCode.CommandLine
+namespace nMars.RedCode
 {
     public class CommandLine
     {
         public static int ParserMain(string[] args, string parserName)
         {
+            int res;
+            bool brief;
+            string dumpext;
+            bool dumpFiles;
+            List<string> files;
+            DumpOptions options;
+            Project project = new Project();
+            project.Rules = new Rules();
+
+            res = ParseParams(args, out brief, out dumpext, out dumpFiles, out files, out options, project, parserName);
+            if (res <= 0)
+                return res;
+
+            res = RunParser(brief, dumpext, dumpFiles, files, options, parserName, project);
+            return res;
+        }
+
+        public static int EngineMain(string[] args, string engineName, string parserName)
+        {
+            int res;
+            bool brief;
+            string dumpext;
+            bool dumpFiles;
+            List<string> files;
+            DumpOptions options;
+            Project project = new Project();
+            project.Rules = new Rules();
+
+            res = ParseParams(args, out brief, out dumpext, out dumpFiles, out files, out options, project, engineName);
+            if (res <= 0)
+                return res;
+
+            res = RunParser(brief, dumpext, dumpFiles, files, options, parserName, project);
+            if (res <= 0)
+                return res;
+
+            IEngineModule engineModule = ModuleRegister.FindModule(engineName) as IEngineModule;
+            IEngine engine = engineModule.CreateEngine();
+            MatchResult match = engine.Run(project, null, null);
+            match.Dump(Console.Out);
+            return 0;
+        }
+
+        private static int RunParser(bool brief, string dumpext, bool dumpFiles, List<string> files, DumpOptions options, string parserName, Project project)
+        {
             IParserModule parserModule = ModuleRegister.FindModule(parserName) as IParserModule;
+            IParser parser = parserModule.CreateParser();
+            foreach (string file in files)
+            {
+                IWarrior warrior = parser.Parse(file, Console.Error);
+                if (warrior==null)
+                    return -1;
+                if (dumpFiles)
+                {
+                    StreamWriter sw = new StreamWriter(Path.ChangeExtension(file, dumpext));
+                    warrior.Dump(sw, options);
+                    sw.Close();
+                }
+                if (!brief)
+                {
+                    warrior.Dump(Console.Out, options);
+                }
+                project.Warriors.Add(warrior);
+            }
+            return project.Warriors.Count;
+        }
+
+        private static int ParseParams(string[] args, out bool brief, out string dumpext, out bool dumpFiles, out List<string> files, out DumpOptions options, Project project, string moduleName)
+        {
+
+            files = new List<string>();
+            options = new DumpOptions();
+            dumpFiles = false;
+            dumpext = ".dmp";
+            brief = false;
 
             if (args.Length == 0)
             {
-                PrintParserHelp(parserModule.Executable);
+                PrintParserHelp(moduleName+".exe"); 
                 return 0;
             }
-
-            Rules rules = new Rules();
-            List<string> files = new List<string>();
-            bool dumpFiles = false;
-            DumpOptions options = new DumpOptions();
-            string dumpext = ".dmp";
 
             for (int p = 0; p < args.Length; p++)
             {
@@ -34,52 +102,50 @@ namespace nMars.RedCode.CommandLine
                 switch (param)
                 {
                     case "-h":
-                        PrintParserHelp(parserModule.Executable);
+                        PrintParserHelp(moduleName+".exe");
                         return 0;
                     case "-p":
-                        if (!ReadNumber(args, ref p, out rules.MaxProcesses))
+                        if (!ReadNumber(args, ref p, out project.Rules.MaxProcesses))
                         {
                             return -1;
                         }
                         break;
                     case "-s":
-                        if (!ReadNumber(args, ref p, out rules.CoreSize))
+                        if (!ReadNumber(args, ref p, out project.Rules.CoreSize))
                         {
                             return -1;
                         }
                         break;
                     case "-r":
-                        if (!ReadNumber(args, ref p, out rules.Rounds))
+                        if (!ReadNumber(args, ref p, out project.Rules.Rounds))
                         {
                             return -1;
                         }
                         break;
                     case "-c":
-                        if (!ReadNumber(args, ref p, out rules.MaxCycles))
+                        if (!ReadNumber(args, ref p, out project.Rules.MaxCycles))
                         {
                             return -1;
                         }
                         break;
                     case "-l":
-                        if (!ReadNumber(args, ref p, out rules.MaxLength))
+                        if (!ReadNumber(args, ref p, out project.Rules.MaxLength))
                         {
                             return -1;
                         }
                         break;
                     case "-d":
-                        if (!ReadNumber(args, ref p, out rules.MinDistance))
+                        if (!ReadNumber(args, ref p, out project.Rules.MinDistance))
                         {
                             return -1;
                         }
                         break;
                     case "-S":
-                        if (!ReadNumber(args, ref p, out rules.PSpaceSize))
+                        if (!ReadNumber(args, ref p, out project.Rules.PSpaceSize))
                         {
                             return -1;
                         }
                         break;
-
-
                     case "-u":
                         if (args.Length < p + 1)
                         {
@@ -92,6 +158,9 @@ namespace nMars.RedCode.CommandLine
                         break;
                     case "-uo":
                         options.Offset = true;
+                        break;
+                    case "-b":
+                        brief = true;
                         break;
                     case "-ul":
                         options.Labels = true;
@@ -112,22 +181,8 @@ namespace nMars.RedCode.CommandLine
                         break;
                 }
             }
-            IParser parser = parserModule.CreateParser();
-            foreach (string file in files)
-            {
-                IWarrior warrior = parser.Parse(file);
-                if (dumpFiles)
-                {
-                    StreamWriter sw = new StreamWriter(Path.ChangeExtension(file, dumpext));
-                    warrior.Dump(sw, options);
-                    sw.Close();
-                }
-                else
-                {
-                    warrior.Dump(Console.Out, options);
-                }
-            }
-            return 0;
+            project.Rules.WarriorsCount = files.Count;
+            return files.Count;
         }
 
         private static bool ReadNumber(string[] args, ref int p, out int number)
@@ -160,11 +215,6 @@ namespace nMars.RedCode.CommandLine
             Console.WriteLine("  -ul       Dump with labels [off]");
             Console.WriteLine("  -uc       Dump with comments [off]");
             Console.WriteLine();
-        }
-
-        public static int EngineMain(string[] args, string engineName)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -213,7 +213,7 @@ namespace pMars.DllWrapper
             return warrior;
         }
 
-        public static List<string> BuildParams(Rules rules, bool parser, int[] forcedAddresses,
+        public static List<string> BuildParams(Rules rules, bool parser, IList<int> forcedAddresses,
                                                params string[] fileNames)
         {
             List<string> r = new List<string>();

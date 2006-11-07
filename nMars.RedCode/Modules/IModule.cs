@@ -8,6 +8,5 @@ namespace nMars.RedCode.Modules
     public interface IModule
     {
         string Name { get; }
-        string Executable { get; }
     }
 }

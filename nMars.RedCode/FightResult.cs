@@ -4,6 +4,7 @@
 // 2006 Pavel Savara
 
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace nMars.RedCode
@@ -41,6 +42,11 @@ namespace nMars.RedCode
                     }
                 }
             }
+        }
+        
+        public void Dump(TextWriter tw)
+        {
+            tw.WriteLine("Results: //TODO");
         }
 
         public FightResult[,] results;

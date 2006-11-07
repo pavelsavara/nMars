@@ -8,28 +8,26 @@ namespace pMars.DllWrapper
 {
     public class pMarsDllEngine : IEngine, IExtendedStepEngine
     {
-        public MatchResult Run(Rules aRules, IWarrior[] aWarriors, IPSpaces aPSpaces, Random aRandom,
-                               int[] forcedAddresses)
+        public MatchResult Run(IProject project, IPSpaces pSpaces, Random aRandom)
         {
-            BeginMatch(aRules, aWarriors, aPSpaces, aRandom, forcedAddresses);
+            BeginMatch(project, pSpaces, aRandom);
             while (NextStep() != StepResult.Finished)
             {
             }
             return EndMatch();
         }
 
-        public void BeginMatch(Rules aRules, IWarrior[] aWariors, IPSpaces aPSpaces, Random aRandom,
-                               int[] forcedAddresses)
+        public void BeginMatch(IProject project, IPSpaces pSpaces, Random aRandom)
         {
             cycles = 0;
-            rules = aRules;
+            rules = project.Rules;
             results = new MatchResult(rules);
-            string[] names = new string[aWariors.Length];
-            for (int w = 0; w < aWariors.Length; w++)
+            string[] names = new string[project.Warriors.Count];
+            for (int w = 0; w < project.Warriors.Count; w++)
             {
-                names[w] = aWariors[w].FileName;
+                names[w] = project.Warriors[w].FileName;
             }
-            List<string> r = pMarsDll.BuildParams(rules, false, forcedAddresses, names);
+            List<string> r = pMarsDll.BuildParams(rules, false, project.ForcedAddresses, names);
 
             string errFile = Path.GetTempFileName();
             int res = pMarsDll.pMarsBeginMatch(r.Count, r.ToArray(), errFile);

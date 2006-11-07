@@ -4,7 +4,6 @@
 // 2006 Pavel Savara
 
 using nMars.RedCode;
-using nMars.RedCode.CommandLine;
 using nMars.RedCode.Modules;
 
 namespace pMars.ShellWrapper
@@ -13,23 +12,7 @@ namespace pMars.ShellWrapper
     {
         public static int Main(string[] args)
         {
-            return CommandLine.ParserMain(args, name);
-        }
-
-        static Module()
-        {
-            instance = new Module();
-            ModuleRegister.Register(instance);
-        }
-
-        public string Name
-        {
-            get { return name; }
-        }
-
-        public string Executable
-        {
-            get { return executable; }
+            return CommandLine.ParserMain(args, typeof(Module).Namespace);
         }
 
         public IParser CreateParser()
@@ -37,8 +20,18 @@ namespace pMars.ShellWrapper
             return new pMarsParser();
         }
 
-        private static Module instance;
-        private static string name = "pMarsShellParser";
-        private static string executable = "pMarsShellParser";
+        #region Module registration
+
+        static Module()
+        {
+            ModuleRegister.Register(new Module());
+        }
+
+        public string Name
+        {
+            get { return typeof(Module).Namespace; }
+        }
+
+        #endregion
     }
 }
