@@ -57,14 +57,15 @@ namespace nMars.RedCode
             return 0;
         }
 
-        private static int RunParser(bool brief, string dumpext, bool dumpFiles, List<string> files, DumpOptions options, string parserName, Project project)
+        private static int RunParser(bool brief, string dumpext, bool dumpFiles, List<string> files, DumpOptions options,
+                                     string parserName, Project project)
         {
             IParserModule parserModule = ModuleRegister.FindModule(parserName) as IParserModule;
             IParser parser = parserModule.CreateParser();
             foreach (string file in files)
             {
                 IWarrior warrior = parser.Parse(file, Console.Error);
-                if (warrior==null)
+                if (warrior == null)
                     return -1;
                 if (dumpFiles)
                 {
@@ -81,9 +82,10 @@ namespace nMars.RedCode
             return project.Warriors.Count;
         }
 
-        private static int ParseParams(string[] args, out bool brief, out string dumpext, out bool dumpFiles, out List<string> files, out DumpOptions options, Project project, string moduleName)
+        private static int ParseParams(string[] args, out bool brief, out string dumpext, out bool dumpFiles,
+                                       out List<string> files, out DumpOptions options, Project project,
+                                       string moduleName)
         {
-
             files = new List<string>();
             options = new DumpOptions();
             dumpFiles = false;
@@ -92,7 +94,7 @@ namespace nMars.RedCode
 
             if (args.Length == 0)
             {
-                PrintParserHelp(moduleName+".exe"); 
+                PrintParserHelp(moduleName + ".exe");
                 return 0;
             }
 
@@ -102,7 +104,7 @@ namespace nMars.RedCode
                 switch (param)
                 {
                     case "-h":
-                        PrintParserHelp(moduleName+".exe");
+                        PrintParserHelp(moduleName + ".exe");
                         return 0;
                     case "-p":
                         if (!ReadNumber(args, ref p, out project.Rules.MaxProcesses))

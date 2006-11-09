@@ -151,7 +151,7 @@ namespace nMars.RedCode
         public static Operation Convert(int i)
         {
             if (i == 14) return Operation.CMP;
-            return (Operation) i;
+            return (Operation)i;
         }
 
         public static Operation Parse(string s)
