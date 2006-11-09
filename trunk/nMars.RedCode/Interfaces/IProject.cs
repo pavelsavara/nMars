@@ -1,15 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace nMars.RedCode
 {
     public interface IProject
     {
-        Rules Rules { get;}
-        IList<IWarrior> Warriors { get;}
-        IList<int> ForcedAddresses { get;}
-        
+        Rules Rules { get; }
+        IList<IWarrior> Warriors { get; }
+        IList<int> ForcedAddresses { get; }
     }
 
     public class Project : IProject
@@ -22,7 +19,7 @@ namespace nMars.RedCode
         {
             this.rules = rules;
         }
-        
+
         private IList<IWarrior> warriors = new List<IWarrior>();
         private IList<int> forcedAddresses = null;
         private Rules rules = Rules.DefaultRules;
@@ -30,7 +27,7 @@ namespace nMars.RedCode
         public Rules Rules
         {
             get { return rules; }
-            set { rules=value; }
+            set { rules = value; }
         }
 
         public IList<IWarrior> Warriors
@@ -41,6 +38,7 @@ namespace nMars.RedCode
         public IList<int> ForcedAddresses
         {
             get { return forcedAddresses; }
+            set { forcedAddresses = value; }
         }
     }
 }

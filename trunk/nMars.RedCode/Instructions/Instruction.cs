@@ -15,13 +15,7 @@ namespace nMars.RedCode
     {
         #region Constructors
 
-        public Instruction(
-            Operation operation,
-            Modifier modifier,
-            Mode modeA,
-            int valueA,
-            Mode modeB,
-            int valueB)
+        public Instruction(Operation operation, Modifier modifier, Mode modeA, int valueA, Mode modeB, int valueB)
         {
             Operation = operation;
             Modifier = modifier;
@@ -57,17 +51,17 @@ namespace nMars.RedCode
 
         public static int Mod(int raw, int coreSize)
         {
-            int res = raw%coreSize;
+            int res = raw % coreSize;
             if (res < 0) res += coreSize;
             return res;
         }
 
         public static int Wrap(int raw, int coreSize)
         {
-            int wrap = raw%coreSize;
-            if (wrap <= (coreSize/-2))
+            int wrap = raw % coreSize;
+            if (wrap <= (coreSize / -2))
                 wrap += coreSize;
-            if (wrap > (coreSize/2))
+            if (wrap > (coreSize / 2))
                 wrap -= coreSize;
             return wrap;
         }

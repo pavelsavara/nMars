@@ -18,54 +18,102 @@ namespace nMars.RedCode
     }
 
     [ComVisible(true)]
-    public class MatchResult : IComparable
+    public class MatchResult
     {
         public MatchResult(Rules rules)
         {
             this.rules = rules;
             results = new FightResult[rules.WarriorsCount,rules.Rounds];
-            points = new int[rules.WarriorsCount];
+            score = new int[rules.WarriorsCount];
+            wins = new int[rules.WarriorsCount];
+            ties = new int[rules.WarriorsCount];
+            looses = new int[rules.WarriorsCount];
+        }
+
+        public static bool operator !=(MatchResult a, MatchResult b)
+        {
+            return !a.Equals(b);
+        }
+
+        public static bool operator ==(MatchResult a, MatchResult b)
+        {
+            return a.Equals(b);
         }
 
         public void ComputePoints()
         {
             //TODO
-            for (int w = 0; w < rules.WarriorsCount; w++)
+            for (int r = 0; r < rules.Rounds; r++)
             {
-                for (int r = 0; r < rules.Rounds; r++)
+                int survivers = 0;
+                for (int w = 0; w < rules.WarriorsCount; w++)
+                {
+                    switch (results[w, r])
+                    {
+                        case FightResult.Win:
+                            wins[w]++;
+                            survivers++;
+                            break;
+                        case FightResult.Tie:
+                            ties[w]++;
+                            survivers++;
+                            break;
+                        case FightResult.Loose:
+                            looses[w]++;
+                            break;
+                    }
+                }
+                for (int w = 0; w < rules.WarriorsCount; w++)
                 {
                     switch (rules.ScoreFormula)
                     {
                         case PointsFormula.Standard:
-                            points[w] += 1;
+                            if (results[w, r] != FightResult.Loose)
+                            {
+                                score[w] += (rules.WarriorsCount * rules.WarriorsCount - 1) / survivers;
+                            }
                             break;
+                        default:
+                            throw new NotImplementedException("Formula not imlemented");
                     }
                 }
             }
         }
-        
+
         public void Dump(TextWriter tw)
         {
             tw.WriteLine("Results: //TODO");
         }
 
         public FightResult[,] results;
-        public int[] points;
+        public int[] score;
+        public int[] wins;
+        public int[] looses;
+        public int[] ties;
         private Rules rules;
+
+        public override bool Equals(object obj)
+        {
+            MatchResult res = obj as MatchResult;
+            if (rules != res.rules)
+                throw new InvalidOperationException("Cannot compare different results with rules");
+
+            for (int w = 0; w < rules.WarriorsCount; w++)
+            {
+                for (int r = 0; r < rules.Rounds; r++)
+                {
+                    if (results[w, r] != res.results[w, r])
+                        return false;
+                }
+                if (score[w] != res.score[w])
+                    return false;
+            }
+            return true;
+        }
 
         public int CompareTo(object obj)
         {
-            MatchResult res = obj as MatchResult;
-            if (rules != res.rules) return -1;
-            for (int w = 0; w < rules.WarriorsCount; w++)
-            {
-                if (points[w] != res.points[w]) return -1;
-                for (int r = 0; r < rules.Rounds; r++)
-                {
-                    if (results[w, r] != res.results[w, r]) return -1;
-                }
-            }
-            return 0;
+            throw new NotImplementedException();
         }
     }
 }
