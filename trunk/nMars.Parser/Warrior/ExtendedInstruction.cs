@@ -16,13 +16,8 @@ namespace nMars.Parser.Warrior
         {
         }
 
-        public ExtendedInstruction(
-            Operation operation,
-            Modifier modifier,
-            Mode modeA,
-            int valueA,
-            Mode modeB,
-            int valueB)
+        public ExtendedInstruction(Operation operation, Modifier modifier, Mode modeA, int valueA, Mode modeB,
+                                   int valueB)
             : base(operation, modifier, modeA, valueA, modeB, valueB)
         {
         }

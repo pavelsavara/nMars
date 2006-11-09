@@ -33,7 +33,7 @@ namespace com.calitha.goldparser
         /// <returns></returns>
         public virtual State Peek()
         {
-            return (State) stack.Peek();
+            return (State)stack.Peek();
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace com.calitha.goldparser
         /// <returns></returns>
         public virtual State Pop()
         {
-            return (State) stack.Pop();
+            return (State)stack.Pop();
         }
 
         /// <summary>

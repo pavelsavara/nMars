@@ -11,17 +11,18 @@ namespace com.calitha.goldparser.structure
     [Serializable()]
     public class CGTStructureException : IOException
     {
-        public CGTStructureException(string message) : base(message)
+        public CGTStructureException(string message)
+            : base(message)
         {
         }
 
-        public CGTStructureException(string message,
-                                     Exception inner) : base(message, inner)
+        public CGTStructureException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 
-        protected CGTStructureException(SerializationInfo info,
-                                        StreamingContext context) : base(info, context)
+        protected CGTStructureException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

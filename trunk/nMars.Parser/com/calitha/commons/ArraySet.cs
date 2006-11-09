@@ -11,9 +11,10 @@ namespace com.calitha.commons
     {
         private IList list;
 
-        public ArraySet() : base(new ArrayList())
+        public ArraySet()
+            : base(new ArrayList())
         {
-            list = (ArrayList) collection;
+            list = (ArrayList)collection;
         }
 
         public override void Add(Object obj)

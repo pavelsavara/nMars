@@ -25,7 +25,7 @@ namespace com.calitha.goldparser.lalr
         /// </summary>
         public SymbolNonterminal Symbol
         {
-            get { return (SymbolNonterminal) symbol; }
+            get { return (SymbolNonterminal)symbol; }
         }
 
         /// <summary>

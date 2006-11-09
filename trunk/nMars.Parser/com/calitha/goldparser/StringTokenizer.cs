@@ -77,9 +77,7 @@ namespace com.calitha.goldparser
 
             if (input.Position >= input.Text.Length)
             {
-                return new TerminalToken(SymbolCollection.EOF,
-                                         SymbolCollection.EOF.Name,
-                                         startLocation);
+                return new TerminalToken(SymbolCollection.EOF, SymbolCollection.EOF.Name, startLocation);
             }
 
             State newState = dfa.GotoNext(input.ReadChar());
@@ -87,7 +85,7 @@ namespace com.calitha.goldparser
             {
                 if (newState is EndState)
                 {
-                    acceptInfo = new AcceptInfo((EndState) newState, input.Location.Clone());
+                    acceptInfo = new AcceptInfo((EndState)newState, input.Location.Clone());
                 }
                 if (input.IsEof())
                     newState = null;

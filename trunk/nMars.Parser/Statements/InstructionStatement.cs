@@ -34,8 +34,8 @@ namespace nMars.Parser.Statements
         public Location Location;
 
 
-        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser,
-                                              ref int currentAddress, int coreSize, bool evaluate)
+        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser, ref int currentAddress,
+                                              int coreSize, bool evaluate)
         {
             //set all labels
             foreach (LabelName label in Labels)
@@ -46,11 +46,8 @@ namespace nMars.Parser.Statements
             ExtendedInstruction instruction;
             if (!evaluate)
             {
-                instruction = new ExtendedInstruction(
-                    Operation,
-                    Modifier,
-                    A.Mode, Int32.MinValue,
-                    B.Mode, Int32.MinValue);
+                instruction =
+                    new ExtendedInstruction(Operation, Modifier, A.Mode, Int32.MinValue, B.Mode, Int32.MinValue);
                 instruction.Address = currentAddress;
                 if (Labels.Count > 0)
                 {
@@ -73,7 +70,7 @@ namespace nMars.Parser.Statements
             }
             else
             {
-                instruction = (ExtendedInstruction) warrior.Instructions[currentAddress];
+                instruction = (ExtendedInstruction)warrior.Instructions[currentAddress];
                 instruction.ValueA = A.Expression.Evaluate(parser, currentAddress, coreSize);
                 instruction.ValueB = B.Expression.Evaluate(parser, currentAddress, coreSize);
             }

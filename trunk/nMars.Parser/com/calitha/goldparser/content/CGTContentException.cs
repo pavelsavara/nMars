@@ -11,17 +11,18 @@ namespace com.calitha.goldparser.content
     [Serializable()]
     public class CGTContentException : IOException
     {
-        public CGTContentException(string message) : base(message)
+        public CGTContentException(string message)
+            : base(message)
         {
         }
 
-        public CGTContentException(string message,
-                                   Exception inner) : base(message, inner)
+        public CGTContentException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 
-        protected CGTContentException(SerializationInfo info,
-                                      StreamingContext context) : base(info, context)
+        protected CGTContentException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

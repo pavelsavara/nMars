@@ -10,8 +10,8 @@ namespace nMars.Parser.Statements
 {
     public class ForRofContainerStatement : ContainerStatement
     {
-        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser,
-                                              ref int currentAddress, int coreSize, bool evaluate)
+        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser, ref int currentAddress,
+                                              int coreSize, bool evaluate)
         {
             //set labels, except last which is FOR expression
             for (int l = 0; l < Labels.Count - 1; l++)

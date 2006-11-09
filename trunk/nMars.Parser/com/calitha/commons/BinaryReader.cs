@@ -9,11 +9,13 @@ namespace com.calitha.commons
     /// </summary>
     public class CalithaBinReader : BinaryReader
     {
-        public CalithaBinReader(Stream input) : base(input)
+        public CalithaBinReader(Stream input)
+            : base(input)
         {
         }
 
-        public CalithaBinReader(Stream input, Encoding encoding) : base(input, encoding)
+        public CalithaBinReader(Stream input, Encoding encoding)
+            : base(input, encoding)
         {
         }
 
@@ -27,7 +29,7 @@ namespace com.calitha.commons
             ushort ch = ReadUInt16();
             while (ch != 0)
             {
-                builder.Append((char) ch);
+                builder.Append((char)ch);
                 ch = ReadUInt16();
             }
             return builder.ToString();
