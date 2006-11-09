@@ -21,6 +21,7 @@ extern "C"
     PMARSDLL_API void pMarsFreeParsed();
 	PMARSDLL_API int pMarsBeginMatch(int argc, char** argv, char* errFile);
 	PMARSDLL_API int pMarsStepMatch();
+	PMARSDLL_API void pMarsResultsMatch();
 	PMARSDLL_API void pMarsWatchMatch(mem_struct** aCore, int* aCoreSize, long** aCyclesLeft, int** aRound,
 									  warrior_struct** aWarriors, int* aWarriorsCount, 
 									  int** aWarriorsLeft, warrior_struct*** aNextWarrior,//warriors

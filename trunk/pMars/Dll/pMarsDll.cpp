@@ -85,6 +85,11 @@ PMARSDLL_API int pMarsStepMatch()
 	return step_match();
 }
 
+PMARSDLL_API void pMarsResultsMatch()
+{
+	body_results();
+}
+
 PMARSDLL_API void pMarsEndMatch()
 {
 	end_match();

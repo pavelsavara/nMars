@@ -215,12 +215,15 @@ void body_results()
 	int     i, j;
     if (SWITCH_k) {
       set_reg('W', (long) warriors);        /* 'W' used in score calculation */
-      if (warriors == 2)        /* standard 2-warrior game */
+      if (warriors == 2) {      /* standard 2-warrior game */
         fprintf(STDOUT, "%d %d\n%d %d\n", warrior[0].score[0],
              warrior[0].score[1], warrior[1].score[0], warrior[1].score[1]);
+			warrior[0].totalscore = warrior[0].score[0];
+			warrior[1].totalscore = warrior[1].score[0];
+        }
       else                        /* multiwarrior */
         for (i = 0; i < warriors; i++) {
-          fprintf(STDOUT, "%d ", score(i));
+          fprintf(STDOUT, "%d ", warrior[i].totalscore = score(i));
           for (j = 0; j < warriors; j++) {
             fprintf(STDOUT, "%d ", warrior[i].score[j]);
           }
@@ -242,20 +245,7 @@ void body_finalize()
 		FREE(warrior[w].version);
 		FREE(warrior[w].name);
 		FREE(warrior[w].instBank);
-		warrior[w].offset=0;
-		warrior[w].instLen=0;
-		warrior[w].tasks=0;
-		warrior[w].pSpaceIDNumber=0;
-		warrior[w].lastResult=0;
-		warrior[w].taskHead=NULL;
-		warrior[w].taskTail=NULL;
-		warrior[w].nextWarrior=NULL;
-		warrior[w].authorName=NULL;
-		warrior[w].fileName=NULL;
-		warrior[w].date=NULL;
-		warrior[w].version=NULL;
-		warrior[w].name=NULL;
-		warrior[w].instBank=NULL;
+		memset(&warrior[w],0,sizeof(warrior_struct));
 	}
 #ifdef PSPACE                        /* teardown up pSpace */
 	pspace_finalize();
@@ -413,6 +403,7 @@ returninfo()
     set_reg('W', (long) warriors);        /* 'W' used in score calculation */
     for (i = 0; i < warriors; ++i) {
       scrV[i] = score(i);
+	  warrior[i].totalscore = scrV[i];
       idxV[i] = i;
     }
     if (SWITCH_o)
