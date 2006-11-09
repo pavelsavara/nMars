@@ -34,7 +34,7 @@ namespace pMars.DllWrapper
             }
             catch (Exception ex)
             {
-                StreamWriter err=new StreamWriter(errFileName, true);
+                StreamWriter err = new StreamWriter(errFileName, true);
                 err.WriteLine("pMars.DllWrapper exited with exception " + ex.ToString() + "\n");
                 err.Close();
                 return null;
