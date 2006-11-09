@@ -1,4 +1,5 @@
 @echo off
+call %~dp0\ver.cmd
 
 svn export https://svn.sourceforge.net/svnroot/nmars/trunk nMarsSources.%VER%
 zip -r -9 nMars.%VER%.src.zip nMarsSources.%VER%
