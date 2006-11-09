@@ -33,10 +33,7 @@ namespace com.calitha.goldparser
         /// <param name="tokenizer">A tokenizer.</param>
         /// <param name="states">The LALR states.</param>
         /// <param name="startState">The starting state.</param>
-        public LALRParser(IStringTokenizer tokenizer,
-                          StateCollection states,
-                          State startState,
-                          SymbolCollection symbols)
+        public LALRParser(IStringTokenizer tokenizer, StateCollection states, State startState, SymbolCollection symbols)
         {
             this.tokenizer = tokenizer;
             this.states = states;
@@ -73,7 +70,7 @@ namespace com.calitha.goldparser
                     ParseTerminal(token);
             }
             if (accepted)
-                return (NonterminalToken) tokenStack.Pop();
+                return (NonterminalToken)tokenStack.Pop();
             else
                 return null;
         }
@@ -93,8 +90,7 @@ namespace com.calitha.goldparser
 
             State currentState;
             // Do not reduce if the rule is single nonterminal and TrimReductions is on
-            bool skipReduce = ((TrimReductions) &&
-                               (reduceLength == 1) && (action.Rule.Rhs[0] is SymbolNonterminal));
+            bool skipReduce = ((TrimReductions) && (reduceLength == 1) && (action.Rule.Rhs[0] is SymbolNonterminal));
             if (skipReduce)
             {
                 stateStack.Pop();
@@ -123,9 +119,7 @@ namespace com.calitha.goldparser
 
                 if (OnReduce != null)
                 {
-                    ReduceEventArgs args = new ReduceEventArgs(action.Rule,
-                                                               nttoken,
-                                                               currentState);
+                    ReduceEventArgs args = new ReduceEventArgs(action.Rule, nttoken, currentState);
                     OnReduce(this, args);
                     DoReleaseTokens(args.Token);
 
@@ -136,7 +130,7 @@ namespace com.calitha.goldparser
 
             if (gotoAction is GotoAction)
             {
-                DoGoto(token, (GotoAction) gotoAction);
+                DoGoto(token, (GotoAction)gotoAction);
             }
             else
             {
@@ -147,8 +141,7 @@ namespace com.calitha.goldparser
         private void DoReleaseTokens(NonterminalToken token)
         {
             if ((StoreTokens == StoreTokensMode.Never) ||
-                (StoreTokens == StoreTokensMode.NoUserObject &&
-                 token.UserObject != null))
+                (StoreTokens == StoreTokensMode.NoUserObject && token.UserObject != null))
             {
                 token.ClearTokens();
             }
@@ -159,7 +152,7 @@ namespace com.calitha.goldparser
             continueParsing = false;
             accepted = true;
             if (OnAccept != null)
-                OnAccept(this, new AcceptEventArgs((NonterminalToken) tokenStack.Peek()));
+                OnAccept(this, new AcceptEventArgs((NonterminalToken)tokenStack.Peek()));
         }
 
         private void DoGoto(Token token, GotoAction action)
@@ -178,11 +171,11 @@ namespace com.calitha.goldparser
             Action action = currentState.Actions.Get(token.Symbol);
 
             if (action is ShiftAction)
-                DoShift(token, (ShiftAction) action);
+                DoShift(token, (ShiftAction)action);
             else if (action is ReduceAction)
-                DoReduce(token, (ReduceAction) action);
+                DoReduce(token, (ReduceAction)action);
             else if (action is AcceptAction)
-                DoAccept(token, (AcceptAction) action);
+                DoAccept(token, (AcceptAction)action);
             else
             {
                 continueParsing = false;
@@ -194,8 +187,7 @@ namespace com.calitha.goldparser
         {
             if (OnParseError != null)
             {
-                ParseErrorEventArgs e =
-                    new ParseErrorEventArgs(token, FindExpectedTokens());
+                ParseErrorEventArgs e = new ParseErrorEventArgs(token, FindExpectedTokens());
                 OnParseError(this, e);
                 continueParsing = e.Continue != ContinueMode.Stop;
                 lookahead = e.NextToken;
@@ -206,9 +198,8 @@ namespace com.calitha.goldparser
 
         private void FireEOFError()
         {
-            TerminalToken eofToken = new TerminalToken(SymbolCollection.EOF,
-                                                       SymbolCollection.EOF.Name,
-                                                       tokenizer.GetCurrentLocation());
+            TerminalToken eofToken =
+                new TerminalToken(SymbolCollection.EOF, SymbolCollection.EOF.Name, tokenizer.GetCurrentLocation());
             FireParseError(eofToken);
         }
 
@@ -218,8 +209,7 @@ namespace com.calitha.goldparser
             State state = stateStack.Peek();
             foreach (Action action in state.Actions)
             {
-                if ((action is ShiftAction) || (action is ReduceAction)
-                    || (action is AcceptAction))
+                if ((action is ShiftAction) || (action is ReduceAction) || (action is AcceptAction))
                 {
                     symbols.Add(action.symbol);
                 }
@@ -274,8 +264,7 @@ namespace com.calitha.goldparser
             do
             {
                 TerminalToken token = tokenizer.RetrieveToken();
-                if (prevtoken != null &&
-                    token.Symbol.Name == "NewLine" &&
+                if (prevtoken != null && token.Symbol.Name == "NewLine" &&
                     (prevtoken.Symbol is SymbolCommentLine || prevtoken.Symbol is SymbolCommentStart))
                 {
                     token.UserObject = prevtoken.UserObject;
@@ -335,9 +324,7 @@ namespace com.calitha.goldparser
                 token.UserObject = comment;
                 if (OnCommentRead != null)
                 {
-                    CommentReadEventArgs args = new CommentReadEventArgs(token.Text,
-                                                                         comment,
-                                                                         true);
+                    CommentReadEventArgs args = new CommentReadEventArgs(token.Text, comment, true);
                     OnCommentRead(this, args);
                 }
             }
@@ -358,9 +345,7 @@ namespace com.calitha.goldparser
                 token.UserObject = comment;
                 if (OnCommentRead != null)
                 {
-                    CommentReadEventArgs args = new CommentReadEventArgs(token.Text + comment,
-                                                                         comment,
-                                                                         false);
+                    CommentReadEventArgs args = new CommentReadEventArgs(token.Text + comment, comment, false);
                     OnCommentRead(this, args);
                 }
             }

@@ -13,13 +13,12 @@ namespace com.calitha.goldparser.content
         public ActionSubRecordCollection(Record record, int start)
         {
             list = new ArrayList();
-            if ((record.Entries.Count - start)%4 != 0)
+            if ((record.Entries.Count - start) % 4 != 0)
                 throw new CGTContentException("Invalid number of entries for actions in LALR state");
             for (int i = start; i < record.Entries.Count; i = i + 4)
             {
-                ActionSubRecord actionRecord = new ActionSubRecord(record.Entries[i],
-                                                                   record.Entries[i + 1],
-                                                                   record.Entries[i + 2]);
+                ActionSubRecord actionRecord =
+                    new ActionSubRecord(record.Entries[i], record.Entries[i + 1], record.Entries[i + 2]);
                 list.Add(actionRecord);
             }
         }

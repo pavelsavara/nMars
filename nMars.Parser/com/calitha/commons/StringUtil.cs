@@ -22,8 +22,7 @@ namespace com.calitha.commons
         public static string ShowEscapeChars(string str)
         {
             Regex regex = new Regex("\0|\a|\b|\f|\n|\r|\t|\v");
-            MatchEvaluator evaluator =
-                new MatchEvaluator((new StringUtil()).MatchEvent);
+            MatchEvaluator evaluator = new MatchEvaluator((new StringUtil()).MatchEvent);
             return regex.Replace(str, evaluator);
         }
 

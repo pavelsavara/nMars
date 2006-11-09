@@ -28,7 +28,7 @@ namespace com.calitha.goldparser
                 return false;
             else
             {
-                Symbol other = (Symbol) obj;
+                Symbol other = (Symbol)obj;
                 return (id == other.id);
             }
         }
@@ -59,7 +59,8 @@ namespace com.calitha.goldparser
     /// </summary>
     public class SymbolNonterminal : Symbol
     {
-        public SymbolNonterminal(int id, string name) : base(id, name)
+        public SymbolNonterminal(int id, string name)
+            : base(id, name)
         {
         }
 
@@ -74,7 +75,8 @@ namespace com.calitha.goldparser
     /// </summary>
     public class SymbolTerminal : Symbol
     {
-        public SymbolTerminal(int id, string name) : base(id, name)
+        public SymbolTerminal(int id, string name)
+            : base(id, name)
         {
         }
     }
@@ -84,7 +86,8 @@ namespace com.calitha.goldparser
     /// </summary>
     public class SymbolWhiteSpace : SymbolTerminal
     {
-        public SymbolWhiteSpace(int id) : base(id, "(Whitespace)")
+        public SymbolWhiteSpace(int id)
+            : base(id, "(Whitespace)")
         {
         }
     }
@@ -94,7 +97,8 @@ namespace com.calitha.goldparser
     /// </summary>
     public class SymbolEnd : SymbolTerminal
     {
-        public SymbolEnd(int id) : base(id, "(EOF)")
+        public SymbolEnd(int id)
+            : base(id, "(EOF)")
         {
         }
     }
@@ -104,7 +108,8 @@ namespace com.calitha.goldparser
     /// </summary>
     public class SymbolCommentStart : SymbolTerminal
     {
-        public SymbolCommentStart(int id) : base(id, "(Comment Start)")
+        public SymbolCommentStart(int id)
+            : base(id, "(Comment Start)")
         {
         }
     }
@@ -114,7 +119,8 @@ namespace com.calitha.goldparser
     /// </summary>
     public class SymbolCommentEnd : SymbolTerminal
     {
-        public SymbolCommentEnd(int id) : base(id, "(Comment End)")
+        public SymbolCommentEnd(int id)
+            : base(id, "(Comment End)")
         {
         }
     }
@@ -124,7 +130,8 @@ namespace com.calitha.goldparser
     /// </summary>
     public class SymbolCommentLine : SymbolTerminal
     {
-        public SymbolCommentLine(int id) : base(id, "(Comment Line)")
+        public SymbolCommentLine(int id)
+            : base(id, "(Comment Line)")
         {
         }
     }
@@ -134,7 +141,8 @@ namespace com.calitha.goldparser
     /// </summary>
     public class SymbolError : SymbolTerminal
     {
-        public SymbolError(int id) : base(id, "(ERROR)")
+        public SymbolError(int id)
+            : base(id, "(ERROR)")
         {
         }
     }

@@ -11,9 +11,10 @@ namespace com.calitha.commons
     {
         private IDictionary map;
 
-        public HashSet() : base(new Hashtable())
+        public HashSet()
+            : base(new Hashtable())
         {
-            map = (Hashtable) collection;
+            map = (Hashtable)collection;
         }
 
         public override void Add(Object obj)

@@ -227,8 +227,7 @@ namespace com.calitha.goldparser
         private ContinueMode contin;
         private TerminalToken nextToken;
 
-        public ParseErrorEventArgs(TerminalToken unexpectedToken,
-                                   SymbolCollection expectedTokens)
+        public ParseErrorEventArgs(TerminalToken unexpectedToken, SymbolCollection expectedTokens)
         {
             this.unexpectedToken = unexpectedToken;
             this.expectedTokens = expectedTokens;
@@ -298,9 +297,7 @@ namespace com.calitha.goldparser
         /// <param name="content">The content of the comment</param>
         /// <param name="lineComment">True for a line comment, otherwise a 
         ///                           block comment.</param>
-        public CommentReadEventArgs(string comment,
-                                    string content,
-                                    bool lineComment)
+        public CommentReadEventArgs(string comment, string content, bool lineComment)
         {
             this.comment = comment;
             this.content = content;

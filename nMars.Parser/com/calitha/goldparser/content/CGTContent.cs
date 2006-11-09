@@ -33,16 +33,10 @@ namespace com.calitha.goldparser.content
             if (structure.Records.Count != specifiedRecordCount)
                 throw new CGTContentException("Invalid number of records");
 
-            characterSetTable = new CharacterSetTable(structure,
-                                                      characterSetStart,
-                                                      TableCounts.CharacterSetTable);
-            symbolTable = new SymbolTable(structure,
-                                          symbolStart,
-                                          TableCounts.SymbolTable);
+            characterSetTable = new CharacterSetTable(structure, characterSetStart, TableCounts.CharacterSetTable);
+            symbolTable = new SymbolTable(structure, symbolStart, TableCounts.SymbolTable);
 
-            ruleTable = new RuleTable(structure,
-                                      ruleStart,
-                                      TableCounts.RuleTable);
+            ruleTable = new RuleTable(structure, ruleStart, TableCounts.RuleTable);
             initialStates = new InitialStatesRecord(structure.Records[initialStatesStart]);
             dfaStateTable = new DFAStateTable(structure, dfaStart, TableCounts.DFATable);
             lalrStateTable = new LALRStateTable(structure, lalrStart, TableCounts.LALRTable);

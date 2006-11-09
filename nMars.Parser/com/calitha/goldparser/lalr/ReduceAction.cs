@@ -25,7 +25,7 @@ namespace com.calitha.goldparser.lalr
         /// </summary>
         public SymbolTerminal Symbol
         {
-            get { return (SymbolTerminal) symbol; }
+            get { return (SymbolTerminal)symbol; }
         }
 
         /// <summary>

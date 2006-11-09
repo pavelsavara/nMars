@@ -10,17 +10,18 @@ namespace com.calitha.goldparser
     [Serializable()]
     public class ParserException : ApplicationException
     {
-        public ParserException(string message) : base(message)
+        public ParserException(string message)
+            : base(message)
         {
         }
 
-        public ParserException(string message,
-                               Exception inner) : base(message, inner)
+        public ParserException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 
-        protected ParserException(SerializationInfo info,
-                                  StreamingContext context) : base(info, context)
+        protected ParserException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

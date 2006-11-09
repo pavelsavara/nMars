@@ -19,9 +19,7 @@ namespace com.calitha.goldparser.lalr
         /// <param name="symbols">The symbols.</param>
         /// <param name="rules">The rules.</param>
         /// <returns>A new action object.</returns>
-        public static Action CreateAction(ActionSubRecord record,
-                                          StateCollection states,
-                                          SymbolCollection symbols,
+        public static Action CreateAction(ActionSubRecord record, StateCollection states, SymbolCollection symbols,
                                           RuleCollection rules)
         {
             Action action;
@@ -45,10 +43,8 @@ namespace com.calitha.goldparser.lalr
             return action;
         }
 
-        private static ShiftAction CreateShiftAction(ActionSubRecord record,
-                                                     SymbolCollection symbols,
-                                                     StateCollection states
-            )
+        private static ShiftAction CreateShiftAction(ActionSubRecord record, SymbolCollection symbols,
+                                                     StateCollection states)
         {
             State state = states[record.Target];
             SymbolTerminal symbol = symbols[record.SymbolIndex] as SymbolTerminal;
@@ -56,8 +52,7 @@ namespace com.calitha.goldparser.lalr
             return new ShiftAction(symbol, state);
         }
 
-        private static ReduceAction CreateReduceAction(ActionSubRecord record,
-                                                       SymbolCollection symbols,
+        private static ReduceAction CreateReduceAction(ActionSubRecord record, SymbolCollection symbols,
                                                        RuleCollection rules)
         {
             SymbolTerminal symbol = symbols[record.SymbolIndex] as SymbolTerminal;
@@ -65,8 +60,7 @@ namespace com.calitha.goldparser.lalr
             return new ReduceAction(symbol, rule);
         }
 
-        private static GotoAction CreateGotoAction(ActionSubRecord record,
-                                                   SymbolCollection symbols,
+        private static GotoAction CreateGotoAction(ActionSubRecord record, SymbolCollection symbols,
                                                    StateCollection states)
         {
             SymbolNonterminal symbol = symbols[record.SymbolIndex] as SymbolNonterminal;
@@ -74,8 +68,7 @@ namespace com.calitha.goldparser.lalr
             return new GotoAction(symbol, state);
         }
 
-        private static AcceptAction CreateAcceptAction(ActionSubRecord record,
-                                                       SymbolCollection symbols)
+        private static AcceptAction CreateAcceptAction(ActionSubRecord record, SymbolCollection symbols)
         {
             SymbolTerminal symbol = symbols[record.SymbolIndex] as SymbolTerminal;
             return new AcceptAction(symbol);

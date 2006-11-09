@@ -15,8 +15,8 @@ namespace nMars.Parser.Statements
             this.expression = expression;
         }
 
-        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser,
-                                              ref int currentAddress, int coreSize, bool evaluate)
+        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser, ref int currentAddress,
+                                              int coreSize, bool evaluate)
         {
             //set labels, except last which is EQU expression
             for (int l = 0; l < Labels.Count; l++)

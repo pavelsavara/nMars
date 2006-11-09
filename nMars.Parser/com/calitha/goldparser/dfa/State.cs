@@ -45,7 +45,8 @@ namespace com.calitha.goldparser.dfa
     {
         private SymbolTerminal acceptSymbol;
 
-        public EndState(int id, SymbolTerminal acceptSymbol) : base(id)
+        public EndState(int id, SymbolTerminal acceptSymbol)
+            : base(id)
         {
             this.acceptSymbol = acceptSymbol;
         }

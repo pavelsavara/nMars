@@ -44,7 +44,7 @@ namespace com.calitha.commons
         public virtual object Clone()
         {
             IntegerList result = new IntegerList();
-            result.list = (ArrayList) list.Clone();
+            result.list = (ArrayList)list.Clone();
             return result;
         }
 
@@ -108,7 +108,7 @@ namespace com.calitha.commons
         {
             if (! (obj is IntegerList))
                 return false;
-            IntegerList otherList = (IntegerList) obj;
+            IntegerList otherList = (IntegerList)obj;
             if (otherList.Count != Count)
                 return false;
             for (int i = 0; i < list.Count; i++)
@@ -160,7 +160,7 @@ namespace com.calitha.commons
         /// <returns>A hash code.</returns>
         public override int GetHashCode()
         {
-            return (list.Count*(this[0] + this[list.Count - 1]).GetHashCode());
+            return (list.Count * (this[0] + this[list.Count - 1]).GetHashCode());
         }
 
         /// <summary>
@@ -501,7 +501,7 @@ namespace com.calitha.commons
         /// </summary>
         public int this[int index]
         {
-            get { return (Int32) list[index]; }
+            get { return (Int32)list[index]; }
         }
 
         /// <summary>

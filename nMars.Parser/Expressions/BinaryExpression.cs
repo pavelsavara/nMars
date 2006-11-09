@@ -53,21 +53,21 @@ namespace nMars.Parser
                 case BinaryOperation.Minus:
                     return l - r;
                 case BinaryOperation.Multiply:
-                    return l*r;
+                    return l * r;
                 case BinaryOperation.Divide:
                     if (r == 0)
                     {
                         parser.WriteError("Divide by zero during evaluation of " + ToString());
                         return 0;
                     }
-                    return l/r;
+                    return l / r;
                 case BinaryOperation.Modulo:
                     if (r == 0)
                     {
                         parser.WriteError("Divide by zero during evaluation of " + ToString());
                         return 0;
                     }
-                    return l%r;
+                    return l % r;
                 case BinaryOperation.BinOr:
                     return l | r;
                 case BinaryOperation.BinXor:

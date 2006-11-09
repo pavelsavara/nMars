@@ -14,9 +14,7 @@ namespace com.calitha.commons
         {
         }
 
-        public static void AddFileAsStringResource(string resourceFile,
-                                                   string resourceName,
-                                                   string inputFile)
+        public static void AddFileAsStringResource(string resourceFile, string resourceName, string inputFile)
         {
             ResourceWriter writer = new ResourceWriter(resourceFile);
             StreamReader reader = new StreamReader(inputFile);
@@ -26,22 +24,16 @@ namespace com.calitha.commons
             writer.Close();
         }
 
-        public static string GetStringResource(Assembly assembly,
-                                               string baseName,
-                                               string resourceName)
+        public static string GetStringResource(Assembly assembly, string baseName, string resourceName)
         {
-            ResourceManager rm =
-                new ResourceManager(baseName, assembly);
-            return (String) rm.GetObject(resourceName);
+            ResourceManager rm = new ResourceManager(baseName, assembly);
+            return (String)rm.GetObject(resourceName);
         }
 
-        public static byte[] GetByteArrayResource(Assembly assembly,
-                                                  string baseName,
-                                                  string resourceName)
+        public static byte[] GetByteArrayResource(Assembly assembly, string baseName, string resourceName)
         {
-            ResourceManager rm =
-                new ResourceManager(baseName, assembly);
-            return (Byte[]) rm.GetObject(resourceName);
+            ResourceManager rm = new ResourceManager(baseName, assembly);
+            return (Byte[])rm.GetObject(resourceName);
         }
     }
 }

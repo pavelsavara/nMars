@@ -7,7 +7,7 @@ using com.calitha.goldparser.lalr;
 using com.calitha.goldparser.structure;
 using DFA = com.calitha.goldparser.dfa;
 using State=com.calitha.goldparser.dfa.State;
-using StateCollection=com.calitha.goldparser.lalr.StateCollection;
+using StateCollection=com.calitha.goldparser.dfa.StateCollection;
 
 namespace com.calitha.goldparser
 {
@@ -20,8 +20,8 @@ namespace com.calitha.goldparser
         private Stream stream;
         private CGTStructure structure;
         private CGTContent content;
-        private dfa.StateCollection dfaStates;
-        private StateCollection parserStates;
+        private StateCollection dfaStates;
+        private lalr.StateCollection parserStates;
         private SymbolCollection symbols;
         private RuleCollection rules;
 
@@ -116,10 +116,7 @@ namespace com.calitha.goldparser
         public LALRParser CreateNewParser()
         {
             lalr.State startState = parserStates[content.InitialStates.LALR];
-            return new LALRParser(CreateNewTokenizer(),
-                                  parserStates,
-                                  startState,
-                                  Symbols);
+            return new LALRParser(CreateNewTokenizer(), parserStates, startState, Symbols);
         }
 
         private SymbolCollection CreateSymbols(CGTContent content)
@@ -133,10 +130,10 @@ namespace com.calitha.goldparser
             return symbols;
         }
 
-        private dfa.StateCollection CreateDFAStates(CGTContent content)
+        private StateCollection CreateDFAStates(CGTContent content)
         {
             symbols = CreateSymbols(content);
-            dfa.StateCollection states = new dfa.StateCollection();
+            StateCollection states = new StateCollection();
             foreach (DFAStateRecord stateRecord in content.DFAStateTable)
             {
                 State state;
@@ -144,7 +141,7 @@ namespace com.calitha.goldparser
                 {
                     Symbol symbol = symbols[stateRecord.AcceptIndex];
 
-                    state = new EndState(stateRecord.Index, (SymbolTerminal) symbol);
+                    state = new EndState(stateRecord.Index, (SymbolTerminal)symbol);
                     //todo: type checking (exception?)
                 }
                 else
@@ -187,11 +184,11 @@ namespace com.calitha.goldparser
             return rules;
         }
 
-        private StateCollection CreateParserStates(CGTContent content)
+        private lalr.StateCollection CreateParserStates(CGTContent content)
         {
             rules = CreateRules(content);
 
-            StateCollection states = new StateCollection();
+            lalr.StateCollection states = new lalr.StateCollection();
             foreach (LALRStateRecord record in content.LALRStateTable)
             {
                 lalr.State state = new lalr.State(record.Index);
@@ -203,11 +200,7 @@ namespace com.calitha.goldparser
                 lalr.State state = states[record.Index];
                 foreach (ActionSubRecord subRecord in record.ActionSubRecords)
                 {
-                    Action action =
-                        ActionFactory.CreateAction(subRecord,
-                                                   states,
-                                                   symbols,
-                                                   rules);
+                    Action action = ActionFactory.CreateAction(subRecord, states, symbols, rules);
                     state.Actions.Add(action);
                 }
             }

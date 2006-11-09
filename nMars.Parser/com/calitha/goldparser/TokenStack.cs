@@ -31,7 +31,7 @@ namespace com.calitha.goldparser
         /// <returns>The top of the stack.</returns>
         public virtual Token Peek()
         {
-            return (Token) stack.Peek();
+            return (Token)stack.Peek();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace com.calitha.goldparser
         /// <returns>The top of the stack.</returns>
         public virtual Token Pop()
         {
-            return (Token) stack.Pop();
+            return (Token)stack.Pop();
         }
 
         /// <summary>

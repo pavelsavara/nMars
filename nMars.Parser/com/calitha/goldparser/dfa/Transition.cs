@@ -75,7 +75,7 @@ namespace com.calitha.goldparser.dfa
             IEnumerator enumerator = transition.CharSet.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                char ch = (char) enumerator.Current;
+                char ch = (char)enumerator.Current;
                 map.Add(ch, transition);
             }
             return list.Add(transition);

@@ -21,13 +21,10 @@ namespace nMars.Parser.Warrior
             : base(rules)
         {
         }
-        
+
         public new ExtendedInstruction this[int offset]
         {
-            get
-            {
-                return (ExtendedInstruction)Instructions[offset];
-            }
+            get { return (ExtendedInstruction)Instructions[offset]; }
         }
 
         public override void Dump(TextWriter tw, DumpOptions options)
@@ -38,7 +35,7 @@ namespace nMars.Parser.Warrior
             {
                 tw.Write("   ");
             }
-            if (options.Labels && Length>0)
+            if (options.Labels && Length > 0)
             {
                 tw.WriteLine("             ORG      " + this[StartOffset].Label);
             }
@@ -53,6 +50,7 @@ namespace nMars.Parser.Warrior
             tw.WriteLine();
         }
 
-        [NonSerialized] internal Dictionary<string, Expression> Variables = null;
+        [NonSerialized]
+        internal Dictionary<string, Expression> Variables = null;
     }
 }

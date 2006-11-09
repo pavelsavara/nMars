@@ -14,7 +14,7 @@ namespace com.calitha.goldparser.content
         public EdgeSubRecordCollection(Record record, int start)
         {
             list = new ArrayList();
-            if ((record.Entries.Count - start)%3 != 0)
+            if ((record.Entries.Count - start) % 3 != 0)
                 throw new CGTContentException("Invalid number of entries for edges in DFA state");
             for (int i = start; i < record.Entries.Count; i = i + 3)
             {

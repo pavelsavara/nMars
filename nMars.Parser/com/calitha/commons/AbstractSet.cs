@@ -58,10 +58,7 @@ namespace com.calitha.commons
         /// zero-based indexing.</param>
         /// <param name="index">The zero-based index in array at which 
         /// copying begins.</param>
-        public void CopyTo(
-            Array array,
-            int index
-            )
+        public void CopyTo(Array array, int index)
         {
             collection.CopyTo(array, index);
         }
