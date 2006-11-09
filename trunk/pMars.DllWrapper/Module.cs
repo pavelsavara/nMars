@@ -12,7 +12,7 @@ namespace pMars.DllWrapper
     {
         public static int Main(string[] args)
         {
-            return CommandLine.EngineMain(args, typeof (Module).Namespace, typeof (Module).Namespace);
+            return CommandLine.EngineMain(args, typeof(Module).Namespace, typeof(Module).Namespace);
         }
 
         public IParser CreateParser()
@@ -34,10 +34,9 @@ namespace pMars.DllWrapper
 
         public string Name
         {
-            get { return typeof (Module).Namespace; }
+            get { return typeof(Module).Namespace; }
         }
 
         #endregion
     }
 }
- 

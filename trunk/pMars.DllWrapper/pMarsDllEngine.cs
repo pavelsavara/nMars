@@ -37,15 +37,22 @@ namespace pMars.DllWrapper
                 File.Delete(errFile);
                 throw new ParserException(errors);
             }
-            pMarsDll.pMarsWatchMatch(out dllCore, out dllCoreSize, out dllCyclesLeft, out dllRound,
-                                     out dllWarriors, out dllWarriorsCout, out dllWarrirorsLeft, out dllNextWarrior,
-                                     out dllTasksStart, out dllTasksEnd);
+            pMarsDll.pMarsWatchMatch(out dllCore, out dllCoreSize, out dllCyclesLeft, out dllRound, out dllWarriors,
+                                     out dllWarriorsCout, out dllWarrirorsLeft, out dllNextWarrior, out dllTasksStart,
+                                     out dllTasksEnd);
             dllDataLinked = true;
         }
 
         public MatchResult EndMatch()
         {
-            results.ComputePoints();
+            pMarsDll.pMarsResultsMatch();
+            dllWarriorsLoaded = false;
+            CopyWarriors();
+            for (int w = 0; w < rules.WarriorsCount; w++)
+            {
+                results.score[w] = warriorsDllCopy[w].totalScore;
+            }
+
             pMarsDll.pMarsEndMatch();
             dllCore = IntPtr.Zero;
             dllCoreSize = 0;
@@ -97,7 +104,7 @@ namespace pMars.DllWrapper
                 lastInstruction = this[currentInstructionAddress];
             }
 
-            StepResult res = (StepResult) pMarsDll.pMarsStepMatch();
+            StepResult res = (StepResult)pMarsDll.pMarsStepMatch();
             dllCoreLoaded = false;
             dllTasksLoaded = false;
             dllWarriorsLoaded = false;
@@ -105,9 +112,27 @@ namespace pMars.DllWrapper
 
             if (res > StepResult.Continue)
             {
+                int foundAlive = -1;
                 for (int w = 0; w < rules.WarriorsCount; w++)
                 {
-                    results.results[w, Round - 1] = FightResult.Tie; //TODO
+                    int tasks = Tasks[w].Count;
+                    if (tasks > 0)
+                    {
+                        if (foundAlive != -1)
+                        {
+                            results.results[w, Round - 1] = FightResult.Tie;
+                            results.results[foundAlive, Round - 1] = FightResult.Tie;
+                        }
+                        else
+                        {
+                            results.results[w, Round - 1] = FightResult.Win;
+                            foundAlive = w;
+                        }
+                    }
+                    else
+                    {
+                        results.results[w, Round - 1] = FightResult.Loose;
+                    }
                 }
                 if (res != StepResult.Finished)
                 {

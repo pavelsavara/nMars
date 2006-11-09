@@ -5,13 +5,16 @@ using nMars.RedCode;
 
 namespace pMars.DllWrapper
 {
+    /// <summary>
+    /// This is PInvoke glue to pMars.dll
+    /// </summary>
     static class pMarsDll
     {
         static pMarsDll()
         {
-            instructionSize = Marshal.SizeOf(typeof (PmarsInstruction));
-            warrirorSize = Marshal.SizeOf(typeof (PmarsWarrior));
-            pointerSize = Marshal.SizeOf(typeof (IntPtr));
+            instructionSize = Marshal.SizeOf(typeof(PmarsInstruction));
+            warrirorSize = Marshal.SizeOf(typeof(PmarsWarrior));
+            pointerSize = Marshal.SizeOf(typeof(IntPtr));
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -58,7 +61,7 @@ namespace pMars.DllWrapper
 
             public Modifier Modifier
             {
-                get { return (Modifier) (opcode & 0x07); }
+                get { return (Modifier)(opcode & 0x07); }
             }
 
             public Mode ModeA
@@ -102,13 +105,25 @@ namespace pMars.DllWrapper
             public int instLen;
             public int offset;
 
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 71)] public short[] score;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 71)]
+            public short[] score;
 
-            [MarshalAs(UnmanagedType.LPStr)] public string name;
-            [MarshalAs(UnmanagedType.LPStr)] public string version;
-            [MarshalAs(UnmanagedType.LPStr)] public string date;
-            [MarshalAs(UnmanagedType.LPStr)] public string fileName;
-            [MarshalAs(UnmanagedType.LPStr)] public string authorName;
+            public int totalScore;
+
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string name;
+
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string version;
+
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string date;
+
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string fileName;
+
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string authorName;
 
             public IntPtr instBank;
 
@@ -118,26 +133,26 @@ namespace pMars.DllWrapper
         #region Dll
 
         [DllImport("pMars.dll")]
-        public static extern PmarsWarrior pMarsParse(
-            [In] int argc,
-            [In, MarshalAs(UnmanagedType.LPArray)] string[] argv,
-            [In, MarshalAs(UnmanagedType.LPStr)] string errFile);
+        public static extern PmarsWarrior pMarsParse([In] int argc,
+                                                     [In] [MarshalAs(UnmanagedType.LPArray)] string[] argv,
+                                                     [In] [MarshalAs(UnmanagedType.LPStr)] string errFile);
 
         [DllImport("pMars.dll")]
-        public static extern int pMarsBeginMatch(
-            [In] int argc,
-            [In, MarshalAs(UnmanagedType.LPArray)] string[] argv,
-            [In, MarshalAs(UnmanagedType.LPStr)] string errFile);
+        public static extern int pMarsBeginMatch([In] int argc, [In] [MarshalAs(UnmanagedType.LPArray)] string[] argv,
+                                                 [In] [MarshalAs(UnmanagedType.LPStr)] string errFile);
 
         [DllImport("pMars.dll")]
         public static extern int pMarsStepMatch();
 
         [DllImport("pMars.dll")]
-        public static extern void pMarsWatchMatch(
-            [Out] out IntPtr aCore, [Out] out int aCoreSize, [Out] out IntPtr aCyclesLeft, [Out] out IntPtr aRound,
-            [Out] out IntPtr aWarriors, [Out] out int aWarriorsCount, [Out] out IntPtr aWarrirosLeft,
-            [Out] out IntPtr aNextWarrior,
-            [Out] out IntPtr aTaskQueue, [Out] out IntPtr aEndQueue);
+        public static extern void pMarsResultsMatch();
+
+        [DllImport("pMars.dll")]
+        public static extern void pMarsWatchMatch([Out] out IntPtr aCore, [Out] out int aCoreSize,
+                                                  [Out] out IntPtr aCyclesLeft, [Out] out IntPtr aRound,
+                                                  [Out] out IntPtr aWarriors, [Out] out int aWarriorsCount,
+                                                  [Out] out IntPtr aWarrirosLeft, [Out] out IntPtr aNextWarrior,
+                                                  [Out] out IntPtr aTaskQueue, [Out] out IntPtr aEndQueue);
 
         [DllImport("pMars.dll")]
         public static extern void pMarsEndMatch();
@@ -155,9 +170,8 @@ namespace pMars.DllWrapper
         {
             for (int i = 0; i < length; i++)
             {
-                IntPtr instructionPtr = (IntPtr) ((int) first + (i*instructionSize));
-                PmarsInstruction m =
-                    (PmarsInstruction) Marshal.PtrToStructure(instructionPtr, typeof (PmarsInstruction));
+                IntPtr instructionPtr = (IntPtr)((int)first + (i * instructionSize));
+                PmarsInstruction m = (PmarsInstruction)Marshal.PtrToStructure(instructionPtr, typeof(PmarsInstruction));
 
                 Instruction c = new Instruction(m);
                 //c.ValueA = Instruction.Wrap(c.ValueA, coreSize);
@@ -170,8 +184,8 @@ namespace pMars.DllWrapper
         {
             for (int w = 0; w < length; w++)
             {
-                IntPtr warrirorPtr = (IntPtr) ((int) first + (w*warrirorSize));
-                list.Add((PmarsWarrior) Marshal.PtrToStructure(warrirorPtr, typeof (PmarsWarrior)));
+                IntPtr warrirorPtr = (IntPtr)((int)first + (w * warrirorSize));
+                list.Add((PmarsWarrior)Marshal.PtrToStructure(warrirorPtr, typeof(PmarsWarrior)));
             }
         }
 
@@ -182,7 +196,7 @@ namespace pMars.DllWrapper
             {
                 int task = Marshal.ReadInt32(taskPtr);
                 list.Add(task);
-                taskPtr = (IntPtr) ((int) taskPtr + pointerSize);
+                taskPtr = (IntPtr)((int)taskPtr + pointerSize);
                 if (taskPtr == end)
                     taskPtr = start;
             }
@@ -191,7 +205,7 @@ namespace pMars.DllWrapper
         public static int WarrirorIndex(IntPtr first, IntPtr currentPtr)
         {
             IntPtr current = Marshal.ReadIntPtr(currentPtr);
-            return ((int) current - (int) first)/warrirorSize;
+            return ((int)current - (int)first) / warrirorSize;
         }
 
         public static int InstructionAddress(IntPtr taskPtr)
@@ -229,7 +243,7 @@ namespace pMars.DllWrapper
                 r.Add(rules.Rounds.ToString());
                 r.Add("-b");
             }
-            r.Add("-k");
+            //r.Add("-k");
             r.Add("-p");
             r.Add(rules.MaxProcesses.ToString());
             r.Add("-s");
