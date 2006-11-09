@@ -279,6 +279,7 @@ typedef struct warrior_struct {
   int     offset;                /* Offset value specified by 'ORG' or 'END'.
                                  * 0 is default */
   short   score[MAXWARRIOR * 2 - 1];
+  int     totalscore;
 
   char   *name;                        /* warrior name */
   char   *version;

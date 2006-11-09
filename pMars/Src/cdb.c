@@ -2648,6 +2648,7 @@ results(outp)
   for (i = 0; i < warriors; ++i) {
     idxV[i] = i;
     scrV[i] = score(i);
+	warrior[i].totalscore = scrV[i];
   }
   if (SWITCH_o)
     sort_by_score(idxV, scrV);
