@@ -27,7 +27,7 @@ namespace nMars.Test
             Directory.CreateDirectory(problemsPath);
             return problemsPath;
         }
-        
+
         public static string GetWarrirorsDirectory()
         {
             string current = Directory.GetCurrentDirectory();

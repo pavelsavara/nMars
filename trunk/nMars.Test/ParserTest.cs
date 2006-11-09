@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using nMars;
 using nMars.RedCode;
 using NUnit.Framework;
 using pMars.DllWrapper;
@@ -35,7 +34,7 @@ namespace nMars.Test
         public void Single()
         {
             Init();
-            if (!LoadDumpOne(Path.Combine(Path.Combine(basePath, "corewin"),"irongate.red")))
+            if (!LoadDumpOne(Path.Combine(Path.Combine(basePath, "corewin"), "irongate.red")))
                 throw new ParserException("Some warriors failed.");
         }
 
@@ -44,8 +43,7 @@ namespace nMars.Test
         {
             Init();
 
-            List<string> files =
-                new List<string>(Directory.GetFiles(basePath, "*.rc", SearchOption.AllDirectories));
+            List<string> files = new List<string>(Directory.GetFiles(basePath, "*.rc", SearchOption.AllDirectories));
             files.AddRange(Directory.GetFiles(basePath, "*.red", SearchOption.AllDirectories));
             files.Sort();
             bool allOK = true;
