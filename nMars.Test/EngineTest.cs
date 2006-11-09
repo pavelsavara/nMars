@@ -6,9 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using nMars;
 using nMars.RedCode;
-using nMars.Engine;
 using NUnit.Framework;
 using pMars.DllWrapper;
 
@@ -61,6 +59,7 @@ namespace nMars.Test
         private void Init()
         {
             rules = Rules.DefaultRules;
+            rules.Rounds = 3;
             pparser = new pMarsDllParser();
             pparser.InitParser(rules);
             nparser = new nMarsParser();
@@ -75,7 +74,7 @@ namespace nMars.Test
 
             forcedArdresses = new int[2];
             forcedArdresses[0] = 0;
-            forcedArdresses[1] = rules.CoreSize/2;
+            forcedArdresses[1] = rules.CoreSize / 2;
         }
 
         [Test]
@@ -99,8 +98,7 @@ namespace nMars.Test
         {
             Init();
 
-            List<string> files =
-                new List<string>(Directory.GetFiles(basePath, "*.rc", SearchOption.AllDirectories));
+            List<string> files = new List<string>(Directory.GetFiles(basePath, "*.rc", SearchOption.AllDirectories));
             files.AddRange(Directory.GetFiles(basePath, "*.red", SearchOption.AllDirectories));
             files.Sort();
             bool allOK = true;
@@ -129,7 +127,7 @@ namespace nMars.Test
             string shortOne = Path.GetFileNameWithoutExtension(fileOne);
             string midleOne = fileOne.Substring(basePath.Length);
             Console.Write("Reading {0}      \r", midleOne);
-            string problemsPathOne = Path.Combine(problemsPath, shortOne); 
+            string problemsPathOne = Path.Combine(problemsPath, shortOne);
             warriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr");
             Project project = new Project(rules);
             project.Warriors.Add(warriorOne);
@@ -151,11 +149,13 @@ namespace nMars.Test
             string problemsPathOne = Path.Combine(problemsPath, shortOne);
             string problemsPathTwo = Path.Combine(problemsPath, shortTwo);
             pwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
-            pwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".nErr2");
-            nwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
+            pwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".pErr2");
+            nwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".nErr1");
             nwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".nErr2");
             Project pproject = new Project(rules);
             Project nproject = new Project(rules);
+            pproject.ForcedAddresses = forcedArdresses;
+            nproject.ForcedAddresses = forcedArdresses;
             pproject.Warriors.Add(pwarriorOne);
             pproject.Warriors.Add(pwarriorTwo);
             nproject.Warriors.Add(nwarriorOne);
@@ -212,7 +212,7 @@ namespace nMars.Test
             }
 
 
-            if (matchOne == matchTwo)
+            if (matchOne != matchTwo)
             {
                 throw new EngineDifferException("Score", int.MaxValue, int.MaxValue);
             }
@@ -228,7 +228,7 @@ namespace nMars.Test
             bool range = (engineOne.Cycles >= fromCycle && engineOne.Cycles <= toCycle);
 
             CheapCheck(resOne, resTwo, range);
-            if (engineOne.Cycles%200 == 0 || range)
+            if (engineOne.Cycles % 200 == 0 || range)
             {
                 ExpensiveCheck(range);
             }

@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 [assembly: AssemblyTitle("nMars RedCode unit tests")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
