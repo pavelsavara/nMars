@@ -100,11 +100,13 @@ namespace nMars.RedCode
 
             for (int w = 0; w < rules.WarriorsCount; w++)
             {
+                /*
                 for (int r = 0; r < rules.Rounds; r++)
                 {
                     if (results[w, r] != res.results[w, r])
                         return false;
                 }
+                */
                 if (score[w] != res.score[w])
                     return false;
             }

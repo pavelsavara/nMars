@@ -1,0 +1,242 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
+using System;
+using System.Collections.Generic;
+using nMars.RedCode;
+
+namespace nMars.Engine
+{
+    public abstract class EnginePlacement : EngineCore, IWarriorsView
+    {
+        #region Events
+
+        protected override void InitializeMatch(IProject project, IPSpaces pspaces, Random aRandom)
+        {
+            base.InitializeMatch(project, pspaces, aRandom);
+            if (project.Warriors.Count != rules.WarriorsCount)
+                throw new EngineException("Count of warriors differ from rules");
+
+            random = aRandom;
+            forcedAddresses = project.ForcedAddresses;
+            sourceWarriors = project.Warriors;
+
+            warriors = new List<EngineWarrior>(rules.WarriorsCount);
+            runningWarriors = new List<IRunningWarrior>(rules.WarriorsCount);
+            iWarriors = new List<IWarrior>(rules.WarriorsCount);
+
+            for (int w = 0; w < rules.WarriorsCount; w++)
+            {
+                IWarrior sourceWarrior = sourceWarriors[w];
+                if (sourceWarrior.Rules != rules)
+                    throw new EngineException("Warrior was compiled under different rules");
+                EngineWarrior engineWarrior = new EngineWarrior(sourceWarrior, this, w);
+                warriors.Add(engineWarrior);
+                runningWarriors.Add(engineWarrior);
+                iWarriors.Add(engineWarrior);
+            }
+            permutate = project.EngineOptions.Permutate;
+            if (forcedAddresses != null)
+            {
+                seed = forcedAddresses[1] - rules.MinDistance;
+            }
+            else
+            {
+                seed = random.Next();
+            }
+        }
+
+        protected override void InitializeRound()
+        {
+            base.InitializeRound();
+
+            if (rules.WarriorsCount > 1)
+            {
+                if (rules.WarriorsCount == 2)
+                {
+                    if (permutate)
+                    {
+                        throw new NotImplementedException("Permutations are not implemented");
+                    }
+                    else
+                    {
+                        int positions = rules.CoreSize + 1 - (rules.MinDistance << 1);
+                        warriors[1].LoadAddress = rules.MinDistance + seed % positions;
+                        seed = Rng(seed);
+                    }
+                }
+                else
+                {
+                    if (Posit())
+                        Npos();
+                }
+            }
+
+            //Load warriors
+            for (int w = 0; w < rules.WarriorsCount; w++)
+            {
+                EngineWarrior engineWarrior = warriors[w];
+                Load(engineWarrior, engineWarrior.LoadAddress);
+            }
+        }
+
+        #endregion
+
+        #region Helpers
+
+        public void Load(EngineWarrior warrior, int loadAddress)
+        {
+            warrior.LoadAddress = loadAddress;
+            bool initpspace = false;
+
+            //copy warrior to core
+            for (int a = 0; a < warrior.Length; a++)
+            {
+                IInstruction instruction = warrior[a];
+                if (instruction.ValueA >= rules.CoreSize || instruction.ValueA <= 0 - rules.CoreSize ||
+                    instruction.ValueB >= rules.CoreSize || instruction.ValueB <= 0 - rules.CoreSize)
+                {
+                    throw new RulesException("operand value out of core size");
+                }
+                if (instruction.Operation == Operation.LDP || instruction.Operation == Operation.STP)
+                {
+                    if (!rules.EnablePSpace)
+                    {
+                        throw new RulesException("Current rules don't support p-space operations");
+                    }
+                    initpspace = true;
+                }
+                int addr = mod(loadAddress + a);
+                core[addr] = new EngineInstruction(instruction, addr);
+            }
+
+            if (initpspace)
+                warrior.InitPSpace(pSpaces);
+        }
+
+        public int Rng(int lseed)
+        {
+            int temp = lseed;
+            unchecked
+            {
+                temp = 16807 * (temp % 127773) - 2836 * (temp / 127773);
+                if (temp < 0)
+                    temp += 2147483647;
+            }
+            return temp;
+        }
+
+
+        bool Posit()
+        {
+            const int RETRIES1 = 20;
+            const int RETRIES2 = 4;
+
+            int pos = 1, i, retries1 = RETRIES1, retries2 = RETRIES2;
+            int diff;
+
+            do
+            {
+                /* generate */
+                warriors[pos].LoadAddress = ((seed = Rng(seed)) % (rules.CoreSize - 2 * rules.MinDistance + 1)) +
+                                            rules.MinDistance;
+                /* test for overlap */
+                for (i = 1; i < pos; ++i)
+                {
+                    /* calculate positive difference */
+                    diff = warriors[pos].LoadAddress - warriors[i].LoadAddress;
+                    if (diff < 0)
+                        diff = -diff;
+                    if (diff < rules.MinDistance)
+                        break; /* overlap! */
+                }
+                if (i == pos) /* no overlap, generate next number */
+                    ++pos;
+                else
+                {
+                    /* overlap */
+                    if (retries2 != 0)
+                        return true; /* exceeded attempts, fail */
+                    if (retries1 != 0)
+                    {
+                        /* backtrack: generate new sequence starting
+                                 * at an */
+                        pos = i; /* arbitrary position (last conflict) */
+                        --retries2;
+                        retries1 = RETRIES1;
+                    }
+                    else /* generate new current number (pos not
+                                 * incremented) */
+                        --retries1;
+                }
+            } while (pos < rules.WarriorsCount);
+            return false;
+        }
+
+        void Npos()
+        {
+            int i, j;
+            int temp;
+            int room = rules.CoreSize - rules.MinDistance * rules.WarriorsCount + 1;
+            for (i = 1; i < rules.WarriorsCount; i++)
+            {
+                temp = (seed = Rng(seed)) % room;
+                for (j = i - 1; j > 0; j--)
+                {
+                    if (temp > warriors[j].LoadAddress)
+                        break;
+                    warriors[j + 1].LoadAddress = warriors[j].LoadAddress;
+                }
+                warriors[j + 1].LoadAddress = temp;
+            }
+            temp = rules.MinDistance;
+            for (i = 1; i < rules.WarriorsCount; i++)
+            {
+                warriors[i].LoadAddress += temp;
+                temp += rules.MinDistance;
+            }
+            for (i = 1; i < rules.WarriorsCount; i++)
+            {
+                j = (seed = Rng(seed)) % (rules.WarriorsCount - i) + i;
+                temp = warriors[j].LoadAddress;
+                warriors[j].LoadAddress = warriors[i].LoadAddress;
+                warriors[i].LoadAddress = temp;
+            }
+        }
+
+        private int seed;
+
+        #endregion
+
+        #region Interfaces
+
+        public IList<IRunningWarrior> RunningWarriors
+        {
+            get { return runningWarriors; }
+        }
+
+        public IList<IWarrior> Warriors
+        {
+            get { return iWarriors; }
+        }
+
+        #endregion
+
+        #region Variables
+
+        //various views
+        protected List<EngineWarrior> warriors;
+        private List<IRunningWarrior> runningWarriors;
+        private List<IWarrior> iWarriors;
+
+        //input
+        private IList<IWarrior> sourceWarriors;
+        private IList<int> forcedAddresses;
+        private Random random;
+        private bool permutate;
+
+        #endregion
+    }
+}

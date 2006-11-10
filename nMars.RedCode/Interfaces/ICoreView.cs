@@ -12,9 +12,5 @@ namespace nMars.RedCode
     {
         IInstruction this[int address] { get; }
         int CoreSize { get; }
-        int Round { get; }
-        int Cycles { get; }
-        int CyclesLeft { get; }
-        int LiveWarriorsCount { get; }
     }
 }

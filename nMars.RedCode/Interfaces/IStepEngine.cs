@@ -37,7 +37,7 @@ namespace nMars.RedCode
     }
 
     [ComVisible(true)]
-    public interface IExtendedStepEngine : IStepEngine, ICoreView, ITaskView, IWarriorsView, ITimeView
+    public interface IExtendedStepEngine : IStepEngine, ICoreView, ITaskView, IWarriorsView, ITimeView, IStatusView
     {
     }
 }

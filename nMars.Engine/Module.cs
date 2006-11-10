@@ -12,7 +12,7 @@ namespace nMars.Engine
     {
         public static int Main(string[] args)
         {
-            return CommandLine.EngineMain(args, typeof (Module).Namespace, "nMars.Parser");
+            return CommandLine.EngineMain(args, typeof(Module).Namespace, "nMars.Parser");
         }
 
         public IEngine CreateEngine()
@@ -29,7 +29,7 @@ namespace nMars.Engine
 
         public string Name
         {
-            get { return typeof (Module).Namespace; }
+            get { return typeof(Module).Namespace; }
         }
 
         #endregion

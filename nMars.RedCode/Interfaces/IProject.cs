@@ -5,6 +5,7 @@ namespace nMars.RedCode
     public interface IProject
     {
         Rules Rules { get; }
+        EngineOptions EngineOptions { get; }
         IList<IWarrior> Warriors { get; }
         IList<int> ForcedAddresses { get; }
     }
@@ -23,11 +24,18 @@ namespace nMars.RedCode
         private IList<IWarrior> warriors = new List<IWarrior>();
         private IList<int> forcedAddresses = null;
         private Rules rules = Rules.DefaultRules;
+        private EngineOptions engineOptions = EngineOptions.DefaultOptions;
 
         public Rules Rules
         {
             get { return rules; }
             set { rules = value; }
+        }
+
+        public EngineOptions EngineOptions
+        {
+            get { return engineOptions; }
+            set { engineOptions = value; }
         }
 
         public IList<IWarrior> Warriors
