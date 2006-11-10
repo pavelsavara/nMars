@@ -9,6 +9,16 @@ using System.Runtime.InteropServices;
 namespace nMars.RedCode
 {
     [ComVisible(true)]
+    public interface IStatusView
+    {
+        int Round { get; }
+        int Cycles { get; }
+        int CyclesLeft { get; }
+        int LiveWarriorsCount { get; }
+        int WarriorsCount { get; }
+    }
+    
+    [ComVisible(true)]
     public interface ITaskView
     {
         IList<IList<int>> Tasks { get; }
@@ -19,6 +29,7 @@ namespace nMars.RedCode
     [ComVisible(true)]
     public interface IWarriorsView
     {
+        IList<IRunningWarrior> RunningWarriors { get; }
         IList<IWarrior> Warriors { get; }
     }
 

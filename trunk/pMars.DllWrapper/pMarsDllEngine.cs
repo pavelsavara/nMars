@@ -134,6 +134,7 @@ namespace pMars.DllWrapper
                         results.results[w, Round - 1] = FightResult.Loose;
                     }
                 }
+
                 if (res != StepResult.Finished)
                 {
                     cycles = 0;
@@ -215,6 +216,11 @@ namespace pMars.DllWrapper
             get { return Marshal.ReadInt32(dllWarrirorsLeft); }
         }
 
+        public int WarriorsCount
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public IList<IList<int>> Tasks
         {
             get
@@ -222,6 +228,11 @@ namespace pMars.DllWrapper
                 CopyTasks();
                 return tasksCopy;
             }
+        }
+
+        IList<IRunningWarrior> IWarriorsView.RunningWarriors
+        {
+            get { throw new NotImplementedException(); }
         }
 
         public IList<IWarrior> Warriors

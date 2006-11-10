@@ -117,6 +117,12 @@ namespace nMars.RedCode
         I
     }
 
+    public enum Register
+    {
+        A,
+        B,
+    }
+
     /*
                     switch (instruction.Modifier)
                     {

@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
@@ -11,47 +12,14 @@ namespace nMars.Engine
 {
     public class EngineWarrior : IRunningWarrior
     {
-        public EngineWarrior(IWarrior warrior, Core core, int index, int loadAddress)
+        public EngineWarrior(IWarrior warrior, EngineCore core, int index)
         {
             SourceWarrior = warrior;
             Index = index;
             Tasks = new Queue<int>();
             this.core = core;
-            this.loadAddress = loadAddress;
-            Load();
         }
 
-        private void Load()
-        {
-            bool initpspace = false;
-
-            //copy warrior to core
-            for (int a = 0; a < Length; a++)
-            {
-                IInstruction instruction = this[a];
-                if (instruction.ValueA >= core.CoreSize || instruction.ValueA <= 0 - core.CoreSize ||
-                    instruction.ValueB >= core.CoreSize || instruction.ValueB <= 0 - core.CoreSize)
-                {
-                    throw new RulesException("operand value out of core size");
-                }
-                if (instruction.Operation == Operation.LDP ||
-                    instruction.Operation == Operation.STP)
-                {
-                    if (!core.Rules.EnablePSpace)
-                    {
-                        throw new RulesException("Current rules don't support p-space operations");
-                    }
-                    initpspace = true;
-                }
-                int addr = core.mod(loadAddress + a);
-                core.core[addr] = new EngineInstruction(instruction, addr);
-            }
-
-            if (initpspace)
-                InitPSpace(core.PSpaces);
-
-            Tasks.Enqueue(core.mod(loadAddress + StartOffset));
-        }
 
         public void InitPSpace(IPSpaces pSpaces)
         {
@@ -65,7 +33,7 @@ namespace nMars.Engine
             }
             else
             {
-                pSpaceSize = core.Rules.PSpaceSize;
+                pSpaceSize = core.rules.PSpaceSize;
                 pSpace = new int[pSpaceSize];
                 pSpaces[pName] = pSpace;
             }
@@ -73,25 +41,26 @@ namespace nMars.Engine
 
         public int GetPSpace(int address)
         {
-            int addr = address%pSpaceSize;
+            int addr = address % pSpaceSize;
             if (addr < 0) addr += pSpaceSize;
             return pSpace[addr];
         }
 
         public void SetPSpace(int address, int value)
         {
-            int addr = address%pSpaceSize;
+            int addr = address % pSpaceSize;
             if (addr < 0) addr += pSpaceSize;
             pSpace[addr] = core.mod(value);
         }
 
         public Queue<int> Tasks;
         public int Index;
+        public int StartOrder;
         public IWarrior SourceWarrior;
         private int[] pSpace = null;
         private int pSpaceSize = 0;
-        private Core core;
-        private int loadAddress;
+        private EngineCore core;
+        private int loadAddress = 0;
 
         public int LiveTasks
         {
@@ -111,6 +80,7 @@ namespace nMars.Engine
         public int LoadAddress
         {
             get { return loadAddress; }
+            set { loadAddress = value; }
         }
 
         public string Name
@@ -178,6 +148,16 @@ namespace nMars.Engine
         public int NextInstructionIndex
         {
             get { return Tasks.Peek(); }
+        }
+
+        public IInstruction PreviousInstruction
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int PreviousInstructionIndex
+        {
+            get { throw new NotImplementedException(); }
         }
 
         public IInstruction NextInstruction

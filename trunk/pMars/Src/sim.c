@@ -229,7 +229,7 @@ checksum_warriors()
 }
 
 #ifdef PERMUTATE
-  int permidx = 0, permtmp, *permbuf = NULL;
+  int permidx, permtmp, *permbuf;
 #endif
   /* range for random number generator */
   warrior_struct *oldW;                /* the previous living warrior to execute */
@@ -262,6 +262,7 @@ void init_core()
   starter = warrior;
 
 #ifdef PERMUTATE
+  permidx=0;
   if (SWITCH_P) {
     permbuf = (int *) malloc((size_t)(warriors * positions * sizeof(int)));
     if (!permbuf) {

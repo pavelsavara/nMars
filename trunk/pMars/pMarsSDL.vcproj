@@ -96,7 +96,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(ProjectDir)SDL\Lib\SDL.dll $(OutDir)"
+				CommandLine="copy $(ProjectDir)SDL\Lib\SDL.dll ..\Bin\$(ConfigurationName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -179,7 +179,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(ProjectDir)SDL\Lib\SDL.dll $(OutDir)"
+				CommandLine="copy $(ProjectDir)SDL\Lib\SDL.dll ..\Bin\$(ConfigurationName)"
 			/>
 		</Configuration>
 	</Configurations>

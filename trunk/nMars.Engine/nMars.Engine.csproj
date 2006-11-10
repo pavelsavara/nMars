@@ -38,12 +38,18 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Engine.cs" />
+    <Compile Include="Engine\Engine0Ground.cs" />
+    <Compile Include="Engine\Engine2Placement.cs" />
+    <Compile Include="Engine\Engine1Core.cs" />
+    <Compile Include="Engine\Engine3Tasks.cs" />
+    <Compile Include="Engine\Engine4Status.cs" />
+    <Compile Include="Engine\Engine5Addressing.cs" />
+    <Compile Include="Engine\Engine6Instructions.cs" />
+    <Compile Include="Engine\Engine7Steps.cs" />
     <Compile Include="EngineInstruction.cs" />
+    <Compile Include="Engine\Engine8Observer.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core.cs" />
-    <Compile Include="StepEngine.cs" />
     <Compile Include="EngineWarrior.cs" />
   </ItemGroup>
   <ItemGroup>

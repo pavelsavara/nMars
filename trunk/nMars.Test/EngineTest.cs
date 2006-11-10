@@ -65,7 +65,7 @@ namespace nMars.Test
             nparser = new nMarsParser();
             nparser.InitParser(rules);
             engineOne = new pMarsDllEngine();
-            engineTwo = new Engine.Engine();
+            engineTwo = new Engine.EngineSteps();
             spaces = new PSpaces();
             random = new Random(0);
 

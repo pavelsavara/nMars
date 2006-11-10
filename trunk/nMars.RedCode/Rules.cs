@@ -18,6 +18,20 @@ namespace nMars.RedCode
     }
 
     [ComVisible(true)]
+    public class EngineOptions
+    {
+        public bool KOTHFormat = false;
+        public bool Permutate = false;
+        public static EngineOptions DefaultOptions
+        {
+            get
+            {
+                return new EngineOptions();
+            }
+        }
+    }
+
+    [ComVisible(true)]
     public enum ICWStandard
     {
         ICWS88,
