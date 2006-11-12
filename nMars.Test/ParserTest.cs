@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
+using nMars.RedCode.Modules;
 using NUnit.Framework;
-using pMars.DllWrapper;
 
 namespace nMars.Test
 {
@@ -22,8 +22,8 @@ namespace nMars.Test
 
         void Init()
         {
-            nparser = new nMarsParser();
-            pparser = new pMarsDllParser();
+            nparser = ModuleRegister.CreateParser("nMars.Parser");
+            pparser = ModuleRegister.CreateParser("pMars.DllWrapper");
             //pparser = new pMarsParser(Rules.DefaultRules);
 
             basePath = Utils.GetWarrirorsDirectory();

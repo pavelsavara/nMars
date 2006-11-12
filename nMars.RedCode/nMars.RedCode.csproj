@@ -39,7 +39,7 @@
     <Compile Include="Interfaces\ITaskView.cs" />
     <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\CommandLine.cs" />
-    <Compile Include="FightResult.cs" />
+    <Compile Include="MatchResult.cs" />
     <Compile Include="Interfaces\ICoreView.cs" />
     <Compile Include="Interfaces\IEngine.cs" />
     <Compile Include="Instructions\Instruction.cs" />

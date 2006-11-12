@@ -331,7 +331,7 @@ void init_core()
 void init_round()
 {
 #if defined(DOS16) && !defined(SERVER) && !defined(DOSTXTGRAPHX) && !defined(DOSGRXGRAPHX) && !defined(DJGPP)
-    fputc('\r', stdout);        /* enable interruption by Ctrl-C */
+    fputc('\r', STDOUT);        /* enable interruption by Ctrl-C */
 #else
 #if defined(DJGPP) && !defined(SERVER) && !defined(DOSTXTGRAPHX) && !defined(DOSGRXGRAPHX) && !defined(CURSESGRAPHX)
     if (kbhit())

@@ -16,51 +16,50 @@ namespace nMars.Engine
         {
             SourceWarrior = warrior;
             Index = index;
-            Tasks = new Queue<int>();
-            this.core = core;
-        }
-
-
-        public void InitPSpace(IPSpaces pSpaces)
-        {
-            string pName = Name;
-            if (Pin != -1)
-                pName = Pin.ToString();
-            if (pSpaces.ContainsKey(pName))
+            if (Pin == PSpace.UNSHARED)
             {
-                pSpace = pSpaces[pName];
-                pSpaceSize = pSpace.Length;
+                PSpaceIndex = PSpace.UNSHARED;
             }
             else
             {
-                pSpaceSize = core.rules.PSpaceSize;
-                pSpace = new int[pSpaceSize];
-                pSpaces[pName] = pSpace;
+                PSpaceIndex = PSpace.PIN_APPEARED;
+            }
+            Tasks = new Queue<int>();
+            this.core = core;
+            LastResult = core.rules.CoreSize - 1;
+        }
+
+        #region PSpace
+
+        public int GetPSpaceValue(int idx)
+        {
+            int addr = idx % core.rules.PSpaceSize;
+            if (addr != 0)
+            {
+                return PSpace.Memory[addr];
+            }
+            else
+            {
+                return LastResult;
             }
         }
 
-        public int GetPSpace(int address)
+        public void SetPSpaceValue(int address, int value)
         {
-            int addr = address % pSpaceSize;
-            if (addr < 0) addr += pSpaceSize;
-            return pSpace[addr];
+            int addr = address % core.rules.PSpaceSize;
+            if (addr != 0)
+            {
+                PSpace.Memory[addr] = value;
+            }
+            else
+            {
+                LastResult = value;
+            }
         }
+        
+        #endregion
 
-        public void SetPSpace(int address, int value)
-        {
-            int addr = address % pSpaceSize;
-            if (addr < 0) addr += pSpaceSize;
-            pSpace[addr] = core.mod(value);
-        }
-
-        public Queue<int> Tasks;
-        public int Index;
-        public int StartOrder;
-        public IWarrior SourceWarrior;
-        private int[] pSpace = null;
-        private int pSpaceSize = 0;
-        private EngineCore core;
-        private int loadAddress = 0;
+        #region Interface
 
         public int LiveTasks
         {
@@ -70,11 +69,6 @@ namespace nMars.Engine
         public int StartOffset
         {
             get { return SourceWarrior.StartOffset; }
-        }
-
-        public int Pin
-        {
-            get { return SourceWarrior.Pin; }
         }
 
         public int LoadAddress
@@ -108,6 +102,11 @@ namespace nMars.Engine
             get { return SourceWarrior.FileName; }
         }
 
+        public int Pin
+        {
+            get { return SourceWarrior.Pin; }
+        }
+
         public Rules Rules
         {
             get { return SourceWarrior.Rules; }
@@ -137,8 +136,6 @@ namespace nMars.Engine
         {
             SourceWarrior.Dump(fileName, options);
         }
-
-        public FightResult Result = FightResult.Tie;
 
         public override string ToString()
         {
@@ -182,5 +179,49 @@ namespace nMars.Engine
                 return tasks;
             }
         }
+
+        PSpace IRunningWarrior.PSpace
+        {
+            get
+            {
+                return PSpace;
+            }
+        }
+
+        int IRunningWarrior.LastResult
+        {
+            get
+            {
+                return LastResult;
+            }
+        }
+
+        int IRunningWarrior.PSpaceIndex
+        {
+            get { return PSpaceIndex; }
+        }
+
+        public int s
+        {
+            get { return PSpaceIndex; }
+        }
+
+        #endregion
+
+        #region Variables
+
+        public RoundResult Result;
+        public Queue<int> Tasks;
+        public int Index;
+        public int StartOrder;
+        public int PSpaceIndex=-1;
+        public IWarrior SourceWarrior;
+        public PSpace PSpace = null;
+        private EngineCore core;
+        private int loadAddress = 0;
+        public int LastResult;
+
+        #endregion
+
     }
 }

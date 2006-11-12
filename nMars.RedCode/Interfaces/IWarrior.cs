@@ -116,5 +116,9 @@ namespace nMars.RedCode
         int PreviousInstructionIndex { get; }
         int LiveTasksCount { get; }
         IList<int> Tasks { get; }
+        PSpace PSpace { get; }
+        int LastResult { get; }
+        int PSpaceIndex{ get; }
     }
+
 }

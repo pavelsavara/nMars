@@ -12,9 +12,9 @@ namespace nMars.Engine
     {
         #region Events
         
-        protected override void InitializeMatch(IProject project, IPSpaces pspaces, Random aRandom)
+        protected override void InitializeMatch(IProject project, Random aRandom)
         {
-            base.InitializeMatch(project, pspaces, aRandom);
+            base.InitializeMatch(project, aRandom);
             round = 0;
         }
 
@@ -44,16 +44,6 @@ namespace nMars.Engine
             get { return cyclesLeft; }
         }
 
-        public int WarriorsCount
-        {
-            get { return warriors.Count; }
-        }
-
-        public int LiveWarriorsCount
-        {
-            get { return liveWarriors.Count; }
-        }
-        
         #endregion
 
         #region Variables

@@ -13,9 +13,9 @@ namespace nMars.Engine
     {
         #region Events
         
-        protected override void InitializeMatch(IProject project, IPSpaces pspaces, Random aRandom)
+        protected override void InitializeMatch(IProject project, Random aRandom)
         {
-            base.InitializeMatch(project, pspaces, aRandom);
+            base.InitializeMatch(project, aRandom);
             starter = 0;
         }
         
@@ -29,6 +29,7 @@ namespace nMars.Engine
             {
                 EngineWarrior engineWarrior = warriors[warriorIndex];
                 engineWarrior.StartOrder = liveWarriors.Count;
+                engineWarrior.Result = RoundResult.Tie;
                 liveWarriors.Enqueue(engineWarrior);
                 
                 //first task
@@ -104,6 +105,16 @@ namespace nMars.Engine
         public int NextInstructionAddress
         {
             get { return NextWarrior.Tasks.Peek(); }
+        }
+
+        public int LiveWarriorsCount
+        {
+            get { return liveWarriors.Count; }
+        }
+
+        public int WarriorsCount
+        {
+            get { return warriors.Count; }
         }
 
         #endregion

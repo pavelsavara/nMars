@@ -6,18 +6,27 @@
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
-namespace nMars.Engine
+namespace nMars.Test
 {
     class Module : IEngineModule
     {
         public static int Main(string[] args)
         {
-            return CommandLine.EngineMain(args, typeof(Module).Namespace, "nMars.Parser");
+            if (args.Length == 0)
+            {
+                EngineTest test=new EngineTest();
+                test.Full();
+                return 0;
+            }
+            else
+            {
+                return CommandLine.EngineMain(args, typeof(Module).Namespace, "pMars.DllWrapper");
+            }
         }
 
         public IEngine CreateEngine()
         {
-            return new EngineSteps();
+            return new ComparingEngine();
         }
 
         #region Module registration

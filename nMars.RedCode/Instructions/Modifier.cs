@@ -122,19 +122,4 @@ namespace nMars.RedCode
         A,
         B,
     }
-
-    /*
-                    switch (instruction.Modifier)
-                    {
-                        case Modifier.A:
-                        case Modifier.F:
-                        case Modifier.B:
-                        case Modifier.AB:
-                        case Modifier.X:
-                        case Modifier.BA:
-                        case Modifier.I:
-                    }
-                    ip++;
-                    break;
-     */
 }

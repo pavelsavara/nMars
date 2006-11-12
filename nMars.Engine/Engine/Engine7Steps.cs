@@ -10,21 +10,21 @@ namespace nMars.Engine
 {
     public class EngineSteps : EngineInstructions, IEngine, IStepEngine, IExtendedStepEngine
     {
-        public MatchResult Run(IProject project, IPSpaces pspaces, Random aRandom)
+        public MatchResult Run(IProject project, Random aRandom)
         {
-            BeginMatch(project, pspaces, aRandom);
+            BeginMatch(project, aRandom);
             while (NextStep() != StepResult.Finished)
             {
             }
             return EndMatch();
         }
 
-        public void BeginMatch(IProject project, IPSpaces pspaces, Random aRandom)
+        public void BeginMatch(IProject project, Random aRandom)
         {
-            InitializeMatch(project, pspaces, aRandom);
+            InitializeMatch(project, aRandom);
             InitializeRound();
 
-            results = new MatchResult(rules);
+            results = new MatchResult(project);
         }
 
         public StepResult NextStep()
@@ -39,7 +39,7 @@ namespace nMars.Engine
             StepResult res = StepResult.Continue;
             if (LiveWarriorsCount == 1 && WarriorsCount > 1)
             {
-                liveWarriors.Peek().Result = FightResult.Win;
+                liveWarriors.Peek().Result = RoundResult.Win;
                 res = StepResult.NextRound;
             }
             else if (LiveWarriorsCount == 0)
@@ -52,12 +52,20 @@ namespace nMars.Engine
             }
             if (res == StepResult.NextRound)
             {
-                FinalizeRound();
                 for (int w = 0; w < rules.WarriorsCount; w++)
                 {
                     EngineWarrior warrior = warriors[w];
                     results.results[w, round] = warrior.Result;
+                    if (warrior.Result != RoundResult.Loss)
+                    {
+                        warrior.LastResult = LiveWarriorsCount;
+                    }
+                    else
+                    {
+                        warrior.LastResult = 0;
+                    }
                 }
+                FinalizeRound();
                 round++;
                 if (round >= rules.Rounds)
                 {
@@ -92,7 +100,7 @@ namespace nMars.Engine
             }
             else
             {
-                warrior.Result = FightResult.Loose;
+                warrior.Result = RoundResult.Loss;
                 cyclesLeft = cyclesLeft - 1 - (cyclesLeft - 1) / (LiveWarriorsCount + 1);
             }
             cyclesLeft--;

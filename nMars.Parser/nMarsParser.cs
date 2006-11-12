@@ -89,7 +89,7 @@ namespace nMars
             }
             else
             {
-                warrior.Pin = -1;
+                warrior.Pin = PSpace.UNSHARED;
             }
         }
 

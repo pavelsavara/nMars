@@ -1,3 +1,15 @@
+11/13/2006 - nMars0.6 - engine unit test
+  - refactored engine
+  - pMars.dll silent
+  - enhanced unit test
+    - command line
+    - comparer engine
+  - dump match results
+  - droped module dependencies
+  - fixed bugs in engine
+     - PSpace support
+     - adresssing bugs in engine
+
 11/08/2006 - nMars0.5 - more binaries
   - simplified modules
   - modules loading by name
