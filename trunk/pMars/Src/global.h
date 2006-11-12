@@ -188,7 +188,12 @@ extern  PMARS_FATAL, PMARS_BADCOMLIN, PMARS_PARSEERR;
 #endif
 
 /* used by many */
+#ifndef PMARSDLL_EXPORTS
 #define STDOUT stdout
+#else
+#define STDOUT stderr
+#endif
+
 
 #ifdef DOS16
 #define MAXCORESIZE   8192

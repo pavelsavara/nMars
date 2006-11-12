@@ -27,6 +27,14 @@ namespace nMars.RedCode
     }
 
     [ComVisible(true)]
+    public interface IPSpacesView
+    {
+        IList<PSpace> PSpaces { get; }
+        IList<int> LastResults { get; }
+        IList<int> PSPaceIndexes { get; }
+    }
+
+    [ComVisible(true)]
     public interface IWarriorsView
     {
         IList<IRunningWarrior> RunningWarriors { get; }

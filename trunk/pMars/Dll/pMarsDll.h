@@ -24,6 +24,7 @@ extern "C"
 	PMARSDLL_API void pMarsResultsMatch();
 	PMARSDLL_API void pMarsWatchMatch(mem_struct** aCore, int* aCoreSize, long** aCyclesLeft, int** aRound,
 									  warrior_struct** aWarriors, int* aWarriorsCount, 
+									  int*** aPSpaces,
 									  int** aWarriorsLeft, warrior_struct*** aNextWarrior,//warriors
 									  int** aTaskQueue, int** aEndQueue //tasks
 									  );

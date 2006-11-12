@@ -7,90 +7,29 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
+using nMars.RedCode.Modules;
 using NUnit.Framework;
-using pMars.DllWrapper;
 
 namespace nMars.Test
 {
-    public class EngineDifferException : Exception
-    {
-        public EngineDifferException(string message, int fromCycle, bool precise)
-            : base(message)
-        {
-            if (precise)
-            {
-                this.fromCycle = fromCycle;
-                toCycle = fromCycle;
-            }
-            else
-            {
-                this.fromCycle = fromCycle - 200;
-                if (this.fromCycle < 0) this.fromCycle = 0;
-                toCycle = fromCycle;
-            }
-        }
-
-        public EngineDifferException(string message, int fromCycle, int toCycle)
-            : base(message)
-        {
-            this.fromCycle = fromCycle;
-            this.toCycle = toCycle;
-        }
-
-        public int fromCycle;
-        public int toCycle;
-    }
-
     [TestFixture]
     public class EngineTest
     {
-        IParser pparser;
-        IParser nparser;
-        IExtendedStepEngine engineOne;
-        IExtendedStepEngine engineTwo;
-        PSpaces spaces;
-        Random random;
-        string basePath;
-        string problemsPath;
-        int[] forcedArdresses;
-        Rules rules;
-
-
-        private void Init()
-        {
-            rules = Rules.DefaultRules;
-            rules.Rounds = 3;
-            pparser = new pMarsDllParser();
-            pparser.InitParser(rules);
-            nparser = new nMarsParser();
-            nparser.InitParser(rules);
-            engineOne = new pMarsDllEngine();
-            engineTwo = new Engine.EngineSteps();
-            spaces = new PSpaces();
-            random = new Random(0);
-
-            basePath = Utils.GetWarrirorsDirectory();
-            problemsPath = Utils.CleanProblems(basePath, "!problems");
-
-            forcedArdresses = new int[2];
-            forcedArdresses[0] = 0;
-            forcedArdresses[1] = rules.CoreSize / 2;
-        }
 
         [Test]
         public void Single()
         {
             Init();
             rules.WarriorsCount = 1;
-            LoadRunOne(Path.Combine(Path.Combine(basePath, "corewin"), "irongate.red"));
+            LoadRunOne(Path.Combine(basePath, "redcoder/validate.red "));
         }
 
         [Test]
         public void Pair()
         {
             Init();
-            LoadRunPair(Path.Combine(Path.Combine(basePath, "kendall"), "BackfromtheGrave.red"),
-                        Path.Combine(Path.Combine(basePath, "kendall"), "BigBrother.red"));
+            LoadRunPair(Path.Combine(basePath, "clear/twinshot.rc"),
+                        Path.Combine(basePath, "corewin/bluefunk.red"));
         }
 
         [Test]
@@ -110,6 +49,7 @@ namespace nMars.Test
                 }
                 catch (EngineDifferException)
                 {
+                    Console.WriteLine("\nFailed");
                     allOK = false;
                 }
                 catch (ParserException)
@@ -118,7 +58,22 @@ namespace nMars.Test
                 }
             }
             if (!allOK)
-                throw new EngineDifferException("Some warriors failed.", int.MaxValue, int.MaxValue);
+                throw new EngineDifferException("Some warriors failed.", null);
+        }
+        
+        private void Init()
+        {
+            basePath = Utils.GetWarrirorsDirectory();
+            problemsPath = Utils.CleanProblems(basePath, "!problems");
+
+            rules = Rules.DefaultRules;
+            rules.Rounds = 3;
+
+            pparser = ModuleRegister.CreateParser("pMars.DllWrapper");
+            pparser.InitParser(rules);
+            
+            engines=new ComparingEngine();
+
         }
 
         private void LoadRunOne(string fileOne)
@@ -129,18 +84,16 @@ namespace nMars.Test
             Console.Write("Reading {0}      \r", midleOne);
             string problemsPathOne = Path.Combine(problemsPath, shortOne);
             warriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr");
-            Project project = new Project(rules);
-            project.Warriors.Add(warriorOne);
+            Project pproject = new Project(rules);
+            pproject.Warriors.Add(warriorOne);
 
-            RunProject(project);
+            engines.Run(pproject, random);
         }
 
         private void LoadRunPair(string fileOne, string fileTwo)
         {
             IWarrior pwarriorOne;
             IWarrior pwarriorTwo;
-            IWarrior nwarriorOne;
-            IWarrior nwarriorTwo;
             string shortOne = Path.GetFileNameWithoutExtension(fileOne);
             string shortTwo = Path.GetFileNameWithoutExtension(fileTwo);
             string midleOne = fileOne.Substring(basePath.Length);
@@ -150,167 +103,27 @@ namespace nMars.Test
             string problemsPathTwo = Path.Combine(problemsPath, shortTwo);
             pwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
             pwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".pErr2");
-            nwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".nErr1");
-            nwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".nErr2");
             Project pproject = new Project(rules);
-            Project nproject = new Project(rules);
-            pproject.ForcedAddresses = forcedArdresses;
-            nproject.ForcedAddresses = forcedArdresses;
             pproject.Warriors.Add(pwarriorOne);
             pproject.Warriors.Add(pwarriorTwo);
-            nproject.Warriors.Add(nwarriorOne);
-            nproject.Warriors.Add(nwarriorTwo);
-            CheckWarriors(nproject.Warriors, pproject.Warriors);
-            RunProject(pproject);
-        }
-
-        private void RunProject(Project project)
-        {
-            bool res;
-            int fromCycle = int.MaxValue;
-            int toCycle = int.MaxValue;
-            do
-            {
-                res = true;
-                try
-                {
-                    CompareEngines(project, fromCycle, toCycle);
-                }
-                catch (EngineDifferException e)
-                {
-                    if (e.fromCycle >= 0)
-                    {
-                        fromCycle = e.fromCycle;
-                        toCycle = e.toCycle;
-                    }
-                    res = false;
-                }
-            } while (!res);
-        }
-
-        private void CompareEngines(Project project, int fromCycle, int toCycle)
-        {
-            engineOne.BeginMatch(project, spaces, random);
-            engineTwo.BeginMatch(project, spaces, random);
-
-
-            MatchResult matchOne;
-            MatchResult matchTwo;
             try
             {
-                CheckWarriors(engineOne.Warriors, engineTwo.Warriors);
-                ExpensiveCheck(false);
-                while (Step(fromCycle, toCycle))
-                {
-                }
-                ExpensiveCheck(false);
+                engines.Run(pproject, random);
             }
-            finally
+            catch(EngineDifferException)
             {
-                matchOne = engineOne.EndMatch();
-                matchTwo = engineTwo.EndMatch();
-            }
-
-
-            if (matchOne != matchTwo)
-            {
-                throw new EngineDifferException("Score", int.MaxValue, int.MaxValue);
+                File.Copy(fileOne, problemsPathOne + ".red", true);
+                File.Copy(fileTwo, problemsPathTwo + ".red", true);
+                throw;
             }
         }
 
-        private bool Step(int fromCycle, int toCycle)
-        {
-            if (toCycle <= engineOne.Cycles + 1)
-            {
-            }
-            StepResult resOne = engineOne.NextStep();
-            StepResult resTwo = engineTwo.NextStep();
-            bool range = (engineOne.Cycles >= fromCycle && engineOne.Cycles <= toCycle);
+        IParser pparser;
+        string basePath;
+        string problemsPath;
+        Rules rules;
+        Random random=new Random(0); //always same sequence
+        ComparingEngine engines;
 
-            CheapCheck(resOne, resTwo, range);
-            if (engineOne.Cycles % 200 == 0 || range)
-            {
-                ExpensiveCheck(range);
-            }
-
-            if (resOne == StepResult.Finished)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private void CheapCheck(StepResult resOne, StepResult resTwo, bool precise)
-        {
-            if (resOne != resTwo)
-            {
-                throw new EngineDifferException("StepRes", engineOne.Cycles, precise);
-            }
-            if (engineOne.Round != engineTwo.Round)
-            {
-                throw new EngineDifferException("Round", engineOne.Cycles, precise);
-            }
-            if (engineOne.LiveWarriorsCount != engineTwo.LiveWarriorsCount)
-            {
-                throw new EngineDifferException("Died", engineOne.Cycles, precise);
-            }
-            if (engineOne.Cycles != engineTwo.Cycles)
-            {
-                throw new EngineDifferException("Cycle", engineOne.Cycles, precise);
-            }
-            if (engineOne.CyclesLeft != engineTwo.CyclesLeft)
-            {
-                throw new EngineDifferException("CyclesLeft", engineOne.Cycles, precise);
-            }
-            if (engineOne.NextWarriorIndex != engineTwo.NextWarriorIndex)
-            {
-                throw new EngineDifferException("Cheating", engineOne.Cycles, precise);
-            }
-        }
-
-        private void ExpensiveCheck(bool precise)
-        {
-            for (int a = 0; a < rules.CoreSize; a++)
-            {
-                IInstruction iOne = engineOne[a];
-                IInstruction iTwo = engineTwo[a];
-                if (!iOne.Equals(iTwo))
-                {
-                    throw new EngineDifferException("Core", engineOne.Cycles, precise);
-                }
-            }
-            for (int w = 0; w < rules.WarriorsCount; w++)
-            {
-                IList<int> tasksOne = engineOne.Tasks[w];
-                IList<int> tasksTwo = engineTwo.Tasks[w];
-                if (tasksOne.Count != tasksTwo.Count)
-                {
-                    throw new EngineDifferException("Task Died", engineOne.Cycles, precise);
-                }
-                for (int t = 0; t < tasksOne.Count; t++)
-                {
-                    int taskOne = tasksOne[t];
-                    int taskTwo = tasksTwo[t];
-                    if (taskOne != taskTwo)
-                    {
-                        throw new EngineDifferException("Bad IP", engineOne.Cycles, precise);
-                    }
-                }
-            }
-        }
-
-        private void CheckWarriors(IList<IWarrior> warriorsOne, IList<IWarrior> warriorsTwo)
-        {
-            for (int w = 0; w < rules.WarriorsCount; w++)
-            {
-                if (warriorsOne[w] == null || warriorsTwo[w] == null)
-                    throw new ParserException("Warriror not loaded");
-
-                if (!Warrior.Equals(warriorsOne[w], warriorsTwo[w]))
-                {
-                    throw new ParserException("Different warriors");
-                }
-            }
-        }
     }
 }

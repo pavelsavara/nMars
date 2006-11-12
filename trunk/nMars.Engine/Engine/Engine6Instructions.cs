@@ -41,9 +41,9 @@ namespace nMars.Engine
             int AB_Value = instructionCopy.ValueA;
 
             GetEffectiveAddress(ip, core[ip].ModeA, out indirectAadr, ref AA_Value, ref instructionCopy.ValueA,
-                                instructionCopy.ValueB, core[ip].ValueA);
+                                instructionCopy.ValueB, instructionCopy.ValueA);
             GetEffectiveAddress(ip, core[ip].ModeB, out indirectBadr, ref AB_Value, ref instructionCopy.ValueB,
-                                instructionCopy.ValueB, core[ip].ValueB);
+                                instructionCopy.ValueB, instructionCopy.ValueB);
 
             ExecuteInstruction(warrior, ref instructionCopy, ip,
                     AA_Value, AB_Value,
@@ -96,16 +96,16 @@ namespace nMars.Engine
                     {
                         case Modifier.BA:
                         case Modifier.A:
-                            jump = (indirectBvalA == 0);
-                            break;
-                        case Modifier.B:
-                        case Modifier.AB:
-                            jump = (indirectBvalB == 0);
+                            jump = (AB_Value == 0);
                             break;
                         case Modifier.F:
                         case Modifier.X:
                         case Modifier.I:
-                            jump = (indirectBvalA == 0 && indirectBvalB == 0);
+                            jump = (AB_Value == 0 && instructionCopy.ValueB == 0);
+                            break;
+                        case Modifier.B:
+                        case Modifier.AB:
+                            jump = (instructionCopy.ValueB == 0);
                             break;
                     }
                     if (jump)
@@ -291,15 +291,13 @@ namespace nMars.Engine
 
                 case Operation.MOD:
                 case Operation.DIV:
-                    die =
-                        binoper(instructionCopy, ref indirectAvalA, ref indirectAvalB, ref indirectBvalA,
-                                ref indirectBvalB);
+                    die = BinOperation(AA_Value, AB_Value, ref indirectAvalA, ref indirectBvalA, ref indirectBvalB, instructionCopy);
                     ip++;
                     break;
                 case Operation.SUB:
                 case Operation.ADD:
                 case Operation.MUL:
-                    binoper(instructionCopy, ref indirectAvalA, ref indirectAvalB, ref indirectBvalA, ref indirectBvalB);
+                    BinOperation(AA_Value, AB_Value, ref indirectAvalA, ref indirectBvalA, ref indirectBvalB, instructionCopy);
                     ip++;
                     break;
 
@@ -311,24 +309,24 @@ namespace nMars.Engine
                     switch (instructionCopy.Modifier)
                     {
                         case Modifier.A:
-                            indirectBvalA = indirectAvalA;
+                            indirectBvalA = AA_Value;
                             break;
                         case Modifier.F:
-                            indirectBvalA = indirectAvalA;
-                            indirectBvalB = indirectAvalB;
+                            indirectBvalA = AA_Value;
+                            indirectBvalB = instructionCopy.ValueA;
                             break;
                         case Modifier.B:
-                            indirectBvalB = indirectAvalB;
+                            indirectBvalB = instructionCopy.ValueA;
                             break;
                         case Modifier.AB:
-                            indirectBvalB = indirectAvalA;
+                            indirectBvalB = AA_Value;
                             break;
                         case Modifier.X:
-                            indirectBvalB = indirectAvalA;
-                            indirectBvalA = indirectAvalB;
+                            indirectBvalB = AA_Value;
+                            indirectBvalA = instructionCopy.ValueA;
                             break;
                         case Modifier.BA:
-                            indirectBvalA = indirectAvalB;
+                            indirectBvalA = instructionCopy.ValueA;
                             break;
                         case Modifier.I:
                             core[indirectBadr].Operation = core[indirectAadr].Operation;
@@ -351,19 +349,19 @@ namespace nMars.Engine
                     switch (instructionCopy.Modifier)
                     {
                         case Modifier.A:
-                            indirectAvalA = warrior.GetPSpace(AA_Value);
+                            indirectBvalA = warrior.GetPSpaceValue(AA_Value);
                             break;
                         case Modifier.F:
                         case Modifier.B:
                         case Modifier.X:
                         case Modifier.I:
-                            indirectBvalB = warrior.GetPSpace(instructionCopy.ValueA);
+                            indirectBvalB = warrior.GetPSpaceValue(instructionCopy.ValueA);
                             break;
                         case Modifier.AB:
-                            indirectBvalB = warrior.GetPSpace(AA_Value);
+                            indirectBvalB = warrior.GetPSpaceValue(AA_Value);
                             break;
                         case Modifier.BA:
-                            indirectBvalA = warrior.GetPSpace(instructionCopy.ValueA);
+                            indirectBvalA = warrior.GetPSpaceValue(instructionCopy.ValueA);
                             break;
                     }
                     ip++;
@@ -378,19 +376,19 @@ namespace nMars.Engine
                     switch (instructionCopy.Modifier)
                     {
                         case Modifier.A:
-                            warrior.SetPSpace(AB_Value, AA_Value);
+                            warrior.SetPSpaceValue(AB_Value, AA_Value);
                             break;
                         case Modifier.F:
                         case Modifier.B:
                         case Modifier.X:
                         case Modifier.I:
-                            warrior.SetPSpace(instructionCopy.ValueB, instructionCopy.ValueA);
+                            warrior.SetPSpaceValue(instructionCopy.ValueB, instructionCopy.ValueA);
                             break;
                         case Modifier.AB:
-                            warrior.SetPSpace(instructionCopy.ValueB, AA_Value);
+                            warrior.SetPSpaceValue(instructionCopy.ValueB, AA_Value);
                             break;
                         case Modifier.BA:
-                            warrior.SetPSpace(AB_Value, instructionCopy.ValueA);
+                            warrior.SetPSpaceValue(AB_Value, instructionCopy.ValueA);
                             break;
                     }
                     ip++;
@@ -413,6 +411,37 @@ namespace nMars.Engine
             {
                 Split(warrior);
             }
+        }
+
+        private bool BinOperation(int AA_Value, int AB_Value, ref int indirectAvalA, ref int indirectBvalA, ref int indirectBvalB, EngineInstruction instructionCopy)
+        {
+            bool die;
+            die = false;
+            switch (instructionCopy.Modifier)
+            {
+                case Modifier.A:
+                    die |= oper(ref indirectBvalA, AB_Value, AA_Value, instructionCopy.Operation);
+                    break;
+                case Modifier.I:
+                case Modifier.F:
+                    die |= oper(ref indirectBvalA, AB_Value, AA_Value, instructionCopy.Operation);
+                    die |= oper(ref indirectBvalB, instructionCopy.ValueB, instructionCopy.ValueA, instructionCopy.Operation);
+                    break;
+                case Modifier.B:
+                    die |= oper(ref indirectBvalB, instructionCopy.ValueB, instructionCopy.ValueA, instructionCopy.Operation);
+                    break;
+                case Modifier.AB:
+                    die |= oper(ref indirectBvalB, instructionCopy.ValueB, indirectAvalA, instructionCopy.Operation);
+                    break;
+                case Modifier.X:
+                    die |= oper(ref indirectBvalB, instructionCopy.ValueB, indirectAvalA, instructionCopy.Operation);
+                    die |= oper(ref indirectBvalA, AB_Value, instructionCopy.ValueA, instructionCopy.Operation);
+                    break;
+                case Modifier.BA:
+                    die |= oper(ref indirectBvalA, AB_Value, instructionCopy.ValueA, instructionCopy.Operation);
+                    break;
+            }
+            return die;
         }
     }
 }

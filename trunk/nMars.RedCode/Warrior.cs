@@ -12,6 +12,8 @@ namespace nMars.RedCode
     [Serializable]
     public class Warrior : IWarrior
     {
+        #region Connstruction
+
         protected Warrior()
         {
         }
@@ -23,16 +25,9 @@ namespace nMars.RedCode
             Rules = rules;
         }
 
-        public List<IInstruction> Instructions;
-        public int StartOffset;
-        public string Name = "";
-        public string Author = "Anonymous";
-        public string Date = "";
-        public string Version = "";
-        public string FileName = null;
-        public Rules Rules;
-        public int Pin = UnsharedPin;
-        public const int UnsharedPin = -1;
+        #endregion
+
+        #region Dumping
 
         public void Dump(TextWriter tw)
         {
@@ -57,6 +52,10 @@ namespace nMars.RedCode
             Dump(sw, options);
             sw.Close();
         }
+
+        #endregion
+
+        #region Interface
 
         int IWarrior.StartOffset
         {
@@ -108,6 +107,10 @@ namespace nMars.RedCode
             get { return Instructions.Count; }
         }
 
+        #endregion
+
+        #region Extensions
+
         public override string ToString()
         {
             return Name;
@@ -126,5 +129,21 @@ namespace nMars.RedCode
             }
             return true;
         }
+
+        #endregion
+
+        #region Variables
+
+        public List<IInstruction> Instructions;
+        public int StartOffset;
+        public string Name = "";
+        public string Author = "Anonymous";
+        public string Date = "";
+        public string Version = "";
+        public string FileName = null;
+        public Rules Rules;
+        public int Pin = PSpace.UNSHARED;
+
+        #endregion
     }
 }

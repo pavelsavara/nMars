@@ -64,6 +64,7 @@ PMARSDLL_API int pMarsBeginMatch(int argc, char** argv, char* errFile)
 
 PMARSDLL_API void pMarsWatchMatch(mem_struct** aCore, int* aCoreSize, long** aCyclesLeft, int** aRound,
 								  warrior_struct** aWarriors, int* aWarriorsCount, 
+								  int*** aPSpaces,
 								  int** aWarriorsLeft, warrior_struct*** aNextWarrior, //warriors
 								  int** aTaskQueue, int** aEndQueue //tasks
 								  )
@@ -78,6 +79,7 @@ PMARSDLL_API void pMarsWatchMatch(mem_struct** aCore, int* aCoreSize, long** aCy
 	*aCyclesLeft=&cycle;
 	*aNextWarrior=&W;
 	*aRound=&round;
+	*aPSpaces=pSpace;
 }
 
 PMARSDLL_API int pMarsStepMatch()
@@ -93,10 +95,6 @@ PMARSDLL_API void pMarsResultsMatch()
 PMARSDLL_API void pMarsEndMatch()
 {
 	end_match();
-	if(errorcode == SUCCESS)
-	{
-		body_results();
-	}
 	body_finalize();
 	freopen( "CON", "w", stderr );
 }

@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -15,6 +20,7 @@ namespace pMars.DllWrapper
             instructionSize = Marshal.SizeOf(typeof(PmarsInstruction));
             warrirorSize = Marshal.SizeOf(typeof(PmarsWarrior));
             pointerSize = Marshal.SizeOf(typeof(IntPtr));
+            intSize = Marshal.SizeOf(typeof(int));
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -129,7 +135,7 @@ namespace pMars.DllWrapper
 
             public IntPtr nextWarrior;
         }
-
+        
         #region Dll
 
         [DllImport("pMars.dll")]
@@ -151,6 +157,7 @@ namespace pMars.DllWrapper
         public static extern void pMarsWatchMatch([Out] out IntPtr aCore, [Out] out int aCoreSize,
                                                   [Out] out IntPtr aCyclesLeft, [Out] out IntPtr aRound,
                                                   [Out] out IntPtr aWarriors, [Out] out int aWarriorsCount,
+                                                  [Out] out IntPtr aPSpaces,
                                                   [Out] out IntPtr aWarrirosLeft, [Out] out IntPtr aNextWarrior,
                                                   [Out] out IntPtr aTaskQueue, [Out] out IntPtr aEndQueue);
 
@@ -165,6 +172,7 @@ namespace pMars.DllWrapper
         public static int instructionSize;
         public static int warrirorSize;
         public static int pointerSize;
+        public static int intSize;
 
         public static void FillInstructions(IList<IInstruction> list, IntPtr first, int length, int coreSize)
         {
@@ -202,6 +210,23 @@ namespace pMars.DllWrapper
             }
         }
 
+        public static List<PSpace> FillPSpace(Rules rules, List<pMarsDll.PmarsWarrior> warriorsDllCopy, IntPtr pspaceDll)
+        {
+            List<PSpace> res = new List<PSpace>(rules.WarriorsCount);
+            for (int w = 0; w < rules.WarriorsCount;w++ )
+            {
+                PSpace p = new PSpace(rules.PSpaceSize);
+                int psindex = warriorsDllCopy[w].pSpaceIndex;
+                IntPtr ptr = Marshal.ReadIntPtr(pspaceDll, pointerSize * psindex);
+                for (int idx = 0; idx < rules.PSpaceSize; idx++)
+                {
+                    p.Memory[idx] = Marshal.ReadInt32(ptr, idx * intSize);
+                }
+                res.Add(p);
+            }
+            return res;
+        }
+
         public static int WarrirorIndex(IntPtr first, IntPtr currentPtr)
         {
             IntPtr current = Marshal.ReadIntPtr(currentPtr);
@@ -223,6 +248,15 @@ namespace pMars.DllWrapper
             warrior.Date = w.date;
             warrior.Version = w.version;
             warrior.FileName = fileName;
+            if (w.pSpaceIndex != PSpace.UNSHARED)
+            {
+                warrior.Pin = w.pSpaceIDNumber;
+            }
+            else
+            {
+                warrior.Pin = PSpace.UNSHARED;
+            }
+            
             FillInstructions(warrior.Instructions, w.instBank, w.instLen, rules.CoreSize);
             return warrior;
         }

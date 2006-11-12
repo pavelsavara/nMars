@@ -888,7 +888,7 @@ cdb(message)
 #else
 #if defined(LINUXGRAPHX)
       printf(pressAnyKeyToContinue);
-      fflush(stdout);
+      fflush(STDOUT);
       svga_getch();
       svga_open_graphics();
 #else
@@ -1343,7 +1343,7 @@ advance:
       }
     } else {                        /* !# loop end */
 #if defined(DOS16) && !defined(DJGPP)
-      putc('\r', stdout);        /* to check for Ctrl-C press */
+      putc('\r', STDOUT);        /* to check for Ctrl-C press */
 #else
 #if defined(DJGPP)
       if (kbhit())

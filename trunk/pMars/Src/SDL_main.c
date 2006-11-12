@@ -96,7 +96,7 @@ static void __cdecl cleanup_output(void)
 {
 	/* Flush the output in case anything is queued */
 /*
-	fclose(stdout);
+	fclose(STDOUT);
 	fclose(stderr);
 */
 }

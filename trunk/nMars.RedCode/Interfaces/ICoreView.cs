@@ -11,6 +11,7 @@ namespace nMars.RedCode
     public interface ICoreView
     {
         IInstruction this[int address] { get; }
+        int this[int address, Register reg] { get; }
         int CoreSize { get; }
     }
 }

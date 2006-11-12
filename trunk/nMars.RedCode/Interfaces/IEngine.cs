@@ -24,7 +24,7 @@ namespace nMars.RedCode
         /// <summary>
         /// Run complete round
         /// </summary>
-        MatchResult Run(IProject project, IPSpaces pSpaces, Random random);
+        MatchResult Run(IProject project, Random random);
     }
 
     [ComVisible(true)]

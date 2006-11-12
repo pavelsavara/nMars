@@ -46,13 +46,12 @@ namespace nMars.RedCode
             if (res <= 0)
                 return res;
 
-            res = RunParser(brief, dumpext, dumpFiles, files, options, parserName, project);
+            project.Rules.WarriorsCount = files.Count;
+            res = RunParser(true, dumpext, dumpFiles, files, options, parserName, project);
             if (res <= 0)
                 return res;
-
-            IEngineModule engineModule = ModuleRegister.FindModule(engineName) as IEngineModule;
-            IEngine engine = engineModule.CreateEngine();
-            MatchResult match = engine.Run(project, null, null);
+            IEngine engine = ModuleRegister.CreateEngine(engineName);
+            MatchResult match = engine.Run(project, null);
             match.Dump(Console.Out);
             return 0;
         }
@@ -60,8 +59,8 @@ namespace nMars.RedCode
         private static int RunParser(bool brief, string dumpext, bool dumpFiles, List<string> files, DumpOptions options,
                                      string parserName, Project project)
         {
-            IParserModule parserModule = ModuleRegister.FindModule(parserName) as IParserModule;
-            IParser parser = parserModule.CreateParser();
+            IParser parser = ModuleRegister.CreateParser(parserName);
+            parser.InitParser(project.Rules);
             foreach (string file in files)
             {
                 IWarrior warrior = parser.Parse(file, Console.Error);

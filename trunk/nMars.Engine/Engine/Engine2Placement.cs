@@ -9,17 +9,21 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public abstract class EnginePlacement : EngineCore, IWarriorsView
+    public abstract class EnginePlacement : EngineCore, IWarriorsView, IPSpacesView
     {
         #region Events
 
-        protected override void InitializeMatch(IProject project, IPSpaces pspaces, Random aRandom)
+        protected override void InitializeMatch(IProject project, Random aRandom)
         {
-            base.InitializeMatch(project, pspaces, aRandom);
+            base.InitializeMatch(project, aRandom);
             if (project.Warriors.Count != rules.WarriorsCount)
                 throw new EngineException("Count of warriors differ from rules");
 
             random = aRandom;
+            if (random==null)
+            {
+                random=new Random();
+            }
             forcedAddresses = project.ForcedAddresses;
             sourceWarriors = project.Warriors;
 
@@ -33,10 +37,12 @@ namespace nMars.Engine
                 if (sourceWarrior.Rules != rules)
                     throw new EngineException("Warrior was compiled under different rules");
                 EngineWarrior engineWarrior = new EngineWarrior(sourceWarrior, this, w);
+                
                 warriors.Add(engineWarrior);
                 runningWarriors.Add(engineWarrior);
                 iWarriors.Add(engineWarrior);
             }
+            InitPSpaces();
             permutate = project.EngineOptions.Permutate;
             if (forcedAddresses != null)
             {
@@ -89,7 +95,6 @@ namespace nMars.Engine
         public void Load(EngineWarrior warrior, int loadAddress)
         {
             warrior.LoadAddress = loadAddress;
-            bool initpspace = false;
 
             //copy warrior to core
             for (int a = 0; a < warrior.Length; a++)
@@ -106,14 +111,38 @@ namespace nMars.Engine
                     {
                         throw new RulesException("Current rules don't support p-space operations");
                     }
-                    initpspace = true;
                 }
                 int addr = mod(loadAddress + a);
                 core[addr] = new EngineInstruction(instruction, addr);
             }
+        }
 
-            if (initpspace)
-                warrior.InitPSpace(pSpaces);
+        private void InitPSpaces()
+        {
+            int pspP = 0;
+            for (int w = 0; w < rules.WarriorsCount; ++w)
+            {
+                if (warriors[w].PSpaceIndex == PSpace.UNSHARED)
+                {
+                    warriors[w].PSpaceIndex = pspP;
+                    pspP++;
+                }
+                else if (warriors[w].PSpaceIndex == PSpace.PIN_APPEARED)
+                {
+                    warriors[w].PSpaceIndex = pspP;
+                    for (int v = w + 1; v < rules.WarriorsCount; ++v)
+                    {
+                        if (warriors[w].Pin == warriors[v].Pin)
+                        {
+                            warriors[v].PSpaceIndex = pspP;
+                        }
+                    }
+                    pspP++;
+                }
+                if (pSpaces[warriors[w].PSpaceIndex] == null)
+                    pSpaces[warriors[w].PSpaceIndex] = new PSpace(rules.PSpaceSize);
+                warriors[w].PSpace = pSpaces[warriors[w].PSpaceIndex];
+            }
         }
 
         public int Rng(int lseed)
@@ -220,6 +249,45 @@ namespace nMars.Engine
         public IList<IWarrior> Warriors
         {
             get { return iWarriors; }
+        }
+
+        public IList<PSpace> PSpaces
+        {
+            get
+            {
+                List<PSpace> res = new List<PSpace>();
+                foreach (IRunningWarrior warrior in runningWarriors)
+                {
+                    res.Add(warrior.PSpace);
+                }
+                return res;
+            }
+        }
+
+        public IList<int> LastResults
+        {
+            get
+            {
+                List<int> res = new List<int>();
+                foreach (IRunningWarrior warrior in runningWarriors)
+                {
+                    res.Add(warrior.LastResult);
+                }
+                return res;
+            }
+        }
+
+        public IList<int> PSPaceIndexes
+        {
+            get
+            {
+                List<int> res = new List<int>();
+                foreach (IRunningWarrior warrior in runningWarriors)
+                {
+                    res.Add(warrior.PSpaceIndex);
+                }
+                return res;
+            }
         }
 
         #endregion

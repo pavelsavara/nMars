@@ -22,7 +22,7 @@ namespace nMars.RedCode
         /// <summary>
         /// Initialize the engine
         /// </summary>
-        void BeginMatch(IProject project, IPSpaces pSpaces, Random random);
+        void BeginMatch(IProject project, Random random);
 
         /// <summary>
         /// make step
@@ -37,7 +37,7 @@ namespace nMars.RedCode
     }
 
     [ComVisible(true)]
-    public interface IExtendedStepEngine : IStepEngine, ICoreView, ITaskView, IWarriorsView, ITimeView, IStatusView
+    public interface IExtendedStepEngine : IStepEngine, ICoreView, ITaskView, IWarriorsView, ITimeView, IStatusView, IPSpacesView
     {
     }
 }

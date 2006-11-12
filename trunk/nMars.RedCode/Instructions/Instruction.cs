@@ -194,7 +194,7 @@ namespace nMars.RedCode
 
         #endregion
 
-        #region IInstruction
+        #region Interface
 
         public virtual string GetLine(DumpOptions options, bool start)
         {
@@ -248,11 +248,15 @@ namespace nMars.RedCode
 
         #endregion
 
+        #region Variables
+        
         public Operation Operation;
         public Modifier Modifier;
         public Mode ModeA;
         public int ValueA;
         public Mode ModeB;
         public int ValueB;
+
+        #endregion
     }
 }

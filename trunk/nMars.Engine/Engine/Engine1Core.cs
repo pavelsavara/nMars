@@ -12,10 +12,10 @@ namespace nMars.Engine
     {
         #region Events
 
-        protected override void InitializeMatch(IProject project, IPSpaces pspaces, Random aRandom)
+        protected override void InitializeMatch(IProject project, Random aRandom)
         {
-            base.InitializeMatch(project, pspaces, aRandom);
-            pSpaces = pspaces;
+            base.InitializeMatch(project, aRandom);
+            pSpaces=new PSpace[rules.WarriorsCount];
         }
 
         protected virtual void InitializeRound()
@@ -46,12 +46,29 @@ namespace nMars.Engine
             get { return rules.CoreSize; }
         }
 
+        public int this[int address, Register reg]
+        {
+            get
+            {
+                switch (reg)
+                {
+                    case Register.A:
+                        return core[address].ValueA;
+                    case Register.B:
+                        return core[address].ValueB;
+                    default:
+                        throw new ApplicationException("Unknown register");
+                }
+
+            }
+        }
+
         #endregion
 
         #region Variables
 
-        protected IPSpaces pSpaces;
         internal EngineInstruction[] core;
+        internal PSpace[] pSpaces;
 
         #endregion
     }

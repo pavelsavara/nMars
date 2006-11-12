@@ -230,13 +230,12 @@ void body_results()
           fprintf(STDOUT, "%d\n", deaths(i));
         }
     } else                        /* ! SWITCH_k */
-      results(stdout);
+      results(STDOUT);
 }
 
 void body_finalize()
 {
 	int w ;
-	warriors=0;
 	for (w = 0; (w < MAXWARRIOR); w++)
 	{
 		FREE(warrior[w].authorName);
@@ -250,6 +249,7 @@ void body_finalize()
 #ifdef PSPACE                        /* teardown up pSpace */
 	pspace_finalize();
 #endif
+	warriors=0;
 }
 
 void
@@ -320,7 +320,7 @@ Exit(errorcode)
 #ifdef LINUXGRAPHX
   if (vga_getcurrentmode() != TEXT)
     svga_display_close(0);
-  fflush(stdout);
+  fflush(STDOUT);
 #endif
   exit(SWITCH_Q >= 0 ? returninfo() : errorcode);
 #endif
@@ -457,7 +457,8 @@ pspace_init()
   /* allocate space */
   for (i = 0; i < warriors; ++i) {
     warrior[i].lastResult = coreSize - 1;        /* unlikely number */
-    if (pSpace[j = warrior[i].pSpaceIndex] == NULL &&
+	j = warrior[i].pSpaceIndex;
+    if (pSpace[j] == NULL &&
 #ifdef DOS16
         ((pSpace[j] = (ADDR_T far *) farcalloc(pSpaceSize, sizeof(ADDR_T))) == NULL)) {
 #else
@@ -466,6 +467,10 @@ pspace_init()
       errout(outOfMemory);
       Exit(MEMERR);
     }
+	else
+	{
+		memset(pSpace[j],0,pSpaceSize*sizeof(ADDR_T));
+	}
   }
 }                                /* pspace_init() */
 

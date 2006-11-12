@@ -4,20 +4,34 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
-using nMars.RedCode.Utils;
 
 namespace nMars.RedCode
 {
-    public interface IPSpaces : IDictionary<string, int[]>
+    public class PSpace
     {
-    }
+        public PSpace(int size)
+        {
+            Memory=new int[size];
+        }
+        public int[] Memory;
 
-    /// <summary>
-    /// Persistent P-Spaces
-    /// </summary>
-    [Serializable]
-    public class PSpaces : SerializableDictionary<string, int[]>, IPSpaces
-    {
+        public const int UNSHARED = -1;
+        public const int PIN_APPEARED = -2;
+
+        public override bool Equals(object obj)
+        {
+            PSpace ps = obj as PSpace;
+            if (ps.Memory.Length !=Memory.Length) return false;
+            for(int i=0;i<Memory.Length;i++)
+            {
+                if(ps.Memory[i]!=Memory[i]) return false;
+            }
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

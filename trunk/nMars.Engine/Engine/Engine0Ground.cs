@@ -12,7 +12,7 @@ namespace nMars.Engine
     {
         #region Events
         
-        protected virtual void InitializeMatch(IProject project, IPSpaces pspaces, Random aRandom)
+        protected virtual void InitializeMatch(IProject project, Random aRandom)
         {
             rules = project.Rules;
         }
@@ -54,39 +54,7 @@ namespace nMars.Engine
         }
 
         /// <returns>T- should die</returns>
-        protected bool binoper(EngineInstruction instruction, ref int indirectAvalA, ref int indirectAvalB,
-                                     ref int indirectBvalA, ref int indirectBvalB)
-        {
-            bool die = false;
-            switch (instruction.Modifier)
-            {
-                case Modifier.I:
-                case Modifier.F:
-                    die |= oper(ref indirectBvalB, indirectBvalB, indirectAvalB, instruction.Operation);
-                    die |= oper(ref indirectBvalA, indirectBvalA, indirectAvalA, instruction.Operation);
-                    break;
-                case Modifier.A:
-                    die = oper(ref indirectBvalA, indirectBvalA, indirectAvalA, instruction.Operation);
-                    break;
-                case Modifier.B:
-                    die = oper(ref indirectBvalB, indirectBvalB, indirectAvalB, instruction.Operation);
-                    break;
-                case Modifier.X:
-                    die |= oper(ref indirectBvalA, indirectBvalA, indirectAvalB, instruction.Operation);
-                    die |= oper(ref indirectBvalB, indirectBvalB, indirectAvalA, instruction.Operation);
-                    break;
-                case Modifier.AB:
-                    die = oper(ref indirectBvalB, indirectBvalB, indirectAvalA, instruction.Operation);
-                    break;
-                case Modifier.BA:
-                    die = oper(ref indirectBvalA, indirectBvalA, indirectAvalB, instruction.Operation);
-                    break;
-            }
-            return die;
-        }
-
-        /// <returns>T- should die</returns>
-        private bool oper(ref int res, int a, int b, Operation op)
+        protected bool oper(ref int res, int a, int b, Operation op)
         {
             switch (op)
             {
