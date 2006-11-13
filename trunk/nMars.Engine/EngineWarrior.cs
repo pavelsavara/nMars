@@ -117,6 +117,11 @@ namespace nMars.Engine
             get { return SourceWarrior[offset]; }
         }
 
+        public IList<IInstruction> Instructions
+        {
+            get { return SourceWarrior.Instructions; }
+        }
+
         public int Length
         {
             get { return SourceWarrior.Length; }
@@ -222,6 +227,5 @@ namespace nMars.Engine
         public int LastResult;
 
         #endregion
-
     }
 }

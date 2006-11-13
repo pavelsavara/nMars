@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
@@ -12,7 +13,15 @@ namespace nMars.Parser
     {
         public static int Main(string[] args)
         {
-            return CommandLine.ParserMain(args, typeof(Module).Namespace);
+            try
+            {
+                return CommandLine.ParserMain(args, typeof(Module).Namespace);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return -1;
+            }
         }
 
         public IParser CreateParser()

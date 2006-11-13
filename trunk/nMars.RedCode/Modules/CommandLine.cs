@@ -15,7 +15,6 @@ namespace nMars.RedCode
         public static int ParserMain(string[] args, string parserName)
         {
             int res;
-            bool brief;
             string dumpext;
             bool dumpFiles;
             List<string> files;
@@ -23,18 +22,17 @@ namespace nMars.RedCode
             Project project = new Project();
             project.Rules = new Rules();
 
-            res = ParseParams(args, out brief, out dumpext, out dumpFiles, out files, out options, project, parserName);
+            res = ParseParams(args, out dumpext, out dumpFiles, out files, out options, project, parserName);
             if (res <= 0)
                 return res;
 
-            res = RunParser(brief, dumpext, dumpFiles, files, options, parserName, project);
+            res = RunParser(dumpext, dumpFiles, files, options, parserName, project);
             return res;
         }
 
         public static int EngineMain(string[] args, string engineName, string parserName)
         {
             int res;
-            bool brief;
             string dumpext;
             bool dumpFiles;
             List<string> files;
@@ -42,12 +40,12 @@ namespace nMars.RedCode
             Project project = new Project();
             project.Rules = new Rules();
 
-            res = ParseParams(args, out brief, out dumpext, out dumpFiles, out files, out options, project, engineName);
+            res = ParseParams(args, out dumpext, out dumpFiles, out files, out options, project, engineName);
             if (res <= 0)
                 return res;
 
             project.Rules.WarriorsCount = files.Count;
-            res = RunParser(true, dumpext, dumpFiles, files, options, parserName, project);
+            res = RunParser(dumpext, dumpFiles, files, options, parserName, project);
             if (res <= 0)
                 return res;
             IEngine engine = ModuleRegister.CreateEngine(engineName);
@@ -56,7 +54,7 @@ namespace nMars.RedCode
             return 0;
         }
 
-        private static int RunParser(bool brief, string dumpext, bool dumpFiles, List<string> files, DumpOptions options,
+        private static int RunParser(string dumpext, bool dumpFiles, List<string> files, DumpOptions options,
                                      string parserName, Project project)
         {
             IParser parser = ModuleRegister.CreateParser(parserName);
@@ -72,7 +70,7 @@ namespace nMars.RedCode
                     warrior.Dump(sw, options);
                     sw.Close();
                 }
-                if (!brief)
+                if (!options.Brief)
                 {
                     warrior.Dump(Console.Out, options);
                 }
@@ -81,7 +79,7 @@ namespace nMars.RedCode
             return project.Warriors.Count;
         }
 
-        private static int ParseParams(string[] args, out bool brief, out string dumpext, out bool dumpFiles,
+        private static int ParseParams(string[] args, out string dumpext, out bool dumpFiles,
                                        out List<string> files, out DumpOptions options, Project project,
                                        string moduleName)
         {
@@ -89,7 +87,6 @@ namespace nMars.RedCode
             options = new DumpOptions();
             dumpFiles = false;
             dumpext = ".dmp";
-            brief = false;
 
             if (args.Length == 0)
             {
@@ -147,7 +144,7 @@ namespace nMars.RedCode
                             return -1;
                         }
                         break;
-                    case "-u":
+                    case "-ue":
                         if (args.Length < p + 1)
                         {
                             Console.WriteLine("Invalid parameter -u");
@@ -161,10 +158,13 @@ namespace nMars.RedCode
                         options.Offset = true;
                         break;
                     case "-b":
-                        brief = true;
+                        options.Brief = true;
                         break;
                     case "-ul":
                         options.Labels = true;
+                        break;
+                    case "-ux":
+                        options.XmlFormat = true;
                         break;
                     case "-uc":
                         options.Comments = true;
@@ -202,7 +202,7 @@ namespace nMars.RedCode
         {
             Console.WriteLine("Usage   : " + execName + " [options] file1 [files]");
             Console.WriteLine();
-            Console.WriteLine("Options :");
+            Console.WriteLine("Rules :");
             Console.WriteLine("  -r # Rounds to play [1]");
             Console.WriteLine("  -s # Size of core [8000]");
             Console.WriteLine("  -c # Cycles until tie [80000]");
@@ -211,10 +211,13 @@ namespace nMars.RedCode
             Console.WriteLine("  -d # Min. warriors distance");
             Console.WriteLine("  -S # Size of P-space [500]");
             Console.WriteLine();
-            Console.WriteLine("  -u .ext   Dump to files with extension");
+            Console.WriteLine("Parser :");
+            Console.WriteLine("  -b        Brief/silent parser mode");
+            Console.WriteLine("  -ue .ext  Dump to files next by original warrior with extension");
             Console.WriteLine("  -uo       Dump with offset [off]");
             Console.WriteLine("  -ul       Dump with labels [off]");
             Console.WriteLine("  -uc       Dump with comments [off]");
+            Console.WriteLine("  -ux       Dump xml");
             Console.WriteLine();
         }
     }

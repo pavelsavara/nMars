@@ -4,9 +4,9 @@
 ---------------------------------------
 
 Currently it consist of
-- Redcode Definitions
+- Redcode definitions library
 - Parser
-- Simple Engine core simulator    
+- Engine core simulator    
 - Parser & core engine unit tests
 - Library of warriors
 - Modularized/SDL/Windows/Dll 0.9.2 pMars

@@ -29,6 +29,12 @@ namespace nMars.Parser.Warrior
 
         public override void Dump(TextWriter tw, DumpOptions options)
         {
+            if (options.XmlFormat)
+            {
+                base.Dump(tw, options);
+                return;
+            }
+            
             tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
             tw.WriteLine();
             if (options.Offset)

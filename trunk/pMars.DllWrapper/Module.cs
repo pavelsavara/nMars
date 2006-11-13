@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
@@ -12,7 +13,15 @@ namespace pMars.DllWrapper
     {
         public static int Main(string[] args)
         {
-            return CommandLine.EngineMain(args, typeof(Module).Namespace, typeof(Module).Namespace);
+            try
+            {
+                return CommandLine.EngineMain(args, typeof(Module).Namespace, typeof(Module).Namespace);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return -1;
+            }
         }
 
         public IParser CreateParser()

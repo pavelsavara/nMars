@@ -16,16 +16,20 @@ namespace nMars.RedCode
         {
         }
 
-        public DumpOptions(bool offset, bool labels, bool comments)
+        public DumpOptions(bool offset, bool labels, bool comments, bool xml, bool brief)
         {
             Offset = offset;
             Labels = labels;
             Comments = comments;
+            XmlFormat = xml;
+            Brief = brief;
         }
 
+        public bool Brief = false;
         public bool Offset = false;
         public bool Labels = false;
         public bool Comments = false;
+        public bool XmlFormat = false;
 
         public bool IsDefault()
         {
@@ -33,8 +37,9 @@ namespace nMars.RedCode
         }
 
         public static readonly DumpOptions Default = new DumpOptions();
-        public static readonly DumpOptions Full = new DumpOptions(true, true, true);
-        public static readonly DumpOptions NoOffset = new DumpOptions(false, true, true);
+        public static readonly DumpOptions Full = new DumpOptions(true, true, true, false, false);
+        public static readonly DumpOptions NoOffset = new DumpOptions(false, true, true, false, false);
+        public static readonly DumpOptions Xml = new DumpOptions(true, true, true, true, false);
     }
 
     [ComVisible(true)]
@@ -90,6 +95,11 @@ namespace nMars.RedCode
         /// List of Instructions
         /// </summary>
         IInstruction this[int offset] { get; }
+
+        /// <summary>
+        /// List of Instructions
+        /// </summary>
+        IList<IInstruction> Instructions { get;}
 
         /// <summary>
         /// Dump

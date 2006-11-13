@@ -4,13 +4,16 @@
 // 2006 Pavel Savara
 
 using System;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.IO;
 
 namespace nMars.RedCode
 {
     [Serializable]
-    public class Warrior : IWarrior
+    public class Warrior : IWarrior, IXmlSerializable
     {
         #region Connstruction
 
@@ -36,14 +39,23 @@ namespace nMars.RedCode
 
         public virtual void Dump(TextWriter tw, DumpOptions options)
         {
-            tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
-            tw.WriteLine();
-            tw.WriteLine("       ORG      START");
-            for (int a = 0; a < Instructions.Count; a++)
+            if (options.XmlFormat)
             {
-                tw.WriteLine(Instructions[a].GetLine(options, a == StartOffset));
+                XmlSerializer serializer = new XmlSerializer(GetType());
+                serializer.Serialize(tw, this);
+                tw.WriteLine();
             }
-            tw.WriteLine();
+            else
+            {
+                tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
+                tw.WriteLine();
+                tw.WriteLine("       ORG      START");
+                for (int a = 0; a < Instructions.Count; a++)
+                {
+                    tw.WriteLine(Instructions[a].GetLine(options, a == StartOffset));
+                }
+                tw.WriteLine();
+            }
         }
 
         public virtual void Dump(string fileName, DumpOptions options)
@@ -102,6 +114,11 @@ namespace nMars.RedCode
             get { return Instructions[offset]; }
         }
 
+        IList<IInstruction> IWarrior.Instructions
+        {
+            get { return Instructions; }
+        }
+
         public int Length
         {
             get { return Instructions.Count; }
@@ -130,6 +147,58 @@ namespace nMars.RedCode
             return true;
         }
 
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            string t;
+            Name = reader.ReadElementString("Name");
+            Author = reader.ReadElementString("Author");
+            Date = reader.ReadElementString("Date");
+            Version = reader.ReadElementString("Version");
+            t = reader.ReadElementString("Pin"); if (t!=null) Pin = Int32.Parse(t);
+            t = reader.ReadElementString("StartOffset"); if (t != null) StartOffset = Int32.Parse(t);
+            reader.ReadElementString("StartOffset");
+            while (reader.NodeType != XmlNodeType.EndElement)
+            {
+                reader.ReadStartElement("Instruction");
+                Instruction i = new Instruction();
+                i.Operation = OperationHelper.Parse(reader.ReadElementString("Operation"));
+                i.Modifier = (Modifier)Enum.Parse(typeof(Modifier), reader.ReadElementString("Modifier"));
+                i.ModeA = ModeHelper.Parse(reader.ReadElementString("ModeA"));
+                i.ValueA = Int32.Parse(reader.ReadElementString("ValueA"));
+                i.ModeB = ModeHelper.Parse(reader.ReadElementString("ModeB"));
+                i.ValueB = Int32.Parse(reader.ReadElementString("ValueB"));
+                Instructions.Add(i);
+                reader.ReadEndElement();
+                reader.MoveToContent();
+            }
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            if (Name != null) writer.WriteAttributeString("Name", Name);
+            if (Author != null) writer.WriteAttributeString("Author", Author);
+            if (Date != null) writer.WriteAttributeString("Date", Date);
+            if (Version != null) writer.WriteAttributeString("Version", Version);
+            if (Pin != PSpace.UNSHARED) writer.WriteAttributeString("Pin", Pin.ToString());
+            if (StartOffset != 0) writer.WriteAttributeString("StartOffset", StartOffset.ToString());
+            foreach(IInstruction i in Instructions)
+            {
+                writer.WriteStartElement("Instruction");
+                writer.WriteAttributeString("Operation", i.Operation.ToString());
+                writer.WriteAttributeString("Modifier", i.Modifier.ToString());
+                writer.WriteAttributeString("ModeA", ModeHelper.ToString(i.ModeA));
+                writer.WriteAttributeString("ValueA", i.ValueA.ToString());
+                writer.WriteAttributeString("ModeB", ModeHelper.ToString(i.ModeB));
+                writer.WriteAttributeString("ValueB", i.ValueB.ToString());
+                writer.WriteEndElement();
+            }
+        }
+
         #endregion
 
         #region Variables
@@ -140,9 +209,9 @@ namespace nMars.RedCode
         public string Author = "Anonymous";
         public string Date = "";
         public string Version = "";
+        public int Pin = PSpace.UNSHARED;
         public string FileName = null;
         public Rules Rules;
-        public int Pin = PSpace.UNSHARED;
 
         #endregion
     }
