@@ -33,7 +33,7 @@ namespace nMars.RedCode
     {
         public abstract IWarrior Parse(string fileName, TextWriter err);
 
-        public void InitParser(Rules aRules)
+        public virtual void InitParser(Rules aRules)
         {
             rules = aRules;
         }

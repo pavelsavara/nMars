@@ -12,6 +12,13 @@ namespace pMars.DllWrapper
 {
     public class pMarsDllParser : ParserRoot
     {
+        public override void InitParser(Rules aRules)
+        {
+            base.InitParser(aRules);
+            //touch DLL
+            pMarsDll.pMarsFreeParsed();
+        }
+        
         public override IWarrior Parse(string fileName, TextWriter err)
         {
             string errFile = Path.GetTempFileName();
