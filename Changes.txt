@@ -1,3 +1,8 @@
+11/13/2006 - nMars0.7 - going public
+  - documentation
+  - exception handling
+  - XML dump
+  
 11/13/2006 - nMars0.6 - engine unit test
   - refactored engine
   - pMars.dll silent
