@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="SDL\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;EXT94;PERMUTATE;SDLGRAPHX"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;EXT94;PERMUTATE;SDLGRAPHX;_CRT_SECURE_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -125,7 +125,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="SDL\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;EXT94;PERMUTATE;SDLGRAPHX"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;EXT94;PERMUTATE;SDLGRAPHX;_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				ObjectFile="$(IntDir)SDL\"
