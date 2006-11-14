@@ -29,6 +29,11 @@ Usage manual can be found here
 https://svn.sourceforge.net/svnroot/nmars/trunk/Usage.txt
 
 
+  Download 
+--------------------
+https://sourceforge.net/project/showfiles.php?group_id=174312
+
+
   Parser
 --------------------
 Targeting to be full ICWS '94 RedCode specification compliant.
