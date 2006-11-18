@@ -41,20 +41,23 @@ namespace nMars.Test
             files.AddRange(Directory.GetFiles(basePath, "*.red", SearchOption.AllDirectories));
             files.Sort();
             bool allOK = true;
-            for (int i = 0; i < files.Count; i += 2)
+            for (int i = 0; i < files.Count; i++)
             {
-                try
+                for (int j = 0; j < files.Count; j++)
                 {
-                    LoadRunPair(files[i], files[i + 1]);
-                }
-                catch (EngineDifferException)
-                {
-                    Console.WriteLine("\nFailed");
-                    allOK = false;
-                }
-                catch (ParserException)
-                {
-                    //swallow
+                    try
+                    {
+                        LoadRunPair(files[i], files[j]);
+                    }
+                    catch (EngineDifferException)
+                    {
+                        Console.WriteLine("\nFailed");
+                        allOK = false;
+                    }
+                    catch (ParserException)
+                    {
+                        //swallow
+                    }
                 }
             }
             if (!allOK)
@@ -67,9 +70,13 @@ namespace nMars.Test
             problemsPath = Utils.CleanProblems(basePath, "!problems");
 
             rules = Rules.DefaultRules;
+#if DEBUG
             rules.Rounds = 3;
+#else
+            rules.Rounds = 7;
+#endif
 
-            pparser = ModuleRegister.CreateParser("pMars.DllWrapper");
+            pparser = new CachingParser(ModuleRegister.CreateParser("pMars.DllWrapper"));
             pparser.InitParser(rules);
             
             engines=new ComparingEngine();
@@ -78,16 +85,18 @@ namespace nMars.Test
 
         private void LoadRunOne(string fileOne)
         {
-            IWarrior warriorOne;
+            IWarrior pwarriorOne;
             string shortOne = Path.GetFileNameWithoutExtension(fileOne);
             string midleOne = fileOne.Substring(basePath.Length);
-            Console.Write("Reading {0}      \r", midleOne);
+            Console.Write("Fighting {0}      \r", midleOne);
             string problemsPathOne = Path.Combine(problemsPath, shortOne);
-            warriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr");
+            pwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr");
+            if (pwarriorOne == null)
+                return;
             Project pproject = new Project(rules);
-            pproject.Warriors.Add(warriorOne);
+            pproject.Warriors.Add(pwarriorOne);
 
-            engines.Run(pproject, random);
+            engines.Run(pproject, EngineOptions.ConstantRandomOptions);
         }
 
         private void LoadRunPair(string fileOne, string fileTwo)
@@ -98,17 +107,19 @@ namespace nMars.Test
             string shortTwo = Path.GetFileNameWithoutExtension(fileTwo);
             string midleOne = fileOne.Substring(basePath.Length);
             string midleTwo = fileTwo.Substring(basePath.Length);
-            Console.Write("Reading {0} and {1}         \r", midleOne, midleTwo);
+            Console.Write("Fighting {0} and {1}         \r", midleOne, midleTwo);
             string problemsPathOne = Path.Combine(problemsPath, shortOne);
             string problemsPathTwo = Path.Combine(problemsPath, shortTwo);
             pwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
             pwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".pErr2");
+            if (pwarriorOne== null || pwarriorTwo == null) 
+                return;
             Project pproject = new Project(rules);
             pproject.Warriors.Add(pwarriorOne);
             pproject.Warriors.Add(pwarriorTwo);
             try
             {
-                engines.Run(pproject, random);
+                engines.Run(pproject, EngineOptions.ConstantRandomOptions);
             }
             catch(EngineDifferException)
             {
@@ -122,7 +133,6 @@ namespace nMars.Test
         string basePath;
         string problemsPath;
         Rules rules;
-        Random random=new Random(0); //always same sequence
         ComparingEngine engines;
 
     }

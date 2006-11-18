@@ -10,7 +10,7 @@ namespace nMars.RedCode
     [ComVisible(true)]
     public interface IInstruction
     {
-        string GetLine(DumpOptions options, bool start);
+        string GetLine(ParserOptions options, bool start);
         Operation Operation { get; }
         Modifier Modifier { get; }
         Mode ModeA { get; }

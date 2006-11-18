@@ -7,37 +7,26 @@ using System;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
-namespace nMars.Test
+namespace nMars.Debugger
 {
-    class Module : IEngineModule
+    class Module : IDebuggerModule
     {
         public static int Main(string[] args)
         {
             try
             {
-                if (args.Length == 0)
-                {
-                    EngineTest test=new EngineTest();
-                    test.Full();
-                    return 0;
-                }
-                else
-                {
-                    return CommandLine.EngineMain(args, typeof(Module).Namespace, "pMars.DllWrapper");
-                }
+                throw new NotImplementedException();
             }
             catch (Exception ex)
             {
                 Console.Error.WriteLine(ex.Message);
-                Console.Error.WriteLine();
-                Console.Error.WriteLine(ex.StackTrace);
                 return -1;
             }
         }
 
-        public IEngine CreateEngine()
+        public IDebugger CreateDebugger()
         {
-            return new ComparingEngine();
+            throw new NotImplementedException();
         }
 
         #region Module registration

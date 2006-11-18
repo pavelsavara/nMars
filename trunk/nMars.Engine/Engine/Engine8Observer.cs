@@ -3,17 +3,33 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    class Engine : EngineSteps
+    class Engine : EngineSteps, IStepBackEngine
     {
-        protected override void BeforeWrite(int address, Register register)
+        public void PrevStep()
+        {
+            if (!CanStepBack)
+                throw new InvalidOperationException("Cannot step back now");
+
+        }
+
+        public bool CanStepBack
+        {
+            get
+            {
+                return (lastStepResult == StepResult.Continue);
+            }
+        }
+
+        protected override void BeforeWrite(int address, Column column)
         {
         }
 
-        protected override void AfterWrite(int address, Register register)
+        protected override void AfterWrite(int address, Column column)
         {
         }
 

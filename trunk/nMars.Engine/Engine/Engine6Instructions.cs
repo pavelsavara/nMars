@@ -12,14 +12,6 @@ namespace nMars.Engine
     {
         #region Events
         
-        protected virtual void BeforeWrite(int address, Register register)
-        {
-        }
-
-        protected virtual void AfterWrite(int address, Register register)
-        {
-        }
-
         protected virtual void Died(EngineWarrior warrior)
         {
         }
@@ -32,36 +24,24 @@ namespace nMars.Engine
 
         protected void PerformInstruction(EngineWarrior warrior, int ip)
         {
-            int indirectAadr;
-            int indirectBadr;
+            reg.ip = ip;
+            BeforeRead(ip,Column.All);
+            reg.IR = core[ip];
+            reg.AA_Value = core[ip].ValueA;
+            reg.AB_Value = core[ip].ValueA;
 
-            EngineInstruction instructionCopy = core[ip];
+            GetEffectiveAddress(core[ip].ModeA, out reg.AdrA, ref reg.AA_Value, ref reg.IR.ValueA, reg.IR.ValueA);
+            GetEffectiveAddress(core[ip].ModeB, out reg.AdrB, ref reg.AB_Value, ref reg.IR.ValueB, reg.IR.ValueB);
 
-            int AA_Value = instructionCopy.ValueA;
-            int AB_Value = instructionCopy.ValueA;
-
-            GetEffectiveAddress(ip, core[ip].ModeA, out indirectAadr, ref AA_Value, ref instructionCopy.ValueA,
-                                instructionCopy.ValueB, instructionCopy.ValueA);
-            GetEffectiveAddress(ip, core[ip].ModeB, out indirectBadr, ref AB_Value, ref instructionCopy.ValueB,
-                                instructionCopy.ValueB, instructionCopy.ValueB);
-
-            ExecuteInstruction(warrior, ref instructionCopy, ip,
-                    AA_Value, AB_Value,
-                    indirectAadr, indirectBadr,
-                    ref core[indirectAadr].ValueA, ref core[indirectAadr].ValueB,
-                    ref core[indirectBadr].ValueA, ref core[indirectBadr].ValueB);
+            ExecuteInstruction(warrior);
         }
 
-        private void ExecuteInstruction(EngineWarrior warrior, ref EngineInstruction instructionCopy, int ip,
-                                          //int directAadr, int directBadr,
-                                          int AA_Value, int AB_Value, int indirectAadr, int indirectBadr,
-                                          ref int indirectAvalA, ref int indirectAvalB, ref int indirectBvalA,
-                                          ref int indirectBvalB)
+        private void ExecuteInstruction(EngineWarrior warrior)
         {
             bool jump = false;
             bool die = false;
             bool split = false;
-            switch (instructionCopy.Operation)
+            switch (reg.IR.Operation)
             {
                     #region Simple
 
@@ -69,22 +49,22 @@ namespace nMars.Engine
                     die = true;
                     break;
                 case Operation.NOP:
-                    ip++;
+                    reg.ip++;
                     break;
                 case Operation.SPL:
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
-                        warrior.Tasks.Enqueue(mod(ip + 1));
-                        ip = indirectAadr; // as second to queue
+                        warrior.Tasks.Enqueue(mod(reg.ip + 1));
+                        reg.ip = reg.AdrA; // as second to queue
                         split = true;
                     }
                     else
                     {
-                        ip++;
+                        reg.ip++;
                     }
                     break;
                 case Operation.JMP:
-                    ip = indirectAadr;
+                    reg.ip = reg.AdrA;
                     break;
 
                     #endregion
@@ -92,26 +72,26 @@ namespace nMars.Engine
                     #region JMZ
 
                 case Operation.JMZ:
-                    switch (instructionCopy.Modifier)
+                    switch (reg.IR.Modifier)
                     {
                         case Modifier.BA:
                         case Modifier.A:
-                            jump = (AB_Value == 0);
+                            jump = (reg.AB_Value == 0);
                             break;
                         case Modifier.F:
                         case Modifier.X:
                         case Modifier.I:
-                            jump = (AB_Value == 0 && instructionCopy.ValueB == 0);
+                            jump = (reg.AB_Value == 0 && reg.IR.ValueB == 0);
                             break;
                         case Modifier.B:
                         case Modifier.AB:
-                            jump = (instructionCopy.ValueB == 0);
+                            jump = (reg.IR.ValueB == 0);
                             break;
                     }
                     if (jump)
-                        ip = indirectAadr;
+                        reg.ip = reg.AdrA;
                     else
-                        ip++;
+                        reg.ip++;
                     break;
 
                     #endregion
@@ -119,26 +99,26 @@ namespace nMars.Engine
                     #region JMN
 
                 case Operation.JMN:
-                    switch (instructionCopy.Modifier)
+                    switch (reg.IR.Modifier)
                     {
                         case Modifier.BA:
                         case Modifier.A:
-                            jump = !(AB_Value == 0);
+                            jump = !(reg.AB_Value == 0);
                             break;
                         case Modifier.B:
                         case Modifier.AB:
-                            jump = !(instructionCopy.ValueB == 0);
+                            jump = !(reg.IR.ValueB == 0);
                             break;
                         case Modifier.F:
                         case Modifier.X:
                         case Modifier.I:
-                            jump = !(AB_Value == 0 && instructionCopy.ValueB == 0);
+                            jump = !(reg.AB_Value == 0 && reg.IR.ValueB == 0);
                             break;
                     }
                     if (jump)
-                        ip = indirectAadr;
+                        reg.ip = reg.AdrA;
                     else
-                        ip++;
+                        reg.ip++;
                     break;
 
                     #endregion
@@ -146,30 +126,30 @@ namespace nMars.Engine
                     #region DJN
 
                 case Operation.DJN:
-                    switch (instructionCopy.Modifier)
+                    switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
                         case Modifier.BA:
-                            jump = (AB_Value != 1);
-                            dec(ref indirectBvalA);
+                            jump = (reg.AB_Value != 1);
+                            dec(reg.AdrB, Column.A);
                             break;
                         case Modifier.B:
                         case Modifier.AB:
-                            jump = (instructionCopy.ValueB != 1);
-                            dec(ref indirectBvalB);
+                            jump = (reg.IR.ValueB != 1);
+                            dec(reg.AdrB, Column.B);
                             break;
                         case Modifier.F:
                         case Modifier.X:
                         case Modifier.I:
-                            jump = !(AB_Value == 1 && instructionCopy.ValueB == 1);
-                            dec(ref indirectBvalA);
-                            dec(ref indirectBvalB);
+                            jump = !(reg.AB_Value == 1 && reg.IR.ValueB == 1);
+                            dec(reg.AdrB, Column.A);
+                            dec(reg.AdrB, Column.B);
                             break;
                     }
                     if (jump)
-                        ip = indirectAadr;
+                        reg.ip = reg.AdrA;
                     else
-                        ip++;
+                        reg.ip++;
                     break;
 
                     #endregion
@@ -177,38 +157,41 @@ namespace nMars.Engine
                     #region SEQ
 
                 case Operation.CMP:
-                    switch (instructionCopy.Modifier)
+                    switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
-                            jump = (AA_Value == AB_Value);
+                            jump = (reg.AA_Value == reg.AB_Value);
                             break;
                         case Modifier.B:
-                            jump = (instructionCopy.ValueA == instructionCopy.ValueB);
+                            jump = (reg.IR.ValueA == reg.IR.ValueB);
                             break;
                         case Modifier.AB:
-                            jump = (instructionCopy.ValueB == AA_Value);
+                            jump = (reg.IR.ValueB == reg.AA_Value);
                             break;
                         case Modifier.BA:
-                            jump = (indirectAvalB == indirectBvalA);
+                            jump = (this[reg.AdrA, Column.B] == this[reg.AdrB, Column.A]);
                             break;
                         case Modifier.I:
-                            jump = (core[indirectAadr].Operation == core[indirectBadr].Operation &&
-                                    core[indirectAadr].Modifier == core[indirectBadr].Modifier &&
-                                    core[indirectAadr].ModeA == core[indirectBadr].ModeA &&
-                                    core[indirectAadr].ModeB == core[indirectBadr].ModeB && AA_Value == AB_Value &&
-                                    instructionCopy.ValueA == instructionCopy.ValueB);
+                            BeforeRead(reg.AdrA, Column.All);
+                            BeforeRead(reg.AdrB, Column.All);
+                            jump = (core[reg.AdrA].Operation == core[reg.AdrB].Operation &&
+                                    core[reg.AdrA].Modifier == core[reg.AdrB].Modifier &&
+                                    core[reg.AdrA].ModeA == core[reg.AdrB].ModeA &&
+                                    core[reg.AdrA].ModeB == core[reg.AdrB].ModeB && 
+                                    reg.AA_Value == reg.AB_Value &&
+                                    reg.IR.ValueA == reg.IR.ValueB);
                             break;
                         case Modifier.F:
-                            jump = (AA_Value == AB_Value && instructionCopy.ValueA == instructionCopy.ValueB);
+                            jump = (reg.AA_Value == reg.AB_Value && reg.IR.ValueA == reg.IR.ValueB);
                             break;
                         case Modifier.X:
-                            jump = (instructionCopy.ValueB == AA_Value && AB_Value == instructionCopy.ValueA);
+                            jump = (reg.IR.ValueB == reg.AA_Value && reg.AB_Value == reg.IR.ValueA);
                             break;
                     }
                     if (jump)
-                        ip += 2;
+                        reg.ip += 2;
                     else
-                        ip++;
+                        reg.ip++;
                     break;
 
                     #endregion
@@ -217,38 +200,40 @@ namespace nMars.Engine
 
                 case Operation.SNE:
 
-                    switch (instructionCopy.Modifier)
+                    switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
-                            jump = (AA_Value != AB_Value);
+                            jump = (reg.AA_Value != reg.AB_Value);
                             break;
                         case Modifier.B:
-                            jump = (instructionCopy.ValueA != instructionCopy.ValueB);
+                            jump = (reg.IR.ValueA != reg.IR.ValueB);
                             break;
                         case Modifier.AB:
-                            jump = (instructionCopy.ValueB != AA_Value);
+                            jump = (reg.IR.ValueB != reg.AA_Value);
                             break;
                         case Modifier.BA:
-                            jump = (indirectAvalB != indirectBvalA);
+                            jump = (this[reg.AdrA, Column.B] != this[reg.AdrB, Column.A]);
                             break;
                         case Modifier.I:
-                            jump = (core[indirectAadr].Operation != core[indirectBadr].Operation ||
-                                    core[indirectAadr].Modifier != core[indirectBadr].Modifier ||
-                                    core[indirectAadr].ModeA != core[indirectBadr].ModeA ||
-                                    core[indirectAadr].ModeB != core[indirectBadr].ModeB || AB_Value != AA_Value ||
-                                    instructionCopy.ValueA != instructionCopy.ValueB);
+                            BeforeRead(reg.AdrA, Column.All);
+                            BeforeRead(reg.AdrB, Column.All);
+                            jump = (core[reg.AdrA].Operation != core[reg.AdrB].Operation ||
+                                    core[reg.AdrA].Modifier != core[reg.AdrB].Modifier ||
+                                    core[reg.AdrA].ModeA != core[reg.AdrB].ModeA ||
+                                    core[reg.AdrA].ModeB != core[reg.AdrB].ModeB || reg.AB_Value != reg.AA_Value ||
+                                    reg.IR.ValueA != reg.IR.ValueB);
                             break;
                         case Modifier.F:
-                            jump = (AA_Value != AB_Value || instructionCopy.ValueA != instructionCopy.ValueB);
+                            jump = (reg.AA_Value != reg.AB_Value || reg.IR.ValueA != reg.IR.ValueB);
                             break;
                         case Modifier.X:
-                            jump = (instructionCopy.ValueB != AA_Value || AB_Value != instructionCopy.ValueA);
+                            jump = (reg.IR.ValueB != reg.AA_Value || reg.AB_Value != reg.IR.ValueA);
                             break;
                     }
                     if (jump)
-                        ip += 2;
+                        reg.ip += 2;
                     else
-                        ip++;
+                        reg.ip++;
                     break;
 
                     #endregion
@@ -257,32 +242,34 @@ namespace nMars.Engine
 
                 case Operation.SLT:
 
-                    switch (instructionCopy.Modifier)
+                    switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
-                            jump = (indirectAvalA < indirectBvalA);
+                            jump = (reg.AB_Value > reg.AA_Value);
                             break;
                         case Modifier.B:
-                            jump = (indirectAvalB < indirectBvalB);
+                            jump = (reg.IR.ValueB > reg.IR.ValueA);
                             break;
                         case Modifier.AB:
-                            jump = (indirectAvalA < indirectBvalB);
+                            jump = (reg.IR.ValueB > reg.AA_Value);
                             break;
                         case Modifier.BA:
-                            jump = (indirectAvalB < indirectBvalA);
+                            jump = (reg.AB_Value > reg.IR.ValueA);
                             break;
                         case Modifier.I:
                         case Modifier.F:
-                            jump = (indirectAvalA < indirectBvalA && indirectAvalB < indirectBvalB);
+                            jump = (reg.AB_Value > reg.AA_Value &&
+                                    reg.IR.ValueB > reg.IR.ValueA);
                             break;
                         case Modifier.X:
-                            jump = (indirectAvalA < indirectBvalB && indirectAvalB < indirectBvalA);
+                            jump = (reg.IR.ValueB > reg.AA_Value &&
+                                    reg.AB_Value > reg.IR.ValueA);
                             break;
                     }
                     if (jump)
-                        ip += 2;
+                        reg.ip += 2;
                     else
-                        ip++;
+                        reg.ip++;
                     break;
 
                     #endregion
@@ -291,14 +278,14 @@ namespace nMars.Engine
 
                 case Operation.MOD:
                 case Operation.DIV:
-                    die = BinOperation(AA_Value, AB_Value, ref indirectAvalA, ref indirectBvalA, ref indirectBvalB, instructionCopy);
-                    ip++;
+                    die = BinOperation();
+                    reg.ip++;
                     break;
                 case Operation.SUB:
                 case Operation.ADD:
                 case Operation.MUL:
-                    BinOperation(AA_Value, AB_Value, ref indirectAvalA, ref indirectBvalA, ref indirectBvalB, instructionCopy);
-                    ip++;
+                    BinOperation();
+                    reg.ip++;
                     break;
 
                     #endregion
@@ -306,38 +293,43 @@ namespace nMars.Engine
                     #region MOV
 
                 case Operation.MOV:
-                    switch (instructionCopy.Modifier)
+                    switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
-                            indirectBvalA = AA_Value;
+                            this[reg.AdrB, Column.A] = reg.AA_Value;
                             break;
                         case Modifier.F:
-                            indirectBvalA = AA_Value;
-                            indirectBvalB = instructionCopy.ValueA;
+                            this[reg.AdrB, Column.A] = reg.AA_Value;
+                            this[reg.AdrB, Column.B] = reg.IR.ValueA;
                             break;
                         case Modifier.B:
-                            indirectBvalB = instructionCopy.ValueA;
+                            this[reg.AdrB, Column.B] = reg.IR.ValueA;
                             break;
                         case Modifier.AB:
-                            indirectBvalB = AA_Value;
+                            this[reg.AdrB, Column.B] = reg.AA_Value;
                             break;
                         case Modifier.X:
-                            indirectBvalB = AA_Value;
-                            indirectBvalA = instructionCopy.ValueA;
+                            this[reg.AdrB, Column.B] = reg.AA_Value;
+                            this[reg.AdrB, Column.A] = reg.IR.ValueA;
                             break;
                         case Modifier.BA:
-                            indirectBvalA = instructionCopy.ValueA;
+                            this[reg.AdrB, Column.A] = reg.IR.ValueA;
                             break;
                         case Modifier.I:
-                            core[indirectBadr].Operation = core[indirectAadr].Operation;
-                            core[indirectBadr].Modifier = core[indirectAadr].Modifier;
-                            core[indirectBadr].ModeA = core[indirectAadr].ModeA;
-                            core[indirectBadr].ModeB = core[indirectAadr].ModeB;
-                            indirectBvalA = AA_Value;
-                            indirectBvalB = instructionCopy.ValueA;
+                            BeforeRead(reg.AdrA, Column.All);
+                            BeforeRead(reg.AdrB, Column.All);
+                            BeforeWrite(reg.AdrB, Column.All);
+                            core[reg.AdrB].Source = core[reg.AdrA].Source;
+                            core[reg.AdrB].Operation = core[reg.AdrA].Operation;
+                            core[reg.AdrB].Modifier = core[reg.AdrA].Modifier;
+                            core[reg.AdrB].ModeA = core[reg.AdrA].ModeA;
+                            core[reg.AdrB].ModeB = core[reg.AdrA].ModeB;
+                            core[reg.AdrB].ValueA = reg.AA_Value;
+                            core[reg.AdrB].ValueB = reg.IR.ValueA;
+                            AfterWrite(reg.AdrB, Column.All);
                             break;
                     }
-                    ip++;
+                    reg.ip++;
                     break;
 
                     #endregion
@@ -346,25 +338,25 @@ namespace nMars.Engine
 
                 case Operation.LDP:
 
-                    switch (instructionCopy.Modifier)
+                    switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
-                            indirectBvalA = warrior.GetPSpaceValue(AA_Value);
+                            this[reg.AdrB, Column.A] = warrior.GetPSpaceValue(reg.AA_Value);
                             break;
                         case Modifier.F:
                         case Modifier.B:
                         case Modifier.X:
                         case Modifier.I:
-                            indirectBvalB = warrior.GetPSpaceValue(instructionCopy.ValueA);
+                            this[reg.AdrB, Column.B] = warrior.GetPSpaceValue(reg.IR.ValueA);
                             break;
                         case Modifier.AB:
-                            indirectBvalB = warrior.GetPSpaceValue(AA_Value);
+                            this[reg.AdrB, Column.B] = warrior.GetPSpaceValue(reg.AA_Value);
                             break;
                         case Modifier.BA:
-                            indirectBvalA = warrior.GetPSpaceValue(instructionCopy.ValueA);
+                            this[reg.AdrB, Column.A] = warrior.GetPSpaceValue(reg.IR.ValueA);
                             break;
                     }
-                    ip++;
+                    reg.ip++;
                     break;
 
                     #endregion
@@ -373,25 +365,25 @@ namespace nMars.Engine
 
                 case Operation.STP:
 
-                    switch (instructionCopy.Modifier)
+                    switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
-                            warrior.SetPSpaceValue(AB_Value, AA_Value);
+                            warrior.SetPSpaceValue(reg.AB_Value, reg.AA_Value);
                             break;
                         case Modifier.F:
                         case Modifier.B:
                         case Modifier.X:
                         case Modifier.I:
-                            warrior.SetPSpaceValue(instructionCopy.ValueB, instructionCopy.ValueA);
+                            warrior.SetPSpaceValue(reg.IR.ValueB, reg.IR.ValueA);
                             break;
                         case Modifier.AB:
-                            warrior.SetPSpaceValue(instructionCopy.ValueB, AA_Value);
+                            warrior.SetPSpaceValue(reg.IR.ValueB, reg.AA_Value);
                             break;
                         case Modifier.BA:
-                            warrior.SetPSpaceValue(AB_Value, instructionCopy.ValueA);
+                            warrior.SetPSpaceValue(reg.AB_Value, reg.IR.ValueA);
                             break;
                     }
-                    ip++;
+                    reg.ip++;
                     break;
 
                     #endregion
@@ -401,7 +393,7 @@ namespace nMars.Engine
             }
             if (!die)
             {
-                warrior.Tasks.Enqueue(mod(ip));
+                warrior.Tasks.Enqueue(mod(reg.ip));
             }
             else
             {
@@ -413,32 +405,46 @@ namespace nMars.Engine
             }
         }
 
-        private bool BinOperation(int AA_Value, int AB_Value, ref int indirectAvalA, ref int indirectBvalA, ref int indirectBvalB, EngineInstruction instructionCopy)
+        private bool BinOperation()
         {
             bool die;
             die = false;
-            switch (instructionCopy.Modifier)
+            switch (reg.IR.Modifier)
             {
                 case Modifier.A:
-                    die |= oper(ref indirectBvalA, AB_Value, AA_Value, instructionCopy.Operation);
+                    BeforeWrite(reg.AdrB,Column.A);
+                    die |= oper(ref core[reg.AdrB].ValueA, reg.AB_Value, reg.AA_Value, reg.IR.Operation);
+                    AfterWrite(reg.AdrB, Column.A);
                     break;
                 case Modifier.I:
                 case Modifier.F:
-                    die |= oper(ref indirectBvalA, AB_Value, AA_Value, instructionCopy.Operation);
-                    die |= oper(ref indirectBvalB, instructionCopy.ValueB, instructionCopy.ValueA, instructionCopy.Operation);
+                    BeforeWrite(reg.AdrB, Column.AB);
+                    die |= oper(ref core[reg.AdrB].ValueA, reg.AB_Value, reg.AA_Value, reg.IR.Operation);
+                    die |= oper(ref core[reg.AdrB].ValueB, reg.IR.ValueB, reg.IR.ValueA, reg.IR.Operation);
+                    AfterWrite(reg.AdrB, Column.AB);
                     break;
                 case Modifier.B:
-                    die |= oper(ref indirectBvalB, instructionCopy.ValueB, instructionCopy.ValueA, instructionCopy.Operation);
+                    BeforeWrite(reg.AdrB, Column.B);
+                    die |= oper(ref core[reg.AdrB].ValueB, reg.IR.ValueB, reg.IR.ValueA, reg.IR.Operation);
+                    AfterWrite(reg.AdrB, Column.B);
                     break;
                 case Modifier.AB:
-                    die |= oper(ref indirectBvalB, instructionCopy.ValueB, indirectAvalA, instructionCopy.Operation);
+                    BeforeRead(reg.AdrA, Column.A);
+                    BeforeWrite(reg.AdrB, Column.B);
+                    die |= oper(ref core[reg.AdrB].ValueB, reg.IR.ValueB, reg.AA_Value, reg.IR.Operation);
+                    AfterWrite(reg.AdrB, Column.B);
                     break;
                 case Modifier.X:
-                    die |= oper(ref indirectBvalB, instructionCopy.ValueB, indirectAvalA, instructionCopy.Operation);
-                    die |= oper(ref indirectBvalA, AB_Value, instructionCopy.ValueA, instructionCopy.Operation);
+                    BeforeRead(reg.AdrA, Column.A);
+                    BeforeWrite(reg.AdrB, Column.B);
+                    die |= oper(ref core[reg.AdrB].ValueB, reg.IR.ValueB, core[reg.AdrA].ValueA, reg.IR.Operation);
+                    die |= oper(ref core[reg.AdrB].ValueA, reg.AB_Value, reg.IR.ValueA, reg.IR.Operation);
+                    AfterWrite(reg.AdrB, Column.B);
                     break;
                 case Modifier.BA:
-                    die |= oper(ref indirectBvalA, AB_Value, instructionCopy.ValueA, instructionCopy.Operation);
+                    BeforeWrite(reg.AdrB, Column.A);
+                    die |= oper(ref core[reg.AdrB].ValueA, reg.AB_Value, reg.IR.ValueA, reg.IR.Operation);
+                    AfterWrite(reg.AdrB, Column.A);
                     break;
             }
             return die;

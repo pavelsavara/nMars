@@ -11,34 +11,66 @@ using System.Runtime.InteropServices;
 namespace nMars.RedCode
 {
     [ComVisible(true)]
+    public enum StepResult
+    {
+        Continue = 0,
+        NextRound = 1,
+        Finished = 2,
+    }
+
+    [ComVisible(true)]
     public enum RoundResult
     {
         Tie,
         Win,
         Loss,
     }
-    
+
+    [ComVisible(true)]
+    public enum ScoreFormula
+    {
+        Standard, // (W*W-1)/S
+    }
+
     [ComVisible(true)]
     public class MatchResult
     {
         #region Public Methods
-        
+
+        public MatchResult(MatchResult source)
+        {
+            warriorsCount = source.warriorsCount;
+            rounds = source.rounds;
+            formula = source.formula;
+            results = new RoundResult[warriorsCount, rounds];
+            for (int w = 0; w < warriorsCount; w++)
+            {
+                for (int r = 0; r < rounds; r++)
+                {
+                    results[w, r] = source.results[w, r];
+                }
+            }
+
+        }
+
         public MatchResult(IProject project)
         {
-            this.project = project;
-            results = new RoundResult[project.Rules.WarriorsCount, project.Rules.Rounds];
-            score = new int[project.Rules.WarriorsCount];
-            wins = new int[project.Rules.WarriorsCount];
-            ties = new int[project.Rules.WarriorsCount];
-            looses = new int[project.Rules.WarriorsCount];
+            warriorsCount = project.Rules.WarriorsCount;
+            rounds = project.Rules.Rounds;
+            formula = project.Rules.ScoreFormula;
+            results = new RoundResult[warriorsCount, rounds];
         }
 
         public void ComputePoints()
         {
-            for (int r = 0; r < project.Rules.Rounds; r++)
+            score = new int[warriorsCount];
+            wins = new int[warriorsCount];
+            ties = new int[warriorsCount];
+            looses = new int[warriorsCount];
+            for (int r = 0; r < rounds; r++)
             {
                 int survivers = 0;
-                for (int w = 0; w < project.Rules.WarriorsCount; w++)
+                for (int w = 0; w < warriorsCount; w++)
                 {
                     switch (results[w, r])
                     {
@@ -55,14 +87,14 @@ namespace nMars.RedCode
                             break;
                     }
                 }
-                for (int w = 0; w < project.Rules.WarriorsCount; w++)
+                for (int w = 0; w < warriorsCount; w++)
                 {
-                    switch (project.Rules.ScoreFormula)
+                    switch (formula)
                     {
-                        case PointsFormula.Standard:
+                        case ScoreFormula.Standard:
                             if (results[w, r] != RoundResult.Loss)
                             {
-                                score[w] += (project.Rules.WarriorsCount * project.Rules.WarriorsCount - 1) / survivers;
+                                score[w] += (warriorsCount * warriorsCount - 1) / survivers;
                             }
                             break;
                         default:
@@ -72,9 +104,9 @@ namespace nMars.RedCode
             }
         }
 
-        public void Dump(TextWriter tw)
+        public void Dump(TextWriter tw, EngineOptions options, IProject project)
         {
-            IList<ResultsHelper> res = SortResults();
+            IList<ResultsHelper> res = PrepareResults(project, options.SortResults);
             for(int w=0;w<res.Count;w++)
             {
                 IWarrior warrior = res[w].warrior;
@@ -91,10 +123,10 @@ namespace nMars.RedCode
 
         #region Helpers
         
-        private IList<ResultsHelper> SortResults()
+        private IList<ResultsHelper> PrepareResults(IProject project,bool sort)
         {
             List<ResultsHelper> res = new List<ResultsHelper>();
-            for(int w = 0; w<project.Warriors.Count;w++)
+            for(int w = 0; w<warriorsCount;w++)
             {
                 IWarrior warrior = project.Warriors[w];
                 ResultsHelper r=new ResultsHelper();
@@ -103,7 +135,8 @@ namespace nMars.RedCode
                 r.warrior = warrior;
                 res.Add(r);
             }
-            res.Sort();
+            if (sort)
+                res.Sort();
             return res;
         }
 
@@ -137,10 +170,11 @@ namespace nMars.RedCode
         public override bool Equals(object obj)
         {
             MatchResult res = obj as MatchResult;
+            /*
             if (project.Rules != res.project.Rules)
                 throw new InvalidOperationException("Cannot compare different results with rules");
-
-            for (int w = 0; w < project.Rules.WarriorsCount; w++)
+            */
+            for (int w = 0; w < warriorsCount; w++)
             {
                 /*
                 for (int r = 0; r < rules.Rounds; r++)
@@ -174,7 +208,9 @@ namespace nMars.RedCode
         public int[] wins;
         public int[] looses;
         public int[] ties;
-        private IProject project;
+        public int warriorsCount;
+        public int rounds;
+        public ScoreFormula formula;
 
         #endregion
     }

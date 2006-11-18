@@ -3,33 +3,12 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
-using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
-    [ComVisible(true)]
-    public class ParserException : Exception
-    {
-        public ParserException(string message)
-            : base(message)
-        {
-        }
-    }
-
-    [ComVisible(true)]
-    public interface IParser
-    {
-        void InitParser(Rules aRules);
-        IWarrior Parse(string fileName);
-        IWarrior Parse(string fileName, TextWriter err);
-        IWarrior Parse(string fileName, string errFileName);
-    }
-
-    public abstract class ParserRoot : IParser
+    public abstract class ParserBase : IParser
     {
         public abstract IWarrior Parse(string fileName, TextWriter err);
 
@@ -69,11 +48,5 @@ namespace nMars.RedCode
         }
 
         protected Rules rules = Rules.DefaultRules;
-    }
-
-    [ComVisible(true)]
-    public interface IParserModule : IModule
-    {
-        IParser CreateParser();
     }
 }

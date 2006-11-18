@@ -4,19 +4,17 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8C680360-97C6-475A-B047-D9E52348990C}</ProjectGuid>
+    <ProjectGuid>{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>nMars.Engine</RootNamespace>
-    <AssemblyName>nMars.Engine</AssemblyName>
-    <ApplicationIcon>Properties\Engine.ico</ApplicationIcon>
-    <StartupObject>nMars.Engine.Module</StartupObject>
+    <RootNamespace>nMars.Debugger</RootNamespace>
+    <AssemblyName>nMars.Debugger</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +22,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -38,28 +36,14 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Engine\Engine0Ground.cs" />
-    <Compile Include="Engine\Engine2Placement.cs" />
-    <Compile Include="Engine\Engine1Core.cs" />
-    <Compile Include="Engine\Engine3Tasks.cs" />
-    <Compile Include="Engine\Engine4Changes.cs" />
-    <Compile Include="Engine\Engine5Addressing.cs" />
-    <Compile Include="Engine\Engine6Instructions.cs" />
-    <Compile Include="Engine\Engine7Steps.cs" />
-    <Compile Include="EngineInstruction.cs" />
-    <Compile Include="Engine\Engine8Observer.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EngineWarrior.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nMars.RedCode\nMars.RedCode.csproj">
       <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
       <Name>nMars.RedCode</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Engine.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

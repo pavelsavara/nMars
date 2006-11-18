@@ -3,15 +3,18 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Runtime.InteropServices;
+using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
     [ComVisible(true)]
-    public interface ICoreView
+    public class EngineException : Exception
     {
-        IInstruction this[int address] { get; }
-        int this[int address, Register reg] { get; }
-        int CoreSize { get; }
+        public EngineException(string message)
+            : base(message)
+        {
+        }
     }
 }

@@ -8,69 +8,72 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public abstract class EngineAddressing : EngineStatus
+    public abstract class EngineAddressing : EngineChanges
     {
         /// <summary>
         /// (primary)-field effective address calculation
         /// </summary>
-        protected void GetEffectiveAddress(int ip, Mode mode, out int indirect, ref int AX_Value, ref int IR_X, int IR_B,
-                                         int primary)
+        protected void GetEffectiveAddress(Mode mode, out int indirect, ref int AX_Value, ref int IR_X, int primary)
         {
-            int direct;
+            int direct = mod(primary + reg.ip);
             switch (mode)
             {
                 case Mode.PreDecIndirectA:
-                    direct = mod(primary + ip);
-                    indirect = mod(direct + dec(ref core[direct].ValueA));
-                    AX_Value = core[indirect].ValueA;
-                    IR_X = core[indirect].ValueB;
+                    indirect = mod(direct + dec(direct, Column.A));
+                    AX_Value = this[indirect, Column.A];
+                    IR_X = this[indirect, Column.B];
                     return;
                 case Mode.PreDecIndirectB:
-                    direct = mod(primary + ip);
-                    indirect = mod(direct + dec(ref core[direct].ValueB));
-                    AX_Value = core[indirect].ValueA;
-                    IR_X = core[indirect].ValueB;
+                    indirect = mod(direct + dec(direct, Column.B));
+                    AX_Value = this[indirect, Column.A];
+                    IR_X = this[indirect, Column.B];
                     return;
                 case Mode.IndirectA:
-                    direct = mod(ip + primary);
-                    indirect = mod(direct + core[direct].ValueA);
-                    AX_Value = core[indirect].ValueA;
-                    IR_X = core[indirect].ValueB;
+                    indirect = mod(direct + this[direct, Column.A]);
+                    AX_Value = this[indirect, Column.A];
+                    IR_X = this[indirect, Column.B];
                     return;
                 case Mode.IndirectB:
-                    direct = mod(ip + primary);
-                    indirect = mod(direct + core[direct].ValueB);
-                    AX_Value = core[indirect].ValueA;
-                    IR_X = core[indirect].ValueB;
+                    indirect = mod(direct + this[direct, Column.B]);
+                    AX_Value = this[indirect, Column.A];
+                    IR_X = this[indirect, Column.B];
                     return;
                 case Mode.PostIncIndirectA:
-                    direct = mod(ip + primary);
-                    indirect = mod(direct + core[direct].ValueA);
-                    AX_Value = core[indirect].ValueA;
-                    IR_X = core[indirect].ValueB;
-                    inc(ref core[direct].ValueA);
+                    indirect = mod(direct + this[direct, Column.A]);
+                    AX_Value = this[indirect, Column.A];
+                    IR_X = this[indirect, Column.B];
+                    inc(direct, Column.A);
                     return;
                 case Mode.PostIncIndirectB:
-                    direct = mod(ip + primary);
-                    indirect = mod(direct + core[direct].ValueB);
-                    AX_Value = core[indirect].ValueA;
-                    IR_X = core[indirect].ValueB;
-                    inc(ref core[direct].ValueB);
+                    indirect = mod(direct + this[direct, Column.B]);
+                    AX_Value = this[indirect, Column.A];
+                    IR_X = this[indirect, Column.B];
+                    inc(direct, Column.B);
                     return;
                 case Mode.Direct:
-                    direct = mod(ip + primary);
+                    AX_Value = this[direct, Column.A];
+                    IR_X = this[direct, Column.B];
                     indirect = direct;
-                    AX_Value = core[indirect].ValueA;
-                    IR_X = core[indirect].ValueB;
                     return;
                 case Mode.Immediate:
-                    indirect = ip;
-                    IR_X = IR_B;
+                    indirect = reg.ip;
+                    IR_X = reg.IR.ValueB;
                     return;
                 default:
                     throw new InvalidOperationException("Unknown Mode");
             }
         }
 
+        protected Registers reg;
+
+        protected struct Registers
+        {
+            public int ip;
+            public EngineInstruction IR; //Instruction copy
+            public int AdrA;
+            public int AdrB;
+            public int AA_Value;
+            public int AB_Value;
+        }
     }
 }

@@ -65,7 +65,7 @@
 				Name="VCLinkerTool"
 				OutputFile="..\Bin\$(ConfigurationName)\pMars.dll"
 				LinkIncremental="2"
-				ManifestFile="$(IntDir)Dll\$(TargetFileName).intermediate.manifest"
+				ManifestFile="$(IntDir)\$(TargetFileName).intermediate.manifest"
 				ModuleDefinitionFile="Dll\pMarsDll.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"

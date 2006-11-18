@@ -18,15 +18,16 @@ namespace nMars.RedCode
             string dumpext;
             bool dumpFiles;
             List<string> files;
-            DumpOptions options;
+            ParserOptions parserOptions;
+            EngineOptions engineOptions;
             Project project = new Project();
             project.Rules = new Rules();
 
-            res = ParseParams(args, out dumpext, out dumpFiles, out files, out options, project, parserName);
+            res = ParseParams(args, out dumpext, out dumpFiles, out files, out parserOptions, out engineOptions, project, parserName);
             if (res <= 0)
                 return res;
 
-            res = RunParser(dumpext, dumpFiles, files, options, parserName, project);
+            res = RunParser(dumpext, dumpFiles, files, parserOptions, parserName, project);
             return res;
         }
 
@@ -36,25 +37,26 @@ namespace nMars.RedCode
             string dumpext;
             bool dumpFiles;
             List<string> files;
-            DumpOptions options;
+            ParserOptions parserOptions;
+            EngineOptions engineOptions;
             Project project = new Project();
             project.Rules = new Rules();
 
-            res = ParseParams(args, out dumpext, out dumpFiles, out files, out options, project, engineName);
+            res = ParseParams(args, out dumpext, out dumpFiles, out files, out parserOptions, out engineOptions, project, engineName);
             if (res <= 0)
                 return res;
 
             project.Rules.WarriorsCount = files.Count;
-            res = RunParser(dumpext, dumpFiles, files, options, parserName, project);
+            res = RunParser(dumpext, dumpFiles, files, parserOptions, parserName, project);
             if (res <= 0)
                 return res;
             IEngine engine = ModuleRegister.CreateEngine(engineName);
             MatchResult match = engine.Run(project, null);
-            match.Dump(Console.Out);
+            match.Dump(Console.Out, engineOptions, project);
             return 0;
         }
 
-        private static int RunParser(string dumpext, bool dumpFiles, List<string> files, DumpOptions options,
+        private static int RunParser(string dumpext, bool dumpFiles, List<string> files, ParserOptions options,
                                      string parserName, Project project)
         {
             IParser parser = ModuleRegister.CreateParser(parserName);
@@ -80,11 +82,14 @@ namespace nMars.RedCode
         }
 
         private static int ParseParams(string[] args, out string dumpext, out bool dumpFiles,
-                                       out List<string> files, out DumpOptions options, Project project,
+                                       out List<string> files, 
+                                       out ParserOptions parserOptions, out EngineOptions engineOptions
+                                       , Project project,
                                        string moduleName)
         {
             files = new List<string>();
-            options = new DumpOptions();
+            parserOptions = new ParserOptions();
+            engineOptions = new EngineOptions();
             dumpFiles = false;
             dumpext = ".dmp";
 
@@ -155,19 +160,19 @@ namespace nMars.RedCode
                         dumpFiles = true;
                         break;
                     case "-uo":
-                        options.Offset = true;
+                        parserOptions.Offset = true;
                         break;
                     case "-b":
-                        options.Brief = true;
+                        parserOptions.Brief = true;
                         break;
                     case "-ul":
-                        options.Labels = true;
+                        parserOptions.Labels = true;
                         break;
                     case "-ux":
-                        options.XmlFormat = true;
+                        parserOptions.XmlFormat = true;
                         break;
                     case "-uc":
-                        options.Comments = true;
+                        parserOptions.Comments = true;
                         break;
                     default:
                         if (File.Exists(param))

@@ -9,17 +9,18 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public abstract class EnginePlacement : EngineCore, IWarriorsView, IPSpacesView
+    public abstract class EnginePlacement : EngineCore, ICoreEdit, IPSpacesView
     {
         #region Events
 
-        protected override void InitializeMatch(IProject project, Random aRandom)
+        protected override void InitializeMatch(IProject aProject, EngineOptions options)
         {
-            base.InitializeMatch(project, aRandom);
+            project = aProject;
+            base.InitializeMatch(project, options);
             if (project.Warriors.Count != rules.WarriorsCount)
                 throw new EngineException("Count of warriors differ from rules");
 
-            random = aRandom;
+            random = options.Random;
             if (random==null)
             {
                 random=new Random();
@@ -43,7 +44,7 @@ namespace nMars.Engine
                 iWarriors.Add(engineWarrior);
             }
             InitPSpaces();
-            permutate = project.EngineOptions.Permutate;
+            permutate = options.Permutate;
             if (forcedAddresses != null)
             {
                 seed = forcedAddresses[1] - rules.MinDistance;
@@ -251,11 +252,11 @@ namespace nMars.Engine
             get { return iWarriors; }
         }
 
-        public IList<PSpace> PSpaces
+        public IList<IPSpace> PSpaces
         {
             get
             {
-                List<PSpace> res = new List<PSpace>();
+                List<IPSpace> res = new List<IPSpace>();
                 foreach (IRunningWarrior warrior in runningWarriors)
                 {
                     res.Add(warrior.PSpace);
@@ -289,6 +290,14 @@ namespace nMars.Engine
                 return res;
             }
         }
+        
+        public IProject Project
+        {
+            get
+            {
+                return project;
+            }
+        }
 
         #endregion
 
@@ -300,6 +309,7 @@ namespace nMars.Engine
         private List<IWarrior> iWarriors;
 
         //input
+        private IProject project;
         private IList<IWarrior> sourceWarriors;
         private IList<int> forcedAddresses;
         private Random random;

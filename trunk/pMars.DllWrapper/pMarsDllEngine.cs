@@ -11,21 +11,22 @@ using nMars.RedCode;
 
 namespace pMars.DllWrapper
 {
-    public class pMarsDllEngine : IEngine, IExtendedStepEngine
+    public class pMarsDllEngine : IEngine, ICoreView, ITaskView, IPSpacesView, IWarriorsView, IExtendedStepEngine
     {
         #region Steps
 
-        public MatchResult Run(IProject project, Random aRandom)
+        public MatchResult Run(IProject aProject, EngineOptions options)
         {
-            BeginMatch(project, aRandom);
+            BeginMatch(aProject, options);
             while (NextStep() != StepResult.Finished)
             {
             }
             return EndMatch();
         }
 
-        public void BeginMatch(IProject project, Random aRandom)
+        public void BeginMatch(IProject aProject, EngineOptions options)
         {
+            project = aProject;
             cycles = 0;
             rules = project.Rules;
             results = new MatchResult(project);
@@ -40,8 +41,16 @@ namespace pMars.DllWrapper
             int res = pMarsDll.pMarsBeginMatch(r.Count, r.ToArray(), errFile);
             if (res != 0)
             {
-                string errors = File.ReadAllText(errFile);
-                File.Delete(errFile);
+                string errors="";
+                try
+                {
+                    errors = File.ReadAllText(errFile);
+                    File.Delete(errFile);
+                }
+                catch(Exception e)
+                {
+                    //swalow
+                }
                 throw new ParserException(errors);
             }
             pMarsDll.pMarsWatchMatch(out dllCore, out dllCoreSize, out dllCyclesLeft, out dllRound, 
@@ -80,6 +89,11 @@ namespace pMars.DllWrapper
                 // swallow
             }
             return results;
+        }
+
+        public IProject Project
+        {
+            get { return project; }
         }
 
         public StepResult NextStep()
@@ -131,6 +145,7 @@ namespace pMars.DllWrapper
                     pMarsDll.pMarsResultsMatch();
                     dllWarriorsLoaded = false;
                     CopyWarriors();
+                    results.score = new int[rules.WarriorsCount];
                     for (int w = 0; w < rules.WarriorsCount; w++)
                     {
                         results.score[w] = warriorsDllCopy[w].totalScore;
@@ -211,16 +226,16 @@ namespace pMars.DllWrapper
             }
         }
 
-        public int this[int address, Register reg]
+        public int this[int address, Column reg]
         {
             get
             {
                 CopyCore();
                 switch(reg)
                 {
-                    case Register.A:
+                    case Column.A:
                         return coreCopy[address].ValueA;
-                    case Register.B:
+                    case Column.B:
                         return coreCopy[address].ValueB;
                     default:
                         throw new ApplicationException("Unknown register");
@@ -318,12 +333,12 @@ namespace pMars.DllWrapper
             }
         }
 
-        public IList<PSpace> PSpaces
+        public IList<IPSpace> PSpaces
         {
             get
             {
                 CopyWarriors();
-                List<PSpace> res = pMarsDll.FillPSpace(rules, warriorsDllCopy, dllPSpaces);
+                List<IPSpace> res = pMarsDll.FillPSpace(rules, warriorsDllCopy, dllPSpaces);
                 return res;
             }
         }
@@ -392,6 +407,7 @@ namespace pMars.DllWrapper
         protected int cycles;
         string errFile;
         private IInstruction lastInstruction = null;
+        private IProject project;
 
         #endregion
     }

@@ -47,6 +47,7 @@ PMARSDLL_API int pMarsBeginMatch(int argc, char** argv, char* errFile)
 		body_load();
 		if (errorcode != SUCCESS)
 		{
+			freopen( "CON", "w", stderr );
 			return 2;
 		}
 		if (rounds!=0) 
@@ -56,6 +57,7 @@ PMARSDLL_API int pMarsBeginMatch(int argc, char** argv, char* errFile)
 	}
 	else
 	{
+		freopen( "CON", "w", stderr );
 		return 1;
 	}
 	return 0;

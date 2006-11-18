@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Test", "nMars.Test\nM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pMars.DllWrapper", "pMars.DllWrapper\pMars.DllWrapper.csproj", "{9D9C6AB6-BDF3-483B-A11C-DE7C15EB4814}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Debugger", "nMars.Debugger\nMars.Debugger.csproj", "{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,16 @@ Global
 		{9D9C6AB6-BDF3-483B-A11C-DE7C15EB4814}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9D9C6AB6-BDF3-483B-A11C-DE7C15EB4814}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9D9C6AB6-BDF3-483B-A11C-DE7C15EB4814}.Release|Win32.ActiveCfg = Release|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
