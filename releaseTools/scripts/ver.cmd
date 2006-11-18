@@ -1,2 +1,2 @@
 @echo off
-set VER=0.5
+set VER=0.7
