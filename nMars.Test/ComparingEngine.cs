@@ -50,7 +50,7 @@ namespace nMars.Test
         public int ToCycle;
         public int Step;
         public int Round;
-        public static Check Optimistic = new Check(int.MaxValue, int.MaxValue, int.MaxValue, 4000);
+        public static Check Optimistic = new Check(0, int.MaxValue, int.MaxValue, 37777);
     }
 
     public class EngineDifferException : Exception
@@ -67,8 +67,9 @@ namespace nMars.Test
 
     class ComparingEngine : IEngine
     {
-        public MatchResult Run(IProject aProject, Random aRandom)
+        public MatchResult Run(IProject aProject, EngineOptions aOptions)
         {
+            options = aOptions;
             Init();
             project = (Project)aProject;
             project.ForcedAddresses = forcedArdresses;
@@ -98,7 +99,7 @@ namespace nMars.Test
 
         private void Init()
         {
-            random = new Random(0);
+            options.Random = new Random(0);
 
             engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
             engineTwo = ModuleRegister.CreateEngine("nMars.Engine") as IExtendedStepEngine;
@@ -111,8 +112,8 @@ namespace nMars.Test
         
         private void CompareEngines(Check check)
         {
-            engineOne.BeginMatch(project, random);
-            engineTwo.BeginMatch(project, random);
+            engineOne.BeginMatch(project, options);
+            engineTwo.BeginMatch(project, options);
 
             try
             {
@@ -204,8 +205,8 @@ namespace nMars.Test
                     throw new EngineDifferException("Core", new Check(engineOne.Round, engineOne.Cycles, precise));
                 }
             }
-            IList<PSpace> psapacesOne = engineOne.PSpaces;
-            IList<PSpace> psapacesTwo = engineTwo.PSpaces;
+            IList<IPSpace> psapacesOne = engineOne.PSpaces;
+            IList<IPSpace> psapacesTwo = engineTwo.PSpaces;
             for (int w = 0; w < project.Rules.WarriorsCount; w++)
             {
                 if (!psapacesOne[w].Equals(psapacesTwo[w]))
@@ -265,7 +266,7 @@ namespace nMars.Test
         IExtendedStepEngine engineTwo;
         MatchResult matchOne;
         MatchResult matchTwo;
-        Random random;
+        EngineOptions options;
         Project project;
         int[] forcedArdresses;
 

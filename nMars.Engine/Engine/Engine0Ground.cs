@@ -11,8 +11,8 @@ namespace nMars.Engine
     public abstract class EngineGround
     {
         #region Events
-        
-        protected virtual void InitializeMatch(IProject project, Random aRandom)
+
+        protected virtual void InitializeMatch(IProject project, EngineOptions options)
         {
             rules = project.Rules;
         }
@@ -30,17 +30,6 @@ namespace nMars.Engine
             warriorIndex++;
             if (warriorIndex >= rules.WarriorsCount)
                 warriorIndex = 0;
-        }
-
-        protected int dec(ref int address)
-        {
-            address = mod(address - 1);
-            return address;
-        }
-
-        protected void inc(ref int address)
-        {
-            address = mod(address + 1);
         }
 
         public int wrap(int value)

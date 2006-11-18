@@ -3,28 +3,28 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using nMars.RedCode;
 
 namespace nMars.Engine
 {
     public class EngineSteps : EngineInstructions, IEngine, IStepEngine, IExtendedStepEngine
     {
-        public MatchResult Run(IProject project, Random aRandom)
+        public MatchResult Run(IProject project, EngineOptions options)
         {
-            BeginMatch(project, aRandom);
+            BeginMatch(project, options);
             while (NextStep() != StepResult.Finished)
             {
             }
             return EndMatch();
         }
 
-        public void BeginMatch(IProject project, Random aRandom)
+        public void BeginMatch(IProject project, EngineOptions options)
         {
-            InitializeMatch(project, aRandom);
+            InitializeMatch(project, options);
             InitializeRound();
 
             results = new MatchResult(project);
+            lastStepResult = StepResult.Finished;
         }
 
         public StepResult NextStep()
@@ -36,21 +36,21 @@ namespace nMars.Engine
 
             PerformInstruction();
 
-            StepResult res = StepResult.Continue;
+            lastStepResult = StepResult.Continue;
             if (LiveWarriorsCount == 1 && WarriorsCount > 1)
             {
                 liveWarriors.Peek().Result = RoundResult.Win;
-                res = StepResult.NextRound;
+                lastStepResult = StepResult.NextRound;
             }
             else if (LiveWarriorsCount == 0)
             {
-                res = StepResult.NextRound;
+                lastStepResult = StepResult.NextRound;
             }
             else if (cyclesLeft == 0)
             {
-                res = StepResult.NextRound;
+                lastStepResult = StepResult.NextRound;
             }
-            if (res == StepResult.NextRound)
+            if (lastStepResult == StepResult.NextRound)
             {
                 for (int w = 0; w < rules.WarriorsCount; w++)
                 {
@@ -69,16 +69,16 @@ namespace nMars.Engine
                 round++;
                 if (round >= rules.Rounds)
                 {
-                    res = StepResult.Finished;
+                    lastStepResult = StepResult.Finished;
                 }
                 else
                 {
                     InitializeRound();
                 }
             }
-            return res;
+            return lastStepResult;
         }
-
+        
         public MatchResult EndMatch()
         {
             FinalizeMatch();
@@ -108,6 +108,10 @@ namespace nMars.Engine
             FinalizeCycle();
         }
 
-        private MatchResult results;
+        #region Variables
+        
+        protected StepResult lastStepResult;
+
+        #endregion
     }
 }

@@ -68,7 +68,7 @@
 				OutputFile="..\Bin\$(ConfigurationName)\$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="SDL\lib"
-				ManifestFile="$(IntDir)SDL\$(TargetFileName).intermediate.manifest"
+				ManifestFile="$(IntDir)\$(TargetFileName).intermediate.manifest"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"

@@ -16,7 +16,7 @@ using ParserException=nMars.RedCode.ParserException;
 
 namespace nMars.Parser
 {
-    public abstract class ParserBase : ParserRoot
+    public abstract class ParserTokens : ParserBase
     {
         private LALRParser parser;
         protected internal Dictionary<string, Expression> variables;
@@ -28,9 +28,9 @@ namespace nMars.Parser
         protected string warriorName = null;
         protected string authorName = null;
 
-        protected ParserBase()
+        protected ParserTokens()
         {
-            Assembly assembly = typeof(ParserBase).Assembly;
+            Assembly assembly = typeof(ParserTokens).Assembly;
             Stream redCode = assembly.GetManifestResourceStream("nMars.Parser.Properties.RedCode.cgt");
             if (redCode == null)
             {

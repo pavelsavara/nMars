@@ -196,7 +196,7 @@ namespace nMars.RedCode
 
         #region Interface
 
-        public virtual string GetLine(DumpOptions options, bool start)
+        public virtual string GetLine(ParserOptions options, bool start)
         {
             StringBuilder sb = new StringBuilder();
 

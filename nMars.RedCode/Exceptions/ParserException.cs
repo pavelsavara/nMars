@@ -3,15 +3,18 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System.Collections.Generic;
+using System;
+using System.Runtime.InteropServices;
 
 namespace nMars.RedCode
 {
-    public interface IProject
+    [ComVisible(true)]
+    public class ParserException : Exception
     {
-        Rules Rules { get; }
-        IList<IWarrior> Warriors { get; }
-        IList<int> ForcedAddresses { get; }
+        public ParserException(string message)
+            : base(message)
+        {
+        }
     }
 
 }

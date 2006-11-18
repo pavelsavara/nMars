@@ -70,16 +70,16 @@ namespace nMars.Test
             }
             else if (pw == null)
             {
-                nw.Dump(problemsPathFile + ".nDmp", DumpOptions.NoOffset);
+                nw.Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
             }
             else if (nw == null)
             {
-                pw.Dump(problemsPathFile + ".pDmp", DumpOptions.NoOffset);
+                pw.Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
             }
             else if (!Warrior.Equals(nw, pw))
             {
-                nw.Dump(problemsPathFile + ".nDmp", DumpOptions.NoOffset);
-                pw.Dump(problemsPathFile + ".pDmp", DumpOptions.NoOffset);
+                nw.Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
+                pw.Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
             }
             else
             {

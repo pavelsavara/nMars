@@ -90,7 +90,7 @@ namespace pMars.DllWrapper
                 get { return B_value; }
             }
 
-            public string GetLine(DumpOptions options, bool start)
+            public string GetLine(ParserOptions options, bool start)
             {
                 throw new NotImplementedException();
             }
@@ -210,9 +210,9 @@ namespace pMars.DllWrapper
             }
         }
 
-        public static List<PSpace> FillPSpace(Rules rules, List<pMarsDll.PmarsWarrior> warriorsDllCopy, IntPtr pspaceDll)
+        public static List<IPSpace> FillPSpace(Rules rules, List<pMarsDll.PmarsWarrior> warriorsDllCopy, IntPtr pspaceDll)
         {
-            List<PSpace> res = new List<PSpace>(rules.WarriorsCount);
+            List<IPSpace> res = new List<IPSpace>(rules.WarriorsCount);
             for (int w = 0; w < rules.WarriorsCount;w++ )
             {
                 PSpace p = new PSpace(rules.PSpaceSize);

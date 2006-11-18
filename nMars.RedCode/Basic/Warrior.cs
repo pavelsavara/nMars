@@ -34,16 +34,15 @@ namespace nMars.RedCode
 
         public void Dump(TextWriter tw)
         {
-            Dump(tw, DumpOptions.Default);
+            Dump(tw, ParserOptions.Default);
         }
 
-        public virtual void Dump(TextWriter tw, DumpOptions options)
+        public virtual void Dump(TextWriter tw, ParserOptions options)
         {
             if (options.XmlFormat)
             {
                 XmlSerializer serializer = new XmlSerializer(GetType());
                 serializer.Serialize(tw, this);
-                tw.WriteLine();
             }
             else
             {
@@ -54,11 +53,11 @@ namespace nMars.RedCode
                 {
                     tw.WriteLine(Instructions[a].GetLine(options, a == StartOffset));
                 }
-                tw.WriteLine();
             }
+            tw.WriteLine();
         }
 
-        public virtual void Dump(string fileName, DumpOptions options)
+        public virtual void Dump(string fileName, ParserOptions options)
         {
             StreamWriter sw = new StreamWriter(fileName);
             Dump(sw, options);

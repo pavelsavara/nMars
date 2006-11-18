@@ -132,12 +132,12 @@ namespace nMars.Engine
             SourceWarrior.Dump(tw);
         }
 
-        public void Dump(TextWriter tw, DumpOptions options)
+        public void Dump(TextWriter tw, ParserOptions options)
         {
             SourceWarrior.Dump(tw, options);
         }
 
-        public void Dump(string fileName, DumpOptions options)
+        public void Dump(string fileName, ParserOptions options)
         {
             SourceWarrior.Dump(fileName, options);
         }
@@ -164,7 +164,7 @@ namespace nMars.Engine
 
         public IInstruction NextInstruction
         {
-            get { return core.core[NextInstructionIndex]; }
+            get { return core[NextInstructionIndex]; }
         }
 
         public int LiveTasksCount
@@ -185,7 +185,7 @@ namespace nMars.Engine
             }
         }
 
-        PSpace IRunningWarrior.PSpace
+        IPSpace IRunningWarrior.PSpace
         {
             get
             {

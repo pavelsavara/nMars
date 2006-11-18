@@ -32,6 +32,11 @@ namespace nMars.Engine
             ValueB = src.ValueB;
             Source = src;
             Address = address;
+            if (src is EngineInstruction)
+            {
+                EngineInstruction ei = (EngineInstruction)src;
+                Source = ei.Source;
+            }
         }
 
         public bool IsEmpty
@@ -111,7 +116,7 @@ namespace nMars.Engine
 
         #region IInstruction
 
-        public string GetLine(DumpOptions options, bool start)
+        public string GetLine(ParserOptions options, bool start)
         {
             StringBuilder sb = new StringBuilder();
 

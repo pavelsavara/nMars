@@ -8,13 +8,13 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public abstract class EngineCore : EngineGround, ICoreView
+    public abstract class EngineCore : EngineGround, ICoreEdit
     {
         #region Events
 
-        protected override void InitializeMatch(IProject project, Random aRandom)
+        protected override void InitializeMatch(IProject project, EngineOptions options)
         {
-            base.InitializeMatch(project, aRandom);
+            base.InitializeMatch(project, options);
             pSpaces=new PSpace[rules.WarriorsCount];
         }
 
@@ -36,30 +36,50 @@ namespace nMars.Engine
 
         #region Interfaces
 
-        public IInstruction this[int address]
-        {
-            get { return core[mod(address)]; }
-        }
-
         public int CoreSize
         {
             get { return rules.CoreSize; }
         }
 
-        public int this[int address, Register reg]
+        public IInstruction this[int address]
         {
             get
             {
-                switch (reg)
+                return core[mod(address)];
+            }
+            set
+            {
+                core[mod(address)]=new EngineInstruction(value, address);
+            }
+        }
+
+        public int this[int address, Column column]
+        {
+            get
+            {
+                switch (column)
                 {
-                    case Register.A:
-                        return core[address].ValueA;
-                    case Register.B:
-                        return core[address].ValueB;
+                    case Column.A:
+                        return core[mod(address)].ValueA;
+                    case Column.B:
+                        return core[mod(address)].ValueB;
                     default:
                         throw new ApplicationException("Unknown register");
                 }
-
+            }
+            set
+            {
+                switch (column)
+                {
+                    case Column.A:
+                        core[mod(address)].ValueA = value;
+                        break;
+                    case Column.B:
+                        core[mod(address)].ValueB = value;
+                        break;
+                    default:
+                        throw new ApplicationException("Unknown register");
+                }
             }
         }
 
@@ -67,8 +87,8 @@ namespace nMars.Engine
 
         #region Variables
 
-        internal EngineInstruction[] core;
-        internal PSpace[] pSpaces;
+        protected EngineInstruction[] core;
+        protected PSpace[] pSpaces;
 
         #endregion
     }

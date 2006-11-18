@@ -22,12 +22,12 @@ namespace nMars.Parser.Warrior
         {
         }
 
-        public new ExtendedInstruction this[int offset]
+        public ExtendedInstruction this[int offset]
         {
             get { return (ExtendedInstruction)Instructions[offset]; }
         }
 
-        public override void Dump(TextWriter tw, DumpOptions options)
+        public override void Dump(TextWriter tw, ParserOptions options)
         {
             if (options.XmlFormat)
             {

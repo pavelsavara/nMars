@@ -3,25 +3,28 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using System.Collections.Generic;
 using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public abstract class EngineTasks : EnginePlacement, ITaskView, ITimeView
+    public abstract class EngineTasks : EnginePlacement, ITaskView, ITimeView, IStatusView, ICoreDump 
     {
         #region Events
-        
-        protected override void InitializeMatch(IProject project, Random aRandom)
+
+        protected override void InitializeMatch(IProject project, EngineOptions options)
         {
-            base.InitializeMatch(project, aRandom);
+            base.InitializeMatch(project, options);
             starter = 0;
+            round = 0;
         }
         
         protected override void InitializeRound()
         {
             base.InitializeRound();
+
+            cycles = 0;
+            cyclesLeft = rules.MaxCycles * rules.WarriorsCount;
             
             liveWarriors = new Queue<EngineWarrior>();
             int warriorIndex = starter;
@@ -68,6 +71,22 @@ namespace nMars.Engine
         #endregion
 
         #region Interfaces
+
+        public int Round
+        {
+            get { return round; }
+        }
+
+        public int Cycles
+        {
+            get { return cycles; }
+        }
+
+        public int CyclesLeft
+        {
+            get { return cyclesLeft; }
+        }
+
         public IList<IList<int>> Tasks
         {
             get
@@ -80,11 +99,6 @@ namespace nMars.Engine
         public int NextWarriorIndex
         {
             get { return liveWarriors.Peek().Index; }
-        }
-
-        IWarrior ITaskView.NextWarrior
-        {
-            get { return liveWarriors.Peek(); }
         }
 
         private EngineWarrior NextWarrior
@@ -114,12 +128,20 @@ namespace nMars.Engine
 
         public int WarriorsCount
         {
-            get { return warriors.Count; }
+            get { return rules.WarriorsCount; }
+        }
+
+        public MatchResult Results
+        {
+            get
+            {
+                return results;
+            }
         }
 
         #endregion
 
-        #region Cache
+        #region Caches
 
         private List<IList<int>> tasksCopy;
         private bool tasksCopyLoaded = false;
@@ -130,7 +152,7 @@ namespace nMars.Engine
             if (!tasksCopyLoaded)
             {
                 tasksCopy = new List<IList<int>>(rules.WarriorsCount);
-                foreach (IRunningWarrior warrior in RunningWarriors)
+                foreach (IRunningWarrior warrior in warriors)
                 {
                     tasksCopy.Add(warrior.Tasks);
                 }
@@ -151,6 +173,10 @@ namespace nMars.Engine
 
         protected Queue<EngineWarrior> liveWarriors;
         private int starter;
+        protected int cycles;
+        protected int cyclesLeft;
+        protected int round;
+        protected MatchResult results;
 
         #endregion
     }

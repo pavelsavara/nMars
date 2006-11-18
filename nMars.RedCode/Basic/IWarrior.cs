@@ -5,44 +5,9 @@
 
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
 
 namespace nMars.RedCode
 {
-    [ComVisible(true)]
-    public class DumpOptions
-    {
-        public DumpOptions()
-        {
-        }
-
-        public DumpOptions(bool offset, bool labels, bool comments, bool xml, bool brief)
-        {
-            Offset = offset;
-            Labels = labels;
-            Comments = comments;
-            XmlFormat = xml;
-            Brief = brief;
-        }
-
-        public bool Brief = false;
-        public bool Offset = false;
-        public bool Labels = false;
-        public bool Comments = false;
-        public bool XmlFormat = false;
-
-        public bool IsDefault()
-        {
-            return !Offset && !Labels && !Comments;
-        }
-
-        public static readonly DumpOptions Default = new DumpOptions();
-        public static readonly DumpOptions Full = new DumpOptions(true, true, true, false, false);
-        public static readonly DumpOptions NoOffset = new DumpOptions(false, true, true, false, false);
-        public static readonly DumpOptions Xml = new DumpOptions(true, true, true, true, false);
-    }
-
-    [ComVisible(true)]
     public interface IWarrior
     {
         /// <summary>
@@ -109,26 +74,11 @@ namespace nMars.RedCode
         /// <summary>
         /// Dump with extended options
         /// </summary>
-        void Dump(TextWriter tw, DumpOptions options);
+        void Dump(TextWriter tw, ParserOptions options);
 
         /// <summary>
         /// Dump with extended options
         /// </summary>
-        void Dump(string fileName, DumpOptions options);
+        void Dump(string fileName, ParserOptions options);
     }
-
-    [ComVisible(true)]
-    public interface IRunningWarrior : IWarrior
-    {
-        IInstruction NextInstruction { get; }
-        int NextInstructionIndex { get; }
-        IInstruction PreviousInstruction { get; }
-        int PreviousInstructionIndex { get; }
-        int LiveTasksCount { get; }
-        IList<int> Tasks { get; }
-        PSpace PSpace { get; }
-        int LastResult { get; }
-        int PSpaceIndex{ get; }
-    }
-
 }

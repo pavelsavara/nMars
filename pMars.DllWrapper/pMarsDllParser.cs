@@ -10,7 +10,7 @@ using nMars.RedCode;
 
 namespace pMars.DllWrapper
 {
-    public class pMarsDllParser : ParserRoot
+    public class pMarsDllParser : ParserBase
     {
         public override void InitParser(Rules aRules)
         {

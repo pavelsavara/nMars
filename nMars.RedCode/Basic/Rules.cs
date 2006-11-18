@@ -18,30 +18,10 @@ namespace nMars.RedCode
     }
 
     [ComVisible(true)]
-    public class EngineOptions
-    {
-        public bool KOTHFormat = false;
-        public bool Permutate = false;
-        public static EngineOptions DefaultOptions
-        {
-            get
-            {
-                return new EngineOptions();
-            }
-        }
-    }
-
-    [ComVisible(true)]
     public enum ICWStandard
     {
         ICWS88,
         ICWS94,
-    }
-
-    [ComVisible(true)]
-    public enum PointsFormula
-    {
-        Standard, // (W*W-1)/S
     }
 
     [Serializable]
@@ -58,7 +38,7 @@ namespace nMars.RedCode
         public int Rounds = 1;
         public int WarriorsCount = 2;
         public int Version = 60;
-        public PointsFormula ScoreFormula = PointsFormula.Standard;
+        public ScoreFormula ScoreFormula = ScoreFormula.Standard;
         public ICWStandard ICWSStandard = ICWStandard.ICWS94;
 
         public static Rules DefaultRules
@@ -90,6 +70,11 @@ namespace nMars.RedCode
             if (WarriorsCount != r2.WarriorsCount) return false;
             if (Version != r2.Version) return false;
             return true;
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
         }
     }
 }

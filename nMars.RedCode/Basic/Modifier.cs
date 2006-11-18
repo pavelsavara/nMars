@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace nMars.RedCode
@@ -117,9 +118,17 @@ namespace nMars.RedCode
         I
     }
 
-    public enum Register
+    [Flags]
+    public enum Column
     {
-        A,
-        B,
+        None      = 0x00,
+        Operation = 0x01,
+        Modifier  = 0x02,
+        ModeA     = 0x04,
+        ModeB     = 0x08,
+        A         = 0x10,
+        B         = 0x20,
+        AB        = 0x30,
+        All       = 0x3f,
     }
 }

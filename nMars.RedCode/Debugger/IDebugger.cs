@@ -3,15 +3,16 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System.Collections.Generic;
 
 namespace nMars.RedCode
 {
-    public interface IProject
+    public interface IDebugger
     {
-        Rules Rules { get; }
-        IList<IWarrior> Warriors { get; }
-        IList<int> ForcedAddresses { get; }
+        void Attach(IStepEngine engine);
+        void ProcessCommand(string command);
+        void Step();
+        void Continue();
+        void Break();
+        int Speed { get; set;}
     }
-
 }

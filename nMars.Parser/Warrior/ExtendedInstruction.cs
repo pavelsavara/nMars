@@ -28,7 +28,7 @@ namespace nMars.Parser.Warrior
         {
         }
 
-        public override string GetLine(DumpOptions options, bool start)
+        public override string GetLine(ParserOptions options, bool start)
         {
             StringBuilder sb = new StringBuilder();
             if (options.Offset)
