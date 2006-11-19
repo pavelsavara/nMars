@@ -1,0 +1,56 @@
+11/19/2006 - nMars0.8 - debugger
+  - console debugger
+  - IronPython extension for debugger
+  - fixed bugs in engine
+  - building step back infrastructure
+  - building coredump infrastructure
+  
+11/13/2006 - nMars0.7 - going public
+  - documentation
+  - exception handling
+  - XML dump
+  
+11/13/2006 - nMars0.6 - engine unit test
+  - refactored engine
+  - pMars.dll silent
+  - enhanced unit test
+    - command line
+    - comparer engine
+  - dump match results
+  - droped module dependencies
+  - fixed bugs in engine
+     - PSpace support
+     - adresssing bugs in engine
+
+11/08/2006 - nMars0.5 - more binaries
+  - simplified modules
+  - modules loading by name
+  - engine commandline
+  - IProject introduced
+  - version info in binaries
+  - release tools in svn
+  
+11/03/2006 - nMars0.4 - pMars included
+  - included pMars circa 0.9.2, with SDL display from M Joonas Pihlaja
+  - modularized pMars and wrapped into Windows DLL
+  - used pMars.dll as validator for unit tests
+  - enhanced SimpleEngine compatiblity, fixed bugs
+  - extended interfaces in namespace RedCode
+
+09/28/2006 - nMars0.3 - first binary
+  - Parser more pmarsv compatible
+  - mono supported
+  - comments parsed
+  - unit tests
+  - pmarsv wrapper
+  
+09/17/2006 - nMars0.2 - Parser more powerfull
+  - more expression operations
+  - label can be A B I ... <Modifier>
+  - dynamic label names name & order
+  - locations to pareser errors
+  - 2 pass label&variable evaluation
+  - unit test skeleton
+  - exaple warriors in directory rc
+
+08/12/2006 - nMars0.1 - First version
