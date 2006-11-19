@@ -1,6 +1,6 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
-[assembly: AssemblyTitle("nMars RedCode debugger")]
+[assembly: AssemblyTitle("nMars RedCode debugger shell")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -8,4 +8,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c3398daa-73f7-42e9-8310-72d148336a73")]
+[assembly: Guid("c3398daa-73f7-42e9-8310-72d148336a74")]

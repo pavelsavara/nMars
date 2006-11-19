@@ -12,9 +12,9 @@ namespace nMars.Engine
     {
         #region Events
 
-        protected override void InitializeMatch(IProject project, EngineOptions options)
+        protected override void InitializeMatch(IProject project)
         {
-            base.InitializeMatch(project, options);
+            base.InitializeMatch(project);
             pSpaces=new PSpace[rules.WarriorsCount];
         }
 
@@ -23,8 +23,7 @@ namespace nMars.Engine
             core = new EngineInstruction[rules.CoreSize];
             for (int a = 0; a < rules.CoreSize; a++)
             {
-                core[a] = EngineInstruction.DefaultInstruction;
-                core[a].Address = a;
+                core[a] = new EngineInstruction(a);
             }
         }
 
@@ -41,7 +40,7 @@ namespace nMars.Engine
             get { return rules.CoreSize; }
         }
 
-        public IInstruction this[int address]
+        public IRunningInstruction this[int address]
         {
             get
             {

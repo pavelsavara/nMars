@@ -10,6 +10,7 @@ Currently it consist of
 - Parser & core engine unit tests
 - Library of warriors
 - Modularized/SDL/Windows/Dll 0.9.2 pMars
+- Console debugger, with IronPython as command line language
 
 Planned components are
 - simple IDE with debuger
@@ -61,6 +62,11 @@ Basic idea is to be easily comprehensible and maintainable.
 There is no efort to make it fast.
 This implementation support interfaces for watching, debugging - still in developement.
 
+  Debugger
+--------------------
+Basic debugger, currently console UI. IronPython as optional extension.
+Still in developement.
+
 
   RedCode - common library
 --------------------
@@ -100,8 +106,7 @@ which can be found here: http://www.gnu.org/licenses/lgpl.txt
 
   Road map
 --------------------
-0.7 - Current, see https://svn.sourceforge.net/svnroot/nmars/trunk/Changes.txt
-0.8 - react to your feedback, finalize debug interfaces on engine, console debuger, similar to pMars one
+0.8 - Current, see https://svn.sourceforge.net/svnroot/nmars/trunk/Changes.txt
 0.9 - graphical IDE framework, draft of editor, draft of core viewers
 1.0 - stabilization
 I will have a week of vacations for that, so I can move it forward! Soon.

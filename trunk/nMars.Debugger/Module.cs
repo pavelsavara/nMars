@@ -15,7 +15,7 @@ namespace nMars.Debugger
         {
             try
             {
-                throw new NotImplementedException();
+                return CommandLine.DebuggerMain(args, "nMars.Engine", "nMars.Engine-StepBack", "nMars.Parser", "nMars.Parser", "nMars.Debugger", "nMars.Debugger");
             }
             catch (Exception ex)
             {
@@ -26,7 +26,7 @@ namespace nMars.Debugger
 
         public IDebugger CreateDebugger()
         {
-            throw new NotImplementedException();
+            return new Debugger();
         }
 
         #region Module registration
@@ -34,6 +34,7 @@ namespace nMars.Debugger
         static Module()
         {
             ModuleRegister.Register(new Module());
+            ModuleRegister.Register(new DebuggerShellModule());
         }
 
         public string Name
@@ -42,5 +43,18 @@ namespace nMars.Debugger
         }
 
         #endregion
+    }
+
+    class DebuggerShellModule : IDebuggerShellModule
+    {
+        public IDebuggerShell CreateShell()
+        {
+            return new DebuggerShell();
+        }
+
+        public string Name
+        {
+            get { return typeof(Module).Namespace + "-Shell"; }
+        }
     }
 }

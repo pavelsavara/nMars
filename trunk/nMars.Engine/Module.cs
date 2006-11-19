@@ -34,6 +34,7 @@ namespace nMars.Engine
         static Module()
         {
             ModuleRegister.Register(new Module());
+            ModuleRegister.Register(new DebuggerModule());
         }
 
         public string Name
@@ -42,5 +43,19 @@ namespace nMars.Engine
         }
 
         #endregion
+
+    }
+    
+    class DebuggerModule : IEngineModule
+    {
+        public IEngine CreateEngine()
+        {
+            return new EngineStepBack();
+        }
+
+        public string Name
+        {
+            get { return typeof(Module).Namespace+"-StepBack"; }
+        }
     }
 }

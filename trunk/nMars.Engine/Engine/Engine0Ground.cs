@@ -12,7 +12,7 @@ namespace nMars.Engine
     {
         #region Events
 
-        protected virtual void InitializeMatch(IProject project, EngineOptions options)
+        protected virtual void InitializeMatch(IProject project)
         {
             rules = project.Rules;
         }

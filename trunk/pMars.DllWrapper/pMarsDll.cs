@@ -24,7 +24,7 @@ namespace pMars.DllWrapper
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct PmarsInstruction : IInstruction
+        public struct PmarsInstruction : IRunningInstruction
         {
             public int A_value;
             public int B_value;
@@ -88,6 +88,15 @@ namespace pMars.DllWrapper
             public int ValueB
             {
                 get { return B_value; }
+            }
+            
+            public int Address
+            {
+                get
+                {
+                    //TODO stub
+                    return 0;
+                }
             }
 
             public string GetLine(ParserOptions options, bool start)
@@ -176,12 +185,13 @@ namespace pMars.DllWrapper
 
         public static void FillInstructions(IList<IInstruction> list, IntPtr first, int length, int coreSize)
         {
-            for (int i = 0; i < length; i++)
+            for (int a = 0; a < length; a++)
             {
-                IntPtr instructionPtr = (IntPtr)((int)first + (i * instructionSize));
+                IntPtr instructionPtr = (IntPtr)((int)first + (a * instructionSize));
                 PmarsInstruction m = (PmarsInstruction)Marshal.PtrToStructure(instructionPtr, typeof(PmarsInstruction));
 
-                Instruction c = new Instruction(m);
+                DllInstruction c = new DllInstruction(m);
+                c.address = a;
                 //c.ValueA = Instruction.Wrap(c.ValueA, coreSize);
                 //c.ValueB = Instruction.Wrap(c.ValueB, coreSize);
                 list.Add(c);
@@ -210,7 +220,7 @@ namespace pMars.DllWrapper
             }
         }
 
-        public static List<IPSpace> FillPSpace(Rules rules, List<pMarsDll.PmarsWarrior> warriorsDllCopy, IntPtr pspaceDll)
+        public static List<IPSpace> FillPSpace(Rules rules, List<PmarsWarrior> warriorsDllCopy, IntPtr pspaceDll)
         {
             List<IPSpace> res = new List<IPSpace>(rules.WarriorsCount);
             for (int w = 0; w < rules.WarriorsCount;w++ )
@@ -238,10 +248,10 @@ namespace pMars.DllWrapper
             return Marshal.ReadInt32(taskPtr);
         }
 
-        public static Warrior ConvertWarrior(string fileName, PmarsWarrior w, Rules rules)
+        public static DllWarrior ConvertWarrior(string fileName, PmarsWarrior w, Rules rules)
         {
-            Warrior warrior;
-            warrior = new Warrior(rules);
+            DllWarrior warrior;
+            warrior = new DllWarrior(rules);
             warrior.StartOffset = w.offset;
             warrior.Name = w.name;
             warrior.Author = w.authorName;
@@ -300,6 +310,80 @@ namespace pMars.DllWrapper
                 }
             }
             return r;
+        }
+    }
+
+    class DllWarrior : Warrior, IRunningWarrior
+    {
+        //TODO just stub
+        public DllWarrior(Rules rules)
+            : base(rules)
+        {
+        }
+
+        public IInstruction NextInstruction
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int NextInstructionIndex
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IInstruction PreviousInstruction
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int PreviousInstructionIndex
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int LiveTasksCount
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IList<int> Tasks
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int TasksCount
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IPSpace PSpace
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int LastResult
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int PSpaceIndex
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
+    
+    class DllInstruction : Instruction, IRunningInstruction
+    {
+        public DllInstruction(IInstruction src)
+            : base(src)
+        {
+        }
+        
+        public int address;
+
+        public int Address
+        {
+            get { return address; }
         }
     }
 }

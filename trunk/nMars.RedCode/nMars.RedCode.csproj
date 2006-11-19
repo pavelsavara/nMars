@@ -35,11 +35,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Debugger\DebuggerShell.cs" />
     <Compile Include="Debugger\IDebugger.cs" />
     <Compile Include="Engine\CoreDump.cs" />
     <Compile Include="Engine\EngineOptions.cs" />
     <Compile Include="Engine\Project.cs" />
     <Compile Include="Engine\PSpace.cs" />
+    <Compile Include="Exceptions\DebuggerException.cs" />
     <Compile Include="Exceptions\EngineException.cs" />
     <Compile Include="Exceptions\ParserException.cs" />
     <Compile Include="Basic\IInstruction.cs" />

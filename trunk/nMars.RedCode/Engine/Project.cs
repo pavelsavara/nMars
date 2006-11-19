@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Collections.Generic;
 
 namespace nMars.RedCode
@@ -21,7 +22,8 @@ namespace nMars.RedCode
         private IList<IWarrior> warriors = new List<IWarrior>();
         private IList<int> forcedAddresses = null;
         private Rules rules = Rules.DefaultRules;
-        private EngineOptions engineOptions = EngineOptions.DefaultOptions;
+        private EngineOptions engineOptions = EngineOptions.Default;
+        private ParserOptions parserOptions = ParserOptions.Default;
 
         public Rules Rules
         {
@@ -33,6 +35,12 @@ namespace nMars.RedCode
         {
             get { return engineOptions; }
             set { engineOptions = value; }
+        }
+
+        public ParserOptions ParserOptions
+        {
+            get { return parserOptions; }
+            set { parserOptions = value; }
         }
 
         public IList<IWarrior> Warriors

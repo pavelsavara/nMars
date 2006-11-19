@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace nMars.RedCode
 {
     [Serializable]
-    public class CoreDump
+    public class CoreDump : ICoreDump
     {
         public CoreDump(ICoreDump source)
         {
@@ -22,7 +23,7 @@ namespace nMars.RedCode
             round = source.Round;
             nextWarriorIndex = source.NextWarriorIndex;
             coreSize = source.CoreSize;
-            tasks = new List<List<int>>();
+            tasks = new List<IList<int>>();
             foreach (IList<int> list in source.Tasks)
             {
                 tasks.Add(new List<int>(list));
@@ -34,13 +35,76 @@ namespace nMars.RedCode
             }
         }
 
-        public static void Dump(XmlWriter xw, ICoreDump engine)
+        public IRunningInstruction this[int address]
         {
+            get { throw new NotImplementedException(); }
         }
 
-        public static void Load(XmlReader xw, ICoreLoad engine)
+        public int CoreSize
         {
+            get { return coreSize; }
         }
+
+        public IList<IList<int>> Tasks
+        {
+            get { return tasks; }
+        }
+
+        public int NextWarriorIndex
+        {
+            get { return nextWarriorIndex; }
+        }
+
+        public int Round
+        {
+            get { return round; }
+        }
+
+        public int Cycles
+        {
+            get { return cycles; }
+        }
+
+        public int CyclesLeft
+        {
+            get { return cyclesLeft; }
+        }
+
+        public int LiveWarriorsCount
+        {
+            get { return liveWarriorsCount; }
+        }
+
+        public int WarriorsCount
+        {
+            get { return warriorsCount; }
+        }
+
+        public MatchResult Results
+        {
+            get { return results; }
+        }
+
+        #region
+        
+        public static void Dump(XmlWriter xw, CoreDump core)
+        {
+            if (coreSerializer == null)
+                coreSerializer = new XmlSerializer(typeof(CoreDump));
+            coreSerializer.Serialize(xw, core);
+        }
+
+        public static CoreDump Load(XmlReader xr, ICoreLoad engine)
+        {
+            if (coreSerializer == null)
+                coreSerializer = new XmlSerializer(typeof(CoreDump));
+            CoreDump cd = coreSerializer.Deserialize(xr) as CoreDump;
+            return cd;
+        }
+
+        private static XmlSerializer coreSerializer;
+
+        #endregion
 
         #region Variables
 
@@ -52,9 +116,9 @@ namespace nMars.RedCode
         public int round;
         public int nextWarriorIndex;
         public int coreSize;
-        public List<List<int>> tasks;
+        public List<IList<int>> tasks;
         public Instruction[] core;
-
+        
         #endregion
     }
 }

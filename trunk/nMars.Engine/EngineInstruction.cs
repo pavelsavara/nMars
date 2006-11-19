@@ -8,9 +8,9 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public struct EngineInstruction : IInstruction
+    public struct EngineInstruction : IRunningInstruction
     {
-        public EngineInstruction(bool setDefault)
+        public EngineInstruction(int address)
         {
             Operation = Operation.DAT;
             Modifier = Modifier.F;
@@ -19,7 +19,7 @@ namespace nMars.Engine
             ModeB = Mode.Direct;
             ValueB = 0;
             Source = null;
-            Address = -1;
+            Address = address;
         }
 
         public EngineInstruction(IInstruction src, int address)
@@ -52,9 +52,15 @@ namespace nMars.Engine
             }
         }
 
-        public static readonly EngineInstruction DefaultInstruction = new EngineInstruction(true);
-
         #region Extensions
+        
+        string IRunningInstruction.ToString()
+        {
+            return Address.ToString().PadRight(5) + 
+                   Operation.ToString() + "." + Modifier.ToString().PadRight(3) +
+                   ModeHelper.ToString(ModeA) + ValueA.ToString().PadLeft(6) + ", " +
+                   ModeHelper.ToString(ModeB) + ValueB.ToString().PadLeft(6) + "     ";
+        }
 
         public override string ToString()
         {
@@ -164,6 +170,11 @@ namespace nMars.Engine
         int IInstruction.ValueB
         {
             get { return ValueB; }
+        }
+
+        int IRunningInstruction.Address
+        {
+            get { return Address; }
         }
 
         #endregion

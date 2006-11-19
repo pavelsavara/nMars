@@ -15,14 +15,14 @@ namespace nMars.RedCode
         public bool Permutate = false;
         public bool SortResults = true;
         public Random Random = new Random();
-        public static EngineOptions DefaultOptions
+        public static EngineOptions Default
         {
             get
             {
                 return new EngineOptions();
             }
         }
-        public static EngineOptions ConstantRandomOptions
+        public static EngineOptions ConstantRandom
         {
             get
             {

@@ -94,9 +94,10 @@ namespace nMars.Test
             if (pwarriorOne == null)
                 return;
             Project pproject = new Project(rules);
+            pproject.EngineOptions = EngineOptions.ConstantRandom;
             pproject.Warriors.Add(pwarriorOne);
 
-            engines.Run(pproject, EngineOptions.ConstantRandomOptions);
+            engines.Run(pproject);
         }
 
         private void LoadRunPair(string fileOne, string fileTwo)
@@ -115,11 +116,12 @@ namespace nMars.Test
             if (pwarriorOne== null || pwarriorTwo == null) 
                 return;
             Project pproject = new Project(rules);
+            pproject.EngineOptions = EngineOptions.ConstantRandom;
             pproject.Warriors.Add(pwarriorOne);
             pproject.Warriors.Add(pwarriorTwo);
             try
             {
-                engines.Run(pproject, EngineOptions.ConstantRandomOptions);
+                engines.Run(pproject);
             }
             catch(EngineDifferException)
             {
