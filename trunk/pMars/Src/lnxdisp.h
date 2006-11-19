@@ -19,7 +19,7 @@
 /*
  * lnxdisp.h: user interface for Linux svga graphics displays
  *            mostly stolen from grxdisp.c, uidisp.c, xgraphio.c
- * $Id: lnxdisp.h,v 1.1.1.1 2000/08/20 13:29:39 iltzu Exp $
+ * $Id: lnxdisp.h,v 1.1.1.1 2005/09/11 21:55:20 alexanderwait Exp $
  */
 
 #ifdef LINUXGRAPHX

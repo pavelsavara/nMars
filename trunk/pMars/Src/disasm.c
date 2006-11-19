@@ -18,7 +18,7 @@
 
 /*
  * disasm.c: functions to turn core cell data into printable string
- * $Id: disasm.c,v 1.1.1.1 2000/08/20 13:29:32 iltzu Exp $
+ * $Id: disasm.c,v 1.1.1.1 2005/09/11 21:55:18 alexanderwait Exp $
  */
 
 #include "global.h"

@@ -18,7 +18,7 @@
 
 /*
  * alldisp.c: functions for combined DOS graphics/text mode display
- * $Id: alldisp.c,v 1.1.1.1 2000/08/20 13:29:25 iltzu Exp $
+ * $Id: alldisp.c,v 1.1.1.1 2005/09/11 21:55:13 alexanderwait Exp $
  */
 
 void    display_init(void);

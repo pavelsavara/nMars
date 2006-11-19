@@ -19,7 +19,7 @@
 
 /*
  * global.h: global header
- * $Id: global.h,v 1.5 2000/12/25 00:56:41 iltzu Exp $
+ * $Id: global.h,v 1.1.1.1 2005/09/11 21:55:18 alexanderwait Exp $
  *
  * 10-23-98 Pentium optimized version 30% faster than the original
  *          Ken Espiritu   (kespirit@cesun1.ce.vt.edu)
