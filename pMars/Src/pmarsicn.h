@@ -18,7 +18,7 @@
 
 /*
  * pmarsicn.h: icon
- * $Id: pmarsicn.h,v 1.1.1.1 2000/08/20 13:29:41 iltzu Exp $
+ * $Id: pmarsicn.h,v 1.1.1.1 2005/09/11 21:55:20 alexanderwait Exp $
  */
 
 #define pmarsicn_width 48

@@ -19,7 +19,7 @@
 
 /*
  * curdisp.c: curses display.
- * $Id: curdisp.c,v 1.2 2000/12/24 12:51:48 iltzu Exp $
+ * $Id: curdisp.c,v 1.1.1.1 2005/09/11 21:55:18 alexanderwait Exp $
  */
 
 #if defined(CURSESGRAPHX)

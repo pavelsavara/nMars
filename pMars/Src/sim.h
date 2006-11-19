@@ -18,7 +18,7 @@
 
 /*
  * sim.h: header for sim.c, cdb.c and display files
- * $Id: sim.h,v 1.1.1.1 2000/08/20 13:29:44 iltzu Exp $
+ * $Id: sim.h,v 1.1.1.1 2005/09/11 21:55:21 alexanderwait Exp $
  */
 
 /*

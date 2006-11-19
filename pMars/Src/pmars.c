@@ -18,7 +18,7 @@
 
 /*
  * pmars.c: main(), toplevel, initialization, cleanup
- * $Id: pmars.c,v 1.1.1.1 2000/08/20 13:29:40 iltzu Exp $
+ * $Id: pmars.c,v 1.1.1.1 2005/09/11 21:55:20 alexanderwait Exp $
  */
 
 #include <stdio.h>

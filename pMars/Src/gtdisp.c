@@ -18,7 +18,7 @@
 
 /*
  * gtdisp.c: DJGPP & Watcom/DOS text display (libpc.a)
- * $Id: gtdisp.c,v 1.1.1.1 2000/08/20 13:29:37 iltzu Exp $
+ * $Id: gtdisp.c,v 1.1.1.1 2005/09/11 21:55:19 alexanderwait Exp $
  */
 
 #include <string.h>

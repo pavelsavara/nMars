@@ -19,7 +19,7 @@
 
 /*
  * cdb.c: debugger
- * $Id: cdb.c,v 1.3 2000/12/25 00:49:07 iltzu Exp $
+ * $Id: cdb.c,v 1.1.1.1 2005/09/11 21:55:17 alexanderwait Exp $
  *
  * cdb - line-oriented core debugger by Stefan Strack
  */

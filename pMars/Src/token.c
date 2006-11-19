@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: token.c,v 1.1.1.1 2000/08/20 13:29:46 iltzu Exp $
+ * $Id: token.c,v 1.1.1.1 2005/09/11 21:55:22 alexanderwait Exp $
  */
 
 #include <ctype.h>

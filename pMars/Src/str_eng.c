@@ -19,7 +19,7 @@
 
 /*
  * str_eng.c: externalized messages for easy translation (ENGLISH version)
- * $Id: str_eng.c,v 1.5 2000/12/25 00:49:08 iltzu Exp $
+ * $Id: str_eng.c,v 1.1.1.1 2005/09/11 21:55:21 alexanderwait Exp $
  */
 
 #include "global.h"

@@ -19,7 +19,7 @@
 
 /*
  * asm.c: assembler
- * $Id: asm.c,v 1.3 2000/12/25 00:49:07 iltzu Exp $
+ * $Id: asm.c,v 1.1.1.1 2005/09/11 21:55:14 alexanderwait Exp $
  *
  *    usage: int assemble(char *filename, FIELD_T warriornum);
  *     parameters:

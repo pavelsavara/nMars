@@ -19,7 +19,7 @@
 /*
  * xgraphio.c: input/output functions for DOS DJGPP/GRX display
  *
- * $Id: xgraphio.c,v 1.1.1.1 2000/08/20 13:29:48 iltzu Exp $
+ * $Id: xgraphio.c,v 1.1.1.1 2005/09/11 21:55:22 alexanderwait Exp $
  */
 
 #include <bios.h>

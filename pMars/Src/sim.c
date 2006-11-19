@@ -19,7 +19,7 @@
 
 /*
  * sim.c: simulator
- * $Id: sim.c,v 1.3 2000/12/25 00:49:08 iltzu Exp $
+ * $Id: sim.c,v 1.1.1.1 2005/09/11 21:55:21 alexanderwait Exp $
  *
  * 10-23-98 Pentium optimized version 30% faster than the original
  *          Ken Espiritu
