@@ -1,3 +1,10 @@
+11/19/2006 - nMars0.8 - debugger
+  - console debugger
+  - IronPython extension for debugger
+  - fixed bugs in engine
+  - building step back infrastructure
+  - building coredump infrastructure
+  
 11/13/2006 - nMars0.7 - going public
   - documentation
   - exception handling
