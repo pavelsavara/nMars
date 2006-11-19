@@ -185,6 +185,14 @@ namespace nMars.Engine
             }
         }
 
+        public int TasksCount
+        {
+            get
+            {
+                return Tasks.Count;
+            }
+        }
+
         IPSpace IRunningWarrior.PSpace
         {
             get

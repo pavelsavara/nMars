@@ -17,7 +17,7 @@ namespace nMars.RedCode
         /// <summary>
         /// Run complete round
         /// </summary>
-        MatchResult Run(IProject project, EngineOptions options);
+        MatchResult Run(IProject project);
     }
 
     [ComVisible(true)]
@@ -26,7 +26,7 @@ namespace nMars.RedCode
         /// <summary>
         /// Initialize the engine
         /// </summary>
-        void BeginMatch(IProject project, EngineOptions options);
+        void BeginMatch(IProject project);
 
         /// <summary>
         /// make step
@@ -57,21 +57,28 @@ namespace nMars.RedCode
         int PreviousInstructionIndex { get; }
         int LiveTasksCount { get; }
         IList<int> Tasks { get; }
+        int TasksCount { get; }
         IPSpace PSpace { get; }
         int LastResult { get; }
         int PSpaceIndex { get; }
     }
+    
+    public interface IRunningInstruction : IInstruction
+    {
+        int Address { get;}
+        string ToString();
+    }
 
     public interface ICoreView
     {
-        IInstruction this[int address] { get; }
+        IRunningInstruction this[int address] { get; }
         int this[int address, Column reg] { get; }
         int CoreSize { get; }
     }
 
     public interface ICoreEdit : ICoreView
     {
-        new IInstruction this[int address] { get; set; }
+        new IRunningInstruction this[int address] { get; set; }
         new int this[int address, Column reg] { get; set; }
     }
 
@@ -96,7 +103,6 @@ namespace nMars.RedCode
     {
         IList<IList<int>> Tasks { get; }
         int NextWarriorIndex { get; }
-        //IWarrior NextWarrior { get; }
     }
 
     public interface IPSpacesView
@@ -114,19 +120,33 @@ namespace nMars.RedCode
 
     public interface ITimeView
     {
-        IInstruction LastInstruction { get; }
-        IInstruction NextInstruction { get; }
+        IRunningWarrior NextWarrior { get; }
+        IRunningInstruction NextInstruction { get; }
+        IRunningInstruction LastInstruction { get; }
     }
 
     public interface IStepBackEngine
     {
-        void PrevStep();
+        StepResult PrevStep();
         bool CanStepBack { get;}
+    }
+
+    public interface IBreakpointsEngine
+    {
+    }
+    
+    public interface IAttachEngine
+    {
+        
+    }
+
+    public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IAttachEngine, IBreakpointsEngine, ITaskView, ITimeView, ICoreView
+    {
     }
 
     public interface ICoreDump : ITaskView, IStatusView, IScoreView
     {
-        IInstruction this[int address] { get; }
+        IRunningInstruction this[int address] { get; }
         int CoreSize { get; }
     }
 

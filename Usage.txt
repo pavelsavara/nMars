@@ -1,10 +1,10 @@
     nMars - Corewars MARS for .NET 
 ---------------------------------------
 - you will need .NET 2.0/Mono runtime installed
-- both packages are expected to be extracted to same directory
+- all packages are expected to be extracted to same directory
 
 ***************************************
-* Package nMarsBinary
+* Package nMars.?.?.bin.zip
 ***************************************
 - this package is should run on any .NET/Mono system
 
@@ -33,6 +33,17 @@
 - it uses nMars.Parser component to parse warriors
 
 
+  nMars.Debugger.exe
+---------------------
+- This is implementation of CoreWars engine
+- it is console application, UI is very similar to pMARS
+    - for help type nMars.Debugger.exe -h 
+- it is reusable .NET 2.0 component
+- it is nMARS module, implements IDebuggerModule
+- it uses nMars.Parser component to parse warriors
+- it uses nMars.Engine component to run core
+
+
   nMars.RedCode.dll
 ---------------------
 - This is common library for nMars
@@ -46,7 +57,7 @@
 
 
 ***************************************
-* Package npMarsBinary.win32
+* Package npMars.?.?.win32.zip
 ***************************************
 - this package is compiled for windows
 
@@ -84,4 +95,10 @@
 - it uses nMars.Engine component as second tested engine
 - you will need NUnit installed
   
-  
+
+***************************************
+* Package nMarsDbgPy.?.?.zip
+***************************************
+- this package is should run on any .NET/Mono system
+- this IronPython extension for debugger
+

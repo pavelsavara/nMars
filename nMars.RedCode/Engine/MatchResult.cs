@@ -104,9 +104,9 @@ namespace nMars.RedCode
             }
         }
 
-        public void Dump(TextWriter tw, EngineOptions options, IProject project)
+        public void Dump(TextWriter tw, IProject project)
         {
-            IList<ResultsHelper> res = PrepareResults(project, options.SortResults);
+            IList<ResultsHelper> res = PrepareResults(project, project.EngineOptions.SortResults);
             for(int w=0;w<res.Count;w++)
             {
                 IWarrior warrior = res[w].warrior;

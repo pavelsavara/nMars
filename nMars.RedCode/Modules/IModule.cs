@@ -31,4 +31,9 @@ namespace nMars.RedCode.Modules
         IDebugger CreateDebugger();
     }
     
+    [ComVisible(true)]
+    public interface IDebuggerShellModule : IModule
+    {
+        IDebuggerShell CreateShell();
+    }
 }

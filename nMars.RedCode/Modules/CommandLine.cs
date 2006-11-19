@@ -14,84 +14,104 @@ namespace nMars.RedCode
     {
         public static int ParserMain(string[] args, string parserName)
         {
-            int res;
-            string dumpext;
-            bool dumpFiles;
-            List<string> files;
-            ParserOptions parserOptions;
-            EngineOptions engineOptions;
-            Project project = new Project();
-            project.Rules = new Rules();
-
-            res = ParseParams(args, out dumpext, out dumpFiles, out files, out parserOptions, out engineOptions, project, parserName);
-            if (res <= 0)
-                return res;
-
-            res = RunParser(dumpext, dumpFiles, files, parserOptions, parserName, project);
-            return res;
+            return ParserMain(args, parserName, parserName);
         }
 
         public static int EngineMain(string[] args, string engineName, string parserName)
         {
-            int res;
-            string dumpext;
-            bool dumpFiles;
-            List<string> files;
-            ParserOptions parserOptions;
-            EngineOptions engineOptions;
-            Project project = new Project();
-            project.Rules = new Rules();
+            return EngineMain(args, engineName, engineName, parserName, parserName);
+        }
 
-            res = ParseParams(args, out dumpext, out dumpFiles, out files, out parserOptions, out engineOptions, project, engineName);
+        public static int ParserMain(string[] args, string parserAssembly, string parserName)
+        {
+            int res;
+            List<string> files;
+            Project project = new Project();
+            IParser parser = ModuleRegister.CreateParser(parserAssembly, parserName);
+
+            res = ParseParams(args, out files, project, parserName);
+            if (res <= 0)
+                return res;
+
+            res = RunParser(files, parser, project);
+            return res;
+        }
+
+        public static int EngineMain(string[] args, string engineAssembly, string engineName, string parserAssembly, string parserName)
+        {
+            IEngine engine = ModuleRegister.CreateEngine(engineAssembly, engineName);
+            IParser parser = ModuleRegister.CreateParser(parserAssembly, parserName);
+
+            int res;
+            List<string> files;
+            Project project = new Project();
+
+            res = ParseParams(args, out files, project, engineName);
             if (res <= 0)
                 return res;
 
             project.Rules.WarriorsCount = files.Count;
-            res = RunParser(dumpext, dumpFiles, files, parserOptions, parserName, project);
+            res = RunParser(files, parser, project);
             if (res <= 0)
                 return res;
-            IEngine engine = ModuleRegister.CreateEngine(engineName);
-            MatchResult match = engine.Run(project, null);
-            match.Dump(Console.Out, engineOptions, project);
+            MatchResult match = engine.Run(project);
+            match.Dump(Console.Out, project);
             return 0;
         }
 
-        private static int RunParser(string dumpext, bool dumpFiles, List<string> files, ParserOptions options,
-                                     string parserName, Project project)
+        public static int DebuggerMain(string[] args, string engineAssembly, string engineName, string parserAssembly, string parserName, string debuggerAssembly, string debuggerName)
         {
-            IParser parser = ModuleRegister.CreateParser(parserName);
+            IDebuggerEngine engine = ModuleRegister.CreateEngine(engineAssembly, engineName) as IDebuggerEngine;
+            IParser parser = ModuleRegister.CreateParser(parserAssembly, parserName);
+            IDebugger debugger = ModuleRegister.CreateDebugger(debuggerAssembly, debuggerName);
+
+            int res;
+            List<string> files;
+            Project project = new Project();
+
+            if (engine == null)
+                throw new ApplicationException("Unable to create DebuggerEngine");
+
+            res = ParseParams(args, out files, project, engineName);
+            if (res <= 0)
+                return res;
+
+            project.Rules.WarriorsCount = files.Count;
+            res = RunParser(files, parser, project);
+            if (res <= 0)
+                return res;
+            debugger.Attach(engine, null, null);
+            MatchResult match = debugger.Run(project);
+            match.Dump(Console.Out, project);
+            return 0;
+        }
+
+        private static int RunParser(List<string> files, IParser parser, Project project)
+        {
             parser.InitParser(project.Rules);
             foreach (string file in files)
             {
                 IWarrior warrior = parser.Parse(file, Console.Error);
                 if (warrior == null)
                     return -1;
-                if (dumpFiles)
+                if (project.ParserOptions.DumpFiles)
                 {
-                    StreamWriter sw = new StreamWriter(Path.ChangeExtension(file, dumpext));
-                    warrior.Dump(sw, options);
+                    StreamWriter sw = new StreamWriter(Path.ChangeExtension(file, project.ParserOptions.DumpExt));
+                    warrior.Dump(sw, project.ParserOptions);
                     sw.Close();
                 }
-                if (!options.Brief)
+                if (!project.ParserOptions.Brief)
                 {
-                    warrior.Dump(Console.Out, options);
+                    warrior.Dump(Console.Out, project.ParserOptions);
                 }
                 project.Warriors.Add(warrior);
             }
             return project.Warriors.Count;
         }
 
-        private static int ParseParams(string[] args, out string dumpext, out bool dumpFiles,
-                                       out List<string> files, 
-                                       out ParserOptions parserOptions, out EngineOptions engineOptions
-                                       , Project project,
-                                       string moduleName)
+        private static int ParseParams(string[] args, out List<string> files, Project project, string moduleName)
         {
             files = new List<string>();
-            parserOptions = new ParserOptions();
-            engineOptions = new EngineOptions();
-            dumpFiles = false;
-            dumpext = ".dmp";
 
             if (args.Length == 0)
             {
@@ -156,23 +176,23 @@ namespace nMars.RedCode
                             return -1;
                         }
                         p++;
-                        dumpext = args[p];
-                        dumpFiles = true;
+                        project.ParserOptions.DumpExt = args[p];
+                        project.ParserOptions.DumpFiles = true;
                         break;
                     case "-uo":
-                        parserOptions.Offset = true;
+                        project.ParserOptions.Offset = true;
                         break;
                     case "-b":
-                        parserOptions.Brief = true;
+                        project.ParserOptions.Brief = true;
                         break;
                     case "-ul":
-                        parserOptions.Labels = true;
+                        project.ParserOptions.Labels = true;
                         break;
                     case "-ux":
-                        parserOptions.XmlFormat = true;
+                        project.ParserOptions.XmlFormat = true;
                         break;
                     case "-uc":
-                        parserOptions.Comments = true;
+                        project.ParserOptions.Comments = true;
                         break;
                     default:
                         if (File.Exists(param))

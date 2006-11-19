@@ -12,6 +12,8 @@ namespace nMars.RedCode
         Rules Rules { get; }
         IList<IWarrior> Warriors { get; }
         IList<int> ForcedAddresses { get; }
+        EngineOptions EngineOptions { get; set;}
+        ParserOptions ParserOptions { get; set;}
     }
 
 }

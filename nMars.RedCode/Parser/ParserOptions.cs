@@ -28,6 +28,8 @@ namespace nMars.RedCode
         public bool Labels = false;
         public bool Comments = false;
         public bool XmlFormat = false;
+        public string DumpExt = ".dmp";
+        public bool DumpFiles = false;
 
         public static readonly ParserOptions Default = new ParserOptions();
         public static readonly ParserOptions Full = new ParserOptions(true, true, true, false, false);

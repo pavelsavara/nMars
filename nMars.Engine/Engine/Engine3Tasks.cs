@@ -12,9 +12,9 @@ namespace nMars.Engine
     {
         #region Events
 
-        protected override void InitializeMatch(IProject project, EngineOptions options)
+        protected override void InitializeMatch(IProject project)
         {
-            base.InitializeMatch(project, options);
+            base.InitializeMatch(project);
             starter = 0;
             round = 0;
         }
@@ -101,24 +101,49 @@ namespace nMars.Engine
             get { return liveWarriors.Peek().Index; }
         }
 
-        private EngineWarrior NextWarrior
+        IRunningWarrior ITimeView.NextWarrior
         {
-            get { return liveWarriors.Peek(); }
+            get
+            {
+                if (liveWarriors.Count == 0)
+                    return null;
+                return liveWarriors.Peek();
+            }
         }
 
-        public IInstruction LastInstruction
+        private EngineWarrior NextWarrior
+        {
+            get
+            {
+                if (liveWarriors.Count == 0)
+                    return null;
+                return liveWarriors.Peek();
+            }
+        }
+
+        public IRunningInstruction LastInstruction
         {
             get { return lastInstruction; }
         }
 
-        public IInstruction NextInstruction
+        public IRunningInstruction NextInstruction
         {
-            get { return core[NextWarrior.Tasks.Peek()]; }
+            get
+            {
+                if (NextWarrior == null || NextWarrior.TasksCount == 0)
+                    return null;
+                return core[NextWarrior.Tasks.Peek()];
+            }
         }
 
         public int NextInstructionAddress
         {
-            get { return NextWarrior.Tasks.Peek(); }
+            get
+            {
+                if (NextWarrior == null || NextWarrior.TasksCount == 0)
+                    return -1;
+                return NextWarrior.Tasks.Peek();
+            }
         }
 
         public int LiveWarriorsCount
@@ -145,7 +170,7 @@ namespace nMars.Engine
 
         private List<IList<int>> tasksCopy;
         private bool tasksCopyLoaded = false;
-        private IInstruction lastInstruction;
+        private IRunningInstruction lastInstruction;
 
         private void CopyTasks()
         {

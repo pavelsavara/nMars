@@ -15,16 +15,16 @@ namespace pMars.DllWrapper
     {
         #region Steps
 
-        public MatchResult Run(IProject aProject, EngineOptions options)
+        public MatchResult Run(IProject aProject)
         {
-            BeginMatch(aProject, options);
+            BeginMatch(aProject);
             while (NextStep() != StepResult.Finished)
             {
             }
             return EndMatch();
         }
 
-        public void BeginMatch(IProject aProject, EngineOptions options)
+        public void BeginMatch(IProject aProject)
         {
             project = aProject;
             cycles = 0;
@@ -47,7 +47,7 @@ namespace pMars.DllWrapper
                     errors = File.ReadAllText(errFile);
                     File.Delete(errFile);
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     //swalow
                 }
@@ -206,8 +206,9 @@ namespace pMars.DllWrapper
                 warriorsCopy = new List<IWarrior>(dllWarriorsCout);
                 for (int w = 0; w < rules.WarriorsCount; w++)
                 {
-                    Warrior warrior = pMarsDll.ConvertWarrior(null, warriorsDllCopy[w], rules);
+                    DllWarrior warrior = pMarsDll.ConvertWarrior(null, warriorsDllCopy[w], rules);
                     warriorsCopy.Add(warrior);
+                    runningWarriorsCopy.Add(warrior);
                 }
                 dllWarriorsLoaded = true;
             }
@@ -217,12 +218,12 @@ namespace pMars.DllWrapper
 
         #region Interfaces
 
-        public IInstruction this[int address]
+        public IRunningInstruction this[int address]
         {
             get
             {
                 CopyCore();
-                return coreCopy[address];
+                return (IRunningInstruction)coreCopy[address];
             }
         }
 
@@ -287,12 +288,12 @@ namespace pMars.DllWrapper
             get { return pMarsDll.WarrirorIndex(dllWarriors, dllNextWarrior); }
         }
 
-        public IWarrior NextWarrior
+        public IRunningWarrior NextWarrior
         {
             get
             {
                 CopyWarriors();
-                return warriorsCopy[NextWarriorIndex];
+                return runningWarriorsCopy[NextWarriorIndex];
             }
         }
 
@@ -312,7 +313,7 @@ namespace pMars.DllWrapper
         }
 
 
-        public IInstruction LastInstruction
+        public IRunningInstruction LastInstruction
         {
             get
             {
@@ -321,7 +322,7 @@ namespace pMars.DllWrapper
             }
         }
 
-        public IInstruction NextInstruction
+        public IRunningInstruction NextInstruction
         {
             get
             {
@@ -329,7 +330,7 @@ namespace pMars.DllWrapper
                 CopyCore();
                 CopyTasks();
                 int address = pMarsDll.InstructionAddress(warriorsDllCopy[NextWarriorIndex].taskHead);
-                return coreCopy[address];
+                return (IRunningInstruction)coreCopy[address];
             }
         }
 
@@ -389,6 +390,7 @@ namespace pMars.DllWrapper
         private IntPtr dllWarrirorsLeft;
         private List<pMarsDll.PmarsWarrior> warriorsDllCopy = null;
         private List<IWarrior> warriorsCopy = null;
+        private List<IRunningWarrior> runningWarriorsCopy = null;
         private bool dllWarriorsLoaded = false;
         private IntPtr dllNextWarrior;
         private IntPtr dllPSpaces;
@@ -406,9 +408,10 @@ namespace pMars.DllWrapper
         private Rules rules;
         protected int cycles;
         string errFile;
-        private IInstruction lastInstruction = null;
+        private IRunningInstruction lastInstruction = null;
         private IProject project;
 
         #endregion
     }
+    
 }

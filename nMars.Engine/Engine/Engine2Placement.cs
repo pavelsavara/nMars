@@ -13,14 +13,14 @@ namespace nMars.Engine
     {
         #region Events
 
-        protected override void InitializeMatch(IProject aProject, EngineOptions options)
+        protected override void InitializeMatch(IProject aProject)
         {
             project = aProject;
-            base.InitializeMatch(project, options);
+            base.InitializeMatch(project);
             if (project.Warriors.Count != rules.WarriorsCount)
                 throw new EngineException("Count of warriors differ from rules");
 
-            random = options.Random;
+            random = project.EngineOptions.Random;
             if (random==null)
             {
                 random=new Random();
@@ -44,7 +44,7 @@ namespace nMars.Engine
                 iWarriors.Add(engineWarrior);
             }
             InitPSpaces();
-            permutate = options.Permutate;
+            permutate = project.EngineOptions.Permutate;
             if (forcedAddresses != null)
             {
                 seed = forcedAddresses[1] - rules.MinDistance;

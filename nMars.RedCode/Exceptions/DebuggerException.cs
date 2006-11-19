@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 namespace nMars.RedCode
 {
     [ComVisible(true)]
-    public class EngineException : Exception
+    public class DebuggerException : Exception
     {
-        public EngineException(string message)
+        public DebuggerException(string message)
             : base(message)
         {
         }

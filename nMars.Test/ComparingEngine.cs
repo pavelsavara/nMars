@@ -67,9 +67,8 @@ namespace nMars.Test
 
     class ComparingEngine : IEngine
     {
-        public MatchResult Run(IProject aProject, EngineOptions aOptions)
+        public MatchResult Run(IProject aProject)
         {
-            options = aOptions;
             Init();
             project = (Project)aProject;
             project.ForcedAddresses = forcedArdresses;
@@ -99,7 +98,7 @@ namespace nMars.Test
 
         private void Init()
         {
-            options.Random = new Random(0);
+            project.EngineOptions.Random = new Random(0);
 
             engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
             engineTwo = ModuleRegister.CreateEngine("nMars.Engine") as IExtendedStepEngine;
@@ -112,8 +111,8 @@ namespace nMars.Test
         
         private void CompareEngines(Check check)
         {
-            engineOne.BeginMatch(project, options);
-            engineTwo.BeginMatch(project, options);
+            engineOne.BeginMatch(project);
+            engineTwo.BeginMatch(project);
 
             try
             {
@@ -266,7 +265,6 @@ namespace nMars.Test
         IExtendedStepEngine engineTwo;
         MatchResult matchOne;
         MatchResult matchTwo;
-        EngineOptions options;
         Project project;
         int[] forcedArdresses;
 

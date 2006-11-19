@@ -9,18 +9,20 @@ namespace nMars.Engine
 {
     public class EngineSteps : EngineInstructions, IEngine, IStepEngine, IExtendedStepEngine
     {
-        public MatchResult Run(IProject project, EngineOptions options)
+        public MatchResult Run(IProject project)
         {
-            BeginMatch(project, options);
-            while (NextStep() != StepResult.Finished)
+            BeginMatch(project);
+            StepResult stepResult;
+            do
             {
-            }
+                stepResult = NextStep();
+            } while (stepResult != StepResult.Finished);
             return EndMatch();
         }
 
-        public void BeginMatch(IProject project, EngineOptions options)
+        public void BeginMatch(IProject project)
         {
-            InitializeMatch(project, options);
+            InitializeMatch(project);
             InitializeRound();
 
             results = new MatchResult(project);
@@ -89,18 +91,18 @@ namespace nMars.Engine
         protected void PerformInstruction()
         {
             InitializeCycle();
-            EngineWarrior warrior = liveWarriors.Dequeue();
-            int insructionPointer = warrior.Tasks.Dequeue();
+            lastStepWarrior = liveWarriors.Dequeue();
+            int insructionPointer = lastStepWarrior.Tasks.Dequeue();
 
-            PerformInstruction(warrior, insructionPointer);
+            PerformInstruction(lastStepWarrior, insructionPointer);
 
-            if (warrior.LiveTasks > 0)
+            if (lastStepWarrior.LiveTasks > 0)
             {
-                liveWarriors.Enqueue(warrior);
+                liveWarriors.Enqueue(lastStepWarrior);
             }
             else
             {
-                warrior.Result = RoundResult.Loss;
+                lastStepWarrior.Result = RoundResult.Loss;
                 cyclesLeft = cyclesLeft - 1 - (cyclesLeft - 1) / (LiveWarriorsCount + 1);
             }
             cyclesLeft--;
@@ -111,6 +113,7 @@ namespace nMars.Engine
         #region Variables
         
         protected StepResult lastStepResult;
+        protected EngineWarrior lastStepWarrior;
 
         #endregion
     }
