@@ -45,6 +45,7 @@
     <Compile Include="Exceptions\EngineException.cs" />
     <Compile Include="Exceptions\ParserException.cs" />
     <Compile Include="Basic\IInstruction.cs" />
+    <Compile Include="Modules\ComponentSetup.cs" />
     <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\CommandLine.cs" />
     <Compile Include="Engine\MatchResult.cs" />

@@ -9,24 +9,25 @@ namespace nMars.RedCode
 {
     public interface IDebugger : IEngine
     {
-        void Attach(IDebuggerEngine engine, IDebuggerShell shell, IDebuggerPrompt prompt);
+        void Init(IDebuggerEngine engine, IDebuggerShell shell, IDebuggerPrompt prompt);
         void CoreDump(TextWriter tw);
-        void Step();
-        void Step(int count);
-        void StepBack();
-        void StepBack(int count);
+        void NextStep();
+        void NextStep(int count);
+        void PrevStep();
+        void PrevStep(int count);
         void Continue();
-        void Break();
+        void Pause();
         void Quit();
         void Restart();
         void List(int from, int length);
         int Speed { get; set;}
         bool Echo { get; set;}
+        event CheckBreak CheckBreak;
     }
 
     public interface IDebuggerPrompt
     {
-        void Init(IDebugger debugger, IDebuggerEngine engine);
+        void Init(IDebugger debugger, IDebuggerEngine engine, IDebuggerShell aShell);
         string GetCommand();
         void Clear();
         TextWriter Error { get;}
@@ -40,7 +41,9 @@ namespace nMars.RedCode
     public interface IDebuggerShell
     {
         void Init(IDebugger debugger, IDebuggerEngine engine, IDebuggerPrompt prompt);
-        bool ProcessCommand(ref string command);
+        bool ProcessCommand(ref string command, bool printErrors);
+        string EchoString { get;}
+        string PromptString { get;}
     }
 
 }

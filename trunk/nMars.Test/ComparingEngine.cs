@@ -161,6 +161,14 @@ namespace nMars.Test
             return true;
         }
 
+        public IProject Project
+        {
+            get
+            {
+                return project;
+            }
+        }
+
         #endregion
 
         #region Tests

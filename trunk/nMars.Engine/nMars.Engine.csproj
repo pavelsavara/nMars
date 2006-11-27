@@ -49,6 +49,7 @@
     <Compile Include="EngineInstruction.cs" />
     <Compile Include="Engine\Engine8Observer.cs" />
     <Compile Include="Engine\Engine9StepBack.cs" />
+    <Compile Include="Engine\EngineASync.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EngineWarrior.cs" />

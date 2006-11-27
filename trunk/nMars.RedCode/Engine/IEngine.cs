@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -18,6 +19,11 @@ namespace nMars.RedCode
         /// Run complete round
         /// </summary>
         MatchResult Run(IProject project);
+
+        /// <summary>
+        /// return current project
+        /// </summary>
+        IProject Project { get;}
     }
 
     [ComVisible(true)]
@@ -40,9 +46,9 @@ namespace nMars.RedCode
         MatchResult EndMatch();
 
         /// <summary>
-        /// return current project
+        /// returns result of last step
         /// </summary>
-        IProject Project { get;}
+        StepResult LastStepResult { get;}
     }
 
     #endregion 
@@ -131,18 +137,30 @@ namespace nMars.RedCode
         bool CanStepBack { get;}
     }
 
+    public class CheckBreakEventArgs : EventArgs
+    {
+        public bool Break=false;
+    }
+    
+    public delegate void CheckBreak(CheckBreakEventArgs args);
+    
     public interface IBreakpointsEngine
+    {
+        event CheckBreak CheckBreak;
+    }
+    
+    public interface IAsyncEngine
+    {
+        void Continue();
+        void Pause();
+        void Wait();
+        void Quit();
+    }
+
+    public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IAsyncEngine, ITaskView, ITimeView, ICoreView
     {
     }
     
-    public interface IAttachEngine
-    {
-        
-    }
-
-    public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IAttachEngine, IBreakpointsEngine, ITaskView, ITimeView, ICoreView
-    {
-    }
 
     public interface ICoreDump : ITaskView, IStatusView, IScoreView
     {

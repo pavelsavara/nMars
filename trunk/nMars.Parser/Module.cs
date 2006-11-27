@@ -15,7 +15,7 @@ namespace nMars.Parser
         {
             try
             {
-                return CommandLine.ParserMain(args, typeof(Module).Namespace);
+                return CommandLine.ParserMain(args, null, null);
             }
             catch (Exception ex)
             {
