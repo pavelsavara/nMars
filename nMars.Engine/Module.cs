@@ -15,7 +15,7 @@ namespace nMars.Engine
         {
             try
             {
-                return CommandLine.EngineMain(args, typeof(Module).Namespace, "nMars.Parser");
+                return CommandLine.EngineMain(args, null, null);
             }
             catch (Exception ex)
             {
@@ -35,6 +35,7 @@ namespace nMars.Engine
         {
             ModuleRegister.Register(new Module());
             ModuleRegister.Register(new DebuggerModule());
+            ModuleRegister.Register(new AsyncDebuggerModule());
         }
 
         public string Name
@@ -56,6 +57,19 @@ namespace nMars.Engine
         public string Name
         {
             get { return typeof(Module).Namespace+"-StepBack"; }
+        }
+    }
+
+    class AsyncDebuggerModule : IEngineModule
+    {
+        public IEngine CreateEngine()
+        {
+            return new EngineASync();
+        }
+
+        public string Name
+        {
+            get { return typeof(Module).Namespace + "-Async"; }
         }
     }
 }

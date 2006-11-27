@@ -3,34 +3,41 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using System.Collections.Generic;
 using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    class EngineEvent
-    {
-        public EngineEvent(int cycles, int cyclesLeft, int ip, EngineWarrior warrior)
-        {
-            Cycles = cycles;
-            CyclesLeft = cyclesLeft;
-            Ip = ip;
-            Warrior = warrior;
-            instructionsChanged = new Stack<EngineInstruction>();
-        }
-
-        public int Ip;
-        public int Cycles;
-        public int CyclesLeft;
-        public Stack<EngineInstruction> instructionsChanged;
-        public EngineWarrior Warrior;
-        public bool Split;
-        public bool Died;
-    }
-    
     public class EngineObserver : EngineSteps
     {
+        #region Event class
+
+        protected class EngineEvent
+        {
+            public EngineEvent(int cycles, int cyclesLeft, int ip, EngineWarrior warrior, StepResult prevStepResult)
+            {
+                Cycles = cycles;
+                CyclesLeft = cyclesLeft;
+                Ip = ip;
+                Warrior = warrior;
+                PrevStepResult = prevStepResult;
+                instructionsChanged = new Stack<EngineInstruction>();
+            }
+
+            public int Ip;
+            public int Cycles;
+            public int CyclesLeft;
+            public Stack<EngineInstruction> instructionsChanged;
+            public EngineWarrior Warrior;
+            public bool Split;
+            public bool Died;
+            public StepResult PrevStepResult;
+        }
+
+        #endregion
+
+        #region Events
+
         protected override void InitializeRound()
         {
             base.InitializeRound();
@@ -77,10 +84,17 @@ namespace nMars.Engine
         {
             if (CurrentEvent == null)
             {
-                CurrentEvent = new EngineEvent(cycles, cyclesLeft, reg.ip, lastStepWarrior);
+                CurrentEvent = new EngineEvent(cycles, cyclesLeft, reg.ip, lastStepWarrior, lastStepResult);
             }
         }
-        private Stack<EngineEvent> History;
+
+        #endregion
+
+        #region Variables
+        
+        protected Stack<EngineEvent> History;
         private EngineEvent CurrentEvent;
+
+        #endregion
     }
 }

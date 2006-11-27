@@ -6,24 +6,20 @@ namespace nMars.Debugger
 {
     class DebuggerConsolePrompt : IDebuggerPrompt
     {
-        public void Init(IDebugger aDebugger, IDebuggerEngine aEngine)
+        public void Init(IDebugger aDebugger, IDebuggerEngine aEngine, IDebuggerShell aShell)
         {
             engine = aEngine;
+            debugger = aDebugger;
+            shell = aShell;
         }
 
         public void PaintCore(bool running)
         {
-            IRunningWarrior w = engine.NextWarrior;
-            IRunningInstruction i = engine.NextInstruction;
-            if (i != null && w != null)
-            {
-                Console.WriteLine("{0,20} ({1,3}): {2}", w.Name, w.TasksCount, i.ToString());
-            }
         }
 
         public string GetCommand()
         {
-            Console.Write(">");
+            Console.Write(shell.PromptString);
             return Console.ReadLine();
         }
 
@@ -74,5 +70,7 @@ namespace nMars.Debugger
         }
 
         private IDebuggerEngine engine;
+        private IDebugger debugger;
+        private IDebuggerShell shell;
     }
 }

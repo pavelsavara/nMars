@@ -31,6 +31,7 @@ namespace nMars.Engine
 
         public StepResult NextStep()
         {
+            
             if (round >= rules.Rounds)
             {
                 return StepResult.Finished;
@@ -38,21 +39,21 @@ namespace nMars.Engine
 
             PerformInstruction();
 
-            lastStepResult = StepResult.Continue;
+            StepResult stepResult = StepResult.Continue;
             if (LiveWarriorsCount == 1 && WarriorsCount > 1)
             {
                 liveWarriors.Peek().Result = RoundResult.Win;
-                lastStepResult = StepResult.NextRound;
+                stepResult = StepResult.NextRound;
             }
             else if (LiveWarriorsCount == 0)
             {
-                lastStepResult = StepResult.NextRound;
+                stepResult = StepResult.NextRound;
             }
             else if (cyclesLeft == 0)
             {
-                lastStepResult = StepResult.NextRound;
+                stepResult = StepResult.NextRound;
             }
-            if (lastStepResult == StepResult.NextRound)
+            if (stepResult == StepResult.NextRound)
             {
                 for (int w = 0; w < rules.WarriorsCount; w++)
                 {
@@ -71,14 +72,15 @@ namespace nMars.Engine
                 round++;
                 if (round >= rules.Rounds)
                 {
-                    lastStepResult = StepResult.Finished;
+                    stepResult = StepResult.Finished;
                 }
                 else
                 {
                     InitializeRound();
                 }
             }
-            return lastStepResult;
+            lastStepResult = stepResult;
+            return stepResult;
         }
         
         public MatchResult EndMatch()
@@ -86,6 +88,14 @@ namespace nMars.Engine
             FinalizeMatch();
             results.ComputePoints();
             return results;
+        }
+        
+        public StepResult LastStepResult
+        {
+            get
+            {
+                return lastStepResult;
+            }
         }
 
         protected void PerformInstruction()

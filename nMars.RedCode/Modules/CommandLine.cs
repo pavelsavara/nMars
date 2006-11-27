@@ -12,81 +12,74 @@ namespace nMars.RedCode
 {
     public class CommandLine
     {
-        public static int ParserMain(string[] args, string parserName)
-        {
-            return ParserMain(args, parserName, parserName);
-        }
-
-        public static int EngineMain(string[] args, string engineName, string parserName)
-        {
-            return EngineMain(args, engineName, engineName, parserName, parserName);
-        }
-
-        public static int ParserMain(string[] args, string parserAssembly, string parserName)
+        public static int ParserMain(string[] args, ComponentSetup setup, IProject project)
         {
             int res;
             List<string> files;
-            Project project = new Project();
-            IParser parser = ModuleRegister.CreateParser(parserAssembly, parserName);
+            if (setup == null)
+                setup = new ComponentSetup();
+            if (project == null)
+                project = new Project();
 
-            res = ParseParams(args, out files, project, parserName);
+            res = ParseParams(args, out files, project);
             if (res <= 0)
                 return res;
 
-            res = RunParser(files, parser, project);
+            res = RunParser(files, setup.Parser, project);
             return res;
         }
 
-        public static int EngineMain(string[] args, string engineAssembly, string engineName, string parserAssembly, string parserName)
+        public static int EngineMain(string[] args, ComponentSetup setup, IProject project)
         {
-            IEngine engine = ModuleRegister.CreateEngine(engineAssembly, engineName);
-            IParser parser = ModuleRegister.CreateParser(parserAssembly, parserName);
-
             int res;
             List<string> files;
-            Project project = new Project();
+            if (setup == null)
+                setup = new ComponentSetup();
+            if (project == null)
+                project = new Project();
 
-            res = ParseParams(args, out files, project, engineName);
+            res = ParseParams(args, out files, project);
             if (res <= 0)
                 return res;
 
             project.Rules.WarriorsCount = files.Count;
-            res = RunParser(files, parser, project);
+            res = RunParser(files, setup.Parser, project);
             if (res <= 0)
                 return res;
-            MatchResult match = engine.Run(project);
+
+            MatchResult match = setup.Engine.Run(project);
             match.Dump(Console.Out, project);
             return 0;
         }
 
-        public static int DebuggerMain(string[] args, string engineAssembly, string engineName, string parserAssembly, string parserName, string debuggerAssembly, string debuggerName)
+        public static int DebuggerMain(string[] args, ComponentSetup setup, IProject project)
         {
-            IDebuggerEngine engine = ModuleRegister.CreateEngine(engineAssembly, engineName) as IDebuggerEngine;
-            IParser parser = ModuleRegister.CreateParser(parserAssembly, parserName);
-            IDebugger debugger = ModuleRegister.CreateDebugger(debuggerAssembly, debuggerName);
-
             int res;
             List<string> files;
-            Project project = new Project();
+            if (setup == null)
+                setup = new ComponentSetup();
+            if (project == null)
+                project = new Project();
 
+            IDebuggerEngine engine = setup.Engine as IDebuggerEngine;
             if (engine == null)
                 throw new ApplicationException("Unable to create DebuggerEngine");
 
-            res = ParseParams(args, out files, project, engineName);
+            res = ParseParams(args, out files, project);
             if (res <= 0)
                 return res;
 
             project.Rules.WarriorsCount = files.Count;
-            res = RunParser(files, parser, project);
+            res = RunParser(files, setup.Parser, project);
             if (res <= 0)
                 return res;
-            debugger.Attach(engine, null, null);
-            MatchResult match = debugger.Run(project);
+            setup.Debugger.Init(engine, null, null);
+            MatchResult match = setup.Debugger.Run(project);
             match.Dump(Console.Out, project);
             return 0;
         }
 
-        private static int RunParser(List<string> files, IParser parser, Project project)
+        private static int RunParser(List<string> files, IParser parser, IProject project)
         {
             parser.InitParser(project.Rules);
             foreach (string file in files)
@@ -109,13 +102,13 @@ namespace nMars.RedCode
             return project.Warriors.Count;
         }
 
-        private static int ParseParams(string[] args, out List<string> files, Project project, string moduleName)
+        private static int ParseParams(string[] args, out List<string> files, IProject project)
         {
             files = new List<string>();
 
             if (args.Length == 0)
             {
-                PrintParserHelp(moduleName + ".exe");
+                PrintParserHelp();
                 return 0;
             }
 
@@ -125,7 +118,7 @@ namespace nMars.RedCode
                 switch (param)
                 {
                     case "-h":
-                        PrintParserHelp(moduleName + ".exe");
+                        PrintParserHelp();
                         return 0;
                     case "-p":
                         if (!ReadNumber(args, ref p, out project.Rules.MaxProcesses))
@@ -223,9 +216,9 @@ namespace nMars.RedCode
             return true;
         }
 
-        private static void PrintParserHelp(string execName)
+        private static void PrintParserHelp()
         {
-            Console.WriteLine("Usage   : " + execName + " [options] file1 [files]");
+            Console.WriteLine("Usage   : nMars.Module.exe [options] file1 [files]");
             Console.WriteLine();
             Console.WriteLine("Rules :");
             Console.WriteLine("  -r # Rounds to play [1]");

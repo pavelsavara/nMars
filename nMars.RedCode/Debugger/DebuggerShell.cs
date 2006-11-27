@@ -17,7 +17,7 @@ namespace nMars.Debugger
             lastCommand = "";
         }
 
-        public bool ProcessCommand(ref string command)
+        public bool ProcessCommand(ref string command, bool printErrors)
         {
             bool res = true;
             if (command.Trim() == "")
@@ -36,7 +36,7 @@ namespace nMars.Debugger
                     break;
                 case "step":
                 case "s":
-                    debugger.Step();
+                    debugger.NextStep();
                     break;
                 case "continue":
                 case "c":
@@ -53,17 +53,48 @@ namespace nMars.Debugger
                 case "re":
                     debugger.Restart();
                     break;
-                case "stepback":
                 case "back":
                 case "b":
-                    debugger.StepBack();
+                    debugger.PrevStep();
+                    break;
+                case "echo":
+                    debugger.Echo = !debugger.Echo;
                     break;
                 default:
+                    if (printErrors)
+                    {
+                        prompt.Error.WriteLine("Unknown command");
+                    }
                     res = false;
                     break;
             }
             lastCommand = command;
             return res;
+        }
+
+        public string EchoString
+        {
+            get
+            {
+                lock (engine)
+                {
+                    IRunningWarrior w = engine.NextWarrior;
+                    IRunningInstruction i = engine.NextInstruction;
+                    if (i != null && w != null)
+                    {
+                        return string.Format("{0,20} ({1,3}): {2}", w.Name, w.TasksCount, i.ToString());
+                    }
+                }
+                return null;
+            }
+        }
+
+        public string PromptString
+        {
+            get
+            {
+                return ">";
+            }
         }
 
         private string lastCommand;

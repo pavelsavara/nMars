@@ -15,7 +15,13 @@ namespace nMars.Debugger
         {
             try
             {
-                return CommandLine.DebuggerMain(args, "nMars.Engine", "nMars.Engine-StepBack", "nMars.Parser", "nMars.Parser", "nMars.Debugger", "nMars.Debugger");
+                ComponentSetup setup=new ComponentSetup();
+                setup.LoadEngine("nMars.Engine", "nMars.Engine-Async");
+                
+                Project project=new Project();
+                project.ParserOptions.Brief = true;
+                
+                return CommandLine.DebuggerMain(args, setup, project);
             }
             catch (Exception ex)
             {

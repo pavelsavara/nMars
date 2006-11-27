@@ -15,7 +15,7 @@ namespace pMars.DllWrapper
         {
             try
             {
-                return CommandLine.EngineMain(args, typeof(Module).Namespace, typeof(Module).Namespace);
+                return CommandLine.EngineMain(args, null, null);
             }
             catch (Exception ex)
             {

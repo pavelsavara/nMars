@@ -8,7 +8,7 @@ namespace nMars.Debugger
 {
     class Debugger : IDebugger
     {
-        public void Attach(IDebuggerEngine aEngine, IDebuggerShell aShell, IDebuggerPrompt aPrompt)
+        public void Init(IDebuggerEngine aEngine, IDebuggerShell aShell, IDebuggerPrompt aPrompt)
         {
             engine = aEngine;
             prompt = aPrompt;
@@ -34,83 +34,34 @@ namespace nMars.Debugger
             {
                 shell = new DebuggerShell();
             }
-            prompt.Init(this, engine);
+            prompt.Init(this, engine, shell);
             shell.Init(this, engine, prompt);
-            breakpoint = true;
             echo = false;
+            speed = 0;
+            aEngine.CheckBreak += CallBack;
         }
 
-        public MatchResult Run(IProject project)
+        public MatchResult Run(IProject aProject)
         {
-            MatchResult res;
-            do
-            {
-                quitMatch = false;
-                restart = false;
-
-                res = RunMatch(project);
-                if (!restart && !quitDebugger)
-                {
-                    prompt.Out.WriteLine();
-                    prompt.Out.WriteLine("Match is finished, type 'restart' to restart match.");
-                    Prompt();
-                    breakpoint = true;
-                }
-            } while (restart && !quitDebugger);
-            return res;
-        }
-
-        private MatchResult RunMatch(IProject project)
-        {
-            MatchResult res;
-            lastStepResult = StepResult.Continue;
+            project = aProject;
+            quit = false;
             engine.BeginMatch(project);
             do
             {
-                if (CheckBreak())
-                {
-                    if (echo)
-                    {
-                        prompt.PaintCore(false);
-                    }
-                    Prompt();
-                }
-                else
-                {
-                    if (echo)
-                    {
-                        prompt.PaintCore(true);
-                    }
-                    lastStepResult = engine.NextStep();
-                    if (speed > 0)
-                    {
-                        Thread.Sleep(speed);
-                    }
-                }
-            } while (lastStepResult != StepResult.Finished && !quitMatch);
+                AskPrompt();
+            } while (!quit);
             
-            if (echo)
-            {
-                prompt.PaintCore(false);
-            }
-            res = engine.EndMatch();
-            return res;
+            engine.Quit();
+            return engine.EndMatch();
         }
 
-        private bool CheckBreak()
-        {
-            return breakpoint;
-        }
-
-        private void Prompt()
+        private void AskPrompt()
         {
             try
             {
+                prompt.PaintCore(false);
                 string command = prompt.GetCommand();
-                if (!shell.ProcessCommand(ref command))
-                {
-                    prompt.Error.WriteLine("Unknown command");
-                }
+                shell.ProcessCommand(ref command, true);
             }
             catch (DebuggerException e)
             {
@@ -118,66 +69,108 @@ namespace nMars.Debugger
             }
         }
 
+        private void CallBack(CheckBreakEventArgs args)
+        {
+            EchoStep();
+            Slow();
+        }
+
+        private void Slow()
+        {
+            if (speed != 0)
+            {
+                Thread.Sleep(speed);
+            }
+        }
+
+        private void EchoStep()
+        {
+            if (!echo) return;
+            prompt.Out.WriteLine(shell.EchoString);
+        }
+
+        #region Interfaces
+
         public void CoreDump(TextWriter tw)
         {
             throw new NotImplementedException();
         }
 
-        public void Step()
+        public void List(int from, int length)
         {
-            Step(1);
-        }
-
-        public void Step(int count)
-        {
-            while (lastStepResult != StepResult.Finished && !quitMatch && count > 0)
+            for (int a = from; a < from + length; a++)
             {
-                count--;
-                lastStepResult = engine.NextStep();
+                prompt.Out.WriteLine(engine[a].ToString());
             }
         }
 
-        public void StepBack()
+        public void PrevStep()
         {
-            StepBack(1);
+            engine.PrevStep();
         }
 
-        public void StepBack(int count)
+        public void NextStep()
         {
-            while (engine.CanStepBack && lastStepResult != StepResult.Finished && !quitMatch && count > 0)
+            engine.NextStep();
+        }
+
+        public void NextStep(int count)
+        {
+            while (engine.LastStepResult != StepResult.Finished && count > 0)
             {
                 count--;
-                lastStepResult = engine.PrevStep();
+                engine.NextStep();
+            }
+        }
+
+        public void PrevStep(int count)
+        {
+            while (engine.LastStepResult != StepResult.Finished && count > 0)
+            {
+                count--;
+                engine.PrevStep();
             }
         }
 
         public void Continue()
         {
-            breakpoint = false;
+            engine.Continue();
         }
 
-        public void Break()
+        public void Pause()
         {
-            breakpoint = true;
+            engine.Pause();
         }
 
         public void Quit()
         {
-            quitMatch = true;
-            quitDebugger = true;
+            quit = true;
         }
 
         public void Restart()
         {
-            quitMatch = true;
-            restart = true;
+            engine.Pause();
+            lock (engine)
+            {
+                engine.BeginMatch(project);
+            }
         }
 
-        public void List(int from, int lenght)
+        public event CheckBreak CheckBreak
         {
-            for (int a = from; a < from + lenght; a++)
+            add
             {
-                prompt.Out.WriteLine(engine[a].ToString());
+                lock (engine)
+                {
+                    engine.CheckBreak += value;
+                }
+            }
+            remove
+            {
+                lock (engine)
+                {
+                    engine.CheckBreak -= value;
+                }
             }
         }
 
@@ -193,15 +186,26 @@ namespace nMars.Debugger
             set { echo = value; }
         }
 
+        public IProject Project
+        {
+            get
+            {
+                return project;
+            }
+        }
+
+        #endregion
+
+        #region Variables
+        
         private IDebuggerEngine engine;
         private IDebuggerShell shell;
         private IDebuggerPrompt prompt;
-        private StepResult lastStepResult;
-        private bool breakpoint;
-        private bool quitMatch;
-        private bool quitDebugger;
-        private bool restart;
         private bool echo;
         private int speed;
+        private bool quit;
+        private IProject project;
+
+        #endregion
     }
 }

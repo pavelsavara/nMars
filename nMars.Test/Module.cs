@@ -23,7 +23,7 @@ namespace nMars.Test
                 }
                 else
                 {
-                    return CommandLine.EngineMain(args, typeof(Module).Namespace, "pMars.DllWrapper");
+                    return CommandLine.EngineMain(args, null, null);
                 }
             }
             catch (Exception ex)

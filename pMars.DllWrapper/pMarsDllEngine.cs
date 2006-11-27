@@ -91,11 +91,6 @@ namespace pMars.DllWrapper
             return results;
         }
 
-        public IProject Project
-        {
-            get { return project; }
-        }
-
         public StepResult NextStep()
         {
             if (lastInstructionWatchMode)
@@ -105,13 +100,13 @@ namespace pMars.DllWrapper
                 lastInstruction = this[currentInstructionAddress];
             }
 
-            StepResult res = (StepResult)pMarsDll.pMarsStepMatch();
+            lastStepResult = (StepResult)pMarsDll.pMarsStepMatch();
             dllCoreLoaded = false;
             dllTasksLoaded = false;
             dllWarriorsLoaded = false;
             cycles++;
 
-            if (res > StepResult.Continue)
+            if (lastStepResult > StepResult.Continue)
             {
                 int foundAlive = -1;
                 for (int w = 0; w < rules.WarriorsCount; w++)
@@ -136,7 +131,7 @@ namespace pMars.DllWrapper
                     }
                 }
 
-                if (res != StepResult.Finished)
+                if (lastStepResult != StepResult.Finished)
                 {
                     cycles = 0;
                 }
@@ -152,7 +147,7 @@ namespace pMars.DllWrapper
                     }
                 }
             }
-            return res;
+            return lastStepResult;
         }
 
         #endregion
@@ -372,6 +367,19 @@ namespace pMars.DllWrapper
             }
         }
 
+        public StepResult LastStepResult
+        {
+            get
+            {
+                return lastStepResult;
+            }
+        }
+
+        public IProject Project
+        {
+            get { return project; }
+        }
+
         #endregion
 
         #region Dll Variables
@@ -410,6 +418,7 @@ namespace pMars.DllWrapper
         string errFile;
         private IRunningInstruction lastInstruction = null;
         private IProject project;
+        StepResult lastStepResult;
 
         #endregion
     }
