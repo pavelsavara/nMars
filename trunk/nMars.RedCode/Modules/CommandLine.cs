@@ -21,7 +21,6 @@ namespace nMars.RedCode
             if (project == null)
                 project = new Project();
 
-            PrintLogo(setup.Parser);
             res = ParseParams(args, out files, project, setup.Parser);
             if (res <= 0)
                 return res;
@@ -42,7 +41,6 @@ namespace nMars.RedCode
                 project.ParserOptions = ParserOptions.Engine;
             }
 
-            PrintLogo(setup.Parser);
             res = ParseParams(args, out files, project, setup.Engine);
             if (res <= 0)
                 return res;
@@ -73,7 +71,6 @@ namespace nMars.RedCode
             if (engine == null)
                 throw new ApplicationException("Unable to create DebuggerEngine");
 
-            PrintLogo(setup.Parser);
             res = ParseParams(args, out files, project, engine);
             if (res <= 0)
                 return res;
@@ -90,6 +87,7 @@ namespace nMars.RedCode
 
         private static int ParseParams(string[] args, out List<string> files, IProject project, IComponent component)
         {
+            bool logo = true;
             files = new List<string>();
 
             if (args.Length == 0)
@@ -164,9 +162,13 @@ namespace nMars.RedCode
                     case "-b":
                         project.ParserOptions.Brief = true;
                         project.ParserOptions.Status = false;
+                        logo = false;
                         break;
                     case "-bs":
                         project.ParserOptions.Status = !project.ParserOptions.Status;
+                        break;
+                    case "-bl":
+                        logo = false;
                         break;
                     case "-ul":
                         project.ParserOptions.Labels = true;
@@ -191,6 +193,8 @@ namespace nMars.RedCode
                 }
             }
             project.Rules.WarriorsCount = files.Count;
+            if (logo)
+                PrintLogo(component);
             return files.Count;
         }
 
@@ -214,9 +218,10 @@ namespace nMars.RedCode
 
         private static void PrintParserHelp(IComponent component)
         {
-            Console.WriteLine("Usage   : " + ModuleRegister.GetModule(component).Name + ".exe [options] file1 [files]");
+            PrintLogo(component);
+            Console.WriteLine("Usage: " + ModuleRegister.GetModule(component).Name + ".exe [options] file1 [files]");
             Console.WriteLine();
-            Console.WriteLine("Rules :");
+            Console.WriteLine("Rules:");
             Console.WriteLine("  -r # Rounds to play [1]");
             Console.WriteLine("  -s # Size of core [8000]");
             Console.WriteLine("  -c # Cycles until tie [80000]");
@@ -225,7 +230,7 @@ namespace nMars.RedCode
             Console.WriteLine("  -d # Min. warriors distance");
             Console.WriteLine("  -S # Size of P-space [500]");
             Console.WriteLine();
-            Console.WriteLine("Parser :");
+            Console.WriteLine("Parser:");
             Console.WriteLine("  -b        Brief/silent parser mode");
             Console.WriteLine("  -bl       No logo");
             Console.WriteLine("  -bs       No status");

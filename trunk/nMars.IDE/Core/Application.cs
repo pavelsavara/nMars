@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using nMars.IDE.Controls;
-using nMars.IDE.Forms;
 using nMars.IDE.Core;
+using nMars.IDE.Forms;
 using nMars.RedCode;
 
 namespace nMars.IDE
@@ -10,7 +10,7 @@ namespace nMars.IDE
     public class Application
     {
         #region Construction
-        
+
         public Application()
         {
             ApplicationInstance = this;
@@ -22,7 +22,7 @@ namespace nMars.IDE
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             mainForm = new MainForm();
 
-            
+
             Console = new Console();
             Console.Attach(mainForm.tabBottom, "Console");
 
@@ -45,7 +45,7 @@ namespace nMars.IDE
             }
             return SaveSolution();
         }
-        
+
         #endregion
 
         #region Documents
@@ -86,7 +86,7 @@ namespace nMars.IDE
         {
             document.Open();
         }
-        
+
         public static void OpenExistingWarrior(string filename)
         {
             WarriorDocument.Load(filename).Open();
@@ -99,7 +99,6 @@ namespace nMars.IDE
 
         public static void CloseDocument(Document doc)
         {
-            
             if (doc.Closing())
             {
                 doc.Close();
@@ -133,7 +132,7 @@ namespace nMars.IDE
             if (warrior.Closing())
             {
                 warrior.Close();
-                if (warrior.Project!=null)
+                if (warrior.Project != null)
                 {
                     warrior.Project.Remove(warrior, delete);
                 }
@@ -153,12 +152,13 @@ namespace nMars.IDE
 
         public static void Compile(WarriorDocument warrior)
         {
-            if (warrior==null)
+            if (warrior == null)
                 return;
             warrior.Save();
-            string[] files=new string[1];
+            string[] files = new string[1];
             files[0] = warrior.FileName;
-            ParserBase.RunParser(files, ActiveSolution.ComponentSetup.Parser, Rules.DefaultRules, ParserOptions.Engine, Console);
+            ParserBase.RunParser(files, ActiveSolution.ComponentSetup.Parser, Rules.DefaultRules, ParserOptions.Engine,
+                                 Console);
         }
 
         public static void Compile(RedCodeProject project)
@@ -170,9 +170,10 @@ namespace nMars.IDE
                     editor.Save();
                 }
             }
-            string[] a =new string[project.Documents.Keys.Count];
+            string[] a = new string[project.Documents.Keys.Count];
             project.Documents.Keys.CopyTo(a, 0);
-            ParserBase.RunParser(a, ActiveSolution.ComponentSetup.Parser, ActiveSolution.ActiveProject.Rules, ActiveSolution.ActiveProject.ParserOptions, Console);
+            ParserBase.RunParser(a, ActiveSolution.ComponentSetup.Parser, ActiveSolution.ActiveProject.Rules,
+                                 ActiveSolution.ActiveProject.ParserOptions, Console);
         }
 
         #endregion
@@ -186,7 +187,7 @@ namespace nMars.IDE
 
         public static void RemoveProject(RedCodeProject project, bool delete)
         {
-            ActiveSolution.Remove(project,delete);
+            ActiveSolution.Remove(project, delete);
         }
 
         public static void AddExistingProject()
@@ -212,7 +213,7 @@ namespace nMars.IDE
         {
             ActiveSolution.ActiveProject = project;
         }
-        
+
 
         public static bool SaveSolution()
         {
@@ -260,9 +261,9 @@ namespace nMars.IDE
             mainForm.RefreshUI();
             SolutionExplorer.ReloadSolution();
         }
-        
+
         #endregion
-        
+
         #region Variables
 
         public static RedCodeSolution ActiveSolution;
