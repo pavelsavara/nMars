@@ -34,8 +34,11 @@ namespace nMars.Parser.Warrior
                 return;
             }
 
-            tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
-            tw.WriteLine("");
+            if (options.Header)
+            {
+                tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
+                tw.WriteLine("");
+            }
             if (options.Offset)
             {
                 tw.Write("   ");

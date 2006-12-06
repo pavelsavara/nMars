@@ -26,8 +26,8 @@ namespace nMars.RedCode
             }
             if (project.ParserOptions.Status)
             {
-                output.WriteLine("Compiled " + files.Count.ToString() + "warriors, " + (files.Count - res).ToString() +
-                                 "failed");
+                output.WriteLine("Compiled " + files.Count.ToString() + " warriors, " + (files.Count - res).ToString() +
+                                 " failed");
             }
             return res;
         }

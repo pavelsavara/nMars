@@ -46,8 +46,11 @@ namespace nMars.RedCode
             }
             else
             {
-                output.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
-                output.WriteLine("");
+                if (options.Header)
+                {
+                    output.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
+                    output.WriteLine("");
+                }
                 output.WriteLine("       ORG      START");
                 for (int a = 0; a < Instructions.Count; a++)
                 {

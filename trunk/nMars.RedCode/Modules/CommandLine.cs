@@ -71,7 +71,7 @@ namespace nMars.RedCode
             if (engine == null)
                 throw new ApplicationException("Unable to create DebuggerEngine");
 
-            res = ParseParams(args, out files, project, engine);
+            res = ParseParams(args, out files, project, setup.Debugger);
             if (res <= 0)
                 return res;
 
@@ -167,6 +167,9 @@ namespace nMars.RedCode
                     case "-bs":
                         project.ParserOptions.Status = !project.ParserOptions.Status;
                         break;
+                    case "-bh":
+                        project.ParserOptions.Header = false;
+                        break;
                     case "-bl":
                         logo = false;
                         break;
@@ -232,6 +235,7 @@ namespace nMars.RedCode
             Console.WriteLine();
             Console.WriteLine("Parser:");
             Console.WriteLine("  -b        Brief/silent parser mode");
+            Console.WriteLine("  -bh       No header");
             Console.WriteLine("  -bl       No logo");
             Console.WriteLine("  -bs       No status");
             Console.WriteLine("  -ue .ext  Dump to files next by original warrior with extension");
