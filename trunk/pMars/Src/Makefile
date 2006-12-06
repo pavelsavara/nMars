@@ -15,15 +15,20 @@ CC = gcc			# req. for linux
 # (5)   -DSMALLMEM                          16-bit addresses, less memory
 # (6)   -DXWINGRAPHX    1                   X-Windows graphics (UNIX)
 # (7)   -DPERMUTATE                         enables -P switch
+# (8)   -DSDLGRAPHX     1                   SDL graphics (generic)
 
-CFLAGS = -O -DEXT94 -DPERMUTATE
+#CFLAGS = -O -DEXT94 -DPERMUTATE
+CFLAGS = -O -DEXT94 -DPERMUTATE -DSDLGRAPHX $(INC)
 LFLAGS = -x
 # LIB = -lcurses -ltermlib		# enable this one for curses display
 # LIB = -lvgagl -lvga			# enable this one for Linux/SVGA
-# LIB = -L/usr/X11R6/lIB -lX11		# enable this one for X11
+# LIB = -L/usr/X11R6/lib -lX11		# enable this one for X11
+# INC = `sdl-config --cflags`		# enable this one for SDL graphics
+# LIB = `sdl-config --libs`		# enable this one for SDL graphics
 
+EXESUFFIX=
 .SUFFIXES: .o .c .c~ .man .doc .6
-MAINFILE = pmars
+MAINFILE = pmars$(EXESUFFIX)
 
 HEADER = global.h config.h asm.h sim.h 
 OBJ1 = pmars.o asm.o eval.o disasm.o cdb.o sim.o pos.o
@@ -37,7 +42,7 @@ flags:
 
 $(MAINFILE): $(OBJ1) $(OBJ2) $(OBJ3)
 	@echo Linking $(MAINFILE)
-	@$(CC) -o $(MAINFILE) $(OBJ1) $(OBJ2) $(OBJ3) $(LIB)
+	@$(CC) $(CFLAGS) -o $(MAINFILE) $(OBJ1) $(OBJ2) $(OBJ3) $(LIB)
 	@strip $(MAINFILE)
 	@echo done
 
@@ -45,7 +50,7 @@ token.o asm.o disasm.o: asm.h
 
 sim.o cdb.o pos.o disasm.o: sim.h
 
-sim.o: curdisp.c uidisp.c lnxdisp.c xwindisp.c
+sim.o: curdisp.c uidisp.c sdldisp.c lnxdisp.c xwindisp.c
 
 xwindisp.c: xwindisp.h pmarsicn.h
 
@@ -56,7 +61,6 @@ $(OBJ1) $(OBJ2) $(OBJ3): Makefile config.h global.h
 .c.o:
 	@echo Compiling $*.o 
 	@$(CC) $(CFLAGS) -c $*.c
-
 
 clean:
 	rm -f $(OBJ1) $(OBJ2) $(OBJ3) core
