@@ -4,11 +4,11 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Xml.Schema;
 
 namespace nMars.RedCode
 {
@@ -32,35 +32,35 @@ namespace nMars.RedCode
 
         #region Dumping
 
-        public void Dump(TextWriter tw)
+        public void Dump(IConsole output)
         {
-            Dump(tw, ParserOptions.Default);
+            Dump(output, ParserOptions.Default);
         }
 
-        public virtual void Dump(TextWriter tw, ParserOptions options)
+        public virtual void Dump(IConsole output, ParserOptions options)
         {
             if (options.XmlFormat)
             {
                 XmlSerializer serializer = new XmlSerializer(GetType());
-                serializer.Serialize(tw, this);
+                serializer.Serialize(output.OutStream, this);
             }
             else
             {
-                tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
-                tw.WriteLine();
-                tw.WriteLine("       ORG      START");
+                output.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
+                output.WriteLine("");
+                output.WriteLine("       ORG      START");
                 for (int a = 0; a < Instructions.Count; a++)
                 {
-                    tw.WriteLine(Instructions[a].GetLine(options, a == StartOffset));
+                    output.WriteLine(Instructions[a].GetLine(options, a == StartOffset));
                 }
             }
-            tw.WriteLine();
+            output.WriteLine("");
         }
 
         public virtual void Dump(string fileName, ParserOptions options)
         {
             StreamWriter sw = new StreamWriter(fileName);
-            Dump(sw, options);
+            Dump(new WrappedTextWriter(sw), options);
             sw.Close();
         }
 
@@ -158,8 +158,10 @@ namespace nMars.RedCode
             Author = reader.ReadElementString("Author");
             Date = reader.ReadElementString("Date");
             Version = reader.ReadElementString("Version");
-            t = reader.ReadElementString("Pin"); if (t!=null) Pin = Int32.Parse(t);
-            t = reader.ReadElementString("StartOffset"); if (t != null) StartOffset = Int32.Parse(t);
+            t = reader.ReadElementString("Pin");
+            if (t != null) Pin = Int32.Parse(t);
+            t = reader.ReadElementString("StartOffset");
+            if (t != null) StartOffset = Int32.Parse(t);
             reader.ReadElementString("StartOffset");
             while (reader.NodeType != XmlNodeType.EndElement)
             {
@@ -185,7 +187,7 @@ namespace nMars.RedCode
             if (Version != null) writer.WriteAttributeString("Version", Version);
             if (Pin != PSpace.UNSHARED) writer.WriteAttributeString("Pin", Pin.ToString());
             if (StartOffset != 0) writer.WriteAttributeString("StartOffset", StartOffset.ToString());
-            foreach(IInstruction i in Instructions)
+            foreach (IInstruction i in Instructions)
             {
                 writer.WriteStartElement("Instruction");
                 writer.WriteAttributeString("Operation", i.Operation.ToString());

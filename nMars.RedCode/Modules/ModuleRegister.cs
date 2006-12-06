@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace nMars.RedCode.Modules
 {
@@ -28,6 +29,17 @@ namespace nMars.RedCode.Modules
             }
         }
 
+        public static IModule GetModule(IComponent component)
+        {
+            string name = component.GetType().Assembly.GetName().FullName;
+            string namespc = name.Substring(0, name.IndexOf(','));
+            if (modules.ContainsKey(namespc))
+            {
+                return modules[namespc];
+            }
+            return null;
+        }
+
         private static IModule FindModule(string assembly, string name)
         {
             lock (modules)
@@ -39,7 +51,7 @@ namespace nMars.RedCode.Modules
                         Assembly a = Assembly.Load(assembly);
                         a.CreateInstance(assembly + ".Module");
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         return null;
                     }
@@ -47,20 +59,17 @@ namespace nMars.RedCode.Modules
                 return modules[name];
             }
         }
-        
+
         public static string BasePath
         {
-            get
-            {
-                return Path.GetDirectoryName(typeof(ModuleRegister).Module.FullyQualifiedName);
-            }
+            get { return Path.GetDirectoryName(typeof(ModuleRegister).Module.FullyQualifiedName); }
         }
 
         public static IEngine CreateEngine(string engineName)
         {
             return CreateEngine(engineName, engineName);
         }
-        
+
         public static IEngine CreateEngine(string assembly, string engineName)
         {
             IEngineModule engineModule = FindModule(assembly, engineName) as IEngineModule;
@@ -79,7 +88,7 @@ namespace nMars.RedCode.Modules
         public static IParser CreateParser(string assembly, string parserName)
         {
             IParserModule parserModule = FindModule(assembly, parserName) as IParserModule;
-            if (parserModule==null)
+            if (parserModule == null)
             {
                 throw new FileNotFoundException("Cannot find module or interface");
             }
@@ -91,7 +100,7 @@ namespace nMars.RedCode.Modules
             return CreateDebugger(name, name);
         }
 
-        public static IDebugger CreateDebugger( string assembly, string name)
+        public static IDebugger CreateDebugger(string assembly, string name)
         {
             IDebuggerModule debuggerModule = FindModule(assembly, name) as IDebuggerModule;
             if (debuggerModule == null)
@@ -114,6 +123,24 @@ namespace nMars.RedCode.Modules
                 throw new FileNotFoundException("Cannot find module or interface");
             }
             return debuggerModule.CreateShell();
+        }
+
+        public static string GetVersion(Type type)
+        {
+            return type.Assembly.GetName().Version.ToString();
+        }
+
+        public static string GetVersionInfo()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (IModule module in modules.Values)
+            {
+                sb.Append(module.Name);
+                sb.Append(" ");
+                sb.Append(module.Version);
+                sb.Append("\n");
+            }
+            return sb.ToString();
         }
 
         static private Dictionary<string, IModule> modules = new Dictionary<string, IModule>();

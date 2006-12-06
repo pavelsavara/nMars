@@ -4,6 +4,7 @@
 // 2006 Pavel Savara
 
 using System.Runtime.InteropServices;
+using System.Xml.Serialization;
 
 namespace nMars.RedCode
 {
@@ -14,26 +15,68 @@ namespace nMars.RedCode
         {
         }
 
-        public ParserOptions(bool offset, bool labels, bool comments, bool xml, bool brief)
+        public ParserOptions(bool offset, bool labels, bool comments, bool xml, bool brief, bool status)
         {
             Offset = offset;
             Labels = labels;
             Comments = comments;
             XmlFormat = xml;
             Brief = brief;
+            Status = status;
         }
 
+        [XmlAttribute]
+        public bool Status = false;
+
+        [XmlAttribute]
         public bool Brief = false;
+
+        [XmlAttribute]
         public bool Offset = false;
+
+        [XmlAttribute]
         public bool Labels = false;
+
+        [XmlAttribute]
         public bool Comments = false;
+
+        [XmlAttribute]
         public bool XmlFormat = false;
+
+        [XmlAttribute]
         public string DumpExt = ".dmp";
+
+        [XmlAttribute]
         public bool DumpFiles = false;
 
-        public static readonly ParserOptions Default = new ParserOptions();
-        public static readonly ParserOptions Full = new ParserOptions(true, true, true, false, false);
-        public static readonly ParserOptions NoOffset = new ParserOptions(false, true, true, false, false);
-        public static readonly ParserOptions Xml = new ParserOptions(true, true, true, true, false);
+        public static ParserOptions Default
+        {
+            get { return new ParserOptions(); }
+        }
+
+        public static ParserOptions Full
+        {
+            get { return new ParserOptions(true, true, true, false, false, true); }
+        }
+
+        public static ParserOptions NoOffset
+        {
+            get { return new ParserOptions(false, true, true, false, false, false); }
+        }
+
+        public static ParserOptions Xml
+        {
+            get { return new ParserOptions(true, true, true, true, false, false); }
+        }
+
+        public static ParserOptions Engine
+        {
+            get { return new ParserOptions(false, false, false, false, true, false); }
+        }
+
+        public static ParserOptions Ide
+        {
+            get { return new ParserOptions(false, false, false, false, true, true); }
+        }
     }
 }

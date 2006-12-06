@@ -5,16 +5,16 @@
 
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
 using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
     [ComVisible(true)]
-    public interface IParser
+    public interface IParser : IComponent
     {
         void InitParser(Rules aRules);
         IWarrior Parse(string fileName);
+        IWarrior Parse(string fileName, IConsole err);
         IWarrior Parse(string fileName, TextWriter err);
         IWarrior Parse(string fileName, string errFileName);
     }

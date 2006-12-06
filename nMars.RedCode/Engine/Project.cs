@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace nMars.RedCode
 {
+    [Serializable]
     public class Project : IProject
     {
         public Project()
@@ -16,42 +17,40 @@ namespace nMars.RedCode
 
         public Project(Rules rules)
         {
-            this.rules = rules;
+            Rules = rules;
         }
 
-        private IList<IWarrior> warriors = new List<IWarrior>();
-        private IList<int> forcedAddresses = null;
-        private Rules rules = Rules.DefaultRules;
-        private EngineOptions engineOptions = EngineOptions.Default;
-        private ParserOptions parserOptions = ParserOptions.Default;
+        public IList<IWarrior> Warriors = new List<IWarrior>();
+        public List<int> ForcedAddresses = null;
+        public Rules Rules = Rules.DefaultRules;
+        public EngineOptions EngineOptions = EngineOptions.Default;
+        public ParserOptions ParserOptions = ParserOptions.Default;
 
-        public Rules Rules
+        Rules IProject.Rules
         {
-            get { return rules; }
-            set { rules = value; }
+            get { return Rules; }
         }
 
-        public EngineOptions EngineOptions
+        EngineOptions IProject.EngineOptions
         {
-            get { return engineOptions; }
-            set { engineOptions = value; }
+            get { return EngineOptions; }
+            set { EngineOptions = value; }
         }
 
-        public ParserOptions ParserOptions
+        ParserOptions IProject.ParserOptions
         {
-            get { return parserOptions; }
-            set { parserOptions = value; }
+            get { return ParserOptions; }
+            set { ParserOptions = value; }
         }
 
-        public IList<IWarrior> Warriors
+        IList<IWarrior> IProject.Warriors
         {
-            get { return warriors; }
+            get { return Warriors; }
         }
 
-        public IList<int> ForcedAddresses
+        IList<int> IProject.ForcedAddresses
         {
-            get { return forcedAddresses; }
-            set { forcedAddresses = value; }
+            get { return ForcedAddresses; }
         }
     }
 }

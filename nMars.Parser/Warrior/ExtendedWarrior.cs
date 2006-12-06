@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using nMars.RedCode;
 
 namespace nMars.Parser.Warrior
@@ -27,16 +26,16 @@ namespace nMars.Parser.Warrior
             get { return (ExtendedInstruction)Instructions[offset]; }
         }
 
-        public override void Dump(TextWriter tw, ParserOptions options)
+        public override void Dump(IConsole tw, ParserOptions options)
         {
             if (options.XmlFormat)
             {
                 base.Dump(tw, options);
                 return;
             }
-            
+
             tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
-            tw.WriteLine();
+            tw.WriteLine("");
             if (options.Offset)
             {
                 tw.Write("   ");
@@ -53,7 +52,7 @@ namespace nMars.Parser.Warrior
             {
                 tw.WriteLine(this[a].GetLine(options, a == StartOffset));
             }
-            tw.WriteLine();
+            tw.WriteLine("");
         }
 
         [NonSerialized]

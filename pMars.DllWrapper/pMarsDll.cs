@@ -89,7 +89,7 @@ namespace pMars.DllWrapper
             {
                 get { return B_value; }
             }
-            
+
             public int Address
             {
                 get
@@ -144,7 +144,7 @@ namespace pMars.DllWrapper
 
             public IntPtr nextWarrior;
         }
-        
+
         #region Dll
 
         [DllImport("pMars.dll")]
@@ -166,9 +166,9 @@ namespace pMars.DllWrapper
         public static extern void pMarsWatchMatch([Out] out IntPtr aCore, [Out] out int aCoreSize,
                                                   [Out] out IntPtr aCyclesLeft, [Out] out IntPtr aRound,
                                                   [Out] out IntPtr aWarriors, [Out] out int aWarriorsCount,
-                                                  [Out] out IntPtr aPSpaces,
-                                                  [Out] out IntPtr aWarrirosLeft, [Out] out IntPtr aNextWarrior,
-                                                  [Out] out IntPtr aTaskQueue, [Out] out IntPtr aEndQueue);
+                                                  [Out] out IntPtr aPSpaces, [Out] out IntPtr aWarrirosLeft,
+                                                  [Out] out IntPtr aNextWarrior, [Out] out IntPtr aTaskQueue,
+                                                  [Out] out IntPtr aEndQueue);
 
         [DllImport("pMars.dll")]
         public static extern void pMarsEndMatch();
@@ -223,7 +223,7 @@ namespace pMars.DllWrapper
         public static List<IPSpace> FillPSpace(Rules rules, List<PmarsWarrior> warriorsDllCopy, IntPtr pspaceDll)
         {
             List<IPSpace> res = new List<IPSpace>(rules.WarriorsCount);
-            for (int w = 0; w < rules.WarriorsCount;w++ )
+            for (int w = 0; w < rules.WarriorsCount; w++)
             {
                 PSpace p = new PSpace(rules.PSpaceSize);
                 int psindex = warriorsDllCopy[w].pSpaceIndex;
@@ -266,7 +266,7 @@ namespace pMars.DllWrapper
             {
                 warrior.Pin = PSpace.UNSHARED;
             }
-            
+
             FillInstructions(warrior.Instructions, w.instBank, w.instLen, rules.CoreSize);
             return warrior;
         }
@@ -371,14 +371,14 @@ namespace pMars.DllWrapper
             get { throw new NotImplementedException(); }
         }
     }
-    
+
     class DllInstruction : Instruction, IRunningInstruction
     {
         public DllInstruction(IInstruction src)
             : base(src)
         {
         }
-        
+
         public int address;
 
         public int Address

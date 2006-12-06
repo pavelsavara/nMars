@@ -16,5 +16,4 @@ namespace nMars.RedCode
         {
         }
     }
-
 }

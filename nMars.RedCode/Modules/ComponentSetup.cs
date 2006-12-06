@@ -10,6 +10,8 @@ namespace nMars.RedCode.Modules
 {
     public class ComponentSetup
     {
+        #region Construction
+
         public ComponentSetup()
         {
             Assembly a = Assembly.GetEntryAssembly();
@@ -19,63 +21,16 @@ namespace nMars.RedCode.Modules
             LoadDebugger(name, name);
         }
 
-        public ComponentSetup(IParser parser)
-        {
-            this.parser = parser;
-        }
+        #endregion
 
-        public ComponentSetup(IEngine engine)
-        {
-            this.engine = engine;
-        }
+        #region Public
 
-        public ComponentSetup(IDebugger debugger)
-        {
-            this.debugger = debugger;
-        }
-
-        public void LoadParser(string parserAssembly, string parserName)
-        {
-            try
-            {
-                parser = ModuleRegister.CreateParser(parserAssembly, parserName);
-            }
-            catch(FileNotFoundException)
-            {
-                //swallow
-            }
-        }
-        
-        public void LoadEngine(string engineAssembly, string engineName)
-        {
-            try
-            {
-                engine = ModuleRegister.CreateEngine(engineAssembly, engineName);
-            }
-            catch (FileNotFoundException)
-            {
-                //swallow
-            }
-        }
-        
-        public void LoadDebugger(string debuggerAssembly, string debuggerName)
-        {
-            try
-            {
-                debugger = ModuleRegister.CreateDebugger(debuggerAssembly, debuggerName);
-            }
-            catch (FileNotFoundException)
-            {
-                //swallow
-            }
-        }
-        
         public IParser Parser
         {
             get
             {
                 if (parser == null)
-                    LoadParser("nMars.Parser", "nMars.Parser");
+                    LoadParser(ParserAssembly, ParserName);
                 return parser;
             }
         }
@@ -85,7 +40,7 @@ namespace nMars.RedCode.Modules
             get
             {
                 if (engine == null)
-                    LoadEngine("nMars.Engine", "nMars.Engine");
+                    LoadEngine(EngineAssembly, EngineName);
                 return engine;
             }
         }
@@ -95,13 +50,96 @@ namespace nMars.RedCode.Modules
             get
             {
                 if (debugger == null)
-                    LoadDebugger("nMars.Debugger", "nMars.Debugger");
+                    LoadDebugger(DebuggerAssembly, DebuggerName);
                 return debugger;
             }
         }
-        
+
+        public string ParserName;
+        public string EngineName;
+        public string DebuggerName;
+        public string ShellName;
+
+        public string ParserAssembly = "nMars.Parser";
+        public string EngineAssembly = "nMars.Engine";
+        public string DebuggerAssembly = "nMars.Debugger";
+        public string ShellAssembly = "nMars.Debugger";
+
+        #endregion
+
+        #region Helpers
+
+        private void LoadParser(string parserAssembly, string parserName)
+        {
+            try
+            {
+                if (parserName == null)
+                {
+                    parser = ModuleRegister.CreateParser(parserAssembly, parserAssembly);
+                }
+                else
+                {
+                    parser = ModuleRegister.CreateParser(parserAssembly, parserName);
+                }
+                ParserAssembly = parserAssembly;
+                ParserName = parserName;
+            }
+            catch (FileNotFoundException)
+            {
+                //swallow
+            }
+        }
+
+        private void LoadEngine(string engineAssembly, string engineName)
+        {
+            try
+            {
+                if (engineName == null)
+                {
+                    engine = ModuleRegister.CreateEngine(engineAssembly, engineAssembly);
+                }
+                else
+                {
+                    engine = ModuleRegister.CreateEngine(engineAssembly, engineName);
+                }
+                EngineAssembly = engineAssembly;
+                EngineName = engineName;
+            }
+            catch (FileNotFoundException)
+            {
+                //swallow
+            }
+        }
+
+        private void LoadDebugger(string debuggerAssembly, string debuggerName)
+        {
+            try
+            {
+                if (debuggerName == null)
+                {
+                    debugger = ModuleRegister.CreateDebugger(debuggerAssembly, debuggerAssembly);
+                }
+                else
+                {
+                    debugger = ModuleRegister.CreateDebugger(debuggerAssembly, debuggerName);
+                }
+                DebuggerAssembly = debuggerAssembly;
+                DebuggerName = debuggerName;
+            }
+            catch (FileNotFoundException)
+            {
+                //swallow
+            }
+        }
+
+        #endregion
+
+        #region Variables
+
         private IParser parser;
         private IEngine engine;
         private IDebugger debugger;
+
+        #endregion
     }
 }

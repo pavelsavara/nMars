@@ -15,7 +15,6 @@ namespace nMars.Test
     [TestFixture]
     public class EngineTest
     {
-
         [Test]
         public void Single()
         {
@@ -28,8 +27,7 @@ namespace nMars.Test
         public void Pair()
         {
             Init();
-            LoadRunPair(Path.Combine(basePath, "clear/twinshot.rc"),
-                        Path.Combine(basePath, "corewin/bluefunk.red"));
+            LoadRunPair(Path.Combine(basePath, "clear/twinshot.rc"), Path.Combine(basePath, "corewin/bluefunk.red"));
         }
 
         [Test]
@@ -63,7 +61,7 @@ namespace nMars.Test
             if (!allOK)
                 throw new EngineDifferException("Some warriors failed.", null);
         }
-        
+
         private void Init()
         {
             basePath = Utils.GetWarrirorsDirectory();
@@ -78,9 +76,8 @@ namespace nMars.Test
 
             pparser = new CachingParser(ModuleRegister.CreateParser("pMars.DllWrapper"));
             pparser.InitParser(rules);
-            
-            engines=new ComparingEngine();
 
+            engines = new ComparingEngine();
         }
 
         private void LoadRunOne(string fileOne)
@@ -113,7 +110,7 @@ namespace nMars.Test
             string problemsPathTwo = Path.Combine(problemsPath, shortTwo);
             pwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
             pwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".pErr2");
-            if (pwarriorOne== null || pwarriorTwo == null) 
+            if (pwarriorOne == null || pwarriorTwo == null)
                 return;
             Project pproject = new Project(rules);
             pproject.EngineOptions = EngineOptions.ConstantRandom;
@@ -123,7 +120,7 @@ namespace nMars.Test
             {
                 engines.Run(pproject);
             }
-            catch(EngineDifferException)
+            catch (EngineDifferException)
             {
                 File.Copy(fileOne, problemsPathOne + ".red", true);
                 File.Copy(fileTwo, problemsPathTwo + ".red", true);
@@ -136,6 +133,5 @@ namespace nMars.Test
         string problemsPath;
         Rules rules;
         ComparingEngine engines;
-
     }
 }

@@ -42,7 +42,7 @@ namespace nMars.RedCode
             warriorsCount = source.warriorsCount;
             rounds = source.rounds;
             formula = source.formula;
-            results = new RoundResult[warriorsCount, rounds];
+            results = new RoundResult[warriorsCount,rounds];
             for (int w = 0; w < warriorsCount; w++)
             {
                 for (int r = 0; r < rounds; r++)
@@ -50,7 +50,6 @@ namespace nMars.RedCode
                     results[w, r] = source.results[w, r];
                 }
             }
-
         }
 
         public MatchResult(IProject project)
@@ -58,7 +57,7 @@ namespace nMars.RedCode
             warriorsCount = project.Rules.WarriorsCount;
             rounds = project.Rules.Rounds;
             formula = project.Rules.ScoreFormula;
-            results = new RoundResult[warriorsCount, rounds];
+            results = new RoundResult[warriorsCount,rounds];
         }
 
         public void ComputePoints()
@@ -107,7 +106,7 @@ namespace nMars.RedCode
         public void Dump(TextWriter tw, IProject project)
         {
             IList<ResultsHelper> res = PrepareResults(project, project.EngineOptions.SortResults);
-            for(int w=0;w<res.Count;w++)
+            for (int w = 0; w < res.Count; w++)
             {
                 IWarrior warrior = res[w].warrior;
                 tw.WriteLine("{0} by {1} scores {2}", warrior.Name, warrior.Author, res[w].score);
@@ -122,14 +121,14 @@ namespace nMars.RedCode
         #endregion
 
         #region Helpers
-        
-        private IList<ResultsHelper> PrepareResults(IProject project,bool sort)
+
+        private IList<ResultsHelper> PrepareResults(IProject project, bool sort)
         {
             List<ResultsHelper> res = new List<ResultsHelper>();
-            for(int w = 0; w<warriorsCount;w++)
+            for (int w = 0; w < warriorsCount; w++)
             {
                 IWarrior warrior = project.Warriors[w];
-                ResultsHelper r=new ResultsHelper();
+                ResultsHelper r = new ResultsHelper();
                 r.originalIndex = w;
                 r.score = score[w];
                 r.warrior = warrior;

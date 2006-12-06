@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
@@ -13,7 +14,7 @@ namespace nMars.RedCode
     #region Basic
 
     [ComVisible(true)]
-    public interface IEngine
+    public interface IEngine : IComponent
     {
         /// <summary>
         /// Run complete round
@@ -23,7 +24,7 @@ namespace nMars.RedCode
         /// <summary>
         /// return current project
         /// </summary>
-        IProject Project { get;}
+        IProject Project { get; }
     }
 
     [ComVisible(true)]
@@ -48,7 +49,7 @@ namespace nMars.RedCode
         /// <summary>
         /// returns result of last step
         /// </summary>
-        StepResult LastStepResult { get;}
+        StepResult LastStepResult { get; }
     }
 
     #endregion 
@@ -68,10 +69,10 @@ namespace nMars.RedCode
         int LastResult { get; }
         int PSpaceIndex { get; }
     }
-    
+
     public interface IRunningInstruction : IInstruction
     {
-        int Address { get;}
+        int Address { get; }
         string ToString();
     }
 
@@ -102,7 +103,7 @@ namespace nMars.RedCode
     [ComVisible(true)]
     public interface IScoreView
     {
-        MatchResult Results { get;}
+        MatchResult Results { get; }
     }
 
     public interface ITaskView
@@ -134,21 +135,21 @@ namespace nMars.RedCode
     public interface IStepBackEngine
     {
         StepResult PrevStep();
-        bool CanStepBack { get;}
+        bool CanStepBack { get; }
     }
 
     public class CheckBreakEventArgs : EventArgs
     {
-        public bool Break=false;
+        public bool Break = false;
     }
-    
+
     public delegate void CheckBreak(CheckBreakEventArgs args);
-    
+
     public interface IBreakpointsEngine
     {
         event CheckBreak CheckBreak;
     }
-    
+
     public interface IAsyncEngine
     {
         void Continue();
@@ -157,10 +158,11 @@ namespace nMars.RedCode
         void Quit();
     }
 
-    public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IAsyncEngine, ITaskView, ITimeView, ICoreView
+    public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IAsyncEngine, ITaskView,
+                                       ITimeView, ICoreView
     {
     }
-    
+
 
     public interface ICoreDump : ITaskView, IStatusView, IScoreView
     {

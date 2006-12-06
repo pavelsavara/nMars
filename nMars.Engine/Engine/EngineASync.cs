@@ -174,6 +174,7 @@ namespace nMars.Engine
         {
             worker.Interrupt();
             signalRun.Close();
+            signalPaused.Close();
         }
 
         #endregion

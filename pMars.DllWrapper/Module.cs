@@ -9,7 +9,7 @@ using nMars.RedCode.Modules;
 
 namespace pMars.DllWrapper
 {
-    class Module : IParserModule, IEngineModule
+    class Module : BaseModule, IParserModule, IEngineModule
     {
         public static int Main(string[] args)
         {
@@ -39,11 +39,6 @@ namespace pMars.DllWrapper
         static Module()
         {
             ModuleRegister.Register(new Module());
-        }
-
-        public string Name
-        {
-            get { return typeof(Module).Namespace; }
         }
 
         #endregion

@@ -138,9 +138,10 @@ namespace nMars.RedCode
 
         public override string ToString()
         {
-            return Operation.ToString() + "." + Modifier.ToString().PadRight(3) +
-                   ModeHelper.ToString(ModeA) + ValueA.ToString().PadLeft(6) + ", " +
-                   ModeHelper.ToString(ModeB) + ValueB.ToString().PadLeft(6) + "     ";
+            return
+                Operation.ToString() + "." + Modifier.ToString().PadRight(3) + ModeHelper.ToString(ModeA) +
+                ValueA.ToString().PadLeft(6) + ", " + ModeHelper.ToString(ModeB) + ValueB.ToString().PadLeft(6) +
+                "     ";
         }
 
         public override bool Equals(object obj)
@@ -152,8 +153,7 @@ namespace nMars.RedCode
         public override int GetHashCode()
         {
             return
-                Operation.GetHashCode() ^ Modifier.GetHashCode() ^
-                ModeA.GetHashCode() ^ ModeB.GetHashCode() ^
+                Operation.GetHashCode() ^ Modifier.GetHashCode() ^ ModeA.GetHashCode() ^ ModeB.GetHashCode() ^
                 ValueA.GetHashCode() ^ ValueB.GetHashCode();
         }
 
@@ -249,7 +249,7 @@ namespace nMars.RedCode
         #endregion
 
         #region Variables
-        
+
         public Operation Operation;
         public Modifier Modifier;
         public Mode ModeA;

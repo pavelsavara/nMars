@@ -32,7 +32,8 @@ namespace nMars.DbgShellPy
             pythonEngine.Execute("def exit() : debugger.Quit();");
             pythonEngine.Execute("def echo(e = True) : debugger.Echo = e;");
             pythonEngine.Execute("def promptString() : return '>';");
-            pythonEngine.Execute("def echoString() : return System.String.Format('{0,20} ({1,3}): {2}', engine.NextWarrior.Name, engine.NextWarrior.TasksCount, engine.NextInstruction.ToString());");
+            pythonEngine.Execute(
+                "def echoString() : return System.String.Format('{0,20} ({1,3}): {2}', engine.NextWarrior.Name, engine.NextWarrior.TasksCount, engine.NextInstruction.ToString());");
             pythonEngine.SetStandardError(prompt.ErrorStream);
             pythonEngine.SetStandardOutput(prompt.OutStream);
             pythonEngine.SetStandardInput(prompt.InputStream);
@@ -44,11 +45,12 @@ namespace nMars.DbgShellPy
             try
             {
                 if (!basicShell.ProcessCommand(ref command, false))
-                {// is not short command, pass it to python
+                {
+// is not short command, pass it to python
                     pythonEngine.ExecuteToConsole(command);
                 }
             }
-            catch(PythonSyntaxErrorException e)
+            catch (PythonSyntaxErrorException e)
             {
                 if (printErrors)
                 {
@@ -57,7 +59,7 @@ namespace nMars.DbgShellPy
                 }
                 res = false;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 if (printErrors)
                 {
@@ -70,18 +72,12 @@ namespace nMars.DbgShellPy
 
         public string EchoString
         {
-            get
-            {
-                return pythonEngine.Evaluate("echoString()") as string;
-            }
+            get { return pythonEngine.Evaluate("echoString()") as string; }
         }
 
         public string PromptString
         {
-            get
-            {
-                return pythonEngine.Evaluate("promptString()") as string;
-            }
+            get { return pythonEngine.Evaluate("promptString()") as string; }
         }
 
         PythonEngine pythonEngine;

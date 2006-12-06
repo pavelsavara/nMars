@@ -20,7 +20,7 @@ namespace nMars.Parser
     {
         private LALRParser parser;
         protected internal Dictionary<string, Expression> variables;
-        protected TextWriter errOutput;
+        protected IConsole errOutput;
         protected int errCount;
         protected string org;
         protected Expression pin;
@@ -72,7 +72,7 @@ namespace nMars.Parser
 
         protected internal void WriteError(string error)
         {
-            errOutput.WriteLine(error);
+            errOutput.ErrorWriteLine(error);
             errCount++;
             if (errCount > 10)
             {

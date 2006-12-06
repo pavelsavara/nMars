@@ -11,7 +11,7 @@ namespace nMars.Engine
     public abstract class EngineInstructions : EngineAddressing
     {
         #region Events
-        
+
         protected virtual void Died(EngineWarrior warrior)
         {
         }
@@ -25,7 +25,7 @@ namespace nMars.Engine
         protected void PerformInstruction(EngineWarrior warrior, int ip)
         {
             reg.ip = ip;
-            BeforeRead(ip,Column.All);
+            BeforeRead(ip, Column.All);
             reg.IR = core[ip];
             reg.AA_Value = core[ip].ValueA;
             reg.AB_Value = core[ip].ValueA;
@@ -412,7 +412,7 @@ namespace nMars.Engine
             switch (reg.IR.Modifier)
             {
                 case Modifier.A:
-                    BeforeWrite(reg.AdrB,Column.A);
+                    BeforeWrite(reg.AdrB, Column.A);
                     die |= oper(ref core[reg.AdrB].ValueA, reg.AB_Value, reg.AA_Value, reg.IR.Operation);
                     AfterWrite(reg.AdrB, Column.A);
                     break;

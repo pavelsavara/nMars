@@ -24,11 +24,10 @@ namespace nMars.Debugger
                 {
                     shell = ModuleRegister.CreateShell("nMars.DbgShellPy");
                 }
-                catch(FileNotFoundException)
+                catch (FileNotFoundException)
                 {
                     //swallow
                 }
-                
             }
             if (shell == null)
             {
@@ -50,7 +49,7 @@ namespace nMars.Debugger
             {
                 AskPrompt();
             } while (!quit);
-            
+
             engine.Quit();
             return engine.EndMatch();
         }
@@ -59,13 +58,12 @@ namespace nMars.Debugger
         {
             try
             {
-                prompt.PaintCore(false);
                 string command = prompt.GetCommand();
                 shell.ProcessCommand(ref command, true);
             }
             catch (DebuggerException e)
             {
-                prompt.Error.WriteLine(e.Message);
+                prompt.ErrorWriteLine(e.Message);
             }
         }
 
@@ -86,7 +84,7 @@ namespace nMars.Debugger
         private void EchoStep()
         {
             if (!echo) return;
-            prompt.Out.WriteLine(shell.EchoString);
+            prompt.WriteLine(shell.EchoString);
         }
 
         #region Interfaces
@@ -100,7 +98,7 @@ namespace nMars.Debugger
         {
             for (int a = from; a < from + length; a++)
             {
-                prompt.Out.WriteLine(engine[a].ToString());
+                prompt.WriteLine(engine[a].ToString());
             }
         }
 
@@ -188,16 +186,13 @@ namespace nMars.Debugger
 
         public IProject Project
         {
-            get
-            {
-                return project;
-            }
+            get { return project; }
         }
 
         #endregion
 
         #region Variables
-        
+
         private IDebuggerEngine engine;
         private IDebuggerShell shell;
         private IDebuggerPrompt prompt;

@@ -4,7 +4,6 @@
 // 2006 Pavel Savara
 
 using System.Collections.Generic;
-using System.IO;
 
 namespace nMars.RedCode
 {
@@ -64,17 +63,17 @@ namespace nMars.RedCode
         /// <summary>
         /// List of Instructions
         /// </summary>
-        IList<IInstruction> Instructions { get;}
+        IList<IInstruction> Instructions { get; }
 
         /// <summary>
         /// Dump
         /// </summary>
-        void Dump(TextWriter tw);
+        void Dump(IConsole output);
 
         /// <summary>
         /// Dump with extended options
         /// </summary>
-        void Dump(TextWriter tw, ParserOptions options);
+        void Dump(IConsole output, ParserOptions options);
 
         /// <summary>
         /// Dump with extended options

@@ -21,9 +21,9 @@ namespace nMars.Engine
                 throw new EngineException("Count of warriors differ from rules");
 
             random = project.EngineOptions.Random;
-            if (random==null)
+            if (random == null)
             {
-                random=new Random();
+                random = new Random();
             }
             forcedAddresses = project.ForcedAddresses;
             sourceWarriors = project.Warriors;
@@ -38,7 +38,7 @@ namespace nMars.Engine
                 if (sourceWarrior.Rules != rules)
                     throw new EngineException("Warrior was compiled under different rules");
                 EngineWarrior engineWarrior = new EngineWarrior(sourceWarrior, this, w);
-                
+
                 warriors.Add(engineWarrior);
                 runningWarriors.Add(engineWarrior);
                 iWarriors.Add(engineWarrior);
@@ -290,13 +290,10 @@ namespace nMars.Engine
                 return res;
             }
         }
-        
+
         public IProject Project
         {
-            get
-            {
-                return project;
-            }
+            get { return project; }
         }
 
         #endregion
