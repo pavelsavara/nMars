@@ -17,8 +17,8 @@ CC = gcc			# req. for linux
 # (7)   -DPERMUTATE                         enables -P switch
 # (8)   -DSDLGRAPHX     1                   SDL graphics (generic)
 
-#CFLAGS = -O -DEXT94 -DPERMUTATE
-CFLAGS = -O -DEXT94 -DPERMUTATE -DSDLGRAPHX $(INC)
+CFLAGS = -O4 -DEXT94 -DPERMUTATE -DSERVER
+# CFLAGS = -O -DEXT94 -DPERMUTATE -DSDLGRAPHX $(INC)
 LFLAGS = -x
 # LIB = -lcurses -ltermlib		# enable this one for curses display
 # LIB = -lvgagl -lvga			# enable this one for Linux/SVGA
@@ -26,7 +26,7 @@ LFLAGS = -x
 # INC = `sdl-config --cflags`		# enable this one for SDL graphics
 # LIB = `sdl-config --libs`		# enable this one for SDL graphics
 
-EXESUFFIX=
+EXESUFFIX=s
 .SUFFIXES: .o .c .c~ .man .doc .6
 MAINFILE = pmars$(EXESUFFIX)
 
