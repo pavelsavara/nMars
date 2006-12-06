@@ -26,7 +26,10 @@ namespace nMars.RedCode
         }
 
         [XmlAttribute]
-        public bool Status = false;
+        public bool Status = true;
+
+        [XmlAttribute]
+        public bool Header = true;
 
         [XmlAttribute]
         public bool Brief = false;
