@@ -1386,7 +1386,6 @@ void begin_match()
 
 void end_match()
 {
-	display_close();
 	finalize_core();
 }
 
