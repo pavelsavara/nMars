@@ -243,7 +243,8 @@ checksum_warriors()
 #endif
   mem_struct *sourcePtr;        /* pointer used to copy program to core */
   mem_struct *endPtr;                /* pointer used to copy program to core */
-register  int     temp;                        /* general purpose temporary variable */
+//register  
+  int     temp;                        /* general purpose temporary variable */
   int     addrA, addrB;                /* A and B pointers */
 #ifndef SERVER
   int     temp2;			/* needed in graphical versions to display postincrements at the correct address */

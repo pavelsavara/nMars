@@ -16,11 +16,11 @@ CC = gcc			# req. for linux
 # (6)   -DXWINGRAPHX    1                   X-Windows graphics (UNIX)
 # (7)   -DPERMUTATE                         enables -P switch
 
-CFLAGS = -O -DEXT94 -DXWINGRAPHX -DPERMUTATE
+CFLAGS = -O -DEXT94 -DPERMUTATE
 LFLAGS = -x
 # LIB = -lcurses -ltermlib		# enable this one for curses display
 # LIB = -lvgagl -lvga			# enable this one for Linux/SVGA
-LIB = -L/usr/X11R6/lib -lX11		# enable this one for X11
+# LIB = -L/usr/X11R6/lIB -lX11		# enable this one for X11
 
 .SUFFIXES: .o .c .c~ .man .doc .6
 MAINFILE = pmars
