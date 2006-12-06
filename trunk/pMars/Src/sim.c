@@ -243,8 +243,6 @@ checksum_warriors()
 #endif
   mem_struct *sourcePtr;        /* pointer used to copy program to core */
   mem_struct *endPtr;                /* pointer used to copy program to core */
-//register  
-  int     temp;                        /* general purpose temporary variable */
   int     addrA, addrB;                /* A and B pointers */
 #ifndef SERVER
   int     temp2;			/* needed in graphical versions to display postincrements at the correct address */
@@ -331,6 +329,7 @@ void init_core()
 
 void init_round()
 {
+	int     temp;
 #if defined(DOS16) && !defined(SERVER) && !defined(DOSTXTGRAPHX) && !defined(DOSGRXGRAPHX) && !defined(DJGPP)
     fputc('\r', STDOUT);        /* enable interruption by Ctrl-C */
 #else
@@ -402,6 +401,7 @@ void init_round()
 
 int run_step()
 {   
+	register int     temp;                        /* general purpose temporary variable */
     /* the inner loop of execution */
                                 /* each cycle */
       display_cycle();
@@ -1330,6 +1330,7 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 
 void finalize_round()
 {
+	int temp;
     for (temp = 0; temp < warriors; temp++) {
       if (warrior[temp].tasks) {
 	warrior[temp].score[warriorsLeft - 1]++;
