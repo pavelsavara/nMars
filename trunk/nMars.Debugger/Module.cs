@@ -9,18 +9,17 @@ using nMars.RedCode.Modules;
 
 namespace nMars.Debugger
 {
-    class Module : IDebuggerModule
+    public class Module : BaseModule, IDebuggerModule, IDebuggerShellModule
     {
         public static int Main(string[] args)
         {
             try
             {
-                ComponentSetup setup=new ComponentSetup();
-                setup.LoadEngine("nMars.Engine", "nMars.Engine-Async");
-                
-                Project project=new Project();
+                ComponentSetup setup = new ComponentSetup();
+
+                Project project = new Project();
                 project.ParserOptions.Brief = true;
-                
+
                 return CommandLine.DebuggerMain(args, setup, project);
             }
             catch (Exception ex)
@@ -35,32 +34,18 @@ namespace nMars.Debugger
             return new Debugger();
         }
 
-        #region Module registration
-
-        static Module()
-        {
-            ModuleRegister.Register(new Module());
-            ModuleRegister.Register(new DebuggerShellModule());
-        }
-
-        public string Name
-        {
-            get { return typeof(Module).Namespace; }
-        }
-
-        #endregion
-    }
-
-    class DebuggerShellModule : IDebuggerShellModule
-    {
         public IDebuggerShell CreateShell()
         {
             return new DebuggerShell();
         }
 
-        public string Name
+        #region Module registration
+
+        static Module()
         {
-            get { return typeof(Module).Namespace + "-Shell"; }
+            ModuleRegister.Register(new Module());
         }
+
+        #endregion
     }
 }

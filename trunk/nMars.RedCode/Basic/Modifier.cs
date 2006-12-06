@@ -121,14 +121,14 @@ namespace nMars.RedCode
     [Flags]
     public enum Column
     {
-        None      = 0x00,
+        None = 0x00,
         Operation = 0x01,
-        Modifier  = 0x02,
-        ModeA     = 0x04,
-        ModeB     = 0x08,
-        A         = 0x10,
-        B         = 0x20,
-        AB        = 0x30,
-        All       = 0x3f,
+        Modifier = 0x02,
+        ModeA = 0x04,
+        ModeB = 0x08,
+        A = 0x10,
+        B = 0x20,
+        AB = 0x30,
+        All = 0x3f,
     }
 }

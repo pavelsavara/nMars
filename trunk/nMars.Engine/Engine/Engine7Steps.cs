@@ -31,7 +31,6 @@ namespace nMars.Engine
 
         public StepResult NextStep()
         {
-            
             if (round >= rules.Rounds)
             {
                 return StepResult.Finished;
@@ -82,20 +81,17 @@ namespace nMars.Engine
             lastStepResult = stepResult;
             return stepResult;
         }
-        
+
         public MatchResult EndMatch()
         {
             FinalizeMatch();
             results.ComputePoints();
             return results;
         }
-        
+
         public StepResult LastStepResult
         {
-            get
-            {
-                return lastStepResult;
-            }
+            get { return lastStepResult; }
         }
 
         protected void PerformInstruction()
@@ -121,7 +117,7 @@ namespace nMars.Engine
         }
 
         #region Variables
-        
+
         protected StepResult lastStepResult;
         protected EngineWarrior lastStepWarrior;
 

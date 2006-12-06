@@ -8,7 +8,7 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public abstract class EngineTasks : EnginePlacement, ITaskView, ITimeView, IStatusView, ICoreDump 
+    public abstract class EngineTasks : EnginePlacement, ITaskView, ITimeView, IStatusView, ICoreDump
     {
         #region Events
 
@@ -18,14 +18,14 @@ namespace nMars.Engine
             starter = 0;
             round = 0;
         }
-        
+
         protected override void InitializeRound()
         {
             base.InitializeRound();
 
             cycles = 0;
             cyclesLeft = rules.MaxCycles * rules.WarriorsCount;
-            
+
             liveWarriors = new Queue<EngineWarrior>();
             int warriorIndex = starter;
             while (liveWarriors.Count < rules.WarriorsCount)
@@ -34,7 +34,7 @@ namespace nMars.Engine
                 engineWarrior.StartOrder = liveWarriors.Count;
                 engineWarrior.Result = RoundResult.Tie;
                 liveWarriors.Enqueue(engineWarrior);
-                
+
                 //first task
                 engineWarrior.Tasks.Clear();
                 engineWarrior.Tasks.Enqueue(mod(engineWarrior.LoadAddress + engineWarrior.StartOffset));
@@ -55,7 +55,7 @@ namespace nMars.Engine
         protected virtual void FinalizeCycle()
         {
         }
-        
+
         protected override void FinalizeRound()
         {
             incWarrior(ref starter);
@@ -158,10 +158,7 @@ namespace nMars.Engine
 
         public MatchResult Results
         {
-            get
-            {
-                return results;
-            }
+            get { return results; }
         }
 
         #endregion

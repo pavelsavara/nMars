@@ -86,7 +86,7 @@ namespace nMars.RedCode
         }
 
         #region
-        
+
         public static void Dump(XmlWriter xw, CoreDump core)
         {
             if (coreSerializer == null)
@@ -118,7 +118,7 @@ namespace nMars.RedCode
         public int coreSize;
         public List<IList<int>> tasks;
         public Instruction[] core;
-        
+
         #endregion
     }
 }

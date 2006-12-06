@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using nMars.RedCode;
 
 namespace nMars.Engine
@@ -56,7 +55,7 @@ namespace nMars.Engine
                 LastResult = value;
             }
         }
-        
+
         #endregion
 
         #region Interface
@@ -127,12 +126,12 @@ namespace nMars.Engine
             get { return SourceWarrior.Length; }
         }
 
-        public void Dump(TextWriter tw)
+        public void Dump(IConsole tw)
         {
             SourceWarrior.Dump(tw);
         }
 
-        public void Dump(TextWriter tw, ParserOptions options)
+        public void Dump(IConsole tw, ParserOptions options)
         {
             SourceWarrior.Dump(tw, options);
         }
@@ -187,26 +186,17 @@ namespace nMars.Engine
 
         public int TasksCount
         {
-            get
-            {
-                return Tasks.Count;
-            }
+            get { return Tasks.Count; }
         }
 
         IPSpace IRunningWarrior.PSpace
         {
-            get
-            {
-                return PSpace;
-            }
+            get { return PSpace; }
         }
 
         int IRunningWarrior.LastResult
         {
-            get
-            {
-                return LastResult;
-            }
+            get { return LastResult; }
         }
 
         int IRunningWarrior.PSpaceIndex
@@ -227,7 +217,7 @@ namespace nMars.Engine
         public Queue<int> Tasks;
         public int Index;
         public int StartOrder;
-        public int PSpaceIndex=-1;
+        public int PSpaceIndex = -1;
         public IWarrior SourceWarrior;
         public PSpace PSpace = null;
         private EngineCore core;

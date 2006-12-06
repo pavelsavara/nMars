@@ -21,11 +21,12 @@ namespace nMars.RedCode
             if (project == null)
                 project = new Project();
 
-            res = ParseParams(args, out files, project);
+            PrintLogo(setup.Parser);
+            res = ParseParams(args, out files, project, setup.Parser);
             if (res <= 0)
                 return res;
 
-            res = RunParser(files, setup.Parser, project);
+            res = ParserBase.RunParser(files, setup.Parser, project, new WrappedConsole());
             return res;
         }
 
@@ -36,14 +37,18 @@ namespace nMars.RedCode
             if (setup == null)
                 setup = new ComponentSetup();
             if (project == null)
+            {
                 project = new Project();
+                project.ParserOptions = ParserOptions.Engine;
+            }
 
-            res = ParseParams(args, out files, project);
+            PrintLogo(setup.Parser);
+            res = ParseParams(args, out files, project, setup.Engine);
             if (res <= 0)
                 return res;
 
             project.Rules.WarriorsCount = files.Count;
-            res = RunParser(files, setup.Parser, project);
+            res = ParserBase.RunParser(files, setup.Parser, project, new WrappedConsole());
             if (res <= 0)
                 return res;
 
@@ -59,18 +64,22 @@ namespace nMars.RedCode
             if (setup == null)
                 setup = new ComponentSetup();
             if (project == null)
+            {
                 project = new Project();
+                project.ParserOptions = ParserOptions.Engine;
+            }
 
             IDebuggerEngine engine = setup.Engine as IDebuggerEngine;
             if (engine == null)
                 throw new ApplicationException("Unable to create DebuggerEngine");
 
-            res = ParseParams(args, out files, project);
+            PrintLogo(setup.Parser);
+            res = ParseParams(args, out files, project, engine);
             if (res <= 0)
                 return res;
 
             project.Rules.WarriorsCount = files.Count;
-            res = RunParser(files, setup.Parser, project);
+            res = ParserBase.RunParser(files, setup.Parser, project, new WrappedConsole());
             if (res <= 0)
                 return res;
             setup.Debugger.Init(engine, null, null);
@@ -79,36 +88,13 @@ namespace nMars.RedCode
             return 0;
         }
 
-        private static int RunParser(List<string> files, IParser parser, IProject project)
-        {
-            parser.InitParser(project.Rules);
-            foreach (string file in files)
-            {
-                IWarrior warrior = parser.Parse(file, Console.Error);
-                if (warrior == null)
-                    return -1;
-                if (project.ParserOptions.DumpFiles)
-                {
-                    StreamWriter sw = new StreamWriter(Path.ChangeExtension(file, project.ParserOptions.DumpExt));
-                    warrior.Dump(sw, project.ParserOptions);
-                    sw.Close();
-                }
-                if (!project.ParserOptions.Brief)
-                {
-                    warrior.Dump(Console.Out, project.ParserOptions);
-                }
-                project.Warriors.Add(warrior);
-            }
-            return project.Warriors.Count;
-        }
-
-        private static int ParseParams(string[] args, out List<string> files, IProject project)
+        private static int ParseParams(string[] args, out List<string> files, IProject project, IComponent component)
         {
             files = new List<string>();
 
             if (args.Length == 0)
             {
-                PrintParserHelp();
+                PrintParserHelp(component);
                 return 0;
             }
 
@@ -118,7 +104,7 @@ namespace nMars.RedCode
                 switch (param)
                 {
                     case "-h":
-                        PrintParserHelp();
+                        PrintParserHelp(component);
                         return 0;
                     case "-p":
                         if (!ReadNumber(args, ref p, out project.Rules.MaxProcesses))
@@ -177,6 +163,10 @@ namespace nMars.RedCode
                         break;
                     case "-b":
                         project.ParserOptions.Brief = true;
+                        project.ParserOptions.Status = false;
+                        break;
+                    case "-bs":
+                        project.ParserOptions.Status = !project.ParserOptions.Status;
                         break;
                     case "-ul":
                         project.ParserOptions.Labels = true;
@@ -216,9 +206,15 @@ namespace nMars.RedCode
             return true;
         }
 
-        private static void PrintParserHelp()
+        private static void PrintLogo(IComponent component)
         {
-            Console.WriteLine("Usage   : nMars.Module.exe [options] file1 [files]");
+            Console.WriteLine("nMars." + ModuleRegister.GetModule(component).MajorMinorVersion +
+                              " - http://sourceforge.net/projects/nmars");
+        }
+
+        private static void PrintParserHelp(IComponent component)
+        {
+            Console.WriteLine("Usage   : " + ModuleRegister.GetModule(component).Name + ".exe [options] file1 [files]");
             Console.WriteLine();
             Console.WriteLine("Rules :");
             Console.WriteLine("  -r # Rounds to play [1]");
@@ -231,6 +227,8 @@ namespace nMars.RedCode
             Console.WriteLine();
             Console.WriteLine("Parser :");
             Console.WriteLine("  -b        Brief/silent parser mode");
+            Console.WriteLine("  -bl       No logo");
+            Console.WriteLine("  -bs       No status");
             Console.WriteLine("  -ue .ext  Dump to files next by original warrior with extension");
             Console.WriteLine("  -uo       Dump with offset [off]");
             Console.WriteLine("  -ul       Dump with labels [off]");

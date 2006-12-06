@@ -18,7 +18,7 @@ namespace nMars.Engine
             if (e.Died)
             {
                 lastTask++;
-                if (warriors.Count==0)
+                if (warriors.Count == 0)
                 {
                     liveLastRound++;
                 }
@@ -27,27 +27,27 @@ namespace nMars.Engine
             {
                 lastTask--;
             }
-            
+
             // refill live warriors queue
             Queue<EngineWarrior> nlive = new Queue<EngineWarrior>();
             nlive.Enqueue(e.Warrior);
-            for(int w=0;w<liveLastRound-1;w++)
+            for (int w = 0; w < liveLastRound - 1; w++)
             {
                 nlive.Enqueue(liveWarriors.Dequeue());
             }
             liveWarriors = nlive;
-            
+
             //refill tasks queue
-            Queue<int> ntasks=new Queue<int>();
+            Queue<int> ntasks = new Queue<int>();
             ntasks.Enqueue(e.Ip);
             for (int t = 0; t < lastTask - 1; t++)
             {
                 ntasks.Enqueue(e.Warrior.Tasks.Dequeue());
             }
             e.Warrior.Tasks = ntasks;
-            
+
             //rollback core
-            while(e.instructionsChanged.Count>0)
+            while (e.instructionsChanged.Count > 0)
             {
                 EngineInstruction ei = e.instructionsChanged.Pop();
                 core[ei.Address] = ei;
@@ -59,10 +59,7 @@ namespace nMars.Engine
 
         public bool CanStepBack
         {
-            get
-            {
-                return (lastStepResult == StepResult.Continue);
-            }
+            get { return (lastStepResult == StepResult.Continue); }
         }
     }
 }

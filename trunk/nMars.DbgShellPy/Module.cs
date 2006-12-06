@@ -3,13 +3,12 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
 namespace nMars.DbgShellPy
 {
-    class Module : IDebuggerShellModule
+    class Module : BaseModule, IDebuggerShellModule
     {
         public IDebuggerShell CreateShell()
         {
@@ -23,12 +22,6 @@ namespace nMars.DbgShellPy
             ModuleRegister.Register(new Module());
         }
 
-        public string Name
-        {
-            get { return typeof(Module).Namespace; }
-        }
-
         #endregion
     }
-
 }

@@ -76,9 +76,9 @@ namespace nMars.Engine
         #endregion
 
         #region Variables
-        
+
         internal Rules rules;
-        
+
         #endregion
     }
 }

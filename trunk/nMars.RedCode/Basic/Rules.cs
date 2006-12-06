@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Xml.Serialization;
 
 namespace nMars.RedCode
 {
@@ -28,17 +29,40 @@ namespace nMars.RedCode
     [ComVisible(true)]
     public class Rules
     {
+        [XmlAttribute]
         public int CoreSize = 8000;
+
+        [XmlAttribute]
         public int PSpaceSize = 500; // coreSize / 16 
+
+        [XmlAttribute]
         public int MaxCycles = 80000;
+
+        [XmlAttribute]
         public int MaxLength = 100;
+
+        [XmlAttribute]
         public int MaxProcesses = 1000;
+
+        [XmlAttribute]
         public bool EnablePSpace = true;
+
+        [XmlAttribute]
         public int MinDistance = 100;
+
+        [XmlAttribute]
         public int Rounds = 1;
+
+        [XmlAttribute]
         public int WarriorsCount = 2;
+
+        [XmlAttribute]
         public int Version = 60;
+
+        [XmlAttribute]
         public ScoreFormula ScoreFormula = ScoreFormula.Standard;
+
+        [XmlAttribute]
         public ICWStandard ICWSStandard = ICWStandard.ICWS94;
 
         public static Rules DefaultRules
@@ -74,7 +98,7 @@ namespace nMars.RedCode
 
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return base.GetHashCode();
         }
     }
 }

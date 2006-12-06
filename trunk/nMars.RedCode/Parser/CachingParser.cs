@@ -4,7 +4,7 @@
 // 2006 Pavel Savara
 
 using System.Collections.Generic;
-using System.IO;
+using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
@@ -21,11 +21,11 @@ namespace nMars.RedCode
             base.InitParser(aRules);
             cache = new Dictionary<string, IWarrior>();
         }
-        
+
         private IParser parser;
         private Dictionary<string, IWarrior> cache;
 
-        public override IWarrior Parse(string fileName, TextWriter err)
+        public override IWarrior Parse(string fileName, IConsole err)
         {
             if (cache.ContainsKey(fileName))
             {
@@ -37,6 +37,16 @@ namespace nMars.RedCode
                 cache[fileName] = res;
                 return res;
             }
+        }
+
+        public override string Name
+        {
+            get { return GetType().Namespace; }
+        }
+
+        public override string Version
+        {
+            get { return ModuleRegister.GetVersion(GetType()); }
         }
     }
 }

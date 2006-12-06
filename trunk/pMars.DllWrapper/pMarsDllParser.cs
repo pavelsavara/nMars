@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
+using nMars.RedCode.Modules;
 
 namespace pMars.DllWrapper
 {
@@ -18,15 +19,15 @@ namespace pMars.DllWrapper
             //touch DLL
             pMarsDll.pMarsFreeParsed();
         }
-        
-        public override IWarrior Parse(string fileName, TextWriter err)
+
+        public override IWarrior Parse(string fileName, IConsole err)
         {
             string errFile = Path.GetTempFileName();
             IWarrior res = Parse(fileName, errFile);
             if (res == null)
             {
                 string errors = File.ReadAllText(errFile);
-                err.Write(errors);
+                err.ErrorWriteLine(errors);
                 File.Delete(errFile);
             }
             return res;
@@ -56,6 +57,16 @@ namespace pMars.DllWrapper
             pMarsDll.pMarsFreeParsed();
 
             return warrior;
+        }
+
+        public override string Name
+        {
+            get { return GetType().Namespace; }
+        }
+
+        public override string Version
+        {
+            get { return ModuleRegister.GetVersion(GetType()); }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace nMars.Test
 {
 
     #region Helper Classes
-    
+
     public class Check
     {
         public Check(int round, int cycle, bool precise)
@@ -46,6 +46,7 @@ namespace nMars.Test
             Step = step;
             Round = round;
         }
+
         public int FromCycle;
         public int ToCycle;
         public int Step;
@@ -60,6 +61,7 @@ namespace nMars.Test
         {
             Check = check;
         }
+
         public Check Check;
     }
 
@@ -72,7 +74,7 @@ namespace nMars.Test
             Init();
             project = (Project)aProject;
             project.ForcedAddresses = forcedArdresses;
-            
+
             Check check = Check.Optimistic;
 #if DEBUG
             // this loop restarts test with more and more precise check setting to isolate bugs in engine
@@ -102,13 +104,13 @@ namespace nMars.Test
 
             engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
             engineTwo = ModuleRegister.CreateEngine("nMars.Engine") as IExtendedStepEngine;
-            forcedArdresses = new int[2];
-            forcedArdresses[0] = 0;
-            forcedArdresses[1] = 4321;
+            forcedArdresses = new List<int>();
+            forcedArdresses.Add(0);
+            forcedArdresses.Add(4321);
         }
 
         #region Loop
-        
+
         private void CompareEngines(Check check)
         {
             engineOne.BeginMatch(project);
@@ -145,7 +147,8 @@ namespace nMars.Test
             }
             StepResult resOne = engineOne.NextStep();
             StepResult resTwo = engineTwo.NextStep();
-            bool range = (engineOne.Cycles >= check.FromCycle && engineOne.Cycles <= check.ToCycle && engineOne.Round == check.Round);
+            bool range = (engineOne.Cycles >= check.FromCycle && engineOne.Cycles <= check.ToCycle &&
+                          engineOne.Round == check.Round);
             bool step = (check.Step != 1) && (engineOne.Cycles % check.Step == 0) && (engineOne.Round >= check.Round);
 
             CheapCheck(resOne, resTwo, check, range);
@@ -163,10 +166,7 @@ namespace nMars.Test
 
         public IProject Project
         {
-            get
-            {
-                return project;
-            }
+            get { return project; }
         }
 
         #endregion
@@ -177,7 +177,8 @@ namespace nMars.Test
         {
             if (resOne != resTwo)
             {
-                throw new EngineDifferException("StepRes", new Check(0, origCheck.FromCycle, origCheck.ToCycle, origCheck.Step / 2));
+                throw new EngineDifferException("StepRes",
+                                                new Check(0, origCheck.FromCycle, origCheck.ToCycle, origCheck.Step / 2));
             }
             if (engineOne.Cycles != engineTwo.Cycles)
             {
@@ -227,7 +228,8 @@ namespace nMars.Test
                 }
                 if (engineOne.PSPaceIndexes[w] != engineTwo.PSPaceIndexes[w])
                 {
-                    throw new EngineDifferException("PSPaceIndexes", new Check(engineOne.Round, engineOne.Cycles, precise));
+                    throw new EngineDifferException("PSPaceIndexes",
+                                                    new Check(engineOne.Round, engineOne.Cycles, precise));
                 }
                 if (engineOne.Warriors[w].Pin != engineTwo.Warriors[w].Pin)
                 {
@@ -268,13 +270,13 @@ namespace nMars.Test
         #endregion
 
         #region Variables
-        
+
         IExtendedStepEngine engineOne;
         IExtendedStepEngine engineTwo;
         MatchResult matchOne;
         MatchResult matchTwo;
         Project project;
-        int[] forcedArdresses;
+        List<int> forcedArdresses;
 
         #endregion
     }

@@ -66,4 +66,40 @@ namespace nMars.RedCode.Utils
 
         #endregion
     }
+
+    public class KeySerializableDictionary<TValue> : Dictionary<string, TValue>, IXmlSerializable where TValue : class
+    {
+        #region IXmlSerializable Members
+
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            bool wasEmpty = reader.IsEmptyElement;
+            reader.Read();
+            if (wasEmpty)
+                return;
+            while (reader.NodeType != XmlNodeType.EndElement)
+            {
+                Add(reader.GetAttribute("File"), null);
+                reader.MoveToContent();
+            }
+            reader.ReadEndElement();
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            foreach (string key in Keys)
+            {
+                writer.WriteStartElement("LinkedFile");
+                writer.WriteAttributeString("Path", key);
+                writer.WriteEndElement();
+            }
+        }
+
+        #endregion
+    }
 }

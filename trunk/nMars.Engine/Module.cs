@@ -9,7 +9,7 @@ using nMars.RedCode.Modules;
 
 namespace nMars.Engine
 {
-    class Module : IEngineModule
+    class Module : BaseModule, IEngineModule
     {
         public static int Main(string[] args)
         {
@@ -26,7 +26,7 @@ namespace nMars.Engine
 
         public IEngine CreateEngine()
         {
-            return new EngineSteps();
+            return new EngineASync();
         }
 
         #region Module registration
@@ -34,42 +34,36 @@ namespace nMars.Engine
         static Module()
         {
             ModuleRegister.Register(new Module());
-            ModuleRegister.Register(new DebuggerModule());
-            ModuleRegister.Register(new AsyncDebuggerModule());
-        }
-
-        public string Name
-        {
-            get { return typeof(Module).Namespace; }
+            ModuleRegister.Register(new StepBackModule());
+            ModuleRegister.Register(new StepForwardModule());
         }
 
         #endregion
-
     }
-    
-    class DebuggerModule : IEngineModule
+
+    class StepBackModule : BaseModule, IEngineModule
     {
         public IEngine CreateEngine()
         {
             return new EngineStepBack();
         }
 
-        public string Name
+        public override string Name
         {
-            get { return typeof(Module).Namespace+"-StepBack"; }
+            get { return typeof(Module).Namespace + "-StepBack"; }
         }
     }
 
-    class AsyncDebuggerModule : IEngineModule
+    class StepForwardModule : BaseModule, IEngineModule
     {
         public IEngine CreateEngine()
         {
-            return new EngineASync();
+            return new EngineSteps();
         }
 
-        public string Name
+        public override string Name
         {
-            get { return typeof(Module).Namespace + "-Async"; }
+            get { return typeof(Module).Namespace + "-StepForward"; }
         }
     }
 }

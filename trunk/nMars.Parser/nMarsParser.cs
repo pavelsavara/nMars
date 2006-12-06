@@ -5,16 +5,26 @@
 
 using System.Collections.Generic;
 using System.IO;
-using nMars.Parser;
 using nMars.Parser.Statements;
 using nMars.Parser.Warrior;
 using nMars.RedCode;
+using nMars.RedCode.Modules;
 
-namespace nMars
+namespace nMars.Parser
 {
     public class nMarsParser : ParserTokens, IParser
     {
-        public override IWarrior Parse(string fileName, TextWriter err)
+        public override string Name
+        {
+            get { return GetType().Namespace; }
+        }
+
+        public override string Version
+        {
+            get { return ModuleRegister.GetVersion(GetType()); }
+        }
+
+        public override IWarrior Parse(string fileName, IConsole err)
         {
             StreamReader sr = new StreamReader(fileName);
             string source = sr.ReadToEnd();
@@ -24,7 +34,7 @@ namespace nMars
             return res;
         }
 
-        public IWarrior Parse(string sourceText, TextWriter err, string implicitName)
+        public IWarrior Parse(string sourceText, IConsole err, string implicitName)
         {
             errOutput = err;
             errCount = 0;
@@ -56,7 +66,7 @@ namespace nMars
             }
             catch (ParserException ex)
             {
-                err.WriteLine(ex.Message);
+                err.ErrorWriteLine(ex.Message);
                 return null;
             }
         }

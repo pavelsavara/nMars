@@ -41,23 +41,21 @@ namespace pMars.DllWrapper
             int res = pMarsDll.pMarsBeginMatch(r.Count, r.ToArray(), errFile);
             if (res != 0)
             {
-                string errors="";
+                string errors = "";
                 try
                 {
                     errors = File.ReadAllText(errFile);
                     File.Delete(errFile);
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     //swalow
                 }
                 throw new ParserException(errors);
             }
-            pMarsDll.pMarsWatchMatch(out dllCore, out dllCoreSize, out dllCyclesLeft, out dllRound, 
-                                     out dllWarriors,out dllWarriorsCout, 
-                                     out dllPSpaces,
-                                     out dllWarrirorsLeft, out dllNextWarrior, out dllTasksStart,
-                                     out dllTasksEnd);
+            pMarsDll.pMarsWatchMatch(out dllCore, out dllCoreSize, out dllCyclesLeft, out dllRound, out dllWarriors,
+                                     out dllWarriorsCout, out dllPSpaces, out dllWarrirorsLeft, out dllNextWarrior,
+                                     out dllTasksStart, out dllTasksEnd);
             dllDataLinked = true;
         }
 
@@ -227,7 +225,7 @@ namespace pMars.DllWrapper
             get
             {
                 CopyCore();
-                switch(reg)
+                switch (reg)
                 {
                     case Column.A:
                         return coreCopy[address].ValueA;
@@ -236,7 +234,6 @@ namespace pMars.DllWrapper
                     default:
                         throw new ApplicationException("Unknown register");
                 }
-                
             }
         }
 
@@ -355,7 +352,7 @@ namespace pMars.DllWrapper
 
         public IList<int> PSPaceIndexes
         {
-            get 
+            get
             {
                 CopyWarriors();
                 List<int> res = new List<int>();
@@ -369,10 +366,7 @@ namespace pMars.DllWrapper
 
         public StepResult LastStepResult
         {
-            get
-            {
-                return lastStepResult;
-            }
+            get { return lastStepResult; }
         }
 
         public IProject Project
@@ -422,5 +416,4 @@ namespace pMars.DllWrapper
 
         #endregion
     }
-    
 }

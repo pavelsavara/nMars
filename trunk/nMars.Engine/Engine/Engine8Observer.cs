@@ -41,10 +41,10 @@ namespace nMars.Engine
         protected override void InitializeRound()
         {
             base.InitializeRound();
-            History=new Stack<EngineEvent>();
+            History = new Stack<EngineEvent>();
             CurrentEvent = null;
         }
-        
+
         protected override void FinalizeRound()
         {
             base.FinalizeRound();
@@ -55,7 +55,7 @@ namespace nMars.Engine
         protected override void FinalizeCycle()
         {
             base.FinalizeCycle();
-            if (CurrentEvent!=null)
+            if (CurrentEvent != null)
             {
                 History.Push(CurrentEvent);
                 CurrentEvent = null;
@@ -91,7 +91,7 @@ namespace nMars.Engine
         #endregion
 
         #region Variables
-        
+
         protected Stack<EngineEvent> History;
         private EngineEvent CurrentEvent;
 

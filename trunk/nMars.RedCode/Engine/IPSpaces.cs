@@ -7,7 +7,7 @@ namespace nMars.RedCode
 {
     public interface IPSpace
     {
-        int this[int index] { get;}
-        int Size { get;}
+        int this[int index] { get; }
+        int Size { get; }
     }
 }

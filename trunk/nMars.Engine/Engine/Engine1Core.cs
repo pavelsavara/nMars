@@ -15,7 +15,7 @@ namespace nMars.Engine
         protected override void InitializeMatch(IProject project)
         {
             base.InitializeMatch(project);
-            pSpaces=new PSpace[rules.WarriorsCount];
+            pSpaces = new PSpace[rules.WarriorsCount];
         }
 
         protected virtual void InitializeRound()
@@ -42,14 +42,8 @@ namespace nMars.Engine
 
         public IRunningInstruction this[int address]
         {
-            get
-            {
-                return core[mod(address)];
-            }
-            set
-            {
-                core[mod(address)]=new EngineInstruction(value, address);
-            }
+            get { return core[mod(address)]; }
+            set { core[mod(address)] = new EngineInstruction(value, address); }
         }
 
         public int this[int address, Column column]

@@ -63,7 +63,7 @@ namespace nMars.Debugger
                 default:
                     if (printErrors)
                     {
-                        prompt.Error.WriteLine("Unknown command");
+                        prompt.ErrorWriteLine("Unknown command");
                     }
                     res = false;
                     break;
@@ -91,10 +91,7 @@ namespace nMars.Debugger
 
         public string PromptString
         {
-            get
-            {
-                return ">";
-            }
+            get { return ">"; }
         }
 
         private string lastCommand;

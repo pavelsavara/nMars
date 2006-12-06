@@ -9,7 +9,7 @@ using nMars.RedCode.Modules;
 
 namespace nMars.Test
 {
-    class Module : IEngineModule
+    class Module : BaseModule, IEngineModule
     {
         public static int Main(string[] args)
         {
@@ -17,7 +17,7 @@ namespace nMars.Test
             {
                 if (args.Length == 0)
                 {
-                    EngineTest test=new EngineTest();
+                    EngineTest test = new EngineTest();
                     test.Full();
                     return 0;
                 }
@@ -45,11 +45,6 @@ namespace nMars.Test
         static Module()
         {
             ModuleRegister.Register(new Module());
-        }
-
-        public string Name
-        {
-            get { return typeof(Module).Namespace; }
         }
 
         #endregion

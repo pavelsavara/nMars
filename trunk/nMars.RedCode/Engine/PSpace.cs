@@ -4,8 +4,6 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace nMars.RedCode
 {
@@ -15,6 +13,7 @@ namespace nMars.RedCode
         {
             Memory = new int[size];
         }
+
         public int[] Memory;
 
         public const int UNSHARED = -1;

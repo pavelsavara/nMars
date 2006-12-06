@@ -9,7 +9,7 @@ using nMars.RedCode.Modules;
 
 namespace nMars.Parser
 {
-    class Module : IParserModule
+    class Module : BaseModule, IParserModule
     {
         public static int Main(string[] args)
         {
@@ -34,11 +34,6 @@ namespace nMars.Parser
         static Module()
         {
             ModuleRegister.Register(new Module());
-        }
-
-        public string Name
-        {
-            get { return typeof(Module).Namespace; }
         }
 
         #endregion

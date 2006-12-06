@@ -23,7 +23,7 @@ namespace nMars.Engine
         protected virtual void BeforeRead(int address, Column column)
         {
         }
-        
+
         #endregion
 
         #region Accessors
@@ -77,7 +77,7 @@ namespace nMars.Engine
             int val = mod(this[address, column] + 1);
             this[address, column] = val;
         }
-        
+
         #endregion
 
         #region Variables

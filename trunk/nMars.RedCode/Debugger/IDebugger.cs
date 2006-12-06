@@ -4,6 +4,7 @@
 // 2006 Pavel Savara
 
 using System.IO;
+using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
@@ -20,30 +21,21 @@ namespace nMars.RedCode
         void Quit();
         void Restart();
         void List(int from, int length);
-        int Speed { get; set;}
-        bool Echo { get; set;}
+        int Speed { get; set; }
+        bool Echo { get; set; }
         event CheckBreak CheckBreak;
     }
 
-    public interface IDebuggerPrompt
+    public interface IDebuggerPrompt : IConsole, IComponent
     {
         void Init(IDebugger debugger, IDebuggerEngine engine, IDebuggerShell aShell);
-        string GetCommand();
-        void Clear();
-        TextWriter Error { get;}
-        TextWriter Out { get;}
-        Stream ErrorStream { get;}
-        Stream OutStream { get;}
-        Stream InputStream { get;}
-        void PaintCore(bool running);
     }
 
-    public interface IDebuggerShell
+    public interface IDebuggerShell : IComponent
     {
         void Init(IDebugger debugger, IDebuggerEngine engine, IDebuggerPrompt prompt);
         bool ProcessCommand(ref string command, bool printErrors);
-        string EchoString { get;}
-        string PromptString { get;}
+        string EchoString { get; }
+        string PromptString { get; }
     }
-
 }
