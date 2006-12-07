@@ -16,16 +16,6 @@ copy ..\nMars\Bin\Release\nMars.Test.exe nMarsBinary.%VER%%APPENDBUILD%
 copy ..\nMars\Bin\Release\nMars.Debugger.exe nMarsBinary.%VER%%APPENDBUILD%
 zip -r -9 nMars.%VER%%APPENDBUILD%.bin.zip nMarsBinary.%VER%%APPENDBUILD%
 
-mkdir npMarsBinary.%VER%%APPENDBUILD%.win32
-copy ..\nMars\ReadMe.txt npMarsBinary.%VER%%APPENDBUILD%.win32
-copy ..\nMars\Changes.txt npMarsBinary.%VER%%APPENDBUILD%.win32
-copy ..\nMars\Usage.txt npMarsBinary.%VER%%APPENDBUILD%.win32
-copy ..\nMars\Bin\Release\pMars.dll npMarsBinary.%VER%%APPENDBUILD%.win32
-copy ..\nMars\Bin\Release\SDL.dll npMarsBinary.%VER%%APPENDBUILD%.win32
-copy ..\nMars\Bin\Release\pMars.exe npMarsBinary.%VER%%APPENDBUILD%.win32
-copy ..\nMars\Bin\Release\pMarsSDL.exe npMarsBinary.%VER%%APPENDBUILD%.win32
-zip -r -9 npMars.%VER%%APPENDBUILD%.win32.zip npMarsBinary.%VER%%APPENDBUILD%.win32
-
 mkdir nMarsDbgPyBinary.%VER%%APPENDBUILD%
 copy ..\nMars\ReadMe.txt nMarsDbgPyBinary.%VER%%APPENDBUILD%
 copy ..\nMars\Changes.txt nMarsDbgPyBinary.%VER%%APPENDBUILD%
