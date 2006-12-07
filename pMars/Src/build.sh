@@ -1,4 +1,3 @@
-#!/usr/local/bin/bash
 cp MakefileServer Makefile
 make clean
 make all
@@ -12,7 +11,8 @@ make all
 
 echo !!Package
 VER=9.3
-OS=BSD
+OS=FreeBSD
+#OS=Linux.i386
 PKG=0.$VER-a.$OS
 
 rm -rf pMarsBinary.$PKG
