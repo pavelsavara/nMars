@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="pMarsSDL"
-	ProjectGUID="{8F4CD545-0C95-462A-9798-A511739F84C8}"
-	RootNamespace="pMarsSDL"
+	Name="pMarsServer"
+	ProjectGUID="{213C7489-C45D-4CE3-865E-F7D6CF046B39}"
+	RootNamespace="pMarsServer"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="SDL\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;EXT94;PERMUTATE;SDLGRAPHX;_CRT_SECURE_NO_DEPRECATE"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;EXT94;PERMUTATE;SERVER;_CRT_SECURE_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -64,11 +64,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib SDLmain.lib"
-				OutputFile="..\Bin\$(ConfigurationName)\pMars-SDL.exe"
+				OutputFile="..\Bin\$(ConfigurationName)\pMars-s.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="SDL\lib"
-				ManifestFile="$(IntDir)\$(TargetFileName).intermediate.manifest"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -96,7 +93,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(ProjectDir)SDL\Lib\SDL.dll ..\Bin\$(ConfigurationName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -124,8 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="SDL\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;EXT94;PERMUTATE;SDLGRAPHX;_CRT_SECURE_NO_DEPRECATE"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;EXT94;PERMUTATE;SERVER;_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				ObjectFile="$(IntDir)\"
@@ -146,10 +141,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib SDLmain.lib"
-				OutputFile="..\Bin\$(ConfigurationName)\pMars-SDL.exe"
+				OutputFile="..\Bin\$(ConfigurationName)\pMars-s.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="SDL\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -179,7 +172,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(ProjectDir)SDL\Lib\SDL.dll ..\Bin\$(ConfigurationName)"
 			/>
 		</Configuration>
 	</Configurations>

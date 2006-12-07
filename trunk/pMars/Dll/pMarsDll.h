@@ -1,17 +1,33 @@
-// The following ifdef block is the standard way of creating macros which make exporting 
-// from a DLL simpler. All files within this DLL are compiled with the PMARSDLL_EXPORTS
-// symbol defined on the command line. this symbol should not be defined on any project
-// that uses this DLL. This way any other project whose source files include this file see 
-// PMARSDLL_API functions as being imported from a DLL, whereas this DLL sees symbols
-// defined with this macro as being exported.
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+// This is DLL wrapper around pMars
+
+#pragma once
+
+#ifndef WINVER				// Allow use of features specific to Windows XP or later.
+#define WINVER 0x0501		// Change this to the appropriate value to target other versions of Windows.
+#endif
+#ifndef _WIN32_WINNT		// Allow use of features specific to Windows XP or later.                   
+#define _WIN32_WINNT 0x0501	// Change this to the appropriate value to target other versions of Windows.
+#endif						
+#ifndef _WIN32_WINDOWS		// Allow use of features specific to Windows 98 or later.
+#define _WIN32_WINDOWS 0x0410 // Change this to the appropriate value to target Windows Me or later.
+#endif
+#ifndef _WIN32_IE			// Allow use of features specific to IE 6.0 or later.
+#define _WIN32_IE 0x0600	// Change this to the appropriate value to target other versions of IE.
+#endif
+
+#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
+#include <windows.h>
+
 #ifdef PMARSDLL_EXPORTS
 #define PMARSDLL_API __declspec(dllexport)
 #else
 #define PMARSDLL_API __declspec(dllimport) 
 #endif
 
-
-#include "stdafx.h"
 extern "C"
 {
 	#include "..\src\global.h"
