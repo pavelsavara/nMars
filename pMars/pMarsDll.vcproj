@@ -234,10 +234,6 @@
 				>
 			</File>
 			<File
-				RelativePath="Dll\stdafx.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\str_eng.c"
 				>
 			</File>
@@ -273,10 +269,6 @@
 			</File>
 			<File
 				RelativePath=".\src\sim.h"
-				>
-			</File>
-			<File
-				RelativePath="Dll\stdafx.h"
 				>
 			</File>
 		</Filter>

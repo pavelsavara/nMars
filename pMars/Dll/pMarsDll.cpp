@@ -1,8 +1,10 @@
-// pMarsDll.cpp : Defines the entry point for the DLL application.
-//
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+// This is DLL wrapper around pMars
 
 #include "pMarsDll.h"
-
 
 #ifdef _MANAGED
 #pragma managed(push, off)
