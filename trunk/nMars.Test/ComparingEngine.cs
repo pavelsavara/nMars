@@ -71,8 +71,8 @@ namespace nMars.Test
     {
         public MatchResult Run(IProject aProject)
         {
-            Init();
             project = (Project)aProject;
+            Init();
             project.ForcedAddresses = forcedArdresses;
 
             Check check = Check.Optimistic;
