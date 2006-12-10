@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Test", "nMars.Test\nM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pMars.DllWrapper", "pMars.DllWrapper\pMars.DllWrapper.csproj", "{9D9C6AB6-BDF3-483B-A11C-DE7C15EB4814}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pMarsDll", "pMars\pMarsDll.vcproj", "{4D589993-9F4B-407E-B0F7-604A456FBC9F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pMarsDll", "pMars\src\pMarsDll.vcproj", "{4D589993-9F4B-407E-B0F7-604A456FBC9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Debugger", "nMars.Debugger\nMars.Debugger.csproj", "{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}"
 EndProject
@@ -19,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.DbgShellPy", "nMars.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.IDE", "nMars.IDE\nMars.IDE.csproj", "{BB9036EA-050A-4ECD-B857-CB022275A7C5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pMarsConsole", "pMars\pMarsConsole.vcproj", "{49874D75-9D93-4EDA-A0A4-001B2E080778}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pMarsConsole", "pMars\src\pMarsConsole.vcproj", "{49874D75-9D93-4EDA-A0A4-001B2E080778}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pMarsSDL", "pMars\pMarsSDL.vcproj", "{8F4CD545-0C95-462A-9798-A511739F84C8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pMarsSDL", "pMars\src\pMarsSDL.vcproj", "{8F4CD545-0C95-462A-9798-A511739F84C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -194,6 +194,7 @@ namespace pMars.DllWrapper
             if (!dllWarriorsLoaded)
             {
                 warriorsDllCopy = new List<pMarsDll.PmarsWarrior>(dllWarriorsCout);
+                runningWarriorsCopy = new List<IRunningWarrior>(dllWarriorsCout);
                 pMarsDll.FillWarrirors(warriorsDllCopy, dllWarriors, dllWarriorsCout);
 
                 warriorsCopy = new List<IWarrior>(dllWarriorsCout);
