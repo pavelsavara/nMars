@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Schema;
@@ -32,17 +33,20 @@ namespace nMars.RedCode
 
         #region Dumping
 
-        public void Dump(IConsole output)
+        public void Dump(ISimpleOutput output)
         {
             Dump(output, ParserOptions.Default);
         }
 
-        public virtual void Dump(IConsole output, ParserOptions options)
+        public virtual void Dump(ISimpleOutput output, ParserOptions options)
         {
             if (options.XmlFormat)
             {
+                StringWriter sw=new StringWriter();
                 XmlSerializer serializer = new XmlSerializer(GetType());
-                serializer.Serialize(output.OutStream, this);
+                serializer.Serialize(sw, this);
+                sw.Close();
+                output.Write(sw.GetStringBuilder().ToString());
             }
             else
             {
@@ -51,10 +55,13 @@ namespace nMars.RedCode
                     output.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
                     output.WriteLine("");
                 }
-                output.WriteLine("       ORG      START");
-                for (int a = 0; a < Instructions.Count; a++)
+                if (!options.Brief)
                 {
-                    output.WriteLine(Instructions[a].GetLine(options, a == StartOffset));
+                    output.WriteLine("       ORG      START");
+                    for (int a = 0; a < Instructions.Count; a++)
+                    {
+                        output.WriteLine(Instructions[a].GetLine(options, a == StartOffset));
+                    }
                 }
             }
             output.WriteLine("");

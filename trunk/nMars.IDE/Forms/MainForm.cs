@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 using nMars.IDE.Core;
 
@@ -14,9 +15,27 @@ namespace nMars.IDE.Forms
 
         public void RefreshUI()
         {
-            saveWarriorToolStripMenuItem.Enabled = Application.ActiveEditor != null &&
-                                                   Application.ActiveEditor.Document is WarriorDocument;
+            //TODO
+            bool openEditor = Application.ActiveEditor != null;
+            bool openWarrior = openEditor && Application.ActiveEditor.Document is WarriorDocument;
+            saveWarriorToolStripMenuItem.Enabled = openWarrior;
+            compileWarriorToolStripMenuItem.Enabled = openWarrior;
+            closeWarriorToolStripMenuItem.Enabled = openWarrior;
+            lbDocClose.Visible = openEditor;
         }
+        public void RefreshRecent()
+        {
+            recentProjectsToolStripMenuItem.DropDownItems.Clear();
+            foreach (string project in Application.Settings.RecentProjects)
+            {
+                ToolStripMenuItem it=new ToolStripMenuItem(Path.GetFileNameWithoutExtension(project));
+                it.Tag = project;
+                it.ToolTipText = project;
+                it.Click += new EventHandler(it_Click);
+                recentProjectsToolStripMenuItem.DropDownItems.Add(it);
+            }
+        }
+
 
         #region Cycle documents
 
@@ -108,6 +127,12 @@ namespace nMars.IDE.Forms
             Application.OpenSolution();
         }
 
+        void it_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem it = sender as ToolStripMenuItem;
+            Application.OpenSolution(it.Tag as string);
+        }
+
         private void addExistingWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.AddExistingWarrior(Application.ActiveSolution.ActiveProject);
@@ -116,16 +141,6 @@ namespace nMars.IDE.Forms
         private void closeSolutionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.CloseSolution();
-        }
-
-        private void newWarriorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.OpenNewWarrior();
-        }
-
-        private void loadWarriorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.OpenExistingWarrior();
         }
 
         private void saveWarriorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -150,7 +165,10 @@ namespace nMars.IDE.Forms
 
         private void compileWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Compile(Application.ActiveEditor.Document as WarriorDocument);
+            if (Application.ActiveEditor != null)
+            {
+                Application.Compile(Application.ActiveEditor.Document as WarriorDocument);
+            }
         }
 
         private void compileProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -158,6 +176,15 @@ namespace nMars.IDE.Forms
             Application.Compile(Application.ActiveSolution.ActiveProject);
         }
 
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Start(Application.ActiveSolution.ActiveProject);
+        }
+
+        private void lbDocClose_Click(object sender, EventArgs e)
+        {
+            Application.CloseDocument(Application.ActiveEditor.Document);
+        }
         #endregion
     }
 }

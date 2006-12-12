@@ -3,19 +3,23 @@ using System.IO;
 
 namespace nMars.RedCode
 {
-    public interface IConsole
+    public interface ISimpleOutput
+    {
+        void Clear();
+        void WriteLine(string text);
+        void Write(string text);
+        void ErrorWriteLine(string text);
+    }
+
+    public interface IConsole : ISimpleOutput
     {
         Stream ErrorStream { get; }
         Stream OutStream { get; }
         Stream InputStream { get; }
         string GetCommand();
-        void Clear();
-        void ErrorWriteLine(string text);
-        void WriteLine(string text);
-        void Write(string text);
     }
 
-    public class WrappedTextWriter : IConsole
+    public class WrappedTextWriter : ISimpleOutput
     {
         public WrappedTextWriter(TextWriter output)
         {
@@ -65,7 +69,7 @@ namespace nMars.RedCode
         }
     }
 
-    public class WrappedConsole : IConsole
+    public class WrappedConsole : ISimpleOutput
     {
         public Stream ErrorStream
         {

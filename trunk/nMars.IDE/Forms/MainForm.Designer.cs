@@ -44,10 +44,12 @@ namespace nMars.IDE.Forms
             this.closeWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeSolutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recentProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.compileProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stepIntoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,10 +61,11 @@ namespace nMars.IDE.Forms
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
             this.splitContainerOuter = new System.Windows.Forms.SplitContainer();
             this.splitContainerInner = new System.Windows.Forms.SplitContainer();
+            this.lbDocClose = new System.Windows.Forms.Label();
             this.tabDocuments = new System.Windows.Forms.TabControl();
             this.tabBottom = new System.Windows.Forms.TabControl();
             this.tabExplorers = new System.Windows.Forms.TabControl();
-            this.compileProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AsyncHub = new nMars.IDE.Controls.AsyncHub();
             this.mainMenu.SuspendLayout();
             this.splitContainerOuter.Panel1.SuspendLayout();
             this.splitContainerOuter.Panel2.SuspendLayout();
@@ -96,7 +99,8 @@ namespace nMars.IDE.Forms
             this.saveWarriorToolStripMenuItem,
             this.closeWarriorToolStripMenuItem,
             this.saveAllToolStripMenuItem,
-            this.closeSolutionToolStripMenuItem});
+            this.closeSolutionToolStripMenuItem,
+            this.recentProjectsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F)));
             this.fileToolStripMenuItem.ShowShortcutKeys = false;
@@ -203,6 +207,12 @@ namespace nMars.IDE.Forms
             this.closeSolutionToolStripMenuItem.Text = "Close Solution";
             this.closeSolutionToolStripMenuItem.Click += new System.EventHandler(this.closeSolutionToolStripMenuItem_Click);
             // 
+            // recentProjectsToolStripMenuItem
+            // 
+            this.recentProjectsToolStripMenuItem.Name = "recentProjectsToolStripMenuItem";
+            this.recentProjectsToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.recentProjectsToolStripMenuItem.Text = "Recent Projects";
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -239,6 +249,15 @@ namespace nMars.IDE.Forms
             this.compileWarriorToolStripMenuItem.Text = "Compile Warrior";
             this.compileWarriorToolStripMenuItem.Click += new System.EventHandler(this.compileWarriorToolStripMenuItem_Click);
             // 
+            // compileProjectToolStripMenuItem
+            // 
+            this.compileProjectToolStripMenuItem.Name = "compileProjectToolStripMenuItem";
+            this.compileProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+                        | System.Windows.Forms.Keys.B)));
+            this.compileProjectToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.compileProjectToolStripMenuItem.Text = "Compile Project";
+            this.compileProjectToolStripMenuItem.Click += new System.EventHandler(this.compileProjectToolStripMenuItem_Click);
+            // 
             // debugToolStripMenuItem
             // 
             this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -255,6 +274,7 @@ namespace nMars.IDE.Forms
             this.runToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.runToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.runToolStripMenuItem.Text = "Run";
+            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
             // stepIntoToolStripMenuItem
             // 
@@ -321,6 +341,7 @@ namespace nMars.IDE.Forms
             // 
             // splitContainerInner.Panel1
             // 
+            this.splitContainerInner.Panel1.Controls.Add(this.lbDocClose);
             this.splitContainerInner.Panel1.Controls.Add(this.tabDocuments);
             // 
             // splitContainerInner.Panel2
@@ -329,6 +350,18 @@ namespace nMars.IDE.Forms
             this.splitContainerInner.Size = new System.Drawing.Size(622, 357);
             this.splitContainerInner.SplitterDistance = 269;
             this.splitContainerInner.TabIndex = 0;
+            // 
+            // lbDocClose
+            // 
+            this.lbDocClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbDocClose.AutoSize = true;
+            this.lbDocClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lbDocClose.Location = new System.Drawing.Point(604, 4);
+            this.lbDocClose.Name = "lbDocClose";
+            this.lbDocClose.Size = new System.Drawing.Size(15, 13);
+            this.lbDocClose.TabIndex = 1;
+            this.lbDocClose.Text = "X";
+            this.lbDocClose.Click += new System.EventHandler(this.lbDocClose_Click);
             // 
             // tabDocuments
             // 
@@ -357,20 +390,24 @@ namespace nMars.IDE.Forms
             this.tabExplorers.Size = new System.Drawing.Size(181, 357);
             this.tabExplorers.TabIndex = 0;
             // 
-            // compileProjectToolStripMenuItem
+            // AsyncHub
             // 
-            this.compileProjectToolStripMenuItem.Name = "compileProjectToolStripMenuItem";
-            this.compileProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.B)));
-            this.compileProjectToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.compileProjectToolStripMenuItem.Text = "Compile Project";
-            this.compileProjectToolStripMenuItem.Click += new System.EventHandler(this.compileProjectToolStripMenuItem_Click);
+            this.AsyncHub.CausesValidation = false;
+            this.AsyncHub.Enabled = false;
+            this.AsyncHub.Location = new System.Drawing.Point(800, 420);
+            this.AsyncHub.Margin = new System.Windows.Forms.Padding(0);
+            this.AsyncHub.Name = "AsyncHub";
+            this.AsyncHub.Size = new System.Drawing.Size(0, 0);
+            this.AsyncHub.TabIndex = 0;
+            this.AsyncHub.TabStop = false;
+            this.AsyncHub.Visible = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 428);
+            this.Controls.Add(this.AsyncHub);
             this.Controls.Add(this.splitContainerOuter);
             this.Controls.Add(this.toolbar);
             this.Controls.Add(this.statusbar);
@@ -386,6 +423,7 @@ namespace nMars.IDE.Forms
             this.splitContainerOuter.Panel2.ResumeLayout(false);
             this.splitContainerOuter.ResumeLayout(false);
             this.splitContainerInner.Panel1.ResumeLayout(false);
+            this.splitContainerInner.Panel1.PerformLayout();
             this.splitContainerInner.Panel2.ResumeLayout(false);
             this.splitContainerInner.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -429,6 +467,9 @@ namespace nMars.IDE.Forms
         private System.Windows.Forms.ToolStripMenuItem removeWarriorFromProjectToolStripMenuItem;
         public System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem compileProjectToolStripMenuItem;
+        public nMars.IDE.Controls.AsyncHub AsyncHub;
+        private System.Windows.Forms.Label lbDocClose;
+        public System.Windows.Forms.ToolStripMenuItem recentProjectsToolStripMenuItem;
     }
 }
 

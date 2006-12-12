@@ -27,7 +27,7 @@ namespace nMars.Test
         public void Pair()
         {
             Init();
-            LoadRunPair(Path.Combine(basePath, "clear/twinshot.rc"), Path.Combine(basePath, "corewin/bluefunk.red"));
+            LoadRunPair(Path.Combine(basePath, "clear/twinshot.rc"), Path.Combine(basePath, "corewin/bluefunk.red"), 0);
         }
 
         [Test]
@@ -39,13 +39,15 @@ namespace nMars.Test
             files.AddRange(Directory.GetFiles(basePath, "*.red", SearchOption.AllDirectories));
             files.Sort();
             bool allOK = true;
+            int c = 0;
             for (int i = 0; i < files.Count; i++)
             {
                 for (int j = 0; j < files.Count; j++)
                 {
                     try
                     {
-                        LoadRunPair(files[i], files[j]);
+                        LoadRunPair(files[i], files[j], c);
+                        c++;
                     }
                     catch (EngineDifferException)
                     {
@@ -56,6 +58,37 @@ namespace nMars.Test
                     {
                         //swallow
                     }
+                }
+            }
+            if (!allOK)
+                throw new EngineDifferException("Some warriors failed.", null);
+        }
+
+        [Test]
+        public void Random(int count)
+        {
+            Init();
+
+            List<string> files = new List<string>(Directory.GetFiles(basePath, "*.rc", SearchOption.AllDirectories));
+            files.AddRange(Directory.GetFiles(basePath, "*.red", SearchOption.AllDirectories));
+            files.Sort();
+            Random r=new Random();
+            
+            bool allOK = true;
+            for (int i = 0; i < count; i++)
+            {
+                try
+                {
+                    LoadRunPair(files[r.Next(files.Count)], files[r.Next(files.Count)], i);
+                }
+                catch (EngineDifferException)
+                {
+                    Console.WriteLine("\nFailed");
+                    allOK = false;
+                }
+                catch (ParserException)
+                {
+                    //swallow
                 }
             }
             if (!allOK)
@@ -97,7 +130,7 @@ namespace nMars.Test
             engines.Run(pproject);
         }
 
-        private void LoadRunPair(string fileOne, string fileTwo)
+        private void LoadRunPair(string fileOne, string fileTwo, int counter)
         {
             IWarrior pwarriorOne;
             IWarrior pwarriorTwo;
@@ -105,13 +138,13 @@ namespace nMars.Test
             string shortTwo = Path.GetFileNameWithoutExtension(fileTwo);
             string midleOne = fileOne.Substring(basePath.Length);
             string midleTwo = fileTwo.Substring(basePath.Length);
-            Console.Write("Fighting {0} and {1}         \r", midleOne, midleTwo);
             string problemsPathOne = Path.Combine(problemsPath, shortOne);
             string problemsPathTwo = Path.Combine(problemsPath, shortTwo);
             pwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
             pwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".pErr2");
             if (pwarriorOne == null || pwarriorTwo == null)
                 return;
+            Console.Write("{2} Fighting {0} and {1}         \r", pwarriorOne.Name, pwarriorTwo.Name, counter);
             Project pproject = new Project(rules);
             pproject.EngineOptions = EngineOptions.ConstantRandom;
             pproject.Warriors.Add(pwarriorOne);
@@ -122,6 +155,9 @@ namespace nMars.Test
             }
             catch (EngineDifferException)
             {
+                Console.WriteLine();
+                Console.WriteLine(pwarriorOne.Name); 
+                Console.WriteLine(pwarriorTwo.Name);
                 File.Copy(fileOne, problemsPathOne + ".red", true);
                 File.Copy(fileTwo, problemsPathTwo + ".red", true);
                 throw;

@@ -12,6 +12,36 @@ namespace nMars.Engine
 {
     class EngineASync : IEngine, IDisposable, IStepEngine, IDebuggerEngine, IExtendedStepEngine
     {
+        #region Construction
+
+        public EngineASync()
+        {
+            engine = new EngineStepBack();
+            pause = true;
+            running = false;
+            brake = 0;
+        }
+
+        private void InitWorker()
+        {
+            worker = new Thread(new ThreadStart(WorkerLoop));
+            signalRun = new ManualResetEvent(false);
+            signalPaused = new ManualResetEvent(true);
+            pause = true;
+            quit = false;
+            running = true;
+            worker.Start();
+        }
+
+        public void Dispose()
+        {
+            worker.Interrupt();
+            signalRun.Close();
+            signalPaused.Close();
+        }
+
+        #endregion
+
         #region Synchronization
 
         public void Continue()
@@ -56,6 +86,12 @@ namespace nMars.Engine
             Continue();
         }
 
+        public void Run(IProject project, MatchFinishedCallback callback)
+        {
+            BeginMatch(project, callback);
+            Continue();
+        }
+
         public MatchResult Run(IProject project)
         {
             BeginMatch(project);
@@ -63,8 +99,18 @@ namespace nMars.Engine
             return EndMatch();
         }
 
+        
+        
+        
         public void BeginMatch(IProject project)
         {
+            BeginMatch(project, null);
+        }
+        
+        public void BeginMatch(IProject project, MatchFinishedCallback callback)
+        {
+            finishedcallback = callback;
+            brake = project.EngineOptions.Brake;
             lock (this)
             {
                 engine.BeginMatch(project);
@@ -120,12 +166,17 @@ namespace nMars.Engine
                     CheckBreak(args);
                 lock (this)
                 {
+                    if (brake > 0)
+                    {
+                        Thread.Sleep(brake);
+                    }
                     if (pause || args.Break)
                     {
                         args.Break = false;
                         running = false;
                         signalPaused.Set();
                         {
+                            // warning! unlocking already locked region and locking it back then
                             Monitor.Exit(this);
                             signalRun.WaitOne();
                             Monitor.Enter(this);
@@ -146,35 +197,10 @@ namespace nMars.Engine
                 signalPaused.Set();
                 running = false;
             }
-        }
-
-        #endregion
-
-        #region Construction
-
-        public EngineASync()
-        {
-            engine = new EngineStepBack();
-            pause = true;
-            running = false;
-        }
-
-        private void InitWorker()
-        {
-            worker = new Thread(new ThreadStart(WorkerLoop));
-            signalRun = new ManualResetEvent(false);
-            signalPaused = new ManualResetEvent(true);
-            pause = true;
-            quit = false;
-            running = true;
-            worker.Start();
-        }
-
-        public void Dispose()
-        {
-            worker.Interrupt();
-            signalRun.Close();
-            signalPaused.Close();
+            if (finishedcallback!=null)
+            {
+                finishedcallback.Invoke();
+            }
         }
 
         #endregion
@@ -415,6 +441,24 @@ namespace nMars.Engine
             }
         }
 
+        public int Brake
+        {
+            get
+            {
+                lock (this)
+                {
+                    return brake;
+                }
+            }
+            set
+            {
+                lock (this)
+                {
+                    brake = value;
+                }
+            }
+        }
+
         #endregion
 
         #region Variables
@@ -428,6 +472,8 @@ namespace nMars.Engine
         private bool running;
         private bool pause;
         private bool quit;
+        private int brake;
+        private MatchFinishedCallback finishedcallback;
 
         #endregion
     }

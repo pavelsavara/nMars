@@ -14,7 +14,7 @@ namespace nMars.RedCode
     {
         void InitParser(Rules aRules);
         IWarrior Parse(string fileName);
-        IWarrior Parse(string fileName, IConsole err);
+        IWarrior Parse(string fileName, ISimpleOutput err);
         IWarrior Parse(string fileName, TextWriter err);
         IWarrior Parse(string fileName, string errFileName);
     }

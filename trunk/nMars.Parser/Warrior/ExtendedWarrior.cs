@@ -26,7 +26,7 @@ namespace nMars.Parser.Warrior
             get { return (ExtendedInstruction)Instructions[offset]; }
         }
 
-        public override void Dump(IConsole tw, ParserOptions options)
+        public override void Dump(ISimpleOutput tw, ParserOptions options)
         {
             if (options.XmlFormat)
             {
@@ -39,23 +39,26 @@ namespace nMars.Parser.Warrior
                 tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
                 tw.WriteLine("");
             }
-            if (options.Offset)
+            if (!options.Brief)
             {
-                tw.Write("   ");
+                if (options.Offset)
+                {
+                    tw.Write("   ");
+                }
+                if (options.Labels && Length > 0)
+                {
+                    tw.WriteLine("             ORG      " + this[StartOffset].Label);
+                }
+                else
+                {
+                    tw.WriteLine("       ORG      START");
+                }
+                for (int a = 0; a < Instructions.Count; a++)
+                {
+                    tw.WriteLine(this[a].GetLine(options, a == StartOffset));
+                }
+                tw.WriteLine("");
             }
-            if (options.Labels && Length > 0)
-            {
-                tw.WriteLine("             ORG      " + this[StartOffset].Label);
-            }
-            else
-            {
-                tw.WriteLine("       ORG      START");
-            }
-            for (int a = 0; a < Instructions.Count; a++)
-            {
-                tw.WriteLine(this[a].GetLine(options, a == StartOffset));
-            }
-            tw.WriteLine("");
         }
 
         [NonSerialized]

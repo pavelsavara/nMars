@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.DbgShellPy", "nMars.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.IDE", "nMars.IDE\nMars.IDE.csproj", "{BB9036EA-050A-4ECD-B857-CB022275A7C5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pMarsDll", "pMars\src\pMarsDll.vcproj", "{4D589993-9F4B-407E-B0F7-604A456FBC9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,16 @@ Global
 		{BB9036EA-050A-4ECD-B857-CB022275A7C5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BB9036EA-050A-4ECD-B857-CB022275A7C5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BB9036EA-050A-4ECD-B857-CB022275A7C5}.Release|Win32.ActiveCfg = Release|Any CPU
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Debug|Win32.Build.0 = Debug|Win32
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Release|Any CPU.ActiveCfg = Release|Win32
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Release|Win32.ActiveCfg = Release|Win32
+		{4D589993-9F4B-407E-B0F7-604A456FBC9F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -103,18 +103,18 @@ namespace nMars.RedCode
             }
         }
 
-        public void Dump(TextWriter tw, IProject project)
+        public void Dump(ISimpleOutput output, IProject project)
         {
             IList<ResultsHelper> res = PrepareResults(project, project.EngineOptions.SortResults);
             for (int w = 0; w < res.Count; w++)
             {
                 IWarrior warrior = res[w].warrior;
-                tw.WriteLine("{0} by {1} scores {2}", warrior.Name, warrior.Author, res[w].score);
+                output.WriteLine(string.Format("{0} by {1} scores {2}", warrior.Name, warrior.Author, res[w].score));
             }
             if (res.Count == 2)
             {
                 int idx = res[0].originalIndex;
-                tw.WriteLine("Results: {0} {1} {2}", wins[idx], looses[idx], ties[idx]);
+                output.WriteLine(string.Format("Results: {0} {1} {2}", wins[idx], looses[idx], ties[idx]));
             }
         }
 

@@ -66,6 +66,7 @@ namespace nMars.IDE.Controls
             this.tbOut.Multiline = true;
             this.tbOut.Name = "tbOut";
             this.tbOut.ReadOnly = true;
+            this.tbOut.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbOut.Size = new System.Drawing.Size(806, 347);
             this.tbOut.TabIndex = 1;
             // 

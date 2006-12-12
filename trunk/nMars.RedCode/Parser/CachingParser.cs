@@ -25,7 +25,7 @@ namespace nMars.RedCode
         private IParser parser;
         private Dictionary<string, IWarrior> cache;
 
-        public override IWarrior Parse(string fileName, IConsole err)
+        public override IWarrior Parse(string fileName, ISimpleOutput err)
         {
             if (cache.ContainsKey(fileName))
             {

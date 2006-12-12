@@ -24,7 +24,7 @@ namespace nMars.Parser
             get { return ModuleRegister.GetVersion(GetType()); }
         }
 
-        public override IWarrior Parse(string fileName, IConsole err)
+        public override IWarrior Parse(string fileName, ISimpleOutput err)
         {
             StreamReader sr = new StreamReader(fileName);
             string source = sr.ReadToEnd();
@@ -34,7 +34,7 @@ namespace nMars.Parser
             return res;
         }
 
-        public IWarrior Parse(string sourceText, IConsole err, string implicitName)
+        public IWarrior Parse(string sourceText, ISimpleOutput err, string implicitName)
         {
             errOutput = err;
             errCount = 0;

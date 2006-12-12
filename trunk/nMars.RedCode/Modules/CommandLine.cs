@@ -12,6 +12,8 @@ namespace nMars.RedCode
 {
     public class CommandLine
     {
+        #region IParser Support
+        
         public static int ParserMain(string[] args, ComponentSetup setup, IProject project)
         {
             int res;
@@ -25,10 +27,76 @@ namespace nMars.RedCode
             if (res <= 0)
                 return res;
 
-            res = ParserBase.RunParser(files, setup.Parser, project, new WrappedConsole());
+            res = RunParser(files, setup.Parser, project, console);
             return res;
         }
 
+        public static int RunParser(IList<string> files, IParser parser, IProject project, ISimpleOutput output)
+        {
+            int res = 0;
+            parser.InitParser(project.Rules);
+            foreach (string file in files)
+            {
+                IWarrior warrior = RunParser(file, parser, project.ParserOptions, output);
+                if (warrior != null)
+                {
+                    project.Warriors.Add(warrior);
+                    res++;
+                }
+            }
+            if (project.ParserOptions.Status)
+            {
+                output.WriteLine("========== Compiled " + files.Count.ToString() + " warriors, " + (files.Count - res).ToString() +
+                                 " failed ==========");
+            }
+            return res;
+        }
+
+        public static int RunParser(IList<string> files, IParser parser, Rules rules, ParserOptions options,
+                                    ISimpleOutput output)
+        {
+            int res = 0;
+            parser.InitParser(rules);
+            foreach (string file in files)
+            {
+                IWarrior warrior = RunParser(file, parser, options, output);
+                if (warrior != null)
+                {
+                    res++;
+                }
+            }
+            if (options.Status)
+            {
+                output.WriteLine("========== Compiled " + files.Count.ToString() + " warriors, " + (files.Count - res).ToString() +
+                                 " failed ==========");
+            }
+            return res;
+        }
+
+        private static IWarrior RunParser(string file, IParser parser, ParserOptions options, ISimpleOutput output)
+        {
+            if (options.Header)
+            {
+                output.WriteLine(file);
+            }
+            IWarrior warrior = parser.Parse(file, output);
+            if (warrior != null)
+            {
+                if (options.DumpFiles)
+                {
+                    StreamWriter sw = new StreamWriter(Path.ChangeExtension(file, options.DumpExt));
+                    warrior.Dump(new WrappedTextWriter(sw), options);
+                    sw.Close();
+                }
+                warrior.Dump(output, options);
+            }
+            return warrior;
+        }
+
+        #endregion
+
+        #region IEngine Support
+        
         public static int EngineMain(string[] args, ComponentSetup setup, IProject project)
         {
             int res;
@@ -46,14 +114,23 @@ namespace nMars.RedCode
                 return res;
 
             project.Rules.WarriorsCount = files.Count;
-            res = ParserBase.RunParser(files, setup.Parser, project, new WrappedConsole());
+            res = RunParser(files, setup.Parser, project, console);
             if (res <= 0)
                 return res;
 
-            MatchResult match = setup.Engine.Run(project);
-            match.Dump(Console.Out, project);
+            RunEngine(project, setup, console);
             return 0;
         }
+
+        public static void RunEngine(IProject project, ComponentSetup setup, ISimpleOutput output)
+        {
+            MatchResult match = setup.Engine.Run(project);
+            match.Dump(output, project);
+        }
+
+        #endregion
+
+        #region IDebugger Support
 
         public static int DebuggerMain(string[] args, ComponentSetup setup, IProject project)
         {
@@ -67,8 +144,7 @@ namespace nMars.RedCode
                 project.ParserOptions = ParserOptions.Engine;
             }
 
-            IDebuggerEngine engine = setup.Engine as IDebuggerEngine;
-            if (engine == null)
+            if (setup.DebuggerEngine == null)
                 throw new ApplicationException("Unable to create DebuggerEngine");
 
             res = ParseParams(args, out files, project, setup.Debugger);
@@ -76,14 +152,18 @@ namespace nMars.RedCode
                 return res;
 
             project.Rules.WarriorsCount = files.Count;
-            res = ParserBase.RunParser(files, setup.Parser, project, new WrappedConsole());
+            res = RunParser(files, setup.Parser, project, console);
             if (res <= 0)
                 return res;
-            setup.Debugger.Init(engine, null, null);
+            setup.Debugger.Init(setup.DebuggerEngine, null, null);
             MatchResult match = setup.Debugger.Run(project);
-            match.Dump(Console.Out, project);
+            match.Dump(console, project);
             return 0;
         }
+
+        #endregion
+
+        #region Commandline Params
 
         private static int ParseParams(string[] args, out List<string> files, IProject project, IComponent component)
         {
@@ -162,13 +242,14 @@ namespace nMars.RedCode
                     case "-b":
                         project.ParserOptions.Brief = true;
                         project.ParserOptions.Status = false;
+                        project.ParserOptions.Header = false;
                         logo = false;
                         break;
                     case "-bs":
                         project.ParserOptions.Status = !project.ParserOptions.Status;
                         break;
                     case "-bh":
-                        project.ParserOptions.Header = false;
+                        project.ParserOptions.Header = !project.ParserOptions.Header;
                         break;
                     case "-bl":
                         logo = false;
@@ -245,5 +326,13 @@ namespace nMars.RedCode
             Console.WriteLine("  -ux       Dump xml");
             Console.WriteLine();
         }
+
+        #endregion
+
+        #region Variables
+
+        private static WrappedConsole console = new WrappedConsole();
+        
+        #endregion
     }
 }

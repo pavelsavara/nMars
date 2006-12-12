@@ -41,6 +41,12 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\AsyncHub.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AsyncHub.Designer.cs">
+      <DependentUpon>AsyncHub.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Console.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -64,6 +70,12 @@
     <Compile Include="Core\RedCodeProject.cs" />
     <Compile Include="Core\RedCodeSolution.cs" />
     <Compile Include="Core\WarriorDocument.cs" />
+    <Compile Include="Properties\IDESettings.cs" />
+    <Compile Include="Properties\IDESettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>IDESettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IControl.cs" />
     <Compile Include="Forms\AboutDialog.cs">
       <SubType>Form</SubType>
@@ -85,6 +97,10 @@
     </Compile>
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\AsyncHub.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AsyncHub.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Console.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Console.cs</DependentUpon>
@@ -119,17 +135,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\IDESettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>IDESettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\About.html" />
     <Content Include="Resources\IDEsmall.ico" />
     <None Include="Resources\IDE.ico" />

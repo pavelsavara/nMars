@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using nMars.RedCode;
@@ -15,6 +16,7 @@ namespace nMars.IDE.Core
             ParserOptions = new ParserOptions();
             EngineOptions = new EngineOptions();
             ParserOptions.Brief = true;
+            ParserOptions.Status = true;
         }
 
         #endregion
@@ -84,10 +86,16 @@ namespace nMars.IDE.Core
             RedCodeProject doc = rcpSerializer.Deserialize(sr) as RedCodeProject;
             sr.Close();
 
-            foreach (string documentFile in doc.Documents.Keys)
+            if (doc.Documents.Keys.Count > 0)
             {
-                ProjectDocument document = ProjectDocument.Load(documentFile, "WarriorDocument");
-                document.Project = this;
+                string[] keys = new string[doc.Documents.Keys.Count];
+                doc.Documents.Keys.CopyTo(keys, 0);
+                foreach (string documentFile in keys)
+                {
+                    ProjectDocument document = ProjectDocument.Load(documentFile, "WarriorDocument"); //TODO
+                    Documents[documentFile] = document;
+                    document.Project = this;
+                }
             }
             IsModified = false;
             IsNew = false;
@@ -167,10 +175,8 @@ namespace nMars.IDE.Core
         [XmlIgnore]
         public RedCodeSolution Solution;
 
-        [XmlIgnore]
         public EngineOptions EngineOptions;
 
-        [XmlIgnore]
         public ParserOptions ParserOptions;
 
         public Rules Rules;

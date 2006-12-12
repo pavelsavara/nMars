@@ -150,15 +150,27 @@ namespace nMars.RedCode
         event CheckBreak CheckBreak;
     }
 
-    public interface IAsyncEngine
+    public interface IStuntEngine
     {
+        /// <summary>
+        /// sleep miliseconds on each step
+        /// </summary>
+        int Brake { get; set;}
+    }
+    
+    public delegate void MatchFinishedCallback();
+
+    public interface IAsyncEngine : IStepEngine
+    {
+        void BeginMatch(IProject project, MatchFinishedCallback callback);
+        void Run(IProject project, MatchFinishedCallback callback);
         void Continue();
         void Pause();
         void Wait();
         void Quit();
     }
 
-    public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IAsyncEngine, ITaskView,
+    public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IStuntEngine, IAsyncEngine, ITaskView,
                                        ITimeView, ICoreView
     {
     }
