@@ -45,6 +45,16 @@ namespace nMars.RedCode.Modules
             }
         }
 
+        public IDebuggerEngine DebuggerEngine
+        {
+            get
+            {
+                if (engine == null)
+                    LoadEngine(EngineAssembly, EngineName);
+                return engine as IDebuggerEngine;
+            }
+        }
+
         public IDebugger Debugger
         {
             get

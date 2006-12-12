@@ -68,12 +68,12 @@ namespace nMars.RedCode
         /// <summary>
         /// Dump
         /// </summary>
-        void Dump(IConsole output);
+        void Dump(ISimpleOutput output);
 
         /// <summary>
         /// Dump with extended options
         /// </summary>
-        void Dump(IConsole output, ParserOptions options);
+        void Dump(ISimpleOutput output, ParserOptions options);
 
         /// <summary>
         /// Dump with extended options

@@ -84,8 +84,11 @@ namespace nMars.RedCode.Utils
                 return;
             while (reader.NodeType != XmlNodeType.EndElement)
             {
-                Add(reader.GetAttribute("File"), null);
+                string Path = reader.GetAttribute("Path");
+                if (Path != null)
+                    Add(Path, null);
                 reader.MoveToContent();
+                reader.Read();
             }
             reader.ReadEndElement();
         }

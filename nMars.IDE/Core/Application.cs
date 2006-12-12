@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using nMars.IDE.Controls;
 using nMars.IDE.Core;
@@ -28,9 +29,28 @@ namespace nMars.IDE
 
             SolutionExplorer = new SolutionExplorer();
             SolutionExplorer.Attach(mainForm.tabExplorers, "Solution");
-            NewSolution();
-
+            
+            Settings=new IDESettings();
+            Settings.Reload();
+            if (Settings.RecentProjects == null)
+            {
+                Settings.RecentProjects =new List<string>();
+            }
+            if (Settings.RecentProjects.Count != 0
+                && Settings.LoadRecentProject 
+                && File.Exists(Settings.RecentProjects[Settings.RecentProjects.Count - 1]))
+            {
+                LoadSolution(Settings.RecentProjects[Settings.RecentProjects.Count - 1]);
+            }
+            else
+            {
+                NewSolution();
+            }
+            mainForm.RefreshRecent();
+            RefreshUI();
+            
             System.Windows.Forms.Application.Run(mainForm);
+            Settings.Save();
             return 0;
         }
 
@@ -43,7 +63,9 @@ namespace nMars.IDE
                     return false;
                 }
             }
-            return SaveSolution();
+            bool res=SaveSolution();
+            RefreshUI();
+            return res;
         }
 
         #endregion
@@ -57,12 +79,14 @@ namespace nMars.IDE
                 editor.Save();
             }
             SaveSolution();
+            RefreshUI();
         }
 
         public static void OpenNewWarrior()
         {
             WarriorDocument warrior = WarriorDocument.New();
             warrior.Open();
+            RefreshUI();
         }
 
         public static void OpenExistingWarrior()
@@ -80,21 +104,26 @@ namespace nMars.IDE
                     OpenExistingWarrior(fileName);
                 }
             }
+            RefreshUI();
         }
 
         public static void ActivateDocument(ProjectDocument document)
         {
             document.Open();
+            RefreshUI();
         }
 
         public static void OpenExistingWarrior(string filename)
         {
             WarriorDocument.Load(filename).Open();
+            RefreshUI();
         }
 
         public static bool SaveDocument(Document doc)
         {
-            return doc.Save();
+            bool res = doc.Save();
+            RefreshUI();
+            return res;
         }
 
         public static void CloseDocument(Document doc)
@@ -103,6 +132,7 @@ namespace nMars.IDE
             {
                 doc.Close();
             }
+            RefreshUI();
         }
 
         public static void AddExistingWarrior(RedCodeProject project)
@@ -120,11 +150,13 @@ namespace nMars.IDE
                     WarriorDocument.Load(fileName, project);
                 }
             }
+            RefreshUI();
         }
 
         public static void AddNewWarrior(RedCodeProject project)
         {
             WarriorDocument.New(project).Open();
+            RefreshUI();
         }
 
         public static void RemoveWarrior(WarriorDocument warrior, bool delete)
@@ -137,43 +169,20 @@ namespace nMars.IDE
                     warrior.Project.Remove(warrior, delete);
                 }
             }
+            RefreshUI();
         }
 
 
         public static void AddIntoProject(ProjectDocument document)
         {
             ActiveSolution.ActiveProject.Add(document);
+            RefreshUI();
         }
 
         public static void RemoveFromProject(ProjectDocument document)
         {
             document.Project.Remove(document, false);
-        }
-
-        public static void Compile(WarriorDocument warrior)
-        {
-            if (warrior == null)
-                return;
-            warrior.Save();
-            string[] files = new string[1];
-            files[0] = warrior.FileName;
-            ParserBase.RunParser(files, ActiveSolution.ComponentSetup.Parser, Rules.DefaultRules, ParserOptions.Engine,
-                                 Console);
-        }
-
-        public static void Compile(RedCodeProject project)
-        {
-            foreach (IEditor editor in Editors)
-            {
-                if (editor.Document is ProjectDocument && (editor.Document as ProjectDocument).Project == project)
-                {
-                    editor.Save();
-                }
-            }
-            string[] a = new string[project.Documents.Keys.Count];
-            project.Documents.Keys.CopyTo(a, 0);
-            ParserBase.RunParser(a, ActiveSolution.ComponentSetup.Parser, ActiveSolution.ActiveProject.Rules,
-                                 ActiveSolution.ActiveProject.ParserOptions, Console);
+            RefreshUI();
         }
 
         #endregion
@@ -183,11 +192,13 @@ namespace nMars.IDE
         public static void AddNewProject()
         {
             RedCodeProject.New(ActiveSolution);
+            RefreshUI();
         }
 
         public static void RemoveProject(RedCodeProject project, bool delete)
         {
             ActiveSolution.Remove(project, delete);
+            RefreshUI();
         }
 
         public static void AddExistingProject()
@@ -202,22 +213,44 @@ namespace nMars.IDE
             {
                 RedCodeProject.Load(mainForm.openDialog.FileName, ActiveSolution);
             }
+            RefreshUI();
         }
 
         public static bool SaveProject(RedCodeProject project)
         {
-            return project.Save();
+            bool res = project.Save();
+            RefreshUI();
+            return res;
         }
 
         public static void SetProjectActive(RedCodeProject project)
         {
             ActiveSolution.ActiveProject = project;
+            RefreshUI();
         }
 
 
         public static bool SaveSolution()
         {
-            return ActiveSolution.Save();
+            bool res=ActiveSolution.Save();
+            if (res)
+            {
+                AddRecentProject(ActiveSolution.FileName);
+            }
+            RefreshUI();
+            return res;
+        }
+
+        private static void AddRecentProject(string filename)
+        {
+            int idx = Settings.RecentProjects.IndexOf(filename);
+            if (idx != -1 && idx != (Settings.RecentProjects.Count - 1))
+            {
+                Settings.RecentProjects.RemoveAt(idx);
+            }
+            Settings.RecentProjects.Add(ActiveSolution.FileName);
+            Settings.Save();
+            mainForm.RefreshRecent();
         }
 
         public static void OpenSolution()
@@ -233,19 +266,52 @@ namespace nMars.IDE
                 DialogResult dr = mainForm.openDialog.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    ActiveSolution = RedCodeSolution.Load(mainForm.openDialog.FileName);
-                    SolutionExplorer.ReloadSolution();
+                    LoadSolution(mainForm.openDialog.FileName);
+                    AddRecentProject(mainForm.openDialog.FileName);
+                }
+            }
+            RefreshUI();
+        }
+
+        public static void OpenSolution(string fileName)
+        {
+            if (ActiveSolution==null || ActiveSolution.Closing())
+            {
+                if (ActiveSolution != null)
+                    ActiveSolution.Close();
+                LoadSolution(fileName);
+            }
+        }
+        
+        public static void LoadSolution(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                ActiveSolution = RedCodeSolution.Load(fileName);
+                SolutionExplorer.ReloadSolution();
+                AddRecentProject(fileName);
+                mainForm.RefreshRecent();
+                RefreshUI();
+            }
+            else
+            {
+                if (Settings.RecentProjects.Contains(fileName))
+                {
+                    Settings.RecentProjects.Remove(fileName);
+                    mainForm.RefreshRecent();
                 }
             }
         }
 
         public static void CloseSolution()
         {
-            if (ActiveSolution.Closing())
+            if (ActiveSolution == null || ActiveSolution.Closing())
             {
-                ActiveSolution.Close();
+                if (ActiveSolution != null)
+                    ActiveSolution.Close();
                 NewSolution();
             }
+            RefreshUI();
         }
 
         private static void NewSolution()
@@ -254,20 +320,78 @@ namespace nMars.IDE
             AddNewProject();
             ActiveSolution.IsModified = false;
             SolutionExplorer.ReloadSolution();
+            RefreshUI();
         }
 
         public static void RefreshUI()
         {
             mainForm.RefreshUI();
-            SolutionExplorer.ReloadSolution();
+            //? SolutionExplorer.ReloadSolution();
         }
 
+        #endregion
+
+        #region Compile & Run
+
+        public static void Compile(WarriorDocument warrior)
+        {
+            if (warrior == null)
+                return;
+            warrior.Save();
+            string[] files = new string[1];
+            files[0] = warrior.FileName;
+            CommandLine.RunParser(files, ActiveSolution.ComponentSetup.Parser, Rules.DefaultRules, ParserOptions.Ide,
+                                 Console);
+            RefreshUI();
+        }
+
+        public static void Compile(RedCodeProject project)
+        {
+            foreach (IEditor editor in Editors)
+            {
+                if (editor.Document is ProjectDocument && (editor.Document as ProjectDocument).Project == project)
+                {
+                    editor.Save();
+                }
+            }
+            string[] a = new string[project.Documents.Keys.Count];
+            project.Documents.Keys.CopyTo(a, 0);
+            CommandLine.RunParser(a, ActiveSolution.ComponentSetup.Parser, ActiveSolution.ActiveProject.Rules,
+                                 ActiveSolution.ActiveProject.ParserOptions, Console);
+            RefreshUI();
+        }
+
+        public static void Start(RedCodeProject project)
+        {
+            if (ActiveSolution.ActiveProject.Documents.Count==0)
+                return;
+            RedCodeProject pd = ActiveSolution.ActiveProject;
+            Project p = new Project(new Rules(pd.Rules));
+            p.EngineOptions = pd.EngineOptions;
+            p.ParserOptions = pd.ParserOptions;
+            string[] files=new string[pd.Documents.Count];
+            pd.Documents.Keys.CopyTo(files, 0);
+            if (CommandLine.RunParser(files, ActiveSolution.ComponentSetup.Parser, p, Console) > 0)
+            {
+                ActiveSolution.ComponentSetup.DebuggerEngine.Run(p, mainForm.AsyncHub.MatchFinishedCallback);
+            }
+        }
+
+        public static void MatchFinished()
+        {
+            MatchResult match = ActiveSolution.ComponentSetup.DebuggerEngine.EndMatch();
+            match.Dump(Console, ActiveSolution.ComponentSetup.DebuggerEngine.Project);
+        }
+
+        
         #endregion
 
         #region Variables
 
         public static RedCodeSolution ActiveSolution;
         public static Application ApplicationInstance;
+        public static IEngine ActiveEngine;
+        //TODO public static bool PendingOperation; disble controls
 
         //editors
         public static List<IEditor> Editors = new List<IEditor>();
@@ -277,6 +401,9 @@ namespace nMars.IDE
         public static SolutionExplorer SolutionExplorer;
         public static Console Console;
         public static MainForm mainForm;
+        
+        //setting
+        public static IDESettings Settings;
 
         #endregion
     }

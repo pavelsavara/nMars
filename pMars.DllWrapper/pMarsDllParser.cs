@@ -20,7 +20,7 @@ namespace pMars.DllWrapper
             pMarsDll.pMarsFreeParsed();
         }
 
-        public override IWarrior Parse(string fileName, IConsole err)
+        public override IWarrior Parse(string fileName, ISimpleOutput err)
         {
             string errFile = Path.GetTempFileName();
             IWarrior res = Parse(fileName, errFile);

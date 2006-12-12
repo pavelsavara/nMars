@@ -31,6 +31,15 @@ namespace nMars.IDE.Controls
             textBox.Focus();
         }
 
+        public override void DeactivateControl()
+        {
+            base.DeactivateControl();
+            if (Application.ActiveEditor == this)
+            {
+                Application.ActiveEditor = null;
+            }
+        }
+
         #region Load & Save
 
         public void Save()
@@ -81,6 +90,11 @@ namespace nMars.IDE.Controls
                 Application.RefreshUI();
                 PageName = document.Name;
             }
+        }
+
+        public override string ToString()
+        {
+            return document.Name;
         }
     }
 }

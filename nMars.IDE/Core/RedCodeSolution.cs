@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using nMars.RedCode;
 using nMars.RedCode.Modules;
 using nMars.RedCode.Utils;
 
@@ -21,7 +22,7 @@ namespace nMars.IDE.Core
         #endregion
 
         #region Public
-
+        
         public static RedCodeSolution Load(string fileName)
         {
             RedCodeSolution solution = new RedCodeSolution();
@@ -73,13 +74,25 @@ namespace nMars.IDE.Core
             RedCodeSolution doc = rcsSerializer.Deserialize(sr) as RedCodeSolution;
             sr.Close();
 
-            foreach (string projectFile in doc.Projects.Keys)
+            if (doc.Projects.Keys.Count>0)
             {
-                RedCodeProject project = RedCodeProject.Load(projectFile);
-                Add(project);
+                string[] keys = new string[doc.Projects.Keys.Count];
+                doc.Projects.Keys.CopyTo(keys, 0);
+                foreach (string projectFile in keys)
+                {
+                    RedCodeProject project = RedCodeProject.Load(projectFile);
+                    Projects[projectFile] = project;
+                    project.Solution = this;
+                }
+                if (doc.activeProjectFileName != null)
+                {
+                    ActiveProject = Projects[doc.activeProjectFileName];
+                }
+                else
+                {
+                    ActiveProject = Projects[keys[0]];
+                }
             }
-            if (doc.activeProjectFileName != null)
-                ActiveProject = Projects[doc.activeProjectFileName];
             IsModified = false;
             IsNew = false;
         }
@@ -121,9 +134,16 @@ namespace nMars.IDE.Core
                         throw new InvalidOperationException("Project is not member of solution");
                     }
                     activeProject = value;
+                    if (activeProject ==null)
+                    {
+                        activeProjectFileName = null;
+                    }
+                    else
+                    {
+                        activeProjectFileName = value.FileName;
+                    }
                 }
                 IsModified = true;
-                Application.SolutionExplorer.ReloadSolution();
             }
         }
 

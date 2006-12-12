@@ -126,12 +126,12 @@ namespace nMars.Engine
             get { return SourceWarrior.Length; }
         }
 
-        public void Dump(IConsole tw)
+        public void Dump(ISimpleOutput tw)
         {
             SourceWarrior.Dump(tw);
         }
 
-        public void Dump(IConsole tw, ParserOptions options)
+        public void Dump(ISimpleOutput tw, ParserOptions options)
         {
             SourceWarrior.Dump(tw, options);
         }

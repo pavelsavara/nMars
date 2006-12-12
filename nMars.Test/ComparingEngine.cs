@@ -103,10 +103,10 @@ namespace nMars.Test
             project.EngineOptions.Random = new Random(0);
 
             engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
-            engineTwo = ModuleRegister.CreateEngine("nMars.Engine") as IExtendedStepEngine;
+            engineTwo = ModuleRegister.CreateEngine("nMars.Engine", "nMars.Engine-StepForward") as IExtendedStepEngine;
             forcedArdresses = new List<int>();
             forcedArdresses.Add(0);
-            forcedArdresses.Add(4321);
+            forcedArdresses.Add(4231);
         }
 
         #region Loop

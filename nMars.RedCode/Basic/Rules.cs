@@ -29,6 +29,26 @@ namespace nMars.RedCode
     [ComVisible(true)]
     public class Rules
     {
+        public Rules()
+        {
+        }
+
+        public Rules(Rules src)
+        {
+            CoreSize = src.CoreSize;
+            PSpaceSize = src.PSpaceSize;
+            MaxCycles = src.MaxCycles;
+            MaxLength = src.MaxLength;
+            MaxProcesses = src.MaxProcesses;
+            EnablePSpace = src.EnablePSpace;
+            MinDistance = src.MinDistance;
+            Rounds = src.Rounds;
+            WarriorsCount = src.WarriorsCount;
+            Version = src.Version;
+            ScoreFormula = src.ScoreFormula;
+            ICWSStandard = src.ICWSStandard;
+        }
+
         [XmlAttribute]
         public int CoreSize = 8000;
 
@@ -57,7 +77,7 @@ namespace nMars.RedCode
         public int WarriorsCount = 2;
 
         [XmlAttribute]
-        public int Version = 60;
+        public int Version = 93;
 
         [XmlAttribute]
         public ScoreFormula ScoreFormula = ScoreFormula.Standard;

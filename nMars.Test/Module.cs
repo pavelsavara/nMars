@@ -18,6 +18,7 @@ namespace nMars.Test
                 if (args.Length == 0)
                 {
                     EngineTest test = new EngineTest();
+                    test.Random(1000);
                     test.Full();
                     return 0;
                 }
