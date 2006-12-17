@@ -60,11 +60,12 @@ namespace nMars.RedCode
 
     public interface IRunningWarrior : IWarrior
     {
-        IInstruction NextInstruction { get; }
-        int NextInstructionIndex { get; }
-        IInstruction PreviousInstruction { get; }
-        int PreviousInstructionIndex { get; }
+        IRunningInstruction NextInstruction { get; }
+        int NextInstructionAddress { get; }
+        IRunningInstruction PrevInstruction { get; }
+        int PreviousInstructionAddress { get; }
         int LiveTasksCount { get; }
+        int DeadTasksCount { get; }
         IList<int> Tasks { get; }
         int TasksCount { get; }
         IPSpace PSpace { get; }
@@ -111,6 +112,7 @@ namespace nMars.RedCode
     public interface ITaskView
     {
         IList<IList<int>> Tasks { get; }
+        int TasksCount { get; }
         int NextWarriorIndex { get; }
     }
 
@@ -176,7 +178,7 @@ namespace nMars.RedCode
     }
 
     public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IStuntEngine, IAsyncEngine, ITaskView,
-                                       ITimeView, ICoreView, IStatusView
+                                       ITimeView, ICoreView, IStatusView, IExtendedStepEngine
     {
     }
 

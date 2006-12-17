@@ -87,6 +87,19 @@ namespace nMars.Engine
             get { return cyclesLeft; }
         }
 
+        public int TasksCount
+        {
+            get
+            {
+                int res = 0;
+                foreach (IRunningWarrior warrior in warriors)
+                {
+                    res += warrior.TasksCount;
+                }
+                return res;
+            }
+        }
+
         public IList<IList<int>> Tasks
         {
             get

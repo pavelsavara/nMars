@@ -38,17 +38,18 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Engine\Engine0Ground.cs" />
-    <Compile Include="Engine\Engine2Placement.cs" />
-    <Compile Include="Engine\Engine1Core.cs" />
-    <Compile Include="Engine\Engine3Tasks.cs" />
-    <Compile Include="Engine\Engine4Changes.cs" />
-    <Compile Include="Engine\Engine5Addressing.cs" />
-    <Compile Include="Engine\Engine6Instructions.cs" />
-    <Compile Include="Engine\Engine7Steps.cs" />
+    <Compile Include="Engine\Engine00Ground.cs" />
+    <Compile Include="Engine\Engine02Placement.cs" />
+    <Compile Include="Engine\Engine01Core.cs" />
+    <Compile Include="Engine\Engine03Tasks.cs" />
+    <Compile Include="Engine\Engine04Changes.cs" />
+    <Compile Include="Engine\Engine05Addressing.cs" />
+    <Compile Include="Engine\Engine06Instructions.cs" />
+    <Compile Include="Engine\Engine07Steps.cs" />
     <Compile Include="EngineInstruction.cs" />
-    <Compile Include="Engine\Engine8Observer.cs" />
-    <Compile Include="Engine\Engine9StepBack.cs" />
+    <Compile Include="Engine\Engine09History.cs" />
+    <Compile Include="Engine\Engine08Observer.cs" />
+    <Compile Include="Engine\Engine10StepBack.cs" />
     <Compile Include="Engine\EngineASync.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

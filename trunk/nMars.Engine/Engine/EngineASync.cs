@@ -251,7 +251,7 @@ namespace nMars.Engine
                     engineStoppedCallback.Invoke(true);
                 }
             }
-            catch (ThreadInterruptedException ex)
+            catch (ThreadInterruptedException)
             {
                 //swallow
             }
@@ -319,6 +319,17 @@ namespace nMars.Engine
                 lock (this)
                 {
                     return engine.Tasks;
+                }
+            }
+        }
+
+        public int TasksCount
+        {
+            get
+            {
+                lock (this)
+                {
+                    return engine.TasksCount;
                 }
             }
         }

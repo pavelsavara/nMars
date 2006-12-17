@@ -4,7 +4,7 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    class EngineStepBack : EngineObserver, IStepBackEngine
+    class EngineStepBack : EngineHistory, IStepBackEngine
     {
         public StepResult PrevStep()
         {

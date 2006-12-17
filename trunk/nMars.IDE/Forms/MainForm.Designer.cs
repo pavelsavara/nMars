@@ -67,6 +67,7 @@ namespace nMars.IDE.Forms
             this.pauseToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.stepBackToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.stopToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.stepRoundToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.fileToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
@@ -342,6 +343,7 @@ namespace nMars.IDE.Forms
             this.runFastToolStripButton,
             this.runNormalToolStripButton,
             this.runSlowToolStripButton,
+            this.stepRoundToolStripButton,
             this.stepThreadToolStripButton,
             this.stepAnyToolStripButton,
             this.pauseToolStripButton,
@@ -432,6 +434,16 @@ namespace nMars.IDE.Forms
             this.stopToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.stopToolStripButton.Text = "Stop";
             this.stopToolStripButton.Click += new System.EventHandler(this.stopToolStripButton_Click);
+            // 
+            // stepRoundToolStripButton
+            // 
+            this.stepRoundToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stepRoundToolStripButton.Image = global::nMars.IDE.Properties.Resources.StepRound;
+            this.stepRoundToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stepRoundToolStripButton.Name = "stepRoundToolStripButton";
+            this.stepRoundToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.stepRoundToolStripButton.Text = "Step Round";
+            this.stepRoundToolStripButton.Click += new System.EventHandler(this.stepRoundToolStripButton_Click);
             // 
             // openDialog
             // 
@@ -601,6 +613,7 @@ namespace nMars.IDE.Forms
         private System.Windows.Forms.ToolStripMenuItem runFastToolStripMenuItem;
         public System.Windows.Forms.Timer timerDebugWatch;
         private System.Windows.Forms.ToolStripButton stepThreadToolStripButton;
+        private System.Windows.Forms.ToolStripButton stepRoundToolStripButton;
     }
 }
 

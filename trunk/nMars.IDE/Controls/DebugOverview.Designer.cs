@@ -29,20 +29,26 @@ namespace nMars.IDE.Controls
         private void InitializeComponent()
         {
             this.overviewPanel = new System.Windows.Forms.Panel();
-            this.labelRound = new System.Windows.Forms.Label();
-            this.textBoxRound = new System.Windows.Forms.TextBox();
+            this.textBoxLive = new System.Windows.Forms.TextBox();
+            this.labelLive = new System.Windows.Forms.Label();
             this.textBoxCycle = new System.Windows.Forms.TextBox();
             this.labelCycle = new System.Windows.Forms.Label();
+            this.textBoxRound = new System.Windows.Forms.TextBox();
+            this.labelRound = new System.Windows.Forms.Label();
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.IDEFramePanel.SuspendLayout();
             this.overviewPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // IDEFramePanel
             // 
+            this.IDEFramePanel.Controls.Add(this.tableLayoutPanel);
             this.IDEFramePanel.Controls.Add(this.overviewPanel);
             // 
             // overviewPanel
             // 
+            this.overviewPanel.Controls.Add(this.textBoxLive);
+            this.overviewPanel.Controls.Add(this.labelLive);
             this.overviewPanel.Controls.Add(this.textBoxCycle);
             this.overviewPanel.Controls.Add(this.labelCycle);
             this.overviewPanel.Controls.Add(this.textBoxRound);
@@ -53,26 +59,26 @@ namespace nMars.IDE.Controls
             this.overviewPanel.Size = new System.Drawing.Size(806, 96);
             this.overviewPanel.TabIndex = 1;
             // 
-            // labelRound
+            // textBoxLive
             // 
-            this.labelRound.AutoSize = true;
-            this.labelRound.Location = new System.Drawing.Point(12, 11);
-            this.labelRound.Name = "labelRound";
-            this.labelRound.Size = new System.Drawing.Size(48, 13);
-            this.labelRound.TabIndex = 0;
-            this.labelRound.Text = "Round : ";
+            this.textBoxLive.Location = new System.Drawing.Point(65, 59);
+            this.textBoxLive.Name = "textBoxLive";
+            this.textBoxLive.ReadOnly = true;
+            this.textBoxLive.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLive.TabIndex = 5;
             // 
-            // textBoxRound
+            // labelLive
             // 
-            this.textBoxRound.Location = new System.Drawing.Point(57, 8);
-            this.textBoxRound.Name = "textBoxRound";
-            this.textBoxRound.ReadOnly = true;
-            this.textBoxRound.Size = new System.Drawing.Size(100, 20);
-            this.textBoxRound.TabIndex = 1;
+            this.labelLive.AutoSize = true;
+            this.labelLive.Location = new System.Drawing.Point(12, 62);
+            this.labelLive.Name = "labelLive";
+            this.labelLive.Size = new System.Drawing.Size(55, 13);
+            this.labelLive.TabIndex = 4;
+            this.labelLive.Text = "Live w/t : ";
             // 
             // textBoxCycle
             // 
-            this.textBoxCycle.Location = new System.Drawing.Point(57, 34);
+            this.textBoxCycle.Location = new System.Drawing.Point(65, 34);
             this.textBoxCycle.Name = "textBoxCycle";
             this.textBoxCycle.ReadOnly = true;
             this.textBoxCycle.Size = new System.Drawing.Size(100, 20);
@@ -86,6 +92,35 @@ namespace nMars.IDE.Controls
             this.labelCycle.Size = new System.Drawing.Size(42, 13);
             this.labelCycle.TabIndex = 2;
             this.labelCycle.Text = "Cycle : ";
+            // 
+            // textBoxRound
+            // 
+            this.textBoxRound.Location = new System.Drawing.Point(65, 8);
+            this.textBoxRound.Name = "textBoxRound";
+            this.textBoxRound.ReadOnly = true;
+            this.textBoxRound.Size = new System.Drawing.Size(100, 20);
+            this.textBoxRound.TabIndex = 1;
+            // 
+            // labelRound
+            // 
+            this.labelRound.AutoSize = true;
+            this.labelRound.Location = new System.Drawing.Point(12, 11);
+            this.labelRound.Name = "labelRound";
+            this.labelRound.Size = new System.Drawing.Size(48, 13);
+            this.labelRound.TabIndex = 0;
+            this.labelRound.Text = "Round : ";
+            // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.ColumnCount = 1;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 96);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 1;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(806, 274);
+            this.tableLayoutPanel.TabIndex = 2;
             // 
             // DebugOverview
             // 
@@ -105,5 +140,8 @@ namespace nMars.IDE.Controls
         private System.Windows.Forms.TextBox textBoxCycle;
         private System.Windows.Forms.Label labelCycle;
         private System.Windows.Forms.TextBox textBoxRound;
+        private System.Windows.Forms.TextBox textBoxLive;
+        private System.Windows.Forms.Label labelLive;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
     }
 }

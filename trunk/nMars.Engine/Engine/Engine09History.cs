@@ -4,11 +4,12 @@
 // 2006 Pavel Savara
 
 using System.Collections.Generic;
+using nMars.Engine.Engine;
 using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public class EngineObserver : EngineSteps
+    public class EngineHistory : EngineObserver
     {
         #region Event class
 

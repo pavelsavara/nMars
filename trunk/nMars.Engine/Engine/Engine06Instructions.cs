@@ -27,6 +27,7 @@ namespace nMars.Engine
             reg.ip = ip;
             BeforeRead(ip, Column.All);
             reg.IR = core[ip];
+            warrior.PrevInstruction = new EngineInstruction(reg.IR, ip);
             reg.AA_Value = core[ip].ValueA;
             reg.AB_Value = core[ip].ValueA;
 
@@ -397,6 +398,7 @@ namespace nMars.Engine
             }
             else
             {
+                warrior.DeadTasksCount++;
                 Died(warrior);
             }
             if (split)

@@ -135,6 +135,13 @@ namespace nMars.IDE.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap StepRound {
+            get {
+                object obj = ResourceManager.GetObject("StepRound", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap StepThread {
             get {
                 object obj = ResourceManager.GetObject("StepThread", resourceCulture);
