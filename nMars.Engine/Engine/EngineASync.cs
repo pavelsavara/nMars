@@ -10,7 +10,7 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    class EngineASync : IEngine, IDisposable, IStepEngine, IDebuggerEngine, IExtendedStepEngine
+    class EngineASync : IEngine, IDisposable, IStepEngine, IDebuggerEngine, IExtendedStepEngine, IAsyncEngine
     {
         #region Construction
 
@@ -19,6 +19,7 @@ namespace nMars.Engine
             engine = new EngineStepBack();
             pause = true;
             running = false;
+            live = true;
             brake = 0;
         }
 
@@ -86,7 +87,17 @@ namespace nMars.Engine
             Continue();
         }
 
-        public void Run(IProject project, MatchFinishedCallback callback)
+        public void Kill()
+        {
+            lock (this)
+            {
+                worker.Interrupt();
+                running = false;
+                live = false;
+            }
+        }
+
+        public void Run(IProject project, EngineStoppedCallback callback)
         {
             BeginMatch(project, callback);
             Continue();
@@ -99,17 +110,14 @@ namespace nMars.Engine
             return EndMatch();
         }
 
-        
-        
-        
         public void BeginMatch(IProject project)
         {
             BeginMatch(project, null);
         }
         
-        public void BeginMatch(IProject project, MatchFinishedCallback callback)
+        public void BeginMatch(IProject project, EngineStoppedCallback callback)
         {
-            finishedcallback = callback;
+            engineStoppedCallback = callback;
             brake = project.EngineOptions.Brake;
             lock (this)
             {
@@ -153,53 +161,114 @@ namespace nMars.Engine
             }
         }
 
+        public bool IsLive 
+        { 
+            get
+            {
+                return live;
+            }
+        }
+
+        public bool IsPaused
+        {
+            get
+            {
+                return !running;
+            }
+        }
+
         #endregion
 
         #region Loop
 
         private void WorkerLoop()
         {
-            CheckBreakEventArgs args = new CheckBreakEventArgs();
-            do
+            // warning! intentional inversed lock inside
+            try
             {
-                if (CheckBreak != null)
-                    CheckBreak(args);
-                lock (this)
+                live = true;
+                CheckBreakEventArgs args = new CheckBreakEventArgs();
+                do
                 {
-                    if (brake > 0)
+                    if (CheckBreak != null)
+                        CheckBreak(args);
+                    lock (this)
                     {
-                        Thread.Sleep(brake);
-                    }
-                    if (pause || args.Break)
-                    {
-                        args.Break = false;
-                        running = false;
-                        signalPaused.Set();
+                        if (brake > 0)
                         {
-                            // warning! unlocking already locked region and locking it back then
-                            Monitor.Exit(this);
-                            signalRun.WaitOne();
-                            Monitor.Enter(this);
+                            try
+                            {
+                                Monitor.Exit(this);
+                                Thread.Sleep(brake);
+                            }
+                            finally
+                            {
+                                Monitor.Enter(this);
+                            }
                         }
                         if (quit)
                         {
                             break;
                         }
-                        signalPaused.Reset();
-                        pause = false;
-                        running = true;
+                        if (pause || args.Break)
+                        {
+                            args.Break = false;
+                            running = false;
+                            signalPaused.Set();
+                            {
+                                try
+                                {
+                                    Monitor.Exit(this);
+                                    if (engineStoppedCallback != null)
+                                    {
+                                        engineStoppedCallback.Invoke(false);
+                                    }
+                                    signalRun.WaitOne();
+                                }
+                                finally
+                                {
+                                    Monitor.Enter(this);
+                                }
+                            }
+                            if (quit || stepResult == StepResult.Finished)
+                            {
+                                break;
+                            }
+                            signalPaused.Reset();
+                            pause = false;
+                            running = true;
+                        }
+                        stepResult = engine.NextStep();
                     }
-                    stepResult = engine.NextStep();
+                } while (stepResult != StepResult.Finished);
+                lock (this)
+                {
+                    signalPaused.Set();
+                    running = false;
                 }
-            } while (stepResult != StepResult.Finished);
-            lock (this)
-            {
-                signalPaused.Set();
-                running = false;
+                if (engineStoppedCallback != null)
+                {
+                    engineStoppedCallback.Invoke(true);
+                }
             }
-            if (finishedcallback!=null)
+            catch (ThreadInterruptedException ex)
             {
-                finishedcallback.Invoke();
+                //swallow
+            }
+            catch (Exception ex)
+            {
+                if (engine.Output != null)
+                {
+                    engine.Output.ErrorWriteLine(ex.ToString());
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            finally
+            {
+                live = false;
             }
         }
 
@@ -227,6 +296,17 @@ namespace nMars.Engine
                 lock (this)
                 {
                     return engine.Project;
+                }
+            }
+        }
+
+        public ISimpleOutput Output
+        {
+            set
+            {
+                lock (this)
+                {
+                    engine.Output = value;
                 }
             }
         }
@@ -470,10 +550,11 @@ namespace nMars.Engine
         private ManualResetEvent signalPaused;
         private StepResult stepResult;
         private bool running;
+        private bool live;
         private bool pause;
         private bool quit;
         private int brake;
-        private MatchFinishedCallback finishedcallback;
+        private EngineStoppedCallback engineStoppedCallback;
 
         #endregion
     }

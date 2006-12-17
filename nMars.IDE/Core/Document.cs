@@ -67,19 +67,19 @@ namespace nMars.IDE.Core
 
         protected bool ChooseName(string ext, string title)
         {
-            Application.mainForm.saveDialog.Title = "Save " + title;
-            Application.mainForm.saveDialog.DefaultExt = ext;
-            Application.mainForm.saveDialog.Filter = title + " files|*." + ext;
-            Application.mainForm.saveDialog.FilterIndex = 1;
-            Application.mainForm.saveDialog.FileName = FileName;
-            Application.mainForm.saveDialog.AddExtension = true;
-            Application.mainForm.saveDialog.CreatePrompt = false;
-            DialogResult dr = Application.mainForm.saveDialog.ShowDialog();
+            Application.MainForm.saveDialog.Title = "Save " + title;
+            Application.MainForm.saveDialog.DefaultExt = ext;
+            Application.MainForm.saveDialog.Filter = title + " files|*." + ext;
+            Application.MainForm.saveDialog.FilterIndex = 1;
+            Application.MainForm.saveDialog.FileName = FileName;
+            Application.MainForm.saveDialog.AddExtension = true;
+            Application.MainForm.saveDialog.CreatePrompt = false;
+            DialogResult dr = Application.MainForm.saveDialog.ShowDialog();
             if (dr == DialogResult.Cancel)
             {
                 return false;
             }
-            FileName = Application.mainForm.saveDialog.FileName;
+            FileName = Application.MainForm.saveDialog.FileName;
             return true;
         }
     }

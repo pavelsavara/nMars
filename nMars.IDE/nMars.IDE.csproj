@@ -41,17 +41,17 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Controls\AsyncHub.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\AsyncHub.Designer.cs">
-      <DependentUpon>AsyncHub.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Console.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Console.Designer.cs">
       <DependentUpon>Console.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugOverview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugOverview.Designer.cs">
+      <DependentUpon>DebugOverview.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SolutionExplorer.cs">
       <SubType>UserControl</SubType>
@@ -97,13 +97,13 @@
     </Compile>
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\AsyncHub.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>AsyncHub.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Console.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Console.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugOverview.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DebugOverview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SolutionExplorer.resx">
       <DependentUpon>SolutionExplorer.cs</DependentUpon>
@@ -143,7 +143,15 @@
       <LastGenOutput>IDESettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\About.html" />
+    <Content Include="Resources\Back.ico" />
+    <Content Include="Resources\StepThread.ico" />
+    <Content Include="Resources\Step.ico" />
+    <Content Include="Resources\Stop.ico" />
+    <Content Include="Resources\Pause.ico" />
+    <Content Include="Resources\RunFF.ico" />
+    <Content Include="Resources\RunF.ico" />
     <Content Include="Resources\IDEsmall.ico" />
+    <Content Include="Resources\Run.ico" />
     <None Include="Resources\IDE.ico" />
   </ItemGroup>
   <ItemGroup>

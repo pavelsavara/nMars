@@ -95,6 +95,7 @@ namespace nMars.Test
 #else
             CompareEngines(check);
 #endif
+            matchTwo.Dump(output, project);
             return matchTwo;
         }
 
@@ -167,6 +168,11 @@ namespace nMars.Test
         public IProject Project
         {
             get { return project; }
+        }
+
+        public ISimpleOutput Output
+        {
+            set { output = value; }
         }
 
         #endregion
@@ -277,6 +283,7 @@ namespace nMars.Test
         MatchResult matchTwo;
         Project project;
         List<int> forcedArdresses;
+        private ISimpleOutput output;
 
         #endregion
     }

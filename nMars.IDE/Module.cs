@@ -14,7 +14,7 @@ namespace nMars.IDE
         public static int Main(string[] args)
         {
             Application app = new Application();
-            return app.Run();
+            return app.Main();
         }
 
         #region Module registration

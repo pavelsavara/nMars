@@ -86,6 +86,7 @@ namespace pMars.DllWrapper
             {
                 // swallow
             }
+            results.Dump(output, project);
             return results;
         }
 
@@ -375,6 +376,11 @@ namespace pMars.DllWrapper
             get { return project; }
         }
 
+        public ISimpleOutput Output
+        {
+            set { output = value; }
+        }
+
         #endregion
 
         #region Dll Variables
@@ -414,6 +420,7 @@ namespace pMars.DllWrapper
         private IRunningInstruction lastInstruction = null;
         private IProject project;
         StepResult lastStepResult;
+        private ISimpleOutput output;
 
         #endregion
     }

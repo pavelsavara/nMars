@@ -24,7 +24,7 @@ namespace nMars.RedCode
         [XmlIgnore]
         public Random Random = new Random();
 
-        public int Brake = 500;
+        public int Brake = 0;
 
         public static EngineOptions Default
         {

@@ -22,7 +22,33 @@ namespace nMars.IDE.Forms
             compileWarriorToolStripMenuItem.Enabled = openWarrior;
             closeWarriorToolStripMenuItem.Enabled = openWarrior;
             lbDocClose.Visible = openEditor;
+            
+            bool pending = Application.ActiveEditor != null;
+            compileWarriorToolStripMenuItem.Enabled = !pending;
+
+            bool live = Application.ActiveEngine != null && Application.ActiveEngine.IsLive;
+            bool canRun = !live || Application.ActiveEngine.IsPaused;
+            runSlowToolStripMenuItem.Enabled = canRun || Application.ActiveBrake != Application.slowRunBrake;
+            runSlowToolStripButton.Enabled = canRun || Application.ActiveBrake != Application.slowRunBrake;
+            runNormalToolStripButton.Enabled = canRun || Application.ActiveBrake != Application.normalRunBrake;
+            runFastToolStripButton.Enabled = canRun || Application.ActiveBrake != Application.fastRunBrake;
+
+            stopToolStripMenuItem.Enabled = live;
+            stopToolStripButton.Enabled = live;
+
+            bool step = live && Application.ActiveEngine.IsPaused;
+            stepAnyToolStripMenuItem.Enabled = step;
+            stepAnyToolStripButton.Enabled = step;
+            stepThreadToolStripMenuItem.Enabled = step;
+            stepThreadToolStripButton.Enabled = step;
+            stepThreadToolStripButton.Enabled = step;
+            stepBackToolStripButton.Enabled = step;
+
+            bool pause = live && !Application.ActiveEngine.IsPaused;
+            pauseToolStripMenuItem.Enabled = pause;
+            pauseToolStripButton.Enabled = pause;
         }
+
         public void RefreshRecent()
         {
             recentProjectsToolStripMenuItem.DropDownItems.Clear();
@@ -127,6 +153,14 @@ namespace nMars.IDE.Forms
             Application.OpenSolution();
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!Application.ClosingApplication())
+            {
+                e.Cancel = true;
+            }
+        }
+
         void it_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem it = sender as ToolStripMenuItem;
@@ -176,15 +210,71 @@ namespace nMars.IDE.Forms
             Application.Compile(Application.ActiveSolution.ActiveProject);
         }
 
-        private void runToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Start(Application.ActiveSolution.ActiveProject);
-        }
-
         private void lbDocClose_Click(object sender, EventArgs e)
         {
             Application.CloseDocument(Application.ActiveEditor.Document);
         }
+
+        private void runSlowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Run(Application.ActiveSolution.ActiveProject, Application.slowRunBrake);
+        }
+
+        private void runSlowToolStripButton_Click(object sender, EventArgs e)
+        {
+            Application.Run(Application.ActiveSolution.ActiveProject, Application.slowRunBrake);
+        }
+
+        private void runFastToolStripButton_Click(object sender, EventArgs e)
+        {
+            Application.Run(Application.ActiveSolution.ActiveProject, Application.fastRunBrake);
+        }
+
+        private void runFastToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Run(Application.ActiveSolution.ActiveProject, Application.fastRunBrake);
+        }
+
+        private void runNormalToolStripButton_Click(object sender, EventArgs e)
+        {
+            Application.Run(Application.ActiveSolution.ActiveProject, Application.normalRunBrake);
+        }
+
+        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Stop();
+        }
+
+        private void stopToolStripButton_Click(object sender, EventArgs e)
+        {
+            Application.Stop();
+        }
+
+        private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Pause();
+        }
+
+        private void pauseToolStripButton_Click(object sender, EventArgs e)
+        {
+            Application.Pause();
+        }
+
+        private void stepAnyToolStripButton_Click(object sender, EventArgs e)
+        {
+            Application.Step();
+        }
+
+        private void stepBackToolStripButton_Click(object sender, EventArgs e)
+        {
+            Application.Back();
+        }
+
         #endregion
+
+        private void timerDebugWatch_Tick(object sender, EventArgs e)
+        {
+            Application.WatchTick();
+        }
     }
 }
