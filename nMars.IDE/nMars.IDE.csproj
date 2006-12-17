@@ -53,6 +53,12 @@
     <Compile Include="Controls\DebugOverview.Designer.cs">
       <DependentUpon>DebugOverview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DebugWarriorOverview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugWarriorOverview.Designer.cs">
+      <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SolutionExplorer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -66,6 +72,7 @@
       <DependentUpon>IDEFrame.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Application.cs" />
+    <Compile Include="Core\BreakPoints.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\RedCodeProject.cs" />
     <Compile Include="Core\RedCodeSolution.cs" />
@@ -104,6 +111,10 @@
     <EmbeddedResource Include="Controls\DebugOverview.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DebugOverview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugWarriorOverview.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SolutionExplorer.resx">
       <DependentUpon>SolutionExplorer.cs</DependentUpon>
@@ -144,6 +155,7 @@
     </None>
     <None Include="Resources\About.html" />
     <Content Include="Resources\Back.ico" />
+    <Content Include="Resources\StepRound.ico" />
     <Content Include="Resources\StepThread.ico" />
     <Content Include="Resources\Step.ico" />
     <Content Include="Resources\Stop.ico" />

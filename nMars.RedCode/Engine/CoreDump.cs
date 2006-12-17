@@ -50,6 +50,19 @@ namespace nMars.RedCode
             get { return tasks; }
         }
 
+        public int TasksCount
+        {
+            get
+            {
+                int res = 0;
+                foreach (IList<int> wtasks in tasks)
+                {
+                    res += wtasks.Count;
+                }
+                return res;
+            }
+        }
+
         public int NextWarriorIndex
         {
             get { return nextWarriorIndex; }
@@ -85,7 +98,7 @@ namespace nMars.RedCode
             get { return results; }
         }
 
-        #region
+        #region Dump
 
         public static void Dump(XmlWriter xw, CoreDump core)
         {

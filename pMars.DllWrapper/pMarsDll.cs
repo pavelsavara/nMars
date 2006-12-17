@@ -321,27 +321,32 @@ namespace pMars.DllWrapper
         {
         }
 
-        public IInstruction NextInstruction
+        public IRunningInstruction NextInstruction
         {
             get { throw new NotImplementedException(); }
         }
 
-        public int NextInstructionIndex
+        public int NextInstructionAddress
         {
             get { throw new NotImplementedException(); }
         }
 
-        public IInstruction PreviousInstruction
+        public IRunningInstruction PrevInstruction
         {
             get { throw new NotImplementedException(); }
         }
 
-        public int PreviousInstructionIndex
+        public int PreviousInstructionAddress
         {
             get { throw new NotImplementedException(); }
         }
 
         public int LiveTasksCount
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int DeadTasksCount
         {
             get { throw new NotImplementedException(); }
         }

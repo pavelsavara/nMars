@@ -276,5 +276,10 @@ namespace nMars.IDE.Forms
         {
             Application.WatchTick();
         }
+
+        private void stepRoundToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

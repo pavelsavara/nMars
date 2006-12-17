@@ -110,18 +110,19 @@ namespace nMars.Engine
         protected void PerformInstruction()
         {
             InitializeCycle();
-            lastStepWarrior = liveWarriors.Dequeue();
-            int insructionPointer = lastStepWarrior.Tasks.Dequeue();
+            EngineWarrior warrior = liveWarriors.Dequeue();
+            lastStepWarrior = warrior;
+            int insructionPointer = warrior.Tasks.Dequeue();
 
-            PerformInstruction(lastStepWarrior, insructionPointer);
+            PerformInstruction(warrior, insructionPointer);
 
-            if (lastStepWarrior.LiveTasks > 0)
+            if (warrior.LiveTasks > 0)
             {
                 liveWarriors.Enqueue(lastStepWarrior);
             }
             else
             {
-                lastStepWarrior.Result = RoundResult.Loss;
+                warrior.Result = RoundResult.Loss;
                 cyclesLeft = cyclesLeft - 1 - (cyclesLeft - 1) / (LiveWarriorsCount + 1);
             }
             cyclesLeft--;

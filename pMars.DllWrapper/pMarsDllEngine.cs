@@ -263,6 +263,11 @@ namespace pMars.DllWrapper
             }
         }
 
+        public int TasksCount
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         IList<IRunningWarrior> IWarriorsView.RunningWarriors
         {
             get { throw new NotImplementedException(); }

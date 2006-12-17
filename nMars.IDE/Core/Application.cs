@@ -389,7 +389,7 @@ namespace nMars.IDE
                     Console.WriteLine("========== Running ==========");
                     ActiveSolution.ComponentSetup.DebuggerEngine.Run(p, engineStopped);
                     ActiveEngine = ActiveSolution.ComponentSetup.DebuggerEngine;
-                    BeginMatch();
+                    BeginWatch();
                 }
             }
             else
@@ -399,6 +399,7 @@ namespace nMars.IDE
                 {
                     ActiveEngine.Continue();
                     Console.WriteLine("========== Running ==========");
+                    ResumeWatch();
                 }
             }
             ActiveBrake = brake;
@@ -413,12 +414,13 @@ namespace nMars.IDE
             {
                 ActiveSolution.ComponentSetup.DebuggerEngine.EndMatch();
                 ActiveEngine = null;
-                EndMatch();
+                EndWatch();
                 Console.WriteLine("========== Finished ==========");
             }
             else
             {
                 Console.WriteLine("========== Paused ==========");
+                PauseWatch();
             }
             MainForm.RefreshUI();
         }
@@ -445,6 +447,7 @@ namespace nMars.IDE
                 return;
 
             ActiveEngine.NextStep();
+            WatchTick();
             Console.WriteLine("========== Step ==========");
         }
 
@@ -454,6 +457,7 @@ namespace nMars.IDE
                 return;
 
             ActiveEngine.PrevStep();
+            WatchTick();
             Console.WriteLine("========== Back ==========");
         }
 
@@ -468,10 +472,21 @@ namespace nMars.IDE
 
         #region Watch Core
 
-        private static void BeginMatch()
+        private static void BeginWatch()
         {
             DebugOverview=new DebugOverview();
             DebugOverview.Attach(MainForm.tabDocuments, "Debug Overview");
+            MainForm.timerDebugWatch.Enabled = true;
+        }
+
+        public static void PauseWatch()
+        {
+            MainForm.timerDebugWatch.Enabled = false;
+            WatchTick();
+        }
+
+        public static void ResumeWatch()
+        {
             MainForm.timerDebugWatch.Enabled = true;
         }
 
@@ -486,7 +501,7 @@ namespace nMars.IDE
             }
         }
 
-        private static void EndMatch()
+        private static void EndWatch()
         {
             MainForm.timerDebugWatch.Enabled = false;
             DebugOverview.Detach();

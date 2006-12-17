@@ -143,32 +143,46 @@ namespace nMars.Engine
 
         public override string ToString()
         {
-            return Name + " (" + LiveTasks.ToString() + ")";
+            return Name + " (" + LiveTasksCount + ")";
         }
 
-        public int NextInstructionIndex
+        public int NextInstructionAddress
         {
             get { return Tasks.Peek(); }
         }
 
-        public IInstruction PreviousInstruction
+        IRunningInstruction IRunningWarrior.PrevInstruction
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return PrevInstruction;
+            }
         }
 
-        public int PreviousInstructionIndex
+        public int PreviousInstructionAddress
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return PrevInstruction.Address;
+            }
         }
 
-        public IInstruction NextInstruction
+        public IRunningInstruction NextInstruction
         {
-            get { return core[NextInstructionIndex]; }
+            get { return core[NextInstructionAddress]; }
         }
 
         public int LiveTasksCount
         {
             get { return Tasks.Count; }
+        }
+
+        int IRunningWarrior.DeadTasksCount
+        {
+            get
+            {
+                return DeadTasksCount;
+            }
         }
 
         IList<int> IRunningWarrior.Tasks
@@ -223,6 +237,8 @@ namespace nMars.Engine
         private EngineCore core;
         private int loadAddress = 0;
         public int LastResult;
+        public int DeadTasksCount;
+        public EngineInstruction PrevInstruction;
 
         #endregion
     }
