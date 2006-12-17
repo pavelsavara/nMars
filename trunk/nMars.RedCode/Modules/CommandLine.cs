@@ -118,14 +118,9 @@ namespace nMars.RedCode
             if (res <= 0)
                 return res;
 
-            RunEngine(project, setup, console);
+            setup.Engine.Output = console;
+            setup.Engine.Run(project);
             return 0;
-        }
-
-        public static void RunEngine(IProject project, ComponentSetup setup, ISimpleOutput output)
-        {
-            MatchResult match = setup.Engine.Run(project);
-            match.Dump(output, project);
         }
 
         #endregion
@@ -156,8 +151,8 @@ namespace nMars.RedCode
             if (res <= 0)
                 return res;
             setup.Debugger.Init(setup.DebuggerEngine, null, null);
-            MatchResult match = setup.Debugger.Run(project);
-            match.Dump(console, project);
+            setup.Debugger.Output = console;
+            setup.Debugger.Run(project);
             return 0;
         }
 

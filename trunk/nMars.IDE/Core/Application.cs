@@ -17,18 +17,18 @@ namespace nMars.IDE
             ApplicationInstance = this;
         }
 
-        public int Run()
+        public int Main()
         {
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-            mainForm = new MainForm();
+            MainForm = new MainForm();
 
 
             Console = new Console();
-            Console.Attach(mainForm.tabBottom, "Console");
+            Console.Attach(MainForm.tabBottom, "Console");
 
             SolutionExplorer = new SolutionExplorer();
-            SolutionExplorer.Attach(mainForm.tabExplorers, "Solution");
+            SolutionExplorer.Attach(MainForm.tabExplorers, "Solution");
             
             Settings=new IDESettings();
             Settings.Reload();
@@ -46,16 +46,20 @@ namespace nMars.IDE
             {
                 NewSolution();
             }
-            mainForm.RefreshRecent();
+            MainForm.RefreshRecent();
             RefreshUI();
             
-            System.Windows.Forms.Application.Run(mainForm);
+            System.Windows.Forms.Application.Run(MainForm);
             Settings.Save();
             return 0;
         }
 
         public static bool ClosingApplication()
         {
+            if (ActiveEngine !=null && ActiveEngine.IsLive)
+            {
+                ActiveEngine.Kill();
+            }
             foreach (IEditor editor in Editors)
             {
                 if (!editor.Closing())
@@ -91,15 +95,15 @@ namespace nMars.IDE
 
         public static void OpenExistingWarrior()
         {
-            mainForm.openDialog.Title = "Open existing warriors";
-            mainForm.openDialog.Multiselect = true;
-            mainForm.openDialog.Filter = "Warrior Sources|*.red;*.rc|All Files|*.*";
-            mainForm.openDialog.FilterIndex = 1;
-            mainForm.openDialog.DefaultExt = "red";
-            DialogResult dr = mainForm.openDialog.ShowDialog();
+            MainForm.openDialog.Title = "Open existing warriors";
+            MainForm.openDialog.Multiselect = true;
+            MainForm.openDialog.Filter = "Warrior Sources|*.red;*.rc|All Files|*.*";
+            MainForm.openDialog.FilterIndex = 1;
+            MainForm.openDialog.DefaultExt = "red";
+            DialogResult dr = MainForm.openDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                foreach (string fileName in mainForm.openDialog.FileNames)
+                foreach (string fileName in MainForm.openDialog.FileNames)
                 {
                     OpenExistingWarrior(fileName);
                 }
@@ -137,15 +141,15 @@ namespace nMars.IDE
 
         public static void AddExistingWarrior(RedCodeProject project)
         {
-            mainForm.openDialog.Title = "Open existing warriors";
-            mainForm.openDialog.Multiselect = true;
-            mainForm.openDialog.Filter = "Warrior Sources|*.red;*.rc|All Files|*.*";
-            mainForm.openDialog.FilterIndex = 1;
-            mainForm.openDialog.DefaultExt = "red";
-            DialogResult dr = mainForm.openDialog.ShowDialog();
+            MainForm.openDialog.Title = "Open existing warriors";
+            MainForm.openDialog.Multiselect = true;
+            MainForm.openDialog.Filter = "Warrior Sources|*.red;*.rc|All Files|*.*";
+            MainForm.openDialog.FilterIndex = 1;
+            MainForm.openDialog.DefaultExt = "red";
+            DialogResult dr = MainForm.openDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                foreach (string fileName in mainForm.openDialog.FileNames)
+                foreach (string fileName in MainForm.openDialog.FileNames)
                 {
                     WarriorDocument.Load(fileName, project);
                 }
@@ -203,15 +207,15 @@ namespace nMars.IDE
 
         public static void AddExistingProject()
         {
-            mainForm.openDialog.Title = "Add existing project";
-            mainForm.openDialog.Multiselect = false;
-            mainForm.openDialog.Filter = "Warrior Project|*.redProj";
-            mainForm.openDialog.FilterIndex = 1;
-            mainForm.openDialog.DefaultExt = "redProj";
-            DialogResult dr = mainForm.openDialog.ShowDialog();
+            MainForm.openDialog.Title = "Add existing project";
+            MainForm.openDialog.Multiselect = false;
+            MainForm.openDialog.Filter = "Warrior Project|*.redProj";
+            MainForm.openDialog.FilterIndex = 1;
+            MainForm.openDialog.DefaultExt = "redProj";
+            DialogResult dr = MainForm.openDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                RedCodeProject.Load(mainForm.openDialog.FileName, ActiveSolution);
+                RedCodeProject.Load(MainForm.openDialog.FileName, ActiveSolution);
             }
             RefreshUI();
         }
@@ -250,7 +254,7 @@ namespace nMars.IDE
             }
             Settings.RecentProjects.Add(ActiveSolution.FileName);
             Settings.Save();
-            mainForm.RefreshRecent();
+            MainForm.RefreshRecent();
         }
 
         public static void OpenSolution()
@@ -258,16 +262,16 @@ namespace nMars.IDE
             if (ActiveSolution.Closing())
             {
                 ActiveSolution.Close();
-                mainForm.openDialog.Title = "Open existing solution";
-                mainForm.openDialog.Multiselect = false;
-                mainForm.openDialog.Filter = "Warrior Solution|*.redSln";
-                mainForm.openDialog.FilterIndex = 1;
-                mainForm.openDialog.DefaultExt = "redSln";
-                DialogResult dr = mainForm.openDialog.ShowDialog();
+                MainForm.openDialog.Title = "Open existing solution";
+                MainForm.openDialog.Multiselect = false;
+                MainForm.openDialog.Filter = "Warrior Solution|*.redSln";
+                MainForm.openDialog.FilterIndex = 1;
+                MainForm.openDialog.DefaultExt = "redSln";
+                DialogResult dr = MainForm.openDialog.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    LoadSolution(mainForm.openDialog.FileName);
-                    AddRecentProject(mainForm.openDialog.FileName);
+                    LoadSolution(MainForm.openDialog.FileName);
+                    AddRecentProject(MainForm.openDialog.FileName);
                 }
             }
             RefreshUI();
@@ -290,7 +294,7 @@ namespace nMars.IDE
                 ActiveSolution = RedCodeSolution.Load(fileName);
                 SolutionExplorer.ReloadSolution();
                 AddRecentProject(fileName);
-                mainForm.RefreshRecent();
+                MainForm.RefreshRecent();
                 RefreshUI();
             }
             else
@@ -298,7 +302,7 @@ namespace nMars.IDE
                 if (Settings.RecentProjects.Contains(fileName))
                 {
                     Settings.RecentProjects.Remove(fileName);
-                    mainForm.RefreshRecent();
+                    MainForm.RefreshRecent();
                 }
             }
         }
@@ -325,7 +329,7 @@ namespace nMars.IDE
 
         public static void RefreshUI()
         {
-            mainForm.RefreshUI();
+            MainForm.RefreshUI();
             //? SolutionExplorer.ReloadSolution();
         }
 
@@ -361,37 +365,141 @@ namespace nMars.IDE
             RefreshUI();
         }
 
-        public static void Start(RedCodeProject project)
+        public const int slowRunBrake = 200;
+        public const int normalRunBrake = 1;
+        public const int fastRunBrake = 0;
+
+        public static void Run(RedCodeProject project, int brake)
         {
-            if (ActiveSolution.ActiveProject.Documents.Count==0)
+            if (ActiveSolution.ActiveProject.Documents.Count == 0)
                 return;
-            RedCodeProject pd = ActiveSolution.ActiveProject;
-            Project p = new Project(new Rules(pd.Rules));
-            p.EngineOptions = pd.EngineOptions;
-            p.ParserOptions = pd.ParserOptions;
-            string[] files=new string[pd.Documents.Count];
-            pd.Documents.Keys.CopyTo(files, 0);
-            if (CommandLine.RunParser(files, ActiveSolution.ComponentSetup.Parser, p, Console) > 0)
+
+            if (ActiveEngine == null)
             {
-                ActiveSolution.ComponentSetup.DebuggerEngine.Run(p, mainForm.AsyncHub.MatchFinishedCallback);
+                RedCodeProject pd = ActiveSolution.ActiveProject;
+                Project p = new Project(new Rules(pd.Rules));
+                p.EngineOptions = pd.EngineOptions;
+                p.ParserOptions = pd.ParserOptions;
+                string[] files=new string[pd.Documents.Count];
+                pd.Documents.Keys.CopyTo(files, 0);
+                p.EngineOptions.Brake = brake;
+                ActiveSolution.ComponentSetup.DebuggerEngine.Output = Console.GetAsyncWrapper();
+                if (CommandLine.RunParser(files, ActiveSolution.ComponentSetup.Parser, p, Console) == files.Length)
+                {
+                    Console.WriteLine("========== Running ==========");
+                    ActiveSolution.ComponentSetup.DebuggerEngine.Run(p, engineStopped);
+                    ActiveEngine = ActiveSolution.ComponentSetup.DebuggerEngine;
+                    BeginMatch();
+                }
+            }
+            else
+            {
+                ActiveEngine.Brake = brake;
+                if (ActiveEngine.IsPaused)
+                {
+                    ActiveEngine.Continue();
+                    Console.WriteLine("========== Running ==========");
+                }
+            }
+            ActiveBrake = brake;
+            MainForm.RefreshUI();
+        }
+
+        private static void EngineStopped(bool finished)
+        {
+            if (ActiveEngine==null)
+                return;
+            if (finished)
+            {
+                ActiveSolution.ComponentSetup.DebuggerEngine.EndMatch();
+                ActiveEngine = null;
+                EndMatch();
+                Console.WriteLine("========== Finished ==========");
+            }
+            else
+            {
+                Console.WriteLine("========== Paused ==========");
+            }
+            MainForm.RefreshUI();
+        }
+
+        public static void Stop()
+        {
+            if (ActiveEngine == null)
+                return;
+
+            ActiveEngine.Quit();
+        }
+
+        public static void Pause()
+        {
+            if (ActiveEngine == null)
+                return;
+
+            ActiveEngine.Pause();
+        }
+
+        public static void Step()
+        {
+            if (ActiveEngine == null)
+                return;
+
+            ActiveEngine.NextStep();
+            Console.WriteLine("========== Step ==========");
+        }
+
+        public static void Back()
+        {
+            if (ActiveEngine == null || !ActiveEngine.CanStepBack)
+                return;
+
+            ActiveEngine.PrevStep();
+            Console.WriteLine("========== Back ==========");
+        }
+
+        private delegate void boolDelegate(bool logical);
+
+        private static void engineStopped(bool finished)
+        {
+            MainForm.Invoke(new boolDelegate(EngineStopped), finished);
+        }
+
+        #endregion
+
+        #region Watch Core
+
+        private static void BeginMatch()
+        {
+            DebugOverview=new DebugOverview();
+            DebugOverview.Attach(MainForm.tabDocuments, "Debug Overview");
+            MainForm.timerDebugWatch.Enabled = true;
+        }
+
+        public static void WatchTick()
+        {
+            if (ActiveEngine == null || DebugOverview == null)
+                return;
+
+            lock (ActiveEngine)
+            {
+                DebugOverview.WatchCore();
             }
         }
 
-        public static void MatchFinished()
+        private static void EndMatch()
         {
-            MatchResult match = ActiveSolution.ComponentSetup.DebuggerEngine.EndMatch();
-            match.Dump(Console, ActiveSolution.ComponentSetup.DebuggerEngine.Project);
+            MainForm.timerDebugWatch.Enabled = false;
+            DebugOverview.Detach();
         }
 
-        
         #endregion
 
         #region Variables
 
         public static RedCodeSolution ActiveSolution;
         public static Application ApplicationInstance;
-        public static IEngine ActiveEngine;
-        //TODO public static bool PendingOperation; disble controls
+        public static IDebuggerEngine ActiveEngine;
+        public static int ActiveBrake;
 
         //editors
         public static List<IEditor> Editors = new List<IEditor>();
@@ -400,7 +508,8 @@ namespace nMars.IDE
         //UI
         public static SolutionExplorer SolutionExplorer;
         public static Console Console;
-        public static MainForm mainForm;
+        public static MainForm MainForm;
+        public static DebugOverview DebugOverview;
         
         //setting
         public static IDESettings Settings;

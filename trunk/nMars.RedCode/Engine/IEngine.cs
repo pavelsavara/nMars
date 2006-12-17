@@ -25,6 +25,8 @@ namespace nMars.RedCode
         /// return current project
         /// </summary>
         IProject Project { get; }
+
+        ISimpleOutput Output { set;}
     }
 
     [ComVisible(true)]
@@ -158,20 +160,23 @@ namespace nMars.RedCode
         int Brake { get; set;}
     }
     
-    public delegate void MatchFinishedCallback();
+    public delegate void EngineStoppedCallback(bool finished);
 
-    public interface IAsyncEngine : IStepEngine
+    public interface IAsyncEngine : IStepEngine, IStuntEngine, IStepBackEngine
     {
-        void BeginMatch(IProject project, MatchFinishedCallback callback);
-        void Run(IProject project, MatchFinishedCallback callback);
+        void BeginMatch(IProject project, EngineStoppedCallback callback);
+        void Run(IProject project, EngineStoppedCallback callback);
         void Continue();
         void Pause();
         void Wait();
         void Quit();
+        void Kill();
+        bool IsLive { get;}
+        bool IsPaused { get;}
     }
 
     public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IStuntEngine, IAsyncEngine, ITaskView,
-                                       ITimeView, ICoreView
+                                       ITimeView, ICoreView, IStatusView
     {
     }
 

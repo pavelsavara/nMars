@@ -80,17 +80,22 @@ namespace nMars.IDE.Core
                 doc.Projects.Keys.CopyTo(keys, 0);
                 foreach (string projectFile in keys)
                 {
-                    RedCodeProject project = RedCodeProject.Load(projectFile);
-                    Projects[projectFile] = project;
-                    project.Solution = this;
+                    if (File.Exists(projectFile))
+                    {
+                        RedCodeProject project = RedCodeProject.Load(projectFile);
+                        Projects[projectFile] = project;
+                        project.Solution = this;
+                    }
                 }
-                if (doc.activeProjectFileName != null)
+                string[] loadedkeys = new string[Projects.Keys.Count];
+                Projects.Keys.CopyTo(loadedkeys, 0);
+                if (doc.activeProjectFileName != null && Projects.ContainsKey(doc.activeProjectFileName))
                 {
                     ActiveProject = Projects[doc.activeProjectFileName];
                 }
-                else
+                else if (Projects.Count > 0)
                 {
-                    ActiveProject = Projects[keys[0]];
+                    ActiveProject = Projects[loadedkeys[0]];
                 }
             }
             IsModified = false;

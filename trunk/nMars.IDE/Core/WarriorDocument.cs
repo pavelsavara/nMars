@@ -104,7 +104,7 @@ namespace nMars.IDE.Core
                     sr.Close();
                 }
                 IsModified = false;
-                Editor.Attach(Application.mainForm.tabDocuments, Name);
+                Editor.Attach(Application.MainForm.tabDocuments, Name);
             }
             else
             {

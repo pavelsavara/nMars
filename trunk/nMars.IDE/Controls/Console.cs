@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using nMars.RedCode;
@@ -7,6 +8,8 @@ namespace nMars.IDE.Controls
 {
     public partial class Console : IDEFrame, IDebuggerPrompt
     {
+        #region Helper classes
+
         class ConsoleStream : Stream
         {
             public Console Console;
@@ -91,14 +94,47 @@ namespace nMars.IDE.Controls
             #endregion
         }
 
+        class AsyncConsole : ISimpleOutput
+        {
+            public AsyncConsole(Console aConsole)
+            {
+                console = aConsole;
+            }
+
+            public void Clear()
+            {
+                console.Invoke(new voidDelegate(console.Clear));
+            }
+
+            public void WriteLine(string text)
+            {
+                console.Invoke(new stringDelegate(console.WriteLine), text);
+            }
+
+
+            public void Write(string text)
+            {
+                console.Invoke(new stringDelegate(console.Write), text);
+            }
+
+            public void ErrorWriteLine(string text)
+            {
+                console.Invoke(new stringDelegate(console.ErrorWriteLine), text);
+            }
+
+            private delegate void voidDelegate();
+            private delegate void stringDelegate(string text);
+            private Console console;
+        }
+
+        #endregion
+
         public Console()
         {
             InitializeComponent();
             StreamInstance = new ConsoleStream();
             StreamInstance.Console = this;
         }
-
-        ConsoleStream StreamInstance;
 
         public void Init(IDebugger debugger, IDebuggerEngine engine, IDebuggerShell aShell)
         {
@@ -117,21 +153,35 @@ namespace nMars.IDE.Controls
 
         public void ErrorWriteLine(string text)
         {
-            tbOut.Text += text + "\r\n";
-            tbOut.SelectionStart = tbOut.Text.Length;
-            tbOut.ScrollToCaret();
+            AddLine(text);
         }
 
         public void WriteLine(string text)
         {
-            tbOut.Text += text + "\r\n";
-            tbOut.SelectionStart = tbOut.Text.Length;
-            tbOut.ScrollToCaret();
+            AddLine(text);
         }
 
         public void Write(string text)
         {
-            tbOut.Text += text;
+            AddLine(text);
+        }
+
+        private void AddLine(string text)
+        {
+            if (lines.Count >= maxLength)
+            {
+                lines.Dequeue();
+            }
+            lines.Enqueue(text);
+            SuspendLayout();
+            tbOut.Lines = lines.ToArray();
+            MoveCaret();
+            ResumeLayout();
+        }
+
+        private void MoveCaret()
+        {
+            tbOut.SelectionStart = tbOut.Text.Length;
             tbOut.ScrollToCaret();
         }
 
@@ -149,5 +199,18 @@ namespace nMars.IDE.Controls
         {
             get { return StreamInstance; }
         }
+
+        public ISimpleOutput GetAsyncWrapper()
+        {
+            return new AsyncConsole(this);
+        }
+
+        #region Variables
+
+        ConsoleStream StreamInstance;
+        private const int maxLength = 100;
+        Queue<string> lines = new Queue<string>(maxLength);
+
+        #endregion
     }
 }

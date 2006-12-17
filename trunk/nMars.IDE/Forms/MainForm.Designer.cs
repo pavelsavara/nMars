@@ -51,11 +51,22 @@ namespace nMars.IDE.Forms
             this.compileWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stepIntoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stepOverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runFastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runSlowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stepAnyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stepThreadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusbar = new System.Windows.Forms.StatusStrip();
             this.toolbar = new System.Windows.Forms.ToolStrip();
+            this.runFastToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.runNormalToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.runSlowToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.stepThreadToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.stepAnyToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.pauseToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.stepBackToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.stopToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.fileToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
@@ -65,8 +76,9 @@ namespace nMars.IDE.Forms
             this.tabDocuments = new System.Windows.Forms.TabControl();
             this.tabBottom = new System.Windows.Forms.TabControl();
             this.tabExplorers = new System.Windows.Forms.TabControl();
-            this.AsyncHub = new nMars.IDE.Controls.AsyncHub();
+            this.timerDebugWatch = new System.Windows.Forms.Timer(this.components);
             this.mainMenu.SuspendLayout();
+            this.toolbar.SuspendLayout();
             this.splitContainerOuter.Panel1.SuspendLayout();
             this.splitContainerOuter.Panel2.SuspendLayout();
             this.splitContainerOuter.SuspendLayout();
@@ -261,34 +273,60 @@ namespace nMars.IDE.Forms
             // debugToolStripMenuItem
             // 
             this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runToolStripMenuItem,
-            this.stepIntoToolStripMenuItem,
-            this.stepOverToolStripMenuItem});
+            this.runFastToolStripMenuItem,
+            this.runSlowToolStripMenuItem,
+            this.stepAnyToolStripMenuItem,
+            this.stepThreadToolStripMenuItem,
+            this.pauseToolStripMenuItem,
+            this.stopToolStripMenuItem});
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.debugToolStripMenuItem.Text = "Debug";
             // 
-            // runToolStripMenuItem
+            // runFastToolStripMenuItem
             // 
-            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.runToolStripMenuItem.Text = "Run";
-            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
+            this.runFastToolStripMenuItem.Name = "runFastToolStripMenuItem";
+            this.runFastToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.runFastToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.runFastToolStripMenuItem.Text = "Run Fast";
+            this.runFastToolStripMenuItem.Click += new System.EventHandler(this.runFastToolStripMenuItem_Click);
             // 
-            // stepIntoToolStripMenuItem
+            // runSlowToolStripMenuItem
             // 
-            this.stepIntoToolStripMenuItem.Name = "stepIntoToolStripMenuItem";
-            this.stepIntoToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
-            this.stepIntoToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.stepIntoToolStripMenuItem.Text = "Step Into";
+            this.runSlowToolStripMenuItem.Name = "runSlowToolStripMenuItem";
+            this.runSlowToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.runSlowToolStripMenuItem.Text = "Run Slow";
+            this.runSlowToolStripMenuItem.Click += new System.EventHandler(this.runSlowToolStripMenuItem_Click);
             // 
-            // stepOverToolStripMenuItem
+            // stepAnyToolStripMenuItem
             // 
-            this.stepOverToolStripMenuItem.Name = "stepOverToolStripMenuItem";
-            this.stepOverToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.stepOverToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.stepOverToolStripMenuItem.Text = "Step Over";
+            this.stepAnyToolStripMenuItem.Name = "stepAnyToolStripMenuItem";
+            this.stepAnyToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
+            this.stepAnyToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.stepAnyToolStripMenuItem.Text = "Step Any";
+            // 
+            // stepThreadToolStripMenuItem
+            // 
+            this.stepThreadToolStripMenuItem.Name = "stepThreadToolStripMenuItem";
+            this.stepThreadToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
+            this.stepThreadToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.stepThreadToolStripMenuItem.Text = "Step Thread";
+            // 
+            // pauseToolStripMenuItem
+            // 
+            this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
+            this.pauseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.pauseToolStripMenuItem.Text = "Pause";
+            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem_Click);
+            // 
+            // stopToolStripMenuItem
+            // 
+            this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
+            this.stopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F5)));
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.stopToolStripMenuItem.Text = "Stop";
+            this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
             // statusbar
             // 
@@ -300,12 +338,100 @@ namespace nMars.IDE.Forms
             // 
             // toolbar
             // 
+            this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runFastToolStripButton,
+            this.runNormalToolStripButton,
+            this.runSlowToolStripButton,
+            this.stepThreadToolStripButton,
+            this.stepAnyToolStripButton,
+            this.pauseToolStripButton,
+            this.stepBackToolStripButton,
+            this.stopToolStripButton});
             this.toolbar.Location = new System.Drawing.Point(0, 24);
             this.toolbar.Name = "toolbar";
             this.toolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolbar.Size = new System.Drawing.Size(807, 25);
             this.toolbar.TabIndex = 3;
             this.toolbar.Text = "toolStrip1";
+            // 
+            // runFastToolStripButton
+            // 
+            this.runFastToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.runFastToolStripButton.Image = global::nMars.IDE.Properties.Resources.RunFF;
+            this.runFastToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.runFastToolStripButton.Name = "runFastToolStripButton";
+            this.runFastToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.runFastToolStripButton.Text = "Run Fast";
+            this.runFastToolStripButton.Click += new System.EventHandler(this.runFastToolStripButton_Click);
+            // 
+            // runNormalToolStripButton
+            // 
+            this.runNormalToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.runNormalToolStripButton.Image = global::nMars.IDE.Properties.Resources.RunF;
+            this.runNormalToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.runNormalToolStripButton.Name = "runNormalToolStripButton";
+            this.runNormalToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.runNormalToolStripButton.Text = "Run";
+            this.runNormalToolStripButton.Click += new System.EventHandler(this.runNormalToolStripButton_Click);
+            // 
+            // runSlowToolStripButton
+            // 
+            this.runSlowToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.runSlowToolStripButton.Image = global::nMars.IDE.Properties.Resources.Run;
+            this.runSlowToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.runSlowToolStripButton.Name = "runSlowToolStripButton";
+            this.runSlowToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.runSlowToolStripButton.Text = "Run Slow";
+            this.runSlowToolStripButton.Click += new System.EventHandler(this.runSlowToolStripButton_Click);
+            // 
+            // stepThreadToolStripButton
+            // 
+            this.stepThreadToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stepThreadToolStripButton.Image = global::nMars.IDE.Properties.Resources.StepThread;
+            this.stepThreadToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stepThreadToolStripButton.Name = "stepThreadToolStripButton";
+            this.stepThreadToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.stepThreadToolStripButton.Text = "Step Thread";
+            // 
+            // stepAnyToolStripButton
+            // 
+            this.stepAnyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stepAnyToolStripButton.Image = global::nMars.IDE.Properties.Resources.Step;
+            this.stepAnyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stepAnyToolStripButton.Name = "stepAnyToolStripButton";
+            this.stepAnyToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.stepAnyToolStripButton.Text = "Step";
+            this.stepAnyToolStripButton.Click += new System.EventHandler(this.stepAnyToolStripButton_Click);
+            // 
+            // pauseToolStripButton
+            // 
+            this.pauseToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pauseToolStripButton.Image = global::nMars.IDE.Properties.Resources.Pause;
+            this.pauseToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pauseToolStripButton.Name = "pauseToolStripButton";
+            this.pauseToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.pauseToolStripButton.Text = "Pause";
+            this.pauseToolStripButton.Click += new System.EventHandler(this.pauseToolStripButton_Click);
+            // 
+            // stepBackToolStripButton
+            // 
+            this.stepBackToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stepBackToolStripButton.Image = global::nMars.IDE.Properties.Resources.Back;
+            this.stepBackToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stepBackToolStripButton.Name = "stepBackToolStripButton";
+            this.stepBackToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.stepBackToolStripButton.Text = "Step Back";
+            this.stepBackToolStripButton.Click += new System.EventHandler(this.stepBackToolStripButton_Click);
+            // 
+            // stopToolStripButton
+            // 
+            this.stopToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stopToolStripButton.Image = global::nMars.IDE.Properties.Resources.Stop;
+            this.stopToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stopToolStripButton.Name = "stopToolStripButton";
+            this.stopToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.stopToolStripButton.Text = "Stop";
+            this.stopToolStripButton.Click += new System.EventHandler(this.stopToolStripButton_Click);
             // 
             // openDialog
             // 
@@ -390,24 +516,15 @@ namespace nMars.IDE.Forms
             this.tabExplorers.Size = new System.Drawing.Size(181, 357);
             this.tabExplorers.TabIndex = 0;
             // 
-            // AsyncHub
+            // timerDebugWatch
             // 
-            this.AsyncHub.CausesValidation = false;
-            this.AsyncHub.Enabled = false;
-            this.AsyncHub.Location = new System.Drawing.Point(800, 420);
-            this.AsyncHub.Margin = new System.Windows.Forms.Padding(0);
-            this.AsyncHub.Name = "AsyncHub";
-            this.AsyncHub.Size = new System.Drawing.Size(0, 0);
-            this.AsyncHub.TabIndex = 0;
-            this.AsyncHub.TabStop = false;
-            this.AsyncHub.Visible = false;
+            this.timerDebugWatch.Tick += new System.EventHandler(this.timerDebugWatch_Tick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 428);
-            this.Controls.Add(this.AsyncHub);
             this.Controls.Add(this.splitContainerOuter);
             this.Controls.Add(this.toolbar);
             this.Controls.Add(this.statusbar);
@@ -417,8 +534,11 @@ namespace nMars.IDE.Forms
             this.Name = "MainForm";
             this.Text = "nMars - Corewars MARS for .NET ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
+            this.toolbar.ResumeLayout(false);
+            this.toolbar.PerformLayout();
             this.splitContainerOuter.Panel1.ResumeLayout(false);
             this.splitContainerOuter.Panel2.ResumeLayout(false);
             this.splitContainerOuter.ResumeLayout(false);
@@ -457,9 +577,9 @@ namespace nMars.IDE.Forms
         private System.Windows.Forms.ToolStripMenuItem compileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compileWarriorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stepIntoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stepOverToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runSlowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stepAnyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stepThreadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openExistingSolutionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addExistingWarriorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeSolutionToolStripMenuItem;
@@ -467,9 +587,20 @@ namespace nMars.IDE.Forms
         private System.Windows.Forms.ToolStripMenuItem removeWarriorFromProjectToolStripMenuItem;
         public System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem compileProjectToolStripMenuItem;
-        public nMars.IDE.Controls.AsyncHub AsyncHub;
         private System.Windows.Forms.Label lbDocClose;
         public System.Windows.Forms.ToolStripMenuItem recentProjectsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton runSlowToolStripButton;
+        private System.Windows.Forms.ToolStripButton stopToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton pauseToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton runFastToolStripButton;
+        private System.Windows.Forms.ToolStripButton runNormalToolStripButton;
+        private System.Windows.Forms.ToolStripButton stepAnyToolStripButton;
+        private System.Windows.Forms.ToolStripButton stepBackToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem runFastToolStripMenuItem;
+        public System.Windows.Forms.Timer timerDebugWatch;
+        private System.Windows.Forms.ToolStripButton stepThreadToolStripButton;
     }
 }
 

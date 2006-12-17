@@ -189,6 +189,14 @@ namespace nMars.Debugger
             get { return project; }
         }
 
+        public ISimpleOutput Output
+        {
+            set
+            {
+                //output = value;
+            }
+        }
+
         #endregion
 
         #region Variables
@@ -200,6 +208,7 @@ namespace nMars.Debugger
         private int speed;
         private bool quit;
         private IProject project;
+        //private ISimpleOutput output;
 
         #endregion
     }

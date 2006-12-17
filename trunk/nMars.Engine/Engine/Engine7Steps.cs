@@ -20,6 +20,18 @@ namespace nMars.Engine
             return EndMatch();
         }
 
+        public ISimpleOutput Output
+        {
+            set
+            {
+                output = value;
+            }
+            get
+            {
+                return output;
+            }
+        }
+
         public void BeginMatch(IProject project)
         {
             InitializeMatch(project);
@@ -86,6 +98,7 @@ namespace nMars.Engine
         {
             FinalizeMatch();
             results.ComputePoints();
+            results.Dump(output, Project);
             return results;
         }
 
@@ -120,6 +133,7 @@ namespace nMars.Engine
 
         protected StepResult lastStepResult;
         protected EngineWarrior lastStepWarrior;
+        private ISimpleOutput output;
 
         #endregion
     }

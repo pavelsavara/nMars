@@ -26,7 +26,7 @@ namespace nMars.IDE.Controls
             if (Application.ActiveEditor != this)
             {
                 Application.ActiveEditor = this;
-                Application.mainForm.CycleDocuments(true);
+                Application.MainForm.CycleDocuments(true);
             }
             textBox.Focus();
         }
