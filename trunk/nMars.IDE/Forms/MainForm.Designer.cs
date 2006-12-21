@@ -74,9 +74,9 @@ namespace nMars.IDE.Forms
             this.splitContainerOuter = new System.Windows.Forms.SplitContainer();
             this.splitContainerInner = new System.Windows.Forms.SplitContainer();
             this.lbDocClose = new System.Windows.Forms.Label();
-            this.tabDocuments = new System.Windows.Forms.TabControl();
-            this.tabBottom = new System.Windows.Forms.TabControl();
-            this.tabExplorers = new System.Windows.Forms.TabControl();
+            this.tabDocuments = new IDE.Controls.IDEPanel();
+            this.tabBottom = new IDE.Controls.IDEPanel();
+            this.tabExplorers = new IDE.Controls.IDEPanel();
             this.timerDebugWatch = new System.Windows.Forms.Timer(this.components);
             this.mainMenu.SuspendLayout();
             this.toolbar.SuspendLayout();
@@ -567,9 +567,9 @@ namespace nMars.IDE.Forms
 
         public System.Windows.Forms.SaveFileDialog saveDialog;
         public System.Windows.Forms.OpenFileDialog openDialog;
-        public System.Windows.Forms.TabControl tabExplorers;
-        public System.Windows.Forms.TabControl tabDocuments;
-        public System.Windows.Forms.TabControl tabBottom;
+        public IDE.Controls.IDEPanel tabExplorers;
+        public IDE.Controls.IDEPanel tabDocuments;
+        public IDE.Controls.IDEPanel tabBottom;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;

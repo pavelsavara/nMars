@@ -47,6 +47,18 @@
     <Compile Include="Controls\Console.Designer.cs">
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DebugMemoryGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryGraph.Designer.cs">
+      <DependentUpon>DebugMemoryGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryListing.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryListing.Designer.cs">
+      <DependentUpon>DebugMemoryListing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DebugOverview.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -58,6 +70,12 @@
     </Compile>
     <Compile Include="Controls\DebugWarriorOverview.Designer.cs">
       <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IDEPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\IDEPanel.Designer.cs">
+      <DependentUpon>IDEPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SolutionExplorer.cs">
       <SubType>UserControl</SubType>
@@ -107,6 +125,14 @@
     <EmbeddedResource Include="Controls\Console.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Console.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugMemoryGraph.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DebugMemoryGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugMemoryListing.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DebugMemoryListing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DebugOverview.resx">
       <SubType>Designer</SubType>

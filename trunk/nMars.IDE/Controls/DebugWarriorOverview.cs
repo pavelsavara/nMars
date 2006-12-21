@@ -18,6 +18,7 @@ namespace nMars.IDE.Controls
 
         public void Attach(TableLayoutPanel panel, int aWarriorIndex)
         {
+            Dock = DockStyle.Fill;
             warriorIndex = aWarriorIndex;
             panel.Controls.Add(this, aWarriorIndex, 0);
             groupBox.Text = Application.ActiveEngine.Warriors[aWarriorIndex].Name;
@@ -28,17 +29,19 @@ namespace nMars.IDE.Controls
             IRunningWarrior rw = Application.ActiveEngine.RunningWarriors[warriorIndex];
             textBoxTasks.Text = rw.TasksCount.ToString() + "/" + rw.DeadTasksCount.ToString();
             textBoxLastInstruction.Text = rw.PrevInstruction.ToString();
-            listBoxNextInstructions.Items.Clear();
             int maxItems = int.MaxValue;
             if (!Application.ActiveEngine.IsPaused)
             {
                 maxItems = listBoxNextInstructions.Height / listBoxNextInstructions.ItemHeight;                
             }
-            for (int t = 0; t < rw.Tasks.Count && t < maxItems; t++ )
+            listBoxNextInstructions.BeginUpdate();
+            listBoxNextInstructions.Items.Clear();
+            for (int t = 0; t < rw.Tasks.Count && t < maxItems; t++)
             {
                 IRunningInstruction ri = Application.ActiveEngine[rw.Tasks[t]];
                 listBoxNextInstructions.Items.Add(ri.ToString());
             }
+            listBoxNextInstructions.EndUpdate();
         }
 
         private int warriorIndex;

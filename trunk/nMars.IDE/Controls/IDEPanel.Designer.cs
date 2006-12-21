@@ -1,6 +1,6 @@
 namespace nMars.IDE.Controls
 {
-    partial class IDEFrame
+    partial class IDEPanel
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,21 +28,9 @@ namespace nMars.IDE.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // IDEFrame
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Name = "IDEFrame";
-            this.Size = new System.Drawing.Size(806, 370);
-            this.ResumeLayout(false);
-
+            components = new System.ComponentModel.Container();
         }
 
         #endregion
-
-
     }
 }

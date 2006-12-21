@@ -31,14 +31,13 @@ namespace nMars.IDE.Controls
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbIn = new System.Windows.Forms.ComboBox();
             this.tbOut = new System.Windows.Forms.TextBox();
-            this.IDEFramePanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // IDEFramePanel
             // 
-            this.IDEFramePanel.Controls.Add(this.tbOut);
-            this.IDEFramePanel.Controls.Add(this.panel1);
+            this.Controls.Add(this.tbOut);
+            this.Controls.Add(this.panel1);
             // 
             // panel1
             // 
@@ -75,8 +74,7 @@ namespace nMars.IDE.Controls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "Console";
-            this.IDEFramePanel.ResumeLayout(false);
-            this.IDEFramePanel.PerformLayout();
+            this.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
