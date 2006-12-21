@@ -475,7 +475,13 @@ namespace nMars.IDE
         private static void BeginWatch()
         {
             DebugOverview=new DebugOverview();
-            DebugOverview.Attach(MainForm.tabDocuments, "Debug Overview");
+            DebugOverview.Attach(MainForm.tabBottom, "Debug Overview");
+            DebugMemoryListing=new DebugMemoryListing();
+            DebugMemoryListing.Attach(MainForm.tabExplorers, "Memory Listing");
+            DebugMemoryGraph=new DebugMemoryGraph();
+            DebugMemoryGraph.Attach(MainForm.tabDocuments, "Memory Graph");
+            DebugOverview.ActivateControl();
+            DebugMemoryListing.ActivateControl();
             MainForm.timerDebugWatch.Enabled = true;
         }
 
@@ -498,6 +504,8 @@ namespace nMars.IDE
             lock (ActiveEngine)
             {
                 DebugOverview.WatchCore();
+                DebugMemoryListing.WatchCore();
+                DebugMemoryGraph.WatchCore();
             }
         }
 
@@ -505,6 +513,8 @@ namespace nMars.IDE
         {
             MainForm.timerDebugWatch.Enabled = false;
             DebugOverview.Detach();
+            DebugMemoryListing.Detach();
+            DebugMemoryGraph.Detach();
         }
 
         #endregion
@@ -525,6 +535,8 @@ namespace nMars.IDE
         public static Console Console;
         public static MainForm MainForm;
         public static DebugOverview DebugOverview;
+        public static DebugMemoryListing DebugMemoryListing;
+        public static DebugMemoryGraph DebugMemoryGraph;
         
         //setting
         public static IDESettings Settings;

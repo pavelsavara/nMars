@@ -36,14 +36,13 @@ namespace nMars.IDE.Controls
             this.textBoxRound = new System.Windows.Forms.TextBox();
             this.labelRound = new System.Windows.Forms.Label();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.IDEFramePanel.SuspendLayout();
             this.overviewPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // IDEFramePanel
             // 
-            this.IDEFramePanel.Controls.Add(this.tableLayoutPanel);
-            this.IDEFramePanel.Controls.Add(this.overviewPanel);
+            this.Controls.Add(this.tableLayoutPanel);
+            this.Controls.Add(this.overviewPanel);
             // 
             // overviewPanel
             // 
@@ -56,12 +55,12 @@ namespace nMars.IDE.Controls
             this.overviewPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.overviewPanel.Location = new System.Drawing.Point(0, 0);
             this.overviewPanel.Name = "overviewPanel";
-            this.overviewPanel.Size = new System.Drawing.Size(806, 96);
+            this.overviewPanel.Size = new System.Drawing.Size(806, 26);
             this.overviewPanel.TabIndex = 1;
             // 
             // textBoxLive
             // 
-            this.textBoxLive.Location = new System.Drawing.Point(65, 59);
+            this.textBoxLive.Location = new System.Drawing.Point(390, 3);
             this.textBoxLive.Name = "textBoxLive";
             this.textBoxLive.ReadOnly = true;
             this.textBoxLive.Size = new System.Drawing.Size(100, 20);
@@ -70,7 +69,7 @@ namespace nMars.IDE.Controls
             // labelLive
             // 
             this.labelLive.AutoSize = true;
-            this.labelLive.Location = new System.Drawing.Point(12, 62);
+            this.labelLive.Location = new System.Drawing.Point(337, 6);
             this.labelLive.Name = "labelLive";
             this.labelLive.Size = new System.Drawing.Size(55, 13);
             this.labelLive.TabIndex = 4;
@@ -78,7 +77,7 @@ namespace nMars.IDE.Controls
             // 
             // textBoxCycle
             // 
-            this.textBoxCycle.Location = new System.Drawing.Point(65, 34);
+            this.textBoxCycle.Location = new System.Drawing.Point(227, 3);
             this.textBoxCycle.Name = "textBoxCycle";
             this.textBoxCycle.ReadOnly = true;
             this.textBoxCycle.Size = new System.Drawing.Size(100, 20);
@@ -87,7 +86,7 @@ namespace nMars.IDE.Controls
             // labelCycle
             // 
             this.labelCycle.AutoSize = true;
-            this.labelCycle.Location = new System.Drawing.Point(12, 37);
+            this.labelCycle.Location = new System.Drawing.Point(174, 6);
             this.labelCycle.Name = "labelCycle";
             this.labelCycle.Size = new System.Drawing.Size(42, 13);
             this.labelCycle.TabIndex = 2;
@@ -95,7 +94,7 @@ namespace nMars.IDE.Controls
             // 
             // textBoxRound
             // 
-            this.textBoxRound.Location = new System.Drawing.Point(65, 8);
+            this.textBoxRound.Location = new System.Drawing.Point(65, 3);
             this.textBoxRound.Name = "textBoxRound";
             this.textBoxRound.ReadOnly = true;
             this.textBoxRound.Size = new System.Drawing.Size(100, 20);
@@ -104,7 +103,7 @@ namespace nMars.IDE.Controls
             // labelRound
             // 
             this.labelRound.AutoSize = true;
-            this.labelRound.Location = new System.Drawing.Point(12, 11);
+            this.labelRound.Location = new System.Drawing.Point(12, 6);
             this.labelRound.Name = "labelRound";
             this.labelRound.Size = new System.Drawing.Size(48, 13);
             this.labelRound.TabIndex = 0;
@@ -112,21 +111,22 @@ namespace nMars.IDE.Controls
             // 
             // tableLayoutPanel
             // 
+            this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel.ColumnCount = 1;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 96);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 26);
+            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 1;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(806, 274);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(806, 344);
             this.tableLayoutPanel.TabIndex = 2;
             // 
             // DebugOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Name = "DebugOverview";
-            this.IDEFramePanel.ResumeLayout(false);
             this.overviewPanel.ResumeLayout(false);
             this.overviewPanel.PerformLayout();
             this.ResumeLayout(false);

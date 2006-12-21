@@ -59,6 +59,7 @@ namespace nMars.IDE.Controls
             // 
             // panelRight
             // 
+            this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelRight.Controls.Add(this.listBoxNextInstructions);
             this.panelRight.Controls.Add(this.panelTop);
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -153,6 +154,7 @@ namespace nMars.IDE.Controls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.groupBox);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "DebugWarriorOverview";
             this.Size = new System.Drawing.Size(642, 535);
             this.groupBox.ResumeLayout(false);

@@ -31,13 +31,12 @@ namespace nMars.IDE.Controls
         private void InitializeComponent()
         {
             this.textBox = new System.Windows.Forms.RichTextBox();
-            this.IDEFramePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // IDEFramePanel
             // 
-            this.IDEFramePanel.Controls.Add(this.textBox);
-            this.IDEFramePanel.Size = new System.Drawing.Size(249, 238);
+            this.Controls.Add(this.textBox);
+            this.Size = new System.Drawing.Size(249, 238);
             // 
             // textBox
             // 
@@ -61,7 +60,6 @@ namespace nMars.IDE.Controls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "TextEditor";
             this.Size = new System.Drawing.Size(249, 238);
-            this.IDEFramePanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

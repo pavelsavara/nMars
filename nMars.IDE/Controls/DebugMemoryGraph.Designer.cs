@@ -1,13 +1,13 @@
 namespace nMars.IDE.Controls
 {
-    partial class IDEFrame
+    partial class DebugMemoryGraph
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,29 +20,29 @@ namespace nMars.IDE.Controls
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.SuspendLayout();
             // 
-            // IDEFrame
+            // IDEFramePanel
+            // 
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.IDEFramePanel_Paint);
+            // 
+            // DebugMemoryGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Name = "IDEFrame";
-            this.Size = new System.Drawing.Size(806, 370);
+            this.BackColor = System.Drawing.Color.Black;
+            this.Name = "DebugMemoryGraph";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-
     }
 }

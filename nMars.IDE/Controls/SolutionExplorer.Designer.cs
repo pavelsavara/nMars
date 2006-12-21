@@ -45,7 +45,6 @@ namespace nMars.IDE.Controls
             this.compileWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.IDEFramePanel.SuspendLayout();
             this.contextMenuSolution.SuspendLayout();
             this.contextMenuProject.SuspendLayout();
             this.contextMenuWarrior.SuspendLayout();
@@ -53,8 +52,8 @@ namespace nMars.IDE.Controls
             // 
             // IDEFramePanel
             // 
-            this.IDEFramePanel.Controls.Add(this.tree);
-            this.IDEFramePanel.Size = new System.Drawing.Size(252, 600);
+            this.Controls.Add(this.tree);
+            this.Size = new System.Drawing.Size(252, 600);
             // 
             // tree
             // 
@@ -185,8 +184,6 @@ namespace nMars.IDE.Controls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Name = "SolutionExplorer";
             this.Size = new System.Drawing.Size(252, 600);
-            this.Controls.SetChildIndex(this.IDEFramePanel, 0);
-            this.IDEFramePanel.ResumeLayout(false);
             this.contextMenuSolution.ResumeLayout(false);
             this.contextMenuProject.ResumeLayout(false);
             this.contextMenuWarrior.ResumeLayout(false);
