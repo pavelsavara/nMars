@@ -30,14 +30,11 @@ namespace nMars.IDE.Controls
         {
             this.SuspendLayout();
             // 
-            // IDEFramePanel
-            // 
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.IDEFramePanel_Paint);
-            // 
             // DebugMemoryGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.BackColor = System.Drawing.Color.Black;
+            this.DoubleBuffered = true;
             this.Name = "DebugMemoryGraph";
             this.ResumeLayout(false);
 

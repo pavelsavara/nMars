@@ -62,21 +62,21 @@ namespace nMars.IDE.Forms
             this.runFastToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.runNormalToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.runSlowToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.stepRoundToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.stepThreadToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.stepAnyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pauseToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.stepBackToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.stopToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.stepRoundToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.fileToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
             this.splitContainerOuter = new System.Windows.Forms.SplitContainer();
             this.splitContainerInner = new System.Windows.Forms.SplitContainer();
             this.lbDocClose = new System.Windows.Forms.Label();
-            this.tabDocuments = new IDE.Controls.IDEPanel();
-            this.tabBottom = new IDE.Controls.IDEPanel();
-            this.tabExplorers = new IDE.Controls.IDEPanel();
+            this.tabDocuments = new nMars.IDE.Controls.IDEPanel();
+            this.tabBottom = new nMars.IDE.Controls.IDEPanel();
+            this.tabExplorers = new nMars.IDE.Controls.IDEPanel();
             this.timerDebugWatch = new System.Windows.Forms.Timer(this.components);
             this.mainMenu.SuspendLayout();
             this.toolbar.SuspendLayout();
@@ -386,6 +386,16 @@ namespace nMars.IDE.Forms
             this.runSlowToolStripButton.Text = "Run Slow";
             this.runSlowToolStripButton.Click += new System.EventHandler(this.runSlowToolStripButton_Click);
             // 
+            // stepRoundToolStripButton
+            // 
+            this.stepRoundToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stepRoundToolStripButton.Image = global::nMars.IDE.Properties.Resources.StepRound;
+            this.stepRoundToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stepRoundToolStripButton.Name = "stepRoundToolStripButton";
+            this.stepRoundToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.stepRoundToolStripButton.Text = "Step Round";
+            this.stepRoundToolStripButton.Click += new System.EventHandler(this.stepRoundToolStripButton_Click);
+            // 
             // stepThreadToolStripButton
             // 
             this.stepThreadToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -434,16 +444,6 @@ namespace nMars.IDE.Forms
             this.stopToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.stopToolStripButton.Text = "Stop";
             this.stopToolStripButton.Click += new System.EventHandler(this.stopToolStripButton_Click);
-            // 
-            // stepRoundToolStripButton
-            // 
-            this.stepRoundToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.stepRoundToolStripButton.Image = global::nMars.IDE.Properties.Resources.StepRound;
-            this.stepRoundToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.stepRoundToolStripButton.Name = "stepRoundToolStripButton";
-            this.stepRoundToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.stepRoundToolStripButton.Text = "Step Round";
-            this.stepRoundToolStripButton.Click += new System.EventHandler(this.stepRoundToolStripButton_Click);
             // 
             // openDialog
             // 
@@ -530,6 +530,7 @@ namespace nMars.IDE.Forms
             // 
             // timerDebugWatch
             // 
+            this.timerDebugWatch.Interval = 200;
             this.timerDebugWatch.Tick += new System.EventHandler(this.timerDebugWatch_Tick);
             // 
             // MainForm
