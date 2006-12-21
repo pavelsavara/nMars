@@ -16,50 +16,65 @@ namespace nMars.IDE.Controls
             InitializeComponent();
         }
 
+        public void WatchCore()
+        {
+            Invalidate();
+        }
+
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, name);
             coresize = Application.ActiveEngine.CoreSize;
         }
 
-        private int coresize;
-
-        public void WatchCore()
+        protected override void OnPaint(PaintEventArgs e)
         {
-            //IDEFramePanel.Invalidate();
+            //empty
         }
 
-        private const int cellSize = 4;
-
-        private void IDEFramePanel_Paint(object sender, PaintEventArgs e)
+        protected override void OnPaintBackground(PaintEventArgs e)
         {
-            int columns = e.ClipRectangle.Width / cellSize;
-            int rows = e.ClipRectangle.Height / cellSize;
-            for (int c = 0; c < columns; c++)
+            base.OnPaint(e);
+
+            int left = e.ClipRectangle.Left / cellxsize;
+            int right = (e.ClipRectangle.Right / cellxsize) + 1;
+            int top = e.ClipRectangle.Top / cellysize;
+            int bottom = (e.ClipRectangle.Bottom / cellysize) + 1;
+            if (right > columns)
+                right = columns;
+            if (bottom > rows)
+                bottom = rows;
+
+            for (int c = left; c < right; c++)
             {
-                for (int r = 0; r < rows; r++)
+                for (int r = top; r < bottom; r++)
                 {
                     int address = c * columns + r;
-                    if (address == coresize)
-                        return;
+
                     IRunningInstruction ri = Application.ActiveEngine[address];
-                    Pen p;
-                    switch(ri.Operation)
+                    Pen pen;
+                    switch (ri.Operation)
                     {
                         case Operation.MOV:
-                            p = Pens.White;
+                            pen = Pens.White;
                             break;
                         case Operation.DAT:
-                            p = Pens.Black;
+                            pen = Pens.Black;
                             break;
                         default:
-                            p = Pens.Red;
+                            pen = Pens.Red;
                             break;
                     }
-                    e.Graphics.DrawRectangle(p, c * cellSize, r * cellSize, cellSize - 2, cellSize - 2);
+                    e.Graphics.DrawRectangle(pen, c * cellxsize, r * cellysize, 2, 2);
                 }
             }
         }
+
+        const int columns = 100;
+        const int rows = 80;
+        const int cellxsize = 4;
+        const int cellysize = 4;
+        private int coresize;
     }
 }
 

@@ -35,6 +35,7 @@ namespace nMars.IDE.Controls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "IDEFrame";
             this.Size = new System.Drawing.Size(806, 370);
             this.ResumeLayout(false);
