@@ -12,36 +12,35 @@ namespace nMars.Engine
     {
         #region Events
 
-        protected virtual void Died(EngineWarrior warrior)
+        protected virtual void Died(int address)
         {
         }
 
-        protected virtual void Split(EngineWarrior warrior)
+        protected virtual void Split(int addressTo)
         {
         }
 
         #endregion
 
-        protected void PerformInstruction(EngineWarrior warrior, int ip)
+        protected virtual void PerformInstruction(int ip)
         {
             reg.ip = ip;
             BeforeRead(ip, Column.All);
             reg.IR = core[ip];
-            warrior.PrevInstruction = new EngineInstruction(reg.IR, ip);
+            activeWarrior.PrevInstruction = new EngineInstruction(reg.IR, ip);
             reg.AA_Value = core[ip].ValueA;
             reg.AB_Value = core[ip].ValueA;
 
             GetEffectiveAddress(core[ip].ModeA, out reg.AdrA, ref reg.AA_Value, ref reg.IR.ValueA, reg.IR.ValueA);
             GetEffectiveAddress(core[ip].ModeB, out reg.AdrB, ref reg.AB_Value, ref reg.IR.ValueB, reg.IR.ValueB);
 
-            ExecuteInstruction(warrior);
+            ExecuteInstruction(activeWarrior);
         }
 
         private void ExecuteInstruction(EngineWarrior warrior)
         {
             bool jump = false;
             bool die = false;
-            bool split = false;
             switch (reg.IR.Operation)
             {
                     #region Simple
@@ -57,7 +56,7 @@ namespace nMars.Engine
                     {
                         warrior.Tasks.Enqueue(mod(reg.ip + 1));
                         reg.ip = reg.AdrA; // as second to queue
-                        split = true;
+                        Split(reg.AdrA);
                     }
                     else
                     {
@@ -321,6 +320,7 @@ namespace nMars.Engine
                             BeforeRead(reg.AdrB, Column.All);
                             BeforeWrite(reg.AdrB, Column.All);
                             core[reg.AdrB].Source = core[reg.AdrA].Source;
+                            core[reg.AdrB].OriginalOwner = core[reg.AdrA].OriginalOwner;
                             core[reg.AdrB].Operation = core[reg.AdrA].Operation;
                             core[reg.AdrB].Modifier = core[reg.AdrA].Modifier;
                             core[reg.AdrB].ModeA = core[reg.AdrA].ModeA;
@@ -399,11 +399,7 @@ namespace nMars.Engine
             else
             {
                 warrior.DeadTasksCount++;
-                Died(warrior);
-            }
-            if (split)
-            {
-                Split(warrior);
+                Died(reg.ip);
             }
         }
 

@@ -1,46 +1,97 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
-using System.Collections.Generic;
-using System.Text;
+using nMars.RedCode;
 
 namespace nMars.Engine.Engine
 {
-    public class EngineObserver : EngineSteps
+    public class EngineObserver : EngineSteps, ICoreEvents
     {
-        public delegate void AfterWriteDelegate(int address, nMars.RedCode.Column column);
-        public event AfterWriteDelegate AfterWriteEvent;
-
-        protected override void AfterWrite(int address, nMars.RedCode.Column column)
+        public InstructionEvent[] Events
         {
-            if (AfterWriteEvent!=null)
+            get
             {
-                AfterWriteEvent.Invoke(address, column);
+                return coreEvents;
             }
-            base.AfterWrite(address, column);
         }
 
-        protected override void BeforeWrite(int address, nMars.RedCode.Column column)
+        public CoreEventsLevel[] EventLevels
         {
-            base.BeforeWrite(address, column);
+            get
+            {
+                return coreLevels;
+            }
         }
 
-        protected override void BeforeRead(int address, nMars.RedCode.Column column)
+        public IRunningWarrior[] EventWarriors
+        {
+            get
+            {
+                return coreEventWarriors;
+            }
+        }
+
+        public IRunningWarrior[] ExecutedWarriors
+        {
+            get
+            {
+                return coreExcecutedWarriors;
+            }
+        }
+
+        protected override void InitializeRound()
+        {
+            base.InitializeRound();
+            coreEvents = new InstructionEvent[Project.Rules.CoreSize];
+            coreLevels = new CoreEventsLevel[Project.Rules.CoreSize];
+            coreEventWarriors = new IRunningWarrior[Project.Rules.CoreSize];
+            coreExcecutedWarriors = new IRunningWarrior[Project.Rules.CoreSize];
+            for(int a=0;a<Project.Rules.CoreSize;a++)
+            {
+                coreLevels[a] = CoreEventsLevel.Clean;
+            }
+        }
+
+        protected override void AfterWrite(int address, Column column)
+        {
+            base.AfterWrite(address, column);
+            coreEvents[address] |= InstructionEvent.Write;
+            coreLevels[address] = CoreEventsLevel.Flash;
+            coreEventWarriors[address] = activeWarrior;
+        }
+
+        protected override void BeforeRead(int address, Column column)
         {
             base.BeforeRead(address, column);
+            coreEvents[address] |= InstructionEvent.Read;
+            coreLevels[address] = CoreEventsLevel.Flash;
+            coreEventWarriors[address] = activeWarrior;
         }
 
-        protected override void Died(EngineWarrior warrior)
+        protected override void Died(int address)
         {
-            base.Died(warrior);
+            base.Died(address);
+            coreEvents[address] |= InstructionEvent.Died;
+            coreLevels[address] = CoreEventsLevel.Flash;
+            coreEventWarriors[address] = activeWarrior;
         }
 
-        protected override void Split(EngineWarrior warrior)
+        protected override void PerformInstruction(int ip)
         {
-            base.Split(warrior);
+            base.PerformInstruction(ip);
+            coreEvents[ip] |= InstructionEvent.Execute;
+            coreLevels[ip] = CoreEventsLevel.Flash;
+            coreEventWarriors[ip] = activeWarrior;
+            coreExcecutedWarriors[ip] = activeWarrior;
         }
 
-        protected override void FinalizeRound()
-        {
-            base.FinalizeRound();
-        }
+        protected InstructionEvent[] coreEvents;
+        protected CoreEventsLevel[] coreLevels;
+        protected IRunningWarrior[] coreEventWarriors;
+        protected IRunningWarrior[] coreExcecutedWarriors;
+
     }
 }

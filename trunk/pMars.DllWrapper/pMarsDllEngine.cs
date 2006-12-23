@@ -86,7 +86,8 @@ namespace pMars.DllWrapper
             {
                 // swallow
             }
-            results.Dump(output, project);
+            //results.ComputePoints();
+            //results.Dump(output, Project);
             return results;
         }
 
@@ -107,29 +108,6 @@ namespace pMars.DllWrapper
 
             if (lastStepResult > StepResult.Continue)
             {
-                int foundAlive = -1;
-                for (int w = 0; w < rules.WarriorsCount; w++)
-                {
-                    int tasks = Tasks[w].Count;
-                    if (tasks > 0)
-                    {
-                        if (foundAlive != -1)
-                        {
-                            results.results[w, Round - 1] = RoundResult.Tie;
-                            results.results[foundAlive, Round - 1] = RoundResult.Tie;
-                        }
-                        else
-                        {
-                            results.results[w, Round - 1] = RoundResult.Win;
-                            foundAlive = w;
-                        }
-                    }
-                    else
-                    {
-                        results.results[w, Round - 1] = RoundResult.Loss;
-                    }
-                }
-
                 if (lastStepResult != StepResult.Finished)
                 {
                     cycles = 0;

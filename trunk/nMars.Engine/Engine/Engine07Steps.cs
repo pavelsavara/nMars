@@ -111,14 +111,14 @@ namespace nMars.Engine
         {
             InitializeCycle();
             EngineWarrior warrior = liveWarriors.Dequeue();
-            lastStepWarrior = warrior;
+            activeWarrior = warrior;
             int insructionPointer = warrior.Tasks.Dequeue();
 
-            PerformInstruction(warrior, insructionPointer);
+            PerformInstruction(insructionPointer);
 
             if (warrior.LiveTasks > 0)
             {
-                liveWarriors.Enqueue(lastStepWarrior);
+                liveWarriors.Enqueue(activeWarrior);
             }
             else
             {
@@ -133,7 +133,6 @@ namespace nMars.Engine
         #region Variables
 
         protected StepResult lastStepResult;
-        protected EngineWarrior lastStepWarrior;
         private ISimpleOutput output;
 
         #endregion

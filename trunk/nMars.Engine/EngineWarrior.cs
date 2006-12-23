@@ -14,7 +14,7 @@ namespace nMars.Engine
         public EngineWarrior(IWarrior warrior, EngineCore core, int index)
         {
             SourceWarrior = warrior;
-            Index = index;
+            warriorIndex = index;
             if (Pin == PSpace.UNSHARED)
             {
                 PSpaceIndex = PSpace.UNSHARED;
@@ -30,9 +30,9 @@ namespace nMars.Engine
 
         #region PSpace
 
-        public int GetPSpaceValue(int idx)
+        public int GetPSpaceValue(int address)
         {
-            int addr = idx % core.rules.PSpaceSize;
+            int addr = Instruction.Mod(address, core.rules.PSpaceSize);
             if (addr != 0)
             {
                 return PSpace.Memory[addr];
@@ -45,7 +45,7 @@ namespace nMars.Engine
 
         public void SetPSpaceValue(int address, int value)
         {
-            int addr = address % core.rules.PSpaceSize;
+            int addr = Instruction.Mod(address, core.rules.PSpaceSize);
             if (addr != 0)
             {
                 PSpace.Memory[addr] = value;
@@ -218,6 +218,14 @@ namespace nMars.Engine
             get { return PSpaceIndex; }
         }
 
+        public int WarriorIndex
+        {
+            get
+            {
+                return warriorIndex;
+            }
+        }
+
         public int s
         {
             get { return PSpaceIndex; }
@@ -229,7 +237,7 @@ namespace nMars.Engine
 
         public RoundResult Result;
         public Queue<int> Tasks;
-        public int Index;
+        private int warriorIndex;
         public int StartOrder;
         public int PSpaceIndex = -1;
         public IWarrior SourceWarrior;

@@ -181,6 +181,7 @@
     </None>
     <None Include="Resources\About.html" />
     <Content Include="Resources\Back.ico" />
+    <Content Include="Resources\Execute.ico" />
     <Content Include="Resources\StepRound.ico" />
     <Content Include="Resources\StepThread.ico" />
     <Content Include="Resources\Step.ico" />

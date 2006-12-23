@@ -111,7 +111,7 @@ namespace nMars.Engine
 
         public int NextWarriorIndex
         {
-            get { return liveWarriors.Peek().Index; }
+            get { return liveWarriors.Peek().WarriorIndex; }
         }
 
         IRunningWarrior ITimeView.NextWarrior

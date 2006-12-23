@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -41,7 +46,7 @@ namespace nMars.IDE.Forms
             stepAnyToolStripButton.Enabled = step;
             stepThreadToolStripMenuItem.Enabled = step;
             stepThreadToolStripButton.Enabled = step;
-            stepThreadToolStripButton.Enabled = step;
+            stepRoundToolStripButton.Enabled = step;
             stepBackToolStripButton.Enabled = step;
 
             bool pause = live && !Application.ActiveEngine.IsPaused;
@@ -240,6 +245,16 @@ namespace nMars.IDE.Forms
             Application.Run(Application.ActiveSolution.ActiveProject, Application.normalRunBrake);
         }
 
+        private void executeToolStripButton_Click(object sender, EventArgs e)
+        {
+            Application.Run(Application.ActiveSolution.ActiveProject, Application.executeBrake);
+        }
+
+        private void executeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Run(Application.ActiveSolution.ActiveProject, Application.executeBrake);
+        }
+
         private void stopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Stop();
@@ -281,5 +296,6 @@ namespace nMars.IDE.Forms
         {
 
         }
+
     }
 }

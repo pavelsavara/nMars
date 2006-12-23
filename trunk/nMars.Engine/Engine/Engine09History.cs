@@ -67,25 +67,28 @@ namespace nMars.Engine
         {
             CreateEvent();
             CurrentEvent.instructionsChanged.Push(new EngineInstruction(core[address], address));
+            base.BeforeWrite(address, column);
         }
 
-        protected override void Died(EngineWarrior warrior)
+        protected override void Died(int address)
         {
             CreateEvent();
             CurrentEvent.Died = true;
+            base.Died(address);
         }
 
-        protected override void Split(EngineWarrior warrior)
+        protected override void Split(int addressTo)
         {
             CreateEvent();
             CurrentEvent.Split = true;
+            base.Split(addressTo);
         }
 
         private void CreateEvent()
         {
             if (CurrentEvent == null)
             {
-                CurrentEvent = new EngineEvent(cycles, cyclesLeft, reg.ip, lastStepWarrior, lastStepResult);
+                CurrentEvent = new EngineEvent(cycles, cyclesLeft, reg.ip, activeWarrior, lastStepResult);
             }
         }
 

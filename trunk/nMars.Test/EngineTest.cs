@@ -111,6 +111,7 @@ namespace nMars.Test
             pparser.InitParser(rules);
 
             engines = new ComparingEngine();
+            engines.Output = new WrappedConsole();
         }
 
         private void LoadRunOne(string fileOne)

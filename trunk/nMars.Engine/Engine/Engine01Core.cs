@@ -23,7 +23,7 @@ namespace nMars.Engine
             core = new EngineInstruction[rules.CoreSize];
             for (int a = 0; a < rules.CoreSize; a++)
             {
-                core[a] = new EngineInstruction(a);
+                core[a] = new EngineInstruction(a, null);
             }
         }
 
@@ -82,6 +82,7 @@ namespace nMars.Engine
 
         protected EngineInstruction[] core;
         protected PSpace[] pSpaces;
+        protected EngineWarrior activeWarrior;
 
         #endregion
     }
