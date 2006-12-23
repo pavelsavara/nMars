@@ -95,16 +95,19 @@ namespace nMars.Test
 #else
             CompareEngines(check);
 #endif
-            matchTwo.Dump(output, project);
             return matchTwo;
         }
 
         private void Init()
         {
             project.EngineOptions.Random = new Random(0);
+            project.EngineOptions.DumpResults = false;
 
             engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
             engineTwo = ModuleRegister.CreateEngine("nMars.Engine", "nMars.Engine-StepForward") as IExtendedStepEngine;
+            engineOne.Output = output;
+            engineTwo.Output = output;
+
             forcedArdresses = new List<int>();
             forcedArdresses.Add(0);
             forcedArdresses.Add(4231);
@@ -134,7 +137,7 @@ namespace nMars.Test
 
             if (matchOne != matchTwo)
             {
-                throw new EngineDifferException("Score", null);
+                throw new EngineDifferException("Score", Check.Optimistic);
             }
         }
 

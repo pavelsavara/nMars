@@ -21,6 +21,9 @@ namespace nMars.RedCode
         [XmlAttribute]
         public bool SortResults = true;
 
+        [XmlAttribute]
+        public bool DumpResults = true;
+
         [XmlIgnore]
         public Random Random = new Random();
 

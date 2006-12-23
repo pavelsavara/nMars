@@ -28,7 +28,15 @@ namespace nMars.IDE.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
+            // 
+            // toolTip
+            // 
+            this.toolTip.UseAnimation = false;
+            this.toolTip.UseFading = false;
+            this.toolTip.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip_Popup);
             // 
             // DebugMemoryGraph
             // 
@@ -36,10 +44,13 @@ namespace nMars.IDE.Controls
             this.BackColor = System.Drawing.Color.Black;
             this.DoubleBuffered = true;
             this.Name = "DebugMemoryGraph";
+            this.toolTip.SetToolTip(this, "test");
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

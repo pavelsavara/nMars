@@ -105,16 +105,19 @@ namespace nMars.RedCode
 
         public void Dump(ISimpleOutput output, IProject project)
         {
-            IList<ResultsHelper> res = PrepareResults(project, project.EngineOptions.SortResults);
-            for (int w = 0; w < res.Count; w++)
+            if (project.EngineOptions.DumpResults)
             {
-                IWarrior warrior = res[w].warrior;
-                output.WriteLine(string.Format("{0} by {1} scores {2}", warrior.Name, warrior.Author, res[w].score));
-            }
-            if (res.Count == 2)
-            {
-                int idx = res[0].originalIndex;
-                output.WriteLine(string.Format("Results: {0} {1} {2}", wins[idx], looses[idx], ties[idx]));
+                IList<ResultsHelper> res = PrepareResults(project, project.EngineOptions.SortResults);
+                for (int w = 0; w < res.Count; w++)
+                {
+                    IWarrior warrior = res[w].warrior;
+                    output.WriteLine(string.Format("{0} by {1} scores {2}", warrior.Name, warrior.Author, res[w].score));
+                }
+                if (res.Count == 2)
+                {
+                    int idx = res[0].originalIndex;
+                    output.WriteLine(string.Format("Results: {0} {1} {2}", wins[idx], looses[idx], ties[idx]));
+                }
             }
         }
 

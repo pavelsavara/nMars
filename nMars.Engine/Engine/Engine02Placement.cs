@@ -114,7 +114,7 @@ namespace nMars.Engine
                     }
                 }
                 int addr = mod(loadAddress + a);
-                core[addr] = new EngineInstruction(instruction, addr);
+                core[addr] = new EngineInstruction(instruction, addr, warrior);
             }
         }
 

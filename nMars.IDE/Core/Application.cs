@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -365,9 +370,6 @@ namespace nMars.IDE
             RefreshUI();
         }
 
-        public const int slowRunBrake = 200;
-        public const int normalRunBrake = 1;
-        public const int fastRunBrake = 0;
 
         public static void Run(RedCodeProject project, int brake)
         {
@@ -383,13 +385,22 @@ namespace nMars.IDE
                 string[] files=new string[pd.Documents.Count];
                 pd.Documents.Keys.CopyTo(files, 0);
                 p.EngineOptions.Brake = brake;
-                ActiveSolution.ComponentSetup.DebuggerEngine.Output = Console.GetAsyncWrapper();
                 if (CommandLine.RunParser(files, ActiveSolution.ComponentSetup.Parser, p, Console) == files.Length)
                 {
-                    Console.WriteLine("========== Running ==========");
-                    ActiveSolution.ComponentSetup.DebuggerEngine.Run(p, engineStopped);
-                    ActiveEngine = ActiveSolution.ComponentSetup.DebuggerEngine;
-                    BeginWatch();
+                    if (brake == executeBrake)
+                    {
+                        ActiveSolution.ComponentSetup.Engine.Output = Console.GetAsyncWrapper();
+                        ActiveSolution.ComponentSetup.Engine.Run(p);
+                        Console.WriteLine("========== Finished ==========");
+                    }
+                    else
+                    {
+                        Console.WriteLine("========== Running ==========");
+                        ActiveSolution.ComponentSetup.DebuggerEngine.Output = Console.GetAsyncWrapper();
+                        ActiveSolution.ComponentSetup.DebuggerEngine.Run(p, engineStopped);
+                        ActiveEngine = ActiveSolution.ComponentSetup.DebuggerEngine;
+                        BeginWatch();
+                    }
                 }
             }
             else
@@ -516,6 +527,11 @@ namespace nMars.IDE
             DebugMemoryListing.Detach();
             DebugMemoryGraph.Detach();
         }
+
+        public const int slowRunBrake = 400;
+        public const int normalRunBrake = 10;
+        public const int fastRunBrake = 1;
+        public const int executeBrake = -1;
 
         #endregion
 

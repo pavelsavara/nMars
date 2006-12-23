@@ -71,12 +71,14 @@ namespace nMars.RedCode
         IPSpace PSpace { get; }
         int LastResult { get; }
         int PSpaceIndex { get; }
+        int WarriorIndex { get; }
     }
 
     public interface IRunningInstruction : IInstruction
     {
         int Address { get; }
         string ToString();
+        IRunningWarrior OriginalOwner { get; }
     }
 
     public interface ICoreView
@@ -178,7 +180,7 @@ namespace nMars.RedCode
     }
 
     public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IStuntEngine, IAsyncEngine, ITaskView,
-                                       ITimeView, ICoreView, IStatusView, IExtendedStepEngine
+                                       ITimeView, ICoreView, IStatusView, IExtendedStepEngine, ICoreEvents
     {
     }
 
@@ -198,6 +200,32 @@ namespace nMars.RedCode
     public interface IExtendedStepEngine : IStepEngine, ICoreView, ITaskView, IWarriorsView, ITimeView, IStatusView,
                                            IPSpacesView
     {
+    }
+
+    [Flags]
+    public enum InstructionEvent
+    {
+        None = 0,
+        Read = 1,
+        Write = 2,
+        Died = 4,
+        Execute = 8,
+    }
+
+    public enum CoreEventsLevel
+    {
+        None,
+        Clean,
+        Fade,
+        Flash,
+    }
+
+    public interface ICoreEvents
+    {
+        InstructionEvent[] Events { get; }
+        CoreEventsLevel[] EventLevels { get; }
+        IRunningWarrior[] EventWarriors { get; }
+        IRunningWarrior[] ExecutedWarriors { get; }
     }
 
     #endregion

@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 namespace nMars.IDE.Forms
 {
     partial class MainForm
@@ -51,7 +56,9 @@ namespace nMars.IDE.Forms
             this.compileWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runFastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runSlowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stepAnyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stepThreadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +66,7 @@ namespace nMars.IDE.Forms
             this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusbar = new System.Windows.Forms.StatusStrip();
             this.toolbar = new System.Windows.Forms.ToolStrip();
+            this.executeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.runFastToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.runNormalToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.runSlowToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -274,7 +282,9 @@ namespace nMars.IDE.Forms
             // debugToolStripMenuItem
             // 
             this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.executeToolStripMenuItem,
             this.runFastToolStripMenuItem,
+            this.runToolStripMenuItem,
             this.runSlowToolStripMenuItem,
             this.stepAnyToolStripMenuItem,
             this.stepThreadToolStripMenuItem,
@@ -284,18 +294,31 @@ namespace nMars.IDE.Forms
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.debugToolStripMenuItem.Text = "Debug";
             // 
+            // executeToolStripMenuItem
+            // 
+            this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
+            this.executeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.executeToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.executeToolStripMenuItem.Text = "Execute without debugger";
+            this.executeToolStripMenuItem.Click += new System.EventHandler(this.executeToolStripMenuItem_Click);
+            // 
             // runFastToolStripMenuItem
             // 
             this.runFastToolStripMenuItem.Name = "runFastToolStripMenuItem";
-            this.runFastToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.runFastToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.runFastToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.runFastToolStripMenuItem.Text = "Run Fast";
             this.runFastToolStripMenuItem.Click += new System.EventHandler(this.runFastToolStripMenuItem_Click);
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.runToolStripMenuItem.Text = "Run";
             // 
             // runSlowToolStripMenuItem
             // 
             this.runSlowToolStripMenuItem.Name = "runSlowToolStripMenuItem";
-            this.runSlowToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.runSlowToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.runSlowToolStripMenuItem.Text = "Run Slow";
             this.runSlowToolStripMenuItem.Click += new System.EventHandler(this.runSlowToolStripMenuItem_Click);
             // 
@@ -303,21 +326,21 @@ namespace nMars.IDE.Forms
             // 
             this.stepAnyToolStripMenuItem.Name = "stepAnyToolStripMenuItem";
             this.stepAnyToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
-            this.stepAnyToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.stepAnyToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.stepAnyToolStripMenuItem.Text = "Step Any";
             // 
             // stepThreadToolStripMenuItem
             // 
             this.stepThreadToolStripMenuItem.Name = "stepThreadToolStripMenuItem";
             this.stepThreadToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.stepThreadToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.stepThreadToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.stepThreadToolStripMenuItem.Text = "Step Thread";
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
             this.pauseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.pauseToolStripMenuItem.Text = "Pause";
             this.pauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem_Click);
             // 
@@ -325,7 +348,7 @@ namespace nMars.IDE.Forms
             // 
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
             this.stopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F5)));
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.stopToolStripMenuItem.Text = "Stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
@@ -340,6 +363,7 @@ namespace nMars.IDE.Forms
             // toolbar
             // 
             this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.executeToolStripButton,
             this.runFastToolStripButton,
             this.runNormalToolStripButton,
             this.runSlowToolStripButton,
@@ -355,6 +379,16 @@ namespace nMars.IDE.Forms
             this.toolbar.Size = new System.Drawing.Size(807, 25);
             this.toolbar.TabIndex = 3;
             this.toolbar.Text = "toolStrip1";
+            // 
+            // executeToolStripButton
+            // 
+            this.executeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.executeToolStripButton.Image = global::nMars.IDE.Properties.Resources.Execute;
+            this.executeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.executeToolStripButton.Name = "executeToolStripButton";
+            this.executeToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.executeToolStripButton.Text = "Execute without Debuger";
+            this.executeToolStripButton.Click += new System.EventHandler(this.executeToolStripButton_Click);
             // 
             // runFastToolStripButton
             // 
@@ -530,7 +564,6 @@ namespace nMars.IDE.Forms
             // 
             // timerDebugWatch
             // 
-            this.timerDebugWatch.Interval = 200;
             this.timerDebugWatch.Tick += new System.EventHandler(this.timerDebugWatch_Tick);
             // 
             // MainForm
@@ -615,6 +648,9 @@ namespace nMars.IDE.Forms
         public System.Windows.Forms.Timer timerDebugWatch;
         private System.Windows.Forms.ToolStripButton stepThreadToolStripButton;
         private System.Windows.Forms.ToolStripButton stepRoundToolStripButton;
+        private System.Windows.Forms.ToolStripButton executeToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem executeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
     }
 }
 

@@ -86,6 +86,13 @@ namespace nMars.IDE.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Execute {
+            get {
+                object obj = ResourceManager.GetObject("Execute", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Icon IDE {
             get {
                 object obj = ResourceManager.GetObject("IDE", resourceCulture);

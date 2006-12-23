@@ -125,6 +125,7 @@ namespace nMars.RedCode
         /// skip if equal (compares two instructions, and skips the next instruction if they are equal)
         /// </summary>
         //SEQ = 14,
+
         /// <summary>
         /// skip if not equal (compares two instructions, and skips the next instruction if they aren't equal)
         /// </summary>
@@ -153,6 +154,8 @@ namespace nMars.RedCode
             if (i == 14) return Operation.CMP;
             return (Operation)i;
         }
+
+        public const int OperationCount = 19;
 
         public static Operation Parse(string s)
         {

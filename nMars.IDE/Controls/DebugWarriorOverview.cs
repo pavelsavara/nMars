@@ -1,3 +1,8 @@
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +33,10 @@ namespace nMars.IDE.Controls
         {
             IRunningWarrior rw = Application.ActiveEngine.RunningWarriors[warriorIndex];
             textBoxTasks.Text = rw.TasksCount.ToString() + "/" + rw.DeadTasksCount.ToString();
-            textBoxLastInstruction.Text = rw.PrevInstruction.ToString();
+            if (rw.PrevInstruction != null)
+                textBoxLastInstruction.Text = rw.PrevInstruction.ToString();
+            else
+                textBoxLastInstruction.Text = null;
             int maxItems = int.MaxValue;
             if (!Application.ActiveEngine.IsPaused)
             {

@@ -10,7 +10,7 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    class EngineASync : IEngine, IDisposable, IStepEngine, IDebuggerEngine, IExtendedStepEngine, IAsyncEngine
+    class EngineASync : IEngine, IDisposable, IStepEngine, IDebuggerEngine, IExtendedStepEngine, IAsyncEngine, ICoreEvents
     {
         #region Construction
 
@@ -196,14 +196,17 @@ namespace nMars.Engine
                     {
                         if (brake > 0)
                         {
-                            try
+                            if (brake > 100 || engine.Cycles % (100/brake) == 0)
                             {
-                                Monitor.Exit(this);
-                                Thread.Sleep(brake);
-                            }
-                            finally
-                            {
-                                Monitor.Enter(this);
+                                try
+                                {
+                                    Monitor.Exit(this);
+                                    Thread.Sleep(brake);
+                                }
+                                finally
+                                {
+                                    Monitor.Enter(this);
+                                }
                             }
                         }
                         if (quit)
@@ -243,8 +246,9 @@ namespace nMars.Engine
                 } while (stepResult != StepResult.Finished);
                 lock (this)
                 {
-                    signalPaused.Set();
+                    live = false;
                     running = false;
+                    signalPaused.Set();
                 }
                 if (engineStoppedCallback != null)
                 {
@@ -253,10 +257,16 @@ namespace nMars.Engine
             }
             catch (ThreadInterruptedException)
             {
+                live = false;
+                running = false;
+                signalPaused.Set();
                 //swallow
             }
             catch (Exception ex)
             {
+                live = false;
+                running = false;
+                signalPaused.Set();
                 if (engine.Output != null)
                 {
                     engine.Output.ErrorWriteLine(ex.ToString());
@@ -265,10 +275,6 @@ namespace nMars.Engine
                 {
                     throw;
                 }
-            }
-            finally
-            {
-                live = false;
             }
         }
 
@@ -547,6 +553,42 @@ namespace nMars.Engine
                 {
                     brake = value;
                 }
+            }
+        }
+
+        /// <remarks>Not synchronized! Use lock on this instance</remarks>
+        public InstructionEvent[] Events
+        {
+            get
+            {
+                return engine.Events;
+            }
+        }
+
+        /// <remarks>Not synchronized! Use lock on this instance</remarks>
+        public CoreEventsLevel[] EventLevels
+        {
+            get
+            {
+                return engine.EventLevels;
+            }
+        }
+
+        /// <remarks>Not synchronized! Use lock on this instance</remarks>
+        public IRunningWarrior[] EventWarriors
+        {
+            get
+            {
+                return engine.EventWarriors;
+            }
+        }
+
+        /// <remarks>Not synchronized! Use lock on this instance</remarks>
+        public IRunningWarrior[] ExecutedWarriors
+        {
+            get
+            {
+                return engine.ExecutedWarriors;
             }
         }
 
