@@ -1,9 +1,6 @@
 @echo off
 call %~dp0\ver.cmd
 
-svn export https://svn.sourceforge.net/svnroot/nmars/trunk nMarsSources.%VER%%APPENDBUILD%
-zip -r -9 nMars.%VER%%APPENDBUILD%.src.zip nMarsSources.%VER%%APPENDBUILD%
-
 mkdir nMarsBinary.%VER%%APPENDBUILD%
 copy ..\nMars\ReadMe.txt nMarsBinary.%VER%%APPENDBUILD%
 copy ..\nMars\Changes.txt nMarsBinary.%VER%%APPENDBUILD%
@@ -15,6 +12,16 @@ copy ..\nMars\Bin\Release\pMars.DllWrapper.exe nMarsBinary.%VER%%APPENDBUILD%
 copy ..\nMars\Bin\Release\nMars.Test.exe nMarsBinary.%VER%%APPENDBUILD%
 copy ..\nMars\Bin\Release\nMars.Debugger.exe nMarsBinary.%VER%%APPENDBUILD%
 zip -r -9 nMars.%VER%%APPENDBUILD%.bin.zip nMarsBinary.%VER%%APPENDBUILD%
+
+mkdir nMarsIdeBinary.%VER%%APPENDBUILD%
+copy ..\nMars\ReadMe.txt nMarsIdeBinary.%VER%%APPENDBUILD%
+copy ..\nMars\Changes.txt nMarsIdeBinary.%VER%%APPENDBUILD%
+copy ..\nMars\Usage.txt nMarsIdeBinary.%VER%%APPENDBUILD%
+copy ..\nMars\Bin\Release\nMars.RedCode.dll nMarsIdeBinary.%VER%%APPENDBUILD%
+copy ..\nMars\Bin\Release\nMars.Parser.exe nMarsIdeBinary.%VER%%APPENDBUILD%
+copy ..\nMars\Bin\Release\nMars.Engine.exe nMarsIdeBinary.%VER%%APPENDBUILD%
+copy ..\nMars\Bin\Release\nMars.IDE.exe nMarsIdeBinary.%VER%%APPENDBUILD%
+zip -r -9 nMarsIde.%VER%%APPENDBUILD%.bin.zip nMarsIdeBinary.%VER%%APPENDBUILD%
 
 mkdir nMarsDbgPyBinary.%VER%%APPENDBUILD%
 copy ..\nMars\ReadMe.txt nMarsDbgPyBinary.%VER%%APPENDBUILD%
