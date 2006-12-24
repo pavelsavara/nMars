@@ -397,9 +397,10 @@ namespace nMars.IDE
                     {
                         Console.WriteLine("========== Running ==========");
                         ActiveSolution.ComponentSetup.DebuggerEngine.Output = Console.GetAsyncWrapper();
-                        ActiveSolution.ComponentSetup.DebuggerEngine.Run(p, engineStopped);
+                        ActiveSolution.ComponentSetup.DebuggerEngine.BeginMatch(p, engineStopped);
                         ActiveEngine = ActiveSolution.ComponentSetup.DebuggerEngine;
                         BeginWatch();
+                        ActiveSolution.ComponentSetup.DebuggerEngine.Continue();
                     }
                 }
             }
@@ -452,6 +453,16 @@ namespace nMars.IDE
             ActiveEngine.Pause();
         }
 
+        public static void Continue()
+        {
+            if (ActiveEngine == null)
+                return;
+
+            ActiveEngine.Continue();
+            Console.WriteLine("========== Running ==========");
+            ResumeWatch();
+        }
+
         public static void Step()
         {
             if (ActiveEngine == null)
@@ -460,6 +471,16 @@ namespace nMars.IDE
             ActiveEngine.NextStep();
             WatchTick();
             Console.WriteLine("========== Step ==========");
+        }
+
+        public static void StepThread()
+        {
+            //TODO
+        }
+
+        public static void StepWarrior()
+        {
+            //TODO
         }
 
         public static void Back()
@@ -493,17 +514,24 @@ namespace nMars.IDE
             DebugMemoryGraph.Attach(MainForm.tabDocuments, "Memory Graph");
             DebugOverview.ActivateControl();
             DebugMemoryListing.ActivateControl();
+            DebugMemoryGraph.ActivateControl();
             MainForm.timerDebugWatch.Enabled = true;
         }
 
         public static void PauseWatch()
         {
             MainForm.timerDebugWatch.Enabled = false;
-            WatchTick();
+            DebugOverview.Pause();
+            DebugMemoryListing.Pause();
+            DebugMemoryGraph.Pause();
+            //WatchTick();
         }
 
         public static void ResumeWatch()
         {
+            DebugOverview.Resume();
+            DebugMemoryListing.Resume();
+            DebugMemoryGraph.Resume();
             MainForm.timerDebugWatch.Enabled = true;
         }
 
@@ -517,6 +545,7 @@ namespace nMars.IDE
                 DebugOverview.WatchCore();
                 DebugMemoryListing.WatchCore();
                 DebugMemoryGraph.WatchCore();
+                ActiveEngine.UiTickDone();
             }
         }
 
@@ -526,12 +555,23 @@ namespace nMars.IDE
             DebugOverview.Detach();
             DebugMemoryListing.Detach();
             DebugMemoryGraph.Detach();
+            ActiveBrake = executeBrake;
         }
 
         public const int slowRunBrake = 400;
         public const int normalRunBrake = 10;
         public const int fastRunBrake = 1;
         public const int executeBrake = -1;
+
+        public static void ShowAddress(int address)
+        {
+            DebugMemoryListing.ShowAddress(address);
+        }
+
+        public static void AddBreakpoint(int address)
+        {
+            //TODO
+        }
 
         #endregion
 
@@ -540,7 +580,7 @@ namespace nMars.IDE
         public static RedCodeSolution ActiveSolution;
         public static Application ApplicationInstance;
         public static IDebuggerEngine ActiveEngine;
-        public static int ActiveBrake;
+        public static int ActiveBrake = executeBrake;
 
         //editors
         public static List<IEditor> Editors = new List<IEditor>();

@@ -317,7 +317,6 @@ namespace nMars.Engine
                             break;
                         case Modifier.I:
                             BeforeRead(reg.AdrA, Column.All);
-                            BeforeRead(reg.AdrB, Column.All);
                             BeforeWrite(reg.AdrB, Column.All);
                             core[reg.AdrB].Source = core[reg.AdrA].Source;
                             core[reg.AdrB].OriginalOwner = core[reg.AdrA].OriginalOwner;

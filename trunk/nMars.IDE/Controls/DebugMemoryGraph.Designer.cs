@@ -34,17 +34,22 @@ namespace nMars.IDE.Controls
             // 
             // toolTip
             // 
-            this.toolTip.UseAnimation = false;
-            this.toolTip.UseFading = false;
-            this.toolTip.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip_Popup);
+            this.toolTip.AutoPopDelay = 500;
+            this.toolTip.InitialDelay = 100;
+            this.toolTip.ReshowDelay = 100;
             // 
             // DebugMemoryGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.BackColor = System.Drawing.Color.Black;
+            this.Cursor = System.Windows.Forms.Cursors.Cross;
             this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "DebugMemoryGraph";
             this.toolTip.SetToolTip(this, "test");
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DebugMemoryGraph_MouseMove);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DebugMemoryGraph_MouseClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DebugMemoryGraph_MouseDoubleClick);
             this.ResumeLayout(false);
 
         }

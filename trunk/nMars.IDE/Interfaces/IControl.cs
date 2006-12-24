@@ -23,4 +23,11 @@ namespace nMars.IDE
         void Open();
         Document Document { get; }
     }
+
+    public interface IDebugWatch : IControl
+    {
+        void WatchCore();
+        void Resume();
+        void Pause();
+    }
 }
