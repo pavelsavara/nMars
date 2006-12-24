@@ -1,3 +1,11 @@
+12/23/2006 - IDE
+  - IDE framework
+  - fast GUI debug watches
+  - async engine layer
+  - project, solution
+  - IDE editor
+  - engine layers and iterfaces extended
+
 11/19/2006 - nMars0.8 - debugger
   - console debugger
   - IronPython extension for debugger
