@@ -9,30 +9,26 @@ Currently it consist of
 - Engine core simulator    
 - Parser & core engine unit tests
 - Library of warriors
-- Modularized/SDL/Windows/Dll 0.9.2 pMars
+- Modularized/SDL/Windows/Dll 0.9.3-a pMars
 - Console debugger, with IronPython as command line language
-
-Planned components are
-- simple IDE with debuger
-- hill - competition engine
-- evolver - engine for Darwinistic evolution
-- screensaver - visualisation for evolver
-- p2p evolver - distributed version of evolver
-- faster core engine - array of C# delegates as implementation of instructions
-- wrappers for other engines and parsers
-- constant optimizer
+- Graphical IDE
 
 * More info about Corewars can be found here http://www.koth.org/, http://groups.google.com/group/rec.games.corewar
 
   Usage
 --------------------
 Usage manual can be found here
-https://svn.sourceforge.net/svnroot/nmars/trunk/Usage.txt
+https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Usage.txt
 
 
   Download 
 --------------------
 https://sourceforge.net/project/showfiles.php?group_id=174312
+
+
+  IDE
+--------------------
+Is extesible graphical framework with editor, compiler and debugger integrated.
 
 
   Parser
@@ -62,6 +58,7 @@ Basic idea is to be easily comprehensible and maintainable.
 There is no efort to make it fast.
 This implementation support interfaces for watching, debugging - still in developement.
 
+
   Debugger
 --------------------
 Basic debugger, currently console UI. IronPython as optional extension.
@@ -87,7 +84,7 @@ Contain shared definitions of types and interfaces.
   Unit tests
 --------------------
 Are included to verify that my implementation is working same as original pMars.
-Currently engine is 100% compatible and parser should be polished a bit.
+Currently engine is 99% compatible and parser should be polished a bit.
 
 
   Architecture
@@ -106,10 +103,8 @@ which can be found here: http://www.gnu.org/licenses/lgpl.txt
 
   Road map
 --------------------
-0.8 - Current, see https://svn.sourceforge.net/svnroot/nmars/trunk/Changes.txt
 0.9 - graphical IDE framework, draft of editor, draft of core viewers
 1.0 - stabilization
-I will have a week of vacations for that, so I can move it forward! Soon.
 
 
   Contributions
@@ -118,32 +113,15 @@ I would love to hear your opinion.
 Let's open new thread on rec.games.corewar on following topics or send me email.
 If you would like to contribute more, there are some tasks:
  - Bugs - please feed it into bugzilla (preferably) or send it by email
- - Let's talk about specification of evolvers, IDE and hill engine
-   - feature requests, ideas, opinions
-   - design of interfaces of component
- - Wrap existing engines
-   - create module similar to pMars.DllWrapper around existing engines
-   - we will get unit tests for it for free
-   - fMars, qMars or any fast one
-   - pMars.so - same as pMArs.dll but for Linux
  - Code review
    - I'm used to use some parts of extreme programming, code review is one. 
      If you can spend some time to review my code I will be very happy. 
      Pleas drop me an email before you start, so I can tell you what needs your attention.
  - Code contribution
    - I'm open for code contribution to nMars, send me an email to agree on it.
- - Documentation & Home page
-   - Currently there is only basic info about nMars, let's extend it
-   - I feel we need some Wiki for CoreWars
-   - There is neglect page on wikipedia, but that's not vehicle for more focused content
-   - Anyone should be able to update pages about strategies, software links, personal corewars pages, warriors library
-   - Let's update content on koth.org
- - Logo & Icons
-   - We need some nice graphics to promote corewars
-   - Propose some great idea, maybe I can persuade my coleague to do it for us
  - Links
    - If you like my effort, please add link to your pages to http://nmars.sourceforge.net/
- + Looking forward, Thanks !
+ + Looking forward to hear you opinion, Thanks !
 
 
   Contact
@@ -152,7 +130,7 @@ Project home is currently at
 http://sourceforge.net/projects/nmars
 
 Source code can be found at
-https://svn.sourceforge.net/svnroot/nmars/trunk
+https://nmars.svn.sourceforge.net/svnroot/nmars/trunk
 
 Ideas, contributions and bug reports are welcome.
 Pavel Savara
