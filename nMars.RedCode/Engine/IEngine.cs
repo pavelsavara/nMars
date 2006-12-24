@@ -220,12 +220,19 @@ namespace nMars.RedCode
         Flash,
     }
 
+    public class CoreEventRecord
+    {
+        public InstructionEvent Event;
+        public CoreEventsLevel Level = CoreEventsLevel.Clean;
+        public IRunningWarrior Touched;
+        public IRunningWarrior Executed;
+        public long Version;
+    }
+
     public interface ICoreEvents
     {
-        InstructionEvent[] Events { get; }
-        CoreEventsLevel[] EventLevels { get; }
-        IRunningWarrior[] EventWarriors { get; }
-        IRunningWarrior[] ExecutedWarriors { get; }
+        CoreEventRecord[] CoreEvents { get; }
+        void UiTickDone();
     }
 
     #endregion

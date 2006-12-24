@@ -39,11 +39,6 @@ namespace nMars.IDE.Controls
             this.overviewPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // IDEFramePanel
-            // 
-            this.Controls.Add(this.tableLayoutPanel);
-            this.Controls.Add(this.overviewPanel);
-            // 
             // overviewPanel
             // 
             this.overviewPanel.Controls.Add(this.textBoxLive);
@@ -126,6 +121,9 @@ namespace nMars.IDE.Controls
             // DebugOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.Controls.Add(this.tableLayoutPanel);
+            this.Controls.Add(this.overviewPanel);
+            this.DoubleBuffered = true;
             this.Name = "DebugOverview";
             this.overviewPanel.ResumeLayout(false);
             this.overviewPanel.PerformLayout();

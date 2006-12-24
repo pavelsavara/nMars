@@ -5,15 +5,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace nMars.IDE.Controls
 {
-    public partial class DebugOverview : nMars.IDE.Controls.IDEFrame
+    public partial class DebugOverview : IDEFrame, IDebugWatch
     {
         public DebugOverview()
         {
@@ -50,6 +46,14 @@ namespace nMars.IDE.Controls
             {
                 dwoList[w].WatchCore();
             }
+        }
+
+        public void Resume()
+        {
+        }
+
+        public void Pause()
+        {
         }
 
         private int warriorsCount;

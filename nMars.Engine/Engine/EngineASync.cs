@@ -183,6 +183,7 @@ namespace nMars.Engine
 
         private void WorkerLoop()
         {
+            signalRun.WaitOne();
             // warning! intentional inversed lock inside
             try
             {
@@ -557,39 +558,17 @@ namespace nMars.Engine
         }
 
         /// <remarks>Not synchronized! Use lock on this instance</remarks>
-        public InstructionEvent[] Events
+        public CoreEventRecord[] CoreEvents
         {
             get
             {
-                return engine.Events;
+                return engine.CoreEvents;
             }
         }
 
-        /// <remarks>Not synchronized! Use lock on this instance</remarks>
-        public CoreEventsLevel[] EventLevels
+        public void UiTickDone()
         {
-            get
-            {
-                return engine.EventLevels;
-            }
-        }
-
-        /// <remarks>Not synchronized! Use lock on this instance</remarks>
-        public IRunningWarrior[] EventWarriors
-        {
-            get
-            {
-                return engine.EventWarriors;
-            }
-        }
-
-        /// <remarks>Not synchronized! Use lock on this instance</remarks>
-        public IRunningWarrior[] ExecutedWarriors
-        {
-            get
-            {
-                return engine.ExecutedWarriors;
-            }
+            engine.UiTickDone();
         }
 
         #endregion

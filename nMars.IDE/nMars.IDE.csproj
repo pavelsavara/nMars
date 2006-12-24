@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="Core\Application.cs" />
     <Compile Include="Core\BreakPoints.cs" />
+    <Compile Include="Core\ColorManager.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\RedCodeProject.cs" />
     <Compile Include="Core\RedCodeSolution.cs" />

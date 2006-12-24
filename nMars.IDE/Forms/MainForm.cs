@@ -28,8 +28,8 @@ namespace nMars.IDE.Forms
             closeWarriorToolStripMenuItem.Enabled = openWarrior;
             lbDocClose.Visible = openEditor;
             
-            bool pending = Application.ActiveEditor != null;
-            compileWarriorToolStripMenuItem.Enabled = !pending;
+            bool warrior = Application.ActiveEditor != null;
+            compileWarriorToolStripMenuItem.Enabled = warrior;
 
             bool live = Application.ActiveEngine != null && Application.ActiveEngine.IsLive;
             bool canRun = !live || Application.ActiveEngine.IsPaused;
@@ -50,8 +50,19 @@ namespace nMars.IDE.Forms
             stepBackToolStripButton.Enabled = step;
 
             bool pause = live && !Application.ActiveEngine.IsPaused;
-            pauseToolStripMenuItem.Enabled = pause;
             pauseToolStripButton.Enabled = pause;
+            pauseToolStripMenuItem.Enabled = live;
+            if (live)
+            {
+                if(pause)
+                {
+                    pauseToolStripMenuItem.Text = "Pause";
+                }
+                else
+                {
+                    pauseToolStripMenuItem.Text = "Resume";
+                }
+            }
         }
 
         public void RefreshRecent()
@@ -240,17 +251,22 @@ namespace nMars.IDE.Forms
             Application.Run(Application.ActiveSolution.ActiveProject, Application.fastRunBrake);
         }
 
+        private void runNormalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Run(Application.ActiveSolution.ActiveProject, Application.normalRunBrake);
+        }
+
         private void runNormalToolStripButton_Click(object sender, EventArgs e)
         {
             Application.Run(Application.ActiveSolution.ActiveProject, Application.normalRunBrake);
         }
 
-        private void executeToolStripButton_Click(object sender, EventArgs e)
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Run(Application.ActiveSolution.ActiveProject, Application.executeBrake);
+            Application.Run(Application.ActiveSolution.ActiveProject, Application.ActiveBrake);
         }
 
-        private void executeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void executeToolStripButton_Click(object sender, EventArgs e)
         {
             Application.Run(Application.ActiveSolution.ActiveProject, Application.executeBrake);
         }
@@ -267,13 +283,40 @@ namespace nMars.IDE.Forms
 
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Pause();
+            if (!Application.ActiveEngine.IsPaused)
+            {
+                Application.Pause();
+            }
+            else
+            {
+                Application.Continue();
+            }
         }
 
         private void pauseToolStripButton_Click(object sender, EventArgs e)
         {
             Application.Pause();
         }
+
+        private void stepRoundToolStripButton_Click(object sender, EventArgs e)
+        {
+            Application.StepThread();
+        }
+
+        private void stepThreadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.StepThread();
+        }
+
+        private void stepWarriorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.StepWarrior();
+        }
+
+        private void stepAnyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Step();
+}
 
         private void stepAnyToolStripButton_Click(object sender, EventArgs e)
         {
@@ -285,17 +328,11 @@ namespace nMars.IDE.Forms
             Application.Back();
         }
 
-        #endregion
-
         private void timerDebugWatch_Tick(object sender, EventArgs e)
         {
             Application.WatchTick();
         }
 
-        private void stepRoundToolStripButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        #endregion
     }
 }

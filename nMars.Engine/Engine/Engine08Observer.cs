@@ -10,7 +10,7 @@ namespace nMars.Engine.Engine
 {
     public class EngineObserver : EngineSteps, ICoreEvents
     {
-        public InstructionEvent[] Events
+        public CoreEventRecord[] CoreEvents
         {
             get
             {
@@ -18,80 +18,73 @@ namespace nMars.Engine.Engine
             }
         }
 
-        public CoreEventsLevel[] EventLevels
+        public void UiTickDone()
         {
-            get
+            foreach (CoreEventRecord record in coreEvents)
             {
-                return coreLevels;
-            }
-        }
-
-        public IRunningWarrior[] EventWarriors
-        {
-            get
-            {
-                return coreEventWarriors;
-            }
-        }
-
-        public IRunningWarrior[] ExecutedWarriors
-        {
-            get
-            {
-                return coreExcecutedWarriors;
+                switch (record.Level)
+                {
+                    case CoreEventsLevel.Flash:
+                    case CoreEventsLevel.Fade:
+                        record.Level--;
+                        break;
+                    case CoreEventsLevel.Clean:
+                        record.Event = InstructionEvent.None;
+                        record.Level--;
+                        break;
+                }
             }
         }
 
         protected override void InitializeRound()
         {
             base.InitializeRound();
-            coreEvents = new InstructionEvent[Project.Rules.CoreSize];
-            coreLevels = new CoreEventsLevel[Project.Rules.CoreSize];
-            coreEventWarriors = new IRunningWarrior[Project.Rules.CoreSize];
-            coreExcecutedWarriors = new IRunningWarrior[Project.Rules.CoreSize];
-            for(int a=0;a<Project.Rules.CoreSize;a++)
+            coreEvents = new CoreEventRecord[Project.Rules.CoreSize];
+            for (int a = 0; a < Project.Rules.CoreSize; a++)
             {
-                coreLevels[a] = CoreEventsLevel.Clean;
+                coreEvents[a] = new CoreEventRecord();
             }
         }
 
         protected override void AfterWrite(int address, Column column)
         {
             base.AfterWrite(address, column);
-            coreEvents[address] |= InstructionEvent.Write;
-            coreLevels[address] = CoreEventsLevel.Flash;
-            coreEventWarriors[address] = activeWarrior;
+            coreEvents[address].Event |= InstructionEvent.Write;
+            coreEvents[address].Level = CoreEventsLevel.Flash;
+            coreEvents[address].Touched = activeWarrior;
+            coreEvents[address].Version = ++version;
         }
 
         protected override void BeforeRead(int address, Column column)
         {
             base.BeforeRead(address, column);
-            coreEvents[address] |= InstructionEvent.Read;
-            coreLevels[address] = CoreEventsLevel.Flash;
-            coreEventWarriors[address] = activeWarrior;
+            coreEvents[address].Event |= InstructionEvent.Read;
+            coreEvents[address].Level = CoreEventsLevel.Flash;
+            coreEvents[address].Touched = activeWarrior;
+            coreEvents[address].Version = ++version;
         }
 
         protected override void Died(int address)
         {
             base.Died(address);
-            coreEvents[address] |= InstructionEvent.Died;
-            coreLevels[address] = CoreEventsLevel.Flash;
-            coreEventWarriors[address] = activeWarrior;
+            coreEvents[address].Event |= InstructionEvent.Died;
+            coreEvents[address].Level = CoreEventsLevel.Flash;
+            coreEvents[address].Touched = activeWarrior;
+            coreEvents[address].Version = ++version;
         }
 
-        protected override void PerformInstruction(int ip)
+        protected override void PerformInstruction(int address)
         {
-            base.PerformInstruction(ip);
-            coreEvents[ip] |= InstructionEvent.Execute;
-            coreLevels[ip] = CoreEventsLevel.Flash;
-            coreEventWarriors[ip] = activeWarrior;
-            coreExcecutedWarriors[ip] = activeWarrior;
+            base.PerformInstruction(address);
+            coreEvents[address].Event |= InstructionEvent.Execute;
+            coreEvents[address].Level = CoreEventsLevel.Flash;
+            coreEvents[address].Touched = activeWarrior;
+            coreEvents[address].Executed = activeWarrior;
+            coreEvents[address].Version = ++version;
         }
 
-        protected InstructionEvent[] coreEvents;
-        protected CoreEventsLevel[] coreLevels;
-        protected IRunningWarrior[] coreEventWarriors;
-        protected IRunningWarrior[] coreExcecutedWarriors;
+        protected CoreEventRecord[] coreEvents;
+        protected long version;
 
     }
 }

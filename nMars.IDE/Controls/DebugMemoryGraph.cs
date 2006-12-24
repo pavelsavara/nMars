@@ -3,26 +3,40 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 using nMars.RedCode;
 
 namespace nMars.IDE.Controls
 {
-    public partial class DebugMemoryGraph : IDEFrame
+    public partial class DebugMemoryGraph : IDEFrame, IDebugWatch
     {
+        #region Init
+
         public DebugMemoryGraph()
         {
             InitializeComponent();
-            InitColors();
         }
+
+        public override void Attach(TabControl aFrame, string name)
+        {
+            base.Attach(aFrame, name);
+            coreSize = Application.ActiveSolution.ActiveProject.Rules.CoreSize;
+            columns = (Width / (gridx * 10)) * 10;
+            rows = coreSize / columns;
+        }
+
+        #endregion
 
         #region Events
 
-        public void WatchCore()
+        public void Resume()
         {
-            PaintChanges();
+        }
+
+        public void Pause()
+        {
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -30,40 +44,53 @@ namespace nMars.IDE.Controls
             //empty
         }
 
+        /// <summary>
+        /// Paint region
+        /// </summary>
         protected override void OnPaint(PaintEventArgs e)
         {
-            CoreEventsLevel[] levels = Application.ActiveEngine.EventLevels;
-            InstructionEvent[] events = Application.ActiveEngine.Events;
-            IRunningWarrior[] eventWarriors = Application.ActiveEngine.EventWarriors;
-            int left = e.ClipRectangle.Left / gridx;
-            int right = (e.ClipRectangle.Right / gridx) + 1;
-            int top = e.ClipRectangle.Top / gridy;
-            int bottom = (e.ClipRectangle.Bottom / gridy) + 1;
+            CoreEventRecord[] events = Application.ActiveEngine.CoreEvents;
+            int left = (e.ClipRectangle.Left-offsetx) / gridx;
+            int right = ((e.ClipRectangle.Right-offsetx) / gridx) + 1;
+            int top = (e.ClipRectangle.Top-offsety) / gridy;
+            int bottom = ((e.ClipRectangle.Bottom-offsety) / gridy) + 1;
+            if (left < 0)
+                left = 0;
+            if (top < 0)
+                top = 0;
             if (right > columns)
                 right = columns;
             if (bottom > rows)
                 bottom = rows;
 
-            for (int c = left; c < right; c++)
+            lock (Application.ActiveEngine)
             {
-                for (int r = top; r < bottom; r++)
+                for (int c = left; c < right; c++)
                 {
-                    PaintCell(e.Graphics, c, r, events, levels, eventWarriors, true);
+                    for (int r = top; r < bottom; r++)
+                    {
+                        int address = c + (r * columns);
+                        IRunningInstruction ri = Application.ActiveEngine[address];
+                        PaintCell(e.Graphics, c, r, events[address], ri, true);
+                    }
                 }
             }
         }
 
-        private void PaintChanges()
+        /// <summary>
+        /// Paint changes only
+        /// </summary>
+        public void WatchCore()
         {
-            CoreEventsLevel[] levels = Application.ActiveEngine.EventLevels;
-            InstructionEvent[] events = Application.ActiveEngine.Events;
-            IRunningWarrior[] eventWarriors = Application.ActiveEngine.EventWarriors;
+            CoreEventRecord[] events = Application.ActiveEngine.CoreEvents;
             Graphics g = CreateGraphics();
             for (int c = 0; c < columns; c++)
             {
                 for (int r = 0; r < rows; r++)
                 {
-                    PaintCell(g, c, r, events, levels, eventWarriors, false);
+                    int address = c + (r * columns);
+                    IRunningInstruction ri = Application.ActiveEngine[address];
+                    PaintCell(g, c, r, events[address], ri, false);
                 }
             }
             g.Dispose();
@@ -71,127 +98,69 @@ namespace nMars.IDE.Controls
 
         #endregion
 
-        private void PaintCell(Graphics g, int column, int row, InstructionEvent[] events, CoreEventsLevel[] levels,IRunningWarrior[] eventWarriors,
-                               bool paintNone)
+        #region Painting Cell
+
+        private static void PaintCell(Graphics g, int column, int row, CoreEventRecord evnt, IRunningInstruction ri, bool paintAll)
         {
-            int address = column + row * columns;
-            CoreEventsLevel level = levels[address];
-            switch (level)
+            switch (evnt.Level)
             {
                 case CoreEventsLevel.Flash:
-                    PaintFlash(g, column, row, address, events, eventWarriors);
-                    levels[address]--;
+                    PaintFlash(g, column, row, evnt);
                     break;
                 case CoreEventsLevel.Fade:
-                    PaintFade(g, column, row, address, events);
-                    levels[address]--;
-                    events[address] = InstructionEvent.None;
+                    PaintFade(g, column, row, ri, evnt);
                     break;
                 case CoreEventsLevel.Clean:
-                    PaintNormal(g, column, row, address);
-                    levels[address]--;
+                    PaintNormal(g, column, row, ri);
                     break;
                 case CoreEventsLevel.None:
-                    if (paintNone)
+                    if (paintAll)
                     {
-                        PaintNormal(g, column, row, address);
+                        PaintNormal(g, column, row, ri);
                     }
                     break;
             }
         }
 
-        private const int columns = 100;
-        private const int rows = 80;
-        private const int gridx = 6;
-        private const int gridy = 6;
-        private const int offsetx = 10;
-        private const int offsety = 10;
-
-        private void PaintFlash(Graphics g, int column, int row, int address, InstructionEvent[] events, IRunningWarrior[] eventWarriors)
+        private static void PaintFlash(Graphics g, int column, int row, CoreEventRecord evt)
         {
-            InstructionEvent evnt = events[address];
-            Color ecolor = GetEventColor(evnt);
-            DrawSmall(g, new Pen(ecolor), column, row);
-            DrawData(g, ecolor, column, row);
+            Color evnt;
+            Color touched;
+            ColorManager.GetFlash(evt, out evnt, out touched);
 
-            IRunningWarrior warrior = eventWarriors[address];
-            DrawBig(g, new Pen(GetWarriorColor(warrior)), column, row);
-        }
-
-        private void PaintFade(Graphics g, int column, int row, int address, InstructionEvent[] events)
-        {
-            InstructionEvent evnt = events[address];
-            Color ecolor = GetEventColor(evnt);
-            DrawSmall(g, new Pen(ecolor), column, row);
-            DrawData(g, ecolor, column, row);
-            
-            IRunningInstruction ri = Application.ActiveEngine[address];
-            IRunningWarrior warrior = ri.OriginalOwner;
-            DrawBig(g, new Pen(GetWarriorColor(warrior)), column, row);
-        }
-
-        private void PaintNormal(Graphics g, int column, int row, int address)
-        {
-            IRunningInstruction ri = Application.ActiveEngine[address];
-            IRunningWarrior warrior = ri.OriginalOwner;
-            DrawBig(g, new Pen(GetWarriorColor(warrior)), column, row);
-
-            Color instColor = GetInstructionColor(ri);
-            DrawSmall(g, new Pen(instColor), column, row);
-            if (ri.Operation == Operation.DAT 
-                && (ri.ValueA != 0 || ri.ValueB != 0))
-            {
-                DrawData(g, Color.White, column, row);
-            }
-            else
-            {
-                DrawData(g, instColor, column, row);
-            }
-        }
-
-        private Color GetInstructionColor(IRunningInstruction ri)
-        {
-            return operationColors[(int)ri.Operation];
+            DrawSmall(g, evnt, column, row);
+            DrawBig(g, touched, column, row);
+            DrawData(g, evnt, column, row);
         }
 
 
-        private Color GetWarriorColor(IRunningWarrior warrior)
+        private static void PaintFade(Graphics g, int column, int row, IRunningInstruction ri, CoreEventRecord evt)
         {
-            if (warrior != null)
-            {
-                return warriorColors[warrior.WarriorIndex % warriorColorsCount];
-            }
-            else
-            {
-                return Color.Black;
-            }
+            Color evnt;
+            Color owner;
+            ColorManager.GetFade(ri, evt, out evnt, out owner);
+
+            DrawSmall(g, evnt, column, row);
+            DrawBig(g, owner, column, row);
+            DrawData(g, evnt, column, row);
         }
 
-        private Color GetEventColor(InstructionEvent evnt)
+        private static void PaintNormal(Graphics g, int column, int row, IRunningInstruction ri)
         {
-            if ((evnt & InstructionEvent.Read) != 0)
-            {
-                return flashReadColor;
-            }
-            else if ((evnt & InstructionEvent.Write) != 0)
-            {
-                return flashWriteColor;
-            }
-            else if ((evnt & InstructionEvent.Execute) != 0)
-            {
-                return flashExecuteColor;
-            }
-            else if ((evnt & InstructionEvent.Died) != 0)
-            {
-                return flashDiedColor;
-            }
-            else
-            {
-                throw new ApplicationException("Invalid call");
-            }
+            Color data;
+            Color instruction;
+            Color owner;
+            ColorManager.GetNormal(ri, out data, out instruction, out owner);
+
+            DrawBig(g, owner, column, row);
+            DrawSmall(g, instruction, column, row);
+            DrawData(g, data, column, row);
         }
 
-        #region Colors & Helpers
+
+        #endregion
+
+        #region Drawing
 
         private static void DrawData(Graphics g, Color color, int column, int row)
         {
@@ -210,70 +179,118 @@ namespace nMars.IDE.Controls
             }
         }
 
-        private static void DrawSmall(Graphics g, Pen pen, int column, int row)
+        private static void DrawSmall(Graphics g, Color color, int column, int row)
         {
-            g.DrawRectangle(pen, offsetx + (column * gridx) + 1, offsety + (row * gridy) + 1, 2, 2);
+            g.DrawRectangle(new Pen(color), offsetx + (column * gridx) + 1, offsety + (row * gridy) + 1, 2, 2);
         }
 
-        private static void DrawBig(Graphics g, Pen pen, int column, int row)
+        private static void DrawBig(Graphics g, Color color, int column, int row)
         {
-            g.DrawRectangle(pen, offsetx + (column * gridx), offsety + (row * gridy), 4, 4);
-            if (pen.Color == Color.Black)
+            g.DrawRectangle(new Pen(color), offsetx + (column * gridx), offsety + (row * gridy), 4, 4);
+            if (color == Color.Black)
             {
                 DrawGrid(g, column, row);
             }
         }
 
-
-        private void InitColors()
-        {
-            operationColors = new Color[OperationHelper.OperationCount];
-            operationColors[(int)Operation.MOV] = Color.WhiteSmoke;
-            operationColors[(int)Operation.NOP] = Color.Gray;
-            operationColors[(int)Operation.DAT] = Color.Black;
-            operationColors[(int)Operation.SPL] = Color.Blue;
-
-            operationColors[(int)Operation.LDP] = Color.DarkSalmon;
-            operationColors[(int)Operation.STP] = Color.DarkSalmon;
-
-            operationColors[(int)Operation.ADD] = Color.Violet;
-            operationColors[(int)Operation.SUB] = Color.Violet;
-            operationColors[(int)Operation.MOD] = Color.Violet;
-            operationColors[(int)Operation.DIV] = Color.Violet;
-            operationColors[(int)Operation.MUL] = Color.Violet;
-
-            operationColors[(int)Operation.JMP] = Color.DarkGreen;
-            operationColors[(int)Operation.JMZ] = Color.DarkGreen;
-            operationColors[(int)Operation.JMN] = Color.DarkGreen;
-            operationColors[(int)Operation.DJN] = Color.DarkGreen;
-            operationColors[(int)Operation.CMP] = Color.DarkGreen;
-            operationColors[(int)Operation.SNE] = Color.DarkGreen;
-            operationColors[(int)Operation.SLT] = Color.DarkGreen;
-
-            warriorColors = new Color[warriorColorsCount];
-            warriorColors[0] = Color.Red;
-            warriorColors[1] = Color.Green;
-            warriorColors[2] = Color.Blue;
-            warriorColors[3] = Color.Yellow;
-
-            flashReadColor = Color.Aquamarine;
-            flashWriteColor = Color.Orange;
-            flashExecuteColor = Color.DarkSeaGreen;
-            flashDiedColor = Color.Cyan;
-        }
-
-        private int warriorColorsCount = 4;
-        private Color[] warriorColors;
-        private Color[] operationColors;
-        private Color flashReadColor;
-        private Color flashWriteColor;
-        private Color flashExecuteColor;
-        private Color flashDiedColor;
+        private const int offsetx = 10;
+        private const int offsety = 10;
 
         #endregion
 
-        private void toolTip_Popup(object sender, PopupEventArgs e)
+        #region Mouse
+
+        /// <summary>
+        /// Tooltip
+        /// </summary>
+        private void DebugMemoryGraph_MouseMove(object sender, MouseEventArgs e)
         {
+            int column = (e.X-offsetx) / gridx;
+            int row = (e.Y-offsety) / gridy;
+            if (column < 0 || column>=columns || row<0 || row>=rows)
+                return;
+            int address = column + row * columns;
+            lock (Application.ActiveEngine)
+            {
+                IRunningInstruction instruction = Application.ActiveEngine[address];
+                IRunningWarrior warrior = instruction.OriginalOwner;
+                CoreEventRecord evnt = Application.ActiveEngine.CoreEvents[address];
+                tooltipText.Length = 0;
+                tooltipText.Append(instruction.ToString());
+                if (warrior!=null)
+                {
+                    tooltipText.Append("\r\nfrom ");
+                    tooltipText.Append(warrior.Name);
+                }
+                if (evnt.Event != 0)
+                {
+                    tooltipText.Append("\r\n");
+                    if ((evnt.Event & InstructionEvent.Died) != 0)
+                    {
+                        tooltipText.Append("Died, ");
+                    }
+                    if ((evnt.Event & InstructionEvent.Execute) != 0)
+                    {
+                        tooltipText.Append("Executed, ");
+                    }
+                    if ((evnt.Event & InstructionEvent.Write) != 0)
+                    {
+                        tooltipText.Append("Write, ");
+                    }
+                    if ((evnt.Event & InstructionEvent.Read) != 0)
+                    {
+                        tooltipText.Append("Read ");
+                    }
+                    tooltipText.Append("by ");
+                    tooltipText.Append(evnt.Touched.Name);
+                }
+                if (evnt.Executed != null)
+                {
+                    tooltipText.Append("\r\n last executed by ");
+                    tooltipText.Append(evnt.Executed.Name);
+                }
+                toolTip.SetToolTip(this, tooltipText.ToString());
+            }
         }
+
+        private StringBuilder tooltipText=new StringBuilder(200);
+
+        /// <summary>
+        /// Click to show memory
+        /// </summary>
+        private void DebugMemoryGraph_MouseClick(object sender, MouseEventArgs e)
+        {
+            int column = (e.X-offsetx) / gridx;
+            int row = (e.Y-offsety) / gridy;
+            if (column < 0 || column>=columns || row<0 || row>=rows)
+                return;
+            int address = column + row * columns;
+            Application.ShowAddress(address);
+        }
+
+        /// <summary>
+        /// Double click to add breakpoint
+        /// </summary>
+        private void DebugMemoryGraph_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int column = (e.X-offsetx) / gridx;
+            int row = (e.Y-offsety) / gridy;
+            if (column < 0 || column>=columns || row<0 || row>=rows)
+                return;
+            int address = column + row * columns;
+            Application.AddBreakpoint(address);
+        }
+
+        #endregion
+
+        #region Variables
+
+        private int columns = 100;
+        private int rows = 80;
+        private int coreSize = 8000;
+        private const int gridx = 6;
+        private const int gridy = 6;
+
+        #endregion
     }
 }
