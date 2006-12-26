@@ -42,7 +42,7 @@
 #include <ctype.h>
 #include "global.h"
 
-#define CLP_MAXSTRLEN  80
+#define CLP_MAXSTRLEN  512
 #define CLP_ADDR ADDR_T
 #define CLP_LONG long
 #define CLP_INT int
