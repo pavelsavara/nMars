@@ -318,7 +318,7 @@ namespace nMars.Engine
                         case Modifier.I:
                             BeforeRead(reg.AdrA, Column.All);
                             BeforeWrite(reg.AdrB, Column.All);
-                            core[reg.AdrB].Source = core[reg.AdrA].Source;
+                            core[reg.AdrB].OriginalInstruction = core[reg.AdrA].OriginalInstruction;
                             core[reg.AdrB].OriginalOwner = core[reg.AdrA].OriginalOwner;
                             core[reg.AdrB].Operation = core[reg.AdrA].Operation;
                             core[reg.AdrB].Modifier = core[reg.AdrA].Modifier;

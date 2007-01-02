@@ -8,10 +8,17 @@ using nMars.IDE.Core;
 
 namespace nMars.IDE
 {
+    public enum IDEMode
+    {
+        Edit,
+        Debug,
+    }
+
     public interface IControl
     {
         void Attach(TabControl frame, string name);
         void Detach();
+        void ChangingMode(IDEMode newMode);
         void ActivateControl();
         void DeactivateControl();
     }

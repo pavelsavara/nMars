@@ -96,8 +96,7 @@ namespace pMars.DllWrapper
             if (lastInstructionWatchMode)
             {
                 //copy instruction
-                int currentInstructionAddress = Tasks[NextWarriorIndex][0];
-                lastInstruction = this[currentInstructionAddress];
+                lastInstruction = NextInstruction;
             }
 
             lastStepResult = (StepResult)pMarsDll.pMarsStepMatch();
@@ -152,7 +151,7 @@ namespace pMars.DllWrapper
             if (!dllTasksLoaded)
             {
                 CopyWarriors();
-                tasksCopy = new List<IList<int>>(dllWarriorsCout);
+                tasksCopy = new List<IEnumerable<int>>(dllWarriorsCout);
                 for (int w = 0; w < dllWarriorsCout; w++)
                 {
                     pMarsDll.PmarsWarrior warriror = warriorsDllCopy[w];
@@ -232,7 +231,7 @@ namespace pMars.DllWrapper
             get { throw new NotImplementedException(); }
         }
 
-        public IList<IList<int>> Tasks
+        public IList<IEnumerable<int>> Tasks
         {
             get
             {
@@ -247,6 +246,11 @@ namespace pMars.DllWrapper
         }
 
         IList<IRunningWarrior> IWarriorsView.RunningWarriors
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IEnumerable<IRunningWarrior> LiveWarriors
         {
             get { throw new NotImplementedException(); }
         }
@@ -389,7 +393,7 @@ namespace pMars.DllWrapper
 
         private IntPtr dllTasksStart;
         private IntPtr dllTasksEnd;
-        private List<IList<int>> tasksCopy = null;
+        private List<IEnumerable<int>> tasksCopy = null;
         private bool dllTasksLoaded = false;
 
         #endregion

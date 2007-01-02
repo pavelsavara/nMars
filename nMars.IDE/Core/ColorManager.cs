@@ -67,7 +67,7 @@ namespace nMars.IDE
 
         public static Color GetEventColor(InstructionEvent evnt)
         {
-            if ((evnt & InstructionEvent.Write) != 0)
+            if ((evnt & InstructionEvent.WrittenInstruction) != 0)
             {
                 return flashWriteColor;
             }
@@ -75,7 +75,7 @@ namespace nMars.IDE
             {
                 return flashDiedColor;
             }
-            else if ((evnt & InstructionEvent.Execute) != 0)
+            else if ((evnt & InstructionEvent.Executed) != 0)
             {
                 return flashExecuteColor;
             }

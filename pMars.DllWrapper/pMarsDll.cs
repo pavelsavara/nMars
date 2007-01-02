@@ -104,6 +104,11 @@ namespace pMars.DllWrapper
                 get { throw new NotImplementedException(); }
             }
 
+            public IInstruction OriginalInstruction
+            {
+                get { throw new NotImplementedException(); }
+            }
+
             public string GetLine(ParserOptions options, bool start)
             {
                 throw new NotImplementedException();
@@ -356,7 +361,7 @@ namespace pMars.DllWrapper
             get { throw new NotImplementedException(); }
         }
 
-        public IList<int> Tasks
+        public IEnumerable<int> Tasks
         {
             get { throw new NotImplementedException(); }
         }
@@ -399,6 +404,11 @@ namespace pMars.DllWrapper
         public int Address
         {
             get { return address; }
+        }
+
+        public IInstruction OriginalInstruction
+        {
+            get { throw new NotImplementedException(); }
         }
 
         public IRunningWarrior OriginalOwner

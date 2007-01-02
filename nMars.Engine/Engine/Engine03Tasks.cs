@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Collections.Generic;
 using nMars.RedCode;
 
@@ -100,7 +101,7 @@ namespace nMars.Engine
             }
         }
 
-        public IList<IList<int>> Tasks
+        public IList<IEnumerable<int>> Tasks
         {
             get
             {
@@ -174,11 +175,20 @@ namespace nMars.Engine
             get { return results; }
         }
 
+        public IEnumerable<IRunningWarrior> LiveWarriors
+        {
+            get
+            {
+                return (IEnumerable<IRunningWarrior>)liveWarriors;
+            }
+        }
+
+
         #endregion
 
         #region Caches
 
-        private List<IList<int>> tasksCopy;
+        private List<IEnumerable<int>> tasksCopy;
         private bool tasksCopyLoaded = false;
         private IRunningInstruction lastInstruction;
 
@@ -186,7 +196,7 @@ namespace nMars.Engine
         {
             if (!tasksCopyLoaded)
             {
-                tasksCopy = new List<IList<int>>(rules.WarriorsCount);
+                tasksCopy = new List<IEnumerable<int>>(rules.WarriorsCount);
                 foreach (IRunningWarrior warrior in warriors)
                 {
                     tasksCopy.Add(warrior.Tasks);

@@ -319,7 +319,7 @@ namespace nMars.Engine
         }
 
 
-        public IList<IList<int>> Tasks
+        public IList<IEnumerable<int>> Tasks
         {
             get
             {
@@ -430,6 +430,17 @@ namespace nMars.Engine
         }
 
         public IList<IRunningWarrior> RunningWarriors
+        {
+            get
+            {
+                lock (this)
+                {
+                    return engine.RunningWarriors;
+                }
+            }
+        }
+
+        public IEnumerable<IRunningWarrior> LiveWarriors
         {
             get
             {

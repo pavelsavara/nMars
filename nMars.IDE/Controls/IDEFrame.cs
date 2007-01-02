@@ -61,6 +61,10 @@ namespace nMars.IDE.Controls
         {
         }
 
+        public virtual void ChangingMode(IDEMode newMode)
+        {
+        }
+
         protected TabControl frame;
         protected TabPage page;
     }

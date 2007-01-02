@@ -66,7 +66,7 @@ namespace nMars.RedCode
         int PreviousInstructionAddress { get; }
         int LiveTasksCount { get; }
         int DeadTasksCount { get; }
-        IList<int> Tasks { get; }
+        IEnumerable<int> Tasks { get; }
         int TasksCount { get; }
         IPSpace PSpace { get; }
         int LastResult { get; }
@@ -79,6 +79,7 @@ namespace nMars.RedCode
         int Address { get; }
         string ToString();
         IRunningWarrior OriginalOwner { get; }
+        IInstruction OriginalInstruction { get; }
     }
 
     public interface ICoreView
@@ -111,9 +112,9 @@ namespace nMars.RedCode
         MatchResult Results { get; }
     }
 
-    public interface ITaskView
+    public interface ITaskView : IWarriorsView
     {
-        IList<IList<int>> Tasks { get; }
+        IList<IEnumerable<int>> Tasks { get; }
         int TasksCount { get; }
         int NextWarriorIndex { get; }
     }
@@ -128,6 +129,7 @@ namespace nMars.RedCode
     public interface IWarriorsView
     {
         IList<IRunningWarrior> RunningWarriors { get; }
+        IEnumerable<IRunningWarrior> LiveWarriors { get; }
         IList<IWarrior> Warriors { get; }
     }
 
@@ -207,9 +209,10 @@ namespace nMars.RedCode
     {
         None = 0,
         Read = 1,
-        Write = 2,
-        Died = 4,
-        Execute = 8,
+        WrittenInstruction = 2,
+        WrittenData = 4,
+        Died = 8,
+        Executed = 16,
     }
 
     public enum CoreEventsLevel
@@ -224,8 +227,12 @@ namespace nMars.RedCode
     {
         public InstructionEvent Event;
         public CoreEventsLevel Level = CoreEventsLevel.Clean;
-        public IRunningWarrior Touched;
+        public IRunningWarrior Read;
+        public IRunningWarrior WrittenInstruction;
+        public IRunningWarrior WrittenData;
+        public IRunningWarrior Died;
         public IRunningWarrior Executed;
+        public IRunningWarrior Touched;
         public long Version;
     }
 

@@ -13,27 +13,39 @@ namespace nMars.Test
     {
         public static int Main(string[] args)
         {
-            try
+            if (args.Length == 0)
             {
-                if (args.Length == 0)
+                try
                 {
-                    EngineTest test = new EngineTest();
-                    //test.Random(1000);
-                    test.Full();
+                    //MainParser();
+                    MainEngine();
                     return 0;
                 }
-                else
+                catch (Exception ex)
                 {
-                    return CommandLine.EngineMain(args, null, null);
+                    Console.Error.WriteLine(ex.Message);
+                    Console.Error.WriteLine();
+                    Console.Error.WriteLine(ex.StackTrace);
+                    return -1;
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Console.Error.WriteLine(ex.Message);
-                Console.Error.WriteLine();
-                Console.Error.WriteLine(ex.StackTrace);
-                return -1;
+                return CommandLine.EngineMain(args, null, null);
             }
+        }
+
+        public static void MainEngine()
+        {
+            EngineTest test = new EngineTest();
+            test.Random(10000);
+            test.Full();
+        }
+
+        public static void MainParser()
+        {
+            ParserTest test = new ParserTest();
+            test.Full();
         }
 
         public IEngine CreateEngine()
