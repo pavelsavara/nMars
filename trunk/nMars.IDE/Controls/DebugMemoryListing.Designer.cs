@@ -28,12 +28,14 @@ namespace nMars.IDE.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBoxAutoIP = new System.Windows.Forms.CheckBox();
             this.checkBoxRelative = new System.Windows.Forms.CheckBox();
             this.maskedTextBoxAddress = new System.Windows.Forms.TextBox();
             this.labelAddress = new System.Windows.Forms.Label();
             this.listBoxMemory = new System.Windows.Forms.ListBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,6 +104,7 @@ namespace nMars.IDE.Controls
             this.listBoxMemory.Size = new System.Drawing.Size(199, 494);
             this.listBoxMemory.TabIndex = 3;
             this.listBoxMemory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxMemory_DrawItem);
+            this.listBoxMemory.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBoxMemory_MouseMove);
             // 
             // DebugMemoryListing
             // 
@@ -125,5 +128,6 @@ namespace nMars.IDE.Controls
         private System.Windows.Forms.CheckBox checkBoxRelative;
         private System.Windows.Forms.ListBox listBoxMemory;
         private System.Windows.Forms.CheckBox checkBoxAutoIP;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

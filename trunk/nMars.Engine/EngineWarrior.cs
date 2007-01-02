@@ -185,16 +185,11 @@ namespace nMars.Engine
             }
         }
 
-        IList<int> IRunningWarrior.Tasks
+        IEnumerable<int> IRunningWarrior.Tasks
         {
             get
             {
-                List<int> tasks = new List<int>();
-                foreach (int i in Tasks)
-                {
-                    tasks.Add(i);
-                }
-                return tasks;
+                return Tasks;
             }
         }
 

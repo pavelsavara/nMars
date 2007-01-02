@@ -244,20 +244,36 @@ namespace nMars.Test
                 {
                     throw new EngineDifferException("Pin", new Check(engineOne.Round, engineOne.Cycles, precise));
                 }
-                IList<int> tasksOne = engineOne.Tasks[w];
-                IList<int> tasksTwo = engineTwo.Tasks[w];
-                if (tasksOne.Count != tasksTwo.Count)
+                IEnumerable<int> tasksOne = engineOne.Tasks[w];
+                IEnumerable<int> tasksTwo = engineTwo.Tasks[w];
+
+                IEnumerator<int> enumerator1 = tasksOne.GetEnumerator();
+                IEnumerator<int> enumerator2 = tasksOne.GetEnumerator();
+                try
                 {
-                    throw new EngineDifferException("Task Died", new Check(engineOne.Round, engineOne.Cycles, precise));
-                }
-                for (int t = 0; t < tasksOne.Count; t++)
-                {
-                    int taskOne = tasksOne[t];
-                    int taskTwo = tasksTwo[t];
-                    if (taskOne != taskTwo)
+                    while (enumerator1.MoveNext())
                     {
-                        throw new EngineDifferException("Bad IP", new Check(engineOne.Round, engineOne.Cycles, precise));
+                        if (!enumerator2.MoveNext())
+                        {
+                            throw new EngineDifferException("Task Died",
+                                                            new Check(engineOne.Round, engineOne.Cycles, precise));
+                        }
+                        if (enumerator1.Current != enumerator2.Current)
+                        {
+                            throw new EngineDifferException("Bad IP",
+                                                            new Check(engineOne.Round, engineOne.Cycles, precise));
+                        }
                     }
+                    if (enumerator2.MoveNext())
+                    {
+                        throw new EngineDifferException("Task Died",
+                                                        new Check(engineOne.Round, engineOne.Cycles, precise));
+                    }
+                }
+                finally
+                {
+                    enumerator1.Dispose();
+                    enumerator2.Dispose();
                 }
             }
         }

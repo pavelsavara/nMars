@@ -49,38 +49,57 @@ namespace nMars.Engine.Engine
         protected override void AfterWrite(int address, Column column)
         {
             base.AfterWrite(address, column);
-            coreEvents[address].Event |= InstructionEvent.Write;
-            coreEvents[address].Level = CoreEventsLevel.Flash;
-            coreEvents[address].Touched = activeWarrior;
-            coreEvents[address].Version = ++version;
+            CoreEventRecord evnt = coreEvents[address];
+            evnt.Level = CoreEventsLevel.Flash;
+            evnt.Touched = activeWarrior;
+            if (column == Column.All)
+            {
+                evnt.Died = null;
+                evnt.Executed = null;
+                evnt.WrittenInstruction = activeWarrior;
+                evnt.WrittenData = activeWarrior;
+                evnt.Event |= InstructionEvent.WrittenInstruction;
+                evnt.Event |= InstructionEvent.WrittenData;
+            }
+            else
+            {
+                evnt.WrittenData = activeWarrior;
+                evnt.Event |= InstructionEvent.WrittenData;
+            }
+            evnt.Version = ++version;
         }
 
         protected override void BeforeRead(int address, Column column)
         {
             base.BeforeRead(address, column);
-            coreEvents[address].Event |= InstructionEvent.Read;
-            coreEvents[address].Level = CoreEventsLevel.Flash;
-            coreEvents[address].Touched = activeWarrior;
-            coreEvents[address].Version = ++version;
+            CoreEventRecord evnt = coreEvents[address];
+            evnt.Event |= InstructionEvent.Read;
+            evnt.Level = CoreEventsLevel.Flash;
+            evnt.Touched = activeWarrior;
+            evnt.Read = activeWarrior;
+            evnt.Version = ++version;
         }
 
         protected override void Died(int address)
         {
             base.Died(address);
-            coreEvents[address].Event |= InstructionEvent.Died;
-            coreEvents[address].Level = CoreEventsLevel.Flash;
-            coreEvents[address].Touched = activeWarrior;
-            coreEvents[address].Version = ++version;
+            CoreEventRecord evnt = coreEvents[address];
+            evnt.Event |= InstructionEvent.Died;
+            evnt.Level = CoreEventsLevel.Flash;
+            evnt.Touched = activeWarrior;
+            evnt.Died = activeWarrior;
+            evnt.Version = ++version;
         }
 
         protected override void PerformInstruction(int address)
         {
             base.PerformInstruction(address);
-            coreEvents[address].Event |= InstructionEvent.Execute;
-            coreEvents[address].Level = CoreEventsLevel.Flash;
-            coreEvents[address].Touched = activeWarrior;
-            coreEvents[address].Executed = activeWarrior;
-            coreEvents[address].Version = ++version;
+            CoreEventRecord evnt = coreEvents[address];
+            evnt.Event |= InstructionEvent.Executed;
+            evnt.Level = CoreEventsLevel.Flash;
+            evnt.Touched = activeWarrior;
+            evnt.Executed = activeWarrior;
+            evnt.Version = ++version;
         }
 
         protected CoreEventRecord[] coreEvents;

@@ -20,6 +20,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RegisterForComInterop>true</RegisterForComInterop>
+    <DocumentationFile>bin\Debug\nMars.RedCode.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\nMars.RedCode.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -37,7 +39,6 @@
   <ItemGroup>
     <Compile Include="Debugger\DebuggerShell.cs" />
     <Compile Include="Debugger\IDebugger.cs" />
-    <Compile Include="Engine\CoreDump.cs" />
     <Compile Include="Engine\EngineOptions.cs" />
     <Compile Include="Engine\Project.cs" />
     <Compile Include="Engine\PSpace.cs" />

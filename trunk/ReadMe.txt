@@ -1,5 +1,5 @@
 
-    nMars - Corewars MARS for .NET 
+    nMars - Corewars MARS for .NET
     
 ---------------------------------------
 

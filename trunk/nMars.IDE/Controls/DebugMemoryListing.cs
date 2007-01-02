@@ -12,7 +12,7 @@ using nMars.RedCode;
 
 namespace nMars.IDE.Controls
 {
-    public partial class DebugMemoryListing : IDEFrame, IDebugWatch
+    public partial class DebugMemoryListing : IDEFrame, IDebugWatch, IMemoryPainter
     {
         public DebugMemoryListing()
         {
@@ -41,7 +41,7 @@ namespace nMars.IDE.Controls
             nextAddress = (Application.ActiveEngine.NextInstruction.Address % helper.coreSize) + helper.half;
             if (checkBoxAutoIP.Checked)
             {
-                ShowAddress(Application.ActiveEngine.NextInstruction.Address);
+                Show(Application.ActiveEngine.NextInstruction.Address, false);
             }
             helper.WatchCore();
             listBoxMemory.EndUpdate();
@@ -84,10 +84,10 @@ namespace nMars.IDE.Controls
                 Show(addr, false);
             }
         }
-        
+
         private CoreListHelper helper;
-        private int nextAddress=0;
-        private int markedIndex=-1;
+        private int nextAddress = 0;
+        private int markedIndex = -1;
 
         private void maskedTextBoxAddress_KeyDown(object sender, KeyEventArgs e)
         {
@@ -125,107 +125,63 @@ namespace nMars.IDE.Controls
                     myBrush = Brushes.White;
                 }
                 CoreCellHelper cell = (CoreCellHelper)((ListBox)sender).Items[e.Index];
-
-                PaintCell(e.Graphics, e.Bounds, cell.Event, cell.Instruction);
+                graphics = e.Graphics;
+                bounds = e.Bounds;
+                MemoryPainter.PaintCell(this, cell.Event, cell.Instruction, true);
                 Rectangle r = new Rectangle(e.Bounds.X + 10, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
 
-                e.Graphics.DrawString(cell.Instruction.ToString(), e.Font, myBrush, r,
-                                      StringFormat.GenericDefault);
+                e.Graphics.DrawString(cell.Instruction.ToString(), e.Font, myBrush, r, StringFormat.GenericDefault);
                 e.DrawFocusRectangle();
             }
         }
 
-        #region Painting Cell
-
-        private static void PaintCell(Graphics g, Rectangle bounds, CoreEventRecord evt, IRunningInstruction ri)
-        {
-            switch (evt.Level)
-            {
-                case CoreEventsLevel.Flash:
-                    PaintFlash(g, bounds, evt);
-                    break;
-                case CoreEventsLevel.Fade:
-                    PaintFade(g, bounds, ri, evt);
-                    break;
-                case CoreEventsLevel.Clean:
-                    PaintNormal(g, bounds, ri);
-                    evt.Event = InstructionEvent.None;
-                    break;
-                case CoreEventsLevel.None:
-                    PaintNormal(g, bounds, ri);
-                    break;
-            }
-        }
-
-        private static void PaintFlash(Graphics g, Rectangle bounds, CoreEventRecord evt)
-        {
-            Color evnt;
-            Color touched;
-            ColorManager.GetFlash(evt, out evnt, out touched);
-
-            DrawSmall(g, bounds, evnt);
-            DrawBig(g, bounds, touched);
-            DrawData(g, bounds, evnt);
-        }
-
-
-        private static void PaintFade(Graphics g, Rectangle bounds, IRunningInstruction ri, CoreEventRecord evt)
-        {
-            Color evnt;
-            Color owner;
-            ColorManager.GetFade(ri, evt, out evnt, out owner);
-
-            DrawSmall(g, bounds, evnt);
-            DrawBig(g, bounds, owner);
-            DrawData(g, bounds, evnt);
-        }
-
-        private static void PaintNormal(Graphics g, Rectangle bounds, IRunningInstruction ri)
-        {
-            Color data;
-            Color instruction;
-            Color owner;
-            ColorManager.GetNormal(ri, out data, out instruction, out owner);
-
-            DrawBig(g, bounds, owner);
-            DrawSmall(g, bounds, instruction);
-            DrawData(g, bounds, data);
-        }
-
-        #endregion
-
         #region Drawing
 
-        private static void DrawData(Graphics g, Rectangle bounds, Color color)
+        private Graphics graphics;
+        private Rectangle bounds;
+
+        void IMemoryPainter.DrawData(Color color)
         {
-            g.FillRectangle(new SolidBrush(color), bounds.X + offsetx + 3, bounds.Y + offsety + 3, 3, 3);
+            graphics.FillRectangle(new SolidBrush(color), bounds.X + offsetx + 3, bounds.Y + offsety + 3, 3, 3);
         }
 
-        private static void DrawSmall(Graphics g, Rectangle bounds, Color color)
+        void IMemoryPainter.DrawSmall(Color color)
         {
-            g.DrawRectangle(new Pen(color, 2), bounds.X + offsetx + 2, bounds.Y + offsety + 2, 5, 5);
+            graphics.DrawRectangle(new Pen(color, 2), bounds.X + offsetx + 2, bounds.Y + offsety + 2, 5, 5);
         }
 
-        private static void DrawBig(Graphics g, Rectangle bounds, Color color)
+        void IMemoryPainter.DrawBig(Color color)
         {
-            g.DrawRectangle(new Pen(color, 2), bounds.X + offsetx, bounds.Y + offsety, 9, 9);
+            graphics.DrawRectangle(new Pen(color, 2), bounds.X + offsetx, bounds.Y + offsety, 9, 9);
+        }
+
+        void IMemoryPainter.DrawGrid()
+        {
         }
 
         private const int offsetx = 2;
         private const int offsety = 4;
 
         #endregion
-    
-    
+
+        private void listBoxMemory_MouseMove(object sender, MouseEventArgs e)
+        {
+            int index = (e.Y / listBoxMemory.ItemHeight) + listBoxMemory.TopIndex;
+            CoreCellHelper item = (CoreCellHelper)helper[index];
+            lock (Application.ActiveEngine)
+            {
+                toolTip.SetToolTip(listBoxMemory, MemoryPainter.GetTooltip(Application.ActiveEngine, item.Instruction.Address));
+            }
+        }
     }
 
-    class CoreCellHelper
+    internal class CoreCellHelper
     {
         public IRunningInstruction Instruction;
         public CoreEventRecord Event;
     }
 
-    class CoreListHelper : IBindingList
+    internal class CoreListHelper : IBindingList
     {
         private CoreCellHelper[] cache;
 
@@ -242,6 +198,7 @@ namespace nMars.IDE.Controls
                 cache[i].Instruction = Application.ActiveEngine[i + half];
             }
         }
+
         public void Invalidate(int index)
         {
             change.Invoke(this, new ListChangedEventArgs(ListChangedType.ItemChanged, index));
@@ -278,74 +235,44 @@ namespace nMars.IDE.Controls
 
         public event ListChangedEventHandler ListChanged
         {
-            add
-            {
-                change += value;
-            }
-            remove
-            {
-                change -= value;
-            }
+            add { change += value; }
+            remove { change -= value; }
         }
 
         public bool SupportsChangeNotification
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public object this[int index]
         {
-            get
-            {
-                return cache[index];
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return cache[index]; }
+            set { throw new NotImplementedException(); }
         }
 
         public int Count
         {
-            get
-            {
-                return coreSize * 2;
-            }
+            get { return coreSize * 2; }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public bool IsFixedSize
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return Application.ActiveEngine;
-            }
+            get { return Application.ActiveEngine; }
         }
 
         public bool IsSynchronized
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public IEnumerator GetEnumerator()
@@ -353,7 +280,7 @@ namespace nMars.IDE.Controls
             throw new NotImplementedException();
         }
 
-            #region Not Implemented
+        #region Not Implemented
 
         public object AddNew()
         {
@@ -387,50 +314,32 @@ namespace nMars.IDE.Controls
 
         public bool AllowNew
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool AllowEdit
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool AllowRemove
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool SupportsSearching
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool SupportsSorting
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool IsSorted
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public PropertyDescriptor SortProperty

@@ -19,7 +19,7 @@ namespace nMars.Engine
             ValueA = 0;
             ModeB = Mode.Direct;
             ValueB = 0;
-            Source = null;
+            OriginalInstruction = null;
             Address = address;
             OriginalOwner = owner;
         }
@@ -37,11 +37,11 @@ namespace nMars.Engine
             if (src is EngineInstruction)
             {
                 EngineInstruction ei = (EngineInstruction)src;
-                Source = ei.Source;
+                OriginalInstruction = ei.OriginalInstruction;
             }
             else
             {
-                Source = src;
+                OriginalInstruction = src;
             }
         }
 
@@ -57,12 +57,12 @@ namespace nMars.Engine
             if (src is EngineInstruction)
             {
                 EngineInstruction ei = (EngineInstruction)src;
-                Source = ei.Source;
+                OriginalInstruction = ei.OriginalInstruction;
                 OriginalOwner = ei.OriginalOwner;
             }
             else
             {
-                Source = src;
+                OriginalInstruction = src;
                 OriginalOwner = null;
             }
         }
@@ -223,6 +223,14 @@ namespace nMars.Engine
             }
         }
 
+        IInstruction IRunningInstruction.OriginalInstruction
+        {
+            get
+            {
+                return OriginalInstruction;
+            }
+        }
+
         #endregion
 
         public Operation Operation;
@@ -231,7 +239,7 @@ namespace nMars.Engine
         public int ValueA;
         public Mode ModeB;
         public int ValueB;
-        public IInstruction Source;
+        public IInstruction OriginalInstruction;
         public IRunningWarrior OriginalOwner;
         public int Address;
     }

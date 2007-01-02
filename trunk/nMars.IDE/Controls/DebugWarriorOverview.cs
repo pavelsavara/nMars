@@ -26,7 +26,8 @@ namespace nMars.IDE.Controls
             Dock = DockStyle.Fill;
             warriorIndex = aWarriorIndex;
             panel.Controls.Add(this, aWarriorIndex, 0);
-            groupBox.Text = Application.ActiveEngine.Warriors[aWarriorIndex].Name;
+            groupBox.Text = Application.ActiveEngine.Warriors[aWarriorIndex].Name + " by " +
+                            Application.ActiveEngine.Warriors[aWarriorIndex].Author;
         }
 
         public void WatchCore()
@@ -44,10 +45,18 @@ namespace nMars.IDE.Controls
             }
             listBoxNextInstructions.BeginUpdate();
             listBoxNextInstructions.Items.Clear();
-            for (int t = 0; t < rw.Tasks.Count && t < maxItems; t++)
+            IEnumerator<int> enumerator = rw.Tasks.GetEnumerator();
+            for (int t = 0; t < maxItems; t++)
             {
-                IRunningInstruction ri = Application.ActiveEngine[rw.Tasks[t]];
-                listBoxNextInstructions.Items.Add(ri.ToString());
+                if (enumerator.MoveNext())
+                {
+                    IRunningInstruction ri = Application.ActiveEngine[enumerator.Current];
+                    listBoxNextInstructions.Items.Add(ri.ToString());
+                }
+                else
+                {
+                    break;
+                }
             }
             listBoxNextInstructions.EndUpdate();
         }

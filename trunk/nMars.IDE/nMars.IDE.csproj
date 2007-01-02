@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Debug\nMars.IDE.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -93,6 +94,7 @@
     <Compile Include="Core\BreakPoints.cs" />
     <Compile Include="Core\ColorManager.cs" />
     <Compile Include="Core\Document.cs" />
+    <Compile Include="Core\MemoryPainter.cs" />
     <Compile Include="Core\RedCodeProject.cs" />
     <Compile Include="Core\RedCodeSolution.cs" />
     <Compile Include="Core\WarriorDocument.cs" />
