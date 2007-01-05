@@ -20,6 +20,7 @@ PMARSDLL_API warrior_struct* pMarsParse(int argc, char** argv, char* errFile)
 	freopen( errFile, "w", stderr );
 	if (parse_param(argc,argv)==SUCCESS) 
 	{
+		reset_regs();
 		init();
 		if (assemble(warrior[0].fileName,0)==SUCCESS) 
 		{
@@ -45,6 +46,7 @@ PMARSDLL_API int pMarsBeginMatch(int argc, char** argv, char* errFile)
 	freopen( errFile, "w", stderr );
 	if (parse_param(argc,argv)==SUCCESS) 
 	{
+		reset_regs();
 		init();
 		body_load();
 		if (errorcode != SUCCESS)
