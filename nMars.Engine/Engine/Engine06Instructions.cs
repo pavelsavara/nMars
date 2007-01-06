@@ -169,7 +169,8 @@ namespace nMars.Engine
                             jump = (reg.IR.ValueB == reg.AA_Value);
                             break;
                         case Modifier.BA:
-                            jump = (this[reg.AdrA, Column.B] == this[reg.AdrB, Column.A]);
+                            jump = (reg.AB_Value == reg.IR.ValueA);
+                            
                             break;
                         case Modifier.I:
                             BeforeRead(reg.AdrA, Column.All);
@@ -212,7 +213,7 @@ namespace nMars.Engine
                             jump = (reg.IR.ValueB != reg.AA_Value);
                             break;
                         case Modifier.BA:
-                            jump = (this[reg.AdrA, Column.B] != this[reg.AdrB, Column.A]);
+                            jump = (reg.AB_Value != reg.IR.ValueA);
                             break;
                         case Modifier.I:
                             BeforeRead(reg.AdrA, Column.All);
@@ -434,7 +435,7 @@ namespace nMars.Engine
                 case Modifier.X:
                     BeforeRead(reg.AdrA, Column.A);
                     BeforeWrite(reg.AdrB, Column.B);
-                    die |= oper(ref core[reg.AdrB].ValueB, reg.IR.ValueB, core[reg.AdrA].ValueA, reg.IR.Operation);
+                    die |= oper(ref core[reg.AdrB].ValueB, reg.IR.ValueB, reg.AA_Value, reg.IR.Operation);
                     die |= oper(ref core[reg.AdrB].ValueA, reg.AB_Value, reg.IR.ValueA, reg.IR.Operation);
                     AfterWrite(reg.AdrB, Column.B);
                     break;
