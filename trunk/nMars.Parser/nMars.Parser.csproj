@@ -125,7 +125,6 @@
     <None Include="..\nMars.RedCode\Properties\nMars.snk">
       <Link>Properties\nMars.snk</Link>
     </None>
-    <None Include="nMars.snk" />
     <None Include="Properties\RedCode.grm" />
   </ItemGroup>
   <ItemGroup>

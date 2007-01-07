@@ -1,3 +1,5 @@
+using nMars.Graphics.Controls;
+
 namespace nMars.IDE.Controls
 {
     partial class DebugMemoryListing
@@ -29,27 +31,26 @@ namespace nMars.IDE.Controls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel = new System.Windows.Forms.Panel();
             this.checkBoxAutoIP = new System.Windows.Forms.CheckBox();
             this.checkBoxRelative = new System.Windows.Forms.CheckBox();
             this.maskedTextBoxAddress = new System.Windows.Forms.TextBox();
             this.labelAddress = new System.Windows.Forms.Label();
-            this.listBoxMemory = new System.Windows.Forms.ListBox();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1.SuspendLayout();
+            this.coreList = new nMars.IDE.Controls.CoreListingInteractive(this.components);
+            this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // panel
             // 
-            this.panel1.Controls.Add(this.checkBoxAutoIP);
-            this.panel1.Controls.Add(this.checkBoxRelative);
-            this.panel1.Controls.Add(this.maskedTextBoxAddress);
-            this.panel1.Controls.Add(this.labelAddress);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(199, 38);
-            this.panel1.TabIndex = 0;
+            this.panel.Controls.Add(this.checkBoxAutoIP);
+            this.panel.Controls.Add(this.checkBoxRelative);
+            this.panel.Controls.Add(this.maskedTextBoxAddress);
+            this.panel.Controls.Add(this.labelAddress);
+            this.panel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel.Location = new System.Drawing.Point(0, 0);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(199, 38);
+            this.panel.TabIndex = 0;
             // 
             // checkBoxAutoIP
             // 
@@ -90,44 +91,44 @@ namespace nMars.IDE.Controls
             this.labelAddress.TabIndex = 0;
             this.labelAddress.Text = "Addr :";
             // 
-            // listBoxMemory
+            // coreList
             // 
-            this.listBoxMemory.BackColor = System.Drawing.Color.Black;
-            this.listBoxMemory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxMemory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.listBoxMemory.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.listBoxMemory.ForeColor = System.Drawing.Color.White;
-            this.listBoxMemory.FormattingEnabled = true;
-            this.listBoxMemory.ItemHeight = 14;
-            this.listBoxMemory.Location = new System.Drawing.Point(0, 38);
-            this.listBoxMemory.Name = "listBoxMemory";
-            this.listBoxMemory.Size = new System.Drawing.Size(199, 494);
-            this.listBoxMemory.TabIndex = 3;
-            this.listBoxMemory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxMemory_DrawItem);
-            this.listBoxMemory.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBoxMemory_MouseMove);
+            this.coreList.BackColor = System.Drawing.Color.Black;
+            this.coreList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.coreList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.coreList.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.coreList.ForeColor = System.Drawing.Color.White;
+            this.coreList.FormattingEnabled = true;
+            this.coreList.ItemHeight = 14;
+            this.coreList.Location = new System.Drawing.Point(0, 38);
+            this.coreList.Name = "coreList";
+            this.coreList.PaintMarkedIndex = true;
+            this.coreList.PaintNextAddress = true;
+            this.coreList.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.coreList.Size = new System.Drawing.Size(199, 494);
+            this.coreList.TabIndex = 3;
             // 
             // DebugMemoryListing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.Controls.Add(this.listBoxMemory);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.coreList);
+            this.Controls.Add(this.panel);
             this.DoubleBuffered = true;
             this.Name = "DebugMemoryListing";
             this.Size = new System.Drawing.Size(199, 540);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.TextBox maskedTextBoxAddress;
         private System.Windows.Forms.Label labelAddress;
         private System.Windows.Forms.CheckBox checkBoxRelative;
-        private System.Windows.Forms.ListBox listBoxMemory;
+        private CoreListingInteractive coreList;
         private System.Windows.Forms.CheckBox checkBoxAutoIP;
-        private System.Windows.Forms.ToolTip toolTip;
     }
 }

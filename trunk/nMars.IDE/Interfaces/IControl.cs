@@ -4,7 +4,9 @@
 // 2006 Pavel Savara
 
 using System.Windows.Forms;
+using nMars.Graphics;
 using nMars.IDE.Core;
+using nMars.RedCode;
 
 namespace nMars.IDE
 {
@@ -33,8 +35,8 @@ namespace nMars.IDE
 
     public interface IDebugWatch : IControl
     {
-        void WatchCore();
         void Resume();
         void Pause();
+        void RepaintView();
     }
 }

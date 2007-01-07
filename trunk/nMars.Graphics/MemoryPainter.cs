@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Text;
 using nMars.RedCode;
 
-namespace nMars.IDE
+namespace nMars.Graphics
 {
     public interface IMemoryPainter
     {

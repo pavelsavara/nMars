@@ -7,15 +7,10 @@ using System;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
-namespace nMars.Debugger
+namespace nMars.Graphics
 {
     class Module : BaseModule
     {
-        static int Main(string[] args)
-        {
-            return 0;
-        }
-
         #region Module registration
 
         static Module()

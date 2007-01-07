@@ -28,34 +28,33 @@ namespace nMars.IDE.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.coreGrid = new nMars.IDE.Controls.CoreGridInteractive();
             this.SuspendLayout();
             // 
-            // toolTip
+            // coreGrid
             // 
-            this.toolTip.AutoPopDelay = 500;
-            this.toolTip.InitialDelay = 100;
-            this.toolTip.ReshowDelay = 100;
+            this.coreGrid.BackColor = System.Drawing.Color.Black;
+            this.coreGrid.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.coreGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.coreGrid.ForeColor = System.Drawing.Color.White;
+            this.coreGrid.Location = new System.Drawing.Point(0, 0);
+            this.coreGrid.Name = "coreGrid";
+            this.coreGrid.Size = new System.Drawing.Size(870, 370);
+            this.coreGrid.TabIndex = 0;
             // 
             // DebugMemoryGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.BackColor = System.Drawing.Color.Black;
-            this.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.DoubleBuffered = true;
-            this.ForeColor = System.Drawing.Color.White;
+            this.Controls.Add(this.coreGrid);
             this.Name = "DebugMemoryGraph";
-            this.toolTip.SetToolTip(this, "test");
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DebugMemoryGraph_MouseMove);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DebugMemoryGraph_MouseClick);
-            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DebugMemoryGraph_MouseDoubleClick);
+            this.Size = new System.Drawing.Size(870, 370);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ToolTip toolTip;
+        private CoreGridInteractive coreGrid;
+
     }
 }
