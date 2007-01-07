@@ -34,11 +34,6 @@ namespace nMars.IDE.Controls
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // IDEFramePanel
-            // 
-            this.Controls.Add(this.tbOut);
-            this.Controls.Add(this.panel1);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.cbIn);
@@ -50,17 +45,21 @@ namespace nMars.IDE.Controls
             // 
             // cbIn
             // 
+            this.cbIn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cbIn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
             this.cbIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbIn.FormattingEnabled = true;
+            this.cbIn.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.cbIn.Location = new System.Drawing.Point(0, 0);
             this.cbIn.Name = "cbIn";
-            this.cbIn.Size = new System.Drawing.Size(806, 21);
+            this.cbIn.Size = new System.Drawing.Size(806, 22);
             this.cbIn.TabIndex = 0;
+            this.cbIn.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbIn_KeyUp);
             // 
             // tbOut
             // 
             this.tbOut.BackColor = System.Drawing.SystemColors.Window;
             this.tbOut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbOut.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.tbOut.Location = new System.Drawing.Point(0, 0);
             this.tbOut.Multiline = true;
             this.tbOut.Name = "tbOut";
@@ -73,10 +72,12 @@ namespace nMars.IDE.Controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tbOut);
+            this.Controls.Add(this.panel1);
             this.Name = "Console";
-            this.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

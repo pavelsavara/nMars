@@ -4,49 +4,66 @@
 // 2006 Pavel Savara
 
 using System.Collections.Generic;
-using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
+    /// <summary>
+    /// Parser wrapper which caches warriors compiled under same rules
+    /// </summary>
     public class CachingParser : ParserBase
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="aParser">Real parser</param>
         public CachingParser(IParser aParser)
         {
             parser = aParser;
-        }
-
-        public override void InitParser(Rules aRules)
-        {
-            parser.InitParser(aRules);
-            base.InitParser(aRules);
             cache = new Dictionary<string, IWarrior>();
+            cachedRules = null;
         }
 
         private IParser parser;
         private Dictionary<string, IWarrior> cache;
+        private Rules cachedRules;
 
-        public override IWarrior Parse(string fileName, ISimpleOutput err)
+        /// <summary>
+        /// Parse warrior files in project parameter considering parser options and rules
+        /// </summary>
+        /// <param name="aProject">files, rules, options</param>
+        /// <param name="aConsole">output console, could be null</param>
+        /// <returns>list of errors</returns>
+        public override ParseResult Parse(IProject aProject, ISimpleOutput aConsole)
         {
-            if (cache.ContainsKey(fileName))
+            //cache and ceck rules
+            if (cachedRules==null)
             {
-                return cache[fileName];
+                cachedRules = aProject.Rules;
+            }
+            else if (!cachedRules.Equals(aProject.Rules))
+            {
+                throw new ParserException("Caching parser can cache only warriors compiled under same rules");
+            }
+            return base.Parse(aProject, aConsole);
+        }
+
+        protected override IWarrior Parse(string filename)
+        {
+            if (cache.ContainsKey(filename))
+            {
+                return cache[filename];
             }
             else
             {
-                IWarrior res = parser.Parse(fileName, err);
-                cache[fileName] = res;
-                return res;
+                Project tmpProj = new Project(project.Rules);
+                tmpProj.ParserOptions = project.ParserOptions;
+                tmpProj.WarriorFiles.Add(filename);
+                ParseResult res = parser.Parse(tmpProj, console);
+                res.Messages.AddRange(res.Messages);
+                IWarrior warrior = tmpProj.Warriors[0];
+                cache[filename] = warrior;
+                return warrior;
             }
-        }
-
-        public override string Name
-        {
-            get { return GetType().Namespace; }
-        }
-
-        public override string Version
-        {
-            get { return ModuleRegister.GetVersion(GetType()); }
         }
     }
 }

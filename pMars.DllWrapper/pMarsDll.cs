@@ -158,7 +158,7 @@ namespace pMars.DllWrapper
         #region Dll
 
         [DllImport("pMars.dll")]
-        public static extern PmarsWarrior pMarsParse([In] int argc,
+        public static extern IntPtr pMarsParse([In] int argc,
                                                      [In] [MarshalAs(UnmanagedType.LPArray)] string[] argv,
                                                      [In] [MarshalAs(UnmanagedType.LPStr)] string errFile);
 
@@ -288,15 +288,8 @@ namespace pMars.DllWrapper
 
             r.Add("pMars.dll");
             r.Add("-r");
-            if (parser)
-            {
-                r.Add("0");
-            }
-            else
-            {
-                r.Add(rules.Rounds.ToString());
-                r.Add("-b");
-            }
+            r.Add(rules.Rounds.ToString());
+            r.Add("-b");
             //r.Add("-k");
             r.Add("-p");
             r.Add(rules.MaxProcesses.ToString());
@@ -318,6 +311,11 @@ namespace pMars.DllWrapper
                     r.Add("-F");
                     r.Add(forcedAddresses[w].ToString());
                 }
+            }
+            // there is no other way how to set warrior count
+            for (int w = fileNames.Length; w < rules.WarriorsCount; w++)
+            {
+                r.Add(fileNames[0]);
             }
             return r;
         }

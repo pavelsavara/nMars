@@ -1,6 +1,6 @@
 ﻿<project schemaVersion="1.3.3.1">
     <assemblies>
-        <assembly assemblyPath="N:\nMars\nMars.RedCode\bin\Debug\nMars.RedCode.dll" xmlCommentsPath="N:\nMars\nMars.RedCode\bin\Debug\nMars.RedCode.XML" commentsOnly="False" />
+        <assembly assemblyPath="Bin\Release\nMars.RedCode.dll" xmlCommentsPath="Bin\Release\nMars.RedCode.xml" commentsOnly="False" />
     </assemblies>
     <contentPlacement>AboveNamespaces</contentPlacement>
     <projectSummary />

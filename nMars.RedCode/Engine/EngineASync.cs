@@ -8,15 +8,18 @@ using System.Collections.Generic;
 using System.Threading;
 using nMars.RedCode;
 
-namespace nMars.Engine
+namespace nMars.RedCode
 {
-    class EngineASync : IEngine, IDisposable, IStepEngine, IDebuggerEngine, IExtendedStepEngine, IAsyncEngine, ICoreEvents
+    /// <summary>
+    /// Asynchronous wrapper around IDebuggerEngine
+    /// </summary>
+    public class EngineASync : IEngine, IDisposable, IDebuggerEngine, IAsyncEngine
     {
         #region Construction
 
-        public EngineASync()
+        public EngineASync(IDebuggerEngine aEngine)
         {
-            engine = new EngineStepBack();
+            engine = aEngine;
             pause = true;
             running = false;
             live = true;
@@ -103,18 +106,18 @@ namespace nMars.Engine
             Continue();
         }
 
-        public MatchResult Run(IProject project)
+        public MatchResult Run(IProject project, ISimpleOutput console)
         {
             BeginMatch(project);
             Continue();
-            return EndMatch();
+            return EndMatch(console);
         }
 
         public void BeginMatch(IProject project)
         {
             BeginMatch(project, null);
         }
-        
+
         public void BeginMatch(IProject project, EngineStoppedCallback callback)
         {
             engineStoppedCallback = callback;
@@ -126,12 +129,12 @@ namespace nMars.Engine
             InitWorker();
         }
 
-        public MatchResult EndMatch()
+        public MatchResult EndMatch(ISimpleOutput console)
         {
             Wait();
             lock (this)
             {
-                return engine.EndMatch();
+                return engine.EndMatch(console);
             }
         }
 
@@ -263,19 +266,12 @@ namespace nMars.Engine
                 signalPaused.Set();
                 //swallow
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 live = false;
                 running = false;
                 signalPaused.Set();
-                if (engine.Output != null)
-                {
-                    engine.Output.ErrorWriteLine(ex.ToString());
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
 
@@ -306,18 +302,6 @@ namespace nMars.Engine
                 }
             }
         }
-
-        public ISimpleOutput Output
-        {
-            set
-            {
-                lock (this)
-                {
-                    engine.Output = value;
-                }
-            }
-        }
-
 
         public IList<IEnumerable<int>> Tasks
         {
@@ -358,7 +342,7 @@ namespace nMars.Engine
             {
                 lock (this)
                 {
-                    return (engine as ITimeView).NextWarrior;
+                    return engine.NextWarrior;
                 }
             }
         }
@@ -587,7 +571,7 @@ namespace nMars.Engine
         #region Variables
 
         public event CheckBreak CheckBreak;
-        private EngineStepBack engine;
+        private IDebuggerEngine engine;
         private Thread worker;
         private ManualResetEvent signalRun;
         private ManualResetEvent signalPaused;

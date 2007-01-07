@@ -1,4 +1,22 @@
-12/23/2006 - IDE
+06/01/2007 - nMars0.8.2 - Refactoring
+  - IProject is vehicle for IParser as well for IEngine 
+  - Project now contains WarriorFiles and can be saved/loaded to .nmproj , also from pmars config files
+  - nMars.exe is new commandline replacement, some new options, hooks for plugins added, configurable components
+  - Parser and Engine are no more executables
+  - signed assemblies
+  - Async Engine moved to RedCode assembly
+  - IDE is now showing tootip info about each cell, including last events
+  - console debugger is broken now
+  - nMars.Engine bugs in instructions fixed
+  - Unit test is producing .nmproj setup for failed tests and can be drive by commandline
+  - executed 100k matches on combinations of 5k different warriors to test Engine compatibility with pMars. No open issue.
+  - started work on documentation comments in code
+  - Parser is now returning result structure with list messages, including positions in files
+  - pMars.DllWrapper parser is converting error to result structure too, + memory leaks fixed, WARRIORS count is set from rules
+  - pMars.dll a-z registry cleanup in dll mode, long filenames buffer overflow fixed
+  - class ComponentSetup renamed to ComponentLoader and simplified
+
+12/23/2006 - nMars0.8.1 - IDE
   - IDE framework
   - fast GUI debug watches
   - async engine layer

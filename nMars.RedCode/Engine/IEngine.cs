@@ -13,23 +13,23 @@ namespace nMars.RedCode
 
     #region Basic
 
-    [ComVisible(true)]
+    /// <summary>
+    /// Basic engine interface
+    /// </summary>
     public interface IEngine : IComponent
     {
         /// <summary>
-        /// Run complete round
+        /// Run complete match, considering rules, warriors and options in project
         /// </summary>
-        MatchResult Run(IProject project);
-
-        /// <summary>
-        /// return current project
-        /// </summary>
-        IProject Project { get; }
-
-        ISimpleOutput Output { set;}
+        /// <param name="project">rules, warriors and options</param>
+        /// <param name="console">output console, could be null</param>
+        /// <returns>score</returns>
+        MatchResult Run(IProject project, ISimpleOutput console);
     }
 
-    [ComVisible(true)]
+    /// <summary>
+    /// Step-by-step match
+    /// </summary>
     public interface IStepEngine : IEngine
     {
         /// <summary>
@@ -38,20 +38,25 @@ namespace nMars.RedCode
         void BeginMatch(IProject project);
 
         /// <summary>
-        /// make step
+        /// Make step
         /// </summary>
         /// <returns>true when there is next step to process</returns>
         StepResult NextStep();
 
         /// <summary>
-        /// returns results of the match
+        /// Returns scores of the match
         /// </summary>
-        MatchResult EndMatch();
+        MatchResult EndMatch(ISimpleOutput console);
 
         /// <summary>
         /// returns result of last step
         /// </summary>
         StepResult LastStepResult { get; }
+
+        /// <summary>
+        /// return current project
+        /// </summary>
+        IProject Project { get; }
     }
 
     #endregion 
@@ -168,7 +173,8 @@ namespace nMars.RedCode
     
     public delegate void EngineStoppedCallback(bool finished);
 
-    public interface IAsyncEngine : IStepEngine, IStuntEngine, IStepBackEngine
+    public interface IAsyncEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IStuntEngine, ITaskView,
+                                       ITimeView, ICoreView, IStatusView, IExtendedStepEngine, ICoreEvents
     {
         void BeginMatch(IProject project, EngineStoppedCallback callback);
         void Run(IProject project, EngineStoppedCallback callback);
@@ -181,7 +187,7 @@ namespace nMars.RedCode
         bool IsPaused { get;}
     }
 
-    public interface IDebuggerEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IStuntEngine, IAsyncEngine, ITaskView,
+    public interface IDebuggerEngine : IStepEngine, IStepBackEngine, ITaskView,
                                        ITimeView, ICoreView, IStatusView, IExtendedStepEngine, ICoreEvents
     {
     }

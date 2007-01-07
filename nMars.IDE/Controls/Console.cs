@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 using nMars.RedCode;
 
 namespace nMars.IDE.Controls
@@ -205,6 +206,8 @@ namespace nMars.IDE.Controls
             get { return StreamInstance; }
         }
 
+        public event ConsoleCommandEntered CommandEntered;
+
         public ISimpleOutput GetAsyncWrapper()
         {
             return new AsyncConsole(this);
@@ -212,10 +215,20 @@ namespace nMars.IDE.Controls
 
         #region Variables
 
-        ConsoleStream StreamInstance;
+        private ConsoleStream StreamInstance;
         private const int maxLength = 100;
-        Queue<string> lines = new Queue<string>(maxLength);
+        private Queue<string> lines = new Queue<string>(maxLength);
 
         #endregion
+
+        private void cbIn_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                if (CommandEntered!=null)
+                    CommandEntered.Invoke(cbIn.Text);
+            }
+        }
     }
 }

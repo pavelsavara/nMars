@@ -13,32 +13,47 @@ namespace nMars.Test
     {
         public static int Main(string[] args)
         {
-            if (args.Length == 0)
+            try
             {
-                try
+                int res = 0;
+                if (args.Length!=0)
+                {
+                    ComponentLoader components = EngineTest.InitComponents();
+                    WrappedConsole console = new WrappedConsole();
+                    Project project = CommandLine.Prepare(args, components, console);
+                    if (project!=null)
+                    {
+                        project.EngineOptions.DumpResults = false;
+                        project.EngineOptions.StatusLine = false;
+                        project.ParserOptions.Brief = true;
+                        project.ParserOptions.StatusLine = false;
+                    }
+                    res = CommandLine.Exec(components, console, project);
+                }
+                else
                 {
                     //MainParser();
                     MainEngine();
-                    return 0;
                 }
-                catch (Exception ex)
-                {
-                    Console.Error.WriteLine(ex.Message);
-                    Console.Error.WriteLine();
-                    Console.Error.WriteLine(ex.StackTrace);
-                    return -1;
-                }
+                if (res == 0)
+                    Console.WriteLine("No errors");
+                return res;
             }
-            else
+            catch (Exception ex)
             {
-                return CommandLine.EngineMain(args, null, null);
+                Console.Error.WriteLine(ex.Message);
+                Console.Error.WriteLine();
+                Console.Error.WriteLine(ex.StackTrace);
+                return -255;
             }
         }
 
         public static void MainEngine()
         {
             EngineTest test = new EngineTest();
-            test.Random(10000);
+            //test.Single();
+            test.Pair();
+            test.Random(100000);
             test.Full();
         }
 
@@ -48,9 +63,10 @@ namespace nMars.Test
             test.Full();
         }
 
+
         public IEngine CreateEngine()
         {
-            return new ComparingEngine();
+            return CreateEngine();
         }
 
         #region Module registration

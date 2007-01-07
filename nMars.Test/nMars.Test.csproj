@@ -11,6 +11,8 @@
     <AssemblyName>nMars.Test</AssemblyName>
     <StartupObject>nMars.Test.Module</StartupObject>
     <ApplicationIcon>Properties\Test.ico</ApplicationIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

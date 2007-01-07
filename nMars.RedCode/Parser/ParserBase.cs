@@ -4,57 +4,67 @@
 // 2006 Pavel Savara
 
 using System.IO;
-using System.Text;
 
 namespace nMars.RedCode
 {
+    /// <summary>
+    /// Abstract base for parsers
+    /// </summary>
     public abstract class ParserBase : IParser
     {
-        public abstract IWarrior Parse(string fileName, ISimpleOutput err);
-        public abstract string Name { get; }
-        public abstract string Version { get; }
-
-        public virtual void InitParser(Rules aRules)
+        /// <summary>
+        /// Parse warrior files in project parameter considering parser options and rules
+        /// </summary>
+        /// <param name="aProject">files, rules, options</param>
+        /// <param name="aConsole">output console, could be null</param>
+        /// <returns>list of errors</returns>
+        public virtual ParseResult Parse(IProject aProject, ISimpleOutput aConsole)
         {
-            rules = aRules;
-        }
-
-        public IWarrior Parse(string fileName, TextWriter err)
-        {
-            WrappedTextWriter wtw = new WrappedTextWriter(err);
-            return Parse(fileName, wtw);
-        }
-
-        public IWarrior Parse(string fileName)
-        {
-            StringBuilder sb = new StringBuilder();
-            StringWriter sw = new StringWriter(sb);
-            IWarrior res = Parse(fileName, sw);
-            sw.Close();
-            if (sb.Length > 0)
+            project = aProject;
+            result = new ParseResult();
+            console = aConsole;
+            project.Warriors.Clear();
+            int succ = 0;
+            foreach (string file in project.WarriorFiles)
             {
-                throw new ParserException(sb.ToString());
+                IWarrior warrior = Parse(file);
+                project.Warriors.Add(warrior);
+                if (warrior != null)
+                {
+                    succ++;
+                    if (project.ParserOptions.DumpFiles)
+                    {
+                        StreamWriter sw = new StreamWriter(Path.ChangeExtension(file, project.ParserOptions.DumpExt));
+                        warrior.Dump(new WrappedTextWriter(sw), project.ParserOptions);
+                        sw.Close();
+                    }
+                    else if (!project.ParserOptions.Brief && console != null)
+                        warrior.Dump(console, project.ParserOptions);
+                }
+                else
+                {
+                    result.Succesfull = false;
+                }
             }
-            return res;
-        }
-
-        public virtual IWarrior Parse(string fileName, string errFileName)
-        {
-            MemoryStream ms = new MemoryStream();
-            StreamWriter sw = new StreamWriter(ms);
-            IWarrior res = Parse(fileName, sw);
-            sw.Flush();
-
-            if (res == null)
+            if (project.ParserOptions.StatusLine && console!=null)
             {
-                Stream fs = File.Create(errFileName);
-                ms.WriteTo(fs);
-                fs.Close();
+                console.WriteLine("========== Compiled " + project.WarriorFiles.Count + " warriors, " +
+                                 (project.WarriorFiles.Count - succ) + " failed ==========");
             }
-            sw.Close();
-            return res;
+            return result;
         }
 
-        protected Rules rules = Rules.DefaultRules;
+        /// <summary>
+        /// Override this method
+        /// </summary>
+        protected abstract IWarrior Parse(string aFileName);
+
+        #region Variables
+
+        protected ISimpleOutput console;
+        protected IProject project;
+        protected ParseResult result;
+
+        #endregion
     }
 }

@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
@@ -17,11 +18,17 @@ namespace nMars.IDE.Core
 
         public RedCodeProject()
         {
-            Rules = new Rules();
-            ParserOptions = new ParserOptions();
-            EngineOptions = new EngineOptions();
-            ParserOptions.Brief = true;
-            ParserOptions.Status = true;
+            Project=new Project();
+            Project.ParserOptions = ParserOptions.Ide;
+            Project.EngineOptions.StatusLine = true;
+        }
+
+        private RedCodeProject(string filename)
+        {
+            FileName = filename;
+            Load();
+            IsNew = false;
+            IsModified = false;
         }
 
         #endregion
@@ -30,19 +37,15 @@ namespace nMars.IDE.Core
 
         public static RedCodeProject Load(string fileName)
         {
-            RedCodeProject project = new RedCodeProject();
-            project.FileName = fileName;
-            project.Load();
-            project.IsNew = false;
-            project.IsModified = false;
+            RedCodeProject project = new RedCodeProject(fileName);
             return project;
         }
 
         public static RedCodeProject New()
         {
             RedCodeProject project = new RedCodeProject();
-            DocCounter++;
-            project.FileName = "NewProject" + DocCounter.ToString() + ".redProj";
+            ProjectCounter++;
+            project.FileName = "NewProject" + ProjectCounter + ".nmproj";
             project.IsNew = true;
             project.IsModified = false;
             return project;
@@ -69,11 +72,9 @@ namespace nMars.IDE.Core
         public override bool Save()
         {
             bool res = true;
-            if (!IsNew || ChooseName("redProj", "Project"))
+            if (!IsNew || ChooseName("nmproj", "Project"))
             {
-                StreamWriter sw = new StreamWriter(FileName);
-                rcpSerializer.Serialize(sw, this);
-                sw.Close();
+                Project.SaveXml(FileName);
             }
             else
             {
@@ -87,15 +88,11 @@ namespace nMars.IDE.Core
 
         public override void Load()
         {
-            StreamReader sr = new StreamReader(FileName);
-            RedCodeProject doc = rcpSerializer.Deserialize(sr) as RedCodeProject;
-            sr.Close();
+            Project = Project.LoadXml(FileName);
 
-            if (doc.Documents.Keys.Count > 0)
+            if (Project.WarriorFiles.Count > 0)
             {
-                string[] keys = new string[doc.Documents.Keys.Count];
-                doc.Documents.Keys.CopyTo(keys, 0);
-                foreach (string documentFile in keys)
+                foreach (string documentFile in Project.WarriorFiles)
                 {
                     ProjectDocument document = ProjectDocument.Load(documentFile, "WarriorDocument"); //TODO
                     Documents[documentFile] = document;
@@ -131,6 +128,7 @@ namespace nMars.IDE.Core
             if (document != null && !Documents.ContainsValue(document))
             {
                 Documents.Add(document.FileName, document);
+                Project.WarriorFiles.Add(document.FileName);
                 document.Project = this;
                 IsModified = true;
                 Application.SolutionExplorer.ReloadSolution();
@@ -141,6 +139,7 @@ namespace nMars.IDE.Core
         {
             document.Project = null;
             Documents.Remove(document.FileName);
+            Project.WarriorFiles.Remove(document.FileName);
             IsModified = true;
             Application.SolutionExplorer.ReloadSolution();
             if (delete && File.Exists(document.FileName))
@@ -152,41 +151,25 @@ namespace nMars.IDE.Core
         public void Move(ProjectDocument document, string newFileName)
         {
             Documents.Remove(document.FileName);
+            Project.WarriorFiles.Remove(document.FileName);
+
             Documents.Add(newFileName, document);
-        }
-
-        #endregion
-
-        #region XML
-
-        private static XmlSerializer rcpSerializerCached;
-
-        private static XmlSerializer rcpSerializer
-        {
-            get
-            {
-                if (rcpSerializerCached == null)
-                {
-                    rcpSerializerCached = new XmlSerializer(typeof(RedCodeProject));
-                }
-                return rcpSerializerCached;
-            }
+            Project.WarriorFiles.Add(newFileName);
         }
 
         #endregion
 
         #region Variables
 
+        public Project Project;
+
         [XmlIgnore]
         public RedCodeSolution Solution;
 
-        public EngineOptions EngineOptions;
+        [XmlIgnore]
+        public Dictionary<string, ProjectDocument> Documents = new Dictionary<string, ProjectDocument>();
 
-        public ParserOptions ParserOptions;
-
-        public Rules Rules;
-        public KeySerializableDictionary<ProjectDocument> Documents = new KeySerializableDictionary<ProjectDocument>();
-
+        public static int ProjectCounter = 0;
         #endregion
     }
 }

@@ -19,9 +19,12 @@ namespace nMars.IDE.Core
 
         public RedCodeSolution()
         {
-            ComponentSetup = new ComponentSetup();
-            ComponentSetup.ShellAssembly = "nMars.DbgShellPy";
-            ComponentSetup.ShellName = "nMars.DbgShellPy";
+            Components = new ComponentLoader();
+            Components.ParserName = Application.Settings.DefaultParser;
+            Components.EngineName = Application.Settings.DefaultEngine;
+            IDebuggerEngine engine = Components.Engine as IDebuggerEngine;
+            EngineASync wrapper = new EngineASync(engine);
+            Components.Engine = wrapper;
         }
 
         #endregion
@@ -41,8 +44,8 @@ namespace nMars.IDE.Core
         public static RedCodeSolution New()
         {
             RedCodeSolution solution = new RedCodeSolution();
-            DocCounter++;
-            solution.FileName = "NewSolution" + DocCounter.ToString() + ".redSln";
+            SolutionCounter++;
+            solution.FileName = "NewSolution" + SolutionCounter + ".nmsln";
             solution.IsNew = true;
             solution.IsModified = false;
             return solution;
@@ -57,7 +60,7 @@ namespace nMars.IDE.Core
             {
                 res &= project.Save();
             }
-            if (!IsNew || ChooseName("redSln", "Solution"))
+            if (!IsNew || ChooseName("nmsln", "Solution"))
             {
                 StreamWriter sw = new StreamWriter(FileName);
                 rcsSerializer.Serialize(sw, this);
@@ -97,10 +100,12 @@ namespace nMars.IDE.Core
                 if (doc.activeProjectFileName != null && Projects.ContainsKey(doc.activeProjectFileName))
                 {
                     ActiveProject = Projects[doc.activeProjectFileName];
+                    Application.ActiveProject = ActiveProject;
                 }
                 else if (Projects.Count > 0)
                 {
                     ActiveProject = Projects[loadedkeys[0]];
+                    Application.ActiveProject = ActiveProject;
                 }
             }
             IsModified = false;
@@ -153,6 +158,7 @@ namespace nMars.IDE.Core
                         activeProjectFileName = value.FileName;
                     }
                 }
+                Application.ActiveProject = ActiveProject;
                 IsModified = true;
             }
         }
@@ -164,6 +170,7 @@ namespace nMars.IDE.Core
             if (Projects.Count == 1)
             {
                 ActiveProject = project;
+                Application.ActiveProject = ActiveProject;
             }
             Application.SolutionExplorer.ReloadSolution();
             IsModified = true;
@@ -177,6 +184,7 @@ namespace nMars.IDE.Core
             if (Projects.Count == 0)
             {
                 ActiveProject = null;
+                Application.ActiveProject = ActiveProject;
             }
             else
             {
@@ -184,6 +192,7 @@ namespace nMars.IDE.Core
                     Projects.Values.GetEnumerator();
                 enumerator.MoveNext();
                 ActiveProject = enumerator.Current;
+                Application.ActiveProject = ActiveProject;
             }
 
             Application.SolutionExplorer.ReloadSolution();
@@ -227,9 +236,10 @@ namespace nMars.IDE.Core
         [XmlAttribute("ActiveProject")]
         private string activeProjectFileName = null;
 
-        public ComponentSetup ComponentSetup = new ComponentSetup();
+        public ComponentLoader Components = new ComponentLoader();
         public KeySerializableDictionary<RedCodeProject> Projects = new KeySerializableDictionary<RedCodeProject>();
 
+        public static int SolutionCounter = 0;
         #endregion
     }
 }

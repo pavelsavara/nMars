@@ -5,12 +5,15 @@
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9D9C6AB6-BDF3-483B-A11C-DE7C15EB4814}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>pMars.DllWrapper</RootNamespace>
     <AssemblyName>pMars.DllWrapper</AssemblyName>
-    <StartupObject>pMars.DllWrapper.Module</StartupObject>
+    <StartupObject>
+    </StartupObject>
     <ApplicationIcon>Properties\Parser.ico</ApplicationIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

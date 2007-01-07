@@ -3,7 +3,6 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
@@ -11,19 +10,6 @@ namespace pMars.DllWrapper
 {
     class Module : BaseModule, IParserModule, IEngineModule
     {
-        public static int Main(string[] args)
-        {
-            try
-            {
-                return CommandLine.EngineMain(args, null, null);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine(ex.Message);
-                return -1;
-            }
-        }
-
         public IParser CreateParser()
         {
             return new pMarsDllParser();

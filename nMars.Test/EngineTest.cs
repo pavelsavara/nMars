@@ -15,24 +15,59 @@ namespace nMars.Test
     [TestFixture]
     public class EngineTest
     {
+        public static ComponentLoader InitComponents()
+        {
+            ComponentLoader components = new ComponentLoader();
+            components.Parser = CreateParserInternal();
+            components.Engine = CreateEngineInternal();
+            return components;
+        }
+
+        public static CachingParser CreateParserInternal()
+        {
+            IParser pmarsParser = ModuleRegister.CreateParser("pMars.DllWrapper");
+            return new CachingParser(pmarsParser);
+        }
+
+        public static IEngine CreateEngineInternal()
+        {
+            IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
+            IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Engine", "nMars.Engine") as IExtendedStepEngine;
+            return new ComparingEngine(engineOne, engineTwo);
+        }
+
+        public EngineTest()
+        {
+            components = InitComponents();
+        }
+
+        private ComponentLoader components;
+
         [Test]
         public void Single()
         {
+            Console.WriteLine("Single");
             Init();
             rules.WarriorsCount = 1;
-            LoadRunOne(Path.Combine(basePath, "redcoder/validate.red "));
+            LoadRunOne(Path.Combine(basePath, "0test/bad.red"));
+            Console.WriteLine("\nDone");
         }
 
         [Test]
         public void Pair()
         {
+            Console.WriteLine("Pair");
             Init();
-            LoadRunPair(Path.Combine(basePath, "clear/twinshot.rc"), Path.Combine(basePath, "corewin/bluefunk.red"), 0);
+            LoadRunPair(
+                Path.Combine(basePath, @"imt1\metcalf1.red"),
+                Path.Combine(basePath, @"pycorewar\Koenigstuhl\94nop\redrace10801.red"), 0);
+            Console.WriteLine("\nDone");
         }
 
         [Test]
         public void Full()
         {
+            Console.WriteLine("Full");
             Init();
 
             List<string> files = new List<string>(Directory.GetFiles(basePath, "*.rc", SearchOption.AllDirectories));
@@ -60,6 +95,7 @@ namespace nMars.Test
                     }
                 }
             }
+            Console.WriteLine("\nDone");
             if (!allOK)
                 throw new EngineDifferException("Some warriors failed.", null);
         }
@@ -67,6 +103,7 @@ namespace nMars.Test
         [Test]
         public void Random(int count)
         {
+            Console.WriteLine("Random");
             Init();
 
             List<string> files = new List<string>(Directory.GetFiles(basePath, "*.rc", SearchOption.AllDirectories));
@@ -91,6 +128,7 @@ namespace nMars.Test
                     //swallow
                 }
             }
+            Console.WriteLine("\nDone");
             if (!allOK)
                 throw new EngineDifferException("Some warriors failed.", null);
         }
@@ -106,69 +144,62 @@ namespace nMars.Test
 #else
             rules.Rounds = 7;
 #endif
-
-            pparser = new CachingParser(ModuleRegister.CreateParser("pMars.DllWrapper"));
-            pparser.InitParser(rules);
-
-            engines = new ComparingEngine();
-            engines.Output = new WrappedConsole();
         }
 
         private void LoadRunOne(string fileOne)
         {
-            IWarrior pwarriorOne;
-            string shortOne = Path.GetFileNameWithoutExtension(fileOne);
             string midleOne = fileOne.Substring(basePath.Length);
             Console.Write("Fighting {0}      \r", midleOne);
-            string problemsPathOne = Path.Combine(problemsPath, shortOne);
-            pwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr");
-            if (pwarriorOne == null)
+            Project pproject = new Project(rules, fileOne);
+            pproject.ParserOptions.Brief = true;
+            pproject.ParserOptions.StatusLine = false;
+            ParseResult pr = components.Parser.Parse(pproject, null);
+            if (!pr.Succesfull)
                 return;
-            Project pproject = new Project(rules);
-            pproject.EngineOptions = EngineOptions.ConstantRandom;
-            pproject.Warriors.Add(pwarriorOne);
 
-            engines.Run(pproject);
+            components.Engine.Run(pproject, null);
         }
 
         private void LoadRunPair(string fileOne, string fileTwo, int counter)
         {
-            IWarrior pwarriorOne;
-            IWarrior pwarriorTwo;
             string shortOne = Path.GetFileNameWithoutExtension(fileOne);
             string shortTwo = Path.GetFileNameWithoutExtension(fileTwo);
-            string midleOne = fileOne.Substring(basePath.Length);
-            string midleTwo = fileTwo.Substring(basePath.Length);
             string problemsPathOne = Path.Combine(problemsPath, shortOne);
             string problemsPathTwo = Path.Combine(problemsPath, shortTwo);
-            pwarriorOne = pparser.Parse(fileOne, problemsPathOne + ".pErr1");
-            pwarriorTwo = pparser.Parse(fileTwo, problemsPathTwo + ".pErr2");
-            if (pwarriorOne == null || pwarriorTwo == null)
-                return;
-            Console.Write("{2} Fighting {0} and {1}         \r", pwarriorOne.Name, pwarriorTwo.Name, counter);
+
             Project pproject = new Project(rules);
-            pproject.EngineOptions = EngineOptions.ConstantRandom;
-            pproject.Warriors.Add(pwarriorOne);
-            pproject.Warriors.Add(pwarriorTwo);
+            pproject.ParserOptions.Brief = true;
+            pproject.ParserOptions.StatusLine = false;
+            pproject.WarriorFiles.Add(fileOne);
+            pproject.WarriorFiles.Add(fileTwo);
+
+            ParseResult pr = components.Parser.Parse(pproject, null);
+            if (!pr.Succesfull)
+                return;
+
+            string name1 = pproject.Warriors[0].Name;
+            string name2 = pproject.Warriors[1].Name;
+            name1 = name1.Substring(0, Math.Min(name1.Length, 20));
+            name2 = name2.Substring(0, Math.Min(name2.Length, 20));
+            Console.Write("{2} Fighting {0} and {1}         \r", name1, name2, counter);
             try
             {
-                engines.Run(pproject);
+                components.Engine.Run(pproject, null);
             }
             catch (EngineDifferException)
             {
                 Console.WriteLine();
-                Console.WriteLine(pwarriorOne.Name); 
-                Console.WriteLine(pwarriorTwo.Name);
-                File.Copy(fileOne, problemsPathOne + ".red", true);
-                File.Copy(fileTwo, problemsPathTwo + ".red", true);
+                Console.WriteLine(pproject.Warriors[0].FileName);
+                Console.WriteLine(pproject.Warriors[1].FileName);
+                //File.Copy(fileOne, problemsPathOne + ".red", true);
+                //File.Copy(fileTwo, problemsPathTwo + ".red", true);
+                pproject.SaveXml(Path.Combine(problemsPath, "EngineDiffer" + counter + ".nmproj"));
                 throw;
             }
         }
 
-        IParser pparser;
         string basePath;
         string problemsPath;
         Rules rules;
-        ComparingEngine engines;
     }
 }

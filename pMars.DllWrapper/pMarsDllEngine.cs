@@ -15,13 +15,13 @@ namespace pMars.DllWrapper
     {
         #region Steps
 
-        public MatchResult Run(IProject aProject)
+        public MatchResult Run(IProject aProject, ISimpleOutput console)
         {
             BeginMatch(aProject);
             while (NextStep() != StepResult.Finished)
             {
             }
-            return EndMatch();
+            return EndMatch(console);
         }
 
         public void BeginMatch(IProject aProject)
@@ -35,7 +35,7 @@ namespace pMars.DllWrapper
             {
                 names[w] = project.Warriors[w].FileName;
             }
-            List<string> r = pMarsDll.BuildParams(rules, false, project.ForcedAddresses, names);
+            List<string> r = pMarsDll.BuildParams(rules, false, project.EngineOptions.ForcedAddresses, names);
 
             errFile = Path.GetTempFileName();
             int res = pMarsDll.pMarsBeginMatch(r.Count, r.ToArray(), errFile);
@@ -59,7 +59,7 @@ namespace pMars.DllWrapper
             dllDataLinked = true;
         }
 
-        public MatchResult EndMatch()
+        public MatchResult EndMatch(ISimpleOutput console)
         {
             pMarsDll.pMarsEndMatch();
             dllCore = IntPtr.Zero;

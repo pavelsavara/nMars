@@ -19,6 +19,7 @@ namespace nMars.Test
         IParser pparser;
         string basePath;
         string problemsPath;
+        private Rules rules = Rules.DefaultRules;
 
         void Init()
         {
@@ -61,25 +62,29 @@ namespace nMars.Test
             string problemsPathFile = Path.Combine(problemsPath, shortName);
             string midleName = file.Substring(basePath.Length);
             Console.WriteLine("Reading {0}          ", midleName);
-            IWarrior pw = pparser.Parse(file, problemsPathFile + ".pErr");
-            IWarrior nw = nparser.Parse(file, problemsPathFile + ".nErr");
+            Project pp = new Project(rules, file);
+            Project np = new Project(rules, file);
+            ParseResult pr = pparser.Parse(pp, null);
+            ParseResult nr = nparser.Parse(np, null);
 
-            if (nw == null && pw == null)
+            if (!nr.Succesfull && !pr.Succesfull)
             {
                 //both failed
             }
-            else if (pw == null)
+            else if (!pr.Succesfull)
             {
-                nw.Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
+                File.WriteAllText(problemsPathFile + ".pErr", pr.Dump());
+                np.Warriors[0].Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
             }
-            else if (nw == null)
+            else if (!nr.Succesfull)
             {
-                pw.Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
+                File.WriteAllText(problemsPathFile + ".nErr", nr.Dump());
+                pp.Warriors[0].Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
             }
-            else if (!Warrior.Equals(nw, pw))
+            else if (!Warrior.Equals(np.Warriors[0], pp.Warriors[0]))
             {
-                nw.Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
-                pw.Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
+                np.Warriors[0].Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
+                pp.Warriors[0].Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
             }
             else
             {

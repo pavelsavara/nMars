@@ -187,7 +187,7 @@ namespace nMars.IDE.Controls
 
         public CoreListHelper()
         {
-            coreSize = Application.ActiveSolution.ActiveProject.Rules.CoreSize;
+            coreSize = Application.ActiveEngine.Project.Rules.CoreSize;
             half = coreSize / 2;
             cache = new CoreCellHelper[coreSize * 2];
             CoreEventRecord[] records = Application.ActiveEngine.CoreEvents;
