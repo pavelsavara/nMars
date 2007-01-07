@@ -41,8 +41,6 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Debugger.cs" />
-    <Compile Include="DebuggerConsolePrompt.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,9 +49,16 @@
       <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
       <Name>nMars.RedCode</Name>
     </ProjectReference>
+    <ProjectReference Include="N:\nMars\nMars.Graphics\nMars.Graphics.csproj">
+      <Project>{B39B9FDE-DBBD-4118-85BC-48E6508FC76F}</Project>
+      <Name>nMars.Graphics</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Debugger.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

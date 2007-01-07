@@ -10,7 +10,7 @@ using nMars.RedCode.Modules;
 
 namespace nMars.Console
 {
-    public class Module : BaseModule, IModule
+    class Module : BaseModule, IModule
     {
         static int Main(string[] args)
         {

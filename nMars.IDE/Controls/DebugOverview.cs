@@ -3,7 +3,6 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -24,7 +23,7 @@ namespace nMars.IDE.Controls
             tableLayoutPanel.ColumnStyles.Clear();
             for (int w = 0; w < warriorsCount;w++ )
             {
-                tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F / warriorsCount));
+                tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F / warriorsCount));
                 DebugWarriorOverview dwo = new DebugWarriorOverview();
                 dwo.Attach(tableLayoutPanel, w);
                 dwoList.Add(dwo);
@@ -33,18 +32,18 @@ namespace nMars.IDE.Controls
             tableLayoutPanel.ResumeLayout();
         }
 
-        public void WatchCore()
+        public void RepaintView()
         {
-            textBoxCycle.Text = Application.ActiveEngine.Cycles.ToString() + "/" +
-                                Application.ActiveEngine.CyclesLeft.ToString();
-            textBoxRound.Text = Application.ActiveEngine.Round.ToString() + "/" +
+            textBoxCycle.Text = Application.ActiveEngine.Cycles + "/" +
+                                Application.ActiveEngine.CyclesLeft;
+            textBoxRound.Text = Application.ActiveEngine.Round + "/" +
                                 Application.ActiveEngine.Project.Rules.Rounds;
             textBoxLive.Text = Application.ActiveEngine.LiveWarriorsCount + "/" +
                                Application.ActiveEngine.TasksCount;
 
             for (int w = 0; w < warriorsCount; w++)
             {
-                dwoList[w].WatchCore();
+                dwoList[w].RepaintView();
             }
         }
 
@@ -54,6 +53,10 @@ namespace nMars.IDE.Controls
 
         public void Pause()
         {
+            for (int w = 0; w < warriorsCount; w++)
+            {
+                dwoList[w].RepaintView();
+            }
         }
 
         private int warriorsCount;

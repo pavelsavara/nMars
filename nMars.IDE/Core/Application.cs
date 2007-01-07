@@ -544,9 +544,9 @@ namespace nMars.IDE
 
             lock (ActiveEngine)
             {
-                DebugOverview.WatchCore();
-                DebugMemoryListing.WatchCore();
-                DebugMemoryGraph.WatchCore();
+                DebugOverview.RepaintView();
+                DebugMemoryListing.RepaintView();
+                DebugMemoryGraph.RepaintView();
                 ActiveEngine.UiTickDone();
             }
         }
@@ -570,9 +570,10 @@ namespace nMars.IDE
             DebugMemoryListing.ShowAddress(address);
         }
 
-        public static void AddBreakpoint(int address)
+        public static void EditCell(int address)
         {
-            //TODO
+            //TODO breakpoints + cell values, 
+            // dialog and tabs ?
         }
 
         #endregion

@@ -7,7 +7,7 @@ using System;
 using System.Drawing;
 using nMars.RedCode;
 
-namespace nMars.IDE
+namespace nMars.Graphics
 {
     public class ColorManager
     {
