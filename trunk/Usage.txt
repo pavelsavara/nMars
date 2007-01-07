@@ -8,24 +8,30 @@
 ***************************************
 - this package is should run on any .NET/Mono system
 
-  nMars.Parser.exe
+  nMars.exe
+---------------------
+- This is commandline user interface to this implementation of CoreWars MARS
+- it covers Parser and Engine
+- it is console application, UI is very similar to pMARS
+    - for help type nMars.exe -h 
+- it uses nMars.Parser as defaut component to parse warriors
+- it uses nMars.Engine as defaut component to run core
+
+
+  nMars.Parser.dll
 ---------------------
 - This is implementation of RedCode parser
 - it can parse 99% of warriors, still in developement, still some bugs 
 - produces plain "Load Format" which can be loaded by all MARS engines
-- it is console application, UI is very similar to pMARS
-    - for help type nMars.Parser.exe -h 
 - it is reusable .NET 2.0 component
     - look for class nMars.nMarsParser which implements interface IParser
 - it is nMARS module, implements IParserModule
 
 
-  nMars.Engine.exe
+  nMars.Engine.dll
 ---------------------
 - This is implementation of CoreWars engine
 - it is 100% compatible with pMARS, there are unit tests to prove that
-- it is console application, UI is very similar to pMARS
-    - for help type nMars.Engine.exe -h 
 - it is reusable .NET 2.0 component
     - look for class nMars.Engine.EngineSteps which implements interface IEngine
     - it is designed to be easy to extend and reuse not to be fast

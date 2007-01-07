@@ -137,7 +137,7 @@ namespace nMars.RedCode
                 switch (param)
                 {
                     case "-h":
-                        throw new ArgumentException("Help requested: ");
+                        throw new ArgumentException("");
                     case "-p":
                         ReadNumber(args, ref p, out project.Rules.MaxProcesses);
                         break;
