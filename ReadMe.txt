@@ -26,6 +26,11 @@ https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Usage.txt
 https://sourceforge.net/project/showfiles.php?group_id=174312
 
 
+  Console
+--------------------
+nMars.exe is commandline interface similar to pMars.exe, it is parser and engine.
+
+
   IDE
 --------------------
 Is extesible graphical framework with editor, compiler and debugger integrated.
