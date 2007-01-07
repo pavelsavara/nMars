@@ -10,6 +10,10 @@
     <RootNamespace>nMars.RedCode</RootNamespace>
     <AssemblyName>nMars.RedCode</AssemblyName>
     <ApplicationIcon>Properties\RedCode.ico</ApplicationIcon>
+    <StartupObject>
+    </StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\EngineASync.cs" />
+    <Compile Include="Utils\ConsoleWrapper.cs" />
     <Compile Include="Debugger\DebuggerShell.cs" />
     <Compile Include="Debugger\IDebugger.cs" />
     <Compile Include="Engine\EngineOptions.cs" />
@@ -46,9 +52,10 @@
     <Compile Include="Exceptions\EngineException.cs" />
     <Compile Include="Exceptions\ParserException.cs" />
     <Compile Include="Basic\IInstruction.cs" />
-    <Compile Include="Modules\ComponentSetup.cs" />
-    <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\CommandLine.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Modules\ComponentLoader.cs" />
+    <Compile Include="Modules\IModule.cs" />
     <Compile Include="Engine\MatchResult.cs" />
     <Compile Include="Engine\IEngine.cs" />
     <Compile Include="Basic\Instruction.cs" />

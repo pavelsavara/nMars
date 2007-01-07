@@ -38,7 +38,7 @@ namespace nMars.IDE.Controls
             textBoxCycle.Text = Application.ActiveEngine.Cycles.ToString() + "/" +
                                 Application.ActiveEngine.CyclesLeft.ToString();
             textBoxRound.Text = Application.ActiveEngine.Round.ToString() + "/" +
-                                Application.ActiveSolution.ActiveProject.Rules.Rounds;
+                                Application.ActiveEngine.Project.Rules.Rounds;
             textBoxLive.Text = Application.ActiveEngine.LiveWarriorsCount + "/" +
                                Application.ActiveEngine.TasksCount;
 

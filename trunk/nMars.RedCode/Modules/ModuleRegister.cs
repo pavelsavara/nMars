@@ -13,56 +13,93 @@ namespace nMars.RedCode.Modules
 {
     public class ModuleRegister
     {
+        #region Registration & Loading
+
         public static void Register(IModule module, string name)
         {
-            lock (modules)
+            lock (Modules)
             {
-                modules.Add(name, module);
+                Modules.Add(name, module);
             }
         }
 
         public static void Register(IModule module)
         {
-            lock (modules)
+            lock (Modules)
             {
-                modules.Add(module.Name, module);
+                Modules.Add(module.Name, module);
             }
         }
 
-        public static IModule GetModule(IComponent component)
+        public static void SearchForModules()
         {
-            string name = component.GetType().Assembly.GetName().FullName;
-            string namespc = name.Substring(0, name.IndexOf(','));
-            if (modules.ContainsKey(namespc))
-            {
-                return modules[namespc];
-            }
-            return null;
+            SearchForModules(BasePath);
         }
 
-        private static IModule FindModule(string assembly, string name)
+        public static void SearchForModules(string path)
         {
-            lock (modules)
+            foreach (string dllFile in Directory.GetFiles(path, "*.dll"))
             {
-                if (!modules.ContainsKey(assembly))
+                try
                 {
-                    try
+                    Assembly a = Assembly.ReflectionOnlyLoadFrom(dllFile);
+                    foreach (Type type in a.GetTypes())
                     {
-                        Assembly a = Assembly.Load(assembly);
-                        a.CreateInstance(assembly + ".Module");
-                    }
-                    catch (Exception)
-                    {
-                        return null;
+                        if (type.IsSubclassOf(typeof(IModule)))
+                        {
+                            Assembly.Load(type.Assembly.FullName);
+                        }
                     }
                 }
-                return modules[name];
+                catch(FileLoadException)
+                {
+                    //swallow
+                }
+                catch(BadImageFormatException)
+                {
+                    //swallow
+                }
             }
         }
 
         public static string BasePath
         {
             get { return Path.GetDirectoryName(typeof(ModuleRegister).Module.FullyQualifiedName); }
+        }
+
+        public static string GetVersion(Type type)
+        {
+            return type.Assembly.GetName().Version.ToString();
+        }
+
+        public static string GetVersionInfo()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (IModule module in Modules.Values)
+            {
+                sb.Append(module.Name);
+                sb.Append(" ");
+                sb.Append(module.Version);
+                sb.Append("\n");
+            }
+            return sb.ToString();
+        }
+
+        static public Dictionary<string, IModule> Modules = new Dictionary<string, IModule>();
+
+        #endregion
+
+        #region Usage
+
+        public static IModule GetModule(IComponent component)
+        {
+            string name = component.GetType().Assembly.GetName().FullName;
+            string namespc = name.Substring(0, name.IndexOf(','));
+            if (Modules.ContainsKey(namespc))
+            {
+                return Modules[namespc];
+            }
+            return null;
         }
 
         public static IEngine CreateEngine(string engineName)
@@ -125,24 +162,30 @@ namespace nMars.RedCode.Modules
             return debuggerModule.CreateShell();
         }
 
-        public static string GetVersion(Type type)
-        {
-            return type.Assembly.GetName().Version.ToString();
-        }
+        #endregion
 
-        public static string GetVersionInfo()
+        #region Helper
+
+        private static IModule FindModule(string assembly, string name)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (IModule module in modules.Values)
+            lock (Modules)
             {
-                sb.Append(module.Name);
-                sb.Append(" ");
-                sb.Append(module.Version);
-                sb.Append("\n");
+                if (!Modules.ContainsKey(assembly))
+                {
+                    try
+                    {
+                        Assembly a = Assembly.Load(assembly);
+                        a.CreateInstance(assembly + ".Module");
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+                }
+                return Modules[name];
             }
-            return sb.ToString();
         }
 
-        static private Dictionary<string, IModule> modules = new Dictionary<string, IModule>();
+        #endregion
     }
 }

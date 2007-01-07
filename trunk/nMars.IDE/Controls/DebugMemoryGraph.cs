@@ -22,7 +22,7 @@ namespace nMars.IDE.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, name);
-            coreSize = Application.ActiveSolution.ActiveProject.Rules.CoreSize;
+            coreSize = Application.ActiveEngine.Project.Rules.CoreSize;
             columns = (Width / (gridx * 10)) * 10;
             rows = coreSize / columns;
         }

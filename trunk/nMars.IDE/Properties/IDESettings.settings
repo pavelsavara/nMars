@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="nMars.IDE" GeneratedClassName="IDESettings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="nMars.IDE.Properties" GeneratedClassName="IDESettings">
   <Profiles />
   <Settings>
     <Setting Name="RecentProjects" Type="System.Collections.Generic.List&lt;string&gt;" Scope="User">
@@ -7,6 +7,12 @@
     </Setting>
     <Setting Name="LoadRecentProject" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DefaultEngine" Type="System.String" Scope="User">
+      <Value Profile="(Default)">nMars.Engine-StepBack</Value>
+    </Setting>
+    <Setting Name="DefaultParser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">nMars.Parser</Value>
     </Setting>
   </Settings>
 </SettingsFile>

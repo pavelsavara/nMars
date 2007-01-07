@@ -11,22 +11,9 @@ namespace nMars.Engine
 {
     class Module : BaseModule, IEngineModule
     {
-        public static int Main(string[] args)
-        {
-            try
-            {
-                return CommandLine.EngineMain(args, null, null);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine(ex.Message);
-                return -1;
-            }
-        }
-
         public IEngine CreateEngine()
         {
-            return new EngineASync();
+            return new EngineSteps();
         }
 
         #region Module registration
@@ -35,7 +22,6 @@ namespace nMars.Engine
         {
             ModuleRegister.Register(new Module());
             ModuleRegister.Register(new StepBackModule());
-            ModuleRegister.Register(new StepForwardModule());
         }
 
         #endregion
@@ -51,19 +37,6 @@ namespace nMars.Engine
         public override string Name
         {
             get { return typeof(Module).Namespace + "-StepBack"; }
-        }
-    }
-
-    class StepForwardModule : BaseModule, IEngineModule
-    {
-        public IEngine CreateEngine()
-        {
-            return new EngineSteps();
-        }
-
-        public override string Name
-        {
-            get { return typeof(Module).Namespace + "-StepForward"; }
         }
     }
 }

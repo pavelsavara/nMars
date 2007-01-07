@@ -3,18 +3,25 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 
 namespace nMars.RedCode
 {
-    [ComVisible(true)]
+    /// <summary>
+    /// Parser options about outputs
+    /// </summary>
     public class ParserOptions
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public ParserOptions()
         {
         }
 
+        /// <summary>
+        /// Initializing constructor
+        /// </summary>
         public ParserOptions(bool offset, bool labels, bool comments, bool xml, bool brief, bool status)
         {
             Offset = offset;
@@ -22,14 +29,17 @@ namespace nMars.RedCode
             Comments = comments;
             XmlFormat = xml;
             Brief = brief;
-            Status = status;
+            StatusLine = status;
         }
 
         [XmlAttribute]
-        public bool Status = true;
+        public bool StatusLine = false;
 
         [XmlAttribute]
         public bool Header = true;
+
+        [XmlAttribute]
+        public ParseMessageLevel ErrorLevel = ParseMessageLevel.AllMessages;
 
         [XmlAttribute]
         public bool Brief = false;

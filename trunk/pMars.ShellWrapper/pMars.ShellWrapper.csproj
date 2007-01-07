@@ -11,6 +11,8 @@
     <AssemblyName>pMars.ShellWrapper</AssemblyName>
     <StartupObject>pMars.ShellWrapper.Module</StartupObject>
     <ApplicationIcon>Properties\Parser.ico</ApplicationIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

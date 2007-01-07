@@ -20,13 +20,13 @@ namespace nMars.Parser
     {
         private LALRParser parser;
         protected internal Dictionary<string, Expression> variables;
-        protected ISimpleOutput errOutput;
         protected int errCount;
         protected string org;
         protected Expression pin;
         protected int counter;
         protected string warriorName = null;
         protected string authorName = null;
+        protected string fileName;
 
         protected ParserTokens()
         {
@@ -68,16 +68,6 @@ namespace nMars.Parser
             if (!source.EndsWith("\n"))
                 source = source + "\n";
             return (ContainerStatement)parser.Parse(source).UserObject;
-        }
-
-        protected internal void WriteError(string error)
-        {
-            errOutput.ErrorWriteLine(error);
-            errCount++;
-            if (errCount > 10)
-            {
-                throw new ParserException("Too much errors");
-            }
         }
 
         protected void ProcessComments(List<string> comments)
@@ -362,7 +352,7 @@ namespace nMars.Parser
                     forrof.Labels = statementlabels;
                     forrof.Add((Statement)token.Tokens[4].UserObject);
 
-                    LabelName l = new LabelName("#forof" + counter.ToString());
+                    LabelName l = new LabelName("#forof" + counter);
                     counter++;
                     if (statementlabels.Count > 0)
                     {
@@ -948,29 +938,72 @@ namespace nMars.Parser
             throw new RuleException("Unknown rule");
         }
 
+        #endregion
+
+        #region Errors
+
         private void CheckName(string variableName, Location location)
         {
             if (variables.ContainsKey(variableName))
             {
-                WriteError("Variable/label already defined : " + variableName + " at " + location.ToString());
+                WriteWarning("Variable/label already defined : " + variableName + " at " + location, location);
             }
         }
-
-        #endregion
 
         private void TokenErrorEvent(LALRParser argParser, TokenErrorEventArgs args)
         {
             WriteError("Parse error caused by token: '" + args.Token.Text + "'" + " at " +
-                       args.Token.Location.ToString());
+                       args.Token.Location, args.Token.Location);
 
             args.Continue = true;
         }
 
         private void ParseErrorEvent(LALRParser argParser, ParseErrorEventArgs args)
         {
-            WriteError("Parse error caused by token: '" + args.UnexpectedToken.ToString() + "'" + " at " +
-                       args.UnexpectedToken.Location.ToString());
+            WriteError("Parse error caused by token: '" + args.UnexpectedToken + "'" + " at " +
+                       args.UnexpectedToken.Location, args.UnexpectedToken.Location);
             args.Continue = ContinueMode.Insert;
         }
+
+        protected internal void WriteError(string message)
+        {
+            WriteMessage(
+                new ParserMessage(message, ParseMessageLevel.Error, fileName, 0, 0));
+        }
+
+        protected internal void WriteError(string message, Location location)
+        {
+            WriteMessage(
+                new ParserMessage(message, ParseMessageLevel.Error, fileName, location.LineNr, location.ColumnNr));
+        }
+
+        protected internal void WriteWarning(string message, Location location)
+        {
+            WriteMessage(
+                new ParserMessage(message, ParseMessageLevel.Warning, fileName, location.LineNr, location.ColumnNr));
+        }
+
+        protected internal void WriteMessage(ParserMessage message)
+        {
+            if (console != null && message.Level > project.ParserOptions.ErrorLevel)
+                console.ErrorWriteLine(message.Message);
+
+            if (message.Level > ParseMessageLevel.Warning)
+            {
+                errCount++;
+                if (errCount > 10)
+                {
+                    if (project.ParserOptions.ErrorLevel <= ParseMessageLevel.Warning)
+                    {
+                        console.ErrorWriteLine("Too much errors");
+                    }
+                    throw new ParserException("Too much errors");
+                }
+                result.Succesfull = false;
+            }
+            result.Messages.Add(message);
+        }
+
+        #endregion
     }
 }

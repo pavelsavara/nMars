@@ -90,16 +90,6 @@ namespace nMars.RedCode
             get { return new Rules(); }
         }
 
-        public static bool operator !=(Rules a, Rules b)
-        {
-            return !a.Equals(b);
-        }
-
-        public static bool operator ==(Rules a, Rules b)
-        {
-            return a.Equals(b);
-        }
-
         public override bool Equals(object obj)
         {
             Rules r2 = obj as Rules;
@@ -114,11 +104,6 @@ namespace nMars.RedCode
             if (WarriorsCount != r2.WarriorsCount) return false;
             if (Version != r2.Version) return false;
             return true;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
     }
 }

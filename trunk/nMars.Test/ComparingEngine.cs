@@ -69,11 +69,19 @@ namespace nMars.Test
 
     class ComparingEngine : IEngine
     {
-        public MatchResult Run(IProject aProject)
+
+        public ComparingEngine(IExtendedStepEngine aEngineOne, IExtendedStepEngine aEngineTwo)
+        {
+            engineOne = aEngineOne;
+            engineTwo = aEngineTwo;
+        }
+
+        public MatchResult Run(IProject aProject, ISimpleOutput console)
         {
             project = (Project)aProject;
             Init();
-            project.ForcedAddresses = forcedArdresses;
+            project.EngineOptions.ForcedAddresses = forcedArdresses;
+            project.EngineOptions.Random = new Random(0);
 
             Check check = Check.Optimistic;
 #if DEBUG
@@ -103,11 +111,6 @@ namespace nMars.Test
             project.EngineOptions.Random = new Random(0);
             project.EngineOptions.DumpResults = false;
 
-            engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
-            engineTwo = ModuleRegister.CreateEngine("nMars.Engine", "nMars.Engine-StepForward") as IExtendedStepEngine;
-            engineOne.Output = output;
-            engineTwo.Output = output;
-
             forcedArdresses = new List<int>();
             forcedArdresses.Add(0);
             forcedArdresses.Add(4231);
@@ -131,8 +134,8 @@ namespace nMars.Test
             }
             finally
             {
-                matchOne = engineOne.EndMatch();
-                matchTwo = engineTwo.EndMatch();
+                matchOne = engineOne.EndMatch(null);
+                matchTwo = engineTwo.EndMatch(null);
             }
 
             if (matchOne != matchTwo)
@@ -248,7 +251,8 @@ namespace nMars.Test
                 IEnumerable<int> tasksTwo = engineTwo.Tasks[w];
 
                 IEnumerator<int> enumerator1 = tasksOne.GetEnumerator();
-                IEnumerator<int> enumerator2 = tasksOne.GetEnumerator();
+                IEnumerator<int> enumerator2 = tasksTwo.GetEnumerator();
+
                 try
                 {
                     while (enumerator1.MoveNext())
@@ -287,7 +291,7 @@ namespace nMars.Test
 
                 if (!Warrior.Equals(warriorsOne[w], warriorsTwo[w]))
                 {
-                    throw new ParserException("Different warriors");
+                    throw new EngineDifferException("Different warriors", new Check(0, 0, false));
                 }
             }
         }

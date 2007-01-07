@@ -9,7 +9,7 @@ namespace nMars.Engine
 {
     public class EngineSteps : EngineInstructions, IEngine, IStepEngine, IExtendedStepEngine
     {
-        public MatchResult Run(IProject project)
+        public MatchResult Run(IProject project, ISimpleOutput console)
         {
             BeginMatch(project);
             StepResult stepResult;
@@ -17,19 +17,7 @@ namespace nMars.Engine
             {
                 stepResult = NextStep();
             } while (stepResult != StepResult.Finished);
-            return EndMatch();
-        }
-
-        public ISimpleOutput Output
-        {
-            set
-            {
-                output = value;
-            }
-            get
-            {
-                return output;
-            }
+            return EndMatch(console);
         }
 
         public void BeginMatch(IProject project)
@@ -94,11 +82,21 @@ namespace nMars.Engine
             return stepResult;
         }
 
-        public MatchResult EndMatch()
+        public MatchResult EndMatch(ISimpleOutput console)
         {
             FinalizeMatch();
             results.ComputePoints();
-            results.Dump(output, Project);
+            if (console!=null)
+            {
+                if (Project.EngineOptions.DumpResults)
+                {
+                    results.Dump(console, Project);
+                }
+                if (Project.EngineOptions.StatusLine)
+                {
+                    console.WriteLine("========== Finished fight of " + Project.Warriors.Count + " warriors ==========");
+                }
+            }
             return results;
         }
 
@@ -133,7 +131,6 @@ namespace nMars.Engine
         #region Variables
 
         protected StepResult lastStepResult;
-        private ISimpleOutput output;
 
         #endregion
     }

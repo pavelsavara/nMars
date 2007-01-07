@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using nMars.IDE.Controls;
 using nMars.IDE.Core;
 using nMars.IDE.Forms;
+using nMars.IDE.Properties;
 using nMars.RedCode;
 
 namespace nMars.IDE
@@ -349,8 +350,18 @@ namespace nMars.IDE
             warrior.Save();
             string[] files = new string[1];
             files[0] = warrior.FileName;
-            CommandLine.RunParser(files, ActiveSolution.ComponentSetup.Parser, Rules.DefaultRules, ParserOptions.Ide,
-                                 Console);
+
+            if (warrior.Project!=null)
+            {
+                ActiveSolution.Components.Parser.Parse(warrior.Project.Project, Console);
+            }
+            else
+            {
+                Project tmpProj=new Project(Rules.DefaultRules, warrior.FileName);
+                tmpProj.ParserOptions = ParserOptions.Ide;
+                ActiveSolution.Components.Parser.Parse(tmpProj, Console);
+            }
+            
             RefreshUI();
         }
 
@@ -363,10 +374,9 @@ namespace nMars.IDE
                     editor.Save();
                 }
             }
-            string[] a = new string[project.Documents.Keys.Count];
-            project.Documents.Keys.CopyTo(a, 0);
-            CommandLine.RunParser(a, ActiveSolution.ComponentSetup.Parser, ActiveSolution.ActiveProject.Rules,
-                                 ActiveSolution.ActiveProject.ParserOptions, Console);
+
+            ActiveSolution.Components.Parser.Parse(ActiveProject.Project, Console);
+            
             RefreshUI();
         }
 
@@ -378,29 +388,22 @@ namespace nMars.IDE
 
             if (ActiveEngine == null)
             {
-                RedCodeProject pd = ActiveSolution.ActiveProject;
-                Project p = new Project(new Rules(pd.Rules));
-                p.EngineOptions = pd.EngineOptions;
-                p.ParserOptions = pd.ParserOptions;
-                string[] files=new string[pd.Documents.Count];
-                pd.Documents.Keys.CopyTo(files, 0);
-                p.EngineOptions.Brake = brake;
-                if (CommandLine.RunParser(files, ActiveSolution.ComponentSetup.Parser, p, Console) == files.Length)
+                ParseResult result = ActiveSolution.Components.Parser.Parse(ActiveProject.Project, Console);
+
+                if (result.Succesfull)
                 {
+                    ActiveProject.Project.EngineOptions.Brake = brake;
                     if (brake == executeBrake)
                     {
-                        ActiveSolution.ComponentSetup.Engine.Output = Console.GetAsyncWrapper();
-                        ActiveSolution.ComponentSetup.Engine.Run(p);
-                        Console.WriteLine("========== Finished ==========");
+                        ActiveSolution.Components.Engine.Run(ActiveProject.Project, Console.GetAsyncWrapper());
                     }
                     else
                     {
                         Console.WriteLine("========== Running ==========");
-                        ActiveSolution.ComponentSetup.DebuggerEngine.Output = Console.GetAsyncWrapper();
-                        ActiveSolution.ComponentSetup.DebuggerEngine.BeginMatch(p, engineStopped);
-                        ActiveEngine = ActiveSolution.ComponentSetup.DebuggerEngine;
+                        ActiveEngine = ActiveSolution.Components.Engine as IAsyncEngine;
+                        ActiveEngine.BeginMatch(ActiveProject.Project, engineStopped);
                         BeginWatch();
-                        ActiveSolution.ComponentSetup.DebuggerEngine.Continue();
+                        ActiveEngine.Continue();
                     }
                 }
             }
@@ -424,10 +427,9 @@ namespace nMars.IDE
                 return;
             if (finished)
             {
-                ActiveSolution.ComponentSetup.DebuggerEngine.EndMatch();
+                ActiveEngine.EndMatch(Console.GetAsyncWrapper());
                 ActiveEngine = null;
                 EndWatch();
-                Console.WriteLine("========== Finished ==========");
             }
             else
             {
@@ -578,8 +580,9 @@ namespace nMars.IDE
         #region Variables
 
         public static RedCodeSolution ActiveSolution;
+        public static RedCodeProject ActiveProject;
         public static Application ApplicationInstance;
-        public static IDebuggerEngine ActiveEngine;
+        public static IAsyncEngine ActiveEngine;
         public static int ActiveBrake = executeBrake;
 
         //editors
@@ -595,7 +598,7 @@ namespace nMars.IDE
         public static DebugMemoryGraph DebugMemoryGraph;
         
         //setting
-        public static IDESettings Settings;
+        internal static IDESettings Settings;
 
         #endregion
     }

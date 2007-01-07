@@ -10,165 +10,125 @@ using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
+    /// <summary>
+    /// Event of parsing commandline parameters
+    /// </summary>
+    public delegate void ParseArgsDelegate(Project project, string[] args, ref int position, ref bool processed);
+    /// <summary>
+    /// Event of printing help and logos
+    /// </summary>
+    public delegate void CommandlineEventDelegate(ISimpleOutput console);
+
+    /// <summary>
+    /// Commandline user interface, customizable thru events and configuration file
+    /// </summary>
     public class CommandLine
     {
-        #region IParser Support
-        
-        public static int ParserMain(string[] args, ComponentSetup setup, IProject project)
+        /// <summary>
+        /// Main procedure of commandline user interface
+        /// </summary>
+        public static Project Prepare(string[] args, ComponentLoader components, ISimpleOutput console)
         {
-            int res;
-            List<string> files;
-            if (setup == null)
-                setup = new ComponentSetup();
-            if (project == null)
-                project = new Project();
+            bool nologo;
+            string saveProjectFile;
 
-            res = ParseParams(args, out files, project, setup.Parser);
-            if (res <= 0)
-                return res;
+            Project project;
+            try
+            {
+                project = ParseArguments(args, out nologo, out saveProjectFile, components);
+            }
+            catch(ArgumentException ex)
+            {
+                PrintParserHelp(console);
+                console.WriteLine("");
+                console.ErrorWriteLine(ex.Message);
+                return null;
+            }
 
-            res = RunParser(files, setup.Parser, project, console);
-            return res;
+            if (project.WarriorFiles.Count == 0)
+            {
+                PrintParserHelp(console);
+                return null;
+            }
+
+            if (!nologo)
+                PrintLogo(console);
+
+            if (saveProjectFile != null)
+                project.SaveXml(saveProjectFile);
+
+            return project;
         }
 
-        public static int RunParser(IList<string> files, IParser parser, IProject project, ISimpleOutput output)
+        public static int Exec(ComponentLoader components, ISimpleOutput console, Project project)
         {
-            int res = 0;
-            parser.InitParser(project.Rules);
-            foreach (string file in files)
-            {
-                IWarrior warrior = RunParser(file, parser, project.ParserOptions, output);
-                if (warrior != null)
-                {
-                    project.Warriors.Add(warrior);
-                    res++;
-                }
-            }
-            if (project.ParserOptions.Status)
-            {
-                output.WriteLine("========== Compiled " + files.Count.ToString() + " warriors, " + (files.Count - res).ToString() +
-                                 " failed ==========");
-            }
-            return res;
-        }
-
-        public static int RunParser(IList<string> files, IParser parser, Rules rules, ParserOptions options,
-                                    ISimpleOutput output)
-        {
-            int res = 0;
-            parser.InitParser(rules);
-            foreach (string file in files)
-            {
-                IWarrior warrior = RunParser(file, parser, options, output);
-                if (warrior != null)
-                {
-                    res++;
-                }
-            }
-            if (options.Status)
-            {
-                output.WriteLine("========== Compiled " + files.Count.ToString() + " warriors, " + (files.Count - res).ToString() +
-                                 " failed ==========");
-            }
-            return res;
-        }
-
-        private static IWarrior RunParser(string file, IParser parser, ParserOptions options, ISimpleOutput output)
-        {
-            if (options.Header)
-            {
-                output.WriteLine(file);
-            }
-            IWarrior warrior = parser.Parse(file, output);
-            if (warrior != null)
-            {
-                if (options.DumpFiles)
-                {
-                    StreamWriter sw = new StreamWriter(Path.ChangeExtension(file, options.DumpExt));
-                    warrior.Dump(new WrappedTextWriter(sw), options);
-                    sw.Close();
-                }
-                warrior.Dump(output, options);
-            }
-            return warrior;
-        }
-
-        #endregion
-
-        #region IEngine Support
-        
-        public static int EngineMain(string[] args, ComponentSetup setup, IProject project)
-        {
-            int res;
-            List<string> files;
-            if (setup == null)
-                setup = new ComponentSetup();
             if (project == null)
             {
-                project = new Project();
-                project.ParserOptions = ParserOptions.Engine;
+                return -1;
             }
 
-            res = ParseParams(args, out files, project, setup.Engine);
-            if (res <= 0)
-                return res;
-
-            project.Rules.WarriorsCount = files.Count;
-            res = RunParser(files, setup.Parser, project, console);
-            if (res <= 0)
-                return res;
-
-            setup.Engine.Output = console;
-            setup.Engine.Run(project);
+            if (components.Parser != null)
+            {
+                ParseResult result = components.Parser.Parse(project, console);
+                if (result.Succesfull)
+                {
+                    if (project.Rules.Rounds > 0)
+                    {
+                        if (components.Engine != null)
+                        {
+                            components.Engine.Run(project, console);
+                        }
+                        else
+                        {
+                            console.ErrorWriteLine("Engine not found:" + components.EngineName);
+                            return -4; //engine not found
+                        }
+                    }
+                }
+                else
+                {
+                    return -2; //parser errors
+                }
+            }
+            else
+            {
+                console.ErrorWriteLine("Parser not found:" + components.ParserName);
+                return -3; //parser not found
+            }
             return 0;
         }
 
-        #endregion
+        #region Parse Arguments
 
-        #region IDebugger Support
+        public static event ParseArgsDelegate ParseArgsEvent;
 
-        public static int DebuggerMain(string[] args, ComponentSetup setup, IProject project)
+
+        /// <summary>
+        /// Parse pmars compatible commandline options
+        /// </summary>
+        /// <param name="args">pmars compatible arguments</param>
+        /// <returns></returns>
+        public static Project ParseArguments(string args)
         {
-            int res;
-            List<string> files;
-            if (setup == null)
-                setup = new ComponentSetup();
-            if (project == null)
-            {
-                project = new Project();
-                project.ParserOptions = ParserOptions.Engine;
-            }
-
-            if (setup.DebuggerEngine == null)
-                throw new ApplicationException("Unable to create DebuggerEngine");
-
-            res = ParseParams(args, out files, project, setup.Debugger);
-            if (res <= 0)
-                return res;
-
-            project.Rules.WarriorsCount = files.Count;
-            res = RunParser(files, setup.Parser, project, console);
-            if (res <= 0)
-                return res;
-            setup.Debugger.Init(setup.DebuggerEngine, null, null);
-            setup.Debugger.Output = console;
-            setup.Debugger.Run(project);
-            return 0;
+            bool nologo;
+            string saveProjectFile;
+            string[] argsar = args.Split(separ);
+            return ParseArguments(argsar, out nologo, out saveProjectFile, null);
         }
+        private static readonly char[] separ = { ' ', '\t', '\r', '\n' };
 
-        #endregion
-
-        #region Commandline Params
-
-        private static int ParseParams(string[] args, out List<string> files, IProject project, IComponent component)
+        /// <summary>
+        /// Parse pmars compatible commandline options
+        /// </summary>
+        public static Project ParseArguments(string[] args, out bool nologo, out string saveProjectFile, ComponentLoader components)
         {
-            bool logo = true;
-            files = new List<string>();
+            Project project = new Project();
+            saveProjectFile = null;
+            nologo = false;
 
             if (args.Length == 0)
             {
-                PrintParserHelp(component);
-                return 0;
+                throw new ArgumentException("Please provide valid arguments");
             }
 
             for (int p = 0; p < args.Length; p++)
@@ -177,77 +137,117 @@ namespace nMars.RedCode
                 switch (param)
                 {
                     case "-h":
-                        PrintParserHelp(component);
-                        return 0;
+                        throw new ArgumentException("Help requested: ");
                     case "-p":
-                        if (!ReadNumber(args, ref p, out project.Rules.MaxProcesses))
-                        {
-                            return -1;
-                        }
+                        ReadNumber(args, ref p, out project.Rules.MaxProcesses);
                         break;
                     case "-s":
-                        if (!ReadNumber(args, ref p, out project.Rules.CoreSize))
-                        {
-                            return -1;
-                        }
+                        ReadNumber(args, ref p, out project.Rules.CoreSize);
                         break;
                     case "-r":
-                        if (!ReadNumber(args, ref p, out project.Rules.Rounds))
-                        {
-                            return -1;
-                        }
+                        ReadNumber(args, ref p, out project.Rules.Rounds);
                         break;
                     case "-c":
-                        if (!ReadNumber(args, ref p, out project.Rules.MaxCycles))
-                        {
-                            return -1;
-                        }
+                        ReadNumber(args, ref p, out project.Rules.MaxCycles);
                         break;
                     case "-l":
-                        if (!ReadNumber(args, ref p, out project.Rules.MaxLength))
-                        {
-                            return -1;
-                        }
+                        ReadNumber(args, ref p, out project.Rules.MaxLength);
                         break;
                     case "-d":
-                        if (!ReadNumber(args, ref p, out project.Rules.MinDistance))
-                        {
-                            return -1;
-                        }
+                        ReadNumber(args, ref p, out project.Rules.MinDistance);
                         break;
                     case "-S":
-                        if (!ReadNumber(args, ref p, out project.Rules.PSpaceSize))
-                        {
-                            return -1;
-                        }
+                        ReadNumber(args, ref p, out project.Rules.PSpaceSize);
                         break;
                     case "-ue":
                         if (args.Length < p + 1)
                         {
-                            Console.WriteLine("Invalid parameter -u");
-                            return -1;
+                            throw new ArgumentException("Invalid parameter -ue");
                         }
                         p++;
                         project.ParserOptions.DumpExt = args[p];
                         project.ParserOptions.DumpFiles = true;
+                        break;
+                    case "-@":
+                        if (args.Length < p + 1)
+                        {
+                            throw new ArgumentException("Invalid parameter -@ missing argument");
+                        }
+                        p++;
+                        if (!File.Exists(args[p]))
+                        {
+                            throw new ArgumentException("Invalid file name -@" + args[p]);
+                        }
+                        project = Project.ImportPmars(args[p]);
+                        nologo = project.ParserOptions.Brief;
+                        break;
+                    case "-@l":
+                        if (args.Length < p + 1)
+                        {
+                            throw new ArgumentException("Invalid parameter -@x missing argument");
+                        }
+                        p++;
+                        if (!File.Exists(args[p]))
+                        {
+                            throw new ArgumentException("Invalid file name -@x" + args[p]);
+                        }
+                        project = Project.LoadXml(args[p]);
+                        nologo = project.ParserOptions.Brief;
+                        break;
+                    case "-@s":
+                        if (args.Length < p + 1)
+                        {
+                            throw new ArgumentException("Invalid parameter -@x missing argument");
+                        }
+                        p++;
+                        saveProjectFile = args[p];
+                        break;
+                    case "-nP":
+                        if (args.Length < p + 1)
+                        {
+                            throw new ArgumentException("Invalid parameter -@nP missing argument");
+                        }
+                        p++;
+                        components.ParserName = args[p];
+                        components.Parser = null;
+                        break;
+                    case "-nE":
+                        if (args.Length < p + 1)
+                        {
+                            throw new ArgumentException("Invalid parameter -@nE missing argument");
+                        }
+                        p++;
+                        components.EngineName = args[p];
+                        components.Engine = null;
                         break;
                     case "-uo":
                         project.ParserOptions.Offset = true;
                         break;
                     case "-b":
                         project.ParserOptions.Brief = true;
-                        project.ParserOptions.Status = false;
+                        project.ParserOptions.StatusLine = false;
                         project.ParserOptions.Header = false;
-                        logo = false;
+                        nologo = true;
                         break;
                     case "-bs":
-                        project.ParserOptions.Status = !project.ParserOptions.Status;
+                        project.ParserOptions.StatusLine = !project.ParserOptions.StatusLine;
                         break;
                     case "-bh":
                         project.ParserOptions.Header = !project.ParserOptions.Header;
                         break;
                     case "-bl":
-                        logo = false;
+                        nologo = true;
+                        break;
+                    case "-f":
+                        int fix;
+                        ReadNumber(args, ref p, out fix);
+                        project.EngineOptions.ForcedAddresses=new List<int>();
+                        project.EngineOptions.ForcedAddresses.Add(0);
+                        project.EngineOptions.ForcedAddresses.Add(fix);
+                        break;
+                    case "-br":
+                        nologo = true;
+                        project.EngineOptions.DumpResults = false;
                         break;
                     case "-ul":
                         project.ParserOptions.Labels = true;
@@ -259,75 +259,100 @@ namespace nMars.RedCode
                         project.ParserOptions.Comments = true;
                         break;
                     default:
-                        if (File.Exists(param))
+                        bool processed = false;
+                        if (ParseArgsEvent!=null)
+                            ParseArgsEvent.Invoke(project, args, ref p, ref processed);
+
+                        if (!processed)
                         {
-                            files.Add(param);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid file name " + param);
-                            return -1;
+                            if (File.Exists(param))
+                            {
+                                project.WarriorFiles.Add(param);
+                                project.Rules.WarriorsCount = project.WarriorFiles.Count;
+                            }
+                            else
+                            {
+                                if (param.StartsWith("-"))
+                                {
+                                    throw new ArgumentException("Invalid parameter " + param);
+                                }
+                                else
+                                {
+                                    throw new ArgumentException("Invalid file name " + Path.GetFullPath(param));
+                                }
+                            }
                         }
                         break;
                 }
             }
-            project.Rules.WarriorsCount = files.Count;
-            if (logo)
-                PrintLogo(component);
-            return files.Count;
+
+            return project;
         }
 
         private static bool ReadNumber(string[] args, ref int p, out int number)
         {
             if (args.Length < p + 1 || !Int32.TryParse(args[p + 1], out number))
             {
-                Console.WriteLine("Invalid parameter " + args[p]);
-                number = -1;
-                return false;
+                throw new ArgumentException("Invalid parameter " + args[p]);
             }
             p++;
             return true;
         }
 
-        private static void PrintLogo(IComponent component)
-        {
-            Console.WriteLine("nMars." + ModuleRegister.GetModule(component).MajorMinorVersion +
-                              " - http://sourceforge.net/projects/nmars");
-        }
-
-        private static void PrintParserHelp(IComponent component)
-        {
-            PrintLogo(component);
-            Console.WriteLine("Usage: " + ModuleRegister.GetModule(component).Name + ".exe [options] file1 [files]");
-            Console.WriteLine();
-            Console.WriteLine("Rules:");
-            Console.WriteLine("  -r # Rounds to play [1]");
-            Console.WriteLine("  -s # Size of core [8000]");
-            Console.WriteLine("  -c # Cycles until tie [80000]");
-            Console.WriteLine("  -p # Max. processes [8000]");
-            Console.WriteLine("  -l # Max. warrior length [100]");
-            Console.WriteLine("  -d # Min. warriors distance");
-            Console.WriteLine("  -S # Size of P-space [500]");
-            Console.WriteLine();
-            Console.WriteLine("Parser:");
-            Console.WriteLine("  -b        Brief/silent parser mode");
-            Console.WriteLine("  -bh       No header");
-            Console.WriteLine("  -bl       No logo");
-            Console.WriteLine("  -bs       No status");
-            Console.WriteLine("  -ue .ext  Dump to files next by original warrior with extension");
-            Console.WriteLine("  -uo       Dump with offset [off]");
-            Console.WriteLine("  -ul       Dump with labels [off]");
-            Console.WriteLine("  -uc       Dump with comments [off]");
-            Console.WriteLine("  -ux       Dump xml");
-            Console.WriteLine();
-        }
-
         #endregion
 
-        #region Variables
+        #region Help
 
-        private static WrappedConsole console = new WrappedConsole();
-        
+        public static event CommandlineEventDelegate DumpHelpEvent;
+        public static event CommandlineEventDelegate DumpLogoEvent;
+
+        private static void PrintParserHelp(ISimpleOutput console)
+        {
+            PrintLogo(console);
+            console.WriteLine("");
+            console.WriteLine("Usage: nMars.exe [options] file1 [files ..]");
+            console.WriteLine("");
+            console.WriteLine("General:");
+            console.WriteLine("  -@  file  load options from text file (pMars compatible)");
+            console.WriteLine("  -@l file  load project from xml file");
+            console.WriteLine("  -@s file  save project to xml file");
+            console.WriteLine("  -nP name  Change parser component");
+            console.WriteLine("  -nE name  Change engine component");
+            console.WriteLine("");
+            console.WriteLine("Rules:");
+            console.WriteLine("  -r #      Rounds to play [1]");
+            console.WriteLine("  -s #      Size of core [8000]");
+            console.WriteLine("  -c #      Cycles until tie [80000]");
+            console.WriteLine("  -p #      Max. processes [8000]");
+            console.WriteLine("  -l #      Max. warrior length [100]");
+            console.WriteLine("  -d #      Min. warriors distance");
+            console.WriteLine("  -S #      Size of P-space [500]");
+            console.WriteLine("  -f #      Fixed position series");
+            console.WriteLine("");
+            console.WriteLine("Dumps:");
+            console.WriteLine("  -b        Brief/silent parser mode");
+            console.WriteLine("  -bh       No header");
+            console.WriteLine("  -bl       No logo");
+            console.WriteLine("  -bs       No status");
+            console.WriteLine("  -br       No match results");
+            console.WriteLine("  -ue .ext  Dump warriors to files with extension");
+            console.WriteLine("  -uo       Dump format with offset [off]");
+            console.WriteLine("  -ul       Dump format with labels [off]");
+            console.WriteLine("  -uc       Dump format with comments [off]");
+            console.WriteLine("  -ux       Dump format xml");
+            console.WriteLine("");
+            if (DumpHelpEvent != null)
+                DumpHelpEvent.Invoke(console);
+        }
+
+        private static void PrintLogo(ISimpleOutput console)
+        {
+            console.WriteLine("nMars.exe " + new Module().Version + " - http://sourceforge.net/projects/nmars");
+            if (DumpLogoEvent != null)
+                DumpLogoEvent.Invoke(console);
+            console.WriteLine("");
+        }
+
         #endregion
     }
 }

@@ -4,6 +4,7 @@
 // 2006 Pavel Savara
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 
@@ -24,10 +25,16 @@ namespace nMars.RedCode
         [XmlAttribute]
         public bool DumpResults = true;
 
+        [XmlAttribute]
+        public bool StatusLine = false;
+
         [XmlIgnore]
         public Random Random = new Random();
 
+        [XmlAttribute]
         public int Brake = 0;
+
+        public List<int> ForcedAddresses = null;
 
         public static EngineOptions Default
         {

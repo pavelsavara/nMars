@@ -8,16 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace nMars.IDE.Properties {
+namespace nMars.Console.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "8.0.0.0")]
-    internal sealed partial class IDESettings : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class ConsoleCfg : global::System.Configuration.ApplicationSettingsBase {
         
-        private static IDESettings defaultInstance = ((IDESettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new IDESettings())));
+        private static ConsoleCfg defaultInstance = ((ConsoleCfg)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new ConsoleCfg())));
         
-        public static IDESettings Default {
+        public static ConsoleCfg Default {
             get {
                 return defaultInstance;
             }
@@ -25,30 +25,7 @@ namespace nMars.IDE.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public System.Collections.Generic.List<string> RecentProjects {
-            get {
-                return ((System.Collections.Generic.List<string>)(this["RecentProjects"]));
-            }
-            set {
-                this["RecentProjects"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool LoadRecentProject {
-            get {
-                return ((bool)(this["LoadRecentProject"]));
-            }
-            set {
-                this["LoadRecentProject"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("nMars.Engine-StepBack")]
+        [global::System.Configuration.DefaultSettingValueAttribute("nMars.Engine")]
         public string DefaultEngine {
             get {
                 return ((string)(this["DefaultEngine"]));

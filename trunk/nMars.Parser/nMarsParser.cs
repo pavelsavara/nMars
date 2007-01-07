@@ -8,52 +8,43 @@ using System.IO;
 using nMars.Parser.Statements;
 using nMars.Parser.Warrior;
 using nMars.RedCode;
-using nMars.RedCode.Modules;
 
 namespace nMars.Parser
 {
     public class nMarsParser : ParserTokens, IParser
     {
-        public override string Name
+        protected override IWarrior Parse(string aFileName)
         {
-            get { return GetType().Namespace; }
-        }
-
-        public override string Version
-        {
-            get { return ModuleRegister.GetVersion(GetType()); }
-        }
-
-        public override IWarrior Parse(string fileName, ISimpleOutput err)
-        {
+            fileName = aFileName;
             StreamReader sr = new StreamReader(fileName);
             string source = sr.ReadToEnd();
             sr.Close();
-            ExtendedWarrior res = (ExtendedWarrior)Parse(source, err, Path.GetFileNameWithoutExtension(fileName));
-            if (res != null) res.FileName = fileName;
-            return res;
+
+            ExtendedWarrior warrior = Parse(source, Path.GetFileNameWithoutExtension(fileName));
+            if (warrior != null) 
+                warrior.FileName = fileName;
+            return warrior;
         }
 
-        public IWarrior Parse(string sourceText, ISimpleOutput err, string implicitName)
+        private ExtendedWarrior Parse(string sourceText, string implicitName)
         {
-            errOutput = err;
             errCount = 0;
             Prepare();
             try
             {
                 Statement statement = ParseInternal(sourceText);
-                ExtendedWarrior warrior = new ExtendedWarrior(rules);
+                ExtendedWarrior warrior = new ExtendedWarrior(project.Rules);
                 int currentAddress;
 
                 //first pass to expand for-rof cycles
                 currentAddress = 0;
                 variables["CURLINE"] = new Value(0);
-                statement.ExpandStatements(warrior, this, ref currentAddress, rules.CoreSize, false);
+                statement.ExpandStatements(warrior, this, ref currentAddress, project.Rules.CoreSize, false);
 
                 //second pass to evaluate variables/labels in context of for cycles
                 currentAddress = 0;
                 variables["CURLINE"] = new Value(0);
-                statement.ExpandStatements(warrior, this, ref currentAddress, rules.CoreSize, true);
+                statement.ExpandStatements(warrior, this, ref currentAddress, project.Rules.CoreSize, true);
 
                 SetOrg(warrior);
                 SetPin(warrior);
@@ -64,9 +55,8 @@ namespace nMars.Parser
                     return null;
                 return warrior;
             }
-            catch (ParserException ex)
+            catch (ParserException)
             {
-                err.ErrorWriteLine(ex.Message);
                 return null;
             }
         }
@@ -123,15 +113,15 @@ namespace nMars.Parser
             counter = 0;
             warriorName = null;
             authorName = null;
-            variables["CORESIZE"] = new Value(rules.CoreSize);
-            variables["MAXPROCESSES"] = new Value(rules.MaxProcesses);
-            variables["MAXCYCLES"] = new Value(rules.MaxCycles);
-            variables["MAXLENGTH"] = new Value(rules.MaxLength);
-            variables["MINDISTANCE"] = new Value(rules.MinDistance);
-            variables["ROUNDS"] = new Value(rules.Rounds);
-            variables["PSPACESIZE"] = new Value(rules.PSpaceSize);
-            variables["VERSION"] = new Value(rules.Version);
-            variables["WARRIORS"] = new Value(rules.WarriorsCount);
+            variables["CORESIZE"] = new Value(project.Rules.CoreSize);
+            variables["MAXPROCESSES"] = new Value(project.Rules.MaxProcesses);
+            variables["MAXCYCLES"] = new Value(project.Rules.MaxCycles);
+            variables["MAXLENGTH"] = new Value(project.Rules.MaxLength);
+            variables["MINDISTANCE"] = new Value(project.Rules.MinDistance);
+            variables["ROUNDS"] = new Value(project.Rules.Rounds);
+            variables["PSPACESIZE"] = new Value(project.Rules.PSpaceSize);
+            variables["VERSION"] = new Value(project.Rules.Version);
+            variables["WARRIORS"] = new Value(project.Rules.WarriorsCount);
         }
     }
 }

@@ -4,13 +4,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}</ProjectGuid>
+    <ProjectGuid>{FF53C076-410E-410D-BDCF-38003C2D12A0}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>nMars.Debugger</RootNamespace>
-    <AssemblyName>nMars.Debugger</AssemblyName>
-    <ApplicationIcon>Properties\Debugger.ico</ApplicationIcon>
-    <StartupObject>nMars.Debugger.Module</StartupObject>
+    <RootNamespace>nMars.Console</RootNamespace>
+    <AssemblyName>nMars</AssemblyName>
+    <ApplicationIcon>Properties\Console.ico</ApplicationIcon>
+    <StartupObject>nMars.Console.Module</StartupObject>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\nMars.Debugger.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\nMars.Console.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,8 +41,11 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Debugger.cs" />
-    <Compile Include="DebuggerConsolePrompt.cs" />
+    <Compile Include="Properties\ConsoleCfg.Designer.cs">
+      <DependentUpon>ConsoleCfg.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,7 +56,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Debugger.ico" />
+    <EmbeddedResource Include="Properties\Console.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\ConsoleCfg.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ConsoleCfg.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -25,7 +25,7 @@ namespace nMars.Engine
             {
                 random = new Random();
             }
-            forcedAddresses = project.ForcedAddresses;
+            forcedAddresses = project.EngineOptions.ForcedAddresses;
             sourceWarriors = project.Warriors;
 
             warriors = new List<EngineWarrior>(rules.WarriorsCount);
@@ -35,7 +35,7 @@ namespace nMars.Engine
             for (int w = 0; w < rules.WarriorsCount; w++)
             {
                 IWarrior sourceWarrior = sourceWarriors[w];
-                if (sourceWarrior.Rules != rules)
+                if (!sourceWarrior.Rules.Equals(rules))
                     throw new EngineException("Warrior was compiled under different rules");
                 EngineWarrior engineWarrior = new EngineWarrior(sourceWarrior, this, w);
 
@@ -45,7 +45,7 @@ namespace nMars.Engine
             }
             InitPSpaces();
             permutate = project.EngineOptions.Permutate;
-            if (forcedAddresses != null)
+            if (forcedAddresses != null && forcedAddresses.Count>0)
             {
                 seed = forcedAddresses[1] - rules.MinDistance;
             }
