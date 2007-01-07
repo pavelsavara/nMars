@@ -1,7 +1,11 @@
 @echo off
-set VER=0.8
-set APPENDBUILD=.1
-set BUILD=1.0
+set MAJOR=0
+set MINOR=8
+set BUILD=2
+set REV=0
+set VER=%MAJOR%.%MINOR%
+set APPENDBUILD=.%BUILD%
+set BUILDREV=%BUILD%.%REV%
 
 set PVERMA=9
 set PVERMI=3
