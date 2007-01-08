@@ -5,8 +5,9 @@
 
 using System.Collections.Generic;
 using System.Windows.Forms;
+using nMars.IDE.Controls;
 
-namespace nMars.IDE.Controls
+namespace nMars.IDE.Debugger.Controls
 {
     public partial class DebugOverview : IDEFrame, IDebugWatch
     {
@@ -18,7 +19,7 @@ namespace nMars.IDE.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             tableLayoutPanel.SuspendLayout();
-            warriorsCount = Application.ActiveEngine.WarriorsCount;
+            warriorsCount = IDEDebuggerApplication.Instance.ActiveEngine.WarriorsCount;
             tableLayoutPanel.ColumnCount = warriorsCount;
             tableLayoutPanel.ColumnStyles.Clear();
             for (int w = 0; w < warriorsCount;w++ )
@@ -34,12 +35,12 @@ namespace nMars.IDE.Controls
 
         public void RepaintView()
         {
-            textBoxCycle.Text = Application.ActiveEngine.Cycles + "/" +
-                                Application.ActiveEngine.CyclesLeft;
-            textBoxRound.Text = Application.ActiveEngine.Round + "/" +
-                                Application.ActiveEngine.Project.Rules.Rounds;
-            textBoxLive.Text = Application.ActiveEngine.LiveWarriorsCount + "/" +
-                               Application.ActiveEngine.TasksCount;
+            textBoxCycle.Text = IDEDebuggerApplication.Instance.ActiveEngine.Cycles + "/" +
+                                IDEDebuggerApplication.Instance.ActiveEngine.CyclesLeft;
+            textBoxRound.Text = IDEDebuggerApplication.Instance.ActiveEngine.Round + "/" +
+                                IDEDebuggerApplication.Instance.ActiveEngine.Project.Rules.Rounds;
+            textBoxLive.Text = IDEDebuggerApplication.Instance.ActiveEngine.LiveWarriorsCount + "/" +
+                               IDEDebuggerApplication.Instance.ActiveEngine.TasksCount;
 
             for (int w = 0; w < warriorsCount; w++)
             {

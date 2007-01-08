@@ -1,6 +1,6 @@
 using nMars.Graphics.Controls;
 
-namespace nMars.IDE.Controls
+namespace nMars.IDE.Debugger.Controls
 {
     partial class DebugMemoryListing
     {
@@ -36,7 +36,7 @@ namespace nMars.IDE.Controls
             this.checkBoxRelative = new System.Windows.Forms.CheckBox();
             this.maskedTextBoxAddress = new System.Windows.Forms.TextBox();
             this.labelAddress = new System.Windows.Forms.Label();
-            this.coreList = new nMars.IDE.Controls.CoreListingInteractive(this.components);
+            this.coreList = new nMars.IDE.Debugger.Controls.CoreListingInteractive(this.components);
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 

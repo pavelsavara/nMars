@@ -3,218 +3,162 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
-using System.IO;
-using System.Threading;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
 namespace nMars.Debugger
 {
-    class Debugger : IDebugger
+    public class Debugger
     {
-        public void Init(IDebuggerEngine aEngine, IDebuggerShell aShell, IDebuggerPrompt aPrompt)
+        public Debugger(ISimpleOutput aConsole)
         {
-            engine = aEngine;
-            prompt = aPrompt;
-            shell = aShell;
-            if (prompt == null)
-            {
-                prompt = new DebuggerConsolePrompt();
-            }
+            console = aConsole;
+        }
 
-            if (shell == null)
+
+        public virtual bool Run(Project project, ComponentLoader components, EngineStoppedCallback engineStopped)
+        {
+            if (ActiveEngine == null)
             {
-                try
+                ParseResult result = components.Parser.Parse(project, console);
+
+                if (result.Succesfull)
                 {
-                    shell = ModuleRegister.CreateShell("nMars.DbgShellPy");
+                    if (project.EngineOptions.Brake == executeBrake)
+                    {
+                        components.Engine.Run(project, console);
+                    }
+                    else
+                    {
+                        ActiveEngine = components.Engine as IAsyncEngine;
+                        ActiveEngine.BeginMatch(project, engineStopped);
+                        console.WriteLine(runningString);
+                        RunContinueImpl(true);
+                    }
                 }
-                catch (FileNotFoundException)
+                else
                 {
-                    //swallow
-                }
-            }
-            if (shell == null)
-            {
-                shell = new DebuggerShell();
-            }
-            prompt.Init(this, engine, shell);
-            shell.Init(this, engine, prompt);
-            echo = false;
-            speed = 0;
-            aEngine.CheckBreak += CallBack;
-        }
-
-        public MatchResult Run(IProject aProject)
-        {
-            project = aProject;
-            quit = false;
-            engine.BeginMatch(project);
-            do
-            {
-                AskPrompt();
-            } while (!quit);
-
-            engine.Quit();
-            return engine.EndMatch();
-        }
-
-        private void AskPrompt()
-        {
-            try
-            {
-                string command = prompt.GetCommand();
-                shell.ProcessCommand(ref command, true);
-            }
-            catch (DebuggerException e)
-            {
-                prompt.ErrorWriteLine(e.Message);
-            }
-        }
-
-        private void CallBack(CheckBreakEventArgs args)
-        {
-            EchoStep();
-            Slow();
-        }
-
-        private void Slow()
-        {
-            if (speed != 0)
-            {
-                Thread.Sleep(speed);
-            }
-        }
-
-        private void EchoStep()
-        {
-            if (!echo) return;
-            prompt.WriteLine(shell.EchoString);
-        }
-
-        #region Interfaces
-
-        public void CoreDump(TextWriter tw)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void List(int from, int length)
-        {
-            for (int a = from; a < from + length; a++)
-            {
-                prompt.WriteLine(engine[a].ToString());
-            }
-        }
-
-        public void PrevStep()
-        {
-            engine.PrevStep();
-        }
-
-        public void NextStep()
-        {
-            engine.NextStep();
-        }
-
-        public void NextStep(int count)
-        {
-            while (engine.LastStepResult != StepResult.Finished && count > 0)
-            {
-                count--;
-                engine.NextStep();
-            }
-        }
-
-        public void PrevStep(int count)
-        {
-            while (engine.LastStepResult != StepResult.Finished && count > 0)
-            {
-                count--;
-                engine.PrevStep();
-            }
-        }
-
-        public void Continue()
-        {
-            engine.Continue();
-        }
-
-        public void Pause()
-        {
-            engine.Pause();
-        }
-
-        public void Quit()
-        {
-            quit = true;
-        }
-
-        public void Restart()
-        {
-            engine.Pause();
-            lock (engine)
-            {
-                engine.BeginMatch(project);
-            }
-        }
-
-        public event CheckBreak CheckBreak
-        {
-            add
-            {
-                lock (engine)
-                {
-                    engine.CheckBreak += value;
+                    return false;
                 }
             }
-            remove
+            else
             {
-                lock (engine)
+                ActiveEngine.Brake = project.EngineOptions.Brake;
+                if (ActiveEngine.IsPaused)
                 {
-                    engine.CheckBreak -= value;
+                    RunContinueImpl(false);
                 }
             }
+            return true;
         }
 
-        public int Speed
+        protected virtual void RunContinueImpl(bool start)
         {
-            get { return speed; }
-            set { speed = value; }
+            ActiveEngine.Continue();
         }
 
-        public bool Echo
+        public int Brake
         {
-            get { return echo; }
-            set { echo = value; }
-        }
-
-        public IProject Project
-        {
-            get { return project; }
-        }
-
-        public ISimpleOutput Output
-        {
+            get
+            {
+                return ActiveEngine.Brake;
+            }
             set
             {
-                //output = value;
+                ActiveEngine.Brake = value;
             }
         }
 
-        #endregion
 
-        #region Variables
+        protected virtual bool engineStopped(bool finished)
+        {
+            if (ActiveEngine == null)
+                return false;
 
-        private IDebuggerEngine engine;
-        private IDebuggerShell shell;
-        private IDebuggerPrompt prompt;
-        private bool echo;
-        private int speed;
-        private bool quit;
-        private IProject project;
-        //private ISimpleOutput output;
+            if (finished)
+            {
+                ActiveEngine.EndMatch(console);
+                ActiveEngine = null;
+                //console.WriteLine(stopedString);
+            }
+            else
+            {
+                console.WriteLine(pausedString);
+            }
+            return true;
+        }
 
-        #endregion
+        public virtual bool Stop()
+        {
+            if (ActiveEngine == null || !ActiveEngine.IsLive)
+                return false;
+
+            ActiveEngine.Quit();
+            return true;
+        }
+
+        public virtual bool Pause()
+        {
+            if (ActiveEngine == null || ActiveEngine.IsPaused)
+                return false;
+
+            ActiveEngine.Pause();
+            return true;
+        }
+
+        public virtual bool Continue()
+        {
+            if (ActiveEngine == null || !ActiveEngine.IsPaused)
+                return false;
+
+            ActiveEngine.Continue();
+            console.WriteLine(runningString);
+            return true;
+        }
+
+        public virtual bool Step()
+        {
+            if (ActiveEngine == null || !ActiveEngine.IsPaused)
+                return false;
+
+            ActiveEngine.NextStep();
+            console.WriteLine(stepString);
+            return true;
+        }
+
+        public virtual bool StepThread()
+        {
+            //TODO
+            return false;
+        }
+
+        public virtual bool StepWarrior()
+        {
+            //TODO
+            return false;
+        }
+
+        public virtual bool Back()
+        {
+            if (ActiveEngine == null || !ActiveEngine.IsPaused|| !ActiveEngine.CanStepBack)
+                return false;
+
+            ActiveEngine.PrevStep();
+            console.WriteLine(backString);
+            return true;
+        }
+
+        const string runningString = "=Running=";
+        const string pausedString = "=Paused=";
+        const string backString = "=Back=";
+        const string stepString = "=Step=";
+
+        public const int slowRunBrake = 400;
+        public const int normalRunBrake = 10;
+        public const int fastRunBrake = 1;
+        public const int executeBrake = -1;
+
+        public IAsyncEngine ActiveEngine;
+        protected ISimpleOutput console;
     }
 }

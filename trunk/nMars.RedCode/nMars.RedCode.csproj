@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RegisterForComInterop>true</RegisterForComInterop>
+    <RegisterForComInterop>false</RegisterForComInterop>
     <DocumentationFile>bin\Debug\nMars.RedCode.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -42,9 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\EngineASync.cs" />
+    <Compile Include="IDE\IIDEPlugin.cs" />
     <Compile Include="Utils\ConsoleWrapper.cs" />
-    <Compile Include="Debugger\DebuggerShell.cs" />
-    <Compile Include="Debugger\IDebugger.cs" />
     <Compile Include="Engine\EngineOptions.cs" />
     <Compile Include="Engine\Project.cs" />
     <Compile Include="Engine\PSpace.cs" />

@@ -4,11 +4,11 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections;
 using System.Windows.Forms;
+using nMars.IDE.Controls;
 using nMars.RedCode;
 
-namespace nMars.IDE.Controls
+namespace nMars.IDE.Debugger.Controls
 {
     public partial class DebugMemoryListing : IDEFrame, IDebugWatch
     {
@@ -20,11 +20,14 @@ namespace nMars.IDE.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, name);
-            CoreListView view = new CoreListView(Application.ActiveEngine);
+            CoreListView view = new CoreListView(IDEDebuggerApplication.Instance.ActiveEngine);
             coreList.View = view;
-            coreList.Attach(Application.ActiveEngine);
-            coreList.TopIndex = Application.ActiveEngine.CoreSize / 2;
+            coreList.Attach(IDEDebuggerApplication.Instance.ActiveEngine);
+            coreList.TopIndex = CoreSize / 2;
+            CoreSize = IDEDebuggerApplication.Instance.ActiveEngine.CoreSize;
         }
+
+        private int CoreSize;
 
         public override void Detach()
         {
@@ -34,10 +37,10 @@ namespace nMars.IDE.Controls
 
         public void RepaintView()
         {
-            int nextAddress = Application.ActiveEngine.NextInstruction.Address;
+            int nextAddress = IDEDebuggerApplication.Instance.ActiveEngine.NextInstruction.Address;
             if (checkBoxAutoIP.Checked)
             {
-                coreList.TopIndex = nextAddress + Application.ActiveEngine.CoreSize / 2 - 5;
+                coreList.TopIndex = nextAddress + CoreSize / 2 - 5;
             }
             coreList.RepaintView();
         }
@@ -54,7 +57,7 @@ namespace nMars.IDE.Controls
         {
             checkBoxAutoIP.Checked = false;
             coreList.MarkedAddress = address;
-            coreList.TopIndex = address + Application.ActiveEngine.CoreSize / 2 - 5;
+            coreList.TopIndex = address + CoreSize / 2 - 5;
         }
 
         private void ShowAddress()
@@ -65,10 +68,10 @@ namespace nMars.IDE.Controls
                 if (checkBoxRelative.Checked)
                 {
                     //relative to current instruction
-                    address += Application.ActiveEngine.NextInstruction.Address;
+                    address += IDEDebuggerApplication.Instance.ActiveEngine.NextInstruction.Address;
                 }
                 coreList.MarkedAddress = address;
-                coreList.TopIndex = address + Application.ActiveEngine.CoreSize / 2 - 5;
+                coreList.TopIndex = address + CoreSize / 2 - 5;
             }
         }
 
@@ -91,7 +94,6 @@ namespace nMars.IDE.Controls
     class CoreListView : ICoreBindingView
     {
         private int coreSize;
-        private Random r = new Random();
 
         public CoreListView(IAsyncEngine aEngine)
         {

@@ -29,7 +29,7 @@ namespace nMars.RedCode
             {
                 if (project.ParserOptions.StatusLine && console != null)
                 {
-                    console.WriteLine("========== Parsing " + file + "==========");
+                    console.WriteLine("Parsing: " + file);
                 }
                 IWarrior warrior = Parse(file);
                 project.Warriors.Add(warrior);

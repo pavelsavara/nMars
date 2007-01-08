@@ -82,7 +82,7 @@ namespace nMars.IDE.Core
             }
             IsModified = false;
             IsNew = false;
-            Application.SolutionExplorer.ReloadSolution();
+            IDEApplication.SolutionExplorer.ReloadSolution();
             return res;
         }
 
@@ -131,7 +131,7 @@ namespace nMars.IDE.Core
                 Project.WarriorFiles.Add(document.FileName);
                 document.Project = this;
                 IsModified = true;
-                Application.SolutionExplorer.ReloadSolution();
+                IDEApplication.SolutionExplorer.ReloadSolution();
             }
         }
 
@@ -141,7 +141,7 @@ namespace nMars.IDE.Core
             Documents.Remove(document.FileName);
             Project.WarriorFiles.Remove(document.FileName);
             IsModified = true;
-            Application.SolutionExplorer.ReloadSolution();
+            IDEApplication.SolutionExplorer.ReloadSolution();
             if (delete && File.Exists(document.FileName))
             {
                 File.Delete(document.FileName);

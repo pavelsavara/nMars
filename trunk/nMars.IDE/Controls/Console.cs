@@ -12,7 +12,7 @@ using nMars.RedCode;
 
 namespace nMars.IDE.Controls
 {
-    public partial class Console : IDEFrame, IDebuggerPrompt
+    public partial class Console : IDEFrame, IConsole
     {
         #region Helper classes
 
@@ -140,11 +140,6 @@ namespace nMars.IDE.Controls
             InitializeComponent();
             StreamInstance = new ConsoleStream();
             StreamInstance.Console = this;
-        }
-
-        public void Init(IDebugger debugger, IDebuggerEngine engine, IDebuggerShell aShell)
-        {
-            throw new NotImplementedException();
         }
 
         public string GetCommand()

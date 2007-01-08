@@ -22,9 +22,9 @@ namespace nMars.IDE.Controls
         {
             tree.BeginUpdate();
             tree.Nodes.Clear();
-            TreeNode root = new TreeNode(Application.ActiveSolution.Name);
-            root.Tag = Application.ActiveSolution;
-            foreach (KeyValuePair<string, RedCodeProject> project in Application.ActiveSolution.Projects)
+            TreeNode root = new TreeNode(IDEApplication.ActiveSolution.Name);
+            root.Tag = IDEApplication.ActiveSolution;
+            foreach (KeyValuePair<string, RedCodeProject> project in IDEApplication.ActiveSolution.Projects)
             {
                 TreeNode proj;
                 if (project.Value == null)
@@ -35,7 +35,7 @@ namespace nMars.IDE.Controls
                 {
                     proj = new TreeNode(project.Value.Name);
                     proj.Tag = project.Value;
-                    if (project.Value == Application.ActiveSolution.ActiveProject)
+                    if (project.Value == IDEApplication.ActiveSolution.ActiveProject)
                     {
                         proj.NodeFont = new Font(tree.Font, FontStyle.Bold);
                     }
@@ -67,32 +67,32 @@ namespace nMars.IDE.Controls
 
         private void addNewProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.AddNewProject();
+            IDEApplication.AddNewProject();
         }
 
         private void addExisingProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.AddExistingProject();
+            IDEApplication.AddExistingProject();
         }
 
         private void deleteProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.RemoveProject(clickedNode.Tag as RedCodeProject, true);
+            IDEApplication.RemoveProject(clickedNode.Tag as RedCodeProject, true);
         }
 
         private void removeProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.RemoveProject(clickedNode.Tag as RedCodeProject, false);
+            IDEApplication.RemoveProject(clickedNode.Tag as RedCodeProject, false);
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.SaveProject(clickedNode.Tag as RedCodeProject);
+            IDEApplication.SaveProject(clickedNode.Tag as RedCodeProject);
         }
 
         private void setAsActiveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.SetProjectActive(clickedNode.Tag as RedCodeProject);
+            IDEApplication.SetProjectActive(clickedNode.Tag as RedCodeProject);
         }
 
         #endregion
@@ -101,24 +101,24 @@ namespace nMars.IDE.Controls
 
         private void addExistingWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.AddExistingWarrior(clickedNode.Tag as RedCodeProject);
+            IDEApplication.AddExistingWarrior(clickedNode.Tag as RedCodeProject);
         }
 
         private void addNewWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.AddNewWarrior(clickedNode.Tag as RedCodeProject);
+            IDEApplication.AddNewWarrior(clickedNode.Tag as RedCodeProject);
         }
 
         private void removeWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WarriorDocument warrior = clickedNode.Tag as WarriorDocument;
-            Application.RemoveWarrior(warrior, false);
+            IDEApplication.RemoveWarrior(warrior, false);
         }
 
         private void deleteWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WarriorDocument warrior = clickedNode.Tag as WarriorDocument;
-            Application.RemoveWarrior(warrior, true);
+            IDEApplication.RemoveWarrior(warrior, true);
         }
 
         private void compileWarriorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -132,7 +132,7 @@ namespace nMars.IDE.Controls
 
         private void saveSolutionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.SaveSolution();
+            IDEApplication.SaveSolution();
         }
 
         #endregion
@@ -173,7 +173,7 @@ namespace nMars.IDE.Controls
             {
                 if (clickedNode.Tag is ProjectDocument)
                 {
-                    Application.ActivateDocument(clickedNode.Tag as ProjectDocument);
+                    IDEApplication.ActivateDocument(clickedNode.Tag as ProjectDocument);
                 }
             }
         }

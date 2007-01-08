@@ -1,4 +1,4 @@
-namespace nMars.IDE.Controls
+namespace nMars.IDE.Debugger.Controls
 {
     partial class DebugMemoryGraph
     {
@@ -28,7 +28,7 @@ namespace nMars.IDE.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.coreGrid = new nMars.IDE.Controls.CoreGridInteractive();
+            this.coreGrid = new nMars.IDE.Debugger.Controls.CoreGridInteractive();
             this.SuspendLayout();
             // 
             // coreGrid

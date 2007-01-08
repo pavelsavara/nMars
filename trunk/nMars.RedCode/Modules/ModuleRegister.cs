@@ -132,34 +132,19 @@ namespace nMars.RedCode.Modules
             return parserModule.CreateParser();
         }
 
-        public static IDebugger CreateDebugger(string name)
+        public static IIDEPlugin CreateIDEPlugin(string IDEPluginName)
         {
-            return CreateDebugger(name, name);
+            return CreateIDEPlugin(IDEPluginName, IDEPluginName);
         }
 
-        public static IDebugger CreateDebugger(string assembly, string name)
+        public static IIDEPlugin CreateIDEPlugin(string assembly, string IDEPluginName)
         {
-            IDebuggerModule debuggerModule = FindModule(assembly, name) as IDebuggerModule;
-            if (debuggerModule == null)
+            IIDEPluginModule IDEPluginModule = FindModule(assembly, IDEPluginName) as IIDEPluginModule;
+            if (IDEPluginModule == null)
             {
                 throw new FileNotFoundException("Cannot find module or interface");
             }
-            return debuggerModule.CreateDebugger();
-        }
-
-        public static IDebuggerShell CreateShell(string name)
-        {
-            return CreateShell(name, name);
-        }
-
-        public static IDebuggerShell CreateShell(string assembly, string name)
-        {
-            IDebuggerShellModule debuggerModule = FindModule(assembly, name) as IDebuggerShellModule;
-            if (debuggerModule == null)
-            {
-                throw new FileNotFoundException("Cannot find module or interface");
-            }
-            return debuggerModule.CreateShell();
+            return IDEPluginModule.CreateIDEPlugin();
         }
 
         #endregion
