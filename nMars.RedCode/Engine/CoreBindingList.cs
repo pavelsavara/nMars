@@ -16,35 +16,26 @@ namespace nMars.RedCode
         void Invalidate(int index);
         void InvalidateEvents();
     }
-
-    public class CoreCellHelper
+    public interface ICoreBindingView
     {
-        public IRunningInstruction Instruction;
-        public CoreEventRecord Event;
+        int this[int index] { get; }
+        int Count { get; }
+        bool IsFixedSize { get; }
     }
 
-    public abstract class CoreBindingList : ICoreBindingList
+
+    public class CoreBindingList : ICoreBindingList
     {
-        protected CoreBindingList(IAsyncEngine aEngine)
+        public CoreBindingList(IAsyncEngine aEngine, ICoreBindingView aView)
         {
             Engine = aEngine;
-            CoreSize = Engine.Project.Rules.CoreSize;
-            cache = new CoreCellHelper[CoreSize];
-            CoreEventRecord[] records = Engine.CoreEvents;
-            for (int i = 0; i < CoreSize; i++)
-            {
-                cache[i] = new CoreCellHelper();
-                cache[i].Event = records[i];
-                cache[i].Instruction = Engine[i];
-            }
+            view = aView;
         }
 
-        protected long maxVersion;
-        public IAsyncEngine Engine;
-
-        protected CoreCellHelper[] cache;
-        public int CoreSize;
-        protected ListChangedEventHandler change;
+        private long maxVersion;
+        private IAsyncEngine Engine;
+        private ICoreBindingView view;
+        private ListChangedEventHandler change;
 
         public void Invalidate(int index)
         {
@@ -62,9 +53,10 @@ namespace nMars.RedCode
         {
             long lmax = maxVersion;
             CoreEventRecord[] records = Engine.CoreEvents;
-            for (int i = 0; i < cache.Length; i++)
+            for (int index = 0; index < Count;index++ )
             {
-                CoreEventRecord evn = records[i];
+                int address = view[index];
+                CoreEventRecord evn = records[address];
                 long ver = evn.Version;
                 if (ver > maxVersion)
                 {
@@ -72,19 +64,28 @@ namespace nMars.RedCode
                     {
                         lmax = ver;
                     }
-                    cache[i].Event = evn;
-                    cache[i].Instruction = Engine[i];
                     if (change != null)
-                        change.Invoke(this, new ListChangedEventArgs(ListChangedType.ItemChanged, i));
+                        change.Invoke(this, new ListChangedEventArgs(ListChangedType.ItemChanged, index));
                 }
             }
             maxVersion = lmax;
         }
 
-        public abstract object this[int index] { get; set; }
-        public abstract int Count { get; }
-        public abstract bool IsFixedSize { get; }
-        public abstract IEnumerator GetEnumerator();
+        public object this[int index]
+        {
+            get { return view[index]; }
+            set { throw new NotImplementedException(); }
+        }
+
+        public bool IsFixedSize
+        {
+            get { return view.IsFixedSize; }
+        }
+
+        public int Count
+        {
+            get { return view.Count; }
+        }
 
         #region IBindingList
 
@@ -142,6 +143,11 @@ namespace nMars.RedCode
         }
 
         public void RemoveSort()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator GetEnumerator()
         {
             throw new NotImplementedException();
         }

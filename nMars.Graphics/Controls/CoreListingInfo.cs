@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System.Windows.Forms;
-using nMars.RedCode;
 
 namespace nMars.Graphics.Controls
 {
@@ -24,15 +22,14 @@ namespace nMars.Graphics.Controls
             int index = (e.Y / ItemHeight) + TopIndex;
             lock (engine)
             {
-                ICoreBindingList list = (ICoreBindingList)DataSource;
-                if (index < 0 || index >= list.Count)
+                if (index < 0 || index >= View.Count)
                 {
                     toolTip.SetToolTip(this, "");
                 }
                 else
                 {
-                    CoreCellHelper item = (CoreCellHelper)list[index];
-                    toolTip.SetToolTip(this, MemoryPainter.GetTooltip(engine, item.Instruction.Address));
+                    int address = View[index];
+                    toolTip.SetToolTip(this, MemoryPainter.GetTooltip(engine, address));
                 }
             }
         }

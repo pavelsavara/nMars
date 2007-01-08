@@ -58,13 +58,13 @@
       <DependentUpon>CoreGridInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CoreListing.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CoreListing.Designer.cs">
       <DependentUpon>CoreListing.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CoreListingInfo.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CoreListingInfo.Designer.cs">
       <DependentUpon>CoreListingInfo.cs</DependentUpon>

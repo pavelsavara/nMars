@@ -31,7 +31,7 @@ namespace nMars.IDE.Controls
             this.components = new System.ComponentModel.Container();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.panelRight = new System.Windows.Forms.Panel();
-            this.listBoxNextInstructions = new nMars.IDE.Controls.CoreListingInteractive(this.components);
+            this.coreList = new nMars.IDE.Controls.CoreListingInteractive(this.components);
             this.panelTop = new System.Windows.Forms.Panel();
             this.textBoxTasks = new System.Windows.Forms.TextBox();
             this.textBoxLastInstruction = new System.Windows.Forms.TextBox();
@@ -61,7 +61,7 @@ namespace nMars.IDE.Controls
             // panelRight
             // 
             this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelRight.Controls.Add(this.listBoxNextInstructions);
+            this.panelRight.Controls.Add(this.coreList);
             this.panelRight.Controls.Add(this.panelTop);
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelRight.Location = new System.Drawing.Point(73, 16);
@@ -71,22 +71,11 @@ namespace nMars.IDE.Controls
             // 
             // listBoxNextInstructions
             // 
-            this.listBoxNextInstructions.BackColor = System.Drawing.Color.Black;
-            this.listBoxNextInstructions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxNextInstructions.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.listBoxNextInstructions.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.listBoxNextInstructions.ForeColor = System.Drawing.Color.White;
-            this.listBoxNextInstructions.FormattingEnabled = true;
-            this.listBoxNextInstructions.ItemHeight = 14;
-            this.listBoxNextInstructions.Items.AddRange(new object[] {
-            "00000 MOV.AB #00000, #00001"});
-            this.listBoxNextInstructions.Location = new System.Drawing.Point(0, 58);
-            this.listBoxNextInstructions.Name = "listBoxNextInstructions";
-            this.listBoxNextInstructions.PaintMarkedIndex = false;
-            this.listBoxNextInstructions.PaintNextAddress = false;
-            this.listBoxNextInstructions.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxNextInstructions.Size = new System.Drawing.Size(566, 452);
-            this.listBoxNextInstructions.TabIndex = 11;
+            this.coreList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.coreList.Location = new System.Drawing.Point(0, 58);
+            this.coreList.Name = "coreList";
+            this.coreList.Size = new System.Drawing.Size(566, 452);
+            this.coreList.TabIndex = 11;
             // 
             // panelTop
             // 
@@ -182,7 +171,7 @@ namespace nMars.IDE.Controls
         private System.Windows.Forms.TextBox textBoxTasks;
         private System.Windows.Forms.Label labelTaks;
         private System.Windows.Forms.Panel panelRight;
-        private CoreListingInteractive listBoxNextInstructions;
+        private CoreListingInteractive coreList;
         private System.Windows.Forms.Label labelNext;
         private System.Windows.Forms.Panel panelLeft;
         private System.Windows.Forms.Panel panelTop;

@@ -20,10 +20,10 @@ namespace nMars.IDE.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, name);
-            coreList.BeginUpdate();
-            coreList.DataSource = new CoreListHelper(Application.ActiveEngine);
+            CoreListView view = new CoreListView(Application.ActiveEngine);
+            coreList.View = view;
             coreList.Attach(Application.ActiveEngine);
-            coreList.EndUpdate();
+            coreList.TopIndex = Application.ActiveEngine.CoreSize / 2;
         }
 
         public override void Detach()
@@ -34,14 +34,12 @@ namespace nMars.IDE.Controls
 
         public void RepaintView()
         {
-            coreList.BeginUpdate();
             int nextAddress = Application.ActiveEngine.NextInstruction.Address;
             if (checkBoxAutoIP.Checked)
             {
-                coreList.FocusAddress(nextAddress);
+                coreList.TopIndex = nextAddress + Application.ActiveEngine.CoreSize / 2 - 5;
             }
             coreList.RepaintView();
-            coreList.EndUpdate();
         }
 
         public void Resume()
@@ -55,9 +53,8 @@ namespace nMars.IDE.Controls
         public void ShowAddress(int address)
         {
             checkBoxAutoIP.Checked = false;
-            coreList.BeginUpdate();
-            coreList.FocusAddress(address);
-            coreList.EndUpdate();
+            coreList.MarkedAddress = address;
+            coreList.TopIndex = address + Application.ActiveEngine.CoreSize / 2 - 5;
         }
 
         private void ShowAddress()
@@ -65,14 +62,13 @@ namespace nMars.IDE.Controls
             int address;
             if (int.TryParse(maskedTextBoxAddress.Text, out address))
             {
-                coreList.BeginUpdate();
                 if (checkBoxRelative.Checked)
                 {
                     //relative to current instruction
                     address += Application.ActiveEngine.NextInstruction.Address;
                 }
-                coreList.FocusAddress(address);
-                coreList.EndUpdate();
+                coreList.MarkedAddress = address;
+                coreList.TopIndex = address + Application.ActiveEngine.CoreSize / 2 - 5;
             }
         }
 
@@ -92,32 +88,32 @@ namespace nMars.IDE.Controls
         }
     }
 
-    class CoreListHelper : CoreBindingList
+    class CoreListView : ICoreBindingView
     {
-        public CoreListHelper(IAsyncEngine aEngine)
-            : base(aEngine)
+        private int coreSize;
+        private Random r = new Random();
+
+        public CoreListView(IAsyncEngine aEngine)
         {
+            coreSize = aEngine.CoreSize;
         }
 
-        public override object this[int index]
+        public int this[int index]
         {
-            get { return cache[((CoreSize + index - (CoreSize / 2)) % CoreSize)]; }
-            set { throw new NotImplementedException(); }
+            get
+            {
+                return (coreSize + index - (coreSize / 2)) % coreSize;
+            }
         }
 
-        public override int Count
+        public int Count
         {
-            get { return CoreSize * 2; }
+            get { return coreSize * 2; }
         }
 
-        public override bool IsFixedSize
+        public bool IsFixedSize
         {
             get { return true; }
-        }
-
-        public override IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
     }
 }
