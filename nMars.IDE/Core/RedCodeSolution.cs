@@ -20,8 +20,8 @@ namespace nMars.IDE.Core
         public RedCodeSolution()
         {
             Components = new ComponentLoader();
-            Components.ParserName = Application.Settings.DefaultParser;
-            Components.EngineName = Application.Settings.DefaultEngine;
+            Components.ParserName = IDEApplication.Settings.DefaultParser;
+            Components.EngineName = IDEApplication.Settings.DefaultEngine;
             IDebuggerEngine engine = Components.Engine as IDebuggerEngine;
             EngineASync wrapper = new EngineASync(engine);
             Components.Engine = wrapper;
@@ -72,7 +72,7 @@ namespace nMars.IDE.Core
             }
             IsModified = false;
             IsNew = false;
-            Application.SolutionExplorer.ReloadSolution();
+            IDEApplication.SolutionExplorer.ReloadSolution();
             return res;
         }
 
@@ -100,12 +100,12 @@ namespace nMars.IDE.Core
                 if (doc.activeProjectFileName != null && Projects.ContainsKey(doc.activeProjectFileName))
                 {
                     ActiveProject = Projects[doc.activeProjectFileName];
-                    Application.ActiveProject = ActiveProject;
+                    IDEApplication.ActiveProject = ActiveProject;
                 }
                 else if (Projects.Count > 0)
                 {
                     ActiveProject = Projects[loadedkeys[0]];
-                    Application.ActiveProject = ActiveProject;
+                    IDEApplication.ActiveProject = ActiveProject;
                 }
             }
             IsModified = false;
@@ -158,7 +158,7 @@ namespace nMars.IDE.Core
                         activeProjectFileName = value.FileName;
                     }
                 }
-                Application.ActiveProject = ActiveProject;
+                IDEApplication.ActiveProject = ActiveProject;
                 IsModified = true;
             }
         }
@@ -170,9 +170,9 @@ namespace nMars.IDE.Core
             if (Projects.Count == 1)
             {
                 ActiveProject = project;
-                Application.ActiveProject = ActiveProject;
+                IDEApplication.ActiveProject = ActiveProject;
             }
-            Application.SolutionExplorer.ReloadSolution();
+            IDEApplication.SolutionExplorer.ReloadSolution();
             IsModified = true;
         }
 
@@ -184,7 +184,7 @@ namespace nMars.IDE.Core
             if (Projects.Count == 0)
             {
                 ActiveProject = null;
-                Application.ActiveProject = ActiveProject;
+                IDEApplication.ActiveProject = ActiveProject;
             }
             else
             {
@@ -192,10 +192,10 @@ namespace nMars.IDE.Core
                     Projects.Values.GetEnumerator();
                 enumerator.MoveNext();
                 ActiveProject = enumerator.Current;
-                Application.ActiveProject = ActiveProject;
+                IDEApplication.ActiveProject = ActiveProject;
             }
 
-            Application.SolutionExplorer.ReloadSolution();
+            IDEApplication.SolutionExplorer.ReloadSolution();
             if (delete && File.Exists(project.FileName))
             {
                 File.Delete(project.FileName);

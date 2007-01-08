@@ -4,19 +4,13 @@
 // 2006 Pavel Savara
 
 using System;
+using nMars.RedCode;
 using nMars.RedCode.Modules;
 
-namespace nMars.IDE
+namespace nMars.IDE.Debugger
 {
-    class Module : BaseModule
+    class Module : BaseModule, IIDEPluginModule
     {
-        [STAThread]
-        public static int Main(string[] args)
-        {
-            IDEApplication app = new IDEApplication();
-            return app.Main(args);
-        }
-
         #region Module registration
 
         static Module()
@@ -25,5 +19,10 @@ namespace nMars.IDE
         }
 
         #endregion
+
+        public IIDEPlugin CreateIDEPlugin()
+        {
+            return new IDEDebuggerApplication();
+        }
     }
 }

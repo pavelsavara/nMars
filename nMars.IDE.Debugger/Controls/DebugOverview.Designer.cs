@@ -1,4 +1,4 @@
-namespace nMars.IDE.Controls
+namespace nMars.IDE.Debugger.Controls
 {
     partial class DebugOverview
     {

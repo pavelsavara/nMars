@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace nMars.IDE.Properties {
+namespace nMars.IDE.Debugger.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace nMars.IDE.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("nMars.IDE.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("nMars.IDE.Debugger.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,36 +60,73 @@ namespace nMars.IDE.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;html&gt;
-        ///&lt;head&gt;
-        ///&lt;title&gt;nMars - Corewars MARS for .NET&lt;/title&gt;
-        ///&lt;/head&gt;
-        ///&lt;body bgcolor=&quot;rgb(212,208,200)&quot;&gt;
-        ///&lt;h3 align=&quot;center&quot;&gt;nMars - Corewars MARS for .NET&lt;/h3&gt;
-        ///&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;http://sourceforge.net/projects/nmars&quot;&gt;http://sourceforge.net/projects/nmars&lt;/a&gt;
-        ///&lt;br&gt;2006 Published under &lt;a href=&quot;http://www.gnu.org/licenses/lgpl.txt&quot;&gt;LGPL&lt;/a&gt; by &lt;a href=&quot;mailto:pavel.savara@gmail.com&quot;&gt;Pavel Savara&lt;/a&gt;
-        ///&lt;br&gt;Versions:&lt;br&gt; $Ver$
-        ///&lt;/body&gt;
-        ///&lt;/html&gt;.
-        /// </summary>
-        internal static string About {
+        internal static System.Drawing.Bitmap Back {
             get {
-                return ResourceManager.GetString("About", resourceCulture);
+                object obj = ResourceManager.GetObject("Back", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Icon IDE {
+        internal static System.Drawing.Bitmap Execute {
             get {
-                object obj = ResourceManager.GetObject("IDE", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("Execute", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Icon IDEsmall {
+        internal static System.Drawing.Bitmap Pause {
             get {
-                object obj = ResourceManager.GetObject("IDEsmall", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("Pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Run {
+            get {
+                object obj = ResourceManager.GetObject("Run", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap RunF {
+            get {
+                object obj = ResourceManager.GetObject("RunF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap RunFF {
+            get {
+                object obj = ResourceManager.GetObject("RunFF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Step {
+            get {
+                object obj = ResourceManager.GetObject("Step", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap StepRound {
+            get {
+                object obj = ResourceManager.GetObject("StepRound", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap StepThread {
+            get {
+                object obj = ResourceManager.GetObject("StepThread", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Stop {
+            get {
+                object obj = ResourceManager.GetObject("Stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

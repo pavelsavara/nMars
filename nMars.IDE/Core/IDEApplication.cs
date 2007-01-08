@@ -11,19 +11,15 @@ using nMars.IDE.Core;
 using nMars.IDE.Forms;
 using nMars.IDE.Properties;
 using nMars.RedCode;
+using nMars.RedCode.Modules;
 
 namespace nMars.IDE
 {
-    public class Application
+    public class IDEApplication
     {
         #region Construction
 
-        public Application()
-        {
-            ApplicationInstance = this;
-        }
-
-        public int Main()
+        public int Main(string[] args)
         {
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
@@ -42,18 +38,30 @@ namespace nMars.IDE
             {
                 Settings.RecentProjects =new List<string>();
             }
-            if (Settings.RecentProjects.Count != 0
-                && Settings.LoadRecentProject 
-                && File.Exists(Settings.RecentProjects[Settings.RecentProjects.Count - 1]))
+
+            if (args.Length>0)
             {
-                LoadSolution(Settings.RecentProjects[Settings.RecentProjects.Count - 1]);
+                NewSolution(args);
             }
             else
             {
-                NewSolution();
+                if (Settings.RecentProjects.Count != 0
+                    && Settings.LoadRecentProject 
+                    && File.Exists(Settings.RecentProjects[Settings.RecentProjects.Count - 1]))
+                {
+                    LoadSolution(Settings.RecentProjects[Settings.RecentProjects.Count - 1]);
+                }
+                else
+                {
+                    NewSolution(null);
+                }
             }
+            debuggerPlugin = ModuleRegister.CreateIDEPlugin("nMars.IDE.Debugger");
+            debuggerPlugin.Load();
+
+
             MainForm.RefreshRecent();
-            RefreshUI();
+            IDEApplication.RefreshControls();
             
             System.Windows.Forms.Application.Run(MainForm);
             Settings.Save();
@@ -62,10 +70,8 @@ namespace nMars.IDE
 
         public static bool ClosingApplication()
         {
-            if (ActiveEngine !=null && ActiveEngine.IsLive)
-            {
-                ActiveEngine.Kill();
-            }
+            debuggerPlugin.Unload();
+
             foreach (IEditor editor in Editors)
             {
                 if (!editor.Closing())
@@ -74,8 +80,25 @@ namespace nMars.IDE
                 }
             }
             bool res=SaveSolution();
-            RefreshUI();
+            RefreshControls();
             return res;
+        }
+
+        public static void RefreshControls()
+        {
+            bool openEditor = IDEApplication.ActiveEditor != null;
+            bool openWarrior = openEditor && IDEApplication.ActiveEditor.Document is WarriorDocument;
+            MainForm.saveWarriorToolStripMenuItem.Enabled = openWarrior;
+            MainForm.compileWarriorToolStripMenuItem.Enabled = openWarrior;
+            MainForm.closeWarriorToolStripMenuItem.Enabled = openWarrior;
+            MainForm.lbDocClose.Visible = openEditor;
+
+            bool warrior = IDEApplication.ActiveEditor != null;
+            MainForm.compileWarriorToolStripMenuItem.Enabled = warrior;
+
+            if (debuggerPlugin!=null)
+                debuggerPlugin.RefreshControls();
+            //? SolutionExplorer.ReloadSolution();
         }
 
         #endregion
@@ -89,14 +112,14 @@ namespace nMars.IDE
                 editor.Save();
             }
             SaveSolution();
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void OpenNewWarrior()
         {
             WarriorDocument warrior = WarriorDocument.New();
             warrior.Open();
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void OpenExistingWarrior()
@@ -114,25 +137,25 @@ namespace nMars.IDE
                     OpenExistingWarrior(fileName);
                 }
             }
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void ActivateDocument(ProjectDocument document)
         {
             document.Open();
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void OpenExistingWarrior(string filename)
         {
             WarriorDocument.Load(filename).Open();
-            RefreshUI();
+            RefreshControls();
         }
 
         public static bool SaveDocument(Document doc)
         {
             bool res = doc.Save();
-            RefreshUI();
+            RefreshControls();
             return res;
         }
 
@@ -142,7 +165,7 @@ namespace nMars.IDE
             {
                 doc.Close();
             }
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void AddExistingWarrior(RedCodeProject project)
@@ -160,13 +183,13 @@ namespace nMars.IDE
                     WarriorDocument.Load(fileName, project);
                 }
             }
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void AddNewWarrior(RedCodeProject project)
         {
             WarriorDocument.New(project).Open();
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void RemoveWarrior(WarriorDocument warrior, bool delete)
@@ -179,20 +202,20 @@ namespace nMars.IDE
                     warrior.Project.Remove(warrior, delete);
                 }
             }
-            RefreshUI();
+            RefreshControls();
         }
 
 
         public static void AddIntoProject(ProjectDocument document)
         {
             ActiveSolution.ActiveProject.Add(document);
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void RemoveFromProject(ProjectDocument document)
         {
             document.Project.Remove(document, false);
-            RefreshUI();
+            RefreshControls();
         }
 
         #endregion
@@ -202,13 +225,13 @@ namespace nMars.IDE
         public static void AddNewProject()
         {
             RedCodeProject.New(ActiveSolution);
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void RemoveProject(RedCodeProject project, bool delete)
         {
             ActiveSolution.Remove(project, delete);
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void AddExistingProject()
@@ -223,20 +246,20 @@ namespace nMars.IDE
             {
                 RedCodeProject.Load(MainForm.openDialog.FileName, ActiveSolution);
             }
-            RefreshUI();
+            RefreshControls();
         }
 
         public static bool SaveProject(RedCodeProject project)
         {
             bool res = project.Save();
-            RefreshUI();
+            RefreshControls();
             return res;
         }
 
         public static void SetProjectActive(RedCodeProject project)
         {
             ActiveSolution.ActiveProject = project;
-            RefreshUI();
+            RefreshControls();
         }
 
 
@@ -247,7 +270,7 @@ namespace nMars.IDE
             {
                 AddRecentProject(ActiveSolution.FileName);
             }
-            RefreshUI();
+            RefreshControls();
             return res;
         }
 
@@ -280,7 +303,7 @@ namespace nMars.IDE
                     AddRecentProject(MainForm.openDialog.FileName);
                 }
             }
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void OpenSolution(string fileName)
@@ -301,7 +324,7 @@ namespace nMars.IDE
                 SolutionExplorer.ReloadSolution();
                 AddRecentProject(fileName);
                 MainForm.RefreshRecent();
-                RefreshUI();
+                RefreshControls();
             }
             else
             {
@@ -319,24 +342,22 @@ namespace nMars.IDE
             {
                 if (ActiveSolution != null)
                     ActiveSolution.Close();
-                NewSolution();
+                NewSolution(null);
             }
-            RefreshUI();
+            RefreshControls();
         }
 
-        private static void NewSolution()
+        private static void NewSolution(string[] args)
         {
             ActiveSolution = RedCodeSolution.New();
             AddNewProject();
             ActiveSolution.IsModified = false;
+            if (args!=null && args.Length>0)
+            {
+                ActiveProject.Project = CommandLine.Prepare(args, ActiveSolution.Components, Console);
+            }
             SolutionExplorer.ReloadSolution();
-            RefreshUI();
-        }
-
-        public static void RefreshUI()
-        {
-            MainForm.RefreshUI();
-            //? SolutionExplorer.ReloadSolution();
+            RefreshControls();
         }
 
         #endregion
@@ -362,7 +383,7 @@ namespace nMars.IDE
                 ActiveSolution.Components.Parser.Parse(tmpProj, Console);
             }
             
-            RefreshUI();
+            RefreshControls();
         }
 
         public static void Compile(RedCodeProject project)
@@ -377,203 +398,7 @@ namespace nMars.IDE
 
             ActiveSolution.Components.Parser.Parse(ActiveProject.Project, Console);
             
-            RefreshUI();
-        }
-
-
-        public static void Run(RedCodeProject project, int brake)
-        {
-            if (ActiveSolution.ActiveProject.Documents.Count == 0)
-                return;
-
-            if (ActiveEngine == null)
-            {
-                ParseResult result = ActiveSolution.Components.Parser.Parse(ActiveProject.Project, Console);
-
-                if (result.Succesfull)
-                {
-                    ActiveProject.Project.EngineOptions.Brake = brake;
-                    if (brake == executeBrake)
-                    {
-                        ActiveSolution.Components.Engine.Run(ActiveProject.Project, Console.GetAsyncWrapper());
-                    }
-                    else
-                    {
-                        Console.WriteLine("========== Running ==========");
-                        ActiveEngine = ActiveSolution.Components.Engine as IAsyncEngine;
-                        ActiveEngine.BeginMatch(ActiveProject.Project, engineStopped);
-                        BeginWatch();
-                        ActiveEngine.Continue();
-                    }
-                }
-            }
-            else
-            {
-                ActiveEngine.Brake = brake;
-                if (ActiveEngine.IsPaused)
-                {
-                    ActiveEngine.Continue();
-                    Console.WriteLine("========== Running ==========");
-                    ResumeWatch();
-                }
-            }
-            ActiveBrake = brake;
-            MainForm.RefreshUI();
-        }
-
-        private static void EngineStopped(bool finished)
-        {
-            if (ActiveEngine==null)
-                return;
-            if (finished)
-            {
-                ActiveEngine.EndMatch(Console.GetAsyncWrapper());
-                ActiveEngine = null;
-                EndWatch();
-            }
-            else
-            {
-                Console.WriteLine("========== Paused ==========");
-                PauseWatch();
-            }
-            MainForm.RefreshUI();
-        }
-
-        public static void Stop()
-        {
-            if (ActiveEngine == null)
-                return;
-
-            ActiveEngine.Quit();
-        }
-
-        public static void Pause()
-        {
-            if (ActiveEngine == null)
-                return;
-
-            ActiveEngine.Pause();
-        }
-
-        public static void Continue()
-        {
-            if (ActiveEngine == null)
-                return;
-
-            ActiveEngine.Continue();
-            Console.WriteLine("========== Running ==========");
-            ResumeWatch();
-        }
-
-        public static void Step()
-        {
-            if (ActiveEngine == null)
-                return;
-
-            ActiveEngine.NextStep();
-            WatchTick();
-            Console.WriteLine("========== Step ==========");
-        }
-
-        public static void StepThread()
-        {
-            //TODO
-        }
-
-        public static void StepWarrior()
-        {
-            //TODO
-        }
-
-        public static void Back()
-        {
-            if (ActiveEngine == null || !ActiveEngine.CanStepBack)
-                return;
-
-            ActiveEngine.PrevStep();
-            WatchTick();
-            Console.WriteLine("========== Back ==========");
-        }
-
-        private delegate void boolDelegate(bool logical);
-
-        private static void engineStopped(bool finished)
-        {
-            MainForm.Invoke(new boolDelegate(EngineStopped), finished);
-        }
-
-        #endregion
-
-        #region Watch Core
-
-        private static void BeginWatch()
-        {
-            DebugOverview=new DebugOverview();
-            DebugOverview.Attach(MainForm.tabBottom, "Debug Overview");
-            DebugMemoryListing=new DebugMemoryListing();
-            DebugMemoryListing.Attach(MainForm.tabExplorers, "Memory Listing");
-            DebugMemoryGraph=new DebugMemoryGraph();
-            DebugMemoryGraph.Attach(MainForm.tabDocuments, "Memory Graph");
-            DebugOverview.ActivateControl();
-            DebugMemoryListing.ActivateControl();
-            DebugMemoryGraph.ActivateControl();
-            MainForm.timerDebugWatch.Enabled = true;
-        }
-
-        public static void PauseWatch()
-        {
-            MainForm.timerDebugWatch.Enabled = false;
-            DebugOverview.Pause();
-            DebugMemoryListing.Pause();
-            DebugMemoryGraph.Pause();
-            //WatchTick();
-        }
-
-        public static void ResumeWatch()
-        {
-            DebugOverview.Resume();
-            DebugMemoryListing.Resume();
-            DebugMemoryGraph.Resume();
-            MainForm.timerDebugWatch.Enabled = true;
-        }
-
-        public static void WatchTick()
-        {
-            if (ActiveEngine == null)
-                return;
-
-            lock (ActiveEngine)
-            {
-                DebugOverview.RepaintView();
-                DebugMemoryListing.RepaintView();
-                DebugMemoryGraph.RepaintView();
-                ActiveEngine.UiTickDone();
-            }
-        }
-
-        private static void EndWatch()
-        {
-            MainForm.timerDebugWatch.Enabled = false;
-            DebugOverview.Detach();
-            DebugMemoryListing.Detach();
-            DebugMemoryGraph.Detach();
-            ActiveBrake = executeBrake;
-        }
-
-        public const int slowRunBrake = 400;
-        public const int normalRunBrake = 10;
-        public const int fastRunBrake = 1;
-        public const int executeBrake = -1;
-
-        public static void ShowAddress(int address)
-        {
-            DebugMemoryListing.ShowAddress(address);
-        }
-
-        public static void EditCell(int address)
-        {
-            //TODO breakpoints + cell values, 
-            // dialog and tabs ?
+            RefreshControls();
         }
 
         #endregion
@@ -582,9 +407,6 @@ namespace nMars.IDE
 
         public static RedCodeSolution ActiveSolution;
         public static RedCodeProject ActiveProject;
-        public static Application ApplicationInstance;
-        public static IAsyncEngine ActiveEngine;
-        public static int ActiveBrake = executeBrake;
 
         //editors
         public static List<IEditor> Editors = new List<IEditor>();
@@ -594,12 +416,11 @@ namespace nMars.IDE
         public static SolutionExplorer SolutionExplorer;
         public static Console Console;
         public static MainForm MainForm;
-        public static DebugOverview DebugOverview;
-        public static DebugMemoryListing DebugMemoryListing;
-        public static DebugMemoryGraph DebugMemoryGraph;
         
         //setting
         internal static IDESettings Settings;
+
+        private static IIDEPlugin debuggerPlugin;
 
         #endregion
     }

@@ -22,7 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\nMars.IDE.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\nMars.IDE.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -50,42 +52,6 @@
     <Compile Include="Controls\Console.Designer.cs">
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CoreGridInteractive.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CoreGridInteractive.Designer.cs">
-      <DependentUpon>CoreGridInteractive.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CoreListingInteractive.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CoreListingInteractive.Designer.cs">
-      <DependentUpon>CoreListingInteractive.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DebugMemoryGraph.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\DebugMemoryGraph.Designer.cs">
-      <DependentUpon>DebugMemoryGraph.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DebugMemoryListing.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\DebugMemoryListing.Designer.cs">
-      <DependentUpon>DebugMemoryListing.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DebugOverview.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\DebugOverview.Designer.cs">
-      <DependentUpon>DebugOverview.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DebugWarriorOverview.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\DebugWarriorOverview.Designer.cs">
-      <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\IDEPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -104,7 +70,7 @@
     <Compile Include="Controls\IDEFrame.Designer.cs">
       <DependentUpon>IDEFrame.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Application.cs" />
+    <Compile Include="Core\IDEApplication.cs" />
     <Compile Include="Core\BreakPoints.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\RedCodeProject.cs" />
@@ -140,30 +106,6 @@
     <EmbeddedResource Include="Controls\Console.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Console.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CoreGridInteractive.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>CoreGridInteractive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CoreListingInteractive.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>CoreListingInteractive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DebugMemoryGraph.resx">
-      <DependentUpon>DebugMemoryGraph.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DebugMemoryListing.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DebugMemoryListing.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DebugOverview.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DebugOverview.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DebugWarriorOverview.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SolutionExplorer.resx">
       <DependentUpon>SolutionExplorer.cs</DependentUpon>
@@ -203,17 +145,7 @@
       <LastGenOutput>IDESettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\About.html" />
-    <Content Include="Resources\Back.ico" />
-    <Content Include="Resources\Execute.ico" />
-    <Content Include="Resources\StepRound.ico" />
-    <Content Include="Resources\StepThread.ico" />
-    <Content Include="Resources\Step.ico" />
-    <Content Include="Resources\Stop.ico" />
-    <Content Include="Resources\Pause.ico" />
-    <Content Include="Resources\RunFF.ico" />
-    <Content Include="Resources\RunF.ico" />
     <Content Include="Resources\IDEsmall.ico" />
-    <Content Include="Resources\Run.ico" />
     <None Include="Resources\IDE.ico" />
   </ItemGroup>
   <ItemGroup>

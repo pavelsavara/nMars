@@ -22,11 +22,15 @@ namespace nMars.RedCode
     /// <param name="commandLine">command line</param>
     public delegate void ConsoleCommandEntered(string commandLine);
 
-    public interface IConsole : ISimpleOutput
+    public interface IShellPrompt
+    {
+        event ConsoleCommandEntered CommandEntered;
+    }
+
+    public interface IConsole : ISimpleOutput, IShellPrompt
     {
         Stream ErrorStream { get; }
         Stream OutStream { get; }
         Stream InputStream { get; }
-        event ConsoleCommandEntered CommandEntered;
     }
 }

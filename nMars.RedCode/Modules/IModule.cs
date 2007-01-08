@@ -84,21 +84,15 @@ namespace nMars.RedCode.Modules
         IParser CreateParser(IParser parser);
     }
 
-    [ComVisible(true)]
-    public interface IDebuggerModule : IModule
+    /// <summary>
+    /// Ide module interface
+    /// </summary>
+    public interface IIDEPluginModule : IModule
     {
-        IDebugger CreateDebugger();
-    }
-
-    [ComVisible(true)]
-    public interface IDebuggerShellModule : IModule
-    {
-        IDebuggerShell CreateShell();
-    }
-
-    [ComVisible(true)]
-    public interface IIDEModule : IModule
-    {
+        /// <summary>
+        /// Called during startup
+        /// </summary>
+        IIDEPlugin CreateIDEPlugin();
     }
 
     /// <summary>

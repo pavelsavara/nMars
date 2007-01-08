@@ -1,0 +1,164 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{25CC8726-10A6-4153-B58A-226384E647E6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>nMars.IDE.Debugger</RootNamespace>
+    <AssemblyName>nMars.IDE.Debugger</AssemblyName>
+    <ApplicationIcon>Properties\IDE.Debugger.ico</ApplicationIcon>
+    <StartupObject>
+    </StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\nMars.IDE.Debugger.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="IDEDebuggerApplication.cs" />
+    <Compile Include="Controls\CoreGridInteractive.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CoreGridInteractive.Designer.cs">
+      <DependentUpon>CoreGridInteractive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CoreListingInteractive.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CoreListingInteractive.Designer.cs">
+      <DependentUpon>CoreListingInteractive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryGraph.cs">
+    </Compile>
+    <Compile Include="Controls\DebugMemoryGraph.Designer.cs">
+      <DependentUpon>DebugMemoryGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryListing.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryListing.Designer.cs">
+      <DependentUpon>DebugMemoryListing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugOverview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugOverview.Designer.cs">
+      <DependentUpon>DebugOverview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugWarriorOverview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugWarriorOverview.Designer.cs">
+      <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DebuggerMainForm.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\nMars.Debugger\nMars.Debugger.csproj">
+      <Project>{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}</Project>
+      <Name>nMars.Debugger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.Graphics\nMars.Graphics.csproj">
+      <Project>{B39B9FDE-DBBD-4118-85BC-48E6508FC76F}</Project>
+      <Name>nMars.Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.RedCode\nMars.RedCode.csproj">
+      <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
+      <Name>nMars.RedCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.IDE\nMars.IDE.csproj">
+      <Project>{BB9036EA-050A-4ECD-B857-CB022275A7C5}</Project>
+      <Name>nMars.IDE</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\CoreGridInteractive.resx">
+      <DependentUpon>CoreGridInteractive.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CoreListingInteractive.resx">
+      <DependentUpon>CoreListingInteractive.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugMemoryGraph.resx">
+      <DependentUpon>DebugMemoryGraph.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugMemoryListing.resx">
+      <DependentUpon>DebugMemoryListing.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugOverview.resx">
+      <DependentUpon>DebugOverview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugWarriorOverview.resx">
+      <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\IDE.Debugger.ico" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Back.ico" />
+    <Content Include="Resources\Execute.ico" />
+    <Content Include="Resources\Pause.ico" />
+    <Content Include="Resources\Run.ico" />
+    <Content Include="Resources\RunF.ico" />
+    <Content Include="Resources\RunFF.ico" />
+    <Content Include="Resources\Step.ico" />
+    <Content Include="Resources\StepRound.ico" />
+    <Content Include="Resources\StepThread.ico" />
+    <Content Include="Resources\Stop.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -59,7 +59,7 @@ namespace nMars.IDE.Core
                 IsModified = false;
                 IsNew = false;
                 Editor.PageName = Name;
-                Application.SolutionExplorer.ReloadSolution();
+                IDEApplication.SolutionExplorer.ReloadSolution();
             }
             else
             {
@@ -91,10 +91,10 @@ namespace nMars.IDE.Core
             if (Editor != null)
             {
                 Editor.Detach();
-                Application.Editors.Remove(Editor);
+                IDEApplication.Editors.Remove(Editor);
                 Editor = null;
             }
-            Application.SolutionExplorer.ReloadSolution();
+            IDEApplication.SolutionExplorer.ReloadSolution();
         }
 
         public override void Open()
@@ -109,7 +109,7 @@ namespace nMars.IDE.Core
                     sr.Close();
                 }
                 IsModified = false;
-                Editor.Attach(Application.MainForm.tabDocuments, Name);
+                Editor.Attach(IDEApplication.MainForm.tabDocuments, Name);
             }
             else
             {

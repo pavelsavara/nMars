@@ -18,57 +18,10 @@ namespace nMars.IDE.Forms
             Icon = nMars.IDE.Properties.Resources.IDEsmall;
         }
 
-        public void RefreshUI()
-        {
-            //TODO
-            bool openEditor = Application.ActiveEditor != null;
-            bool openWarrior = openEditor && Application.ActiveEditor.Document is WarriorDocument;
-            saveWarriorToolStripMenuItem.Enabled = openWarrior;
-            compileWarriorToolStripMenuItem.Enabled = openWarrior;
-            closeWarriorToolStripMenuItem.Enabled = openWarrior;
-            lbDocClose.Visible = openEditor;
-            
-            bool warrior = Application.ActiveEditor != null;
-            compileWarriorToolStripMenuItem.Enabled = warrior;
-
-            bool live = Application.ActiveEngine != null && Application.ActiveEngine.IsLive;
-            bool canRun = !live || Application.ActiveEngine.IsPaused;
-            runSlowToolStripMenuItem.Enabled = canRun || Application.ActiveBrake != Application.slowRunBrake;
-            runSlowToolStripButton.Enabled = canRun || Application.ActiveBrake != Application.slowRunBrake;
-            runNormalToolStripButton.Enabled = canRun || Application.ActiveBrake != Application.normalRunBrake;
-            runFastToolStripButton.Enabled = canRun || Application.ActiveBrake != Application.fastRunBrake;
-
-            stopToolStripMenuItem.Enabled = live;
-            stopToolStripButton.Enabled = live;
-
-            bool step = live && Application.ActiveEngine.IsPaused;
-            stepAnyToolStripMenuItem.Enabled = step;
-            stepAnyToolStripButton.Enabled = step;
-            stepThreadToolStripMenuItem.Enabled = step;
-            stepThreadToolStripButton.Enabled = step;
-            stepRoundToolStripButton.Enabled = step;
-            stepBackToolStripButton.Enabled = step;
-
-            bool pause = live && !Application.ActiveEngine.IsPaused;
-            pauseToolStripButton.Enabled = pause;
-            pauseToolStripMenuItem.Enabled = live;
-            if (live)
-            {
-                if(pause)
-                {
-                    pauseToolStripMenuItem.Text = "Pause";
-                }
-                else
-                {
-                    pauseToolStripMenuItem.Text = "Resume";
-                }
-            }
-        }
-
         public void RefreshRecent()
         {
             recentProjectsToolStripMenuItem.DropDownItems.Clear();
-            foreach (string project in Application.Settings.RecentProjects)
+            foreach (string project in IDEApplication.Settings.RecentProjects)
             {
                 ToolStripMenuItem it=new ToolStripMenuItem(Path.GetFileNameWithoutExtension(project));
                 it.Tag = project;
@@ -110,22 +63,22 @@ namespace nMars.IDE.Forms
         {
             if (!finish)
             {
-                if (Application.Editors.Count == 0)
+                if (IDEApplication.Editors.Count == 0)
                 {
                     return;
                 }
                 lastCycledEditor++;
-                if (lastCycledEditor >= Application.Editors.Count)
+                if (lastCycledEditor >= IDEApplication.Editors.Count)
                     lastCycledEditor = 0;
-                Application.ActiveEditor = Application.Editors[lastCycledEditor];
-                Application.ActiveEditor.ActivateControl();
+                IDEApplication.ActiveEditor = IDEApplication.Editors[lastCycledEditor];
+                IDEApplication.ActiveEditor.ActivateControl();
             }
             else
             {
                 if (lastCycledEditor != -1)
                 {
-                    Application.Editors.Remove(Application.ActiveEditor);
-                    Application.Editors.Insert(0, Application.ActiveEditor);
+                    IDEApplication.Editors.Remove(IDEApplication.ActiveEditor);
+                    IDEApplication.Editors.Insert(0, IDEApplication.ActiveEditor);
                     lastCycledEditor = 0;
                 }
             }
@@ -146,32 +99,32 @@ namespace nMars.IDE.Forms
 
         private void addNewProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.AddNewProject();
+            IDEApplication.AddNewProject();
         }
 
         private void addNewWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.AddNewWarrior(Application.ActiveSolution.ActiveProject);
+            IDEApplication.AddNewWarrior(IDEApplication.ActiveSolution.ActiveProject);
         }
 
         private void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.SaveAll();
+            IDEApplication.SaveAll();
         }
 
         private void openExistingWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.OpenExistingWarrior();
+            IDEApplication.OpenExistingWarrior();
         }
 
         private void openExistingSolutionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.OpenSolution();
+            IDEApplication.OpenSolution();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!Application.ClosingApplication())
+            if (!IDEApplication.ClosingApplication())
             {
                 e.Cancel = true;
             }
@@ -180,157 +133,55 @@ namespace nMars.IDE.Forms
         void it_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem it = sender as ToolStripMenuItem;
-            Application.OpenSolution(it.Tag as string);
+            IDEApplication.OpenSolution(it.Tag as string);
         }
 
         private void addExistingWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.AddExistingWarrior(Application.ActiveSolution.ActiveProject);
+            IDEApplication.AddExistingWarrior(IDEApplication.ActiveSolution.ActiveProject);
         }
 
         private void closeSolutionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.CloseSolution();
+            IDEApplication.CloseSolution();
         }
 
         private void saveWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.SaveDocument(Application.ActiveEditor.Document);
+            IDEApplication.SaveDocument(IDEApplication.ActiveEditor.Document);
         }
 
         private void closeWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.CloseDocument(Application.ActiveEditor.Document);
+            IDEApplication.CloseDocument(IDEApplication.ActiveEditor.Document);
         }
 
         private void addWarriorIntoProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.AddIntoProject(Application.ActiveEditor.Document as ProjectDocument);
+            IDEApplication.AddIntoProject(IDEApplication.ActiveEditor.Document as ProjectDocument);
         }
 
         private void removeWarriorFromProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.RemoveFromProject(Application.ActiveEditor.Document as ProjectDocument);
+            IDEApplication.RemoveFromProject(IDEApplication.ActiveEditor.Document as ProjectDocument);
         }
 
         private void compileWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Application.ActiveEditor != null)
+            if (IDEApplication.ActiveEditor != null)
             {
-                Application.Compile(Application.ActiveEditor.Document as WarriorDocument);
+                IDEApplication.Compile(IDEApplication.ActiveEditor.Document as WarriorDocument);
             }
         }
 
         private void compileProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Compile(Application.ActiveSolution.ActiveProject);
+            IDEApplication.Compile(IDEApplication.ActiveSolution.ActiveProject);
         }
 
         private void lbDocClose_Click(object sender, EventArgs e)
         {
-            Application.CloseDocument(Application.ActiveEditor.Document);
-        }
-
-        private void runSlowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Run(Application.ActiveSolution.ActiveProject, Application.slowRunBrake);
-        }
-
-        private void runSlowToolStripButton_Click(object sender, EventArgs e)
-        {
-            Application.Run(Application.ActiveSolution.ActiveProject, Application.slowRunBrake);
-        }
-
-        private void runFastToolStripButton_Click(object sender, EventArgs e)
-        {
-            Application.Run(Application.ActiveSolution.ActiveProject, Application.fastRunBrake);
-        }
-
-        private void runFastToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Run(Application.ActiveSolution.ActiveProject, Application.fastRunBrake);
-        }
-
-        private void runNormalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Run(Application.ActiveSolution.ActiveProject, Application.normalRunBrake);
-        }
-
-        private void runNormalToolStripButton_Click(object sender, EventArgs e)
-        {
-            Application.Run(Application.ActiveSolution.ActiveProject, Application.normalRunBrake);
-        }
-
-        private void runToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Run(Application.ActiveSolution.ActiveProject, Application.ActiveBrake);
-        }
-
-        private void executeToolStripButton_Click(object sender, EventArgs e)
-        {
-            Application.Run(Application.ActiveSolution.ActiveProject, Application.executeBrake);
-        }
-
-        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Stop();
-        }
-
-        private void stopToolStripButton_Click(object sender, EventArgs e)
-        {
-            Application.Stop();
-        }
-
-        private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!Application.ActiveEngine.IsPaused)
-            {
-                Application.Pause();
-            }
-            else
-            {
-                Application.Continue();
-            }
-        }
-
-        private void pauseToolStripButton_Click(object sender, EventArgs e)
-        {
-            Application.Pause();
-        }
-
-        private void stepRoundToolStripButton_Click(object sender, EventArgs e)
-        {
-            Application.StepThread();
-        }
-
-        private void stepThreadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.StepThread();
-        }
-
-        private void stepWarriorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.StepWarrior();
-        }
-
-        private void stepAnyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Step();
-}
-
-        private void stepAnyToolStripButton_Click(object sender, EventArgs e)
-        {
-            Application.Step();
-        }
-
-        private void stepBackToolStripButton_Click(object sender, EventArgs e)
-        {
-            Application.Back();
-        }
-
-        private void timerDebugWatch_Tick(object sender, EventArgs e)
-        {
-            Application.WatchTick();
+            IDEApplication.CloseDocument(IDEApplication.ActiveEditor.Document);
         }
 
         #endregion

@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using nMars.IDE.Debugger;
 using nMars.RedCode;
 
 namespace nMars.IDE.Controls
@@ -23,17 +24,17 @@ namespace nMars.IDE.Controls
             Dock = DockStyle.Fill;
             warriorIndex = aWarriorIndex;
             panel.Controls.Add(this, aWarriorIndex, 0);
-            groupBox.Text = Application.ActiveEngine.Warriors[aWarriorIndex].Name + " by " +
-                            Application.ActiveEngine.Warriors[aWarriorIndex].Author;
-            view = new TaskListCoreView(Application.ActiveEngine, aWarriorIndex);
+            groupBox.Text = IDEDebuggerApplication.Instance.ActiveEngine.Warriors[aWarriorIndex].Name + " by " +
+                            IDEDebuggerApplication.Instance.ActiveEngine.Warriors[aWarriorIndex].Author;
+            view = new TaskListCoreView(IDEDebuggerApplication.Instance.ActiveEngine, aWarriorIndex);
             coreList.View = view;
-            coreList.Attach(Application.ActiveEngine);
+            coreList.Attach(IDEDebuggerApplication.Instance.ActiveEngine);
 
         }
 
         public void RepaintView()
         {
-            IRunningWarrior rw = Application.ActiveEngine.RunningWarriors[warriorIndex];
+            IRunningWarrior rw = IDEDebuggerApplication.Instance.ActiveEngine.RunningWarriors[warriorIndex];
             textBoxTasks.Text = rw.TasksCount + "/" + rw.DeadTasksCount;
             if (rw.PrevInstruction != null)
                 textBoxLastInstruction.Text = rw.PrevInstruction.ToString();
