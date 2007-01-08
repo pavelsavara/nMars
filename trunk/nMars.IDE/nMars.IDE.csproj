@@ -57,7 +57,7 @@
       <DependentUpon>CoreGridInteractive.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CoreListingInteractive.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CoreListingInteractive.Designer.cs">
       <DependentUpon>CoreListingInteractive.cs</DependentUpon>

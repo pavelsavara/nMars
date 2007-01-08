@@ -539,7 +539,7 @@ namespace nMars.IDE
 
         public static void WatchTick()
         {
-            if (ActiveEngine == null || DebugOverview == null)
+            if (ActiveEngine == null)
                 return;
 
             lock (ActiveEngine)

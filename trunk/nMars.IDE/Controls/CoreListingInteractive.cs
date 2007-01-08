@@ -29,8 +29,8 @@ namespace nMars.IDE.Controls
                 return;
 
             int index = (e.Y / ItemHeight) + TopIndex;
-            CoreCellHelper item = (CoreCellHelper)((ICoreBindingList)DataSource)[index];
-            Application.EditCell(item.Instruction.Address);
+            int address = View[index];
+            Application.EditCell(address);
         }
 
         private void CoreListingInteractive_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -39,8 +39,8 @@ namespace nMars.IDE.Controls
                 return;
 
             int index = (e.Y / ItemHeight) + TopIndex;
-            CoreCellHelper item = (CoreCellHelper)((ICoreBindingList)DataSource)[index];
-            Application.ShowAddress(item.Instruction.Address);
+            int address = View[index];
+            Application.ShowAddress(address);
         }
     }
 }

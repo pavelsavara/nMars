@@ -93,18 +93,11 @@ namespace nMars.IDE.Controls
             // 
             // coreList
             // 
-            this.coreList.BackColor = System.Drawing.Color.Black;
             this.coreList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.coreList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.coreList.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.coreList.ForeColor = System.Drawing.Color.White;
-            this.coreList.FormattingEnabled = true;
-            this.coreList.ItemHeight = 14;
             this.coreList.Location = new System.Drawing.Point(0, 38);
             this.coreList.Name = "coreList";
             this.coreList.PaintMarkedIndex = true;
             this.coreList.PaintNextAddress = true;
-            this.coreList.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.coreList.Size = new System.Drawing.Size(199, 494);
             this.coreList.TabIndex = 3;
             // 

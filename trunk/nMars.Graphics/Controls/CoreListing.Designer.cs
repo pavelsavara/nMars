@@ -28,19 +28,37 @@ namespace nMars.Graphics.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            this.scrollBar = new System.Windows.Forms.VScrollBar();
             this.SuspendLayout();
+            // 
+            // scrollBar
+            // 
+            this.scrollBar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.scrollBar.Location = new System.Drawing.Point(204, 0);
+            this.scrollBar.Name = "scrollBar";
+            this.scrollBar.Size = new System.Drawing.Size(16, 593);
+            this.scrollBar.TabIndex = 0;
+            this.scrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scrollBar_Scroll);
             // 
             // CoreListing
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.Controls.Add(this.scrollBar);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
-            this.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CoreListing_DrawItem);
+            this.Name = "CoreListing";
+            this.Size = new System.Drawing.Size(220, 593);
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.CoreListing_MouseWheel);
+            this.MouseEnter += new System.EventHandler(this.CoreListing_MouseEnter);
+            this.ClientSizeChanged += new System.EventHandler(this.CoreListing_ClientSizeChanged);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.VScrollBar scrollBar;
     }
 }
