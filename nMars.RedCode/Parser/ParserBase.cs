@@ -27,6 +27,10 @@ namespace nMars.RedCode
             int succ = 0;
             foreach (string file in project.WarriorFiles)
             {
+                if (project.ParserOptions.StatusLine && console != null)
+                {
+                    console.WriteLine("========== Parsing " + file + "==========");
+                }
                 IWarrior warrior = Parse(file);
                 project.Warriors.Add(warrior);
                 if (warrior != null)
