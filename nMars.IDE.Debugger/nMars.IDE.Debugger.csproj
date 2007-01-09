@@ -60,16 +60,19 @@
       <DependentUpon>CoreListingInteractive.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DebugMemoryGraph.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\DebugMemoryGraph.Designer.cs">
       <DependentUpon>DebugMemoryGraph.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DebugMemoryListing.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\DebugMemoryListing.Designer.cs">
       <DependentUpon>DebugMemoryListing.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DebugOverview.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\DebugOverview.Designer.cs">
       <DependentUpon>DebugOverview.cs</DependentUpon>
