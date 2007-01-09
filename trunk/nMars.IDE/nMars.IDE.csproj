@@ -153,7 +153,7 @@
       <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
       <Name>nMars.RedCode</Name>
     </ProjectReference>
-    <ProjectReference Include="N:\nMars\nMars.Graphics\nMars.Graphics.csproj">
+    <ProjectReference Include="..\nMars.Graphics\nMars.Graphics.csproj">
       <Project>{B39B9FDE-DBBD-4118-85BC-48E6508FC76F}</Project>
       <Name>nMars.Graphics</Name>
     </ProjectReference>

@@ -21,13 +21,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pMarsConsole", "pMars\src\p
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Screensaver", "nMars.Screensaver\nMars.Screensaver.csproj", "{7C5CCD45-9A5B-4D6F-B4CD-DDB6596C6B93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Graphics", "N:\nMars\nMars.Graphics\nMars.Graphics.csproj", "{B39B9FDE-DBBD-4118-85BC-48E6508FC76F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Graphics", "nMars.Graphics\nMars.Graphics.csproj", "{B39B9FDE-DBBD-4118-85BC-48E6508FC76F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Debugger", "N:\nMars\nMars.Debugger\nMars.Debugger.csproj", "{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Debugger", "nMars.Debugger\nMars.Debugger.csproj", "{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.IDE.Debugger", "N:\nMars\nMars.IDE.Debugger\nMars.IDE.Debugger.csproj", "{25CC8726-10A6-4153-B58A-226384E647E6}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "nMars.Setup", "nMars.Setup\nMars.Setup.vdproj", "{0407FDCC-D18F-48F7-82B5-3152C1CD527A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.IDE.Debugger", "nMars.IDE.Debugger\nMars.IDE.Debugger.csproj", "{25CC8726-10A6-4153-B58A-226384E647E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -169,12 +167,6 @@ Global
 		{25CC8726-10A6-4153-B58A-226384E647E6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{25CC8726-10A6-4153-B58A-226384E647E6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{25CC8726-10A6-4153-B58A-226384E647E6}.Release|Win32.ActiveCfg = Release|Any CPU
-		{0407FDCC-D18F-48F7-82B5-3152C1CD527A}.Debug|Any CPU.ActiveCfg = Debug
-		{0407FDCC-D18F-48F7-82B5-3152C1CD527A}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{0407FDCC-D18F-48F7-82B5-3152C1CD527A}.Debug|Win32.ActiveCfg = Debug
-		{0407FDCC-D18F-48F7-82B5-3152C1CD527A}.Release|Any CPU.ActiveCfg = Release
-		{0407FDCC-D18F-48F7-82B5-3152C1CD527A}.Release|Mixed Platforms.ActiveCfg = Release
-		{0407FDCC-D18F-48F7-82B5-3152C1CD527A}.Release|Win32.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

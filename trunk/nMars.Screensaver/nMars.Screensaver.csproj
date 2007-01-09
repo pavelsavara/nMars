@@ -4,13 +4,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{7C5CCD45-9A5B-4D6F-B4CD-DDB6596C6B93}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>nMars.Debugger</RootNamespace>
-    <AssemblyName>nMars.Debugger</AssemblyName>
-    <ApplicationIcon>Properties\Debugger.ico</ApplicationIcon>
-    <StartupObject>nMars.Debugger.Module</StartupObject>
+    <RootNamespace>nMars.Screensaver</RootNamespace>
+    <AssemblyName>nMars.Screensaver</AssemblyName>
+    <ApplicationIcon>Properties\Screensaver.ico</ApplicationIcon>
+    <StartupObject>nMars.Screensaver.Module</StartupObject>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -32,7 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\nMars.Debugger.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Release\nMars.Screensaver.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -43,7 +43,6 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Debugger.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,13 +51,9 @@
       <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
       <Name>nMars.RedCode</Name>
     </ProjectReference>
-    <ProjectReference Include="..\nMars.Graphics\nMars.Graphics.csproj">
-      <Project>{B39B9FDE-DBBD-4118-85BC-48E6508FC76F}</Project>
-      <Name>nMars.Graphics</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Debugger.ico" />
+    <EmbeddedResource Include="Properties\Screensaver.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -68,4 +63,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetPath) $(TargetDir)nMars.scr</PostBuildEvent>
+  </PropertyGroup>
 </Project>
