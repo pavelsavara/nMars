@@ -1,0 +1,120 @@
+      
+      MOPT(6)                  GAMES AND DEMOS                  MOPT(6)
+      
+      
+      NAME
+           mopt - multiple constant optimizer
+      
+      SYNOPSIS
+           mopt
+      
+      DESCRIPTION
+           Mopt finds "optimal" combinations  of  scanning  or  bombing
+           constants for corewar warriors. In contrast to other popular
+           optimizers (optima, corestep) which optimize  for  a  single
+           step   value,   mopt   is   useful  for  optimizing  complex
+           bombing/scanning patterns of stones  and  cmp-scanners.  The
+           program  asks  for  core  size,  target  size,  and up to 10
+           increment/offset pairs.  "Increment" is the distance between
+           two consecutive bombs/scans; "offset" is the position of the
+           first bomb/scan relative to zero.   Increments  and  offsets
+           can  be simply numbers or "generators" that provide a stream
+           of numbers. If at least one  generator  is  specified,  mopt
+           will  find  the  20  best  combinations  of increment/offset
+           pairs, otherwise it will report the score for the  specified
+           increment/offset  combination.   Generators  have  a  syntax
+           similar to for-loops in the C language (see examples  below)
+           and  use single letter variables A through Z. You don't have
+           to use them in sequence, i.e. A for increment generator  #1,
+           B for offset generator #2 etc..
+      
+      EXAMPLES
+           1) Suppose we have a stone:
+      
+                        spl #A,<B
+                        add -1,1
+                        mov <-2,-2
+                        jmp -2
+      
+           and we want to find optimal values for increments A and B:
+      
+                Coresize: 8000 <enter>
+                Increment value or generator #1: a=4,a<8000,a=a+4 <enter>
+                   Offset value or generator #2: 0 <enter>
+                Increment value or generator #2: b=1,b<8000,b=b+2 <enter>
+                   Offset value or generator #3: <enter>
+      
+           2) Now a carpet-bombing cmp-scanner:
+      
+                        sub incr,1
+                        cmp 0,C
+                        ...
+                incr    spl #-A,<-B
+                        ...
+      
+                Coresize: 8000 <enter>
+                Increment value or generator #1: a=2,a<4000,a=a+4 <enter>
+      
+      
+      PMARS PROJECT       Last change: May 15, 1994                   1
+      
+      
+      MOPT(6)                  GAMES AND DEMOS                  MOPT(6)
+      
+      
+                   Offset value or generator #2: c=10,c<15,c=c+1 <enter>
+                Increment value or generator #2: b=a <enter>
+                   Offset value or generator #3: <enter>
+      
+           3) Lastly, a spl/jmp bombing cmp-scanner:
+      
+                        sub incr,1
+                        cmp 0,C      ;C is A/2
+                        ...
+                incr    spl #-A,<-B
+                        ...
+      
+                Coresize: 8000 <enter>
+                Increment value or generator #1: a=2,a<4000,a=a+4 <enter>
+                   Offset value or generator #2: c=a/2 <enter>
+                Increment value or generator #2: b=a <enter>
+                   Offset value or generator #3: <enter>
+      
+      
+      ALGORITHM
+           Scoring is based on Nandor Sieben's iterative  optima  algo-
+           rithm  with two modifications: A variable gap cut-off ("tar-
+           get size") is used and early gaps weigh more than late gaps.
+      
+      AUTHOR
+           Stefan Strack (stst@vuse.vanderbilt.edu)
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      PMARS PROJECT       Last change: May 15, 1994                   2
+      
