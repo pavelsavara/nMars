@@ -144,6 +144,7 @@ namespace nMars.RedCode
         public IList<IWarrior> Warriors = new List<IWarrior>();
 
         public List<string> WarriorFiles = new List<string>();
+        public List<string> InactiveWarriorFiles = new List<string>();
         public Rules Rules = Rules.DefaultRules;
         public EngineOptions EngineOptions = EngineOptions.Default;
         public ParserOptions ParserOptions = ParserOptions.Default;

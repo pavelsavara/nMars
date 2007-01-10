@@ -108,7 +108,7 @@ namespace nMars.IDE.Core
                     Editor.EditedText = sr.ReadToEnd();
                     sr.Close();
                 }
-                IsModified = false;
+                //?? IsModified = false;
                 Editor.Attach(IDEApplication.MainForm.tabDocuments, Name);
             }
             else

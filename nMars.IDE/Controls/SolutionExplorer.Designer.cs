@@ -45,15 +45,13 @@ namespace nMars.IDE.Controls
             this.compileWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activateWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deactivateWarriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuSolution.SuspendLayout();
             this.contextMenuProject.SuspendLayout();
             this.contextMenuWarrior.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // IDEFramePanel
-            // 
-            this.Controls.Add(this.tree);
-            this.Size = new System.Drawing.Size(252, 600);
             // 
             // tree
             // 
@@ -103,9 +101,10 @@ namespace nMars.IDE.Controls
             this.removeProjectToolStripMenuItem,
             this.deleteProjectToolStripMenuItem,
             this.saveProjectToolStripMenuItem,
-            this.setAsActiveProjectToolStripMenuItem});
+            this.setAsActiveProjectToolStripMenuItem,
+            this.editProjectToolStripMenuItem});
             this.contextMenuProject.Name = "contextMenuProject";
-            this.contextMenuProject.Size = new System.Drawing.Size(186, 136);
+            this.contextMenuProject.Size = new System.Drawing.Size(186, 180);
             // 
             // addNewWarriorToolStripMenuItem
             // 
@@ -154,34 +153,58 @@ namespace nMars.IDE.Controls
             this.contextMenuWarrior.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.compileWarriorToolStripMenuItem,
             this.removeWarriorToolStripMenuItem,
-            this.deleteWarriorToolStripMenuItem});
+            this.deleteWarriorToolStripMenuItem,
+            this.activateWarriorToolStripMenuItem,
+            this.deactivateWarriorToolStripMenuItem});
             this.contextMenuWarrior.Name = "contextMenuWarrior";
-            this.contextMenuWarrior.Size = new System.Drawing.Size(164, 70);
+            this.contextMenuWarrior.Size = new System.Drawing.Size(177, 114);
             // 
             // compileWarriorToolStripMenuItem
             // 
             this.compileWarriorToolStripMenuItem.Name = "compileWarriorToolStripMenuItem";
-            this.compileWarriorToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.compileWarriorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.compileWarriorToolStripMenuItem.Text = "Compile Warrior";
             this.compileWarriorToolStripMenuItem.Click += new System.EventHandler(this.compileWarriorToolStripMenuItem_Click);
             // 
             // removeWarriorToolStripMenuItem
             // 
             this.removeWarriorToolStripMenuItem.Name = "removeWarriorToolStripMenuItem";
-            this.removeWarriorToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.removeWarriorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.removeWarriorToolStripMenuItem.Text = "Remove Warrior";
             this.removeWarriorToolStripMenuItem.Click += new System.EventHandler(this.removeWarriorToolStripMenuItem_Click);
             // 
             // deleteWarriorToolStripMenuItem
             // 
             this.deleteWarriorToolStripMenuItem.Name = "deleteWarriorToolStripMenuItem";
-            this.deleteWarriorToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.deleteWarriorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.deleteWarriorToolStripMenuItem.Text = "Delete Warrior";
             this.deleteWarriorToolStripMenuItem.Click += new System.EventHandler(this.deleteWarriorToolStripMenuItem_Click);
+            // 
+            // activateWarriorToolStripMenuItem
+            // 
+            this.activateWarriorToolStripMenuItem.Name = "activateWarriorToolStripMenuItem";
+            this.activateWarriorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.activateWarriorToolStripMenuItem.Text = "Activate Warrior";
+            this.activateWarriorToolStripMenuItem.Click += new System.EventHandler(this.activateWarriorToolStripMenuItem_Click);
+            // 
+            // deactivateWarriorToolStripMenuItem
+            // 
+            this.deactivateWarriorToolStripMenuItem.Name = "deactivateWarriorToolStripMenuItem";
+            this.deactivateWarriorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.deactivateWarriorToolStripMenuItem.Text = "Deactivate Warrior";
+            this.deactivateWarriorToolStripMenuItem.Click += new System.EventHandler(this.deactivateWarriorToolStripMenuItem_Click);
+            // 
+            // editProjectToolStripMenuItem
+            // 
+            this.editProjectToolStripMenuItem.Name = "editProjectToolStripMenuItem";
+            this.editProjectToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.editProjectToolStripMenuItem.Text = "Edit Project";
+            this.editProjectToolStripMenuItem.Click += new System.EventHandler(this.editProjectToolStripMenuItem_Click);
             // 
             // SolutionExplorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.Controls.Add(this.tree);
             this.Name = "SolutionExplorer";
             this.Size = new System.Drawing.Size(252, 600);
             this.contextMenuSolution.ResumeLayout(false);
@@ -209,6 +232,9 @@ namespace nMars.IDE.Controls
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveSolutionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setAsActiveProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem activateWarriorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deactivateWarriorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem;
 
 
     }

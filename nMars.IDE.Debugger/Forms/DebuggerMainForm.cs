@@ -45,7 +45,7 @@ namespace nMars.IDE.Debugger.Forms
             pauseToolStripButton = new ToolStripButton();
             stepBackToolStripButton = new ToolStripButton();
             stopToolStripButton = new ToolStripButton();
-            timerDebugWatch = new Timer(mainForm.components);
+            timerDebugWatch = new Timer(mainForm.Components);
             mainForm.mainMenu.SuspendLayout();
             mainForm.toolbar.SuspendLayout();
 

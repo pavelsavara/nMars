@@ -95,6 +95,11 @@ namespace nMars.IDE.Controls
             IDEApplication.SetProjectActive(clickedNode.Tag as RedCodeProject);
         }
 
+        private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IDEApplication.ActivateDocument(clickedNode.Tag as RedCodeProject);
+        }
+
         #endregion
 
         #region Warrior events
@@ -121,9 +126,22 @@ namespace nMars.IDE.Controls
             IDEApplication.RemoveWarrior(warrior, true);
         }
 
+        private void activateWarriorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WarriorDocument warrior = clickedNode.Tag as WarriorDocument;
+            warrior.Project.Activate(warrior);
+        }
+
+        private void deactivateWarriorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WarriorDocument warrior = clickedNode.Tag as WarriorDocument;
+            warrior.Project.Deactivate(warrior);
+        }
+
         private void compileWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO
+            WarriorDocument warrior = clickedNode.Tag as WarriorDocument;
+            IDEApplication.Compile(warrior);
         }
 
         #endregion
@@ -175,11 +193,17 @@ namespace nMars.IDE.Controls
                 {
                     IDEApplication.ActivateDocument(clickedNode.Tag as ProjectDocument);
                 }
+                if (clickedNode.Tag is RedCodeProject)
+                {
+                    IDEApplication.ActivateDocument(clickedNode.Tag as RedCodeProject);
+                }
             }
         }
 
         private TreeNode clickedNode;
 
         #endregion
+
+
     }
 }

@@ -70,6 +70,7 @@ unsorted
    - submit to hill feature
    - Project/solution editors
    - Mono - Moma
+   - new warrior template
  
  - Competition
    - look for other implementations
@@ -100,3 +101,11 @@ unsorted
  
  - pMars
    - disable pSpace commandline option
+
+
+ - TODO 0.9
+   - breakpoints
+   - python
+   - web
+   - parser pre ;redcode
+   

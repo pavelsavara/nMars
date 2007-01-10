@@ -7,10 +7,6 @@ namespace nMars.IDE.Forms
 {
     partial class MainForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        public System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -67,7 +63,6 @@ namespace nMars.IDE.Forms
             this.tabBottom = new nMars.IDE.Controls.IDEPanel();
             this.tabExplorers = new nMars.IDE.Controls.IDEPanel();
             this.mainMenu.SuspendLayout();
-            this.toolbar.SuspendLayout();
             this.splitContainerOuter.Panel1.SuspendLayout();
             this.splitContainerOuter.Panel2.SuspendLayout();
             this.splitContainerOuter.SuspendLayout();
@@ -211,7 +206,7 @@ namespace nMars.IDE.Forms
             // 
             this.recentProjectsToolStripMenuItem.Name = "recentProjectsToolStripMenuItem";
             this.recentProjectsToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.recentProjectsToolStripMenuItem.Text = "Recent Projects";
+            this.recentProjectsToolStripMenuItem.Text = "Recent Solutions";
             // 
             // helpToolStripMenuItem
             // 
@@ -375,8 +370,6 @@ namespace nMars.IDE.Forms
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
-            this.toolbar.ResumeLayout(false);
-            this.toolbar.PerformLayout();
             this.splitContainerOuter.Panel1.ResumeLayout(false);
             this.splitContainerOuter.Panel2.ResumeLayout(false);
             this.splitContainerOuter.ResumeLayout(false);
@@ -423,6 +416,7 @@ namespace nMars.IDE.Forms
         public System.Windows.Forms.ToolStripMenuItem compileProjectToolStripMenuItem;
         public System.Windows.Forms.Label lbDocClose;
         public System.Windows.Forms.ToolStripMenuItem recentProjectsToolStripMenuItem;
+        private System.ComponentModel.IContainer components;
     }
 }
 
