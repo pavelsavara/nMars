@@ -235,24 +235,13 @@ checksum_warriors()
   warrior_struct *oldW;                /* the previous living warrior to execute */
   ADDR_T  positions;// = coreSize + 1 - (separation << 1);
   ADDR_T  coreSize1;// = coreSize - 1;
-  warrior_struct *starter;// = warrior;        /* pointer to warrior that starts
-					 /* round */
+  warrior_struct *starter;// = warrior;        /* pointer to warrior that starts round */
   U32_T   cycles2;// = warriors * cycles;
 #ifndef SERVER
   char    outs[60];                /* for cdb() entering message */
 #endif
-  mem_struct *sourcePtr;        /* pointer used to copy program to core */
-  mem_struct *endPtr;                /* pointer used to copy program to core */
-  int     addrA, addrB;                /* A and B pointers */
-#ifndef SERVER
-  int     temp2;			/* needed in graphical versions to display postincrements at the correct address */
-#endif
-  ADDR_T FAR *tempPtr2;
-#ifdef NEW_MODES
-  ADDR_T FAR *offsPtr;                /* temporary pointer used in op decode phase */
-#endif
 
-void init_core()
+void init_core() 
 {
   endWar = warrior + warriors;
   cycles2 = warriors * cycles;
@@ -329,6 +318,9 @@ void init_core()
 
 void init_round()
 {
+  mem_struct *sourcePtr;        /* pointer used to copy program to core */
+  mem_struct *endPtr;                /* pointer used to copy program to core */
+  ADDR_T FAR *tempPtr2;
 	int     temp;
 #if defined(DOS16) && !defined(SERVER) && !defined(DOSTXTGRAPHX) && !defined(DOSGRXGRAPHX) && !defined(DJGPP)
     fputc('\r', STDOUT);        /* enable interruption by Ctrl-C */
@@ -370,11 +362,11 @@ void init_round()
     W = starter;
     if (starter != warrior)
       oldW = starter - 1;
-    addrA = warrior[0].instLen;
+    temp = warrior[0].instLen;
     /* clear the core following warrior 0 */
     do {
-      memory[addrA] = INITIALINST;
-    } while (++addrA < coreSize);
+      memory[temp] = INITIALINST;
+    } while (++temp < coreSize);
     tempPtr2 = endQueue - taskNum - 1;
     temp = 0;
     do {
@@ -401,6 +393,14 @@ void init_round()
 
 int run_step()
 {   
+  int     addrA, addrB;                /* A and B pointers */
+#ifndef SERVER
+  int     temp2;			/* needed in graphical versions to display postincrements at the correct address */
+#endif
+  ADDR_T FAR *tempPtr2;
+#ifdef NEW_MODES
+  ADDR_T FAR *offsPtr;                /* temporary pointer used in op decode phase */
+#endif
 	register int     temp;                        /* general purpose temporary variable */
     /* the inner loop of execution */
                                 /* each cycle */
