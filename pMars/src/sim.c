@@ -166,21 +166,11 @@ extern char *fatalErrorInSimulator;
 extern char *warriorTerminatedEndOfRound;
 extern char *endOfRound;
 
+ADDR_T  progCnt;                /* program counter */
 warrior_struct *W;                /* indicate which warrior is running */
 U32_T   totaltask;                /* size of the taskQueue */
 ADDR_T FAR *endQueue;
 ADDR_T FAR *taskQueue;
-ADDR_T  progCnt;                /* program counter */
-
-  mem_struct FAR *destPtr;        /* pointer used to copy program to core */
-  mem_struct FAR *tempPtr;        /* temporary pointer used in op decode phase */
-
-  mem_struct IR;                /* current instruction and A cell */
-#ifdef NEW_MODES
-//  mem_struct IRA;                /* A/B_field hold A-field of A/B-pointer
-//                                 * necessary for '}' mode */
-ADDR_T AA_Value, AB_Value;
-#endif
 
 mem_struct FAR *memory;
 
@@ -241,7 +231,7 @@ checksum_warriors()
   char    outs[60];                /* for cdb() entering message */
 #endif
 
-void init_core() 
+INLINE void init_core() 
 {
   endWar = warrior + warriors;
   cycles2 = warriors * cycles;
@@ -316,8 +306,10 @@ void init_core()
   round = 1;
 }
 
-void init_round()
+INLINE void init_round()
 {
+  mem_struct FAR *destPtr;        /* pointer used to copy program to core */
+  mem_struct FAR *tempPtr;        /* temporary pointer used in op decode phase */
   mem_struct *sourcePtr;        /* pointer used to copy program to core */
   mem_struct *endPtr;                /* pointer used to copy program to core */
   ADDR_T FAR *tempPtr2;
@@ -391,12 +383,20 @@ void init_round()
     display_clear();
 }
 
-int run_step()
+INLINE int run_step()
 {   
+  mem_struct IR;                /* current instruction and A cell */
+#ifdef NEW_MODES
+//  mem_struct IRA;                /* A/B_field hold A-field of A/B-pointer
+//                                 * necessary for '}' mode */
+ADDR_T AA_Value, AB_Value;
+#endif
   int     addrA, addrB;                /* A and B pointers */
 #ifndef SERVER
   int     temp2;			/* needed in graphical versions to display postincrements at the correct address */
 #endif
+  mem_struct FAR *destPtr;        /* pointer used to copy program to core */
+  mem_struct FAR *tempPtr;        /* temporary pointer used in op decode phase */
   ADDR_T FAR *tempPtr2;
 #ifdef NEW_MODES
   ADDR_T FAR *offsPtr;                /* temporary pointer used in op decode phase */
@@ -1328,7 +1328,7 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 	return 0;
 }
 
-void finalize_round()
+INLINE void finalize_round()
 {
 	int temp;
     for (temp = 0; temp < warriors; temp++) {
@@ -1358,7 +1358,7 @@ void finalize_round()
 }
 
 
-void finalize_core()
+INLINE void finalize_core()
 {
   display_close();
 #ifdef PERMUTATE
@@ -1378,13 +1378,13 @@ void finalize_core()
 #endif
 }
 
-void begin_match()
+INLINE void begin_match()
 {
 	init_core();
 	init_round();
 }
 
-void end_match()
+INLINE void end_match()
 {
 	finalize_core();
 }
@@ -1392,7 +1392,7 @@ void end_match()
 // 0 next step
 // 1 next round
 // 2 end match
-int step_match()
+INLINE int step_match()
 {
 	int res=run_step();
 	--cycle;
