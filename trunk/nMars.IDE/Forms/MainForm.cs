@@ -30,6 +30,13 @@ namespace nMars.IDE.Forms
                 recentProjectsToolStripMenuItem.DropDownItems.Add(it);
             }
         }
+        public System.ComponentModel.IContainer Components
+        {
+            get
+            {
+                return components;
+            }
+        }
 
 
         #region Cycle documents

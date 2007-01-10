@@ -34,6 +34,10 @@ namespace nMars.IDE
             
             Settings=new IDESettings();
             Settings.Reload();
+            debuggerPlugin = ModuleRegister.CreateIDEPlugin("nMars.IDE.Debugger");
+            if (debuggerPlugin != null)
+                debuggerPlugin.Load();
+
             if (Settings.RecentProjects == null)
             {
                 Settings.RecentProjects =new List<string>();
@@ -56,22 +60,18 @@ namespace nMars.IDE
                     NewSolution(null);
                 }
             }
-            debuggerPlugin = ModuleRegister.CreateIDEPlugin("nMars.IDE.Debugger");
-            debuggerPlugin.Load();
 
 
             MainForm.RefreshRecent();
             IDEApplication.RefreshControls();
             
-            System.Windows.Forms.Application.Run(MainForm);
+            Application.Run(MainForm);
             Settings.Save();
             return 0;
         }
 
         public static bool ClosingApplication()
         {
-            debuggerPlugin.Unload();
-
             foreach (IEditor editor in Editors)
             {
                 if (!editor.Closing())
@@ -81,6 +81,11 @@ namespace nMars.IDE
             }
             bool res=SaveSolution();
             RefreshControls();
+            if (res)
+            {
+                if (debuggerPlugin != null)
+                    debuggerPlugin.Unload();
+            }
             return res;
         }
 
@@ -140,7 +145,7 @@ namespace nMars.IDE
             RefreshControls();
         }
 
-        public static void ActivateDocument(ProjectDocument document)
+        public static void ActivateDocument(Document document)
         {
             document.Open();
             RefreshControls();
@@ -352,7 +357,7 @@ namespace nMars.IDE
             ActiveSolution = RedCodeSolution.New();
             AddNewProject();
             ActiveSolution.IsModified = false;
-            if (args!=null && args.Length>0)
+            if (args != null && args.Length > 0)
             {
                 ActiveProject.Project = CommandLine.Prepare(args, ActiveSolution.Components, Console);
             }

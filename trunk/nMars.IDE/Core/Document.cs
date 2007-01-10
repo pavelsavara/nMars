@@ -34,10 +34,22 @@ namespace nMars.IDE.Core
         }
 
         protected string fileName;
-        protected IEditor Editor;
+        [XmlIgnore]
+        public IEditor Editor;
 
         [XmlIgnore]
-        public bool IsModified;
+        public virtual bool IsModified
+        {
+            get
+            {
+                return isModified;
+            }
+            set
+            {
+                isModified = value;
+            }
+        }
+        private bool isModified;
 
         [XmlIgnore]
         public bool IsNew;
@@ -105,6 +117,17 @@ namespace nMars.IDE.Core
 
     public abstract class TextDocument : ProjectDocument
     {
-        public new TextEditor Editor;
+        [XmlIgnore]
+        public new TextEditor Editor
+        {
+            get
+            {
+                return base.Editor as TextEditor;
+            }
+            set
+            {
+                base.Editor = value;
+            }
+        }
     }
 }

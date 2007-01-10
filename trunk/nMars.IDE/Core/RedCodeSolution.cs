@@ -60,18 +60,26 @@ namespace nMars.IDE.Core
             {
                 res &= project.Save();
             }
-            if (!IsNew || ChooseName("nmsln", "Solution"))
+            if (IsModified)
             {
-                StreamWriter sw = new StreamWriter(FileName);
-                rcsSerializer.Serialize(sw, this);
-                sw.Close();
+                if (IsNew)
+                {
+                    res = ChooseName("nmsln", "Solution");
+                }
+                if (res)
+                {
+                    StreamWriter sw = new StreamWriter(FileName);
+                    rcsSerializer.Serialize(sw, this);
+                    sw.Close();
+                    IsModified = false;
+                    IsNew = false;
+                }
             }
             else
             {
-                res = false;
+                res = true;
             }
-            IsModified = false;
-            IsNew = false;
+
             IDEApplication.SolutionExplorer.ReloadSolution();
             return res;
         }
@@ -82,21 +90,18 @@ namespace nMars.IDE.Core
             RedCodeSolution doc = rcsSerializer.Deserialize(sr) as RedCodeSolution;
             sr.Close();
 
-            if (doc.Projects.Keys.Count>0)
+            if (doc.ProjectFiles.Count>0)
             {
-                string[] keys = new string[doc.Projects.Keys.Count];
-                doc.Projects.Keys.CopyTo(keys, 0);
-                foreach (string projectFile in keys)
+                foreach (string projectFile in doc.ProjectFiles)
                 {
                     if (File.Exists(projectFile))
                     {
                         RedCodeProject project = RedCodeProject.Load(projectFile);
                         Projects[projectFile] = project;
                         project.Solution = this;
+                        ProjectFiles.Add(projectFile);
                     }
                 }
-                string[] loadedkeys = new string[Projects.Keys.Count];
-                Projects.Keys.CopyTo(loadedkeys, 0);
                 if (doc.activeProjectFileName != null && Projects.ContainsKey(doc.activeProjectFileName))
                 {
                     ActiveProject = Projects[doc.activeProjectFileName];
@@ -104,7 +109,7 @@ namespace nMars.IDE.Core
                 }
                 else if (Projects.Count > 0)
                 {
-                    ActiveProject = Projects[loadedkeys[0]];
+                    ActiveProject = Projects[ProjectFiles[0]];
                     IDEApplication.ActiveProject = ActiveProject;
                 }
             }
@@ -167,19 +172,21 @@ namespace nMars.IDE.Core
         {
             project.Solution = this;
             Projects.Add(project.FileName, project);
+            ProjectFiles.Add(project.FileName);
             if (Projects.Count == 1)
             {
                 ActiveProject = project;
                 IDEApplication.ActiveProject = ActiveProject;
             }
-            IDEApplication.SolutionExplorer.ReloadSolution();
             IsModified = true;
+            IDEApplication.SolutionExplorer.ReloadSolution();
         }
 
         public void Remove(RedCodeProject project, bool delete)
         {
             project.Solution = null;
             Projects.Remove(project.FileName);
+            ProjectFiles.Remove(project.FileName);
             IsModified = true;
             if (Projects.Count == 0)
             {
@@ -200,12 +207,15 @@ namespace nMars.IDE.Core
             {
                 File.Delete(project.FileName);
             }
+            IDEApplication.SolutionExplorer.ReloadSolution();
         }
 
         public void Move(RedCodeProject project, string newFileName)
         {
             Projects.Remove(project.FileName);
+            ProjectFiles.Remove(project.FileName);
             Projects.Add(newFileName, project);
+            ProjectFiles.Add(newFileName);
         }
 
         #endregion
@@ -237,7 +247,11 @@ namespace nMars.IDE.Core
         private string activeProjectFileName = null;
 
         public ComponentLoader Components = new ComponentLoader();
-        public KeySerializableDictionary<RedCodeProject> Projects = new KeySerializableDictionary<RedCodeProject>();
+
+        public List<string> ProjectFiles=new List<string>();
+
+        [XmlIgnore]
+        public Dictionary<string, RedCodeProject> Projects = new Dictionary<string, RedCodeProject>();
 
         public static int SolutionCounter = 0;
         #endregion

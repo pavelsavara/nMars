@@ -58,6 +58,12 @@
     <Compile Include="Controls\IDEPanel.Designer.cs">
       <DependentUpon>IDEPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ProjectEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProjectEditor.Designer.cs">
+      <DependentUpon>ProjectEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SolutionExplorer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -106,6 +112,10 @@
     <EmbeddedResource Include="Controls\Console.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Console.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProjectEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SolutionExplorer.resx">
       <DependentUpon>SolutionExplorer.cs</DependentUpon>

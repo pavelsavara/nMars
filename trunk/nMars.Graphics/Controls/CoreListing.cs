@@ -35,6 +35,8 @@ namespace nMars.Graphics.Controls
 
         public void RepaintView()
         {
+            if (engine==null)
+                return;
             nextAddress = engine.NextInstruction.Address;
             scrollBar.Maximum = View.Count;
             PaintChanges();

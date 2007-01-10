@@ -110,21 +110,17 @@ namespace nMars.IDE.Debugger
 
         protected override bool engineStopped(bool finished)
         {
-            bool res = base.Continue();
-            if (res)
+            if (finished)
             {
-                if (finished)
-                {
-                    EndWatch();
-                    IDEApplication.ActiveSolution.ActiveProject.Project.EngineOptions.Brake = executeBrake;
-                }
-                else
-                {
-                    PauseWatch();
-                }
-                IDEApplication.RefreshControls();
+                EndWatch();
+                IDEApplication.ActiveSolution.ActiveProject.Project.EngineOptions.Brake = executeBrake;
             }
-            return res;
+            else
+            {
+                PauseWatch();
+            }
+            IDEApplication.RefreshControls();
+            return base.engineStopped(finished);
         }
 
         public override bool Pause()
@@ -183,32 +179,41 @@ namespace nMars.IDE.Debugger
 
         private void BeginWatch()
         {
-            DebugOverview = new DebugOverview();
-            DebugOverview.Attach(MainForm.tabBottom, "Debug Overview");
-            DebugMemoryListing = new DebugMemoryListing();
-            DebugMemoryListing.Attach(MainForm.tabExplorers, "Memory Listing");
-            DebugMemoryGraph = new DebugMemoryGraph();
-            DebugMemoryGraph.Attach(MainForm.tabDocuments, "Memory Graph");
-            DebugOverview.ActivateControl();
-            DebugMemoryListing.ActivateControl();
-            DebugMemoryGraph.ActivateControl();
+            lock (ActiveEngine)
+            {
+                DebugOverview = new DebugOverview();
+                DebugOverview.Attach(MainForm.tabBottom, "Debug Overview");
+                DebugMemoryListing = new DebugMemoryListing();
+                DebugMemoryListing.Attach(MainForm.tabExplorers, "Memory Listing");
+                DebugMemoryGraph = new DebugMemoryGraph();
+                DebugMemoryGraph.Attach(MainForm.tabDocuments, "Memory Graph");
+                DebugOverview.ActivateControl();
+                DebugMemoryListing.ActivateControl();
+                DebugMemoryGraph.ActivateControl();
+            }
             DebuggerMainForm.timerDebugWatch.Enabled = true;
         }
 
         public void PauseWatch()
         {
             DebuggerMainForm.timerDebugWatch.Enabled = false;
-            DebugOverview.Pause();
-            DebugMemoryListing.Pause();
-            DebugMemoryGraph.Pause();
-            //WatchTick();
+            lock (ActiveEngine)
+            {
+                DebugOverview.Pause();
+                DebugMemoryListing.Pause();
+                DebugMemoryGraph.Pause();
+                //WatchTick();
+            }
         }
 
         public void ResumeWatch()
         {
-            DebugOverview.Resume();
-            DebugMemoryListing.Resume();
-            DebugMemoryGraph.Resume();
+            lock (ActiveEngine)
+            {
+                DebugOverview.Resume();
+                DebugMemoryListing.Resume();
+                DebugMemoryGraph.Resume();
+            }
             DebuggerMainForm.timerDebugWatch.Enabled = true;
         }
 
@@ -229,9 +234,12 @@ namespace nMars.IDE.Debugger
         private void EndWatch()
         {
             DebuggerMainForm.timerDebugWatch.Enabled = false;
-            DebugOverview.Detach();
-            DebugMemoryListing.Detach();
-            DebugMemoryGraph.Detach();
+            lock (ActiveEngine)
+            {
+                DebugOverview.Detach();
+                DebugMemoryListing.Detach();
+                DebugMemoryGraph.Detach();
+            }
         }
 
 

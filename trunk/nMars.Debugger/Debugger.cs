@@ -94,6 +94,7 @@ namespace nMars.Debugger
                 return false;
 
             ActiveEngine.Quit();
+            console.WriteLine(stopString);
             return true;
         }
 
@@ -151,6 +152,7 @@ namespace nMars.Debugger
         const string runningString = "=Running=";
         const string pausedString = "=Paused=";
         const string backString = "=Back=";
+        const string stopString = "=Stop=";
         const string stepString = "=Step=";
 
         public const int slowRunBrake = 400;
