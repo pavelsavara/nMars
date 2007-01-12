@@ -37,9 +37,16 @@ namespace nMars.Graphics.Controls
         {
             if (engine==null)
                 return;
-            nextAddress = engine.NextInstruction.Address;
+            if (engine.NextInstruction!=null)
+            {
+                nextAddress = engine.NextInstruction.Address;
+            }
+            else
+            {
+                nextAddress = -1;
+            }
             scrollBar.Maximum = View.Count;
-            PaintChanges();
+            PaintAll();
         }
 
         public ICoreBindingView View;
@@ -123,40 +130,12 @@ namespace nMars.Graphics.Controls
                 int address = View[index];
                 DrawItem(index, address);
             }
-            if (Height - (View.Count * ItemHeight)> 0)
+            int fill = Height - ((bottom-topIndex) * ItemHeight);
+            if (fill > 0)
             {
-                graphics.FillRectangle(Brushes.White, new Rectangle(0, View.Count * ItemHeight, Width - scrollBar.Width, Height - (View.Count * ItemHeight)));
+                graphics.FillRectangle(Brushes.White,
+                                       new Rectangle(0, View.Count * ItemHeight, Width - scrollBar.Width, fill));
             }
-        }
-
-        /// <summary>
-        /// Paint changes only
-        /// </summary>
-        private void PaintChanges()
-        {
-            long lmax = maxVersion;
-            CoreEventRecord[] events = engine.CoreEvents;
-            graphics = CreateGraphics();
-
-            int bottom = Math.Min(
-                maxItems + topIndex,
-                View.Count);
-
-            for (int index = topIndex; index < bottom; index++)
-            {
-                int address = View[index];
-                CoreEventRecord evn = events[address];
-                long ver = evn.Version;
-                if (ver > maxVersion)
-                {
-                    if (ver > lmax)
-                    {
-                        lmax = ver;
-                    }
-                    DrawItem(index, address);
-                }
-            }
-            graphics.Dispose();
         }
 
         /// <summary>
@@ -175,9 +154,11 @@ namespace nMars.Graphics.Controls
                 int address = View[index];
                 DrawItem(index, address);
             }
-            if (Height - (View.Count * ItemHeight) > 0)
+            int fill = Height - ((bottom - topIndex) * ItemHeight);
+            if (fill > 0)
             {
-                graphics.FillRectangle(Brushes.White, new Rectangle(0, View.Count * ItemHeight, Width - scrollBar.Width, Height - (View.Count * ItemHeight)));
+                graphics.FillRectangle(Brushes.White,
+                                       new Rectangle(0, View.Count * ItemHeight, Width - scrollBar.Width, fill));
             }
             graphics.Dispose();
         }

@@ -13,6 +13,9 @@ namespace nMars.IDE
         [STAThread]
         public static int Main(string[] args)
         {
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+
             IDEApplication app = new IDEApplication();
             return app.Main(args);
         }

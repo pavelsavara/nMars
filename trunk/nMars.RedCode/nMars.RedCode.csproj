@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine\EngineASync.cs" />
+    <Compile Include="Engine\AsyncEngine.cs" />
+    <Compile Include="IDE\Solution.cs" />
     <Compile Include="IDE\IIDEPlugin.cs" />
     <Compile Include="Utils\ConsoleWrapper.cs" />
     <Compile Include="Engine\EngineOptions.cs" />

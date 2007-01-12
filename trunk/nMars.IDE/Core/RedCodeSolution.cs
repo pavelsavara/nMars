@@ -19,17 +19,22 @@ namespace nMars.IDE.Core
 
         public RedCodeSolution()
         {
-            Components = new ComponentLoader();
-            Components.ParserName = IDEApplication.Settings.DefaultParser;
-            Components.EngineName = IDEApplication.Settings.DefaultEngine;
-            IDebuggerEngine engine = Components.Engine as IDebuggerEngine;
-            EngineASync wrapper = new EngineASync(engine);
-            Components.Engine = wrapper;
+            solution=new Solution();
+            solution.Components.ParserName = IDEApplication.Settings.DefaultParser;
+            solution.Components.EngineName = IDEApplication.Settings.DefaultEngine;
         }
 
         #endregion
 
         #region Public
+
+        public ComponentLoader Components
+        {
+            get
+            {
+                return solution.Components;
+            }
+        }
         
         public static RedCodeSolution Load(string fileName)
         {
@@ -68,9 +73,7 @@ namespace nMars.IDE.Core
                 }
                 if (res)
                 {
-                    StreamWriter sw = new StreamWriter(FileName);
-                    rcsSerializer.Serialize(sw, this);
-                    sw.Close();
+                    solution.SaveXml(FileName);
                     IsModified = false;
                     IsNew = false;
                 }
@@ -86,30 +89,28 @@ namespace nMars.IDE.Core
 
         public override void Load()
         {
-            StreamReader sr = new StreamReader(FileName);
-            RedCodeSolution doc = rcsSerializer.Deserialize(sr) as RedCodeSolution;
-            sr.Close();
+            //TODO: solve lost files
+            solution = Solution.LoadXml(FileName);
 
-            if (doc.ProjectFiles.Count>0)
+            if (solution.ProjectFiles.Count > 0)
             {
-                foreach (string projectFile in doc.ProjectFiles)
+                foreach (string projectFile in solution.ProjectFiles)
                 {
                     if (File.Exists(projectFile))
                     {
                         RedCodeProject project = RedCodeProject.Load(projectFile);
                         Projects[projectFile] = project;
                         project.Solution = this;
-                        ProjectFiles.Add(projectFile);
                     }
                 }
-                if (doc.activeProjectFileName != null && Projects.ContainsKey(doc.activeProjectFileName))
+                if (solution.ActiveProject != null && Projects.ContainsKey(solution.ActiveProject))
                 {
-                    ActiveProject = Projects[doc.activeProjectFileName];
+                    ActiveProject = Projects[solution.ActiveProject];
                     IDEApplication.ActiveProject = ActiveProject;
                 }
                 else if (Projects.Count > 0)
                 {
-                    ActiveProject = Projects[ProjectFiles[0]];
+                    ActiveProject = Projects[solution.ProjectFiles[0]];
                     IDEApplication.ActiveProject = ActiveProject;
                 }
             }
@@ -137,7 +138,6 @@ namespace nMars.IDE.Core
         {
         }
 
-        [XmlIgnore]
         public RedCodeProject ActiveProject
         {
             get { return activeProject; }
@@ -156,11 +156,11 @@ namespace nMars.IDE.Core
                     activeProject = value;
                     if (activeProject ==null)
                     {
-                        activeProjectFileName = null;
+                        solution.ActiveProject = null;
                     }
                     else
                     {
-                        activeProjectFileName = value.FileName;
+                        solution.ActiveProject = value.FileName;
                     }
                 }
                 IDEApplication.ActiveProject = ActiveProject;
@@ -172,7 +172,7 @@ namespace nMars.IDE.Core
         {
             project.Solution = this;
             Projects.Add(project.FileName, project);
-            ProjectFiles.Add(project.FileName);
+            solution.ProjectFiles.Add(project.FileName);
             if (Projects.Count == 1)
             {
                 ActiveProject = project;
@@ -186,7 +186,7 @@ namespace nMars.IDE.Core
         {
             project.Solution = null;
             Projects.Remove(project.FileName);
-            ProjectFiles.Remove(project.FileName);
+            solution.ProjectFiles.Remove(project.FileName);
             IsModified = true;
             if (Projects.Count == 0)
             {
@@ -213,44 +213,17 @@ namespace nMars.IDE.Core
         public void Move(RedCodeProject project, string newFileName)
         {
             Projects.Remove(project.FileName);
-            ProjectFiles.Remove(project.FileName);
+            solution.ProjectFiles.Remove(project.FileName);
             Projects.Add(newFileName, project);
-            ProjectFiles.Add(newFileName);
-        }
-
-        #endregion
-
-        #region XML
-
-        private static XmlSerializer rcsSerializerCached;
-
-        private static XmlSerializer rcsSerializer
-        {
-            get
-            {
-                if (rcsSerializerCached == null)
-                {
-                    rcsSerializerCached = new XmlSerializer(typeof(RedCodeSolution));
-                }
-                return rcsSerializerCached;
-            }
+            solution.ProjectFiles.Add(newFileName);
         }
 
         #endregion
 
         #region Variables
 
-        [XmlIgnore]
+        private Solution solution;
         private RedCodeProject activeProject;
-
-        [XmlAttribute("ActiveProject")]
-        private string activeProjectFileName = null;
-
-        public ComponentLoader Components = new ComponentLoader();
-
-        public List<string> ProjectFiles=new List<string>();
-
-        [XmlIgnore]
         public Dictionary<string, RedCodeProject> Projects = new Dictionary<string, RedCodeProject>();
 
         public static int SolutionCounter = 0;

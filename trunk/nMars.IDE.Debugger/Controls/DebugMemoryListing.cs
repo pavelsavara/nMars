@@ -23,8 +23,8 @@ namespace nMars.IDE.Debugger.Controls
             CoreListView view = new CoreListView(IDEDebuggerApplication.Instance.ActiveEngine);
             coreList.View = view;
             coreList.Attach(IDEDebuggerApplication.Instance.ActiveEngine);
-            coreList.TopIndex = CoreSize / 2;
             CoreSize = IDEDebuggerApplication.Instance.ActiveEngine.CoreSize;
+            ShowAddress(0);
         }
 
         private int CoreSize;
@@ -37,7 +37,16 @@ namespace nMars.IDE.Debugger.Controls
 
         public void RepaintView()
         {
-            int nextAddress = IDEDebuggerApplication.Instance.ActiveEngine.NextInstruction.Address;
+            IRunningInstruction instruction = IDEDebuggerApplication.Instance.ActiveEngine.NextInstruction;
+            int nextAddress;
+            if (instruction == null)
+            {
+                nextAddress = -1;
+            }
+            else
+            {
+                nextAddress = instruction.Address;
+            }
             if (checkBoxAutoIP.Checked)
             {
                 coreList.TopIndex = nextAddress + CoreSize / 2 - 5;

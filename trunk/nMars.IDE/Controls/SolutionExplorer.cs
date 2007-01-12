@@ -35,7 +35,7 @@ namespace nMars.IDE.Controls
                 {
                     proj = new TreeNode(project.Value.Name);
                     proj.Tag = project.Value;
-                    if (project.Value == IDEApplication.ActiveSolution.ActiveProject)
+                    if (project.Value == IDEApplication.ActiveProject)
                     {
                         proj.NodeFont = new Font(tree.Font, FontStyle.Bold);
                     }

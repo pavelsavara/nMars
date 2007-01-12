@@ -111,7 +111,7 @@ namespace nMars.IDE.Forms
 
         private void addNewWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEApplication.AddNewWarrior(IDEApplication.ActiveSolution.ActiveProject);
+            IDEApplication.AddNewWarrior(IDEApplication.ActiveProject);
         }
 
         private void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -145,7 +145,7 @@ namespace nMars.IDE.Forms
 
         private void addExistingWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEApplication.AddExistingWarrior(IDEApplication.ActiveSolution.ActiveProject);
+            IDEApplication.AddExistingWarrior(IDEApplication.ActiveProject);
         }
 
         private void closeSolutionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -183,7 +183,7 @@ namespace nMars.IDE.Forms
 
         private void compileProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEApplication.Compile(IDEApplication.ActiveSolution.ActiveProject);
+            IDEApplication.Compile(IDEApplication.ActiveProject);
         }
 
         private void lbDocClose_Click(object sender, EventArgs e)

@@ -40,7 +40,7 @@ namespace nMars.RedCode
             if (en == null)
                 throw new ArgumentException(
                     "Argument should implement IDebuggerEngine interface for usage with EngineASync");
-            return new EngineASync(en);
+            return new AsyncEngine(en);
         }
 
         public override string Name

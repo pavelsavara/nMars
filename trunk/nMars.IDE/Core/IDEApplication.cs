@@ -21,10 +21,8 @@ namespace nMars.IDE
 
         public int Main(string[] args)
         {
-            System.Windows.Forms.Application.EnableVisualStyles();
-            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            //basic components
             MainForm = new MainForm();
-
 
             Console = new Console();
             Console.Attach(MainForm.tabBottom, "Console");
@@ -34,10 +32,11 @@ namespace nMars.IDE
             
             Settings=new IDESettings();
             Settings.Reload();
-            debuggerPlugin = ModuleRegister.CreateIDEPlugin("nMars.IDE.Debugger");
-            if (debuggerPlugin != null)
-                debuggerPlugin.Load();
 
+            //plugins
+            LoadPlugins();
+
+            //recent projects
             if (Settings.RecentProjects == null)
             {
                 Settings.RecentProjects =new List<string>();
@@ -61,13 +60,25 @@ namespace nMars.IDE
                 }
             }
 
-
+            //run
             MainForm.RefreshRecent();
             IDEApplication.RefreshControls();
-            
             Application.Run(MainForm);
+
+            //shutdown
             Settings.Save();
+
+            //unload plugins
+            if (debuggerPlugin != null)
+                debuggerPlugin.Unload();
             return 0;
+        }
+
+        private static void LoadPlugins()
+        {
+            debuggerPlugin = ModuleRegister.CreateIDEPlugin("nMars.IDE.Debugger");
+            if (debuggerPlugin != null)
+                debuggerPlugin.Load();
         }
 
         public static bool ClosingApplication()
@@ -81,11 +92,6 @@ namespace nMars.IDE
             }
             bool res=SaveSolution();
             RefreshControls();
-            if (res)
-            {
-                if (debuggerPlugin != null)
-                    debuggerPlugin.Unload();
-            }
             return res;
         }
 
@@ -213,7 +219,7 @@ namespace nMars.IDE
 
         public static void AddIntoProject(ProjectDocument document)
         {
-            ActiveSolution.ActiveProject.Add(document);
+            ActiveProject.Add(document);
             RefreshControls();
         }
 
@@ -263,7 +269,7 @@ namespace nMars.IDE
 
         public static void SetProjectActive(RedCodeProject project)
         {
-            ActiveSolution.ActiveProject = project;
+            ActiveProject = project;
             RefreshControls();
         }
 
@@ -410,8 +416,8 @@ namespace nMars.IDE
 
         #region Variables
 
-        public static RedCodeSolution ActiveSolution;
-        public static RedCodeProject ActiveProject;
+        public static RedCodeSolution ActiveSolution=null;
+        public static RedCodeProject ActiveProject=null;
 
         //editors
         public static List<IEditor> Editors = new List<IEditor>();

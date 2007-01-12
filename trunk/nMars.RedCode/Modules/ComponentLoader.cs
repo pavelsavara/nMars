@@ -30,6 +30,7 @@ namespace nMars.RedCode.Modules
             set
             {
                 parser = value;
+                cachingParser = null;
             }
         }
 
@@ -48,11 +49,61 @@ namespace nMars.RedCode.Modules
             set
             {
                 engine = value;
+                asyncEngineWrapper = null;
             }
         }
 
-        public string ParserName;
-        public string EngineName;
+        /// <summary>
+        /// Asynchronous wrapper
+        /// </summary>
+        [XmlIgnore]
+        public IAsyncEngine AsyncEngineWrapper
+        {
+            get
+            {
+                if (asyncEngineWrapper == null)
+                    asyncEngineWrapper = new AsyncEngine(Engine as IDebuggerEngine);
+                return asyncEngineWrapper;
+            }
+        }
+
+        public IParser CachingParser
+        {
+            get
+            {
+                return cachingParser;
+            }
+        }
+
+        private IAsyncEngine asyncEngineWrapper;
+        private IParser cachingParser;
+
+        private string parserName;
+        private string engineName;
+        public string ParserName
+        {
+            get
+            {
+                return parserName;
+            }
+            set
+            {
+                parserName = value;
+                Parser = null;
+            }
+        }
+        public string EngineName
+        {
+            get
+            {
+                return engineName;
+            }
+            set
+            {
+                engineName = value;
+                Engine = null;
+            }
+        }
 
         #endregion
 

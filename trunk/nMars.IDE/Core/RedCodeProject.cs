@@ -99,13 +99,15 @@ namespace nMars.IDE.Core
 
         public override void Load()
         {
+            //TODO: solve lost files
             Project = Project.LoadXml(FileName);
 
             if (Project.WarriorFiles.Count > 0)
             {
                 foreach (string documentFile in Project.WarriorFiles)
                 {
-                    ProjectDocument document = ProjectDocument.Load(documentFile, "WarriorDocument"); //TODO
+                    //TODO: other document types
+                    ProjectDocument document = ProjectDocument.Load(documentFile, "WarriorDocument"); 
                     Documents[documentFile] = document;
                     document.Project = this;
                 }
@@ -248,7 +250,7 @@ namespace nMars.IDE.Core
             }
             set
             {
-                CheckPropertyChanged<int>("Rounds", ref Project.Rules.Rounds, ref value);
+                CheckPropertyChanged("Rounds", ref Project.Rules.Rounds, ref value);
             }
         }
 
@@ -260,7 +262,7 @@ namespace nMars.IDE.Core
             }
             set
             {
-                CheckPropertyChanged<int>("MaxCycles", ref Project.Rules.MaxCycles, ref value);
+                CheckPropertyChanged("MaxCycles", ref Project.Rules.MaxCycles, ref value);
             }
         }
 
@@ -272,7 +274,7 @@ namespace nMars.IDE.Core
             }
             set
             {
-                CheckPropertyChanged<int>("MaxProcesses", ref Project.Rules.MaxProcesses, ref value);
+                CheckPropertyChanged("MaxProcesses", ref Project.Rules.MaxProcesses, ref value);
             }
         }
 
@@ -284,7 +286,7 @@ namespace nMars.IDE.Core
             }
             set
             {
-                CheckPropertyChanged<int>("MaxLength", ref Project.Rules.MaxLength, ref value);
+                CheckPropertyChanged("MaxLength", ref Project.Rules.MaxLength, ref value);
             }
         }
 
@@ -296,7 +298,7 @@ namespace nMars.IDE.Core
             }
             set
             {
-                CheckPropertyChanged<int>("MinDistance", ref Project.Rules.MinDistance, ref value);
+                CheckPropertyChanged("MinDistance", ref Project.Rules.MinDistance, ref value);
             }
         }
 
@@ -308,7 +310,7 @@ namespace nMars.IDE.Core
             }
             set
             {
-                CheckPropertyChanged<int>("WarriorsCount", ref Project.Rules.WarriorsCount, ref value);
+                CheckPropertyChanged("WarriorsCount", ref Project.Rules.WarriorsCount, ref value);
             }
         }
 
@@ -341,9 +343,9 @@ namespace nMars.IDE.Core
         {
             IsModified = true;
             IDEApplication.SolutionExplorer.ReloadSolution();
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
