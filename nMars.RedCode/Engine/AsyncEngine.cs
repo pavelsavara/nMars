@@ -13,16 +13,16 @@ namespace nMars.RedCode
     /// <summary>
     /// Asynchronous wrapper around IDebuggerEngine
     /// </summary>
-    public class EngineASync : IEngine, IDisposable, IDebuggerEngine, IAsyncEngine
+    public class AsyncEngine : IEngine, IDisposable, IDebuggerEngine, IAsyncEngine
     {
         #region Construction
 
-        public EngineASync(IDebuggerEngine aEngine)
+        public AsyncEngine(IDebuggerEngine aEngine)
         {
             engine = aEngine;
             pause = true;
             running = false;
-            live = true;
+            live = false;
             brake = 0;
         }
 
@@ -31,9 +31,10 @@ namespace nMars.RedCode
             worker = new Thread(new ThreadStart(WorkerLoop));
             signalRun = new ManualResetEvent(false);
             signalPaused = new ManualResetEvent(true);
+            signalRunning = new ManualResetEvent(false);
             pause = true;
             quit = false;
-            running = true;
+            running = false;
             worker.Start();
         }
 
@@ -42,6 +43,7 @@ namespace nMars.RedCode
             worker.Interrupt();
             signalRun.Close();
             signalPaused.Close();
+            signalRunning.Close();
         }
 
         #endregion
@@ -55,6 +57,7 @@ namespace nMars.RedCode
                 pause = false;
                 signalRun.Set();
             }
+            signalRunning.WaitOne();
         }
 
         public void Pause()
@@ -186,11 +189,14 @@ namespace nMars.RedCode
 
         private void WorkerLoop()
         {
-            signalRun.WaitOne();
             // warning! intentional inversed lock inside
             try
             {
                 live = true;
+                signalRun.WaitOne();
+
+                running = true;
+                signalRunning.Set();
                 CheckBreakEventArgs args = new CheckBreakEventArgs();
                 do
                 {
@@ -221,6 +227,7 @@ namespace nMars.RedCode
                         {
                             args.Break = false;
                             running = false;
+                            signalRunning.Reset();
                             signalPaused.Set();
                             {
                                 try
@@ -241,9 +248,10 @@ namespace nMars.RedCode
                             {
                                 break;
                             }
-                            signalPaused.Reset();
                             pause = false;
                             running = true;
+                            signalPaused.Reset();
+                            signalRunning.Set();
                         }
                         stepResult = engine.NextStep();
                     }
@@ -253,6 +261,7 @@ namespace nMars.RedCode
                     live = false;
                     running = false;
                     signalPaused.Set();
+                    signalRunning.Reset();
                 }
                 if (engineStoppedCallback != null)
                 {
@@ -264,6 +273,7 @@ namespace nMars.RedCode
                 live = false;
                 running = false;
                 signalPaused.Set();
+                signalRunning.Reset();
                 //swallow
             }
             catch (Exception)
@@ -271,6 +281,7 @@ namespace nMars.RedCode
                 live = false;
                 running = false;
                 signalPaused.Set();
+                signalRunning.Reset();
                 throw;
             }
         }
@@ -575,6 +586,7 @@ namespace nMars.RedCode
         private Thread worker;
         private ManualResetEvent signalRun;
         private ManualResetEvent signalPaused;
+        private ManualResetEvent signalRunning;
         private StepResult stepResult;
         private bool running;
         private bool live;

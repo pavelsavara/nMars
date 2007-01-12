@@ -10,13 +10,18 @@ namespace nMars.Debugger
 {
     public class Debugger
     {
+        #region Construction
+
         public Debugger(ISimpleOutput aConsole)
         {
             console = aConsole;
         }
 
+        #endregion
 
-        public virtual bool Run(Project project, ComponentLoader components, EngineStoppedCallback engineStopped)
+        #region Operating
+
+        protected bool StartEngine(bool onlyInit)
         {
             if (ActiveEngine == null)
             {
@@ -30,10 +35,10 @@ namespace nMars.Debugger
                     }
                     else
                     {
-                        ActiveEngine = components.Engine as IAsyncEngine;
-                        ActiveEngine.BeginMatch(project, engineStopped);
+                        ActiveEngine = components.AsyncEngineWrapper;
+                        ActiveEngine.BeginMatch(project, onEngineStoppedAsync);
                         console.WriteLine(runningString);
-                        RunContinueImpl(true);
+                        OnAfterStartEngine(false, onlyInit);
                     }
                 }
                 else
@@ -46,34 +51,32 @@ namespace nMars.Debugger
                 ActiveEngine.Brake = project.EngineOptions.Brake;
                 if (ActiveEngine.IsPaused)
                 {
-                    RunContinueImpl(false);
+                    OnAfterStartEngine(true, onlyInit);
                 }
             }
             return true;
         }
 
-        protected virtual void RunContinueImpl(bool start)
+        protected virtual void OnAfterStartEngine(bool justContinue, bool onlyInit)
         {
-            ActiveEngine.Continue();
-        }
-
-        public int Brake
-        {
-            get
+            if (!onlyInit)
             {
-                return ActiveEngine.Brake;
-            }
-            set
-            {
-                ActiveEngine.Brake = value;
+                ActiveEngine.Continue();
             }
         }
 
+        /// <summary>
+        /// Redirection thru MainForm on derived class
+        /// </summary>
+        protected virtual void onEngineStoppedAsync(bool finished)
+        {
+            OnEngineStopped(finished);
+        }
 
-        protected virtual bool engineStopped(bool finished)
+        protected virtual void OnEngineStopped(bool finished)
         {
             if (ActiveEngine == null)
-                return false;
+                return;
 
             if (finished)
             {
@@ -85,7 +88,6 @@ namespace nMars.Debugger
             {
                 console.WriteLine(pausedString);
             }
-            return true;
         }
 
         public virtual bool Stop()
@@ -122,8 +124,15 @@ namespace nMars.Debugger
             if (ActiveEngine == null || !ActiveEngine.IsPaused)
                 return false;
 
-            ActiveEngine.NextStep();
-            console.WriteLine(stepString);
+            StepResult result = ActiveEngine.NextStep();
+            if (result == StepResult.Finished)
+            {
+                ActiveEngine.Continue();
+            }
+            else
+            {
+                console.WriteLine(stepString);
+            }
             return true;
         }
 
@@ -149,6 +158,44 @@ namespace nMars.Debugger
             return true;
         }
 
+        #endregion
+
+        #region Properties
+
+        public int Brake
+        {
+            get { return ActiveEngine.Brake; }
+            set { ActiveEngine.Brake = value; }
+        }
+
+        public Project Project
+        {
+            get { return project; }
+            set { project = value; }
+        }
+
+        public ComponentLoader Components
+        {
+            get { return components; }
+            set { components = value; }
+        }
+
+        public ISimpleOutput Console
+        {
+            get { return console; }
+            set { console = value; }
+        }
+
+        public IAsyncEngine ActiveEngine
+        {
+            get { return activeEngine; }
+            set { activeEngine = value; }
+        }
+
+        #endregion
+
+        #region Variables
+
         const string runningString = "=Running=";
         const string pausedString = "=Paused=";
         const string backString = "=Back=";
@@ -160,7 +207,12 @@ namespace nMars.Debugger
         public const int fastRunBrake = 1;
         public const int executeBrake = -1;
 
-        public IAsyncEngine ActiveEngine;
-        protected ISimpleOutput console;
+        private IAsyncEngine activeEngine;
+        private ISimpleOutput console;
+
+        private Project project;
+        private ComponentLoader components;
+
+        #endregion
     }
 }
