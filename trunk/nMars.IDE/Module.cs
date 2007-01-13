@@ -5,6 +5,7 @@
 
 using System;
 using nMars.RedCode.Modules;
+using nMars.RedCode.Utils;
 
 namespace nMars.IDE
 {
@@ -16,6 +17,10 @@ namespace nMars.IDE
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
+            if (Mono.IsMonoRuntime)
+            {
+                Console.WriteLine("Running on mono, some features will be disabled.");
+            }
             IDEApplication app = new IDEApplication();
             return app.Main(args);
         }

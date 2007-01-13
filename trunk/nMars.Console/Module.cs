@@ -19,8 +19,8 @@ namespace nMars.Console
                 ConsoleCfg consoleConfig = new ConsoleCfg();
                 consoleConfig.Reload();
                 ComponentLoader components=new ComponentLoader();
-                components.ParserName = consoleConfig.DefaultParser;
-                components.EngineName = consoleConfig.DefaultEngine;
+                    components.ParserName = consoleConfig.DefaultParser;
+                    components.EngineName = consoleConfig.DefaultEngine;
                 WrappedConsole console = new WrappedConsole();
                 Project project = CommandLine.Prepare(args, components, console);
                 return CommandLine.Exec(components, console, project);

@@ -56,6 +56,7 @@ unsorted
    - all pmars commands
    - convert pmars startup macros
    - add breakpoints, persistent
+   - python tab completion
    
  - RedCode lib
    - dump core interface, start naming convention, for rof compression
@@ -106,6 +107,7 @@ unsorted
  - TODO 0.9
    - breakpoints
    - python
+   - step back
    - web
    - parser pre ;redcode
    

@@ -78,8 +78,8 @@ namespace nMars.RedCode.Modules
         private IAsyncEngine asyncEngineWrapper;
         private IParser cachingParser;
 
-        private string parserName;
-        private string engineName;
+        private string parserName = "nMars.Parser";
+        private string engineName = "nMars.Engine";
         public string ParserName
         {
             get

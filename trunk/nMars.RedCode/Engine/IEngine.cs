@@ -178,10 +178,10 @@ namespace nMars.RedCode
     {
         void BeginMatch(IProject project, EngineStoppedCallback callback);
         void Run(IProject project, EngineStoppedCallback callback);
-        void Continue();
-        void Pause();
+        void Continue(bool wait);
+        void Pause(bool wait);
         void Wait();
-        void Quit();
+        void Quit(bool wait);
         void Kill();
         bool IsLive { get;}
         bool IsPaused { get;}

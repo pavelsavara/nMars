@@ -215,7 +215,6 @@ namespace nMars.IDE.Controls
             this.tabPageRules.ResumeLayout(false);
             this.tabPageRules.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         #endregion

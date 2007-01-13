@@ -39,7 +39,7 @@ namespace nMars.IDE
             //recent projects
             if (Settings.RecentProjects == null)
             {
-                Settings.RecentProjects =new List<string>();
+                Settings.RecentProjects = new List<string>();
             }
 
             if (args.Length>0)

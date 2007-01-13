@@ -32,12 +32,9 @@ namespace nMars.IDE.Debugger.Controls
             // 
             // DebugCoreGrid
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "DebugCoreGrid";
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DebugCoreGrid_MouseClick);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DebugCoreGrid_MouseDoubleClick);
-            this.Name = "DebugCoreGrid";
-            this.Size = new System.Drawing.Size(807, 401);
             this.ResumeLayout(false);
 
         }

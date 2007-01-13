@@ -80,7 +80,7 @@ namespace nMars.RedCode.Modules
                 sb.Append(module.Name);
                 sb.Append(" ");
                 sb.Append(module.Version);
-                sb.Append("\n");
+                sb.Append("\r\n");
             }
             return sb.ToString();
         }

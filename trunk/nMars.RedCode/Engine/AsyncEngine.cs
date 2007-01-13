@@ -50,24 +50,26 @@ namespace nMars.RedCode
 
         #region Synchronization
 
-        public void Continue()
+        public void Continue(bool wait)
         {
             lock (this)
             {
                 pause = false;
                 signalRun.Set();
             }
-            signalRunning.WaitOne();
+            if (wait)
+                signalRunning.WaitOne();
         }
 
-        public void Pause()
+        public void Pause(bool wait)
         {
             lock (this)
             {
                 signalRun.Reset();
                 pause = true;
             }
-            signalPaused.WaitOne();
+            if (wait)
+                signalPaused.WaitOne();
         }
 
         public void Wait()
@@ -84,13 +86,13 @@ namespace nMars.RedCode
             }
         }
 
-        public void Quit()
+        public void Quit(bool wait)
         {
             lock (this)
             {
                 quit = true;
             }
-            Continue();
+            Continue(wait);
         }
 
         public void Kill()
@@ -106,13 +108,13 @@ namespace nMars.RedCode
         public void Run(IProject project, EngineStoppedCallback callback)
         {
             BeginMatch(project, callback);
-            Continue();
+            Continue(false);
         }
 
         public MatchResult Run(IProject project, ISimpleOutput console)
         {
             BeginMatch(project);
-            Continue();
+            Continue(false);
             return EndMatch(console);
         }
 
@@ -179,7 +181,7 @@ namespace nMars.RedCode
         {
             get
             {
-                return !running;
+                return pause;
             }
         }
 

@@ -106,7 +106,6 @@ namespace nMars.IDE.Debugger.Controls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Controls.Add(this.coreList);
             this.Controls.Add(this.panel);
-            this.DoubleBuffered = true;
             this.Name = "DebugMemoryListing";
             this.Size = new System.Drawing.Size(199, 540);
             this.panel.ResumeLayout(false);

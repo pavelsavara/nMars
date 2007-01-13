@@ -49,7 +49,6 @@ namespace nMars.IDE.Controls
             // 
             // groupBox
             // 
-            this.groupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox.Controls.Add(this.panelRight);
             this.groupBox.Controls.Add(this.panelLeft);
             this.groupBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -62,7 +61,6 @@ namespace nMars.IDE.Controls
             // 
             // panelRight
             // 
-            this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelRight.Controls.Add(this.coreList);
             this.panelRight.Controls.Add(this.panelTop);
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -81,7 +79,6 @@ namespace nMars.IDE.Controls
             // 
             // panelTop
             // 
-            this.panelTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelTop.Controls.Add(this.textBoxTasks);
             this.panelTop.Controls.Add(this.textBoxLastInstruction);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -109,7 +106,6 @@ namespace nMars.IDE.Controls
             // 
             // panelLeft
             // 
-            this.panelLeft.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelLeft.Controls.Add(this.labelTaks);
             this.panelLeft.Controls.Add(this.labelLastInstruction);
             this.panelLeft.Controls.Add(this.labelNext);
@@ -150,7 +146,6 @@ namespace nMars.IDE.Controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.groupBox);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "DebugWarriorOverview";
