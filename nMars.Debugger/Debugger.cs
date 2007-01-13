@@ -61,7 +61,7 @@ namespace nMars.Debugger
         {
             if (!onlyInit)
             {
-                ActiveEngine.Continue();
+                ActiveEngine.Continue(false);
             }
         }
 
@@ -95,7 +95,7 @@ namespace nMars.Debugger
             if (ActiveEngine == null || !ActiveEngine.IsLive)
                 return false;
 
-            ActiveEngine.Quit();
+            ActiveEngine.Quit(false);
             console.WriteLine(stopString);
             return true;
         }
@@ -105,7 +105,7 @@ namespace nMars.Debugger
             if (ActiveEngine == null || ActiveEngine.IsPaused)
                 return false;
 
-            ActiveEngine.Pause();
+            ActiveEngine.Pause(false);
             return true;
         }
 
@@ -114,7 +114,7 @@ namespace nMars.Debugger
             if (ActiveEngine == null || !ActiveEngine.IsPaused)
                 return false;
 
-            ActiveEngine.Continue();
+            ActiveEngine.Continue(false);
             console.WriteLine(runningString);
             return true;
         }
@@ -124,13 +124,13 @@ namespace nMars.Debugger
             if (ActiveEngine == null || !ActiveEngine.IsPaused)
                 return false;
 
-            StepResult result = ActiveEngine.NextStep();
-            if (result == StepResult.Finished)
+            if (ActiveEngine.LastStepResult == StepResult.Finished)
             {
-                ActiveEngine.Continue();
+                ActiveEngine.Continue(false);
             }
             else
             {
+                ActiveEngine.NextStep();
                 console.WriteLine(stepString);
             }
             return true;

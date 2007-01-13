@@ -116,6 +116,8 @@ namespace nMars.IDE.Debugger
             else
             {
                 BeginWatch();
+                if (onlyInit)
+                    PauseWatch();
             }
             base.OnAfterStartEngine(justContinue, onlyInit);
         }

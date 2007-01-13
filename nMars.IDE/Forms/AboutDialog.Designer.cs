@@ -29,7 +29,7 @@ namespace nMars.IDE.Forms
         private void InitializeComponent()
         {
             this.btnOK = new System.Windows.Forms.Button();
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnOK
@@ -42,19 +42,14 @@ namespace nMars.IDE.Forms
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // webBrowser
+            // textBox
             // 
-            this.webBrowser.AllowNavigation = false;
-            this.webBrowser.AllowWebBrowserDrop = false;
-            this.webBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser.Location = new System.Drawing.Point(12, 12);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(540, 258);
-            this.webBrowser.TabIndex = 2;
-            this.webBrowser.WebBrowserShortcutsEnabled = false;
-            this.webBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser_Navigating);
+            this.textBox.Location = new System.Drawing.Point(12, 12);
+            this.textBox.Multiline = true;
+            this.textBox.Name = "textBox";
+            this.textBox.ReadOnly = true;
+            this.textBox.Size = new System.Drawing.Size(531, 258);
+            this.textBox.TabIndex = 1;
             // 
             // AboutDialog
             // 
@@ -63,7 +58,7 @@ namespace nMars.IDE.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnOK;
             this.ClientSize = new System.Drawing.Size(564, 311);
-            this.Controls.Add(this.webBrowser);
+            this.Controls.Add(this.textBox);
             this.Controls.Add(this.btnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -75,12 +70,13 @@ namespace nMars.IDE.Forms
             this.Text = "AboutDialog";
             this.Load += new System.EventHandler(this.AboutDialog_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.WebBrowser webBrowser;
+        private System.Windows.Forms.TextBox textBox;
     }
 }

@@ -17,12 +17,10 @@ namespace nMars.IDE.Debugger.Controls
 
         private void DebugCoreGrid_MouseClick(object sender, MouseEventArgs e)
         {
-
             int address = GetAddress(e.X, e.Y);
             if (address == -1)
                 return;
             IDEDebuggerApplication.Instance.ShowAddress(address);
-
         }
 
         private void DebugCoreGrid_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -31,7 +29,6 @@ namespace nMars.IDE.Debugger.Controls
             if (address == -1)
                 return;
             IDEDebuggerApplication.Instance.EditCell(address);
-
         }
     }
 }

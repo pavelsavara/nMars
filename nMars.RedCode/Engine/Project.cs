@@ -85,7 +85,7 @@ namespace nMars.RedCode
             {
                 if (serializerCached == null)
                 {
-                    serializerCached = new XmlSerializer(typeof(Project));
+                    serializerCached = new XmlSerializer(typeof(Project), RedCode.BreakPoints.KnownTypes);
                 }
                 return serializerCached;
             }
@@ -148,6 +148,7 @@ namespace nMars.RedCode
         public Rules Rules = Rules.DefaultRules;
         public EngineOptions EngineOptions = EngineOptions.Default;
         public ParserOptions ParserOptions = ParserOptions.Default;
+        public BreakPoints BreakPoints;
         
         private static XmlSerializer serializerCached;
 

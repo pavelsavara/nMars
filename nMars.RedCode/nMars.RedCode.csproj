@@ -35,6 +35,15 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\bin\Release\nMars.RedCode.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mono|AnyCPU' ">
+    <OutputPath>..\bin\Mono\</OutputPath>
+    <DefineConstants>TRACE;MONO</DefineConstants>
+    <DocumentationFile>..\bin\Release\nMars.RedCode.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -42,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\AsyncEngine.cs" />
+    <Compile Include="Engine\BreakPoint.cs" />
     <Compile Include="IDE\Solution.cs" />
     <Compile Include="IDE\IIDEPlugin.cs" />
     <Compile Include="Utils\ConsoleWrapper.cs" />
@@ -75,6 +85,7 @@
     <Compile Include="Basic\Rules.cs" />
     <Compile Include="Engine\CoreBindingList.cs" />
     <Compile Include="Utils\IConsole.cs" />
+    <Compile Include="Utils\Mono.cs" />
     <Compile Include="Utils\SerializableDictionary.cs" />
     <Compile Include="Basic\Warrior.cs" />
   </ItemGroup>

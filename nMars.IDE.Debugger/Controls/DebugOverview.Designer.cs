@@ -106,7 +106,6 @@ namespace nMars.IDE.Debugger.Controls
             // 
             // tableLayoutPanel
             // 
-            this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel.ColumnCount = 1;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -123,7 +122,6 @@ namespace nMars.IDE.Debugger.Controls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.overviewPanel);
-            this.DoubleBuffered = true;
             this.Name = "DebugOverview";
             this.overviewPanel.ResumeLayout(false);
             this.overviewPanel.PerformLayout();

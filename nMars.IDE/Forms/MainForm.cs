@@ -23,7 +23,7 @@ namespace nMars.IDE.Forms
             recentProjectsToolStripMenuItem.DropDownItems.Clear();
             foreach (string project in IDEApplication.Settings.RecentProjects)
             {
-                ToolStripMenuItem it=new ToolStripMenuItem(Path.GetFileNameWithoutExtension(project));
+                ToolStripMenuItem it = new ToolStripMenuItem(Path.GetFileNameWithoutExtension(project));
                 it.Tag = project;
                 it.ToolTipText = project;
                 it.Click += new EventHandler(it_Click);

@@ -98,7 +98,6 @@ namespace nMars.IDE.Forms
             this.recentProjectsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F)));
-            this.fileToolStripMenuItem.ShowShortcutKeys = false;
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
@@ -215,7 +214,6 @@ namespace nMars.IDE.Forms
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.H)));
-            this.helpToolStripMenuItem.ShowShortcutKeys = false;
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
@@ -270,14 +268,6 @@ namespace nMars.IDE.Forms
             this.toolbar.TabIndex = 3;
             this.toolbar.Text = "toolStrip1";
             // 
-            // openDialog
-            // 
-            this.openDialog.SupportMultiDottedExtensions = true;
-            // 
-            // saveDialog
-            // 
-            this.saveDialog.SupportMultiDottedExtensions = true;
-            // 
             // splitContainerOuter
             // 
             this.splitContainerOuter.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -317,7 +307,6 @@ namespace nMars.IDE.Forms
             // lbDocClose
             // 
             this.lbDocClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbDocClose.AutoSize = true;
             this.lbDocClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lbDocClose.Location = new System.Drawing.Point(604, 4);
             this.lbDocClose.Name = "lbDocClose";
@@ -362,8 +351,6 @@ namespace nMars.IDE.Forms
             this.Controls.Add(this.toolbar);
             this.Controls.Add(this.statusbar);
             this.Controls.Add(this.mainMenu);
-            this.IsMdiContainer = true;
-            this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
             this.Text = "nMars - Corewars MARS for .NET ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
