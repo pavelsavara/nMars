@@ -15,15 +15,16 @@ Currently it consist of
 
 * More info about Corewars can be found here http://www.koth.org/, http://groups.google.com/group/rec.games.corewar
 
-  Usage
---------------------
-Usage manual can be found here
-https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Usage.txt
-
 
   Download 
 --------------------
 https://sourceforge.net/project/showfiles.php?group_id=174312
+
+
+  Packages
+--------------------
+Info aboutt packages is here
+https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Packages.txt
 
 
   Console
@@ -45,7 +46,7 @@ Current implementation doesn't support (yet)
    - instructions in EQU
    - modifiers in EQU
  - FOR 0 comment-block ROF
- - in-place assignments (k=k+1)
+ - registers in-place assignments (k=k+1)
  - comments asserts
 
 Is based on GOLD parser by Devin Cook
@@ -58,15 +59,16 @@ which was little bit modified.
   Engine
 --------------------
 Is full ICWS '94 RedCode specification compliant and pMars compatible.
-
 Basic idea is to be easily comprehensible and maintainable.
-There is no efort to make it fast.
+There is no effort to make it fast.
+It is 100% compatible with pMars 0.9.2, see unit tests.
 This implementation support interfaces for watching, debugging - still in developement.
 
 
   Debugger
 --------------------
-Basic debugger, currently console UI. IronPython as optional extension.
+Basic debugger, currently console and graphical UI. 
+IronPython as optional extension.
 Still in developement.
 
 
@@ -89,7 +91,8 @@ Contain shared definitions of types and interfaces.
   Unit tests
 --------------------
 Are included to verify that my implementation is working same as original pMars.
-Currently engine is 99% compatible and parser should be polished a bit.
+Currently engine is 100% compatible.
+Parser should be polished a bit.
 
 
   Architecture
