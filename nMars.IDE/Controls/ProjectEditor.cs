@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System.Windows.Forms;
 using nMars.IDE.Core;
 
@@ -23,7 +22,7 @@ namespace nMars.IDE.Controls
         {
             base.Attach(aFrame, project.Name);
             IDEApplication.Editors.Insert(0, this);
-            this.redCodeProjectBindingSource.DataSource = project;
+            redCodeProjectBindingSource.DataSource = project;
             ActivateControl();
         }
 

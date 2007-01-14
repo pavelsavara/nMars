@@ -41,10 +41,16 @@ namespace nMars.RedCode
     /// </summary>
     public class ParserMessage
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public ParserMessage()
         {
         }
 
+        /// <summary>
+        /// Parametrized constructor
+        /// </summary>
         public ParserMessage(string message, ParseMessageLevel level, string fileName, int line, int column)
         {
             Message = message;

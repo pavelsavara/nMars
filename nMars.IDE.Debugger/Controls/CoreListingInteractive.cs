@@ -5,7 +5,6 @@
 
 using System.ComponentModel;
 using nMars.Graphics.Controls;
-using nMars.RedCode;
 
 namespace nMars.IDE.Debugger.Controls
 {

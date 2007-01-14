@@ -3,7 +3,6 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using System.Collections.Generic;
 using nMars.RedCode;
 using nMars.RedCode.Modules;

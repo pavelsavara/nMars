@@ -3,12 +3,8 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
-using System.Drawing;
 using System.Windows.Forms;
-using nMars.Graphics;
 using nMars.IDE.Controls;
-using nMars.RedCode;
 
 namespace nMars.IDE.Debugger.Controls
 {

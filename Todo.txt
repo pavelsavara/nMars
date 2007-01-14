@@ -43,7 +43,6 @@ unsorted
    - implement registers a-z , asignment ?  
    - 'for 0 rof' comment block
    - 'for expression rof' as if - end if, metadata (org) inside block
-   - CURLINE macro
    - multiline EQU, with instructions
 
  - Engine
@@ -106,7 +105,6 @@ unsorted
 
  - TODO 0.9
    - breakpoints
-   - python
    - step back
    - web
    - parser pre ;redcode

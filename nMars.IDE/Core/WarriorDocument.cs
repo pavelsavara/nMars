@@ -35,7 +35,7 @@ namespace nMars.IDE.Core
         {
             WarriorDocument warrior = new WarriorDocument();
             DocCounter++;
-            warrior.FileName = "NewWarrior" + DocCounter.ToString() + ".red";
+            warrior.FileName = "NewWarrior" + DocCounter + ".red";
             warrior.IsNew = true;
             warrior.IsModified = false;
             return warrior;

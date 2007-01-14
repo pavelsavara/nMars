@@ -3,8 +3,6 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using nMars.IDE.Debugger;
