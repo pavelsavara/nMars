@@ -19,7 +19,7 @@ namespace nMars.IDE.Debugger.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             tableLayoutPanel.SuspendLayout();
-            warriorsCount = IDEDebuggerApplication.Instance.ActiveEngine.WarriorsCount;
+            warriorsCount = IDEDebuggerApplication.Instance.Engine.WarriorsCount;
             tableLayoutPanel.ColumnCount = warriorsCount;
             tableLayoutPanel.ColumnStyles.Clear();
             for (int w = 0; w < warriorsCount;w++ )
@@ -35,12 +35,12 @@ namespace nMars.IDE.Debugger.Controls
 
         public void RepaintView()
         {
-            textBoxCycle.Text = IDEDebuggerApplication.Instance.ActiveEngine.Cycles + "/" +
-                                IDEDebuggerApplication.Instance.ActiveEngine.CyclesLeft;
-            textBoxRound.Text = IDEDebuggerApplication.Instance.ActiveEngine.Round + "/" +
-                                IDEDebuggerApplication.Instance.ActiveEngine.Project.Rules.Rounds;
-            textBoxLive.Text = IDEDebuggerApplication.Instance.ActiveEngine.LiveWarriorsCount + "/" +
-                               IDEDebuggerApplication.Instance.ActiveEngine.TasksCount;
+            textBoxCycle.Text = IDEDebuggerApplication.Instance.Engine.Cycles + "/" +
+                                IDEDebuggerApplication.Instance.Engine.CyclesLeft;
+            textBoxRound.Text = IDEDebuggerApplication.Instance.Engine.Round + "/" +
+                                IDEDebuggerApplication.Instance.Engine.Project.Rules.Rounds;
+            textBoxLive.Text = IDEDebuggerApplication.Instance.Engine.LiveWarriorsCount + "/" +
+                               IDEDebuggerApplication.Instance.Engine.TasksCount;
 
             for (int w = 0; w < warriorsCount; w++)
             {

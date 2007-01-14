@@ -12,12 +12,16 @@ namespace pMars.DllWrapper
     {
         public IParser CreateParser()
         {
-            return new pMarsDllParser();
+            pMarsDllParser parser = new pMarsDllParser();
+            parser.Module = this;
+            return parser;
         }
 
         public IEngine CreateEngine()
         {
-            return new pMarsDllEngine();
+            pMarsDllEngine engine = new pMarsDllEngine();
+            engine.Module = this;
+            return engine;
         }
 
         #region Module registration

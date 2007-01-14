@@ -79,6 +79,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.IDE.Debugger", "nMars
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.ShellPy", "nMars.ShellPy\nMars.ShellPy.csproj", "{1A8B207D-E191-42FD-9504-39185D7C8A49}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -287,6 +293,21 @@ Global
 		{25CC8726-10A6-4153-B58A-226384E647E6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{25CC8726-10A6-4153-B58A-226384E647E6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{25CC8726-10A6-4153-B58A-226384E647E6}.Release|Win32.ActiveCfg = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Mono|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Mono|Any CPU.Build.0 = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Mono|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Mono|Mixed Platforms.Build.0 = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Mono|Win32.ActiveCfg = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1A8B207D-E191-42FD-9504-39185D7C8A49}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,13 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using nMars.RedCode;
+using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
     /// <summary>
     /// Asynchronous wrapper around IDebuggerEngine
     /// </summary>
-    public class AsyncEngine : IEngine, IDisposable, IDebuggerEngine, IAsyncEngine
+    public class AsyncEngine : BaseComponent, IEngine, IDisposable, IDebuggerEngine, IAsyncEngine
     {
         #region Construction
 
@@ -309,10 +310,7 @@ namespace nMars.RedCode
         {
             get
             {
-                lock (this)
-                {
-                    return engine.Project;
-                }
+                return engine.Project;
             }
         }
 
@@ -329,100 +327,49 @@ namespace nMars.RedCode
 
         public int TasksCount
         {
-            get
-            {
-                lock (this)
-                {
-                    return engine.TasksCount;
-                }
-            }
+            get { return engine.TasksCount; }
         }
 
         public int NextWarriorIndex
         {
-            get
-            {
-                lock (this)
-                {
-                    return engine.NextWarriorIndex;
-                }
-            }
+            get { return engine.NextWarriorIndex; }
         }
 
         public IRunningWarrior NextWarrior
         {
-            get
-            {
-                lock (this)
-                {
-                    return engine.NextWarrior;
-                }
-            }
+            get { return engine.NextWarrior; }
         }
 
         public IRunningInstruction NextInstruction
         {
-            get
-            {
-                lock (this)
-                {
-                    return engine.NextInstruction;
-                }
-            }
+            get { return engine.NextInstruction; }
         }
 
         public IRunningInstruction LastInstruction
         {
-            get
-            {
-                lock (this)
-                {
-                    return engine.LastInstruction;
-                }
-            }
+            get { return engine.LastInstruction; }
         }
 
         public IRunningInstruction this[int address]
         {
-            get
-            {
-                lock (this)
-                {
-                    return engine[address];
-                }
-            }
+            get { return engine[address]; }
         }
 
         public int this[int address, Column reg]
         {
-            get
-            {
-                lock (this)
-                {
-                    return engine[address, reg];
-                }
-            }
+            get { return engine[address, reg]; }
         }
 
         public int CoreSize
         {
-            get
-            {
-                lock (this)
-                {
-                    return engine.CoreSize;
-                }
-            }
+            get { return engine.CoreSize; }
         }
 
         public StepResult LastStepResult
         {
             get
             {
-                lock (this)
-                {
-                    return engine.LastStepResult;
-                }
+                return engine.LastStepResult;
             }
         }
 
@@ -463,10 +410,7 @@ namespace nMars.RedCode
         {
             get
             {
-                lock (this)
-                {
-                    return engine.Round;
-                }
+                return engine.Round;
             }
         }
 
@@ -474,10 +418,7 @@ namespace nMars.RedCode
         {
             get
             {
-                lock (this)
-                {
-                    return engine.Cycles;
-                }
+                return engine.Cycles;
             }
         }
 
@@ -485,10 +426,7 @@ namespace nMars.RedCode
         {
             get
             {
-                lock (this)
-                {
-                    return engine.CyclesLeft;
-                }
+                return engine.CyclesLeft;
             }
         }
 
@@ -496,10 +434,7 @@ namespace nMars.RedCode
         {
             get
             {
-                lock (this)
-                {
-                    return engine.LiveWarriorsCount;
-                }
+                return engine.LiveWarriorsCount;
             }
         }
 
@@ -507,10 +442,7 @@ namespace nMars.RedCode
         {
             get
             {
-                lock (this)
-                {
-                    return engine.WarriorsCount;
-                }
+                return engine.WarriorsCount;
             }
         }
 
@@ -551,10 +483,7 @@ namespace nMars.RedCode
         {
             get
             {
-                lock (this)
-                {
-                    return brake;
-                }
+                return brake;
             }
             set
             {

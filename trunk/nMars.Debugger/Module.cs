@@ -9,11 +9,13 @@ using nMars.RedCode.Modules;
 
 namespace nMars.Debugger
 {
-    class Module : BaseModule
+    class Module : BaseModule, IShellModule
     {
-        static int Main(string[] args)
+        public IShell CreateShell()
         {
-            return 0;
+            ConsoleDebugger debugger = new ConsoleDebugger();
+            debugger.Module = this;
+            return debugger;
         }
 
         #region Module registration

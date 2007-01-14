@@ -67,7 +67,7 @@ namespace nMars.Test
 
     #endregion
 
-    class ComparingEngine : IEngine
+    class ComparingEngine : BaseComponent, IEngine
     {
 
         public ComparingEngine(IExtendedStepEngine aEngineOne, IExtendedStepEngine aEngineTwo)

@@ -328,7 +328,7 @@ namespace nMars.IDE.Debugger.Forms
 
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!IDEDebuggerApplication.ActiveEngine.IsPaused)
+            if (!IDEDebuggerApplication.Engine.IsPaused)
             {
                 IDEDebuggerApplication.Pause();
             }

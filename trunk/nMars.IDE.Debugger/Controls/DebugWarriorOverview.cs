@@ -24,17 +24,17 @@ namespace nMars.IDE.Controls
             Dock = DockStyle.Fill;
             warriorIndex = aWarriorIndex;
             panel.Controls.Add(this, aWarriorIndex, 0);
-            groupBox.Text = IDEDebuggerApplication.Instance.ActiveEngine.Warriors[aWarriorIndex].Name + " by " +
-                            IDEDebuggerApplication.Instance.ActiveEngine.Warriors[aWarriorIndex].Author;
-            view = new TaskListCoreView(IDEDebuggerApplication.Instance.ActiveEngine, aWarriorIndex);
+            groupBox.Text = IDEDebuggerApplication.Instance.Engine.Warriors[aWarriorIndex].Name + " by " +
+                            IDEDebuggerApplication.Instance.Engine.Warriors[aWarriorIndex].Author;
+            view = new TaskListCoreView(IDEDebuggerApplication.Instance.Engine, aWarriorIndex);
             coreList.View = view;
-            coreList.Attach(IDEDebuggerApplication.Instance.ActiveEngine);
+            coreList.Attach(IDEDebuggerApplication.Instance.Engine);
 
         }
 
         public void RepaintView()
         {
-            IRunningWarrior rw = IDEDebuggerApplication.Instance.ActiveEngine.RunningWarriors[warriorIndex];
+            IRunningWarrior rw = IDEDebuggerApplication.Instance.Engine.RunningWarriors[warriorIndex];
             textBoxTasks.Text = rw.TasksCount + "/" + rw.DeadTasksCount;
             if (rw.PrevInstruction != null)
                 textBoxLastInstruction.Text = rw.PrevInstruction.ToString();

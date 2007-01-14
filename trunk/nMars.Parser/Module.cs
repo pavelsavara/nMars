@@ -12,7 +12,9 @@ namespace nMars.Parser
     {
         public IParser CreateParser()
         {
-            return new nMarsParser();
+            nMarsParser parser = new nMarsParser();
+            parser.Module = this;
+            return parser;
         }
 
         #region Module registration

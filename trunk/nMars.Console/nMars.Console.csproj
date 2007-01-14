@@ -52,6 +52,7 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="ConsoleApplication.cs" />
     <Compile Include="Properties\ConsoleCfg.Designer.cs">
       <DependentUpon>ConsoleCfg.settings</DependentUpon>
       <AutoGen>True</AutoGen>

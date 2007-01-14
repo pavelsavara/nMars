@@ -91,25 +91,9 @@ namespace nMars.RedCode.Modules
 
         #region Usage
 
-        public static IModule GetModule(IComponent component)
-        {
-            string name = component.GetType().Assembly.GetName().FullName;
-            string namespc = name.Substring(0, name.IndexOf(','));
-            if (Modules.ContainsKey(namespc))
-            {
-                return Modules[namespc];
-            }
-            return null;
-        }
-
         public static IEngine CreateEngine(string engineName)
         {
-            return CreateEngine(engineName, engineName);
-        }
-
-        public static IEngine CreateEngine(string assembly, string engineName)
-        {
-            IEngineModule engineModule = FindModule(assembly, engineName) as IEngineModule;
+            IEngineModule engineModule = FindModule(engineName) as IEngineModule;
             if (engineModule == null)
             {
                 throw new FileNotFoundException("Cannot find module or interface");
@@ -119,12 +103,7 @@ namespace nMars.RedCode.Modules
 
         public static IParser CreateParser(string parserName)
         {
-            return CreateParser(parserName, parserName);
-        }
-
-        public static IParser CreateParser(string assembly, string parserName)
-        {
-            IParserModule parserModule = FindModule(assembly, parserName) as IParserModule;
+            IParserModule parserModule = FindModule(parserName) as IParserModule;
             if (parserModule == null)
             {
                 throw new FileNotFoundException("Cannot find module or interface");
@@ -132,14 +111,19 @@ namespace nMars.RedCode.Modules
             return parserModule.CreateParser();
         }
 
-        public static IIDEPlugin CreateIDEPlugin(string IDEPluginName)
+        public static IShell CreateShell(string shellName)
         {
-            return CreateIDEPlugin(IDEPluginName, IDEPluginName);
+            IShellModule shellModule = FindModule(shellName) as IShellModule;
+            if (shellModule == null)
+            {
+                throw new FileNotFoundException("Cannot find module or interface");
+            }
+            return shellModule.CreateShell();
         }
 
-        public static IIDEPlugin CreateIDEPlugin(string assembly, string IDEPluginName)
+        public static IIDEPlugin CreateIDEPlugin(string IDEPluginName)
         {
-            IIDEPluginModule IDEPluginModule = FindModule(assembly, IDEPluginName) as IIDEPluginModule;
+            IIDEPluginModule IDEPluginModule = FindModule(IDEPluginName) as IIDEPluginModule;
             if (IDEPluginModule == null)
             {
                 throw new FileNotFoundException("Cannot find module or interface");
@@ -147,12 +131,19 @@ namespace nMars.RedCode.Modules
             return IDEPluginModule.CreateIDEPlugin();
         }
 
-        #endregion
-
-        #region Helper
-
-        private static IModule FindModule(string assembly, string name)
+        public static IModule FindModule(string name)
         {
+            int idx = name.IndexOf('-');
+            string assembly;
+            if (idx != -1)
+            {
+                assembly = name.Substring(0, idx);
+            }
+            else
+            {
+                assembly = name;
+            }
+
             lock (Modules)
             {
                 if (!Modules.ContainsKey(assembly))

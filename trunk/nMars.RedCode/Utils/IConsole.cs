@@ -4,7 +4,9 @@
 // 2006 Pavel Savara
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
@@ -20,7 +22,7 @@ namespace nMars.RedCode
     /// Command for application shell
     /// </summary>
     /// <param name="commandLine">command line</param>
-    public delegate void ConsoleCommandEntered(string commandLine);
+    public delegate void ConsoleCommandEntered(string commandLine, ref bool processed, ref bool quit);
 
     public interface IShellPrompt
     {
@@ -31,6 +33,16 @@ namespace nMars.RedCode
     {
         Stream ErrorStream { get; }
         Stream OutStream { get; }
-        Stream InputStream { get; }
+    }
+
+    public interface IShell : IComponent
+    {
+        void Attach(IConsole console, IList<IShell> allShells);
+        void Register(object aplication, string name);
+        IProject Project { get; set;}
+        ComponentLoader Components { get; set;}
+        IAsyncEngine Engine { set;}
+        bool PrintErrors { set;}
+        void Detach();
     }
 }

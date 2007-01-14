@@ -28,7 +28,9 @@ namespace nMars.RedCode
 
         public IParser CreateParser(IParser parser)
         {
-            return new CachingParser(parser);
+            CachingParser p = new CachingParser(parser);
+            p.Module = this;
+            return p;
         }
     }
 
@@ -40,7 +42,9 @@ namespace nMars.RedCode
             if (en == null)
                 throw new ArgumentException(
                     "Argument should implement IDebuggerEngine interface for usage with EngineASync");
-            return new AsyncEngine(en);
+            AsyncEngine e = new AsyncEngine(en);
+            e.Module = this;
+            return e;
         }
 
         public override string Name

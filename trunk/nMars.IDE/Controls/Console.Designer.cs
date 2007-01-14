@@ -45,8 +45,26 @@ namespace nMars.IDE.Controls
             // 
             // cbIn
             // 
+            this.cbIn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbIn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbIn.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cbIn.Items.AddRange(new object[] {
+            "start",
+            "step",
+            "stop",
+            "continue",
+            "slow",
+            "fast",
+            "run",
+            "back",
+            "list",
+            "quit",
+            "exit",
+            "pause",
+            "break",
+            "clear",
+            "go"});
             this.cbIn.Location = new System.Drawing.Point(0, 0);
             this.cbIn.Name = "cbIn";
             this.cbIn.Size = new System.Drawing.Size(806, 22);

@@ -18,6 +18,7 @@ namespace nMars.IDE.Controls
 
         class ConsoleStream : Stream
         {
+
             public Console Console;
 
             public override void Write(byte[] buffer, int offset, int count)
@@ -100,7 +101,7 @@ namespace nMars.IDE.Controls
             #endregion
         }
 
-        class AsyncConsole : ISimpleOutput
+        class AsyncConsole : IConsole
         {
             public AsyncConsole(Console aConsole)
             {
@@ -131,6 +132,34 @@ namespace nMars.IDE.Controls
             private delegate void voidDelegate();
             private delegate void stringDelegate(string text);
             private Console console;
+
+            public Stream ErrorStream
+            {
+                get
+                {
+                    return console.ErrorStream;
+                }
+            }
+
+            public Stream OutStream
+            {
+                get
+                {
+                    return console.OutStream;
+                }
+            }
+
+            public event ConsoleCommandEntered CommandEntered
+            {
+                add
+                {
+                    console.CommandEntered += value;
+                }
+                remove
+                {
+                    console.CommandEntered -= value;
+                }
+            }
         }
 
         #endregion
@@ -140,6 +169,12 @@ namespace nMars.IDE.Controls
             InitializeComponent();
             StreamInstance = new ConsoleStream();
             StreamInstance.Console = this;
+        }
+
+        public override void ActivateControl()
+        {
+            base.ActivateControl();
+            cbIn.Focus();
         }
 
         public string GetCommand()
@@ -196,14 +231,9 @@ namespace nMars.IDE.Controls
             get { return StreamInstance; }
         }
 
-        public Stream InputStream
-        {
-            get { return StreamInstance; }
-        }
-
         public event ConsoleCommandEntered CommandEntered;
 
-        public ISimpleOutput GetAsyncWrapper()
+        public IConsole GetAsyncWrapper()
         {
             return new AsyncConsole(this);
         }
@@ -221,8 +251,12 @@ namespace nMars.IDE.Controls
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
-                if (CommandEntered!=null)
-                    CommandEntered.Invoke(cbIn.Text);
+                bool processed = false;
+                bool quit = false;
+                if (CommandEntered != null)
+                    CommandEntered.Invoke(cbIn.Text.Trim(), ref processed, ref quit);
+                if (processed)
+                    cbIn.SelectAll();
             }
         }
     }

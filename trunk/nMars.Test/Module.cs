@@ -20,7 +20,9 @@ namespace nMars.Test
                 {
                     ComponentLoader components = EngineTest.InitComponents();
                     WrappedConsole console = new WrappedConsole();
-                    Project project = CommandLine.Prepare(args, components, console);
+                    bool interactive;
+                    string saveProjectFile;
+                    Project project = CommandLine.Prepare(args, components, console, out interactive, out saveProjectFile);
                     if (project!=null)
                     {
                         project.EngineOptions.DumpResults = false;
@@ -28,7 +30,13 @@ namespace nMars.Test
                         project.ParserOptions.Brief = true;
                         project.ParserOptions.StatusLine = false;
                     }
-                    res = CommandLine.Exec(components, console, project);
+                    ParseResult result = CommandLine.Parse(components, console, project);
+                    if (result==null || !result.Succesfull)
+                    {
+                        return -1;
+                    }
+                    CommandLine.Run(components, console, project);
+                    return 0;
                 }
                 else
                 {
@@ -66,7 +74,9 @@ namespace nMars.Test
 
         public IEngine CreateEngine()
         {
-            return CreateEngine();
+            ComparingEngine engine = new ComparingEngine(null, null);
+            engine.Module = this;
+            return engine;
         }
 
         #region Module registration

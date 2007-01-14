@@ -5,10 +5,11 @@
 
 using System;
 using nMars.RedCode;
+using nMars.RedCode.Modules;
 
 namespace nMars.Engine
 {
-    public abstract class EngineGround
+    public abstract class EngineGround : BaseComponent
     {
         #region Events
 

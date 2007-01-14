@@ -10,7 +10,7 @@ namespace nMars.RedCode
     /// <summary>
     /// Parser wrapper which caches warriors compiled under same rules
     /// </summary>
-    public class CachingParser : ParserBase
+    public class CachingParser : BaseParser
     {
         /// <summary>
         /// Constructor

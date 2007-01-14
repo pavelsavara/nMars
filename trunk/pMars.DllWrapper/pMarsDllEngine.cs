@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using nMars.RedCode;
+using nMars.RedCode.Modules;
 
 namespace pMars.DllWrapper
 {
-    public class pMarsDllEngine : IEngine, ICoreView, ITaskView, IPSpacesView, IWarriorsView, IExtendedStepEngine
+    public class pMarsDllEngine : BaseComponent, IEngine, ICoreView, ITaskView, IPSpacesView, IWarriorsView, IExtendedStepEngine
     {
         #region Steps
 
