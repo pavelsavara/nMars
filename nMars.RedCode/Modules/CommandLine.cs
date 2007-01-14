@@ -337,7 +337,7 @@ namespace nMars.RedCode
             console.WriteLine("General:");
             console.WriteLine("  -@  file  load options from text file (pMars compatible)");
             console.WriteLine("  -@l file  load project from xml file");
-            console.WriteLine("  -@s file  save project to xml file");
+            console.WriteLine("  -@s file  save project to xml file, (use .nmproj extension)");
             console.WriteLine("  -nP name  Change parser component");
             console.WriteLine("  -nE name  Change engine component");
             console.WriteLine("  -v        Component versions");
@@ -363,9 +363,9 @@ namespace nMars.RedCode
             console.WriteLine("  -ul       Dump format with labels [off]");
             console.WriteLine("  -uc       Dump format with comments [off]");
             console.WriteLine("  -ux       Dump format xml");
-            console.WriteLine("");
             if (DumpHelpEvent != null)
                 DumpHelpEvent.Invoke(console);
+            console.WriteLine("");
         }
 
         private static void PrintLogo(ISimpleOutput console)
