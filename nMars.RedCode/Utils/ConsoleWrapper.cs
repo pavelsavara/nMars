@@ -28,11 +28,6 @@ namespace nMars.RedCode
             get { throw new NotSupportedException(); }
         }
 
-        public Stream InputStream
-        {
-            get { throw new NotSupportedException(); }
-        }
-
         public string GetCommand()
         {
             throw new NotSupportedException();
@@ -59,8 +54,35 @@ namespace nMars.RedCode
         }
     }
 
-    public class WrappedConsole : ISimpleOutput
+    public class WrappedConsole : ISimpleOutput, IConsole
     {
+        public void Interactive()
+        {
+            string lastline = null;
+            bool quit;
+            do
+            {
+                Console.Write(">");
+                string line = Console.ReadLine().Trim();
+                if (line.Length == 0)
+                    line = lastline;
+                bool processed = false;
+                quit = false;
+                if (CommandEntered != null)
+                    CommandEntered.Invoke(line, ref processed, ref quit);
+                if (processed)
+                    lastline = line;
+                else
+                    lastline = "";
+            } while (!quit);
+        }
+
+        public void Inject(string command)
+        {
+            bool p = false, q = false;
+            CommandEntered.Invoke(command, ref p, ref q);
+        }
+
         public Stream ErrorStream
         {
             get { return System.Console.OpenStandardError(); }
@@ -69,16 +91,6 @@ namespace nMars.RedCode
         public Stream OutStream
         {
             get { return System.Console.OpenStandardOutput(); }
-        }
-
-        public Stream InputStream
-        {
-            get { return System.Console.OpenStandardInput(); }
-        }
-
-        public virtual string GetCommand()
-        {
-            return System.Console.ReadLine();
         }
 
         public virtual void Clear()
@@ -100,5 +112,7 @@ namespace nMars.RedCode
         {
             System.Console.Out.Write(text);
         }
+
+        public event ConsoleCommandEntered CommandEntered;
     }
 }

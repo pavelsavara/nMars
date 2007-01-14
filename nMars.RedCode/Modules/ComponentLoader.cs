@@ -54,6 +54,24 @@ namespace nMars.RedCode.Modules
         }
 
         /// <summary>
+        /// Engine Component
+        /// </summary>
+        [XmlIgnore]
+        public IShell Shell
+        {
+            get
+            {
+                if (engine == null)
+                    LoadShell();
+                return shell;
+            }
+            set
+            {
+                shell = value;
+            }
+        }
+
+        /// <summary>
         /// Asynchronous wrapper
         /// </summary>
         [XmlIgnore]
@@ -62,7 +80,17 @@ namespace nMars.RedCode.Modules
             get
             {
                 if (asyncEngineWrapper == null)
-                    asyncEngineWrapper = new AsyncEngine(Engine as IDebuggerEngine);
+                {
+                    IDebuggerEngine debuggerEngine = Engine as IDebuggerEngine;
+                    if (debuggerEngine!=null)
+                    {
+                        asyncEngineWrapper = new AsyncEngine(debuggerEngine);
+                    }
+                    else
+                    {
+                        throw new EngineException("Engine must implement IDebuggerEngine");
+                    }
+                }
                 return asyncEngineWrapper;
             }
         }
@@ -80,6 +108,7 @@ namespace nMars.RedCode.Modules
 
         private string parserName = "nMars.Parser";
         private string engineName = "nMars.Engine";
+        private string shellName = "nMars.Debugger";
         public string ParserName
         {
             get
@@ -105,6 +134,19 @@ namespace nMars.RedCode.Modules
             }
         }
 
+        public string ShellName
+        {
+            get
+            {
+                return shellName;
+            }
+            set
+            {
+                shellName = value;
+                Shell = null;
+            }
+        }
+
         #endregion
 
         #region Helpers
@@ -113,16 +155,7 @@ namespace nMars.RedCode.Modules
         {
             try
             {
-                int idx = ParserName.IndexOf('-');
-                if (idx!=-1)
-                {
-                    string assembly = ParserName.Substring(0, idx);
-                    parser = ModuleRegister.CreateParser(assembly, ParserName);
-                }
-                else
-                {
-                    parser = ModuleRegister.CreateParser(ParserName, ParserName);
-                }
+                parser = ModuleRegister.CreateParser(ParserName);
             }
             catch (FileNotFoundException)
             {
@@ -134,16 +167,19 @@ namespace nMars.RedCode.Modules
         {
             try
             {
-                int idx = EngineName.IndexOf('-');
-                if (idx != -1)
-                {
-                    string assembly = EngineName.Substring(0, idx);
-                    engine = ModuleRegister.CreateEngine(assembly, EngineName);
-                }
-                else
-                {
-                    engine = ModuleRegister.CreateEngine(EngineName, EngineName);
-                }
+                engine = ModuleRegister.CreateEngine(EngineName);
+            }
+            catch (FileNotFoundException)
+            {
+                //swallow
+            }
+        }
+
+        private void LoadShell()
+        {
+            try
+            {
+                shell = ModuleRegister.CreateShell(ShellName);
             }
             catch (FileNotFoundException)
             {
@@ -157,6 +193,7 @@ namespace nMars.RedCode.Modules
 
         private IParser parser;
         private IEngine engine;
+        private IShell shell;
 
         #endregion
     }

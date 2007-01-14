@@ -13,7 +13,9 @@ namespace nMars.Engine
     {
         public IEngine CreateEngine()
         {
-            return new EngineSteps();
+            EngineSteps steps = new EngineSteps();
+            steps.Module = this;
+            return steps;
         }
 
         #region Module registration
@@ -31,7 +33,9 @@ namespace nMars.Engine
     {
         public IEngine CreateEngine()
         {
-            return new EngineStepBack();
+            EngineStepBack back = new EngineStepBack();
+            back.Module = this;
+            return back;
         }
 
         public override string Name

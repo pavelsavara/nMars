@@ -3,14 +3,16 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.IO;
+using nMars.RedCode.Modules;
 
 namespace nMars.RedCode
 {
     /// <summary>
     /// Abstract base for parsers
     /// </summary>
-    public abstract class ParserBase : IParser
+    public abstract class BaseParser : BaseComponent, IParser
     {
         /// <summary>
         /// Parse warrior files in project parameter considering parser options and rules

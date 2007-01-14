@@ -60,6 +60,8 @@ namespace nMars.IDE
                 }
             }
 
+            InitShells();
+
             //run
             MainForm.RefreshRecent();
             IDEApplication.RefreshControls();
@@ -69,16 +71,8 @@ namespace nMars.IDE
             Settings.Save();
 
             //unload plugins
-            if (debuggerPlugin != null)
-                debuggerPlugin.Unload();
+            UnloadPlugins();
             return 0;
-        }
-
-        private static void LoadPlugins()
-        {
-            debuggerPlugin = ModuleRegister.CreateIDEPlugin("nMars.IDE.Debugger");
-            if (debuggerPlugin != null)
-                debuggerPlugin.Load();
         }
 
         public static bool ClosingApplication()
@@ -107,9 +101,75 @@ namespace nMars.IDE
             bool warrior = IDEApplication.ActiveEditor != null;
             MainForm.compileWarriorToolStripMenuItem.Enabled = warrior;
 
-            if (debuggerPlugin!=null)
-                debuggerPlugin.RefreshControls();
+            RefreshPluginControls();
             //? SolutionExplorer.ReloadSolution();
+        }
+
+        #endregion
+
+        #region Plugins
+
+        private static void UnloadPlugins()
+        {
+            foreach (IIDEPlugin plugin in IdePlugins)
+            {
+                plugin.Unload();
+            }
+        }
+
+        private static void LoadPlugins()
+        {
+            if (Settings.KnownComponents==null)
+            {
+                List<string> known = new List<string>();
+                known.Add("nMars.Parser");
+                known.Add("nMars.Engine-StepBack");
+                known.Add("nMars.Debugger");
+                known.Add("nMars.IDE.Debugger");
+                known.Add("nMars.ShellPy");
+                Settings["KnownComponents"] = known;
+            }
+
+            foreach (string component in Settings.KnownComponents)
+            {
+                IModule module = ModuleRegister.FindModule(component);
+                IIDEPluginModule ideModule = module as IIDEPluginModule;
+                if (ideModule != null)
+                {
+                    IIDEPlugin plugin = ideModule.CreateIDEPlugin();
+                    IdePlugins.Add(plugin);
+                    plugin.Load();
+                }
+                IShellModule shellModule = module as IShellModule;
+                if (shellModule != null)
+                {
+                    if (shellModule.Name != "nMars.Debugger")
+                    {
+                        Shells.Add(shellModule.CreateShell());
+                    }
+                }
+            }
+        }
+
+        private static void InitShells()
+        {
+            IConsole console = Console.GetAsyncWrapper();
+            foreach (IShell shell in Shells)
+            {
+                shell.Engine = ActiveSolution.Components.AsyncEngineWrapper;
+                shell.Components = ActiveSolution.Components;
+                shell.PrintErrors = true;
+                shell.Project = ActiveProject.Project;
+                shell.Attach(console, Shells);
+            }
+        }
+
+        private static void RefreshPluginControls()
+        {
+            foreach (IIDEPlugin plugin in IdePlugins)
+            {
+                plugin.RefreshControls();
+            }
         }
 
         #endregion
@@ -365,7 +425,9 @@ namespace nMars.IDE
             ActiveSolution.IsModified = false;
             if (args != null && args.Length > 0)
             {
-                ActiveProject.Project = CommandLine.Prepare(args, ActiveSolution.Components, Console);
+                bool interactive;
+                string saveProjectFile;
+                ActiveProject.Project = CommandLine.Prepare(args, ActiveSolution.Components, Console, out interactive, out saveProjectFile);
             }
             SolutionExplorer.ReloadSolution();
             RefreshControls();
@@ -416,8 +478,44 @@ namespace nMars.IDE
 
         #region Variables
 
-        public static RedCodeSolution ActiveSolution=null;
-        public static RedCodeProject ActiveProject=null;
+        public static RedCodeSolution ActiveSolution
+        {
+            get
+            {
+                return activeSolution;
+            }
+            set
+            {
+                activeSolution = value;
+                foreach (IShell shell in Shells)
+                {
+                    shell.Engine = value.Components.AsyncEngineWrapper;
+                    shell.Components = value.Components;
+                    shell.PrintErrors = true;
+                    if (ActiveProject != null)
+                        shell.Project = ActiveProject.Project;
+                    else
+                        shell.Project = null;
+                }
+            }
+        }
+        public static RedCodeProject ActiveProject
+        {
+            get
+            {
+                return activeProject;
+            }
+            set
+            {
+                activeProject = value;
+                foreach (IShell shell in Shells)
+                {
+                    shell.Project = value.Project;
+                }
+            }
+        }
+        private static RedCodeProject activeProject = null;
+        public static RedCodeSolution activeSolution = null;
 
         //editors
         public static List<IEditor> Editors = new List<IEditor>();
@@ -431,7 +529,9 @@ namespace nMars.IDE
         //setting
         internal static IDESettings Settings;
 
-        private static IIDEPlugin debuggerPlugin;
+        //plugins
+        private static List<IIDEPlugin> IdePlugins=new List<IIDEPlugin>();
+        private static List<IShell> Shells = new List<IShell>();
 
         #endregion
     }

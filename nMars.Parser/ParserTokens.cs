@@ -16,7 +16,7 @@ using ParserException=nMars.RedCode.ParserException;
 
 namespace nMars.Parser
 {
-    public abstract class ParserTokens : ParserBase
+    public abstract class ParserTokens : BaseParser
     {
         private LALRParser parser;
         protected internal Dictionary<string, Expression> variables;

@@ -21,6 +21,7 @@ namespace nMars.IDE
             {
                 Console.WriteLine("Running on mono, some features will be disabled.");
             }
+
             IDEApplication app = new IDEApplication();
             return app.Main(args);
         }

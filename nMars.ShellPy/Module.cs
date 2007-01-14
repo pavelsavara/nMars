@@ -3,16 +3,19 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
-namespace nMars.DbgShellPy
+namespace nMars.ShellPy
 {
-    class Module : BaseModule, IDebuggerShellModule
+    class Module : BaseModule, IShellModule
     {
-        public IDebuggerShell CreateShell()
+        public IShell CreateShell()
         {
-            return new DebuggerShellPy();
+            ShellPy py = new ShellPy();
+            py.Module = this;
+            return py;
         }
 
         #region Module registration

@@ -24,7 +24,7 @@ namespace nMars.IDE.Debugger.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, name);
-            coreGrid.Attach(IDEDebuggerApplication.Instance.ActiveEngine);
+            coreGrid.Attach(IDEDebuggerApplication.Instance.Engine);
         }
 
         public override void Detach()

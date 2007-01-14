@@ -13,6 +13,27 @@ namespace nMars.RedCode.Modules
     /// </summary>
     public interface IComponent
     {
+        /// <summary>
+        /// Source module
+        /// </summary>
+        IModule Module { get; }
+    }
+
+
+    public abstract class BaseComponent : IComponent
+    {
+        public IModule Module
+        {
+            get
+            {
+                return module;
+            }
+            set
+            {
+                module = value;
+            }
+        }
+        private IModule module;
     }
 
     /// <summary>
@@ -82,6 +103,18 @@ namespace nMars.RedCode.Modules
         /// </summary>
         /// <returns>parser instance</returns>
         IParser CreateParser(IParser parser);
+    }
+
+    /// <summary>
+    /// Module containing parser, parser factory
+    /// </summary>
+    public interface IShellModule : IModule
+    {
+        /// <summary>
+        /// Shell factory
+        /// </summary>
+        /// <returns>shell instance</returns>
+        IShell CreateShell();
     }
 
     /// <summary>

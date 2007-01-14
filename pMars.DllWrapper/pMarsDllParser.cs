@@ -11,7 +11,7 @@ using nMars.RedCode;
 
 namespace pMars.DllWrapper
 {
-    class pMarsDllParser : ParserBase
+    class pMarsDllParser : BaseParser
     {
         public pMarsDllParser()
         {

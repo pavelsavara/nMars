@@ -20,10 +20,10 @@ namespace nMars.IDE.Debugger.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, name);
-            CoreListView view = new CoreListView(IDEDebuggerApplication.Instance.ActiveEngine);
+            CoreListView view = new CoreListView(IDEDebuggerApplication.Instance.Engine);
             coreList.View = view;
-            coreList.Attach(IDEDebuggerApplication.Instance.ActiveEngine);
-            CoreSize = IDEDebuggerApplication.Instance.ActiveEngine.CoreSize;
+            coreList.Attach(IDEDebuggerApplication.Instance.Engine);
+            CoreSize = IDEDebuggerApplication.Instance.Engine.CoreSize;
             ShowAddress(0);
         }
 
@@ -37,7 +37,7 @@ namespace nMars.IDE.Debugger.Controls
 
         public void RepaintView()
         {
-            IRunningInstruction instruction = IDEDebuggerApplication.Instance.ActiveEngine.NextInstruction;
+            IRunningInstruction instruction = IDEDebuggerApplication.Instance.Engine.NextInstruction;
             int nextAddress;
             if (instruction == null)
             {
@@ -77,7 +77,7 @@ namespace nMars.IDE.Debugger.Controls
                 if (checkBoxRelative.Checked)
                 {
                     //relative to current instruction
-                    address += IDEDebuggerApplication.Instance.ActiveEngine.NextInstruction.Address;
+                    address += IDEDebuggerApplication.Instance.Engine.NextInstruction.Address;
                 }
                 coreList.MarkedAddress = address;
                 coreList.TopIndex = address + CoreSize / 2 - 5;

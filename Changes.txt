@@ -1,6 +1,7 @@
 13/01/2007 - nMars0.8.3 - IDE split
   - IDE was wplit to IDE, graphics, debuger, debugger.ide
   - MONO proof of concept - result: posible, lot of problems with WinForms, screenshot of debugging
+  - Shells and debuggers
   
 06/01/2007 - nMars0.8.2 - Refactoring
   - IProject is vehicle for IParser as well for IEngine 

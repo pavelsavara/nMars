@@ -9,7 +9,7 @@ using nMars.RedCode.Modules;
 
 namespace nMars.IDE.Debugger
 {
-    class Module : BaseModule, IIDEPluginModule
+    class Module : BaseModule, IIDEPluginModule, IShellModule
     {
         #region Module registration
 
@@ -22,7 +22,24 @@ namespace nMars.IDE.Debugger
 
         public IIDEPlugin CreateIDEPlugin()
         {
-            return new IDEDebuggerApplication();
+            if (application==null)
+            {
+                application = new IDEDebuggerApplication();
+                application.Module = this;
+            }
+            return application;
         }
+
+        public IShell CreateShell()
+        {
+            if (application == null)
+            {
+                application = new IDEDebuggerApplication();
+                application.Module = this;
+            }
+            return application;
+        }
+
+        private static IDEDebuggerApplication application;
     }
 }

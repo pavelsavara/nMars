@@ -46,5 +46,25 @@ namespace nMars.Console.Properties {
                 this["DefaultParser"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("nMars.Engine-StepBack")]
+        public string DefaultDebugEngine {
+            get {
+                return ((string)(this["DefaultDebugEngine"]));
+            }
+            set {
+                this["DefaultDebugEngine"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public System.Collections.Generic.List<string> KnownComponents {
+            get {
+                return ((System.Collections.Generic.List<string>)(this["KnownComponents"]));
+            }
+        }
     }
 }

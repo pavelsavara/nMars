@@ -27,75 +27,82 @@ namespace nMars.RedCode
         /// <summary>
         /// Main procedure of commandline user interface
         /// </summary>
-        public static Project Prepare(string[] args, ComponentLoader components, ISimpleOutput console)
+        public static Project Prepare(string[] args, ComponentLoader components, ISimpleOutput console, out bool interactive, out string saveProjectFile)
         {
             bool nologo;
-            string saveProjectFile;
+            saveProjectFile=null;
+            interactive=false;
 
             Project project;
             try
             {
-                project = ParseArguments(args, out nologo, out saveProjectFile, components);
+                project = ParseArguments(args, out nologo, out interactive, out saveProjectFile, components);
             }
             catch(ArgumentException ex)
             {
-                PrintParserHelp(console);
-                console.WriteLine("");
-                console.ErrorWriteLine(ex.Message);
+                if (ex.Message == "versions")
+                {
+                    PrintVersions(console);
+                }
+                else if (ex.Message == "help")
+                {
+                    PrintHelp(console);
+                }
+                else if (ex.Message == "Please provide valid arguments")
+                {
+                    PrintHelp(console);
+                    console.WriteLine("");
+                    console.ErrorWriteLine(ex.Message);
+                }
+                else
+                {
+                    console.ErrorWriteLine(ex.Message);
+                }
                 return null;
             }
 
             if (project.WarriorFiles.Count == 0)
             {
-                PrintParserHelp(console);
+                PrintHelp(console);
                 return null;
             }
 
             if (!nologo)
                 PrintLogo(console);
 
-            if (saveProjectFile != null)
-                project.SaveXml(saveProjectFile);
-
             return project;
         }
-
-        public static int Exec(ComponentLoader components, ISimpleOutput console, Project project)
+        public static ParseResult Parse(ComponentLoader components, ISimpleOutput console, Project project)
         {
             if (project == null)
             {
-                return -1;
+                return null;
             }
 
             if (components.Parser != null)
             {
-                ParseResult result = components.Parser.Parse(project, console);
-                if (result.Succesfull)
-                {
-                    if (project.Rules.Rounds > 0)
-                    {
-                        if (components.Engine != null)
-                        {
-                            components.Engine.Run(project, console);
-                        }
-                        else
-                        {
-                            console.ErrorWriteLine("Engine not found:" + components.EngineName);
-                            return -4; //engine not found
-                        }
-                    }
-                }
-                else
-                {
-                    return -2; //parser errors
-                }
+                return components.Parser.Parse(project, console);
             }
             else
             {
                 console.ErrorWriteLine("Parser not found:" + components.ParserName);
-                return -3; //parser not found
+                return null;
             }
-            return 0;
+        }
+
+        public static void Run(ComponentLoader components, ISimpleOutput console, Project project)
+        {
+            if (project.Rules.Rounds > 0)
+            {
+                if (components.Engine != null)
+                {
+                    components.Engine.Run(project, console);
+                }
+                else
+                {
+                    console.ErrorWriteLine("Engine not found:" + components.EngineName);
+                }
+            }
         }
 
         #region Parse Arguments
@@ -111,20 +118,22 @@ namespace nMars.RedCode
         public static Project ParseArguments(string args)
         {
             bool nologo;
+            bool interactive;
             string saveProjectFile;
             string[] argsar = args.Split(separ);
-            return ParseArguments(argsar, out nologo, out saveProjectFile, null);
+            return ParseArguments(argsar, out nologo, out interactive, out saveProjectFile, null);
         }
         private static readonly char[] separ = { ' ', '\t', '\r', '\n' };
 
         /// <summary>
         /// Parse pmars compatible commandline options
         /// </summary>
-        public static Project ParseArguments(string[] args, out bool nologo, out string saveProjectFile, ComponentLoader components)
+        public static Project ParseArguments(string[] args, out bool nologo, out bool interactive, out string saveProjectFile, ComponentLoader components)
         {
             Project project = new Project();
             saveProjectFile = null;
             nologo = false;
+            interactive = false;
 
             if (args.Length == 0)
             {
@@ -137,7 +146,12 @@ namespace nMars.RedCode
                 switch (param)
                 {
                     case "-h":
-                        throw new ArgumentException("");
+                        throw new ArgumentException("help");
+                    case "-v":
+                        throw new ArgumentException("versions");
+                    case "-e":
+                        interactive = true;
+                        break;
                     case "-p":
                         ReadNumber(args, ref p, out project.Rules.MaxProcesses);
                         break;
@@ -306,7 +320,15 @@ namespace nMars.RedCode
         public static event CommandlineEventDelegate DumpHelpEvent;
         public static event CommandlineEventDelegate DumpLogoEvent;
 
-        private static void PrintParserHelp(ISimpleOutput console)
+        private static void PrintVersions(ISimpleOutput console)
+        {
+            string version = ModuleRegister.GetVersionInfo();
+            string logo = "http://sourceforge.net/projects/nmars\r\n\r\n" +
+                "2007 Published under LGPL http://www.gnu.org/licenses/lgpl.txt\r\n" + "by Pavel Savara (pavel.savara@gmail.com)\r\n\r\n";
+            console.WriteLine(logo + version);
+        }
+
+        private static void PrintHelp(ISimpleOutput console)
         {
             PrintLogo(console);
             console.WriteLine("");
@@ -318,6 +340,7 @@ namespace nMars.RedCode
             console.WriteLine("  -@s file  save project to xml file");
             console.WriteLine("  -nP name  Change parser component");
             console.WriteLine("  -nE name  Change engine component");
+            console.WriteLine("  -v        Component versions");
             console.WriteLine("");
             console.WriteLine("Rules:");
             console.WriteLine("  -r #      Rounds to play [1]");

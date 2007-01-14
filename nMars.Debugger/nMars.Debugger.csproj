@@ -5,12 +5,13 @@
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>nMars.Debugger</RootNamespace>
     <AssemblyName>nMars.Debugger</AssemblyName>
     <ApplicationIcon>Properties\Debugger.ico</ApplicationIcon>
-    <StartupObject>nMars.Debugger.Module</StartupObject>
+    <StartupObject>
+    </StartupObject>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -52,6 +53,7 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="ConsoleDebugger.cs" />
     <Compile Include="Debugger.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

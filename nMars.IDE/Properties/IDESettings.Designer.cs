@@ -10,10 +10,11 @@
 
 namespace nMars.IDE.Properties {
     
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "8.0.0.0")]
     internal sealed partial class IDESettings : global::System.Configuration.ApplicationSettingsBase {
-    
+        
         private static IDESettings defaultInstance = ((IDESettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new IDESettings())));
         
         public static IDESettings Default {
@@ -45,6 +46,14 @@ namespace nMars.IDE.Properties {
             }
         }
         
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public System.Collections.Generic.List<string> KnownComponents {
+            get {
+                return ((System.Collections.Generic.List<string>)(this["KnownComponents"]));
+            }
+        }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("nMars.Engine-StepBack")]
@@ -66,6 +75,15 @@ namespace nMars.IDE.Properties {
             }
             set {
                 this["DefaultParser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("a")]
+        public string Setting {
+            get {
+                return ((string)(this["Setting"]));
             }
         }
     }

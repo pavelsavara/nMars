@@ -3,27 +3,21 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
+using System.Collections.Generic;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 
 namespace nMars.Debugger
 {
-    public class Debugger
+    public class Debugger : BaseComponent, IShell
     {
-        #region Construction
-
-        public Debugger(ISimpleOutput aConsole)
-        {
-            console = aConsole;
-        }
-
-        #endregion
 
         #region Operating
 
-        protected bool StartEngine(bool onlyInit)
+        protected bool Start(bool onlyInit)
         {
-            if (ActiveEngine == null)
+            if (Engine == null || !Engine.IsLive)
             {
                 ParseResult result = components.Parser.Parse(project, console);
 
@@ -35,9 +29,12 @@ namespace nMars.Debugger
                     }
                     else
                     {
-                        ActiveEngine = components.AsyncEngineWrapper;
-                        ActiveEngine.BeginMatch(project, onEngineStoppedAsync);
-                        console.WriteLine(runningString);
+                        Engine = components.AsyncEngineWrapper;
+                        Engine.BeginMatch(project, onEngineStoppedAsync);
+                        if (onlyInit)
+                            console.WriteLine(startString);
+                        else
+                            console.WriteLine(runningString);
                         OnAfterStartEngine(false, onlyInit);
                     }
                 }
@@ -48,8 +45,8 @@ namespace nMars.Debugger
             }
             else
             {
-                ActiveEngine.Brake = project.EngineOptions.Brake;
-                if (ActiveEngine.IsPaused)
+                Engine.Brake = project.EngineOptions.Brake;
+                if (Engine.IsPaused)
                 {
                     OnAfterStartEngine(true, onlyInit);
                 }
@@ -61,7 +58,7 @@ namespace nMars.Debugger
         {
             if (!onlyInit)
             {
-                ActiveEngine.Continue(false);
+                Engine.Continue(false);
             }
         }
 
@@ -75,13 +72,13 @@ namespace nMars.Debugger
 
         protected virtual void OnEngineStopped(bool finished)
         {
-            if (ActiveEngine == null)
+            if (Engine == null)
                 return;
 
             if (finished)
             {
-                ActiveEngine.EndMatch(console);
-                ActiveEngine = null;
+                Engine.EndMatch(console);
+                Engine = null;
                 //console.WriteLine(stopedString);
             }
             else
@@ -92,45 +89,64 @@ namespace nMars.Debugger
 
         public virtual bool Stop()
         {
-            if (ActiveEngine == null || !ActiveEngine.IsLive)
+            if (Engine == null || !Engine.IsLive)
                 return false;
 
-            ActiveEngine.Quit(false);
+            Engine.Quit(false);
             console.WriteLine(stopString);
+            return true;
+        }
+
+        public virtual bool Restart()
+        {
+            if (!Stop())
+                return false;
+            if (!Start(true))
+                return false;
             return true;
         }
 
         public virtual bool Pause()
         {
-            if (ActiveEngine == null || ActiveEngine.IsPaused)
+            if (Engine == null || Engine.IsPaused)
                 return false;
 
-            ActiveEngine.Pause(false);
+            Engine.Pause(false);
             return true;
         }
 
         public virtual bool Continue()
         {
-            if (ActiveEngine == null || !ActiveEngine.IsPaused)
+            if (Engine == null || !Engine.IsPaused)
                 return false;
 
-            ActiveEngine.Continue(false);
+            Engine.Continue(false);
             console.WriteLine(runningString);
+            return true;
+        }
+
+        public virtual bool Step(int count)
+        {
+            while (count > 0)
+            {
+                count--;
+                Step();
+            }
             return true;
         }
 
         public virtual bool Step()
         {
-            if (ActiveEngine == null || !ActiveEngine.IsPaused)
+            if (Engine == null || !Engine.IsPaused)
                 return false;
 
-            if (ActiveEngine.LastStepResult == StepResult.Finished)
+            if (Engine.LastStepResult == StepResult.Finished && Engine.Cycles!=0)
             {
-                ActiveEngine.Continue(false);
+                Engine.Continue(false);
             }
             else
             {
-                ActiveEngine.NextStep();
+                Engine.NextStep();
                 console.WriteLine(stepString);
             }
             return true;
@@ -148,14 +164,135 @@ namespace nMars.Debugger
             return false;
         }
 
+        public virtual bool Back(int count)
+        {
+            while (count > 0)
+            {
+                count--;
+                Back();
+            }
+            return true;
+        }
+
         public virtual bool Back()
         {
-            if (ActiveEngine == null || !ActiveEngine.IsPaused|| !ActiveEngine.CanStepBack)
+            if (Engine == null || !Engine.IsPaused|| !Engine.CanStepBack)
                 return false;
 
-            ActiveEngine.PrevStep();
+            Engine.PrevStep();
             console.WriteLine(backString);
             return true;
+        }
+
+        #endregion
+
+        #region Shell
+
+        public virtual void Attach(IConsole aConsole, IList<IShell> allShells)
+        {
+            console = aConsole;
+            console.CommandEntered += new ConsoleCommandEntered(ConsoleCommandEntered);
+            foreach (IShell shell in allShells)
+            {
+                shell.Register(this, "debugger");
+            }
+        }
+
+        public void Register(object aplication, string name)
+        {
+        }
+
+        public virtual void Detach()
+        {
+            console.CommandEntered -= new ConsoleCommandEntered(ConsoleCommandEntered);
+        }
+
+        public void ConsoleCommandEntered(string command, ref bool processed, ref bool quit)
+        {
+            if (processed)
+                return;
+
+            switch (command.ToLower())
+            {
+                case "clear":
+                case "cl":
+                    console.Clear();
+                    processed = true;
+                    break;
+                case "list":
+                case "l":
+                    List();
+                    processed = true;
+                    break;
+                case "continue":
+                case "c":
+                case "go":
+                case "g":
+                    Continue();
+                    break;
+                case "run":
+                    Project.EngineOptions.Brake = normalRunBrake;
+                    Start(false);
+                    processed = true;
+                    break;
+                case "slow":
+                    Project.EngineOptions.Brake = slowRunBrake;
+                    Start(false);
+                    processed = true;
+                    break;
+                case "fast":
+                    Project.EngineOptions.Brake = fastRunBrake;
+                    Start(false);
+                    processed = true;
+                    break;
+                case "stop":
+                    Stop();
+                    processed = true;
+                    break;
+                case "pause":
+                case "break":
+                    Pause();
+                    processed = true;
+                    break;
+                case "step":
+                case "start":
+                case "s":
+                    Step();
+                    processed = true;
+                    break;
+                case "back":
+                    Back();
+                    processed = true;
+                    break;
+                case "quit":
+                case "exit":
+                case "q":
+                    Engine.Quit(false);
+                    processed = true;
+                    quit = true;
+                    break;
+            }
+        }
+
+        public void List()
+        {
+            if (Engine!=null &&Engine.IsLive)
+                List(Engine.NextInstruction.Address - 1, 10);
+            else 
+                console.ErrorWriteLine("Engine is not running");
+        }
+
+        public void List(int from, int length)
+        {
+            if (Engine != null && Engine.IsLive)
+            {
+                for (int a = from; a < from + length; a++)
+                {
+                    console.WriteLine(Engine[a].ToString());
+                }
+            }
+            else
+                console.ErrorWriteLine("Engine is not running");
         }
 
         #endregion
@@ -164,11 +301,11 @@ namespace nMars.Debugger
 
         public int Brake
         {
-            get { return ActiveEngine.Brake; }
-            set { ActiveEngine.Brake = value; }
+            get { return Engine.Brake; }
+            set { Engine.Brake = value; }
         }
 
-        public Project Project
+        public IProject Project
         {
             get { return project; }
             set { project = value; }
@@ -180,22 +317,28 @@ namespace nMars.Debugger
             set { components = value; }
         }
 
-        public ISimpleOutput Console
+        public bool PrintErrors
+        {
+            set { }
+        }
+
+        public IConsole Console
         {
             get { return console; }
             set { console = value; }
         }
 
-        public IAsyncEngine ActiveEngine
+        public IAsyncEngine Engine
         {
-            get { return activeEngine; }
-            set { activeEngine = value; }
+            get { return engine; }
+            set { engine = value; }
         }
 
         #endregion
 
         #region Variables
 
+        const string startString = "=Start=";
         const string runningString = "=Running=";
         const string pausedString = "=Paused=";
         const string backString = "=Back=";
@@ -207,10 +350,10 @@ namespace nMars.Debugger
         public const int fastRunBrake = 1;
         public const int executeBrake = -1;
 
-        private IAsyncEngine activeEngine;
-        private ISimpleOutput console;
+        private IAsyncEngine engine;
+        private IConsole console;
 
-        private Project project;
+        private IProject project;
         private ComponentLoader components;
 
         #endregion

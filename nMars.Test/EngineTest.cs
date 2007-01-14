@@ -32,7 +32,7 @@ namespace nMars.Test
         public static IEngine CreateEngineInternal()
         {
             IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
-            IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Engine", "nMars.Engine") as IExtendedStepEngine;
+            IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Engine") as IExtendedStepEngine;
             return new ComparingEngine(engineOne, engineTwo);
         }
 

@@ -85,8 +85,7 @@
     <Compile Include="Controls\IDEFrame.Designer.cs">
       <DependentUpon>IDEFrame.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\IDEApplication.cs" />
-    <Compile Include="Core\BreakPoints.cs" />
+    <Compile Include="IDEApplication.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\RedCodeProject.cs" />
     <Compile Include="Core\RedCodeSolution.cs" />
