@@ -4,9 +4,10 @@
 - all packages are expected to be extracted to same directory
 
 ***************************************
-* Package nMars.?.?.bin.zip
+* Package nMarsConsole.*.*.bin.zip
 ***************************************
 - this package is should run on any .NET/Mono system
+
 
   nMars.exe
 ---------------------
@@ -39,7 +40,7 @@
 - it uses nMars.Parser component to parse warriors
 
 
-  nMars.Debugger.exe
+  nMars.Debugger.dll
 ---------------------
 - This is implementation of CoreWars engine
 - it is console application, UI is very similar to pMARS
@@ -59,21 +60,35 @@
     - other reusable classes
     - support for modularity, see ModuleRegister, IModule
   
+  
+
+
+***************************************
+* Package nMarsIDE.*.*.win.zip
+***************************************
+- this package is compiled for Windows
+- contains all modules from nMarsConsole package
+
+
+  nMars.IDE.exe
+-----------------------------------
+- Is Integrated developement environment for corewars
+- integrates parser, engine, debugger
+
 
 
 
 ***************************************
-* Package npMars.?.?.win32.zip
+* Package nMarsTest.*.*.win.zip
 ***************************************
-- this package is compiled for windows
+- this package is compiled for Windows
 
-  pMars.exe
+
+  pMars.dll
 --------------  
-- This is old good pMARS 9.2
+- This is pMARS in version 0.9.3
 - compiled by MSVC++ 2005 for Windows platform
 - small enhancements, same behavior as original pMars
-- pMars.exe is console version
-- pMarsSDL.exe + SDL.dll is graphical version by M Joonas Pihlaja
 - pMars.dll exporting methods for parser, engine and core watch
 
   
@@ -100,11 +115,13 @@
 - it uses pMars.DllWrapper component as first tested engine
 - it uses nMars.Engine component as second tested engine
 - you will need NUnit installed
+
+
   
 
 ***************************************
-* Package nMarsDbgPy.?.?.zip
+* Package nMarsShellPy.*.*.zip
 ***************************************
+- this IronPython extension for debugger/IDE interactive shell
 - this package is should run on any .NET/Mono system
-- this IronPython extension for debugger
 
