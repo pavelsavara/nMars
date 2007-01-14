@@ -1,0 +1,107 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>nMars.RedCode</RootNamespace>
+    <AssemblyName>nMars.RedCode</AssemblyName>
+    <ApplicationIcon>Properties\RedCode.ico</ApplicationIcon>
+    <StartupObject>
+    </StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <DocumentationFile>bin\Debug\nMars.RedCode.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\nMars.RedCode.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mono|AnyCPU' ">
+    <OutputPath>..\bin\Mono\</OutputPath>
+    <DefineConstants>TRACE;MONO</DefineConstants>
+    <DocumentationFile>..\bin\Release\nMars.RedCode.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Engine\AsyncEngine.cs" />
+    <Compile Include="Engine\BreakPoint.cs" />
+    <Compile Include="IDE\Solution.cs" />
+    <Compile Include="IDE\IIDEPlugin.cs" />
+    <Compile Include="Utils\ConsoleWrapper.cs" />
+    <Compile Include="Engine\EngineOptions.cs" />
+    <Compile Include="Engine\Project.cs" />
+    <Compile Include="Engine\PSpace.cs" />
+    <Compile Include="Exceptions\DebuggerException.cs" />
+    <Compile Include="Exceptions\EngineException.cs" />
+    <Compile Include="Exceptions\ParserException.cs" />
+    <Compile Include="Basic\IInstruction.cs" />
+    <Compile Include="Modules\CommandLine.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Modules\ComponentLoader.cs" />
+    <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Engine\MatchResult.cs" />
+    <Compile Include="Engine\IEngine.cs" />
+    <Compile Include="Basic\Instruction.cs" />
+    <Compile Include="Basic\Mode.cs" />
+    <Compile Include="Basic\Modifier.cs" />
+    <Compile Include="Basic\Operation.cs" />
+    <Compile Include="Parser\CachingParser.cs" />
+    <Compile Include="Parser\ParserOptions.cs" />
+    <Compile Include="Parser\IParser.cs" />
+    <Compile Include="Engine\IPSpaces.cs" />
+    <Compile Include="Basic\IWarrior.cs" />
+    <Compile Include="Modules\ModuleRegister.cs" />
+    <Compile Include="Engine\IProject.cs" />
+    <Compile Include="Parser\BaseParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\VersionInfo.cs" />
+    <Compile Include="Basic\Rules.cs" />
+    <Compile Include="Engine\CoreBindingList.cs" />
+    <Compile Include="Utils\IConsole.cs" />
+    <Compile Include="Utils\Mono.cs" />
+    <Compile Include="Utils\SerializableDictionary.cs" />
+    <Compile Include="Basic\Warrior.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\RedCode.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
