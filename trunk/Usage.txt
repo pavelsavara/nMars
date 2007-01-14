@@ -91,4 +91,3 @@ Interactive:
   - UI and engine are asynchronous, engine could change speed
 - There is console/shell which could execute textual commands
 - Shell could be extended by nMarsShellPy module with IronPython
-- IDE could be ported for Mono but implementation of Winforms is poor in Mono now

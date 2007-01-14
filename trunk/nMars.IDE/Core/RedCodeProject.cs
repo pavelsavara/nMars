@@ -3,19 +3,16 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Xml.Serialization;
 using nMars.IDE.Controls;
 using nMars.RedCode;
-using nMars.RedCode.Utils;
 
 namespace nMars.IDE.Core
 {
     public class RedCodeProject : Document, INotifyPropertyChanged
-
     {
         #region Construction
 
@@ -26,9 +23,9 @@ namespace nMars.IDE.Core
             Project.EngineOptions.StatusLine = true;
         }
 
-        private RedCodeProject(string filename)
+        private RedCodeProject(string aFileName)
         {
-            FileName = filename;
+            fileName = aFileName;
             Load();
             IsNew = false;
             IsModified = false;

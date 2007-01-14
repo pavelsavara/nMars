@@ -7,7 +7,6 @@ using nMars.IDE.Debugger.Controls;
 using nMars.IDE.Debugger.Forms;
 using nMars.IDE.Forms;
 using nMars.RedCode;
-using nMars.RedCode.Modules;
 
 namespace nMars.IDE.Debugger
 {

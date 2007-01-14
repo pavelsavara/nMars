@@ -6,10 +6,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
-using nMars.RedCode.Utils;
 
 namespace nMars.IDE.Core
 {

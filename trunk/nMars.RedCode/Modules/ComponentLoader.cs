@@ -54,25 +54,7 @@ namespace nMars.RedCode.Modules
         }
 
         /// <summary>
-        /// Engine Component
-        /// </summary>
-        [XmlIgnore]
-        public IShell Shell
-        {
-            get
-            {
-                if (engine == null)
-                    LoadShell();
-                return shell;
-            }
-            set
-            {
-                shell = value;
-            }
-        }
-
-        /// <summary>
-        /// Asynchronous wrapper
+        /// Asynchronous wrapper around engine
         /// </summary>
         [XmlIgnore]
         public IAsyncEngine AsyncEngineWrapper
@@ -95,6 +77,9 @@ namespace nMars.RedCode.Modules
             }
         }
 
+        /// <summary>
+        /// Caching wrapper around parser
+        /// </summary>
         public IParser CachingParser
         {
             get
@@ -103,12 +88,9 @@ namespace nMars.RedCode.Modules
             }
         }
 
-        private IAsyncEngine asyncEngineWrapper;
-        private IParser cachingParser;
-
-        private string parserName = "nMars.Parser";
-        private string engineName = "nMars.Engine";
-        private string shellName = "nMars.Debugger";
+        /// <summary>
+        /// Name of parser which should be loaded
+        /// </summary>
         public string ParserName
         {
             get
@@ -121,6 +103,10 @@ namespace nMars.RedCode.Modules
                 Parser = null;
             }
         }
+
+        /// <summary>
+        /// Name of engine which should be loaded
+        /// </summary>
         public string EngineName
         {
             get
@@ -131,19 +117,6 @@ namespace nMars.RedCode.Modules
             {
                 engineName = value;
                 Engine = null;
-            }
-        }
-
-        public string ShellName
-        {
-            get
-            {
-                return shellName;
-            }
-            set
-            {
-                shellName = value;
-                Shell = null;
             }
         }
 
@@ -175,25 +148,16 @@ namespace nMars.RedCode.Modules
             }
         }
 
-        private void LoadShell()
-        {
-            try
-            {
-                shell = ModuleRegister.CreateShell(ShellName);
-            }
-            catch (FileNotFoundException)
-            {
-                //swallow
-            }
-        }
-
         #endregion
 
         #region Variables
 
         private IParser parser;
         private IEngine engine;
-        private IShell shell;
+        private IAsyncEngine asyncEngineWrapper;
+        private IParser cachingParser;
+        private string parserName = "nMars.Parser";
+        private string engineName = "nMars.Engine";
 
         #endregion
     }

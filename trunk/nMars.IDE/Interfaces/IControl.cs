@@ -4,9 +4,7 @@
 // 2006 Pavel Savara
 
 using System.Windows.Forms;
-using nMars.Graphics;
 using nMars.IDE.Core;
-using nMars.RedCode;
 
 namespace nMars.IDE
 {

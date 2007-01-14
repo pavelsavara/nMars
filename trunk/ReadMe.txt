@@ -30,11 +30,13 @@ https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Packages.txt
   Console
 --------------------
 nMars.exe is commandline interface similar to pMars.exe, it is parser and engine.
+Is running under Mono.
 
 
   IDE
 --------------------
 Is extesible graphical framework with editor, compiler and debugger integrated.
+IDE could be ported for Mono but implementation of Winforms is poor in Mono now.
 
 
   Parser
@@ -81,7 +83,7 @@ Contain shared definitions of types and interfaces.
  - support for modularity, see ModuleRegister, IModule
 
 
-  pMars
+  pMars - 0.9.3-a
 --------------------
  - I included pMARS 0.9.2 modified by M Joonas Pihlaja.
  - I modularized it and wrapped into DLL and .NET component

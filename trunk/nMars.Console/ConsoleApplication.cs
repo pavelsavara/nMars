@@ -1,6 +1,9 @@
-using System;
+// This file is part of nMars - Corewars MARS for .NET 
+// Whole solution including it's license could be found at
+// http://sourceforge.net/projects/nmars/
+// 2006 Pavel Savara
+
 using System.Collections.Generic;
-using System.Text;
 using nMars.Console.Properties;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
@@ -34,7 +37,7 @@ namespace nMars.Console
                     Shells.Add(shellpy);
                 }
                 components.EngineName = consoleConfig.DefaultDebugEngine;
-                IShell defaultShell = null;
+
                 foreach (IShell shell in Shells)
                 {
                     shell.Attach(console, Shells);
@@ -43,10 +46,6 @@ namespace nMars.Console
                     shell.PrintErrors = true;
                     shell.Engine = components.AsyncEngineWrapper;
                     shell.Register(components.AsyncEngineWrapper, "engine");
-                    if (shell.Module.Name == components.ShellName)
-                    {
-                        defaultShell = shell;
-                    }
                 }
                 console.Inject("step");
                 console.Interactive();
