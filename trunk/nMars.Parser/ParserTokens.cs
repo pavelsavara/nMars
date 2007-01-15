@@ -93,7 +93,7 @@ namespace nMars.Parser
         static ParserTokens()
         {
             start = new Regex("^;redcode", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Multiline);
-            for0 = new Regex("for 0", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Multiline);
+            for0 = new Regex("^.*for 0", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Multiline);
             rof = new Regex("rof", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Multiline);
         }
 
@@ -212,7 +212,7 @@ namespace nMars.Parser
             Statement statement;
             ContainerStatement statements;
             ForRofContainerStatement forrof;
-            List<LabelName> statementlabels;
+            List<LabelName> labels;
             List<string> comments;
             string labell;
 
@@ -351,7 +351,13 @@ namespace nMars.Parser
                     ProcessComments(comments);
                     if (endSymbol<2)
                         endSymbol = 2;
-                    return token.Tokens[1].UserObject;
+                    statements = (ContainerStatement)token.Tokens[1].UserObject;
+                    statement = (Statement)token.Tokens[2].UserObject;
+                    if (statement!=null)
+                    {
+                        statements.Add(statement);
+                    }
+                    return statements;
 
                 case (int)RuleConstants.RULE_ALLSTATEMENTS:
                     //<AllStatements> ::= <Statement>
@@ -398,20 +404,20 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_FOR_FOR_ROF2:
                     // <For> ::= <Labels> <eol> for <Expression> <eol> <AllStatementsOptional> rof <ExpressionOptional>
-                    statementlabels = ((List<LabelName>)token.Tokens[0].UserObject);
+                    labels = ((List<LabelName>)token.Tokens[0].UserObject);
                     expression = (Expression)token.Tokens[3].UserObject;
                     comments = (List<string>)token.Tokens[4].UserObject;
                     statement = (Statement)token.Tokens[5].UserObject;
-                    forrof = CreateForrof(comments, expression, statement, statementlabels, token);
+                    forrof = CreateForrof(comments, expression, statement, labels, token);
                     return forrof;
 
                 case (int)RuleConstants.RULE_FOR_FOR_ROF:
                     // <For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof <ExpressionOptional>
-                    statementlabels = ((List<LabelName>)token.Tokens[0].UserObject);
+                    labels = ((List<LabelName>)token.Tokens[0].UserObject);
                     expression = (Expression)token.Tokens[2].UserObject;
                     comments = (List<string>)token.Tokens[3].UserObject;
                     statement = (Statement)token.Tokens[4].UserObject;
-                    forrof = CreateForrof(comments, expression, statement, statementlabels, token);
+                    forrof = CreateForrof(comments, expression, statement, labels, token);
                     return forrof;
                 case (int)RuleConstants.RULE_ASSERT_ATASSERT:
                     // <Assert> ::= @assert <Expression>
@@ -423,10 +429,10 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_STATEMENT4:
                     //<Statement> ::= <LabelsOptional> <Operation>
-                    statementlabels = (List<LabelName>)token.Tokens[0].UserObject;
+                    labels = (List<LabelName>)token.Tokens[0].UserObject;
                     statement = (InstructionStatement)token.Tokens[1].UserObject;
-                    statement.Labels = statementlabels;
-                    foreach (LabelName label in statementlabels)
+                    statement.Labels = labels;
+                    foreach (LabelName label in labels)
                     {
                         variables[label.Name] = label;
                     }
@@ -434,10 +440,10 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_STATEMENT5:
                     //<Statement> ::= <Labels> <eol> <Operation>
-                    statementlabels = (List<LabelName>)token.Tokens[0].UserObject;
+                    labels = (List<LabelName>)token.Tokens[0].UserObject;
                     statement = (InstructionStatement)token.Tokens[2].UserObject;
-                    statement.Labels = statementlabels;
-                    foreach (LabelName label in statementlabels)
+                    statement.Labels = labels;
+                    foreach (LabelName label in labels)
                     {
                         variables[label.Name] = label;
                     }
@@ -464,6 +470,9 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_ENDOPTIONAL_END:
                 //<EndOptional> ::= <eol> End <eolOptional>
+                    if (endSymbol < 2)
+                        endSymbol = 2;
+                    return null;
 
                 case (int)RuleConstants.RULE_ENDOPTIONAL_END3:
                 //<EndOptional> ::= <eol> <Labels> End <eolOptional>
@@ -472,7 +481,11 @@ namespace nMars.Parser
                 //<EndOptional> ::= <eol> <Labels> <eol> End <eolOptional>
                     if (endSymbol < 2)
                         endSymbol = 2;
-                    return null;
+                    labels = (List<LabelName>)token.Tokens[1].UserObject;
+                    labels.Add(new LabelName("#end#"));
+                    statement = new EquStatement(null, token.Location);
+                    statement.Labels = labels;
+                    return statement;
 
                 case (int)RuleConstants.RULE_ENDOPTIONAL_END2:
                     //<EndOptional> ::= <eol> End <Expression> <eolOptional>
@@ -486,14 +499,22 @@ namespace nMars.Parser
                     org = (Expression)token.Tokens[3].UserObject;
                     if (endSymbol < 2)
                         endSymbol = 2;
-                    return null;
+                    labels = (List<LabelName>)token.Tokens[1].UserObject;
+                    labels.Add(new LabelName("#end#"));
+                    statement = new EquStatement(null, token.Location);
+                    statement.Labels = labels;
+                    return statement;
 
                 case (int)RuleConstants.RULE_ENDOPTIONAL_END6:
                     //<EndOptional> ::= <eol> <Labels> <eol> End <Expression> <eolOptional>
                     org = (Expression)token.Tokens[4].UserObject;
                     if (endSymbol < 2)
                         endSymbol = 2;
-                    return null;
+                    labels = (List<LabelName>)token.Tokens[1].UserObject;
+                    labels.Add(new LabelName("#end#"));
+                    statement = new EquStatement(null, token.Location);
+                    statement.Labels = labels;
+                    return statement;
 
                 case (int)RuleConstants.RULE_ORG_ORG:
                     //<Org> ::= Org <Expression>
@@ -502,7 +523,7 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_EQU_EQU:
                     // <Equ> ::= <Labels> Equ <ModeOptional> <Expression>
-                    statementlabels = (List<LabelName>)token.Tokens[0].UserObject;
+                    labels = (List<LabelName>)token.Tokens[0].UserObject;
                     expression = (Expression)token.Tokens[3].UserObject;
                     Mode mode = (Mode)token.Tokens[2].UserObject;
                     if (mode!=null && mode!=Mode.NULL)
@@ -510,8 +531,8 @@ namespace nMars.Parser
                         expression = new ModifiedExpression(expression, mode);
                     }
                     equ = new EquStatement(expression, token.Location);
-                    equ.Labels = statementlabels;
-                    foreach (LabelName label in statementlabels)
+                    equ.Labels = labels;
+                    foreach (LabelName label in labels)
                     {
                         CheckName(label.Name, token.Tokens[1].Location);
                         variables[label.Name] = expression;
@@ -520,11 +541,11 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_EQU_EQU2:
                     // <Equ> ::= <Labels> <eol> Equ <ModeOptional> <Expression>
-                    statementlabels = (List<LabelName>)token.Tokens[0].UserObject;
+                    labels = (List<LabelName>)token.Tokens[0].UserObject;
                     expression = (Expression)token.Tokens[4].UserObject;
                     equ = new EquStatement(expression, token.Location);
-                    equ.Labels = statementlabels;
-                    foreach (LabelName label in statementlabels)
+                    equ.Labels = labels;
+                    foreach (LabelName label in labels)
                     {
                         CheckName(label.Name, token.Tokens[2].Location);
                         variables[label.Name] = expression;
@@ -575,26 +596,26 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_LABELSOPTIONAL2:
                     //<LabelsOptional> ::= 
-                    statementlabels = new List<LabelName>();
-                    return statementlabels;
+                    labels = new List<LabelName>();
+                    return labels;
 
                 case (int)RuleConstants.RULE_LABELS:
                     // <Labels> ::= <Label>
-                    statementlabels = new List<LabelName>();
-                    statementlabels.Add((LabelName)token.Tokens[0].UserObject);
-                    return statementlabels;
+                    labels = new List<LabelName>();
+                    labels.Add((LabelName)token.Tokens[0].UserObject);
+                    return labels;
 
                 case (int)RuleConstants.RULE_LABELS2:
                     // <Labels> ::= <Labels> <eol> <Label>
-                    statementlabels = (List<LabelName>)token.Tokens[0].UserObject;
-                    statementlabels.Add((LabelName)token.Tokens[2].UserObject);
-                    return statementlabels;
+                    labels = (List<LabelName>)token.Tokens[0].UserObject;
+                    labels.Add((LabelName)token.Tokens[2].UserObject);
+                    return labels;
 
                 case (int)RuleConstants.RULE_LABELS3:
                     // <Labels> ::= <Labels> <Label>
-                    statementlabels = (List<LabelName>)token.Tokens[0].UserObject;
-                    statementlabels.Add((LabelName)token.Tokens[1].UserObject);
-                    return statementlabels;
+                    labels = (List<LabelName>)token.Tokens[0].UserObject;
+                    labels.Add((LabelName)token.Tokens[1].UserObject);
+                    return labels;
 
                     #endregion
 

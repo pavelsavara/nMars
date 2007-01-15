@@ -24,7 +24,7 @@ namespace nMars.Parser.Statements
                 return;
             if (expression.Evaluate(parser, currentAddress) == 0)
             {
-                parser.WriteWarning("Assert failed : " + this + " at : " + Location, Location);
+                parser.WriteError("Assert failed : " + this + " at : " + Location, Location);
             }
         }
 

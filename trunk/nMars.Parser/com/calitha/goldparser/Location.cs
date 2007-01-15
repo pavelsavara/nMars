@@ -48,7 +48,7 @@ namespace com.calitha.goldparser
         /// <returns>The output string.</returns>
         public override string ToString()
         {
-            return "(pos: " + (position + 0) + ", ln: " + (lineNr + 1) + ", col: " + (columnNr + 1) + ")";
+            return "(ln: " + (lineNr + 1) + ", col: " + (columnNr + 1) + ")";
         }
 
         /// <summary>

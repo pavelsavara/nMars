@@ -35,7 +35,7 @@ namespace nMars.Test
         public void Single()
         {
             Init();
-            if (!LoadDumpOne(Path.Combine(basePath, @"beppe\rnd5\EADON5.RED")))
+            if (!LoadDumpOne(Path.Combine(basePath, @"pycorewar\Koenigstuhl\94\ajax.red")))
                 throw new ParserException("Some warriors failed.");
         }
 

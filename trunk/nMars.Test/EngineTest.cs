@@ -60,7 +60,7 @@ namespace nMars.Test
             Init();
             LoadRunPair(
                 Path.Combine(basePath, @"imt1\metcalf1.red"),
-                Path.Combine(basePath, @"pycorewar\Koenigstuhl\94nop\redrace10801.red"), 0);
+                Path.Combine(basePath, @"pycorewar\Koenigstuhl\94\aggression.red"), 0);
             Console.WriteLine("\nDone");
         }
 
