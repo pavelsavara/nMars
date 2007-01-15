@@ -66,6 +66,12 @@ namespace nMars.RedCode
             return wrap;
         }
 
+        public void Wrap(int coreSize)
+        {
+            ValueA = Wrap(ValueA, coreSize);
+            ValueB = Wrap(ValueB, coreSize);
+        }
+
         public static bool Equals(IInstruction a, IInstruction b, int coreSize)
         {
             if (a.Operation != b.Operation) return false;

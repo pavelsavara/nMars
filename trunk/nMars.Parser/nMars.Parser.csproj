@@ -112,10 +112,13 @@
     <Compile Include="Expressions\ComposedLabelName.cs" />
     <Compile Include="Expressions\Expression.cs" />
     <Compile Include="Expressions\LabelName.cs" />
+    <Compile Include="Expressions\ModifiedExpression.cs" />
     <Compile Include="Expressions\TernaryExpression.cs" />
     <Compile Include="Expressions\UnaryExpression.cs" />
     <Compile Include="Expressions\Value.cs" />
+    <Compile Include="Expressions\Variables.cs" />
     <Compile Include="Module.cs" />
+    <Compile Include="Statements\AssertStatement.cs" />
     <Compile Include="Statements\EquStatement.cs" />
     <Compile Include="Warrior\ExtendedWarrior.cs" />
     <Compile Include="Statements\ForRofContainerStatement.cs" />
@@ -123,7 +126,7 @@
     <Compile Include="Warrior\ExtendedInstruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Grammar.cs" />
-    <Compile Include="nMarsParser.cs" />
+    <Compile Include="Parser.cs" />
     <Compile Include="ParserTokens.cs" />
     <Compile Include="Statements\InstructionStatement.cs" />
     <Compile Include="Statements\Statement.cs" />

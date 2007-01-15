@@ -40,7 +40,7 @@ namespace nMars.Test
                 }
                 else
                 {
-                    //MainParser();
+                    MainParser();
                     MainEngine();
                 }
                 if (res == 0)
@@ -61,13 +61,14 @@ namespace nMars.Test
             EngineTest test = new EngineTest();
             //test.Single();
             test.Pair();
-            test.Random(100000);
-            test.Full();
+            test.Random(100);
+            //test.Full();
         }
 
         public static void MainParser()
         {
             ParserTest test = new ParserTest();
+            test.Single();
             test.Full();
         }
 

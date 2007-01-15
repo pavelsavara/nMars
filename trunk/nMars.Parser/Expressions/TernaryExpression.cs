@@ -4,6 +4,7 @@
 // 2006 Pavel Savara
 
 using System;
+using nMars.RedCode;
 
 namespace nMars.Parser.Expressions
 {
@@ -22,7 +23,7 @@ namespace nMars.Parser.Expressions
             this.right = right;
         }
 
-        public override int Evaluate(nMarsParser parser, int currentAddress)
+        public override int Evaluate(Parser parser, int currentAddress)
         {
             int l = left.Evaluate(parser, currentAddress);
             int m = middle.Evaluate(parser, currentAddress);
@@ -41,7 +42,7 @@ namespace nMars.Parser.Expressions
             switch (operation)
             {
                 case TernaryOperation.If:
-                    return left.ToString() + " ? " + middle.ToString() + " : " + right.ToString();
+                    return left + " ? " + middle + " : " + right;
                 default:
                     throw new InvalidOperationException();
             }
@@ -51,5 +52,19 @@ namespace nMars.Parser.Expressions
         private Expression middle;
         private Expression left;
         private Expression right;
+
+        public override Mode GetMode(Parser parser, int currentAddress)
+        {
+            int l = left.Evaluate(parser, currentAddress);
+            Mode m = middle.GetMode(parser, currentAddress);
+            Mode r = right.GetMode(parser, currentAddress);
+            switch (operation)
+            {
+                case TernaryOperation.If:
+                    return (l != 0) ? m : r;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
     }
 }

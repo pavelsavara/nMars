@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using nMars.Parser.Expressions;
 using nMars.RedCode;
 
 namespace nMars.Parser.Warrior
@@ -62,6 +63,6 @@ namespace nMars.Parser.Warrior
         }
 
         [NonSerialized]
-        internal Dictionary<string, Expression> Variables = null;
+        internal Variables Variables = null;
     }
 }

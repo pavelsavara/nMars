@@ -20,7 +20,7 @@ namespace nMars.Parser.Expressions
             get { return name + "&" + parameter; }
         }
 
-        public override string GetFullName(nMarsParser parser, int currentAddress)
+        public override string GetFullName(Parser parser, int currentAddress)
         {
             return name + parameter.Evaluate(parser, currentAddress).ToString("00");
         }

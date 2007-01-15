@@ -6,13 +6,12 @@
 using com.calitha.goldparser;
 using nMars.Parser.Expressions;
 using nMars.Parser.Warrior;
-using nMars.RedCode;
 
 namespace nMars.Parser.Statements
 {
-    public class EquStatement : Statement
+    class AssertStatement : Statement
     {
-        public EquStatement(Expression expression, Location location)
+        public AssertStatement(Expression expression, Location location)
             : base(location)
         {
             this.expression = expression;
@@ -21,20 +20,12 @@ namespace nMars.Parser.Statements
         public override void ExpandStatements(ExtendedWarrior warrior, Parser parser, ref int currentAddress,
                                               int coreSize, bool evaluate)
         {
-            //set labels, except last which is EQU expression
-            for (int l = 0; l < Labels.Count; l++)
+            if (!evaluate)
+                return;
+            if (expression.Evaluate(parser, currentAddress) == 0)
             {
-                LabelName label = Labels[l];
-                if (l == Labels.Count - 1)
-                {//equ
-                    parser.variables[label.GetFullName(parser, currentAddress)] = expression;
-                }
-                else
-                {//labels
-                    parser.variables[label.GetFullName(parser, currentAddress)] = new Address(currentAddress);
-                }
+                parser.WriteWarning("Assert failed : " + this + " at : " + Location, Location);
             }
-            return;
         }
 
         private Expression expression;

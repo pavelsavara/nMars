@@ -18,15 +18,7 @@ namespace nMars.Parser
 {
     public abstract class ParserTokens : BaseParser
     {
-        private LALRParser parser;
-        protected internal Dictionary<string, Expression> variables;
-        protected int errCount;
-        protected string org;
-        protected Expression pin;
-        protected int counter;
-        protected string warriorName = null;
-        protected string authorName = null;
-        protected string fileName;
+        #region Initialization
 
         protected ParserTokens()
         {
@@ -43,6 +35,7 @@ namespace nMars.Parser
             Init(redCode);
         }
 
+
         private void Init(Stream stream)
         {
             CGTReader reader = new CGTReader(stream);
@@ -50,25 +43,63 @@ namespace nMars.Parser
             parser.TrimReductions = false;
             parser.StoreTokens = LALRParser.StoreTokensMode.NoUserObject;
 
-            parser.OnReduce += new LALRParser.ReduceHandler(ReduceEvent);
-            parser.OnTokenRead += new LALRParser.TokenReadHandler(TokenReadEvent);
+            parser.OnReduce += new LALRParser.ReduceHandler(OnReduce);
+            parser.OnTokenRead += new LALRParser.TokenReadHandler(OnTokenRead);
+            parser.OnShift += new LALRParser.ShiftHandler(OnShift);
             parser.OnTokenError += new LALRParser.TokenErrorHandler(TokenErrorEvent);
             parser.OnParseError += new LALRParser.ParseErrorHandler(ParseErrorEvent);
         }
 
-        private static Regex start = new Regex("^;redcode", RegexOptions.IgnoreCase);
+        #endregion
+
+        #region Preprocessing
 
         protected ContainerStatement ParseInternal(string source)
         {
-            Match s = start.Match(source);
-            if (s != null && s.Success && s.Index > 0)
+            //;redcode
+            Match sta = start.Match(source);
+            if (sta != null && sta.Success && sta.Index > 0)
             {
-                source = source.Substring(s.Index);
+                string pre = source.Substring(0, sta.Index+1);
+                string prere = Regex.Replace(pre, "^.?", ";", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                source = 
+                    prere + 
+                    source.Substring(sta.Index+1);
+            }
+            sta = for0.Match(source);
+            if (sta != null && sta.Success && sta.Index > 0)
+            {
+                string pre = source.Substring(0, sta.Index);
+                string mid = source.Substring(sta.Index);
+                Match end = rof.Match(mid);
+                if (end != null && end.Success && end.Index > 0)
+                {
+                    mid = mid.Substring(0,end.Index+3);
+                    string post = source.Substring(sta.Index + end.Index + 3);
+                    source = pre + Regex.Replace(mid, "^.?", ";", RegexOptions.IgnoreCase | RegexOptions.Multiline) + post;
+                }
             }
             if (!source.EndsWith("\n"))
                 source = source + "\n";
+            source = Regex.Replace(source, "^;assert", "@assert", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            endSymbol = 0;
+
             return (ContainerStatement)parser.Parse(source).UserObject;
         }
+
+        private static Regex start;
+        private static Regex for0;
+        private static Regex rof;
+        static ParserTokens()
+        {
+            start = new Regex("^;redcode", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Multiline);
+            for0 = new Regex("for 0", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Multiline);
+            rof = new Regex("rof", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Multiline);
+        }
+
+        #endregion
+
+        #region 
 
         protected void ProcessComments(List<string> comments)
         {
@@ -95,19 +126,47 @@ namespace nMars.Parser
             //TODO
         }
 
-        private void TokenReadEvent(LALRParser argParser, TokenReadEventArgs args)
+        private void OnTokenRead(LALRParser argParser, TokenReadEventArgs args)
         {
-            args.Token.UserObject = CreateObject(args.Token);
+            if (endSymbol == 2)
+            {
+                TerminalToken eofToken =
+                    new TerminalToken(SymbolCollection.EOF, SymbolCollection.EOF.Name, args.Token.Location);
+                argParser.lookahead = eofToken;
+                endSymbol = 3;
+                return;
+            }
+            args.Token.UserObject = CreateObject(args.Token, argParser);
         }
 
-        private void ReduceEvent(LALRParser argParser, ReduceEventArgs args)
+        private void OnReduce(LALRParser argParser, ReduceEventArgs args)
         {
-            args.Token.UserObject = CreateObject(args.Token);
+            args.Token.UserObject = CreateObject(args.Token, argParser);
+            if (endSymbol == 2)
+            {
+                TerminalToken eofToken =
+                    new TerminalToken(SymbolCollection.EOF, SymbolCollection.EOF.Name, args.Token.Location);
+                argParser.lookahead = eofToken;
+                endSymbol = 3;
+            }
         }
+
+        void OnShift(LALRParser argParser, ShiftEventArgs args)
+        {
+            if (endSymbol == 2)
+            {
+                TerminalToken eofToken =
+                    new TerminalToken(SymbolCollection.EOF, SymbolCollection.EOF.Name, args.Token.Location);
+                argParser.lookahead = eofToken;
+                endSymbol = 3;
+            }
+        }
+
+        #endregion
 
         #region Terminal
 
-        private Object CreateObject(TerminalToken token)
+        private Object CreateObject(TerminalToken token, LALRParser argParser)
         {
             switch (token.Symbol.Id)
             {
@@ -116,6 +175,10 @@ namespace nMars.Parser
                     return token.Text;
 
                 case (int)SymbolConstants.SYMBOL_NEWLINE:
+                    if (endSymbol == 1)
+                    {
+                        endSymbol = 2;
+                    }
                     return token.UserObject;
 
                 case (int)SymbolConstants.SYMBOL_LABEL:
@@ -125,7 +188,10 @@ namespace nMars.Parser
                         return token.Text.Substring(0, token.Text.Length - 1);
                     }
                     return token.Text;
-
+                case (int)SymbolConstants.SYMBOL_END:
+                    //end
+                    endSymbol = 1;
+                    return null;
                 default:
                     return null;
             }
@@ -135,7 +201,7 @@ namespace nMars.Parser
 
         #region Nonterminal
 
-        public Object CreateObject(NonterminalToken token)
+        public Object CreateObject(NonterminalToken token, LALRParser argParser)
         {
             Expression expression;
             Operation op;
@@ -194,21 +260,6 @@ namespace nMars.Parser
                 case (int)RuleConstants.RULE_EOLSINGLE_COMMENT_LINE:
                     //<eolSingle> ::= Comment Line
 
-                case (int)RuleConstants.RULE_ENDOPTIONAL:
-                    //<EndOptional> ::= <eol>
-
-                case (int)RuleConstants.RULE_ENDOPTIONAL_END:
-                    //<EndOptional> ::= <eol> End <eolOptional>
-
-                case (int)RuleConstants.RULE_ENDOPTIONAL_END3:
-                    //<EndOptional> ::= <eol> <Labels> End <eolOptional>
-
-                case (int)RuleConstants.RULE_ENDOPTIONAL_END5:
-                    //<EndOptional> ::= <eol> <Labels> <eol> End <eolOptional>
-
-                case (int)RuleConstants.RULE_ENDOPTIONAL2:
-                    //<EndOptional> ::= 
-
                 case (int)RuleConstants.RULE_STATEMENT:
                     //<Statement> ::= <Pin>
 
@@ -221,17 +272,15 @@ namespace nMars.Parser
                 case (int)RuleConstants.RULE_EXPRESSIONOPTIONAL2:
                     // <ExpressionOptional> ::= 
 
-                case (int)RuleConstants.RULE_MODEOPTIONAL:
-                    // <ModeOptional> ::= <Mode>
-
-                case (int)RuleConstants.RULE_MODEOPTIONAL2:
-                    // <ModeOptional> ::= 
 
                     return null;
 
                     #endregion
 
                     #region Forward
+
+                case (int)RuleConstants.RULE_MODEOPTIONAL:
+                    // <ModeOptional> ::= <Mode>
 
                 case (int)RuleConstants.RULE_OPERATION:
                     //<Operation> ::= <Operation0>
@@ -287,6 +336,9 @@ namespace nMars.Parser
                 case (int)RuleConstants.RULE_STATEMENT3:
                     //<Statement> ::= <Equ>
 
+                case (int)RuleConstants.RULE_STATEMENT6:
+                    // <Statement> ::= <Assert>
+
                     return token.Tokens[0].UserObject;
 
                     #endregion
@@ -297,12 +349,14 @@ namespace nMars.Parser
                     //<Start> ::= <eolOptional> <AllStatements> <EndOptional>
                     comments = (List<string>)token.Tokens[0].UserObject;
                     ProcessComments(comments);
+                    if (endSymbol<2)
+                        endSymbol = 2;
                     return token.Tokens[1].UserObject;
 
                 case (int)RuleConstants.RULE_ALLSTATEMENTS:
                     //<AllStatements> ::= <Statement>
                     statement = (Statement)token.Tokens[0].UserObject;
-                    statements = new ContainerStatement(statement);
+                    statements = new ContainerStatement(statement, token.Location);
                     return statements;
 
                 case (int)RuleConstants.RULE_ALLSTATEMENTSOPTIONAL:
@@ -332,47 +386,37 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_ALLSTATEMENTS2:
                     //<AllStatements> ::= <For>
-                    statements = new ContainerStatement();
+                    statements = new ContainerStatement(token.Location);
                     forrof = (ForRofContainerStatement)token.Tokens[0].UserObject;
                     statements.Add(forrof);
                     return statements;
 
                 case (int)RuleConstants.RULE_ALLSTATEMENTSOPTIONAL2:
                     //<AllStatementsOptional> ::= 
-                    statements = new ContainerStatement();
+                    statements = new ContainerStatement(token.Location);
                     return statements;
+
+                case (int)RuleConstants.RULE_FOR_FOR_ROF2:
+                    // <For> ::= <Labels> <eol> for <Expression> <eol> <AllStatementsOptional> rof <ExpressionOptional>
+                    statementlabels = ((List<LabelName>)token.Tokens[0].UserObject);
+                    expression = (Expression)token.Tokens[3].UserObject;
+                    comments = (List<string>)token.Tokens[4].UserObject;
+                    statement = (Statement)token.Tokens[5].UserObject;
+                    forrof = CreateForrof(comments, expression, statement, statementlabels, token);
+                    return forrof;
 
                 case (int)RuleConstants.RULE_FOR_FOR_ROF:
                     // <For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof <ExpressionOptional>
                     statementlabels = ((List<LabelName>)token.Tokens[0].UserObject);
                     expression = (Expression)token.Tokens[2].UserObject;
                     comments = (List<string>)token.Tokens[3].UserObject;
-                    forrof = new ForRofContainerStatement();
-                    forrof.Comments = comments;
-                    forrof.Labels = statementlabels;
-                    forrof.Add((Statement)token.Tokens[4].UserObject);
-
-                    LabelName l = new LabelName("#forof" + counter);
-                    counter++;
-                    if (statementlabels.Count > 0)
-                    {
-                        l = statementlabels[statementlabels.Count - 1];
-                    }
-                    else
-                    {
-                        statementlabels.Add(l);
-                    }
-
-                    //for label could be reused
-                    //CheckName(l, token.Tokens[1].Location);
-                    variables[l.Name] = expression;
-
-                    //for label could be reused
-                    //CheckName(l, token.Tokens[1].Location);
-                    variables[l.Name + "#start"] = expression;
-
+                    statement = (Statement)token.Tokens[4].UserObject;
+                    forrof = CreateForrof(comments, expression, statement, statementlabels, token);
                     return forrof;
-
+                case (int)RuleConstants.RULE_ASSERT_ATASSERT:
+                    // <Assert> ::= @assert <Expression>
+                    expression = (Expression)token.Tokens[1].UserObject;
+                    return new AssertStatement(expression, token.Location);
                     #endregion
 
                     #region Operation Statements
@@ -403,39 +447,69 @@ namespace nMars.Parser
 
                     #region Simple Statements
 
+                case (int)RuleConstants.RULE_MODEOPTIONAL2:
+                // <ModeOptional> ::= 
+                    return Mode.NULL;
+
                 case (int)RuleConstants.RULE_PIN_PIN:
                     //<Pin> ::= Pin <Expression>
                     pin = (Expression)token.Tokens[1].UserObject;
                     return null;
 
+                case (int)RuleConstants.RULE_ENDOPTIONAL:
+                //<EndOptional> ::= <eol>
+
+                case (int)RuleConstants.RULE_ENDOPTIONAL2:
+                //<EndOptional> ::= 
+
+                case (int)RuleConstants.RULE_ENDOPTIONAL_END:
+                //<EndOptional> ::= <eol> End <eolOptional>
+
+                case (int)RuleConstants.RULE_ENDOPTIONAL_END3:
+                //<EndOptional> ::= <eol> <Labels> End <eolOptional>
+
+                case (int)RuleConstants.RULE_ENDOPTIONAL_END5:
+                //<EndOptional> ::= <eol> <Labels> <eol> End <eolOptional>
+                    if (endSymbol < 2)
+                        endSymbol = 2;
+                    return null;
+
                 case (int)RuleConstants.RULE_ENDOPTIONAL_END2:
-                    //<EndOptional> ::= <eol> End <Labels> <eolOptional>
-                    statementlabels = (List<LabelName>)token.Tokens[2].UserObject;
-                    org = statementlabels[0].Name;
+                    //<EndOptional> ::= <eol> End <Expression> <eolOptional>
+                    org = (Expression)token.Tokens[2].UserObject;
+                    if (endSymbol < 2) 
+                        endSymbol = 2;
                     return null;
 
                 case (int)RuleConstants.RULE_ENDOPTIONAL_END4:
-                    //<EndOptional> ::= <eol> <Labels> End <Labels> <eolOptional>
-                    statementlabels = (List<LabelName>)token.Tokens[3].UserObject;
-                    org = statementlabels[0].Name;
+                    //<EndOptional> ::= <eol> <Labels> End <Expression> <eolOptional>
+                    org = (Expression)token.Tokens[3].UserObject;
+                    if (endSymbol < 2)
+                        endSymbol = 2;
                     return null;
 
                 case (int)RuleConstants.RULE_ENDOPTIONAL_END6:
-                    //<EndOptional> ::= <eol> <Labels> <eol> End <Labels> <eolOptional>
-                    statementlabels = (List<LabelName>)token.Tokens[4].UserObject;
-                    org = statementlabels[0].Name;
+                    //<EndOptional> ::= <eol> <Labels> <eol> End <Expression> <eolOptional>
+                    org = (Expression)token.Tokens[4].UserObject;
+                    if (endSymbol < 2)
+                        endSymbol = 2;
                     return null;
 
-                case (int)RuleConstants.RULE_ORG_ORG_LABEL:
-                    //<Org> ::= Org Label
-                    org = ((string)token.Tokens[1].UserObject);
+                case (int)RuleConstants.RULE_ORG_ORG:
+                    //<Org> ::= Org <Expression>
+                    org = (Expression)token.Tokens[1].UserObject;
                     return null;
 
                 case (int)RuleConstants.RULE_EQU_EQU:
                     // <Equ> ::= <Labels> Equ <ModeOptional> <Expression>
                     statementlabels = (List<LabelName>)token.Tokens[0].UserObject;
                     expression = (Expression)token.Tokens[3].UserObject;
-                    equ = new EquStatement(expression);
+                    Mode mode = (Mode)token.Tokens[2].UserObject;
+                    if (mode!=null && mode!=Mode.NULL)
+                    {
+                        expression = new ModifiedExpression(expression, mode);
+                    }
+                    equ = new EquStatement(expression, token.Location);
                     equ.Labels = statementlabels;
                     foreach (LabelName label in statementlabels)
                     {
@@ -448,7 +522,7 @@ namespace nMars.Parser
                     // <Equ> ::= <Labels> <eol> Equ <ModeOptional> <Expression>
                     statementlabels = (List<LabelName>)token.Tokens[0].UserObject;
                     expression = (Expression)token.Tokens[4].UserObject;
-                    equ = new EquStatement(expression);
+                    equ = new EquStatement(expression, token.Location);
                     equ.Labels = statementlabels;
                     foreach (LabelName label in statementlabels)
                     {
@@ -525,13 +599,20 @@ namespace nMars.Parser
                     #endregion
 
                     #region Operations
-
                 case (int)RuleConstants.RULE_OPERATION0:
                     //<Operation0> ::= <Operator0>
                     op = (Operation)token.Tokens[0].UserObject;
                     paramA = new Parameter();
                     paramB = new Parameter();
-                    mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
+                    mod = Modifier.NULL;
+                    return new InstructionStatement(op, mod, paramA, paramB, token.Tokens[0].Location);
+
+                case (int)RuleConstants.RULE_OPERATION0_DOT2:
+                    // <Operation0> ::= <Operator0> . <Modifier>
+                    op = (Operation)token.Tokens[0].UserObject;
+                    mod = (Modifier)token.Tokens[2].UserObject;
+                    paramA = new Parameter();
+                    paramB = new Parameter();
                     return new InstructionStatement(op, mod, paramA, paramB, token.Tokens[0].Location);
 
                 case (int)RuleConstants.RULE_OPERATION0_COMMA:
@@ -539,7 +620,7 @@ namespace nMars.Parser
                     op = (Operation)token.Tokens[0].UserObject;
                     paramA = (Parameter)token.Tokens[1].UserObject;
                     paramB = (Parameter)token.Tokens[3].UserObject;
-                    mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
+                    mod = Modifier.NULL;
                     return new InstructionStatement(op, mod, paramA, paramB, token.Tokens[0].Location);
 
                 case (int)RuleConstants.RULE_OPERATION0_DOT_COMMA:
@@ -550,6 +631,8 @@ namespace nMars.Parser
                     paramB = (Parameter)token.Tokens[5].UserObject;
                     return new InstructionStatement(op, mod, paramA, paramB, token.Tokens[0].Location);
 
+                case (int)RuleConstants.RULE_OPERATION02:
+                    //<Operation0> ::= <Operator0> <Parameter>
                 case (int)RuleConstants.RULE_OPERATION1:
                     //<Operation1> ::= <Operator1> <Parameter>
                     op = (Operation)token.Tokens[0].UserObject;
@@ -564,9 +647,11 @@ namespace nMars.Parser
                         paramA = (Parameter)token.Tokens[1].UserObject;
                         paramB = new Parameter();
                     }
-                    mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
+                    mod = Modifier.NULL;
                     return new InstructionStatement(op, mod, paramA, paramB, token.Tokens[0].Location);
 
+                case (int)RuleConstants.RULE_OPERATION0_DOT:
+                    //<Operation0> ::= <Operator0> . <Modifier> <Parameter>
                 case (int)RuleConstants.RULE_OPERATION1_DOT:
                     //<Operation1> ::= <Operator1> . <Modifier> <Parameter>
                     op = (Operation)token.Tokens[0].UserObject;
@@ -589,7 +674,7 @@ namespace nMars.Parser
                     op = (Operation)token.Tokens[0].UserObject;
                     paramA = (Parameter)token.Tokens[1].UserObject;
                     paramB = (Parameter)token.Tokens[3].UserObject;
-                    mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
+                    mod = Modifier.NULL;
                     return new InstructionStatement(op, mod, paramA, paramB, token.Tokens[0].Location);
 
                 case (int)RuleConstants.RULE_OPERATION1_DOT_COMMA:
@@ -605,7 +690,7 @@ namespace nMars.Parser
                     op = (Operation)token.Tokens[0].UserObject;
                     paramA = (Parameter)token.Tokens[1].UserObject;
                     paramB = (Parameter)token.Tokens[3].UserObject;
-                    mod = Instruction.DefaultModifier(op, paramA.Mode, paramB.Mode);
+                    mod = Modifier.NULL;
                     return new InstructionStatement(op, mod, paramA, paramB, token.Tokens[0].Location);
 
                 case (int)RuleConstants.RULE_OPERATION2_DOT_COMMA:
@@ -622,7 +707,7 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_PARAMETER:
                     //<Parameter> ::= <Expression>
-                    return new Parameter(Mode.Direct, (Expression)token.Tokens[0].UserObject);
+                    return new Parameter(Mode.NULL, (Expression)token.Tokens[0].UserObject);
 
                 case (int)RuleConstants.RULE_PARAMETER2:
                     //<Parameter> ::= <Mode> <Expression>
@@ -922,6 +1007,9 @@ namespace nMars.Parser
                     return
                         new UnaryExpression((Expression)token.Tokens[1].UserObject,
                                             UnaryExpression.UnaryOperation.Negate);
+                case (int)RuleConstants.RULE_NEGATEEXP_PLUS:
+                    //<Negate Exp> ::= + <Value>
+                    return token.Tokens[1].UserObject;
 
                 case (int)RuleConstants.RULE_VALUE_INTEGER:
                     //<Value> ::= Integer
@@ -936,6 +1024,37 @@ namespace nMars.Parser
                     #endregion
             }
             throw new RuleException("Unknown rule");
+        }
+
+        private ForRofContainerStatement CreateForrof(List<string> comments, Expression expression, Statement statement, List<LabelName> statementlabels, NonterminalToken token)
+        {
+            ForRofContainerStatement forrof;
+            forrof = new ForRofContainerStatement(token.Location);
+            forrof.Comments = comments;
+            forrof.Labels = statementlabels;
+            forrof.Add(statement);
+
+            LabelName l = new LabelName("#forof" + rofforCounter);
+            if (statementlabels.Count > 0)
+            {
+                l = statementlabels[statementlabels.Count - 1];
+            }
+            else
+            {
+                statementlabels.Add(l);
+            }
+
+            //for label could be reused
+            //CheckName(l, token.Tokens[1].Location);
+            variables[l.Name] = expression;
+
+            //for label could be reused
+            //CheckName(l, token.Tokens[1].Location);
+            forrof.LimitName = l.Name + "#" + rofforCounter + "#limit";
+            variables[forrof.LimitName] = expression;
+
+            rofforCounter++;
+            return forrof;
         }
 
         #endregion
@@ -967,20 +1086,35 @@ namespace nMars.Parser
 
         protected internal void WriteError(string message)
         {
-            WriteMessage(
-                new ParserMessage(message, ParseMessageLevel.Error, fileName, 0, 0));
+            WriteError(message, null);
         }
 
         protected internal void WriteError(string message, Location location)
         {
-            WriteMessage(
-                new ParserMessage(message, ParseMessageLevel.Error, fileName, location.LineNr, location.ColumnNr));
+            if (location != null)
+            {
+                WriteMessage(
+                    new ParserMessage("Error: " + message, ParseMessageLevel.Error, fileName, location.LineNr, location.ColumnNr));
+            }
+            else
+            {
+                WriteMessage(
+                    new ParserMessage("Error: " + message, ParseMessageLevel.Error, fileName, 0, 0));
+            }
         }
 
         protected internal void WriteWarning(string message, Location location)
         {
-            WriteMessage(
-                new ParserMessage(message, ParseMessageLevel.Warning, fileName, location.LineNr, location.ColumnNr));
+            if (location != null)
+            {
+                WriteMessage(
+                    new ParserMessage("Warning: " + message, ParseMessageLevel.Warning, fileName, location.LineNr, location.ColumnNr));
+            }
+            else
+            {
+                WriteMessage(
+                    new ParserMessage("Warning: " + message, ParseMessageLevel.Warning, fileName, 0, 0));
+            }
         }
 
         protected internal void WriteMessage(ParserMessage message)
@@ -993,7 +1127,8 @@ namespace nMars.Parser
                 errCount++;
                 if (errCount > 10)
                 {
-                    if (project.ParserOptions.ErrorLevel <= ParseMessageLevel.Warning)
+                    if (project.ParserOptions.ErrorLevel <= ParseMessageLevel.Warning
+                        && console!=null)
                     {
                         console.ErrorWriteLine("Too much errors");
                     }
@@ -1005,5 +1140,21 @@ namespace nMars.Parser
         }
 
         #endregion
+
+        #region Variables
+
+        private LALRParser parser;
+        protected internal Variables variables;
+        protected int errCount;
+        protected Expression org;
+        protected Expression pin;
+        protected int rofforCounter;
+        protected string warriorName = null;
+        protected string authorName = null;
+        protected string fileName;
+        private int endSymbol;
+
+        #endregion
+
     }
 }

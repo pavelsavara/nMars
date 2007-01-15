@@ -30,12 +30,12 @@ namespace pMars.DllWrapper
                 IntPtr warrirorPtr = pMarsDll.pMarsParse(r.Count, r.ToArray(), errFileName);
                 pMarsDll.PmarsWarrior dllWarrior =
                     (pMarsDll.PmarsWarrior)Marshal.PtrToStructure(warrirorPtr, typeof(pMarsDll.PmarsWarrior));
+                ParseError(fileName, errFileName);
                 if (dllWarrior == null)
                 {
                     result.Succesfull = false;
                     return null;
                 }
-                ParseError(fileName, errFileName);
                 return pMarsDll.ConvertWarrior(fileName, dllWarrior, project.Rules);
             }
             catch (Exception ex)
@@ -63,7 +63,29 @@ namespace pMars.DllWrapper
                     string line = sr.ReadLine();
                     if (line != null)
                     {
-                        if (line.StartsWith("Error in line"))
+                        if (line.Length == 0 || 
+                            line.StartsWith("Number of errors:") ||
+                            line.StartsWith("Number of warnings:") ||
+                            line.StartsWith("\tIgnoring code generation") ||
+                            line.StartsWith("Duplicate errors/warnings found in line")
+                            )
+                        {
+                            //skip
+                        }
+                        else if (line.StartsWith("Error:"))
+                        {
+                            int sep = line.IndexOf(':');
+
+                            ParserMessage message = new ParserMessage();
+                            message.Level = ParseMessageLevel.Error;
+                            message.Message = line.Substring(sep + 1) + "\n" + sr.ReadLine();
+                            message.FileName = fileName;
+                            if (console != null && message.Level > project.ParserOptions.ErrorLevel)
+                                console.ErrorWriteLine(message.Message);
+                            r = false;
+                            result.Messages.Add(message);
+                        }
+                        else if (line.StartsWith("Error in line"))
                         {
                             int sep = line.IndexOf(':');
 
@@ -76,6 +98,7 @@ namespace pMars.DllWrapper
                             if (console != null && message.Level > project.ParserOptions.ErrorLevel)
                                 console.ErrorWriteLine(message.Message);
                             r = false;
+                            result.Messages.Add(message);
                         }
                         else if (line.StartsWith("Warning:"))
                         {
@@ -85,8 +108,33 @@ namespace pMars.DllWrapper
                             message.FileName = fileName;
                             if (console != null && message.Level > project.ParserOptions.ErrorLevel)
                                 console.ErrorWriteLine(message.Message);
+                            result.Messages.Add(message);
                         }
-                        //else skip
+                        else if (line.StartsWith("Warning in line"))
+                        {
+                            int sep = line.IndexOf(':');
+
+                            ParserMessage message = new ParserMessage();
+                            message.Level = ParseMessageLevel.Warning;
+                            message.Message = line.Substring(sep + 1) + "\n" + sr.ReadLine();
+                            message.FileName = fileName;
+                            string num = line.Substring(15, sep - 15);
+                            int.TryParse(num, out message.Line);
+                            if (console != null && message.Level > project.ParserOptions.ErrorLevel)
+                                console.ErrorWriteLine(message.Message);
+                            result.Messages.Add(message);
+                        }
+                        else
+                        {
+                            ParserMessage message = new ParserMessage();
+                            message.Level = ParseMessageLevel.Warning;
+                            message.Message = sr.ReadLine();
+                            message.FileName = fileName;
+                            if (console != null && message.Level > project.ParserOptions.ErrorLevel)
+                                console.ErrorWriteLine(message.Message);
+                            r = false;
+                            result.Messages.Add(message);
+                        }
                     }
                     else
                     {

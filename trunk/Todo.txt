@@ -34,14 +34,10 @@ unsorted
    - test stepback
    
  - Parser
-   - validate asserts
-   - ORG is expression not label
-   - replace all before ;redcode by space
    - test other rules, warrior count, rounds ...
    - random test
    - check PSpace validation
    - implement registers a-z , asignment ?  
-   - 'for 0 rof' comment block
    - 'for expression rof' as if - end if, metadata (org) inside block
    - multiline EQU, with instructions
 
@@ -107,5 +103,4 @@ unsorted
    - breakpoints
    - step back
    - web
-   - parser pre ;redcode
    

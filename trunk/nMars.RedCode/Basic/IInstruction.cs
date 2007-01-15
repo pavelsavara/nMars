@@ -11,6 +11,7 @@ namespace nMars.RedCode
     public interface IInstruction
     {
         string GetLine(ParserOptions options, bool start);
+        void Wrap(int coreSize);
         Operation Operation { get; }
         Modifier Modifier { get; }
         Mode ModeA { get; }

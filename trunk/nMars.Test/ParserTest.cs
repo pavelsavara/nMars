@@ -35,7 +35,7 @@ namespace nMars.Test
         public void Single()
         {
             Init();
-            if (!LoadDumpOne(Path.Combine(Path.Combine(basePath, "corewin"), "irongate.red")))
+            if (!LoadDumpOne(Path.Combine(basePath, @"beppe\rnd5\EADON5.RED")))
                 throw new ParserException("Some warriors failed.");
         }
 
@@ -70,19 +70,28 @@ namespace nMars.Test
             if (!nr.Succesfull && !pr.Succesfull)
             {
                 //both failed
+                return true;
             }
             else if (!pr.Succesfull)
             {
-                File.WriteAllText(problemsPathFile + ".pErr", pr.Dump());
+                if (pr.Messages.Count != 0)
+                    File.WriteAllText(problemsPathFile + ".pErr", pr.Dump());
                 np.Warriors[0].Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
             }
             else if (!nr.Succesfull)
             {
-                File.WriteAllText(problemsPathFile + ".nErr", nr.Dump());
+                if (nr.Messages.Count != 0)
+                    File.WriteAllText(problemsPathFile + ".nErr", nr.Dump());
                 pp.Warriors[0].Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
             }
             else if (!Warrior.Equals(np.Warriors[0], pp.Warriors[0]))
             {
+                if (pr.Messages.Count!=0) 
+                    File.WriteAllText(problemsPathFile + ".pErr", pr.Dump());
+                if (nr.Messages.Count != 0)
+                    File.WriteAllText(problemsPathFile + ".nErr", nr.Dump());
+                np.Warriors[0].Wrap();
+                pp.Warriors[0].Wrap();
                 np.Warriors[0].Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
                 pp.Warriors[0].Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
             }

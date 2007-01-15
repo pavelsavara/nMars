@@ -127,7 +127,7 @@ namespace com.calitha.commons
         /// <returns>true if objA is the same instance as objB or if both are null
         /// references or if objA.Equals(objB) returns true; otherwise, false.
         /// </returns>
-        public new static bool Equals(object objA, object objB)
+        new public static bool Equals(object objA, object objB)
         {
             return objA.Equals(objB);
         }

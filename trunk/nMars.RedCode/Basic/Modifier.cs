@@ -115,7 +115,12 @@ namespace nMars.RedCode
         ///  the B-instruction.  A MOV.I instruction would replace the instruction
         /// pointed to by the B-pointer with the A-instruction.
         /// </example>
-        I
+        I,
+
+        /// <summary>
+        /// Not defined, unknown
+        /// </summary>
+        NULL,
     }
 
     [Flags]

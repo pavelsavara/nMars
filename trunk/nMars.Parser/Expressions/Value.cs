@@ -4,8 +4,9 @@
 // 2006 Pavel Savara
 
 using System;
+using nMars.RedCode;
 
-namespace nMars.Parser
+namespace nMars.Parser.Expressions
 {
     public class Value : Expression
     {
@@ -21,7 +22,7 @@ namespace nMars.Parser
 
         protected int value = 0;
 
-        public override int Evaluate(nMarsParser parser, int currentAddress)
+        public override int Evaluate(Parser parser, int currentAddress)
         {
             return value;
         }
@@ -29,6 +30,11 @@ namespace nMars.Parser
         public override string ToString()
         {
             return value.ToString();
+        }
+
+        public override Mode GetMode(Parser parser, int currentAddress)
+        {
+            return Mode.NULL;
         }
 
         public static readonly Value Zero = new Value(0);

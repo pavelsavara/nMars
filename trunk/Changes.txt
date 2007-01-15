@@ -1,3 +1,12 @@
+15/01/2007 - parser improovements
+  - all before ;redcode as comment
+  - asserts
+  - for 0 comment rof
+  - all after end ignore
+  - mode as part of equ allowed
+  - org expression
+  - + sign
+  - pMars.DllWrapper fixed error messages
 13/01/2007 - nMars0.8.3 - IDE split
   - IDE was wplit to IDE, graphics, debuger, debugger.ide
   - MONO proof of concept - result: posible, lot of problems with WinForms, screenshot of debugging

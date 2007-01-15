@@ -4,8 +4,9 @@
 // 2006 Pavel Savara
 
 using System;
+using nMars.RedCode;
 
-namespace nMars.Parser
+namespace nMars.Parser.Expressions
 {
     public class UnaryExpression : Expression
     {
@@ -24,7 +25,7 @@ namespace nMars.Parser
         private UnaryOperation operation;
         private Expression sub;
 
-        public override int Evaluate(nMarsParser parser, int currentAddress)
+        public override int Evaluate(Parser parser, int currentAddress)
         {
             switch (operation)
             {
@@ -42,12 +43,17 @@ namespace nMars.Parser
             switch (operation)
             {
                 case UnaryOperation.Negate:
-                    return "-" + sub.ToString();
+                    return "-" + sub;
                 case UnaryOperation.Brackets:
-                    return "(" + sub.ToString() + ")";
+                    return "(" + sub + ")";
                 default:
                     throw new InvalidOperationException();
             }
+        }
+
+        public override Mode GetMode(Parser parser, int currentAddress)
+        {
+            return sub.GetMode(parser, currentAddress);
         }
     }
 }

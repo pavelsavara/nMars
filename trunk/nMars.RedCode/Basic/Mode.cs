@@ -109,6 +109,11 @@ namespace nMars.RedCode
         /// the operation is executed (for post-increment indirect B-mode).
         /// </summary>
         PostIncIndirectA,
+
+        /// <summary>
+        /// Not defined, unknown
+        /// </summary>
+        NULL,
     }
 
     public class ModeHelper
@@ -212,6 +217,8 @@ namespace nMars.RedCode
                     return "{";
                 case Mode.PreDecIndirectB:
                     return "<";
+                case Mode.NULL:
+                    return "";
                 default:
                     throw new ArgumentException();
             }

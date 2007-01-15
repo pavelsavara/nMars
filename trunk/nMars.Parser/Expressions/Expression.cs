@@ -5,16 +5,18 @@
 
 using nMars.RedCode;
 
-namespace nMars.Parser
+namespace nMars.Parser.Expressions
 {
     public abstract class Expression
     {
-        public abstract int Evaluate(nMarsParser parser, int currentAddress);
+        public abstract int Evaluate(Parser parser, int currentAddress);
+        public abstract Mode GetMode(Parser parser, int currentAddress);
 
-        public int Evaluate(nMarsParser parser, int currentAddress, int coreSize)
+        public int Evaluate(Parser parser, int currentAddress, int coreSize)
         {
             int raw = Evaluate(parser, currentAddress);
             return Instruction.Wrap(raw, coreSize);
         }
+
     }
 }

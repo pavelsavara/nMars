@@ -12,7 +12,7 @@ namespace nMars.Parser
     {
         public IParser CreateParser()
         {
-            nMarsParser parser = new nMarsParser();
+            Parser parser = new Parser();
             parser.Module = this;
             return parser;
         }

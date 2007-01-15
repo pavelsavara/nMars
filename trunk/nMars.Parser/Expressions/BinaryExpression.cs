@@ -4,8 +4,9 @@
 // 2006 Pavel Savara
 
 using System;
+using nMars.RedCode;
 
-namespace nMars.Parser
+namespace nMars.Parser.Expressions
 {
     public class BinaryExpression : Expression
     {
@@ -42,7 +43,7 @@ namespace nMars.Parser
         private Expression left;
         private Expression right;
 
-        public override int Evaluate(nMarsParser parser, int currentAddress)
+        public override int Evaluate(Parser parser, int currentAddress)
         {
             int l = left.Evaluate(parser, currentAddress);
             int r = right.Evaluate(parser, currentAddress);
@@ -104,44 +105,52 @@ namespace nMars.Parser
             switch (operation)
             {
                 case BinaryOperation.Plus:
-                    return left.ToString() + "+" + right.ToString();
+                    return left + " + " + right;
                 case BinaryOperation.Minus:
-                    return left.ToString() + "-" + right.ToString();
+                    return left + " - " + right;
                 case BinaryOperation.Multiply:
-                    return left.ToString() + "*" + right.ToString();
+                    return left + " * " + right;
                 case BinaryOperation.Divide:
-                    return left.ToString() + "/" + right.ToString();
+                    return left + " / " + right;
                 case BinaryOperation.Modulo:
-                    return left.ToString() + "%" + right.ToString();
+                    return left + " % " + right;
                 case BinaryOperation.BinOr:
-                    return left.ToString() + "|" + left.ToString();
+                    return left + " | " + right;
                 case BinaryOperation.BinXor:
-                    return left.ToString() + "^" + left.ToString();
+                    return left + " ^ " + right;
                 case BinaryOperation.BinAnd:
-                    return left.ToString() + "&&&" + left.ToString();
+                    return left + " &&& " + right;
                 case BinaryOperation.Shl:
-                    return left.ToString() + "<<" + left.ToString();
+                    return left + " << " + right;
                 case BinaryOperation.Shr:
-                    return left.ToString() + ">>" + left.ToString();
+                    return left + " >> " + right;
                 case BinaryOperation.Or:
-                    return left.ToString() + "||" + left.ToString();
+                    return left + " || " + right;
                 case BinaryOperation.And:
-                    return left.ToString() + "&&" + left.ToString();
+                    return left + " && " + right;
                 case BinaryOperation.CompareGt:
-                    return left.ToString() + ">" + left.ToString();
+                    return left + " > " + right;
                 case BinaryOperation.CompareGe:
-                    return left.ToString() + ">=" + left.ToString();
+                    return left + " >= " + right;
                 case BinaryOperation.CompareLe:
-                    return left.ToString() + "<=" + left.ToString();
+                    return left + " <= " + right;
                 case BinaryOperation.CompareLt:
-                    return left.ToString() + "<" + left.ToString();
+                    return left + " < " + right;
                 case BinaryOperation.CompareEq:
-                    return left.ToString() + "==" + left.ToString();
+                    return left + " == " + right;
                 case BinaryOperation.CompareNe:
-                    return left.ToString() + "!=" + left.ToString();
+                    return left + " != " + right;
                 default:
                     throw new InvalidOperationException();
             }
+        }
+
+        public override Mode GetMode(Parser parser, int currentAddress)
+        {
+            Mode l = left.GetMode(parser, currentAddress);
+            if (l != Mode.NULL)
+                return l;
+            return right.GetMode(parser, currentAddress);
         }
     }
 }
