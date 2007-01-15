@@ -33,6 +33,14 @@ namespace nMars.RedCode
 
         #region Dumping
 
+        public void Wrap()
+        {
+            for (int a = 0; a < Instructions.Count; a++)
+            {
+                Instructions[a].Wrap(Rules.CoreSize);
+            }
+        }
+
         public void Dump(ISimpleOutput output)
         {
             Dump(output, ParserOptions.Default);

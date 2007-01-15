@@ -170,6 +170,12 @@ namespace nMars.Engine
             return sb.ToString();
         }
 
+        public void Wrap(int coreSize)
+        {
+            ValueA = Instruction.Wrap(ValueA, coreSize);
+            ValueB = Instruction.Wrap(ValueB, coreSize);
+        }
+
         Operation IInstruction.Operation
         {
             get { return Operation; }

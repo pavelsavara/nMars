@@ -114,6 +114,11 @@ namespace pMars.DllWrapper
                 throw new NotImplementedException();
             }
 
+            public void Wrap(int coreSize)
+            {
+                throw new NotImplementedException();
+            }
+
             #endregion
         }
 

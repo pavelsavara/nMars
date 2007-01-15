@@ -40,11 +40,11 @@ Comment Line  =  ';'
 
 <EndOptional> ::= <eol>
                 | <eol> End <eolOptional>
-                | <eol> End <Labels> <eolOptional>
+                | <eol> End <Expression> <eolOptional>
                 | <eol> <Labels> End <eolOptional>
-                | <eol> <Labels> End <Labels> <eolOptional>
+                | <eol> <Labels> End <Expression> <eolOptional>
                 | <eol> <Labels> <eol> End <eolOptional>
-                | <eol> <Labels> <eol> End <Labels> <eolOptional>
+                | <eol> <Labels> <eol> End <Expression> <eolOptional>
                 | !Empty
 
 <AllStatements> ::= <Statement>
@@ -53,6 +53,8 @@ Comment Line  =  ';'
                   | <AllStatements> <eol> <For>
 
 <For> ::= <LabelsOptional> for <Expression> <eol> <AllStatementsOptional> rof <ExpressionOptional>
+        | <Labels> <eol> for <Expression> <eol> <AllStatementsOptional> rof <ExpressionOptional>
+
 
 <AllStatementsOptional> ::= <AllStatements> <eol>
                             | !Empty
@@ -62,9 +64,11 @@ Comment Line  =  ';'
               | <Equ>
               | <LabelsOptional> <Operation>
               | <Labels> <eol> <Operation>
+              | <Assert>
 
 <Pin> ::= Pin <Expression>
-<Org> ::= Org Label
+<Assert> ::= '@assert' <Expression>
+<Org> ::= Org <Expression>
 <Equ> ::= <Labels> Equ <ModeOptional> <Expression>
         | <Labels> <eol> Equ <ModeOptional> <Expression>
 
@@ -81,7 +85,6 @@ Comment Line  =  ';'
            | <Labels> <eol> <Label>
            | <Labels> <Label>
 
-
 <Operation> ::= <Operation0>
               | <Operation1>
               | <Operation2>
@@ -89,6 +92,9 @@ Comment Line  =  ';'
 <Operation0> ::= <Operator0> 
                | <Operator0> <Parameter> ',' <Parameter>
                | <Operator0> '.' <Modifier> <Parameter> ',' <Parameter>
+               | <Operator0> <Parameter>
+               | <Operator0> '.' <Modifier> <Parameter>
+               | <Operator0> '.' <Modifier>
 
 
 <Operation1> ::= <Operator1> <Parameter>
@@ -162,6 +168,7 @@ Comment Line  =  ';'
                 | <Negate Exp> 
 
 <Negate Exp>  ::= '-' <Value>
+                | '+' <Value>
                 | <Value>
 
 <Value>       ::= Integer

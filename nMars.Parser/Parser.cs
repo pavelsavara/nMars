@@ -5,13 +5,14 @@
 
 using System.Collections.Generic;
 using System.IO;
+using nMars.Parser.Expressions;
 using nMars.Parser.Statements;
 using nMars.Parser.Warrior;
 using nMars.RedCode;
 
 namespace nMars.Parser
 {
-    public class nMarsParser : ParserTokens, IParser
+    public class Parser : ParserTokens, IParser
     {
         protected override IWarrior Parse(string aFileName)
         {
@@ -33,6 +34,8 @@ namespace nMars.Parser
             try
             {
                 Statement statement = ParseInternal(sourceText);
+                if (statement == null)
+                    return null;
                 ExtendedWarrior warrior = new ExtendedWarrior(project.Rules);
                 int currentAddress;
 
@@ -40,6 +43,7 @@ namespace nMars.Parser
                 currentAddress = 0;
                 variables["CURLINE"] = new Value(0);
                 statement.ExpandStatements(warrior, this, ref currentAddress, project.Rules.CoreSize, false);
+                SetRegisters();
 
                 //second pass to evaluate variables/labels in context of for cycles
                 currentAddress = 0;
@@ -50,6 +54,7 @@ namespace nMars.Parser
                 SetPin(warrior);
                 SetName(warrior, implicitName);
                 SetAuthor(warrior);
+                Asserts(warrior);
                 warrior.Variables = variables;
                 if (errCount > 0)
                     return null;
@@ -61,6 +66,13 @@ namespace nMars.Parser
             }
         }
 
+        private void Asserts(ExtendedWarrior warrior)
+        {
+            if (warrior.Length>warrior.Rules.MaxLength)
+            {
+                WriteError("Too many instructions");
+            }
+        }
         private void SetAuthor(ExtendedWarrior warrior)
         {
             if (authorName != null)
@@ -97,20 +109,15 @@ namespace nMars.Parser
         {
             if (org != null)
             {
-                if (!variables.ContainsKey(org))
-                {
-                    WriteError("Label not defined : " + org);
-                    return;
-                }
-                warrior.StartOffset = variables[org].Evaluate(this, 0);
+                warrior.StartOffset = org.Evaluate(this, 0);
             }
         }
 
         protected void Prepare()
         {
-            variables = new Dictionary<string, Expression>();
+            variables = new Variables();
             org = null;
-            counter = 0;
+            rofforCounter = 0;
             warriorName = null;
             authorName = null;
             variables["CORESIZE"] = new Value(project.Rules.CoreSize);
@@ -122,6 +129,18 @@ namespace nMars.Parser
             variables["PSPACESIZE"] = new Value(project.Rules.PSpaceSize);
             variables["VERSION"] = new Value(project.Rules.Version);
             variables["WARRIORS"] = new Value(project.Rules.WarriorsCount);
+        }
+
+        private void SetRegisters()
+        {
+            for (char c = 'a'; c <= 'z';c++ )
+            {
+                string reg = c.ToString();
+                if (!variables.ContainsKey(reg))
+                {
+                    variables[reg] = new Value(0);
+                }
+            }
         }
     }
 }

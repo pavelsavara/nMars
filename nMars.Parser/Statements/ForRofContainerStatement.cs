@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using com.calitha.goldparser;
 using nMars.Parser.Expressions;
 using nMars.Parser.Warrior;
 
@@ -10,7 +11,12 @@ namespace nMars.Parser.Statements
 {
     public class ForRofContainerStatement : ContainerStatement
     {
-        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser, ref int currentAddress,
+        public ForRofContainerStatement(Location location)
+            : base(location)
+        {
+        }
+
+        public override void ExpandStatements(ExtendedWarrior warrior, Parser parser, ref int currentAddress,
                                               int coreSize, bool evaluate)
         {
             //set labels, except last which is FOR expression
@@ -21,7 +27,7 @@ namespace nMars.Parser.Statements
             }
 
             string cnt = Labels[Labels.Count - 1].Name;
-            int count = parser.variables[cnt + "#start"].Evaluate(parser, currentAddress);
+            int count = parser.variables[LimitName].Evaluate(parser, currentAddress);
 
             for (int i = 1; i <= count; i++)
             {
@@ -29,5 +35,7 @@ namespace nMars.Parser.Statements
                 base.ExpandStatements(warrior, parser, ref currentAddress, coreSize, evaluate);
             }
         }
+
+        public string LimitName=null;
     }
 }

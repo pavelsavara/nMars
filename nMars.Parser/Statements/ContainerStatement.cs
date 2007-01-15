@@ -4,17 +4,20 @@
 // 2006 Pavel Savara
 
 using System.Collections.Generic;
+using com.calitha.goldparser;
 using nMars.Parser.Warrior;
 
 namespace nMars.Parser.Statements
 {
     public class ContainerStatement : Statement
     {
-        public ContainerStatement()
+        public ContainerStatement(Location location)
+            : base(location)
         {
         }
 
-        public ContainerStatement(Statement instruction)
+        public ContainerStatement(Statement instruction, Location location)
+            : base(location)
         {
             if (instruction != null)
                 Statements.Add(instruction);
@@ -38,7 +41,7 @@ namespace nMars.Parser.Statements
                 Statements[Statements.Count - 1].Comments = comments;
         }
 
-        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser, ref int currentAddress,
+        public override void ExpandStatements(ExtendedWarrior warrior, Parser parser, ref int currentAddress,
                                               int coreSize, bool evaluate)
         {
             foreach (Statement statement in Statements)

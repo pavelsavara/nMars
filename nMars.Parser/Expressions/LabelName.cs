@@ -3,6 +3,8 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using nMars.RedCode;
+
 namespace nMars.Parser.Expressions
 {
     public class LabelName : Expression
@@ -20,7 +22,7 @@ namespace nMars.Parser.Expressions
             get { return name; }
         }
 
-        public override int Evaluate(nMarsParser parser, int currentAddress)
+        public override int Evaluate(Parser parser, int currentAddress)
         {
             if (inEval)
             {
@@ -37,7 +39,7 @@ namespace nMars.Parser.Expressions
             }
         }
 
-        protected virtual int EvaluateInternal(nMarsParser parser, int currentAddress)
+        protected virtual int EvaluateInternal(Parser parser, int currentAddress)
         {
             string fullName = GetFullName(parser, currentAddress);
             if (parser.variables.ContainsKey(fullName))
@@ -57,7 +59,27 @@ namespace nMars.Parser.Expressions
             }
         }
 
-        public virtual string GetFullName(nMarsParser parser, int currentAddress)
+        public override Mode GetMode(Parser parser, int currentAddress)
+        {
+            string fullName = GetFullName(parser, currentAddress);
+            if (parser.variables.ContainsKey(fullName))
+            {
+                Expression ex = parser.variables[fullName];
+                if (ex == this)
+                {
+                    parser.WriteError("Label not yet resolved: " + fullName);
+                    return 0;
+                }
+                return ex.GetMode(parser, currentAddress);
+            }
+            else
+            {
+                parser.WriteError("Label not defined: " + fullName);
+                return 0;
+            }
+        }
+
+        public virtual string GetFullName(Parser parser, int currentAddress)
         {
             return name;
         }

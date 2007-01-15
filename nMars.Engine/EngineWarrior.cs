@@ -141,6 +141,14 @@ namespace nMars.Engine
             SourceWarrior.Dump(fileName, options);
         }
 
+        public void Wrap()
+        {
+            for (int a = 0; a < Instructions.Count; a++)
+            {
+                Instructions[a].Wrap(Rules.CoreSize);
+            }
+        }
+
         public override string ToString()
         {
             return Name + " (" + LiveTasksCount + ")";

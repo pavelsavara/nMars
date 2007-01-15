@@ -79,5 +79,10 @@ namespace nMars.RedCode
         /// Dump with extended options
         /// </summary>
         void Dump(string fileName, ParserOptions options);
+        
+        /// <summary>
+        /// Wrap instruction values
+        /// </summary>
+        void Wrap();
     }
 }

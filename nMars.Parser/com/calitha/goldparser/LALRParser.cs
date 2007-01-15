@@ -20,7 +20,7 @@ namespace com.calitha.goldparser
         private State startState;
         private StateStack stateStack;
         private TokenStack tokenStack;
-        private TerminalToken lookahead;
+        public TerminalToken lookahead;
         private bool continueParsing;
         private bool accepted;
         private bool trimReductions;
@@ -277,7 +277,7 @@ namespace com.calitha.goldparser
                 }
                 else if (token.Symbol is SymbolCommentStart)
                 {
-                    if (!ProcessCommenStart(token))
+                    if (!ProcessCommentStart(token))
                         continueParsing = false;
                 }
                 else if (token.Symbol is SymbolWhiteSpace)
@@ -331,7 +331,7 @@ namespace com.calitha.goldparser
             return result;
         }
 
-        private bool ProcessCommenStart(TerminalToken token)
+        private bool ProcessCommentStart(TerminalToken token)
         {
             Location start = tokenizer.GetCurrentLocation();
             TerminalToken commentEnd = SkipAfterCommentEnd();

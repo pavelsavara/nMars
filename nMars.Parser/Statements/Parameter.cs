@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using nMars.Parser.Expressions;
 using nMars.RedCode;
 
 namespace nMars.Parser.Statements
@@ -10,7 +11,7 @@ namespace nMars.Parser.Statements
     public class Parameter
     {
         public Parameter()
-            : this(Mode.Direct, Value.Zero)
+            : this(Mode.NULL, Value.Zero)
         {
         }
 
@@ -20,7 +21,7 @@ namespace nMars.Parser.Statements
             Expression = expression;
         }
 
-        public int GetValue(nMarsParser parser, int currentAddress)
+        public int GetValue(Parser parser, int currentAddress)
         {
             return Expression.Evaluate(parser, currentAddress);
         }

@@ -14,6 +14,7 @@ namespace nMars.Parser.Statements
     public class InstructionStatement : Statement
     {
         public InstructionStatement(Operation operation, Modifier modifier, Parameter a, Parameter b, Location location)
+            : base(location)
         {
             Operation = operation;
             Modifier = modifier;
@@ -31,10 +32,8 @@ namespace nMars.Parser.Statements
         public Modifier Modifier;
         public Parameter A;
         public Parameter B;
-        public Location Location;
 
-
-        public override void ExpandStatements(ExtendedWarrior warrior, nMarsParser parser, ref int currentAddress,
+        public override void ExpandStatements(ExtendedWarrior warrior, Parser parser, ref int currentAddress,
                                               int coreSize, bool evaluate)
         {
             //set all labels
@@ -49,14 +48,35 @@ namespace nMars.Parser.Statements
                 instruction =
                     new ExtendedInstruction(Operation, Modifier, A.Mode, Int32.MinValue, B.Mode, Int32.MinValue);
                 instruction.Address = currentAddress;
-                if (Labels.Count > 0)
+                warrior.Instructions.Add(instruction);
+            }
+            else
+            {
+                instruction = (ExtendedInstruction)warrior.Instructions[currentAddress];
+                instruction.ValueA = A.Expression.Evaluate(parser, currentAddress, coreSize);
+                instruction.ValueB = B.Expression.Evaluate(parser, currentAddress, coreSize);
+                if (instruction.ModeA==Mode.NULL)
                 {
-                    instruction.Label = Labels[Labels.Count - 1].Name;
+                    instruction.ModeA=A.Expression.GetMode(parser, currentAddress);
                 }
-                else
+                if (instruction.ModeA == Mode.NULL)
                 {
-                    instruction.Label = "";
+                    instruction.ModeA = Mode.Direct;
                 }
+                if (instruction.ModeB == Mode.NULL)
+                {
+                    instruction.ModeB=B.Expression.GetMode(parser, currentAddress);
+                }
+                if (instruction.ModeB == Mode.NULL)
+                {
+                    instruction.ModeB = Mode.Direct;
+                }
+                if (instruction.Modifier == Modifier.NULL)
+                {
+                    instruction.Modifier =
+                        Instruction.DefaultModifier(instruction.Operation, instruction.ModeA, instruction.ModeB);
+                }
+
                 if (Comments != null)
                 {
                     instruction.Comment = Comments[Comments.Count - 1];
@@ -66,13 +86,16 @@ namespace nMars.Parser.Statements
                     instruction.Comment = "";
                 }
                 instruction.OriginalInstruction = OriginalInstruction;
-                warrior.Instructions.Add(instruction);
-            }
-            else
-            {
-                instruction = (ExtendedInstruction)warrior.Instructions[currentAddress];
-                instruction.ValueA = A.Expression.Evaluate(parser, currentAddress, coreSize);
-                instruction.ValueB = B.Expression.Evaluate(parser, currentAddress, coreSize);
+
+
+                if (Labels.Count > 0)
+                {
+                    instruction.Label = Labels[Labels.Count - 1].GetFullName(parser, currentAddress);
+                }
+                else
+                {
+                    instruction.Label = "";
+                }
             }
             currentAddress++;
             parser.variables["CURLINE"] = new Value(currentAddress);
