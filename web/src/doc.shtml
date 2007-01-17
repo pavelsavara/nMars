@@ -1,0 +1,9 @@
+<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+
+	<h1>nMars - Corewars MARS for .NET</h1>
+	<p>To be done.</p>
+	<p><a href="doc/Index.html">Generated doc for nMars components</a></p>
+</div>
+<!--#include virtual="footer" -->

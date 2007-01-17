@@ -1,0 +1,76 @@
+<!--#include virtual="header" -->
+<div id="Content">
+<h1>Links</h1>
+<p>List is not yet satisfactory, if you missing your favorite site here, please let me know.</p>
+
+<h2>Core</h2>
+<ul>
+  <li><a href="http://www.koth.org/">King Of The Hill</a> - is most famous corewars site. Start here. If you are lost there, return back :-)</li>
+  <li><a href="http://www.corewar.info/">Fizmo's pages</a></li>
+  <li><a href="http://corewar.co.uk/">John's pages</a></li>
+</ul>
+
+<h2>News and Groups</h2>
+<ul>
+  <li><a href="mailto:listproc@koth.org?body=subscribe corewar-l (name)" title="">Subscribe rec.games.corewars group</a></li>
+  <li><a href="http://groups.google.com/group/rec.games.corewar" title="">Browse rec.games.corewars group</a></li>
+  <li>Chat on irc.koth.org</li>
+<!--
+  <li><a href="http://nmars.blogspot.com/">Pavel's blog</a></li>
+-->
+  <li><a href="http://harald.ist.org/weblog/">Harald's blog</a></li>
+  <li><a href="http://martin.ankerl.com/category/corewars/">Martin's blog</a></li>
+</ul>
+
+<h2>Software</h2>
+<ul>
+  <li><a href="http://corewar.sourceforge.net/">pMars</a> - reference implementation of M.A.R.S.</li>
+  <li><a href="http://harald.ist.org/ares/">ARES</a> - GUI IDE for Windows written in delphi.</li>
+  <li><a href="http://martin.ankerl.com/category/corewars/">exMars</a></li>
+  <li><a href="http://www.cs.helsinki.fi/u/jpihlaja/exhaust/exhaust.html">Exhaust</a></li>
+  <li><a href="http://corewar.co.uk/ankerl/exhaust-ma.htm">Exhaust-ma</a></li>
+  <li><a href="http://corewar.co.uk/ankerl/qmars.htm">qMars</a> engine written with C++ templates.</li>
+  <li><a href="http://corewar.co.uk/ankerl/yace.htm">Yace</a> evolver</li>
+  <li><a href="http://www.v-lo.krakow.pl/~michal/fmars.html">fMars</a></li>
+  <li><a href="http://corewars.jgutzeit.de/index.en.html">PyCorewar</a></li>
+</ul>
+
+<h2>Hills</h2>
+<ul>
+  <li><a href="http://www.koth.org/">King Of The Hill</a></li>
+  <li><a href="http://sal.math.ualberta.ca/">SAL</a></li>
+  <li><a href="http://www.ociw.edu/~birk/COREWAR/koenigstuhl.html">Koenigstuhl</a></li>
+  <li><a href="http://pauillac.inria.fr/~doligez/corewar/olympus/">Mount Olympus</a></li>
+</ul>
+
+<h2>People</h2>
+<ul>
+  <li><a href="http://corewar.co.uk/whoswho.htm">Who is Who</a></li>
+  <li><a href="http://corewar.co.uk/">John Metcalf</a></li>
+  <li><a href="http://www.corewar.info/">Christian Schmidt (Fizmo)</a></li>
+  <li><a href="http://martin.ankerl.com/category/corewars/">Martin Ankerl</a></li>
+  <li><a href="http://corewar.co.uk/ankerl/qmars.htm">Martin Ankerl archived</a></li>
+  <li><a href="http://www.cs.helsinki.fi/u/jpihlaja/cw/">M Joonas Pihlaja</a></li>
+  <li><a href="http://corewars.jgutzeit.de/index.en.html">Jens Gutzeit</a></li>
+  <li><a href="http://www.ociw.edu/~birk/COREWAR/koenigstuhl.html">Christoph Birk</a></li>
+  <li><a href="http://www.v-lo.krakow.pl/~michal/fmars.html">Michal Janeczek</a></li>
+</ul>
+
+<h2>Documentation</h2>
+<ul>
+  <li><a href="http://www.koth.org/info/icws94.html">ICWS94</a> - draft of standard. But current implementation of pMars is stronger rule.</li>
+</ul>
+
+<h2>Archives</h2>
+<ul>
+  <li><a href="ftp://ftp.koth.org/pub/corewar/">ftp.koth.org</a></li>
+</ul>
+
+<h2>Warrior collections</h2>
+<ul>
+  <li><a href="https://nmars.svn.sourceforge.net/svnroot/nmars/warriors/">My collection</a></li>
+  <li><a href="http://www.ociw.edu/~birk/COREWAR/koenigstuhl.html">Koenigstuhl</a> - look for .tar files</li>
+</ul>
+
+</div>
+<!--#include virtual="footer" -->

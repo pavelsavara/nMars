@@ -1,0 +1,13 @@
+<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+
+	<h1>nMars - Corewars MARS for .NET</h1>
+	<p><a href="screens/ide-debugger-1.png">nMars IDE in debug mode</a>, showing write events (green/yellow meteorites)</p>
+	<p><a href="screens/ide-debugger-2.png">nMars IDE in debug mode</a>, showing tooltip info</p>
+	<p><a href="screens/ide-debugger-3.png">nMars IDE in debug mode</a>, showing tooltip info on listing</p>
+	<p><a href="screens/ide-parse-error.png">nMars IDE in compile mode</a>, showing compile errors</p>
+	<p><a href="screens/aeka-compiled-on-suse-mono.jpg">nMars console</a>, showing compiled warrior on Suse Linux and Mono</p>
+
+</div>
+<!--#include virtual="footer" -->

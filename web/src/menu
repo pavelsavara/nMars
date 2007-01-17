@@ -1,0 +1,25 @@
+<div id="Logo">
+  <a href="http://nmars.sourceforge.net/" title="nMars - Corewars MARS for .NET">
+    <img src="pics/nMars.png" alt="nMars logo" border="0" align="middle"/>
+  </a>
+</div>
+<div id="Menu">
+  <br/>
+  <div class="suckerdiv">
+    <ul id="nMarsNavigation">
+      <li><a href="index.shtml">nMars</a></li>
+      <li><a href="http://sourceforge.net/project/showfiles.php?group_id=174312">Download</a></li>
+      <li><a href="screenshots.shtml">Screenshots</a></li>
+      <li><a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Usage.txt">Usage</a></li>
+      <li><a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Packages.txt">Components</a></li>
+      <li><a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/License.txt">License</a></li>
+      <li><a href="doc.shtml">Doc</a></li>
+      <li><a href="links.shtml">Links</a></li>
+      <li><a href="feedback.shtml">Feedback</a></li>
+    </ul>
+  </div>
+  <br/>
+  <a href="http://sourceforge.net" title="Hosted on SourceForge.org">
+    <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=174312&amp;type=1" width="88" height="31" border="0" alt="SourceForge.net" />
+  </a>
+</div>

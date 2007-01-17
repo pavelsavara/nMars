@@ -1,0 +1,35 @@
+<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+
+<h2>Road map</h2>
+<p>0.9 - graphical IDE framework, draft of editor, draft of core viewers</p>
+<p>1.0 - stabilization</p>
+
+<h2>Opinions and Contributions</h2>
+<p>I would love to hear your opinion. Let's open new thread on rec.games.corewar or send me email.</p>
+<p>If you would like to contribute more, there are some tasks:</p>
+<ul>
+  <li>Bugs - please feed it into bugzilla (preferably) or send it by email</li>
+  <li>Code review: I'm used to use some parts of extreme programming, code review is one. 
+    If you can spend some time to review my code I will be very happy.
+    Please drop me an email before you start, so I can tell you what needs your attention.</li>
+  <li>Code contribution: I'm open for code contribution to nMars, send me an email to agree on it.</li>
+  <li>Links: If you like my effort, please add link to your pages to http://nmars.sourceforge.net/</li>
+</ul>
+<p>Looking forward to hear you opinion, Thanks !</p>
+
+<h2>Contact</h2>
+<p>Project home is currently at <a href="http://sourceforge.net/projects/nmars">http://sourceforge.net/projects/nmars</a>
+</p>
+<p>Source code can be found at <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/">https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/</a>
+</p>
+<p>
+  <br/>
+  <strong>Pavel Savara</strong>
+  <br/>
+  pavel (dot) savara (at) gmail (dot) com
+</p>
+
+</div>
+<!--#include virtual="footer" -->
