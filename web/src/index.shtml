@@ -3,34 +3,41 @@
 <div id="Content">
 
 	<h1>nMars - Corewars MARS for .NET</h1>
-	<p>nMars is engine, compiler and IDE for programming game called Corewars. 
-	If you are not sure what corewars is look 
+	<p>nMars is engine, compiler and IDE for programming game called Corewars. </p>
+  <p>Corewars is a programming game in which two or more battle programs (called warriors) compete for the control of the 
+    MARS virtual computer (Memory Array Redcode Simulator). 
+    These battle programs are written in an abstract assembly language called Redcode. 
+    The object of the game is to cause all processes of the opposing program(s) to terminate, 
+  leaving your program in sole possession of the machine. [from wikipedia] </p>
+
+	<p>If you are stil not sure what corewars is look 
 	<a href="http://www.koth.org/">here</a> or 
-	<a href="http://en.wikipedia.org/wiki/Corewars">here</a>
-	and ask <a href="http://groups.google.com/group/rec.games.corewar">here</a>.</p>
-    <br/>
-    <br/>
-	<p>Pages are under construction (01/17/2007), but not forever!</p>
-    <br/>
-    <br/>
+	<a href="http://en.wikipedia.org/wiki/Corewars">here</a> and ask 
+	<a href="http://groups.google.com/group/rec.games.corewar">here</a>.</p>
+  <br/>
+  <br/>
+
+	<p>Pages are under construction (01/18/2007), but not forever!</p>
+  <br/>
+  <br/>
 	<p style="text-align:right"><strong>Pavel Savara</strong></p>
 
 
-<!-- BEGIN imp ring navigation bar 
-  <center><img src="http://vyznev.net/corewar/impring/top.gif"
-  width=337 height=35 alt="The Core War Imp Ring"><br><a
-  href="http://vyznev.net/corewar/impring/?op=prev&amp;id=YOUR_ID"
-  target="_top"><img src="http://vyznev.net/corewar/impring/prev.gif"
-  width=90 height=22 alt="&lt;PREV " border=0></a><a
+<!-- BEGIN imp ring navigation bar -->
+  <center><a
+  href="http://vyznev.net/corewar/impring/?op=prev&amp;id=nmars"
+  target="_top"><img src="pics/cwir-prev.png"
+  alt="&lt;PREV " border=0></a><a
   href="http://vyznev.net/corewar/impring/"
-  target="_top"><img src="http://vyznev.net/corewar/impring/list.gif"
-  width=80 height=22 alt=" LIST " border=0></a><a
-  href="http://vyznev.net/corewar/impring/?op=rand&amp;id=YOUR_ID"
-  target="_top"><img src="http://vyznev.net/corewar/impring/rand.gif"
-  width=80 height=22 alt=" RAND " border=0></a><a
-  href="http://vyznev.net/corewar/impring/?op=next&amp;id=YOUR_ID"
-  target="_top"><img src="http://vyznev.net/corewar/impring/next.gif"
-  width=87 height=22 alt=" NEXT&gt;" border=0></a></center>
- END imp ring navigation bar -->
+  target="_top"><img src="pics/cwir-list.png"
+  alt=" LIST " border=0></a><a
+  href="http://vyznev.net/corewar/impring/?op=rand&amp;id=nmars"
+  target="_top"><img src="pics/cwir-rand.png"
+  alt=" RAND " border=0></a><a
+  href="http://vyznev.net/corewar/impring/?op=next&amp;id=nmars"
+  target="_top"><img src="pics/cwir-next.png"
+  alt=" NEXT&gt;" border=0></a></center>
+<!-- END imp ring navigation bar -->
+
 </div>
 <!--#include virtual="footer" -->
