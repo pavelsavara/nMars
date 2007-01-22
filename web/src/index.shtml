@@ -4,8 +4,6 @@
 
     <h1>nMars - Corewars MARS for .NET</h1>
     <p>nMars is engine, compiler and IDE for programming game called <a href="links.shtml">Corewars</a>. </p>
-    <br/>
-    <br/>
     
     <h2>Features</h2>
     <ul>
@@ -56,6 +54,7 @@
         <li>??/???? - nMars?.? - click on error in IDE</li>
         <li>??/???? - nMars2.? - redcode syntax extensions</li>
     </ul>
+    <p>Complete list of <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Todo.txt">wishes</a></p>
 
     <br/>
     <br/>
@@ -63,7 +62,7 @@
     <br/>
     <br/>
 
-    <p style="text-align:right; right-margin: 25%"><strong>Pavel Savara</strong></p>
+    <p style="text-align:right; padding-right: 25%"><strong>Pavel Savara</strong></p>
     <br/>
     <br/>
 
