@@ -11,6 +11,7 @@ unsorted
    - we will get unit tests for it for free
    - fMars, qMars or any fast one
    - pMars.so - same as pMArs.dll but for Linux
+   - SWIG ?
  
  - Documentation & Home page
    - Currently there is only basic info about nMars, let's extend it
@@ -19,18 +20,13 @@ unsorted
    - Anyone should be able to update pages about strategies, software links, personal corewars pages, warriors library
    - Let's update content on koth.org
    - blog
-   - NDoc | Sandcastle
-   - book in DocBook
+   - Sandcastle doc update
+   - book in DocBook ?
    - Article for root.cz  
    - ICWS 2007 to describe real behavior of pMars
  
- - Logo & Icons
-   - We need some nice graphics to promote corewars
-   - Propose some great idea, maybe I can persuade my coleague to do it for us
- 
  - Unit tests
    - Other engines
-   - projects as driver of tests
    - test stepback
    
  - Parser
@@ -47,8 +43,7 @@ unsorted
    - read/write limit ?
 
  - Debuger
-   - modularize from IDE
-   - all pmars commands
+   - all pmars commands, -k missing, score formula
    - convert pmars startup macros
    - add breakpoints, persistent
    - python tab completion
@@ -57,18 +52,19 @@ unsorted
    - dump core interface, start naming convention, for rof compression
 
  - IDE
-   - Python
    - tutorials
    - remote debug 
    - remote watch - watch hill
-   - modularize, modularize Application
+   - cell editor
    - projects: Base, Warriors, Evolver, Optimizer
    - submit to hill feature
    - Project/solution editors
    - Mono - Moma
    - new warrior template
+   - syntax highliting
+   - parser, focus after click on errors
  
- - Competition
+ - Hill/Competition
    - look for other implementations
    - Tuc's scripts ?
    
@@ -82,7 +78,7 @@ unsorted
    - Teams
 
  - Build
-   - include readme
+   - include doc
 
  - Blind engine & hack quest
    - prompts
@@ -102,5 +98,4 @@ unsorted
  - TODO 0.9
    - breakpoints
    - step back
-   - web
    
