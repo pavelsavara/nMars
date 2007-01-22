@@ -2,29 +2,74 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>nMars - Corewars MARS for .NET</h1>
-	<p>nMars is engine, compiler and IDE for programming game called Corewars. </p>
-  <p>Corewars is a programming game in which two or more battle programs (called warriors) compete for the control of the 
-    MARS virtual computer (Memory Array Redcode Simulator). 
-    These battle programs are written in an abstract assembly language called Redcode. 
-    The object of the game is to cause all processes of the opposing program(s) to terminate, 
-  leaving your program in sole possession of the machine. [from wikipedia] </p>
+    <h1>nMars - Corewars MARS for .NET</h1>
+    <p>nMars is engine, compiler and IDE for programming game called <a href="links.shtml">Corewars</a>. </p>
+    <br/>
+    <br/>
+    
+    <h2>Features</h2>
+    <ul>
+        <li>Component architecture, solid interfaces</li>
+            <ul>
+                <li>Parser, Engine, Command line, Debugger and IDE</li>
+                <li>Components are extensible and reusable</li>
+            </ul>
+        <li>Engine is 100% compatible with pMars and ICWS94</li>
+        <li>Parser is LALR grammar driven</li>
+        <li>nMars is unit tested against pMars</li>
+        <li>Supports most pMars commandline switches</li>
+        <li>IDE supports projects and solutions as a setup frame for your warriors</li>
+        <li>IDE projects containning setup of rules and options</li>
+        <li>IDE has familiar look and feel</li>
+        <li>Graphical debugger is asynchronous to UI, so it can run at any speed, still painting core state.</li>
+        <li>Debugger shell could be extended with IronPython</li>
+        <li>Debugger core views are packed with information about events and status of each cell</li>
+        <li>All configuration is XML driven</li>
+        <li>All components but IDE are running on Mono, porting IDE is goal.</li>
+    </ul>
 
-	<p>If you are stil not sure what corewars is look 
-	<a href="http://www.koth.org/">here</a> or 
-	<a href="http://en.wikipedia.org/wiki/Corewars">here</a> and ask 
-	<a href="http://groups.google.com/group/rec.games.corewar">here</a>.</p>
-  <br/>
-  <br/>
+    <h2>History</h2>
+    <ul>
+        <li>01/13/2007 - nMars0.8.3 - IDE preview released</li>
+        <li>11/19/2006 - nMars0.8 - debugger</li>
+        <li>11/13/2006 - nMars0.7 - going public, overview documents, posted to group</li>
+        <li>11/13/2006 - nMars0.6 - engine unit test</li>
+        <li>11/08/2006 - nMars0.5 - more binaries</li>
+        <li>11/03/2006 - nMars0.4 - pMars included</li>
+        <li>09/28/2006 - nMars0.3 - first binary on released</li>
+        <li>09/17/2006 - nMars0.2 - Parser more powerfull</li>
+        <li>08/12/2006 - nMars0.1 - First version</li>
+    </ul>
+    <p>Complete list of <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Changes.txt">changes</a></p>
 
-	<p>Pages are under construction (01/18/2007), but not forever!</p>
-  <br/>
-  <br/>
-	<p style="text-align:right"><strong>Pavel Savara</strong></p>
+    <h2>Road map</h2>
+    <ul>
+        <li>Q1/2007 - nMars0.9 - IDE with breakpoints</li>
+        <li>Q2/2007 - nMars1.0 - stabilization</li>
+        <br>
+        <li>??/???? - nMars1.1 - round robin, hill</li>
+        <li>??/???? - nMars1.2 - wrap fast engine</li>
+        <li>??/???? - nMars1.3 - evolver, optimizer</li>
+        <br>
+        <li>??/???? - nMars?.? - screensaver</li>
+        <li>??/???? - nMars?.? - syntax highliting in IDE</li>
+        <li>??/???? - nMars?.? - click on error in IDE</li>
+        <li>??/???? - nMars2.? - redcode syntax extensions</li>
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Pages are under construction (01/22/2007), but not forever!</p>
+    <br/>
+    <br/>
+
+    <p style="text-align:right; right-margin: 25%"><strong>Pavel Savara</strong></p>
+    <br/>
+    <br/>
 
 
-<!-- BEGIN imp ring navigation bar -->
-  <center><a
+<div id="ImpRing">
+  <a
   href="http://vyznev.net/corewar/impring/?op=prev&amp;id=nmars"
   target="_top"><img src="pics/cwir-prev.png"
   alt="&lt;PREV " border=0></a><a
@@ -36,8 +81,8 @@
   alt=" RAND " border=0></a><a
   href="http://vyznev.net/corewar/impring/?op=next&amp;id=nmars"
   target="_top"><img src="pics/cwir-next.png"
-  alt=" NEXT&gt;" border=0></a></center>
-<!-- END imp ring navigation bar -->
+  alt=" NEXT&gt;" border=0></a>
+</div>
 
 </div>
 <!--#include virtual="footer" -->
