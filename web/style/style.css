@@ -14,10 +14,17 @@ h1 {
 	
 h2 {
 	margin:15px 0px 15px 0px;
-	padding:0px;
+	padding:1px;
 	font-size:large;
 	}
 
+h3 {
+	margin:15px 0px 15px 0px;
+	padding:3px;
+	font-size:medium;
+	font-style:italic;
+	}
+	
 p {
 	font:11px/20px verdana, arial, helvetica, sans-serif;
 	margin:0px 0px 16px 0px;

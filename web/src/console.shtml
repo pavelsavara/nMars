@@ -1,0 +1,61 @@
+<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+
+	<h1>nMars Console</h1>
+
+    <h2>Overview</h2>
+    <ul>
+      <li>Executable file is nMars.exe</li>
+      <li>nMars console has similar interface to pMars</li>
+      <li>it could export swithes to project, which can be loaded by IDE</li>
+      <li>console default components could be configured thru nMars.exe.config or by -nP, -nE switches</li>
+    </ul>
+
+    <h2>Usage</h2>
+      <h3>General</h3>
+<pre><strong>-@  file </strong> load options from text file (pMars compatible)
+<strong>-@l file </strong> load project from xml file
+<strong>-@s file </strong> save project to xml file, (use .nmproj extension)
+<strong>-nP name </strong> Change parser component
+<strong>-nE name </strong> Change engine component
+<strong>-v</strong> Component versions</pre>
+      <h3>Rules</h3>
+<pre><strong>-r #     </strong> Rounds to play [1]
+<strong>-s #     </strong> Size of core [8000]
+<strong>-c #     </strong> Cycles until tie [80000]
+<strong>-p #     </strong> Max. processes [8000]
+<strong>-l #     </strong> Max. warrior length [100]
+<strong>-d #     </strong> Min. warriors distance
+<strong>-S #     </strong> Size of P-space [500]
+<strong>-f #     </strong> Fixed position series</pre>
+      
+      <h3>Dumps</h3>
+<pre><strong>-b       </strong> Brief/silent parser mode
+<strong>-bh      </strong> No header
+<strong>-bl      </strong> No logo
+<strong>-bs      </strong> No status
+<strong>-br      </strong> No match results
+<strong>-ue .ext </strong> Dump warriors to files with extension
+<strong>-uo      </strong> Dump warriror format with offset [off]
+<strong>-ul      </strong> Dump warriror format with labels [off]
+<strong>-uc      </strong> Dump warriror format with comments [off]
+<strong>-ux      </strong> Dump warriror format xml</pre>
+      
+      <h3>Debugger</h3>
+<pre><strong>-e       </strong> Interactive debugger mode</pre>
+      <h3>Examples</h3>
+      <p>To use it as parser only:<br/>
+      <pre>nMars.exe -r 0 aeka.red -bl -bh</pre>
+      </p>
+      <p>Fixed position of second warrior:<br/>
+      <pre>nMars.exe aeka.red flashpaper.red -f 4321</pre>
+      </p>
+      <p>Interactive:<br/>
+      <pre>nMars.exe -b -e aeka.red flashpaper.red</pre>
+      </p>
+
+    <h2>Implementation</h2>
+    <p>TODO</p>
+</div>
+<!--#include virtual="footer" -->

@@ -5,13 +5,17 @@
     <h1>nMars - Corewars MARS for .NET</h1>
     <p>nMars is engine, compiler and IDE for programming game called <a href="links.shtml">Corewars</a>. </p>
     
+    <h2>Overview</h2>
+    <ul>
+        <li>nMars has <a href="console.shtml">console interface</a> and <a href="ide.shtml">graphical IDE</a></li>
+        <li>Under cover are running <a href="parser.shtml">Parser</a>, <a href="engine.shtml">Engine</a> and <a href="debugger.shtml">Debugger</a> components</li>
+        <li>It can be ensembled with <a href="python.shtml">Python shell</a>, <a href="tests.shtml">Unit tests</a> and <a href="pmarsdll.shtml">pMars wrapper</a> components</li>
+        <li>You can <a href="http://sourceforge.net/project/showfiles.php?group_id=174312">download</a> several <a href="packages.shtml">packages</a>.</li>
+    </ul>
+
     <h2>Features</h2>
     <ul>
-        <li>Component architecture, solid interfaces</li>
-            <ul>
-                <li>Parser, Engine, Command line, Debugger and IDE</li>
-                <li>Components are extensible and reusable</li>
-            </ul>
+        <li>It's well architected, around solid interfaces, extensible and reusable</li>
         <li>Engine is 100% compatible with pMars and ICWS94</li>
         <li>Parser is LALR grammar driven</li>
         <li>nMars is unit tested against pMars</li>
@@ -23,6 +27,7 @@
         <li>Debugger shell could be extended with IronPython</li>
         <li>Debugger core views are packed with information about events and status of each cell</li>
         <li>All configuration is XML driven</li>
+        <li>Target platfor is .NET 2.0 or Mono</li>
         <li>All components but IDE are running on Mono, porting IDE is goal.</li>
     </ul>
 
@@ -55,10 +60,6 @@
         <li>??/???? - nMars2.? - redcode syntax extensions</li>
     </ul>
     <p>Complete list of <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Todo.txt">wishes</a></p>
-
-    <br/>
-    <br/>
-    <p>Pages are under construction (01/22/2007), but not forever!</p>
     <br/>
     <br/>
 
