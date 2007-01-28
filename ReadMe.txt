@@ -3,6 +3,10 @@
     
 ---------------------------------------
 
+Please start here: 
+http://nmars.sourceforge.net/
+
+
 Currently it consist of
 - Redcode definitions library
 - Parser
@@ -137,7 +141,7 @@ If you would like to contribute more, there are some tasks:
   Contact
 --------------------
 Project home is currently at
-http://sourceforge.net/projects/nmars
+http://nmars.sourceforge.net/
 
 Source code can be found at
 https://nmars.svn.sourceforge.net/svnroot/nmars/trunk
