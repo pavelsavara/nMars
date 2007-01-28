@@ -11,6 +11,8 @@
         <li>Under cover are running <a href="parser.shtml">Parser</a>, <a href="engine.shtml">Engine</a> and <a href="debugger.shtml">Debugger</a> components</li>
         <li>It can be ensembled with <a href="python.shtml">Python shell</a>, <a href="tests.shtml">Unit tests</a> and <a href="pmarsdll.shtml">pMars wrapper</a> components</li>
         <li>You can <a href="http://sourceforge.net/project/showfiles.php?group_id=174312">download</a> several <a href="packages.shtml">packages</a>.</li>
+        <li>Source code could be checked out from <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/"> subversion repository</a> or <a href="http://nmars.svn.sourceforge.net/viewvc/nmars/trunk/">browsed</a></li>
+        
     </ul>
 
     <h2>Features</h2>
@@ -27,8 +29,9 @@
         <li>Debugger shell could be extended with IronPython</li>
         <li>Debugger core views are packed with information about events and status of each cell</li>
         <li>All configuration is XML driven</li>
-        <li>Target platfor is .NET 2.0 or Mono</li>
+        <li>Target platform is .NET 2.0 or Mono</li>
         <li>All components but IDE are running on Mono, porting IDE is goal.</li>
+        <li>Licensed under <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/License.txt">LGPL</a></li>
     </ul>
 
     <h2>History</h2>
