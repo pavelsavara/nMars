@@ -12,6 +12,10 @@
       <li>console default components could be configured thru nMars.exe.config or by -nP, -nE switches</li>
     </ul>
 
+    <div id="Pic">
+      <img src="screens/console.png" alt="nMars console" border="0" align="top"/>
+    </div>
+
     <h2>Usage</h2>
       <h3>General</h3>
 <pre><strong>-@  file </strong> load options from text file (pMars compatible)
