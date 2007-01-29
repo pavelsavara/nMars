@@ -2118,6 +2118,7 @@ assemble(fName, aWarrior)
   warrior[curWarrior].version = pstrdup("");
 #ifdef PSPACE
   warrior[curWarrior].pSpaceIndex = UNSHARED;        /* tag */
+  warrior[curWarrior].pSpaceIDNumber = UNSHARED;
 #endif
   /* These two inits turn out to be neccessary */
   warrior[curWarrior].instBank = NULL;

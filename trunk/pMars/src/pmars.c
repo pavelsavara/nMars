@@ -76,6 +76,7 @@ void    Exit(int);
 int     returninfo(void);
 #ifdef PSPACE
 void    pspace_init(void);
+void    pspace_finalize(void);
 #endif
 #if defined(unix) || defined(__MSDOS__) || defined(SDLGRAPHX) || defined(VMS)
 void    sighandler(int dummy);
@@ -107,7 +108,7 @@ extern char *cantInitSvga, *cantOpenConsole, *tcgetattrFails;
 #endif
 
 /* global variables */
-int     pspP = 0;                /* contains number of P-spaces allocated, <
+int     pspP;                /* contains number of P-spaces allocated, <
                                  * warriors with PIN */
 
 #if defined(__BORLANDC__) && defined(CHECK386)
@@ -194,11 +195,9 @@ init()
 #endif
 }
 
-void
-body()
+void body_load()
 {
   int     i, j;
-
   for (i = 0; (i < warriors) && (errorcode == SUCCESS); i++)
     if ((!assemble(warrior[i].fileName, i)) && (!SWITCH_b)) {
       fprintf(STDOUT, info01, warrior[i].name, warrior[i].instLen,
@@ -209,24 +208,60 @@ body()
 #ifdef PSPACE                        /* set up pSpace */
   pspace_init();
 #endif
-  if (rounds && (errorcode == SUCCESS)) {
-    simulator1();
+}
+
+void body_results()
+{
+	int     i, j;
     if (SWITCH_k) {
       set_reg('W', (long) warriors);        /* 'W' used in score calculation */
-      if (warriors == 2)        /* standard 2-warrior game */
+      if (warriors == 2) {      /* standard 2-warrior game */
         fprintf(STDOUT, "%d %d\n%d %d\n", warrior[0].score[0],
              warrior[0].score[1], warrior[1].score[0], warrior[1].score[1]);
+			warrior[0].totalscore = warrior[0].score[0];
+			warrior[1].totalscore = warrior[1].score[0];
+        }
       else                        /* multiwarrior */
         for (i = 0; i < warriors; i++) {
-          fprintf(STDOUT, "%d ", score(i));
+          fprintf(STDOUT, "%d ", warrior[i].totalscore = score(i));
           for (j = 0; j < warriors; j++) {
             fprintf(STDOUT, "%d ", warrior[i].score[j]);
           }
           fprintf(STDOUT, "%d\n", deaths(i));
         }
     } else                        /* ! SWITCH_k */
-      results(stdout);
+      results(STDOUT);
+}
+
+void body_finalize()
+{
+	int w ;
+	for (w = 0; (w < MAXWARRIOR); w++)
+	{
+		FREE(warrior[w].authorName);
+		FREE(warrior[w].fileName);
+		FREE(warrior[w].date);
+		FREE(warrior[w].version);
+		FREE(warrior[w].name);
+		FREE(warrior[w].instBank);
+		memset(&warrior[w],0,sizeof(warrior_struct));
+	}
+#ifdef PSPACE                        /* teardown up pSpace */
+	pspace_finalize();
+#endif
+	warriors=0;
+}
+
+void
+body()
+{
+  
+  body_load();
+  if (rounds && (errorcode == SUCCESS)) {
+    simulator1();
+	body_results();
   }
+  body_finalize();
 }
 
 /* called when ctrl-c is pressed; prepares for debugger entry */
@@ -285,7 +320,7 @@ Exit(errorcode)
 #ifdef LINUXGRAPHX
   if (vga_getcurrentmode() != TEXT)
     svga_display_close(0);
-  fflush(stdout);
+  fflush(STDOUT);
 #endif
   exit(SWITCH_Q >= 0 ? returninfo() : errorcode);
 #endif
@@ -368,6 +403,7 @@ returninfo()
     set_reg('W', (long) warriors);        /* 'W' used in score calculation */
     for (i = 0; i < warriors; ++i) {
       scrV[i] = score(i);
+	  warrior[i].totalscore = scrV[i];
       idxV[i] = i;
     }
     if (SWITCH_o)
@@ -404,6 +440,7 @@ void
 pspace_init()
 {
   int     i, j;
+  pspP=0;
   for (i = 0; i < warriors; ++i) {
     if (warrior[i].pSpaceIndex == UNSHARED)
       warrior[i].pSpaceIndex = pspP++;
@@ -420,7 +457,8 @@ pspace_init()
   /* allocate space */
   for (i = 0; i < warriors; ++i) {
     warrior[i].lastResult = coreSize - 1;        /* unlikely number */
-    if (pSpace[j = warrior[i].pSpaceIndex] == NULL &&
+	j = warrior[i].pSpaceIndex;
+    if (pSpace[j] == NULL &&
 #ifdef DOS16
         ((pSpace[j] = (ADDR_T far *) farcalloc(pSpaceSize, sizeof(ADDR_T))) == NULL)) {
 #else
@@ -429,6 +467,23 @@ pspace_init()
       errout(outOfMemory);
       Exit(MEMERR);
     }
+	else
+	{
+		memset(pSpace[j],0,pSpaceSize*sizeof(ADDR_T));
+	}
   }
 }                                /* pspace_init() */
+
+void pspace_finalize()
+{
+  int     i, j;
+  for (i = 0; i < warriors; ++i) {
+	j = warrior[i].pSpaceIndex;
+    if (pSpace[j])
+	{
+		free(pSpace[j]);
+		pSpace[j]=NULL;
+	}
+  }
+}
 #endif

@@ -166,21 +166,11 @@ extern char *fatalErrorInSimulator;
 extern char *warriorTerminatedEndOfRound;
 extern char *endOfRound;
 
+ADDR_T  progCnt;                /* program counter */
 warrior_struct *W;                /* indicate which warrior is running */
 U32_T   totaltask;                /* size of the taskQueue */
 ADDR_T FAR *endQueue;
 ADDR_T FAR *taskQueue;
-ADDR_T  progCnt;                /* program counter */
-
-  mem_struct FAR *destPtr;        /* pointer used to copy program to core */
-  mem_struct FAR *tempPtr;        /* temporary pointer used in op decode phase */
-
-  mem_struct IR;                /* current instruction and A cell */
-#ifdef NEW_MODES
-//  mem_struct IRA;                /* A/B_field hold A-field of A/B-pointer
-//                                 * necessary for '}' mode */
-ADDR_T AA_Value, AB_Value;
-#endif
 
 mem_struct FAR *memory;
 
@@ -228,37 +218,29 @@ checksum_warriors()
   return checksum;
 }
 
-void
-simulator1()
-{
 #ifdef PERMUTATE
-  int permidx = 0, permtmp, *permbuf = NULL;
+  int permidx, permtmp, *permbuf;
 #endif
   /* range for random number generator */
   warrior_struct *oldW;                /* the previous living warrior to execute */
-  ADDR_T  positions = coreSize + 1 - (separation << 1);
-  ADDR_T  coreSize1 = coreSize - 1;
-  warrior_struct *starter = warrior;        /* pointer to warrior that starts
-					 * round */
-  U32_T   cycles2 = warriors * cycles;
+  ADDR_T  positions;// = coreSize + 1 - (separation << 1);
+  ADDR_T  coreSize1;// = coreSize - 1;
+  warrior_struct *starter;// = warrior;        /* pointer to warrior that starts round */
+  U32_T   cycles2;// = warriors * cycles;
 #ifndef SERVER
   char    outs[60];                /* for cdb() entering message */
 #endif
-  mem_struct *sourcePtr;        /* pointer used to copy program to core */
-  mem_struct *endPtr;                /* pointer used to copy program to core */
-register  int     temp;                        /* general purpose temporary variable */
-  int     addrA, addrB;                /* A and B pointers */
-#ifndef SERVER
-  int     temp2;			/* needed in graphical versions to display postincrements at the correct address */
-#endif
-  ADDR_T FAR *tempPtr2;
-#ifdef NEW_MODES
-  ADDR_T FAR *offsPtr;                /* temporary pointer used in op decode phase */
-#endif
 
+INLINE void init_core() 
+{
   endWar = warrior + warriors;
+  cycles2 = warriors * cycles;
+  coreSize1 = coreSize - 1;
+  positions = coreSize + 1 - (separation << 1);
+  starter = warrior;
 
 #ifdef PERMUTATE
+  permidx=0;
   if (SWITCH_P) {
     permbuf = (int *) malloc((size_t)(warriors * positions * sizeof(int)));
     if (!permbuf) {
@@ -278,6 +260,7 @@ register  int     temp;                        /* general purpose temporary vari
     taskQueue = farmalloc(65528L);        /* allocate an entire 64K segment */
     if (!taskQueue) {
       farfree(memory);
+	  memory=NULL;
       errout(outOfMemory);
       Exit(MEMERR);
     }
@@ -298,6 +281,7 @@ register  int     temp;                        /* general purpose temporary vari
     taskQueue = (ADDR_T *) malloc((size_t) totaltask * sizeof(ADDR_T));
     if (!taskQueue) {
       free(memory);
+	  memory=NULL;
       errout(outOfMemory);
       Exit(MEMERR);
     }
@@ -320,9 +304,18 @@ register  int     temp;                        /* general purpose temporary vari
 
   display_init();
   round = 1;
-  do {                                /* each round */
+}
+
+INLINE void init_round()
+{
+  mem_struct FAR *destPtr;        /* pointer used to copy program to core */
+  mem_struct FAR *tempPtr;        /* temporary pointer used in op decode phase */
+  mem_struct *sourcePtr;        /* pointer used to copy program to core */
+  mem_struct *endPtr;                /* pointer used to copy program to core */
+  ADDR_T FAR *tempPtr2;
+	int     temp;
 #if defined(DOS16) && !defined(SERVER) && !defined(DOSTXTGRAPHX) && !defined(DOSGRXGRAPHX) && !defined(DJGPP)
-    fputc('\r', stdout);        /* enable interruption by Ctrl-C */
+    fputc('\r', STDOUT);        /* enable interruption by Ctrl-C */
 #else
 #if defined(DJGPP) && !defined(SERVER) && !defined(DOSTXTGRAPHX) && !defined(DOSGRXGRAPHX) && !defined(CURSESGRAPHX)
     if (kbhit())
@@ -361,11 +354,11 @@ register  int     temp;                        /* general purpose temporary vari
     W = starter;
     if (starter != warrior)
       oldW = starter - 1;
-    addrA = warrior[0].instLen;
+    temp = warrior[0].instLen;
     /* clear the core following warrior 0 */
     do {
-      memory[addrA] = INITIALINST;
-    } while (++addrA < coreSize);
+      memory[temp] = INITIALINST;
+    } while (++temp < coreSize);
     tempPtr2 = endQueue - taskNum - 1;
     temp = 0;
     do {
@@ -388,8 +381,29 @@ register  int     temp;                        /* general purpose temporary vari
     } while (++temp < warriors);
 
     display_clear();
+}
+
+INLINE int run_step()
+{   
+  mem_struct IR;                /* current instruction and A cell */
+#ifdef NEW_MODES
+//  mem_struct IRA;                /* A/B_field hold A-field of A/B-pointer
+//                                 * necessary for '}' mode */
+ADDR_T AA_Value, AB_Value;
+#endif
+  int     addrA, addrB;                /* A and B pointers */
+#ifndef SERVER
+  int     temp2;			/* needed in graphical versions to display postincrements at the correct address */
+#endif
+  mem_struct FAR *destPtr;        /* pointer used to copy program to core */
+  mem_struct FAR *tempPtr;        /* temporary pointer used in op decode phase */
+  ADDR_T FAR *tempPtr2;
+#ifdef NEW_MODES
+  ADDR_T FAR *offsPtr;                /* temporary pointer used in op decode phase */
+#endif
+	register int     temp;                        /* general purpose temporary variable */
     /* the inner loop of execution */
-    do {                        /* each cycle */
+                                /* each cycle */
       display_cycle();
      // progCnt = *(W->taskHead++);
      // IR = memory[progCnt];        /* copy instruction into register */
@@ -1185,8 +1199,6 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 	display_die(W - warrior);
 	W->score[warriorsLeft + warriors - 2]++;
 	cycle = cycle - 1 - (cycle - 1) / (warriorsLeft--);
-	if (warriorsLeft < 2)
-	  goto nextround;        /* can't use break because in switch */
 
 #ifndef SERVER
 	if (debugState == BREAK) {
@@ -1195,7 +1207,9 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 	}
 #endif                                /* SERVER */
 	oldW->nextWarrior = W = W->nextWarrior;
-	continue;
+	if (warriorsLeft < 2)
+	  return 1;        /* can't use break because in switch */
+	return 0;
 
 	/* $EXT$ insert code for new opcodes here */
 
@@ -1290,7 +1304,10 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
 #ifndef DOS16
 	/* DOS taskQueue may not be free'd because of segment wrap-around */
 	free(memory);
+	memory=NULL;
 	free(taskQueue);
+	taskQueue=NULL;
+    endQueue=NULL;
 	alloc_p = 0;
 #endif
 	Exit(SERIOUS);
@@ -1308,8 +1325,12 @@ if (IR.B_mode != (FIELD_T) IMMEDIATE)
       oldW = W;
       W = W->nextWarrior;
 //      --cycle;
-    } while (--cycle);                /* next cycle */
-nextround:
+	return 0;
+}
+
+INLINE void finalize_round()
+{
+	int temp;
     for (temp = 0; temp < warriors; temp++) {
       if (warrior[temp].tasks) {
 	warrior[temp].score[warriorsLeft - 1]++;
@@ -1334,8 +1355,11 @@ nextround:
       debugState = cdb(outs);
     }
 #endif
-  } while (++round <= rounds);
+}
 
+
+INLINE void finalize_core()
+{
   display_close();
 #ifdef PERMUTATE
   if(permbuf) {
@@ -1346,7 +1370,51 @@ nextround:
 #ifndef DOS16
   /* DOS taskQueue may not be free'd because of segment wrap-around */
   free(memory);
+  memory=NULL;
   free(taskQueue);
+  taskQueue=NULL;
+  endQueue=NULL;
   alloc_p = 0;
 #endif
+}
+
+INLINE void begin_match()
+{
+	init_core();
+	init_round();
+}
+
+INLINE void end_match()
+{
+	finalize_core();
+}
+
+// 0 next step
+// 1 next round
+// 2 end match
+INLINE int step_match()
+{
+	int res=run_step();
+	--cycle;
+	if (res !=0 || cycle==0) 
+	{
+		finalize_round();
+		++round;
+		if (round>rounds) 
+		{
+			return 2;
+		}
+		init_round();
+		return 1;
+	}
+	return 0;
+}
+
+void simulator1()
+{
+	begin_match();
+	while(step_match()!=2)
+	{
+	}
+	end_match();
 }
