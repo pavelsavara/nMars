@@ -17,7 +17,7 @@ namespace nMars.Parser.Statements
             this.expression = expression;
         }
 
-        public override void ExpandStatements(ExtendedWarrior warrior, Parser parser, ref int currentAddress,
+        public override void ExpandStatements(ExtendedWarrior warrior, WarriorParser parser, ref int currentAddress,
                                               int coreSize, bool evaluate)
         {
             if (!evaluate)

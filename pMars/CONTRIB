@@ -4,9 +4,12 @@ code contributions to be incorporated into future pMARS release, please
 follow these simple guidelines:
 
     * before you start changing the main files, request a copy of the most
-        recent code. Reason for letting us know about your changes ahead of 
-        time is that someone else may already be working on it.
-        CVS: http://sourceforge.net/projects/corewar
+        recent code. pMARS is constantly changing, and we likely have
+        "unreleased working code" that outdates the archive you downloaded
+        from the corewar ftp site. We can merge updates to old pMARS code
+        with our current working code, but this is error-prone. Another
+        reason for letting us know about your changes ahead of time is
+        that someone else may already be working on it.
 
     * don't send patches or diffs to the main files, but rather the entire
         file. This is related to the previous point: you are unlikely to
@@ -27,3 +30,6 @@ follow these simple guidelines:
 
     * in general, follow the examples of previous contributors, and if you
         have any questions, let us know.
+
+Contact Stefan.Strack@Vanderbilt.edu if you plan on contributing code
+or if you would simply like to know who is doing what.

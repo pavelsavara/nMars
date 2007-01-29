@@ -888,7 +888,7 @@ cdb(message)
 #else
 #if defined(LINUXGRAPHX)
       printf(pressAnyKeyToContinue);
-      fflush(STDOUT);
+      fflush(stdout);
       svga_getch();
       svga_open_graphics();
 #else
@@ -1343,7 +1343,7 @@ advance:
       }
     } else {                        /* !# loop end */
 #if defined(DOS16) && !defined(DJGPP)
-      putc('\r', STDOUT);        /* to check for Ctrl-C press */
+      putc('\r', stdout);        /* to check for Ctrl-C press */
 #else
 #if defined(DJGPP)
       if (kbhit())
@@ -2648,7 +2648,6 @@ results(outp)
   for (i = 0; i < warriors; ++i) {
     idxV[i] = i;
     scrV[i] = score(i);
-	warrior[i].totalscore = scrV[i];
   }
   if (SWITCH_o)
     sort_by_score(idxV, scrV);

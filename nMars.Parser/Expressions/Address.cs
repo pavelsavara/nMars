@@ -12,7 +12,7 @@ namespace nMars.Parser.Expressions
         {
         }
 
-        public override int Evaluate(Parser parser, int currentAddress)
+        public override int Evaluate(WarriorParser parser, int currentAddress)
         {
             return value - currentAddress;
         }

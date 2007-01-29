@@ -17,7 +17,7 @@ namespace nMars.Parser.Statements
             Location = location;
         }
 
-        public abstract void ExpandStatements(ExtendedWarrior warrior, Parser parser, ref int currentAddress,
+        public abstract void ExpandStatements(ExtendedWarrior warrior, WarriorParser parser, ref int currentAddress,
                                               int coreSize, bool evaluate);
 
         public List<LabelName> Labels = null;

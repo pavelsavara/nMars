@@ -33,7 +33,7 @@ namespace nMars.Parser.Statements
         public Parameter A;
         public Parameter B;
 
-        public override void ExpandStatements(ExtendedWarrior warrior, Parser parser, ref int currentAddress,
+        public override void ExpandStatements(ExtendedWarrior warrior, WarriorParser parser, ref int currentAddress,
                                               int coreSize, bool evaluate)
         {
             //set all labels

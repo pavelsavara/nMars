@@ -25,7 +25,7 @@ namespace nMars.Parser.Expressions
         private UnaryOperation operation;
         private Expression sub;
 
-        public override int Evaluate(Parser parser, int currentAddress)
+        public override int Evaluate(WarriorParser parser, int currentAddress)
         {
             switch (operation)
             {
@@ -51,7 +51,7 @@ namespace nMars.Parser.Expressions
             }
         }
 
-        public override Mode GetMode(Parser parser, int currentAddress)
+        public override Mode GetMode(WarriorParser parser, int currentAddress)
         {
             return sub.GetMode(parser, currentAddress);
         }

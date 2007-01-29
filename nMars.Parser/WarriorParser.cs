@@ -12,7 +12,7 @@ using nMars.RedCode;
 
 namespace nMars.Parser
 {
-    public class Parser : ParserTokens, IParser
+    public class WarriorParser : ParserTokens, IParser
     {
         protected override IWarrior Parse(string aFileName)
         {

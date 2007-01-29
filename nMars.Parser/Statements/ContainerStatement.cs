@@ -41,7 +41,7 @@ namespace nMars.Parser.Statements
                 Statements[Statements.Count - 1].Comments = comments;
         }
 
-        public override void ExpandStatements(ExtendedWarrior warrior, Parser parser, ref int currentAddress,
+        public override void ExpandStatements(ExtendedWarrior warrior, WarriorParser parser, ref int currentAddress,
                                               int coreSize, bool evaluate)
         {
             foreach (Statement statement in Statements)

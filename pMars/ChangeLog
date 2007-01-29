@@ -1,10 +1,3 @@
-2007-01-06  Pavel Savara <pavel.savara@gmail.com>
-
-  - Release 0.9.3
-  - Included SDL gui by Joonas Pihlaja
-  - Modularized sim.c, freeing memory
-  - Exported more symbols and wrapped with WIN32 DLL
-  
 2000-12-25	Ilmari Karonen	<iltzu@sci.fi>
 
 	- Release 0.9.2

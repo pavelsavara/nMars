@@ -1,0 +1,97 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{84BA1FED-DB42-45E0-8014-64057707E051}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Diagrams</RootNamespace>
+    <AssemblyName>Diagrams</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dummy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\nMars.Console\nMars.Console.csproj">
+      <Project>{FF53C076-410E-410D-BDCF-38003C2D12A0}</Project>
+      <Name>nMars.Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.Debugger\nMars.Debugger.csproj">
+      <Project>{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}</Project>
+      <Name>nMars.Debugger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.Engine\nMars.Engine.csproj">
+      <Project>{8C680360-97C6-475A-B047-D9E52348990C}</Project>
+      <Name>nMars.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.Graphics\nMars.Graphics.csproj">
+      <Project>{B39B9FDE-DBBD-4118-85BC-48E6508FC76F}</Project>
+      <Name>nMars.Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.IDE.Debugger\nMars.IDE.Debugger.csproj">
+      <Project>{25CC8726-10A6-4153-B58A-226384E647E6}</Project>
+      <Name>nMars.IDE.Debugger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.IDE\nMars.IDE.csproj">
+      <Project>{BB9036EA-050A-4ECD-B857-CB022275A7C5}</Project>
+      <Name>nMars.IDE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.Parser\nMars.Parser.csproj">
+      <Project>{DD04BC83-CC0A-4F52-A70B-FDB4C0991E3D}</Project>
+      <Name>nMars.Parser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.RedCode\nMars.RedCode.csproj">
+      <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
+      <Name>nMars.RedCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.Screensaver\nMars.Screensaver.csproj">
+      <Project>{7C5CCD45-9A5B-4D6F-B4CD-DDB6596C6B93}</Project>
+      <Name>nMars.Screensaver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.ShellPy\nMars.ShellPy.csproj">
+      <Project>{1A8B207D-E191-42FD-9504-39185D7C8A49}</Project>
+      <Name>nMars.ShellPy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.Test\nMars.Test.csproj">
+      <Project>{FA9132A5-6063-4269-89ED-5A5E8D57A7B8}</Project>
+      <Name>nMars.Test</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Warrior.cd" />
+    <None Include="Components.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

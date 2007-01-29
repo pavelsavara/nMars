@@ -21,7 +21,7 @@ namespace nMars.Parser.Statements
             Expression = expression;
         }
 
-        public int GetValue(Parser parser, int currentAddress)
+        public int GetValue(WarriorParser parser, int currentAddress)
         {
             return Expression.Evaluate(parser, currentAddress);
         }

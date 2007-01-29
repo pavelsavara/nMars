@@ -15,12 +15,12 @@ namespace nMars.Parser.Expressions
             Mode = mode;
         }
         
-        public override int Evaluate(Parser parser, int currentAddress)
+        public override int Evaluate(WarriorParser parser, int currentAddress)
         {
             return Original.Evaluate(parser, currentAddress);
         }
 
-        public override Mode GetMode(Parser parser, int currentAddress)
+        public override Mode GetMode(WarriorParser parser, int currentAddress)
         {
             return Mode;
         }
