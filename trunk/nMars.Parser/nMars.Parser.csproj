@@ -126,7 +126,7 @@
     <Compile Include="Warrior\ExtendedInstruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Grammar.cs" />
-    <Compile Include="Parser.cs" />
+    <Compile Include="WarriorParser.cs" />
     <Compile Include="ParserTokens.cs" />
     <Compile Include="Statements\InstructionStatement.cs" />
     <Compile Include="Statements\Statement.cs" />

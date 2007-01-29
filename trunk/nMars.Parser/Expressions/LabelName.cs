@@ -22,7 +22,7 @@ namespace nMars.Parser.Expressions
             get { return name; }
         }
 
-        public override int Evaluate(Parser parser, int currentAddress)
+        public override int Evaluate(WarriorParser parser, int currentAddress)
         {
             if (inEval)
             {
@@ -39,7 +39,7 @@ namespace nMars.Parser.Expressions
             }
         }
 
-        protected virtual int EvaluateInternal(Parser parser, int currentAddress)
+        protected virtual int EvaluateInternal(WarriorParser parser, int currentAddress)
         {
             string fullName = GetFullName(parser, currentAddress);
             if (parser.variables.ContainsKey(fullName))
@@ -59,7 +59,7 @@ namespace nMars.Parser.Expressions
             }
         }
 
-        public override Mode GetMode(Parser parser, int currentAddress)
+        public override Mode GetMode(WarriorParser parser, int currentAddress)
         {
             string fullName = GetFullName(parser, currentAddress);
             if (parser.variables.ContainsKey(fullName))
@@ -79,7 +79,7 @@ namespace nMars.Parser.Expressions
             }
         }
 
-        public virtual string GetFullName(Parser parser, int currentAddress)
+        public virtual string GetFullName(WarriorParser parser, int currentAddress)
         {
             return name;
         }

@@ -1,4 +1,4 @@
-15/01/2007 - parser improovements
+01/15/2007 - parser improovements
   - all before ;redcode as comment
   - asserts
   - for 0 comment rof
@@ -7,7 +7,7 @@
   - org expression
   - + sign
   - pMars.DllWrapper fixed error messages
-13/01/2007 - nMars0.8.3 - IDE split
+01/13/2007 - nMars0.8.3 - IDE split
   - IDE was wplit to IDE, graphics, debuger, debugger.ide
   - MONO proof of concept - result: posible, lot of problems with WinForms, screenshot of debugging
   - Shells and debuggers
@@ -77,7 +77,7 @@
   - enhanced SimpleEngine compatiblity, fixed bugs
   - extended interfaces in namespace RedCode
 
-09/28/2006 - nMars0.3 - first binary
+09/28/2006 - nMars0.3 - first binary released
   - Parser more pmarsv compatible
   - mono supported
   - comments parsed

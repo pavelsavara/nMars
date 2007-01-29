@@ -126,8 +126,8 @@ enum {
 
 /* Version and date */
 
-#define PMARSVER  93
-#define PMARSDATE "6 Jan 2007"
+#define PMARSVER  92
+#define PMARSDATE "25/12/00"
 
 #ifdef VMS                        /* Must change codes to work with VMS error
                                  * handling */
@@ -188,12 +188,7 @@ extern  PMARS_FATAL, PMARS_BADCOMLIN, PMARS_PARSEERR;
 #endif
 
 /* used by many */
-#ifndef PMARSDLL_EXPORTS
 #define STDOUT stdout
-#else
-#define STDOUT stderr
-#endif
-
 
 #ifdef DOS16
 #define MAXCORESIZE   8192
@@ -284,7 +279,6 @@ typedef struct warrior_struct {
   int     offset;                /* Offset value specified by 'ORG' or 'END'.
                                  * 0 is default */
   short   score[MAXWARRIOR * 2 - 1];
-  int     totalscore;
 
   char   *name;                        /* warrior name */
   char   *version;
@@ -411,22 +405,13 @@ extern int eval_expr(char *expr, long *result);
 extern int assemble(char *fName, int aWarrior);
 extern void disasm(mem_struct * cells, ADDR_T n, ADDR_T offset);
 extern void simulator1(void);
-extern void begin_match(void);
-extern int step_match(void);
-extern void end_match(void);
-extern mem_struct* memory;
 extern char *locview(ADDR_T loc, char *outp);
 extern int cdb(char *msg);
 extern int score(int warnum);
 extern void sort_by_score(int *idxV, int *scrV);
 extern int deaths(int warnum);
 extern void results(FILE * outp);
-extern void init();
-extern void body();
-extern void body_load();
-extern void body_results();
-extern void body_finalize();
-//extern void sort_by_score();
+extern void sort_by_score();
 extern void Exit(int code);
 extern void reset_regs(void);
 extern void set_reg(char regChr, long val);
@@ -511,9 +496,6 @@ extern int
 extern int assemble();
 extern void disasm();
 extern void simulator1();
-extern void begin_match(void);
-extern int step_match(void);
-extern void end_match(void);
 extern char *locview();
 extern char *cellview();
 extern int cdb();

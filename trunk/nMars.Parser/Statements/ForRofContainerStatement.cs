@@ -16,7 +16,7 @@ namespace nMars.Parser.Statements
         {
         }
 
-        public override void ExpandStatements(ExtendedWarrior warrior, Parser parser, ref int currentAddress,
+        public override void ExpandStatements(ExtendedWarrior warrior, WarriorParser parser, ref int currentAddress,
                                               int coreSize, bool evaluate)
         {
             //set labels, except last which is FOR expression
