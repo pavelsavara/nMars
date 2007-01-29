@@ -312,6 +312,12 @@
 #define WIN32
 #endif
 
+#if defined(_MSC_VER)
+#define INLINE __forceinline
+#else
+#define INLINE
+#endif
+
 #if (defined(__TURBOC__) || defined(__BORLANDC__) || defined(MSDOS)\
     || defined(__MSDOS__) || defined(_MSC_VER)) && !defined(__GO32__)\
     && !defined(WATCOM) && !defined(WIN32)
