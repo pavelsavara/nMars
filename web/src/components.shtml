@@ -1,0 +1,16 @@
+<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+
+	<h1>nMars Components</h1>
+
+    <h2>Overview</h2>
+    <ul>
+      <li>Component infrastructure is defined in namespace <a href="http://nmars.sourceforge.net/doc/html/N_nMars_RedCode.htm">nMars.RedCode.Modules</a> of <a href="library.shtml">RedCode library</a></li>
+    </ul>
+
+    <div id="Pic">
+      <img src="diagrams/Components.png" alt="nMars components" border="0" align="top"/>
+    </div>
+</div>
+<!--#include virtual="footer" -->
