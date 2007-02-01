@@ -2,7 +2,34 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>nMars - Corewars MARS for .NET</h1>
-	<p>To be done.</p>
+	<h1>nMars.RedCode Library</h1>
+
+    <h2>Overview</h2>
+    <ul>
+      <li>This is central library of nMars.</li>
+      <li>It contains basic types 
+      <a href="doc/html/T_nMars_RedCode_Instruction.htm">Instruction</a>,
+      <a href="doc/html/T_nMars_RedCode_Warrior.htm">Warrior</a>,
+      <a href="doc/html/T_nMars_RedCode_Project.htm">Project</a> etc.
+      </li>
+      <li>It contains interfaces 
+      <a href="doc/html/T_nMars_RedCode_IParser.htm">IParser</a>,
+      <a href="doc/html/T_nMars_RedCode_IEngine.htm">IEngine</a> 
+      and other <a href="components.shtml">components</a>
+      </li>
+    </ul>
+
+    <h2>Warrior structure</h2>
+    <p>Below is structure of Warrior and Instruction.</p>
+    <div class="Pic">
+      <img src="diagrams/Warrior.png" alt="nMars warrior and instruction"/>
+    </div>
+
+    <h2>Project structure</h2>
+    <p>Below is structure of Project. It contains rules, options for parser, engine and list of warriors. Project is basic container between parser and engine.</p>
+    <div class="Pic">
+      <img src="diagrams/Project.png" alt="nMars warrior and instruction"/>
+    </div>
+
 </div>
 <!--#include virtual="footer" -->

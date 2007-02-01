@@ -53,11 +53,13 @@
     <ul>
         <li>Q1/2007 - nMars0.9 - IDE with breakpoints</li>
         <li>Q2/2007 - nMars1.0 - stabilization</li>
-        <br>
+    </ul>
+    <ul>
         <li>??/???? - nMars1.1 - round robin, hill</li>
         <li>??/???? - nMars1.2 - wrap fast engine</li>
         <li>??/???? - nMars1.3 - evolver, optimizer</li>
-        <br>
+    </ul>
+    <ul>
         <li>??/???? - nMars?.? - screensaver</li>
         <li>??/???? - nMars?.? - syntax highliting in IDE</li>
         <li>??/???? - nMars?.? - click on error in IDE</li>
@@ -75,17 +77,17 @@
 <div id="ImpRing">
   <a
   href="http://vyznev.net/corewar/impring/?op=prev&amp;id=nmars"
-  target="_top"><img src="pics/cwir-prev.png"
-  alt="&lt;PREV " border=0></a><a
+  ><img src="pics/cwir-prev.png"
+  alt="&lt;PREV " /></a><a
   href="http://vyznev.net/corewar/impring/"
-  target="_top"><img src="pics/cwir-list.png"
-  alt=" LIST " border=0></a><a
+  ><img src="pics/cwir-list.png"
+  alt=" LIST " /></a><a
   href="http://vyznev.net/corewar/impring/?op=rand&amp;id=nmars"
-  target="_top"><img src="pics/cwir-rand.png"
-  alt=" RAND " border=0></a><a
+  ><img src="pics/cwir-rand.png"
+  alt=" RAND " /></a><a
   href="http://vyznev.net/corewar/impring/?op=next&amp;id=nmars"
-  target="_top"><img src="pics/cwir-next.png"
-  alt=" NEXT&gt;" border=0></a>
+  ><img src="pics/cwir-next.png"
+  alt=" NEXT&gt;" /></a>
 </div>
 
 </div>

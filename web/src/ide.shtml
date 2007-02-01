@@ -12,64 +12,56 @@
     </ul>
 
     <h2>Editor and IDE</h2>
-    <div id="Pic">
-      <img src="screens/ide-editor.png" alt="nMars console" border="0" align="top"/>
+    <div class="Pic">
+      <img src="screens/ide-editor.png" alt="nMars console"/>
     </div>
     <ul>
-        <li>project is set of settings similar to console switches</li>
-        <ul>
+        <li>project is set of settings similar to console switches<ul>
             <li>it contains warriors</li>
             <li>rules</li>
             <li>praser and engine options</li>
             <li>breakpoints</li>
-        </ul>
-        <li>solution is set of projects</li>
-        <ul>
+        </ul></li>
+        <li>solution is set of projects<ul>
             <li>it is setup of components which are used to run projects</li>
             <li>it contains projects</li>
             <li>it contains components setting</li>
-        </ul>
+        </ul></li>
         <li>IDE default components could be configured thru nMars.IDE.exe.config</li>
     </ul>
     
     <h2>Debugger</h2>
-    <div id="Pic">
-      <img src="screens/ide-debugger.png" alt="nMars console" border="0" align="top"/>
+    <div class="Pic">
+      <img src="screens/ide-debugger.png" alt="nMars console"/>
     </div>
     <ul>
-      <li>has three types of debug watches</li>
-      <ul>
+      <li>has three types of debug watches<ul>
           <li>graph planar view of memory</li>
           <li>list linear view of memory</li>
           <li>warriors/tasks warrior stats and task queue</li>
-      </ul>
+      </ul></li>
             
-      <li>watches has colour semantics for each memory cell</li>
-            
-      <ul>
+      <li>watches has colour semantics for each memory cell<ul>
           <li>outer frame is colour of warrior lt.red, lt.green, lt.blue and lt.yellow</li>
-          <li>inner frame is colour of instruction</li>
-          <ul>
+          <li>inner frame is colour of instruction<ul>
               <li>MOV grey</li>
               <li>DAT black</li>
               <li>SPL blue</li>
               <li>math violet</li>
               <li>jumps green</li>
-          </ul>
+          </ul></li>
           <li>inner white dot for DAT instructions other than 0,0</li>
-          <li>there are event flashes for</li>
-          <ul>
+          <li>there are event flashes for<ul>
               <li>read aquamarine</li>
               <li>write orange</li>
               <li>exec seagreen</li>
               <li>died cyan</li>
-          </ul>
+          </ul></li>
           <li>there is tooltip with plenty information about cell</li>
           <li>click will focus cell in listing watch</li>
           <li>future: double click will edit cell</li>
           <li>UI and engine are asynchronous, engine could change speed</li>
-      </ul>
-      
+      </ul></li>
       <li>There is console/shell which could execute textual commands</li>
       <li>Shell could be extended by nMarsShellPy module with IronPython</li>
     </ul>

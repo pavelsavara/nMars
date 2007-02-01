@@ -13,7 +13,8 @@ leaving your program in sole possession of the machine. [from wikipedia] </p>
 <h2>Core</h2>
 <ul>
   <li><a href="http://www.koth.org/">King Of The Hill</a></li>
-  <br>
+</ul>
+<ul>
   <li><a href="http://www.corewar.info/">Fizmo's pages</a></li>
   <li><a href="http://corewar.co.uk/">John Metcalf's pages</a></li>
   <li><a href="http://bio.freelogy.org/wiki/REC.GAMES.COREWAR.FAQ">FAQ</a></li>
@@ -24,7 +25,8 @@ leaving your program in sole possession of the machine. [from wikipedia] </p>
 <h2>News and Groups</h2>
 <ul>
   <li><a href="http://groups.google.com/group/rec.games.corewar">Browse rec.games.corewars group</a></li>
-  <br>
+</ul>
+<ul>
   <li><a href="mailto:listproc@koth.org?body=subscribe corewar-l (name)">Subscribe rec.games.corewars group</a></li>
   <li><a href="irc://irc.koth.org">Chat on irc.koth.org</a></li>
   <li><a href="http://corewar.home.pipeline.com/rss/rss.html">Koth RSS</a> - feeds with results from koth.org</li>
@@ -48,7 +50,8 @@ leaving your program in sole possession of the machine. [from wikipedia] </p>
 <h2>Software</h2>
 <ul>
   <li><a href="http://redcoder.sourceforge.net/?p=whichmars">Which Mars ?</a> - (Will 'Varfar') - guide thru variou MARS implementations.</li>
-  <br>
+</ul>
+<ul>
   <li><a href="http://corewar.sourceforge.net/">pMars</a> - reference implementation of M.A.R.S.
   <a href="http://sourceforge.net/project/showfiles.php?group_id=174312&package_id=214071">Download</a> binaries hosted here.
   </li>
@@ -73,7 +76,8 @@ leaving your program in sole possession of the machine. [from wikipedia] </p>
 <h2>People</h2>
 <ul>
   <li><a href="http://corewar.co.uk/whoswho.htm">Who is Who</a></li>
-  <br>
+</ul>
+<ul>
   <li><a href="http://corewar.co.uk/">John Metcalf</a></li>
   <li><a href="http://www.corewar.info/">Christian Schmidt</a> [Fizmo]</li>
   <li><a href="http://martin.ankerl.com/category/corewars/">Martin Ankerl</a> [Martinus], 

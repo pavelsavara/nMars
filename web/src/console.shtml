@@ -12,8 +12,8 @@
       <li>console default components could be configured thru nMars.exe.config or by -nP, -nE switches</li>
     </ul>
 
-    <div id="Pic">
-      <img src="screens/console.png" alt="nMars console" border="0" align="top"/>
+    <div class="Pic">
+      <img src="screens/console.png" alt="nMars console"/>
     </div>
 
     <h2>Usage</h2>

@@ -6,11 +6,19 @@
 
     <h2>Overview</h2>
     <ul>
-      <li>Component infrastructure is defined in namespace <a href="http://nmars.sourceforge.net/doc/html/N_nMars_RedCode.htm">nMars.RedCode.Modules</a> of <a href="library.shtml">RedCode library</a></li>
+      <li>Modularity infrastructure is defined in namespace <a href="doc/html/N_nMars_RedCode_Modules.htm">nMars.RedCode.Modules</a> of <a href="library.shtml">RedCode library</a></li>
+      <li>Modules (or plug-ins) are automaticaly registered in class <a href="doc/html/T_nMars_RedCode_Modules_ModuleRegister.htm">ModuleRegister</a>, this class is also factory for component instances.</li>
+      <li>Modules are idetified by name of namespace. When there are more implementations of same component inteface in same module, it is named with sufix. Examples are nMars.Engine and nMars.Engine-StepBack.</li>
+      <li>Registration of module is done thru static constructor of Module class in each module assembly.</li>
+      <li>Instantiation could be done by calling facory methods of class 
+        <a href="doc/html/T_nMars_RedCode_Modules_ModuleRegister.htm">ModuleRegister</a> 
+        or by configuring and using class <a href="doc/html/T_nMars_RedCode_Modules_ComponentLoader.htm">ComponentLoader</a>. This class is serialized to XML and used as configuration for IDE solution.
     </ul>
 
-    <div id="Pic">
-      <img src="diagrams/Components.png" alt="nMars components" border="0" align="top"/>
+    <h2>Interfaces &amp; implementations</h2>
+    <p>Below are most important interfaces and implementations.</p>
+    <div class="Pic">
+      <img src="diagrams/Components.png" alt="nMars components"/>
     </div>
 </div>
 <!--#include virtual="footer" -->
