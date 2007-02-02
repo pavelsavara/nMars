@@ -4,7 +4,7 @@
 // 2006 Pavel Savara
 
 using System.Collections.Generic;
-using nMars.Engine.Engine;
+using nMars.Engine;
 using nMars.RedCode;
 
 namespace nMars.Engine
