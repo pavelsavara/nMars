@@ -7,6 +7,9 @@
   <Comment CommentText="Interfaces">
     <Position X="2.552" Y="3.823" Height="0.278" Width="0.895" />
   </Comment>
+  <Comment CommentText="Implementations">
+    <Position X="5.302" Y="3.781" Height="0.333" Width="1.7" />
+  </Comment>
   <Class Name="nMars.RedCode.Modules.ComponentLoader" Collapsed="true">
     <Position X="3.75" Y="2.25" Width="1.5" />
     <TypeIdentifier />
@@ -14,11 +17,6 @@
   <Class Name="nMars.RedCode.Modules.ModuleRegister" Collapsed="true">
     <Position X="3.75" Y="1.5" Width="1.5" />
     <TypeIdentifier />
-  </Class>
-  <Class Name="nMars.Parser.WarriorParser" Collapsed="true">
-    <Position X="4.5" Y="4.75" Width="1.5" />
-    <TypeIdentifier />
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="nMars.Engine.EngineSteps" Collapsed="true">
     <Position X="4.5" Y="7.25" Width="1.5" />
@@ -33,6 +31,16 @@
   <Class Name="nMars.RedCode.CachingParser" Collapsed="true">
     <Position X="6.25" Y="4.75" Width="1.5" />
     <TypeIdentifier />
+  </Class>
+  <Class Name="nMars.Parser.WarriorParser" Collapsed="true">
+    <Position X="4.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="nMars.ShellPy.ShellPy" Collapsed="true">
+    <Position X="4.5" Y="12" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
   </Class>
   <Interface Name="nMars.RedCode.Modules.IComponent" Collapsed="true">
     <Position X="0.5" Y="3.75" Width="1.5" />
@@ -102,5 +110,16 @@
     <TypeIdentifier />
     <InheritanceLine Type="nMars.RedCode.IEngine" IsHidden="true" />
     <InheritanceLine Type="nMars.RedCode.Modules.IComponent" IsHidden="true" />
+  </Interface>
+  <Interface Name="nMars.RedCode.IShell" Collapsed="true">
+    <Position X="1.75" Y="12" Width="1.5" />
+    <TypeIdentifier />
+    <InheritanceLine Type="nMars.RedCode.Modules.IComponent" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.375" Y="4.259" />
+        <Point X="1.375" Y="12.312" />
+        <Point X="1.75" Y="12.312" />
+      </Path>
+    </InheritanceLine>
   </Interface>
 </ClassDiagram>

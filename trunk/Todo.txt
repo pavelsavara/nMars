@@ -47,6 +47,7 @@ unsorted
    - convert pmars startup macros
    - add breakpoints, persistent
    - python tab completion
+   - clear display (pbt)
    
  - RedCode lib
    - dump core interface, start naming convention, for rof compression

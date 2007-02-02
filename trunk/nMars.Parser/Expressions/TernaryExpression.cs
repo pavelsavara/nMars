@@ -8,7 +8,7 @@ using nMars.RedCode;
 
 namespace nMars.Parser.Expressions
 {
-    class TernaryExpression : Expression
+    public class TernaryExpression : Expression
     {
         public enum TernaryOperation
         {

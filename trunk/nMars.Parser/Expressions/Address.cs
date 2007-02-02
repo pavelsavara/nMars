@@ -5,7 +5,7 @@
 
 namespace nMars.Parser.Expressions
 {
-    class Address : Value
+    public class Address : Value
     {
         public Address(int value)
             : base(value)

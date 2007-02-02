@@ -6,7 +6,7 @@
 using System;
 using nMars.RedCode;
 
-namespace nMars.Engine.Engine
+namespace nMars.Engine
 {
     public class EngineObserver : EngineSteps, ICoreEvents
     {

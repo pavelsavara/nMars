@@ -83,6 +83,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Parser.cd" />
+    <None Include="Engine.cd" />
+    <None Include="Project.cd" />
     <None Include="Warrior.cd" />
     <None Include="Components.cd" />
   </ItemGroup>

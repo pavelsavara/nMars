@@ -7,7 +7,7 @@ using nMars.RedCode;
 
 namespace nMars.Parser.Expressions
 {
-    class ModifiedExpression : Expression
+    public class ModifiedExpression : Expression
     {
         public ModifiedExpression(Expression original, Mode mode)
         {

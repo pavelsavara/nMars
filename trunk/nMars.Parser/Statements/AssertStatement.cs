@@ -9,7 +9,7 @@ using nMars.Parser.Warrior;
 
 namespace nMars.Parser.Statements
 {
-    class AssertStatement : Statement
+    public class AssertStatement : Statement
     {
         public AssertStatement(Expression expression, Location location)
             : base(location)
