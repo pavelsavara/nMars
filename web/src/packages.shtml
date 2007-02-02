@@ -23,6 +23,9 @@
       <li>It contains integrated <a href="editor.shtml">editor</a>, <a href="graphics.shtml">graphical</a> extension to <a href="debugger.shtml">debugger</a></li>
       <li>It's running on top of <a href="parser.shtml">parser</a> and <a href="engine.shtml">engine</a></li>
     </ul>
+    
+    <h2>nMarsIDE.X.Y.Z.win.msi</h2>
+    <p>Is Windows MSI installer with same content as nMarsIDE package above.</p>
 
     <h2>nMarsShellPy.X.Y.Z.bin.zip</h2>
     <ul>

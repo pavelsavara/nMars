@@ -13,8 +13,8 @@
       <li class="MenuLi"><a href="packages.shtml">Packages</a></li>
       <li class="MenuLi"><a href="doc.shtml">Documents</a></li>
       <li class="MenuLi"><a href="links.shtml">Links</a></li>
-      <li class="MenuLi"><a href="feedback.shtml">Feedback</a></li>
       <li class="MenuLi"><a href="map.shtml">Site map</a></li>
+      <li class="MenuLi"><a href="feedback.shtml">Feedback</a></li>
     </ul>
   </div>
   <br/>
