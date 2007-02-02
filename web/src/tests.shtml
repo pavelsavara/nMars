@@ -2,7 +2,11 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>nMars - Corewars MARS for .NET</h1>
-	<p>To be done.</p>
+	<h1>NUnit tests</h1>
+	<p>
+Are included to verify that my implementation is working same as original pMars.
+Currently engine is 100% compatible.
+Parser should be polished a bit.
+	  </p>
 </div>
 <!--#include virtual="footer" -->

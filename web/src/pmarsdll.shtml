@@ -2,7 +2,12 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>nMars - Corewars MARS for .NET</h1>
-	<p>To be done.</p>
+	<h1>pMars DLL and Wrapper</h1>
+	<p>To be done.
+ - I included pMARS 0.9.2 modified by M Joonas Pihlaja.
+ - I modularized it and wrapped into DLL and .NET component
+ - I'm prepared to merge it back to pMARS CVS in near future if owners allow
+	  
+	  </p>
 </div>
 <!--#include virtual="footer" -->

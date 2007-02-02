@@ -2,7 +2,23 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>nMars - Corewars MARS for .NET</h1>
-	<p>To be done.</p>
+	<h1>nMars redcode parser</h1>
+	<p>
+Targeting to be full ICWS '94 RedCode specification compliant.
+
+Current implementation doesn't support (yet)
+ - EQU substitutions 
+   - instructions in EQU
+   - modifiers in EQU
+ - FOR 0 comment-block ROF
+ - registers in-place assignments (k=k+1)
+ - comments asserts
+
+Is based on GOLD parser by Devin Cook
+http://www.devincook.com/goldparser/
+And Calitha .NET Engine for GOLD parser by Robert van Loenhout
+http://www.xs4all.nl/~rvanloen/goldparser.html
+which was little bit modified.
+	</p>
 </div>
 <!--#include virtual="footer" -->

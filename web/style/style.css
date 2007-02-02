@@ -37,6 +37,11 @@ img {
 	border-width:0px 0px;
 	}
 
+ul {
+	margin:0px 0px 0px 20px;
+	padding:0px;
+    }
+    
 li {
 	font:11px/20px verdana, arial, helvetica, sans-serif;
 	margin:0px 0px 0px 0px;
@@ -76,8 +81,8 @@ a:visited {color:#07a;}
 }
 
 #Content {
-	margin-left: 120px;
-	padding:10px;
+	margin-left: 150px;
+	padding-top:10px;
 }
 
 #ImpRing {

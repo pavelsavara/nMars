@@ -2,7 +2,7 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>nMars - Corewars MARS for .NET</h1>
+	<h1>Python shell extension</h1>
 	<p>To be done.</p>
 </div>
 <!--#include virtual="footer" -->
