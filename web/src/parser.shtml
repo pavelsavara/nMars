@@ -3,22 +3,21 @@
 <div id="Content">
 
 	<h1>nMars redcode parser</h1>
-	<p>
-Targeting to be full ICWS '94 RedCode specification compliant.
+    <h2>Parser structure</h2>
+    <p>Below are structures of parser. File is parsed by LALR, statements and expressions are produced. Then are statements turned to warrior instructions.</p>
+    <div class="Pic">
+      <img src="diagrams/Parser.png" alt="nMars redcode parser"/>
+    </div>
 
-Current implementation doesn't support (yet)
- - EQU substitutions 
-   - instructions in EQU
-   - modifiers in EQU
- - FOR 0 comment-block ROF
- - registers in-place assignments (k=k+1)
- - comments asserts
-
-Is based on GOLD parser by Devin Cook
-http://www.devincook.com/goldparser/
-And Calitha .NET Engine for GOLD parser by Robert van Loenhout
-http://www.xs4all.nl/~rvanloen/goldparser.html
-which was little bit modified.
+	<p>Targeting to be full ICWS '94 RedCode specification compliant.
+<br/>Current implementation doesn't support (yet)
+<br/> - EQU substitutions 
+<br/>   - instructions in EQU
+<br/> - registers in-place assignments (k=k+1)
+<br/>Is based on <a href="http://www.devincook.com/goldparser/">GOLD parser</a> by Devin Cook
+<br/>And <a href="http://www.xs4all.nl/~rvanloen/goldparser.html">Calitha .NET Engine</a> for GOLD parser by Robert van Loenhout which was little bit modified.
 	</p>
+
+
 </div>
 <!--#include virtual="footer" -->
