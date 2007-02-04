@@ -50,7 +50,10 @@ namespace nMars.Engine
         {
             ResetCache();
             int nextInstructionAddress = NextInstructionAddress;
-            lastInstruction = new EngineInstruction(core[nextInstructionAddress], nextInstructionAddress);
+            if (nextInstructionAddress!=-1)
+            {
+                lastInstruction = new EngineInstruction(core[nextInstructionAddress], nextInstructionAddress);
+            }
         }
 
         protected virtual void FinalizeCycle()
