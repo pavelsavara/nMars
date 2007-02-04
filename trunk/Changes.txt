@@ -1,3 +1,7 @@
+02/04/2007 - step-back fixes
+  - unit test step-back feature
+  - step-back fixed, pspace history
+
 01/15/2007 - parser improovements
   - all before ;redcode as comment
   - asserts
@@ -7,6 +11,7 @@
   - org expression
   - + sign
   - pMars.DllWrapper fixed error messages
+  
 01/13/2007 - nMars0.8.3 - IDE split
   - IDE was wplit to IDE, graphics, debuger, debugger.ide
   - MONO proof of concept - result: posible, lot of problems with WinForms, screenshot of debugging
