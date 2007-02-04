@@ -76,13 +76,13 @@ namespace nMars.Test
             {
                 if (pr.Messages.Count != 0)
                     File.WriteAllText(problemsPathFile + ".pErr", pr.Dump());
-                np.Warriors[0].Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
+                np.Warriors[0].Dump(problemsPathFile + ".nDmp", ParserOptions.Full);
             }
             else if (!nr.Succesfull)
             {
                 if (nr.Messages.Count != 0)
                     File.WriteAllText(problemsPathFile + ".nErr", nr.Dump());
-                pp.Warriors[0].Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
+                pp.Warriors[0].Dump(problemsPathFile + ".pDmp", ParserOptions.Full);
             }
             else if (!Warrior.Equals(np.Warriors[0], pp.Warriors[0]))
             {
@@ -92,8 +92,8 @@ namespace nMars.Test
                     File.WriteAllText(problemsPathFile + ".nErr", nr.Dump());
                 np.Warriors[0].Wrap();
                 pp.Warriors[0].Wrap();
-                np.Warriors[0].Dump(problemsPathFile + ".nDmp", ParserOptions.NoOffset);
-                pp.Warriors[0].Dump(problemsPathFile + ".pDmp", ParserOptions.NoOffset);
+                np.Warriors[0].Dump(problemsPathFile + ".nDmp", ParserOptions.Full);
+                pp.Warriors[0].Dump(problemsPathFile + ".pDmp", ParserOptions.Full);
             }
             else
             {

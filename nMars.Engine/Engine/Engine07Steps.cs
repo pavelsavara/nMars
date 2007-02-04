@@ -107,10 +107,10 @@ namespace nMars.Engine
 
         protected void PerformInstruction()
         {
-            InitializeCycle();
             EngineWarrior warrior = liveWarriors.Dequeue();
             activeWarrior = warrior;
             int insructionPointer = warrior.Tasks.Dequeue();
+            InitializeCycle(insructionPointer);
 
             PerformInstruction(insructionPointer);
 

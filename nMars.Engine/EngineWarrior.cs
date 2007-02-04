@@ -121,6 +121,11 @@ namespace nMars.Engine
             get { return SourceWarrior.Instructions; }
         }
 
+        public void Add(IInstruction instruction)
+        {
+            Instructions.Add(instruction);
+        }
+
         public int Length
         {
             get { return SourceWarrior.Length; }

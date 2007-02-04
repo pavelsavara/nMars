@@ -27,7 +27,7 @@ namespace nMars.Test
                     {
                         project.EngineOptions.DumpResults = false;
                         project.EngineOptions.StatusLine = false;
-                        project.ParserOptions.Brief = true;
+                        project.ParserOptions.Instructions = false;
                         project.ParserOptions.StatusLine = false;
                     }
                     ParseResult result = CommandLine.Parse(components, console, project);
@@ -40,7 +40,7 @@ namespace nMars.Test
                 }
                 else
                 {
-                    MainParser();
+                    //MainParser();
                     MainEngine();
                 }
                 if (res == 0)

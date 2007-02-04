@@ -124,6 +124,7 @@ namespace nMars.RedCode
         /// <summary>
         /// skip if equal (compares two instructions, and skips the next instruction if they are equal)
         /// </summary>
+        /// <remarks>Same as CMP</remarks>
         //SEQ = 14,
 
         /// <summary>

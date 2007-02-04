@@ -23,7 +23,18 @@ namespace nMars.Parser.Warrior
         }
 
 
-        public ExtendedInstruction(Instruction src)
+        public ExtendedInstruction(ExtendedInstruction src)
+            : base(src)
+        {
+            Address = src.Address;
+            Label = src.Label;
+            Comment = src.Comment;
+            ExpressionA = src.ExpressionA;
+            ExpressionB = src.ExpressionB;
+            OriginalInstruction = src.OriginalInstruction;
+        }
+
+        public ExtendedInstruction(IInstruction src)
             : base(src)
         {
         }
@@ -38,8 +49,14 @@ namespace nMars.Parser.Warrior
 
             if (options.Labels)
             {
-                sb.Append(Label.PadRight(12));
-                sb.Append(" ");
+                if (Label != null)
+                {
+                    sb.Append(Label.PadRight(13));
+                }
+                else
+                {
+                    sb.Append("             ");
+                }
             }
             else
             {
@@ -53,14 +70,60 @@ namespace nMars.Parser.Warrior
                 }
             }
 
-            sb.Append(ToString());
-            if (options.Comments)
+            //operation and modifier
+            sb.Append(Operation);
+            sb.Append(".");
+            sb.Append(Modifier.ToString().PadRight(3));
+
+            //A
+            sb.Append(ModeHelper.ToString(ModeA));
+            if (options.Expressions)
             {
-                if (Comment.Length > 0)
+                if (ExpressionA != null)
                 {
-                    sb.Append("  ;");
-                    sb.Append(Comment);
+                    sb.Append(ExpressionA.PadLeft(12));
                 }
+                else
+                {
+                    sb.Append(ValueA.ToString().PadLeft(12));
+                }
+            }
+            else
+            {
+                sb.Append(ValueA.ToString().PadLeft(6));
+            }
+            
+            //B
+            sb.Append(", ");
+            sb.Append(ModeHelper.ToString(ModeB));
+            if (options.Expressions)
+            {
+                if (ExpressionB != null)
+                {
+                    sb.Append(ExpressionB.PadLeft(12));
+                }
+                else
+                {
+                    sb.Append(ValueB.ToString().PadLeft(12));
+                }
+            }
+            else
+            {
+                sb.Append(ValueB.ToString().PadLeft(6));
+            }
+
+            //comment
+            if (options.Comments && Comment !=null && Comment.Length > 0)
+            {
+                int c = 35;
+                if (options.Labels)
+                    c += 6;
+                if (options.Expressions)
+                    c += 19;
+                if (sb.Length < c)
+                    sb.Length = c;
+                sb.Append(";");
+                sb.Append(Comment);
             }
             return sb.ToString();
         }
@@ -78,6 +141,8 @@ namespace nMars.Parser.Warrior
         public int Address;
         public string Label;
         public string Comment;
+        public string ExpressionA;
+        public string ExpressionB;
         public string OriginalInstruction;
     }
 }

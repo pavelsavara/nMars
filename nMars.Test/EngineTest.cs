@@ -32,7 +32,7 @@ namespace nMars.Test
         public static IEngine CreateEngineInternal()
         {
             IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
-            IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Engine") as IExtendedStepEngine;
+            IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Engine-StepBack") as IExtendedStepEngine;
             return new ComparingEngine(engineOne, engineTwo);
         }
 
@@ -151,7 +151,7 @@ namespace nMars.Test
             string midleOne = fileOne.Substring(basePath.Length);
             Console.Write("Fighting {0}      \r", midleOne);
             Project pproject = new Project(rules, fileOne);
-            pproject.ParserOptions.Brief = true;
+            pproject.ParserOptions.Instructions = false;
             pproject.ParserOptions.StatusLine = false;
             ParseResult pr = components.Parser.Parse(pproject, null);
             if (!pr.Succesfull)
@@ -168,7 +168,7 @@ namespace nMars.Test
             string problemsPathTwo = Path.Combine(problemsPath, shortTwo);
 
             Project pproject = new Project(rules);
-            pproject.ParserOptions.Brief = true;
+            pproject.ParserOptions.Instructions = false;
             pproject.ParserOptions.StatusLine = false;
             pproject.WarriorFiles.Add(fileOne);
             pproject.WarriorFiles.Add(fileTwo);
