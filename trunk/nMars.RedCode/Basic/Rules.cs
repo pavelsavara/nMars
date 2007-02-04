@@ -90,6 +90,16 @@ namespace nMars.RedCode
             get { return new Rules(); }
         }
 
+        public static Rules SingleRules
+        {
+            get
+            {
+                Rules rules = new Rules();
+                rules.WarriorsCount = 1;
+                return rules;
+            }
+        }
+
         public override bool Equals(object obj)
         {
             Rules r2 = obj as Rules;

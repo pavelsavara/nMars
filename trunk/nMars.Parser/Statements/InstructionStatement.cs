@@ -48,14 +48,16 @@ namespace nMars.Parser.Statements
                 instruction =
                     new ExtendedInstruction(Operation, Modifier, A.Mode, Int32.MinValue, B.Mode, Int32.MinValue);
                 instruction.Address = currentAddress;
-                warrior.Instructions.Add(instruction);
+                warrior.Add(instruction);
             }
             else
             {
                 instruction = (ExtendedInstruction)warrior.Instructions[currentAddress];
                 instruction.ValueA = A.Expression.Evaluate(parser, currentAddress, coreSize);
                 instruction.ValueB = B.Expression.Evaluate(parser, currentAddress, coreSize);
-                if (instruction.ModeA==Mode.NULL)
+                instruction.ExpressionA = A.Expression.ToString();
+                instruction.ExpressionB = B.Expression.ToString();
+                if (instruction.ModeA == Mode.NULL)
                 {
                     instruction.ModeA=A.Expression.GetMode(parser, currentAddress);
                 }

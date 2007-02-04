@@ -146,8 +146,7 @@ namespace nMars.RedCode
         {
             return
                 Operation + "." + Modifier.ToString().PadRight(3) + ModeHelper.ToString(ModeA) +
-                ValueA.ToString().PadLeft(6) + ", " + ModeHelper.ToString(ModeB) + ValueB.ToString().PadLeft(6) +
-                "     ";
+                ValueA.ToString().PadLeft(6) + ", " + ModeHelper.ToString(ModeB) + ValueB.ToString().PadLeft(6);
         }
 
         public override bool Equals(object obj)

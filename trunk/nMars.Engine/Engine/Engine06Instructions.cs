@@ -369,18 +369,22 @@ namespace nMars.Engine
                     switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
+                            BeforeWritePSpace(reg.AB_Value);
                             warrior.SetPSpaceValue(reg.AB_Value, reg.AA_Value);
                             break;
                         case Modifier.F:
                         case Modifier.B:
                         case Modifier.X:
                         case Modifier.I:
+                            BeforeWritePSpace(reg.IR.ValueB);
                             warrior.SetPSpaceValue(reg.IR.ValueB, reg.IR.ValueA);
                             break;
                         case Modifier.AB:
+                            BeforeWritePSpace(reg.IR.ValueB);
                             warrior.SetPSpaceValue(reg.IR.ValueB, reg.AA_Value);
                             break;
                         case Modifier.BA:
+                            BeforeWritePSpace(reg.AB_Value);
                             warrior.SetPSpaceValue(reg.AB_Value, reg.IR.ValueA);
                             break;
                     }

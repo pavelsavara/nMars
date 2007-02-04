@@ -68,6 +68,11 @@ namespace nMars.RedCode
         /// <summary>
         /// Dump
         /// </summary>
+        void Add(IInstruction instruction);
+
+        /// <summary>
+        /// Dump
+        /// </summary>
         void Dump(ISimpleOutput output);
 
         /// <summary>

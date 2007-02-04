@@ -43,7 +43,7 @@ namespace nMars.RedCode
                         warrior.Dump(new WrappedTextWriter(sw), project.ParserOptions);
                         sw.Close();
                     }
-                    else if (!project.ParserOptions.Brief && console != null)
+                    else if (console != null)
                         warrior.Dump(console, project.ParserOptions);
                 }
                 else

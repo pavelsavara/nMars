@@ -120,6 +120,8 @@ namespace nMars.Test
 
         private void CompareEngines(Check check)
         {
+            engineSbOne = engineOne as IStepBackEngine;
+            engineSbTwo = engineTwo as IStepBackEngine;
             engineOne.BeginMatch(project);
             engineTwo.BeginMatch(project);
 
@@ -161,6 +163,25 @@ namespace nMars.Test
             CheapCheck(resOne, resTwo, check, range);
             if (stop || step || range || resOne == StepResult.NextRound)
             {
+                ExpensiveCheck(range);
+                if (engineSbOne != null)
+                {
+                    if (engineSbOne.CanStepBack)
+                    {
+                        engineSbOne.PrevStep();
+                        engineOne.NextStep();
+                        CheapCheck(resOne, resTwo, check, range);
+                    }
+                }
+                if (engineSbTwo != null)
+                {
+                    if (engineSbTwo.CanStepBack)
+                    {
+                        engineSbTwo.PrevStep();
+                        engineTwo.NextStep();
+                        CheapCheck(resOne, resTwo, check, range);
+                    }
+                }
                 ExpensiveCheck(range);
             }
 
@@ -300,12 +321,14 @@ namespace nMars.Test
 
         #region Variables
 
-        IExtendedStepEngine engineOne;
-        IExtendedStepEngine engineTwo;
-        MatchResult matchOne;
-        MatchResult matchTwo;
-        Project project;
-        List<int> forcedArdresses;
+        private IExtendedStepEngine engineOne;
+        private IExtendedStepEngine engineTwo;
+        private IStepBackEngine engineSbOne;
+        private IStepBackEngine engineSbTwo;
+        private MatchResult matchOne;
+        private MatchResult matchTwo;
+        private Project project;
+        private List<int> forcedArdresses;
         private ISimpleOutput output;
 
         #endregion

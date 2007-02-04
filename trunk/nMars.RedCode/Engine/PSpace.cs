@@ -38,6 +38,7 @@ namespace nMars.RedCode
         public int this[int index]
         {
             get { return Memory[index]; }
+            set { Memory[index] = value; }
         }
 
         public int Size

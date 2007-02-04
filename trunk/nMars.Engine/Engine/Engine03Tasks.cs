@@ -46,7 +46,7 @@ namespace nMars.Engine
             ResetCache();
         }
 
-        protected virtual void InitializeCycle()
+        protected virtual void InitializeCycle(int Ip)
         {
             ResetCache();
             int nextInstructionAddress = NextInstructionAddress;

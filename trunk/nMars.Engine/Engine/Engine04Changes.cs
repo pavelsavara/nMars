@@ -12,6 +12,10 @@ namespace nMars.Engine
     {
         #region Events
 
+        protected virtual void BeforeWritePSpace(int address)
+        {
+        }
+
         protected virtual void BeforeWrite(int address, Column column)
         {
         }

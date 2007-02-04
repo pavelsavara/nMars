@@ -27,6 +27,12 @@ namespace nMars.Parser.Warrior
             get { return (ExtendedInstruction)Instructions[offset]; }
         }
 
+        public void Add(ExtendedInstruction instruction)
+        {
+            instruction.Address = Instructions.Count;
+            Instructions.Add(instruction);
+        }
+
         public override void Dump(ISimpleOutput tw, ParserOptions options)
         {
             if (options.XmlFormat)
@@ -40,7 +46,18 @@ namespace nMars.Parser.Warrior
                 tw.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
                 tw.WriteLine("");
             }
-            if (!options.Brief)
+            if (options.Metainfo)
+            {
+                tw.WriteLine(";redcode");
+                if (Name != null)
+                    tw.WriteLine(";name " + Name);
+                if (Author != null)
+                    tw.WriteLine(";author " + Author);
+                if (Date != null)
+                    tw.WriteLine(";date " + Date);
+                tw.WriteLine("");
+            }
+            if (options.Instructions)
             {
                 if (options.Offset)
                 {

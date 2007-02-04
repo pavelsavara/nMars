@@ -63,7 +63,7 @@ namespace nMars.RedCode
                     output.WriteLine("Program \"" + Name + "\" (length " + Length.ToString() + ") by \"" + Author + "\"");
                     output.WriteLine("");
                 }
-                if (!options.Brief)
+                if (options.Instructions)
                 {
                     output.WriteLine("       ORG      START");
                     for (int a = 0; a < Instructions.Count; a++)
@@ -134,6 +134,11 @@ namespace nMars.RedCode
         IList<IInstruction> IWarrior.Instructions
         {
             get { return Instructions; }
+        }
+
+        public void Add(IInstruction instruction)
+        {
+            Instructions.Add(instruction);
         }
 
         public int Length

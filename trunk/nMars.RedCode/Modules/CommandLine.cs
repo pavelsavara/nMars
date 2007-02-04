@@ -193,7 +193,7 @@ namespace nMars.RedCode
                             throw new ArgumentException("Invalid file name -@" + args[p]);
                         }
                         project = Project.ImportPmars(args[p]);
-                        nologo = project.ParserOptions.Brief;
+                        nologo = !project.ParserOptions.Instructions;
                         break;
                     case "-@l":
                         if (args.Length < p + 1)
@@ -206,7 +206,7 @@ namespace nMars.RedCode
                             throw new ArgumentException("Invalid file name -@x" + args[p]);
                         }
                         project = Project.LoadXml(args[p]);
-                        nologo = project.ParserOptions.Brief;
+                        nologo = !project.ParserOptions.Instructions;
                         break;
                     case "-@s":
                         if (args.Length < p + 1)
@@ -238,7 +238,7 @@ namespace nMars.RedCode
                         project.ParserOptions.Offset = true;
                         break;
                     case "-b":
-                        project.ParserOptions.Brief = true;
+                        project.ParserOptions.Instructions = false;
                         project.ParserOptions.StatusLine = false;
                         project.ParserOptions.Header = false;
                         nologo = true;
@@ -271,6 +271,12 @@ namespace nMars.RedCode
                         break;
                     case "-uc":
                         project.ParserOptions.Comments = true;
+                        break;
+                    case "-up":
+                        project.ParserOptions.Expressions = true;
+                        break;
+                    case "-um":
+                        project.ParserOptions.Metainfo = true;
                         break;
                     default:
                         bool processed = false;
@@ -359,8 +365,10 @@ namespace nMars.RedCode
             console.WriteLine("  -bs       No status");
             console.WriteLine("  -br       No match results");
             console.WriteLine("  -ue .ext  Dump warriors to files with extension");
+            console.WriteLine("  -um       Dump format with metainfo [off]");
             console.WriteLine("  -uo       Dump format with offset [off]");
             console.WriteLine("  -ul       Dump format with labels [off]");
+            console.WriteLine("  -up       Dump format with expressions [off]");
             console.WriteLine("  -uc       Dump format with comments [off]");
             console.WriteLine("  -ux       Dump format xml");
             if (DumpHelpEvent != null)
