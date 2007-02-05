@@ -115,6 +115,7 @@ namespace nMars.Graphics.Controls
         {
             engine = aEngine;
             coreSize = engine.Project.Rules.CoreSize;
+            ChangeSize();
         }
 
         public void Detach()
@@ -168,6 +169,11 @@ namespace nMars.Graphics.Controls
         #region Events
 
         private void CoreGrid_ClientSizeChanged(object sender, EventArgs e)
+        {
+            ChangeSize();
+        }
+
+        private void ChangeSize()
         {
             columns = (Width / (gridx * 10)) * 10;
             if (columns < 50)

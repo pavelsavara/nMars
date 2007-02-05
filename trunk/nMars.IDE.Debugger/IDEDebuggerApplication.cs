@@ -207,6 +207,7 @@ namespace nMars.IDE.Debugger
                 DebugMemoryListing.Attach(MainForm.tabExplorers, "Memory Listing");
                 DebugMemoryGraph = new DebugMemoryGraph();
                 DebugMemoryGraph.Attach(MainForm.tabDocuments, "Memory Graph");
+
                 DebugOverview.ActivateControl();
                 DebugMemoryListing.ActivateControl();
                 DebugMemoryGraph.ActivateControl();
