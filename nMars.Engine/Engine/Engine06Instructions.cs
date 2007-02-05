@@ -41,6 +41,7 @@ namespace nMars.Engine
         {
             bool jump = false;
             bool die = false;
+            int psAddress;
             switch (reg.IR.Operation)
             {
                     #region Simple
@@ -338,23 +339,26 @@ namespace nMars.Engine
                     #region LDP
 
                 case Operation.LDP:
-
                     switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
-                            this[reg.AdrB, Column.A] = warrior.GetPSpaceValue(reg.AA_Value);
+                            psAddress = Instruction.Mod(reg.AA_Value, rules.PSpaceSize);
+                            this[reg.AdrB, Column.A] = warrior.GetPSpaceValue(psAddress);
                             break;
                         case Modifier.F:
                         case Modifier.B:
                         case Modifier.X:
                         case Modifier.I:
-                            this[reg.AdrB, Column.B] = warrior.GetPSpaceValue(reg.IR.ValueA);
+                            psAddress = Instruction.Mod(reg.IR.ValueA, rules.PSpaceSize);
+                            this[reg.AdrB, Column.B] = warrior.GetPSpaceValue(psAddress);
                             break;
                         case Modifier.AB:
-                            this[reg.AdrB, Column.B] = warrior.GetPSpaceValue(reg.AA_Value);
+                            psAddress = Instruction.Mod(reg.AA_Value, rules.PSpaceSize);
+                            this[reg.AdrB, Column.B] = warrior.GetPSpaceValue(psAddress);
                             break;
                         case Modifier.BA:
-                            this[reg.AdrB, Column.A] = warrior.GetPSpaceValue(reg.IR.ValueA);
+                            psAddress = Instruction.Mod(reg.IR.ValueA, rules.PSpaceSize);
+                            this[reg.AdrB, Column.A] = warrior.GetPSpaceValue(psAddress);
                             break;
                     }
                     reg.ip++;
@@ -365,27 +369,30 @@ namespace nMars.Engine
                     #region STP
 
                 case Operation.STP:
-
                     switch (reg.IR.Modifier)
                     {
                         case Modifier.A:
-                            BeforeWritePSpace(reg.AB_Value);
-                            warrior.SetPSpaceValue(reg.AB_Value, reg.AA_Value);
+                            psAddress = Instruction.Mod(reg.AB_Value, rules.PSpaceSize);
+                            BeforeWritePSpace(psAddress);
+                            warrior.SetPSpaceValue(psAddress, reg.AA_Value);
                             break;
                         case Modifier.F:
                         case Modifier.B:
                         case Modifier.X:
                         case Modifier.I:
-                            BeforeWritePSpace(reg.IR.ValueB);
-                            warrior.SetPSpaceValue(reg.IR.ValueB, reg.IR.ValueA);
+                            psAddress = Instruction.Mod(reg.IR.ValueB, rules.PSpaceSize);
+                            BeforeWritePSpace(psAddress);
+                            warrior.SetPSpaceValue(psAddress, reg.IR.ValueA);
                             break;
                         case Modifier.AB:
-                            BeforeWritePSpace(reg.IR.ValueB);
-                            warrior.SetPSpaceValue(reg.IR.ValueB, reg.AA_Value);
+                            psAddress = Instruction.Mod(reg.IR.ValueB, rules.PSpaceSize);
+                            BeforeWritePSpace(psAddress);
+                            warrior.SetPSpaceValue(psAddress, reg.AA_Value);
                             break;
                         case Modifier.BA:
-                            BeforeWritePSpace(reg.AB_Value);
-                            warrior.SetPSpaceValue(reg.AB_Value, reg.IR.ValueA);
+                            psAddress = Instruction.Mod(reg.AB_Value, rules.PSpaceSize);
+                            BeforeWritePSpace(psAddress);
+                            warrior.SetPSpaceValue(psAddress, reg.IR.ValueA);
                             break;
                     }
                     reg.ip++;

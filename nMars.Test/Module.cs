@@ -61,7 +61,7 @@ namespace nMars.Test
             EngineTest test = new EngineTest();
             //test.Single();
             test.Pair();
-            test.Random(100);
+            test.Random(10000);
             //test.Full();
         }
 
