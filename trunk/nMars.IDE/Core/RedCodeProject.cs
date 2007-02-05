@@ -311,6 +311,30 @@ namespace nMars.IDE.Core
             }
         }
 
+        public int CoreSize
+        {
+            get
+            {
+                return Project.Rules.CoreSize;
+            }
+            set
+            {
+                CheckPropertyChanged("CoreSize", ref Project.Rules.CoreSize, ref value);
+            }
+        }
+
+        public int PSpaceSize
+        {
+            get
+            {
+                return Project.Rules.PSpaceSize;
+            }
+            set
+            {
+                CheckPropertyChanged("PSpaceSize", ref Project.Rules.PSpaceSize, ref value);
+            }
+        }
+
         #endregion
 
         #region INotifyPropertyChanged

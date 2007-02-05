@@ -50,31 +50,31 @@ namespace nMars.RedCode
         }
 
         [XmlAttribute]
+        public int WarriorsCount = 2;
+
+        [XmlAttribute]
+        public int Rounds = 1;
+
+        [XmlAttribute]
+        public int MaxCycles = 80000;
+
+        [XmlAttribute]
         public int CoreSize = 8000;
 
         [XmlAttribute]
         public int PSpaceSize = 500; // coreSize / 16 
 
         [XmlAttribute]
-        public int MaxCycles = 80000;
-
-        [XmlAttribute]
-        public int MaxLength = 100;
+        public bool EnablePSpace = true;
 
         [XmlAttribute]
         public int MaxProcesses = 1000;
 
         [XmlAttribute]
-        public bool EnablePSpace = true;
+        public int MaxLength = 100;
 
         [XmlAttribute]
         public int MinDistance = 100;
-
-        [XmlAttribute]
-        public int Rounds = 1;
-
-        [XmlAttribute]
-        public int WarriorsCount = 2;
 
         [XmlAttribute]
         public int Version = 93;

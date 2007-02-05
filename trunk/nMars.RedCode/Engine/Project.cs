@@ -148,7 +148,7 @@ namespace nMars.RedCode
         public Rules Rules = Rules.DefaultRules;
         public EngineOptions EngineOptions = EngineOptions.Default;
         public ParserOptions ParserOptions = ParserOptions.Default;
-        public BreakPoints BreakPoints;
+        public BreakPoints BreakPoints=new BreakPoints();
         
         private static XmlSerializer serializerCached;
 

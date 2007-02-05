@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
@@ -14,6 +15,11 @@ namespace nMars.RedCode
 
     public class BreakPoints : List<BreakPoint>
     {
+        static BreakPoints()
+        {
+            knownTypes.Add(typeof(ExecuteAddressBreakPoint));
+        }
+
         public bool ShouldBreak(IDebuggerEngine engine)
         {
             foreach (BreakPoint breakPoint in this)
@@ -91,16 +97,21 @@ namespace nMars.RedCode
         #endregion
     }
 
-    public class ExecuteAddressBreakPoint : BreakPoint
+    public class ExecuteAddressBreakPoint : BreakPoint, INotifyPropertyChanged
     {
         static ExecuteAddressBreakPoint()
         {
             BreakPoints.knownTypes.Add(typeof(ExecuteAddressBreakPoint));
         }
 
-        public ExecuteAddressBreakPoint(int address)
+        //for XML
+        private ExecuteAddressBreakPoint()
         {
-            Address = address;
+        }
+
+        public ExecuteAddressBreakPoint(int aAddress)
+        {
+            address = aAddress;
         }
 
         public override bool ShouldBreak(IDebuggerEngine engine)
@@ -108,7 +119,57 @@ namespace nMars.RedCode
             return engine.NextInstruction.Address == Address;
         }
 
-        public int Address;
+        public int Address
+        {
+            get
+            {
+                return address;
+            }
+            set
+            {
+                CheckPropertyChanged("Address", ref address, ref value);
+            }
+        }
+
+        private int address;
+        public override string ToString()
+        {
+            return "Break at address " + Address;
+        }
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private bool CheckPropertyChanged<T>(string propertyName, ref T oldValue, ref T newValue)
+        {
+            if (oldValue == null && newValue == null)
+            {
+                return false;
+            }
+
+            if ((oldValue == null && newValue != null) || !oldValue.Equals((T)newValue))
+            {
+                oldValue = newValue;
+
+                FirePropertyChanged(propertyName);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private void FirePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
     }
 
 
