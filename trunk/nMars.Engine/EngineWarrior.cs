@@ -32,10 +32,9 @@ namespace nMars.Engine
 
         public int GetPSpaceValue(int address)
         {
-            int addr = Instruction.Mod(address, core.rules.PSpaceSize);
-            if (addr != 0)
+            if (address != 0)
             {
-                return PSpace.Memory[addr];
+                return PSpace.Memory[address];
             }
             else
             {
@@ -45,10 +44,9 @@ namespace nMars.Engine
 
         public void SetPSpaceValue(int address, int value)
         {
-            int addr = Instruction.Mod(address, core.rules.PSpaceSize);
-            if (addr != 0)
+            if (address != 0)
             {
-                PSpace.Memory[addr] = value;
+                PSpace.Memory[address] = value;
             }
             else
             {
