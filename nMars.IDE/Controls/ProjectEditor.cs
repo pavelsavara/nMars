@@ -3,8 +3,11 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System.ComponentModel;
 using System.Windows.Forms;
 using nMars.IDE.Core;
+using nMars.IDE.Debugger.Forms;
+using nMars.RedCode;
 
 namespace nMars.IDE.Controls
 {
@@ -23,6 +26,7 @@ namespace nMars.IDE.Controls
             base.Attach(aFrame, project.Name);
             IDEApplication.Editors.Insert(0, this);
             redCodeProjectBindingSource.DataSource = project;
+            breakPointsBindingSource.DataSource = project.Project.BreakPoints;
             ActivateControl();
         }
 
@@ -66,6 +70,24 @@ namespace nMars.IDE.Controls
             get
             {
                 return project;
+            }
+        }
+
+        private void breakPointsBindingSource_AddingNew(object sender, System.ComponentModel.AddingNewEventArgs e)
+        {
+            ExecuteAddressBreakPoint point = new ExecuteAddressBreakPoint(0);
+            BreakPointEditor.EditBreakPoint(point);
+            e.NewObject = point;
+        }
+
+        private void breakPointsBindingSource_ListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemAdded
+                || e.ListChangedType == ListChangedType.ItemChanged
+                || e.ListChangedType == ListChangedType.ItemDeleted
+                )
+            {
+                project.IsModified = true;
             }
         }
     }

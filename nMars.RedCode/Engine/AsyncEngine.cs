@@ -29,7 +29,7 @@ namespace nMars.RedCode
 
         private void InitWorker()
         {
-            worker = new Thread(new ThreadStart(WorkerLoop));
+            worker = new Thread(new ThreadStart(OuterLoop));
             signalRun = new ManualResetEvent(false);
             signalPaused = new ManualResetEvent(true);
             signalRunning = new ManualResetEvent(false);
@@ -190,86 +190,14 @@ namespace nMars.RedCode
 
         #region Loop
 
-        private void WorkerLoop()
+        /// <summary>
+        /// External loop, solving ThreadInterrupted problems
+        /// </summary>
+        private void OuterLoop()
         {
-            // warning! intentional inversed lock inside
             try
             {
-                live = true;
-                signalRun.WaitOne();
-
-                running = true;
-                signalRunning.Set();
-                CheckBreakEventArgs args = new CheckBreakEventArgs();
-                do
-                {
-                    if (CheckBreak != null)
-                        CheckBreak(args);
-                    lock (this)
-                    {
-                        if (brake > 0)
-                        {
-                            if (brake > 100 || engine.Cycles % (100/brake) == 0)
-                            {
-                                try
-                                {
-                                    Monitor.Exit(this);
-                                    Thread.Sleep(brake);
-                                }
-                                finally
-                                {
-                                    Monitor.Enter(this);
-                                }
-                            }
-                        }
-                        if (quit)
-                        {
-                            break;
-                        }
-                        if (pause || args.Break)
-                        {
-                            args.Break = false;
-                            running = false;
-                            signalRunning.Reset();
-                            signalPaused.Set();
-                            {
-                                try
-                                {
-                                    Monitor.Exit(this);
-                                    if (engineStoppedCallback != null)
-                                    {
-                                        engineStoppedCallback.Invoke(false);
-                                    }
-                                    signalRun.WaitOne();
-                                }
-                                finally
-                                {
-                                    Monitor.Enter(this);
-                                }
-                            }
-                            if (quit || stepResult == StepResult.Finished)
-                            {
-                                break;
-                            }
-                            pause = false;
-                            running = true;
-                            signalPaused.Reset();
-                            signalRunning.Set();
-                        }
-                        stepResult = engine.NextStep();
-                    }
-                } while (stepResult != StepResult.Finished);
-                lock (this)
-                {
-                    live = false;
-                    running = false;
-                    signalPaused.Set();
-                    signalRunning.Reset();
-                }
-                if (engineStoppedCallback != null)
-                {
-                    engineStoppedCallback.Invoke(true);
-                }
+                Loop();
             }
             catch (ThreadInterruptedException)
             {
@@ -287,6 +215,104 @@ namespace nMars.RedCode
                 signalRunning.Reset();
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Loop body + stoping
+        /// </summary>
+        private void Loop()
+        {
+            live = true;
+            signalRun.WaitOne();
+
+            running = true;
+            signalRunning.Set();
+            do
+            {
+                if (LoopBody())
+                    break;
+            } while (stepResult != StepResult.Finished);
+            lock (this)
+            {
+                live = false;
+                running = false;
+                signalPaused.Set();
+                signalRunning.Reset();
+            }
+            if (engineStoppedCallback != null)
+            {
+                engineStoppedCallback.Invoke(true);
+            }
+        }
+
+        /// <returns>True to quit loop</returns>
+        private bool LoopBody()
+        {
+            // warning! intentional inversed lock inside
+            bool breakpoint = false;
+            if (CheckBreak != null)
+            {
+                CheckBreakEventArgs args=new CheckBreakEventArgs();
+                CheckBreak(args);
+                breakpoint = args.Break;
+            }
+            lock (this)
+            {
+                if (brake > 0)
+                {
+                    if (brake > 100 || engine.Cycles % (100/brake) == 0)
+                    {
+                        try
+                        {
+                            //inversed lock
+                            Monitor.Exit(this);
+                            Thread.Sleep(brake);
+                        }
+                        finally
+                        {
+                            Monitor.Enter(this);
+                            //inversed lock end
+                        }
+                    }
+                }
+                if (quit)
+                {
+                    return true;
+                }
+                if (pause || breakpoint)
+                {
+                    running = false;
+                    signalRunning.Reset();
+                    signalPaused.Set();
+                    {
+                        try
+                        {
+                            //inversed lock
+                            Monitor.Exit(this);
+                            if (engineStoppedCallback != null)
+                            {
+                                engineStoppedCallback.Invoke(false);
+                            }
+                            signalRun.WaitOne();
+                        }
+                        finally
+                        {
+                            Monitor.Enter(this);
+                            //inversed lock end
+                        }
+                    }
+                    if (quit || stepResult == StepResult.Finished)
+                    {
+                        return true;
+                    }
+                    pause = false;
+                    running = true;
+                    signalPaused.Reset();
+                    signalRunning.Set();
+                }
+                stepResult = engine.NextStep();
+            }
+            return false;
         }
 
         #endregion
