@@ -4,12 +4,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B39B9FDE-DBBD-4118-85BC-48E6508FC76F}</ProjectGuid>
+    <ProjectGuid>{C8FAF620-D9D4-4764-BB3E-9ED86832A8F2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>nMars.Graphics</RootNamespace>
-    <AssemblyName>nMars.Graphics</AssemblyName>
-    <ApplicationIcon>Properties\Graphics.ico</ApplicationIcon>
+    <RootNamespace>nMars.Sounds</RootNamespace>
+    <AssemblyName>nMars.Sounds</AssemblyName>
+    <ApplicationIcon>Properties\Sounds.ico</ApplicationIcon>
     <StartupObject>
     </StartupObject>
     <SignAssembly>true</SignAssembly>
@@ -33,12 +33,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\nMars.Graphics.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Release\nMars.Sounds.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mono|AnyCPU' ">
     <OutputPath>..\bin\Mono\</OutputPath>
     <DefineConstants>TRACE;MONO</DefineConstants>
-    <DocumentationFile>..\bin\Release\nMars.Graphics.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Release\nMars.Sounds.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,59 +55,35 @@
     <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="ColorManager.cs" />
-    <Compile Include="Controls\CoreGrid.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="BeepOut.cs" />
+    <Compile Include="BeepSound.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\CoreGrid.Designer.cs">
-      <DependentUpon>CoreGrid.cs</DependentUpon>
+    <Compile Include="BeepSound.Designer.cs">
+      <DependentUpon>BeepSound.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CoreGridInfo.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="MidiSound.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\CoreGridInfo.Designer.cs">
-      <DependentUpon>CoreGridInfo.cs</DependentUpon>
+    <Compile Include="MidiSound.Designer.cs">
+      <DependentUpon>MidiSound.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CoreListing.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CoreListing.Designer.cs">
-      <DependentUpon>CoreListing.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CoreListingInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CoreListingInfo.Designer.cs">
-      <DependentUpon>CoreListingInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MemoryPainter.cs" />
+    <Compile Include="MidiOut.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\nMars.IDE\nMars.IDE.csproj">
+      <Project>{BB9036EA-050A-4ECD-B857-CB022275A7C5}</Project>
+      <Name>nMars.IDE</Name>
+    </ProjectReference>
     <ProjectReference Include="..\nMars.RedCode\nMars.RedCode.csproj">
       <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
       <Name>nMars.RedCode</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\CoreGrid.resx">
-      <DependentUpon>CoreGrid.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CoreGridInfo.resx">
-      <DependentUpon>CoreGridInfo.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CoreListing.resx">
-      <DependentUpon>CoreListing.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CoreListingInfo.resx">
-      <DependentUpon>CoreListingInfo.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Graphics.ico" />
+    <EmbeddedResource Include="Properties\Sounds.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

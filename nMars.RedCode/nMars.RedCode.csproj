@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Engine\AsyncEngine.cs" />
     <Compile Include="Engine\BreakPoint.cs" />
+    <Compile Include="IDE\ICoreWatch.cs" />
     <Compile Include="IDE\Solution.cs" />
     <Compile Include="IDE\IIDEPlugin.cs" />
     <Compile Include="Utils\ConsoleWrapper.cs" />
