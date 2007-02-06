@@ -1,0 +1,162 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DD04BC83-CC0A-4F52-A70B-FDB4C0991E3D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>nMars.Parser</RootNamespace>
+    <AssemblyName>nMars.Parser</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <ApplicationIcon>Properties\Parser.ico</ApplicationIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\nMars.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\nMars.Parser.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mono|AnyCPU' ">
+    <OutputPath>..\bin\Mono\</OutputPath>
+    <DefineConstants>TRACE;MONO</DefineConstants>
+    <DocumentationFile>..\bin\Release\nMars.Parser.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\nMars.RedCode\Properties\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="com\calitha\commons\AbstractSet.cs" />
+    <Compile Include="com\calitha\commons\ArraySet.cs" />
+    <Compile Include="com\calitha\commons\BinaryReader.cs" />
+    <Compile Include="com\calitha\commons\FileUtil.cs" />
+    <Compile Include="com\calitha\commons\HashSet.cs" />
+    <Compile Include="com\calitha\commons\IntegerList.cs" />
+    <Compile Include="com\calitha\commons\ISet.cs" />
+    <Compile Include="com\calitha\commons\ResourceUtil.cs" />
+    <Compile Include="com\calitha\commons\StringUtil.cs" />
+    <Compile Include="com\calitha\commons\Util.cs" />
+    <Compile Include="com\calitha\goldparser\content\ActionSubRecord.cs" />
+    <Compile Include="com\calitha\goldparser\content\CGTContent.cs" />
+    <Compile Include="com\calitha\goldparser\content\CGTContentException.cs" />
+    <Compile Include="com\calitha\goldparser\content\CharacterSetRecord.cs" />
+    <Compile Include="com\calitha\goldparser\content\CharacterSetTable.cs" />
+    <Compile Include="com\calitha\goldparser\content\DFAStateRecord.cs" />
+    <Compile Include="com\calitha\goldparser\content\DFAStateTable.cs" />
+    <Compile Include="com\calitha\goldparser\content\EdgeSubRecord.cs" />
+    <Compile Include="com\calitha\goldparser\content\InitialStatesRecord.cs" />
+    <Compile Include="com\calitha\goldparser\content\LALRStateRecord.cs" />
+    <Compile Include="com\calitha\goldparser\content\LALRStateTable.cs" />
+    <Compile Include="com\calitha\goldparser\content\Parameters.cs" />
+    <Compile Include="com\calitha\goldparser\content\RuleRecord.cs" />
+    <Compile Include="com\calitha\goldparser\content\RuleTable.cs" />
+    <Compile Include="com\calitha\goldparser\content\SymbolRecord.cs" />
+    <Compile Include="com\calitha\goldparser\content\SymbolTable.cs" />
+    <Compile Include="com\calitha\goldparser\content\TableCounts.cs" />
+    <Compile Include="com\calitha\goldparser\dfa\DFA.cs" />
+    <Compile Include="com\calitha\goldparser\dfa\State.cs" />
+    <Compile Include="com\calitha\goldparser\dfa\Transition.cs" />
+    <Compile Include="com\calitha\goldparser\LALRParser.cs" />
+    <Compile Include="com\calitha\goldparser\lalr\AcceptAction.cs" />
+    <Compile Include="com\calitha\goldparser\lalr\Action.cs" />
+    <Compile Include="com\calitha\goldparser\lalr\ActionFactory.cs" />
+    <Compile Include="com\calitha\goldparser\lalr\GotoAction.cs" />
+    <Compile Include="com\calitha\goldparser\lalr\ReduceAction.cs" />
+    <Compile Include="com\calitha\goldparser\lalr\ShiftAction.cs" />
+    <Compile Include="com\calitha\goldparser\lalr\State.cs" />
+    <Compile Include="com\calitha\goldparser\Location.cs" />
+    <Compile Include="com\calitha\goldparser\ParserEvents.cs" />
+    <Compile Include="com\calitha\goldparser\ParserException.cs" />
+    <Compile Include="com\calitha\goldparser\Reader.cs" />
+    <Compile Include="com\calitha\goldparser\Rule.cs" />
+    <Compile Include="com\calitha\goldparser\StateStack.cs" />
+    <Compile Include="com\calitha\goldparser\StringTokenizer.cs" />
+    <Compile Include="com\calitha\goldparser\structure\CGTStructure.cs" />
+    <Compile Include="com\calitha\goldparser\structure\CGTStructureException.cs" />
+    <Compile Include="com\calitha\goldparser\structure\Entry.cs" />
+    <Compile Include="com\calitha\goldparser\structure\EntryFactory.cs" />
+    <Compile Include="com\calitha\goldparser\structure\Record.cs" />
+    <Compile Include="com\calitha\goldparser\Symbol.cs" />
+    <Compile Include="com\calitha\goldparser\SymbolFactory.cs" />
+    <Compile Include="com\calitha\goldparser\Token.cs" />
+    <Compile Include="com\calitha\goldparser\TokenStack.cs" />
+    <Compile Include="Expressions\Address.cs" />
+    <Compile Include="Expressions\BinaryExpression.cs" />
+    <Compile Include="Expressions\ComposedLabelName.cs" />
+    <Compile Include="Expressions\Expression.cs" />
+    <Compile Include="Expressions\LabelName.cs" />
+    <Compile Include="Expressions\ModifiedExpression.cs" />
+    <Compile Include="Expressions\TernaryExpression.cs" />
+    <Compile Include="Expressions\UnaryExpression.cs" />
+    <Compile Include="Expressions\Value.cs" />
+    <Compile Include="Expressions\Variables.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Statements\AssertStatement.cs" />
+    <Compile Include="Statements\EquStatement.cs" />
+    <Compile Include="Warrior\ExtendedWarrior.cs" />
+    <Compile Include="Statements\ForRofContainerStatement.cs" />
+    <Compile Include="Statements\Parameter.cs" />
+    <Compile Include="Warrior\ExtendedInstruction.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Grammar.cs" />
+    <Compile Include="WarriorParser.cs" />
+    <Compile Include="ParserTokens.cs" />
+    <Compile Include="Statements\InstructionStatement.cs" />
+    <Compile Include="Statements\Statement.cs" />
+    <Compile Include="Statements\ContainerStatement.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\RedCode.cgt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\nMars.RedCode\Properties\nMars.snk">
+      <Link>Properties\nMars.snk</Link>
+    </None>
+    <None Include="Properties\RedCode.grm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\icws94.html" />
+    <EmbeddedResource Include="Properties\Parser.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\nMars.RedCode\nMars.RedCode.csproj">
+      <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
+      <Name>nMars.RedCode</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
