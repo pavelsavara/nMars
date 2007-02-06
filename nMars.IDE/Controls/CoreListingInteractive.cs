@@ -6,7 +6,7 @@
 using System.ComponentModel;
 using nMars.Graphics.Controls;
 
-namespace nMars.IDE.Debugger.Controls
+namespace nMars.IDE.Controls
 {
     public partial class CoreListingInteractive : CoreListingInfo
     {
@@ -29,7 +29,7 @@ namespace nMars.IDE.Debugger.Controls
 
             int index = (e.Y / ItemHeight) + TopIndex;
             int address = View[index];
-            IDEDebuggerApplication.Instance.EditCell(address);
+            IDEApplication.Instance.EditCell(address);
         }
 
         private void CoreListingInteractive_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -39,7 +39,7 @@ namespace nMars.IDE.Debugger.Controls
 
             int index = (e.Y / ItemHeight) + TopIndex;
             int address = View[index];
-            IDEDebuggerApplication.Instance.ShowAddress(address);
+            IDEApplication.Instance.ShowAddress(address);
         }
     }
 }

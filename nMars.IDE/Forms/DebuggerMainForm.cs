@@ -6,24 +6,13 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using nMars.IDE.Debugger.Properties;
-using nMars.IDE.Forms;
+using nMars.IDE.Properties;
 
-namespace nMars.IDE.Debugger.Forms
+namespace nMars.IDE.Forms
 {
-    public class DebuggerMainForm
+    public partial class MainForm
     {
-        public DebuggerMainForm(MainForm aMainForm, IDEDebuggerApplication aIDEDebuggerApplication)
-        {
-            mainForm = aMainForm;
-            IDEDebuggerApplication = aIDEDebuggerApplication;
-            InitializeComponent();
-        }
-
-        private MainForm mainForm;
-        private IDEDebuggerApplication IDEDebuggerApplication;
-
-        private void InitializeComponent()
+        private void InitializeComponentDebug()
         {
             debugToolStripMenuItem = new ToolStripMenuItem();
             runFastToolStripMenuItem = new ToolStripMenuItem();
@@ -45,11 +34,11 @@ namespace nMars.IDE.Debugger.Forms
             pauseToolStripButton = new ToolStripButton();
             stepBackToolStripButton = new ToolStripButton();
             stopToolStripButton = new ToolStripButton();
-            timerDebugWatch = new Timer(mainForm.Components);
-            mainForm.mainMenu.SuspendLayout();
-            mainForm.toolbar.SuspendLayout();
+            timerDebugWatch = new Timer(components);
+            mainMenu.SuspendLayout();
+            toolbar.SuspendLayout();
 
-            mainForm.mainMenu.Items.Add(debugToolStripMenuItem);
+            mainMenu.Items.Add(debugToolStripMenuItem);
 
             // 
             // debugToolStripMenuItem
@@ -134,7 +123,7 @@ namespace nMars.IDE.Debugger.Forms
             stopToolStripMenuItem.Text = "Stop";
             stopToolStripMenuItem.Click += new EventHandler(stopToolStripMenuItem_Click);
 
-            mainForm.toolbar.Items.AddRange(
+            toolbar.Items.AddRange(
                 new ToolStripItem[]
                     {
                         executeToolStripButton, runFastToolStripButton, runNormalToolStripButton,
@@ -248,8 +237,8 @@ namespace nMars.IDE.Debugger.Forms
             timerDebugWatch.Interval = 150;
             timerDebugWatch.Tick += new EventHandler(timerDebugWatch_Tick);
 
-            mainForm.mainMenu.ResumeLayout();
-            mainForm.toolbar.ResumeLayout();
+            mainMenu.ResumeLayout();
+            toolbar.ResumeLayout();
         }
 
         public ToolStripMenuItem debugToolStripMenuItem;
@@ -274,108 +263,108 @@ namespace nMars.IDE.Debugger.Forms
         public ToolStripMenuItem stepWarriorToolStripMenuItem;
         public ToolStripMenuItem runToolStripMenuItem;
 
-        #region 
+        #region Events
 
         private void runSlowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Run(IDEDebuggerApplication.slowRunBrake);
+            IDEApplication.Run(IDEApplication.slowRunBrake);
         }
 
         private void runSlowToolStripButton_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Run(IDEDebuggerApplication.slowRunBrake);
+            IDEApplication.Run(IDEApplication.slowRunBrake);
         }
 
         private void runFastToolStripButton_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Run(IDEDebuggerApplication.fastRunBrake);
+            IDEApplication.Run(IDEApplication.fastRunBrake);
         }
 
         private void runFastToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Run(IDEDebuggerApplication.fastRunBrake);
+            IDEApplication.Run(IDEApplication.fastRunBrake);
         }
 
         private void runNormalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Run(IDEDebuggerApplication.normalRunBrake);
+            IDEApplication.Run(IDEApplication.normalRunBrake);
         }
 
         private void runNormalToolStripButton_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Run(IDEDebuggerApplication.normalRunBrake);
+            IDEApplication.Run(IDEApplication.normalRunBrake);
         }
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Run();
+            IDEApplication.Run();
         }
 
         private void executeToolStripButton_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Run(IDEDebuggerApplication.executeBrake);
+            IDEApplication.Run(IDEApplication.executeBrake);
         }
 
         private void stopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Stop();
+            IDEApplication.Stop();
         }
 
         private void stopToolStripButton_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Stop();
+            IDEApplication.Stop();
         }
 
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!IDEDebuggerApplication.Engine.IsPaused)
+            if (!IDEApplication.Engine.IsPaused)
             {
-                IDEDebuggerApplication.Pause();
+                IDEApplication.Pause();
             }
             else
             {
-                IDEDebuggerApplication.Continue();
+                IDEApplication.Continue();
             }
         }
 
         private void pauseToolStripButton_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Pause();
+            IDEApplication.Pause();
         }
 
         private void stepRoundToolStripButton_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.StepThread();
+            IDEApplication.StepThread();
         }
 
         private void stepThreadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.StepThread();
+            IDEApplication.StepThread();
         }
 
         private void stepWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.StepWarrior();
+            IDEApplication.StepWarrior();
         }
 
         private void stepAnyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Step();
+            IDEApplication.Step();
         }
 
         private void stepAnyToolStripButton_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Step();
+            IDEApplication.Step();
         }
 
         private void stepBackToolStripButton_Click(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.Back();
+            IDEApplication.Back();
         }
 
         private void timerDebugWatch_Tick(object sender, EventArgs e)
         {
-            IDEDebuggerApplication.WatchTick();
+            IDEApplication.WatchTick();
         }
 
         #endregion

@@ -6,7 +6,7 @@
 using System.Windows.Forms;
 using nMars.Graphics.Controls;
 
-namespace nMars.IDE.Debugger.Controls
+namespace nMars.IDE.Controls
 {
     public partial class CoreGridInteractive : CoreGridInfo
     {
@@ -20,7 +20,7 @@ namespace nMars.IDE.Debugger.Controls
             int address = GetAddress(e.X, e.Y);
             if (address == -1)
                 return;
-            IDEDebuggerApplication.Instance.ShowAddress(address);
+            IDEApplication.Instance.ShowAddress(address);
         }
 
         private void DebugCoreGrid_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -28,7 +28,7 @@ namespace nMars.IDE.Debugger.Controls
             int address = GetAddress(e.X, e.Y);
             if (address == -1)
                 return;
-            IDEDebuggerApplication.Instance.EditCell(address);
+            IDEApplication.Instance.EditCell(address);
         }
     }
 }

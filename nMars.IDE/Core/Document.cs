@@ -8,6 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using nMars.IDE.Controls;
+using nMars.IDE.Forms;
 
 namespace nMars.IDE.Core
 {
@@ -84,19 +85,20 @@ namespace nMars.IDE.Core
 
         protected bool ChooseName(string ext, string title)
         {
-            IDEApplication.MainForm.saveDialog.Title = "Save " + title;
-            IDEApplication.MainForm.saveDialog.DefaultExt = ext;
-            IDEApplication.MainForm.saveDialog.Filter = title + " files|*." + ext;
-            IDEApplication.MainForm.saveDialog.FilterIndex = 1;
-            IDEApplication.MainForm.saveDialog.FileName = FileName;
-            IDEApplication.MainForm.saveDialog.AddExtension = true;
-            IDEApplication.MainForm.saveDialog.CreatePrompt = false;
-            DialogResult dr = IDEApplication.MainForm.saveDialog.ShowDialog();
+            MainForm mainForm = IDEApplication.Instance.MainForm;
+            mainForm.saveDialog.Title = "Save " + title;
+            mainForm.saveDialog.DefaultExt = ext;
+            mainForm.saveDialog.Filter = title + " files|*." + ext;
+            mainForm.saveDialog.FilterIndex = 1;
+            mainForm.saveDialog.FileName = FileName;
+            mainForm.saveDialog.AddExtension = true;
+            mainForm.saveDialog.CreatePrompt = false;
+            DialogResult dr = mainForm.saveDialog.ShowDialog();
             if (dr == DialogResult.Cancel)
             {
                 return false;
             }
-            FileName = IDEApplication.MainForm.saveDialog.FileName;
+            FileName = mainForm.saveDialog.FileName;
             return true;
         }
     }

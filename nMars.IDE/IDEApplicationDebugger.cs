@@ -3,77 +3,69 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
-using nMars.IDE.Debugger.Controls;
-using nMars.IDE.Debugger.Forms;
+using nMars.IDE.Controls;
 using nMars.IDE.Forms;
 using nMars.RedCode;
 
-namespace nMars.IDE.Debugger
+namespace nMars.IDE
 {
-    public class IDEDebuggerApplication : nMars.Debugger.Debugger, IIDEPlugin
+    public partial class IDEApplication : nMars.Debugger.Debugger
     {
         #region Construction
 
-        public IDEDebuggerApplication()
+        public void LoadDebugger()
         {
-            Instance = this;
+            ConsoleControl.CommandEntered += new ConsoleCommandEntered(ConsoleCommandEntered);
         }
 
-        public void Load()
-        {
-            MainForm = IDEApplication.MainForm;
-            DebuggerMainForm = new DebuggerMainForm(MainForm, this);
-            IDEApplication.Console.CommandEntered += new ConsoleCommandEntered(ConsoleCommandEntered);
-        }
-
-        public void Unload()
+        public void UnloadDebugger()
         {
             if (Engine != null && Engine.IsLive)
             {
                 Engine.Kill();
             }
-            IDEApplication.Console.CommandEntered -= new ConsoleCommandEntered(ConsoleCommandEntered);
+            ConsoleControl.CommandEntered -= new ConsoleCommandEntered(ConsoleCommandEntered);
         }
 
         #endregion
 
         #region UI
 
-        public void RefreshControls()
+        public void RefreshControlsDebugger()
         {
-            bool warrior = IDEApplication.ActiveProject!=null && IDEApplication.ActiveProject.WarriorsCount > 0;
+            bool warrior = ActiveProject!=null && ActiveProject.WarriorsCount > 0;
             bool live = Engine != null && Engine.IsLive;
             bool canRun = (!live || Engine.IsPaused) && warrior;
-            DebuggerMainForm.runSlowToolStripMenuItem.Enabled = canRun || (live && Brake != slowRunBrake);
-            DebuggerMainForm.runSlowToolStripButton.Enabled = canRun || (live && Brake != slowRunBrake);
-            DebuggerMainForm.runNormalToolStripButton.Enabled = canRun || (live && Brake != normalRunBrake);
-            DebuggerMainForm.runFastToolStripButton.Enabled = canRun || (live && Brake != fastRunBrake);
-            DebuggerMainForm.executeToolStripButton.Enabled = warrior;
+            MainForm.runSlowToolStripMenuItem.Enabled = canRun || (live && Brake != slowRunBrake);
+            MainForm.runSlowToolStripButton.Enabled = canRun || (live && Brake != slowRunBrake);
+            MainForm.runNormalToolStripButton.Enabled = canRun || (live && Brake != normalRunBrake);
+            MainForm.runFastToolStripButton.Enabled = canRun || (live && Brake != fastRunBrake);
+            MainForm.executeToolStripButton.Enabled = warrior;
 
-            DebuggerMainForm.stopToolStripMenuItem.Enabled = live;
-            DebuggerMainForm.stopToolStripButton.Enabled = live;
+            MainForm.stopToolStripMenuItem.Enabled = live;
+            MainForm.stopToolStripButton.Enabled = live;
 
             bool step = live && Engine.IsPaused && warrior;
             bool stepOrStart = step || ((Engine == null || !Engine.IsLive) && warrior);
-            DebuggerMainForm.stepAnyToolStripMenuItem.Enabled = stepOrStart;
-            DebuggerMainForm.stepAnyToolStripButton.Enabled = stepOrStart;
-            DebuggerMainForm.stepThreadToolStripMenuItem.Enabled = step;
-            DebuggerMainForm.stepThreadToolStripButton.Enabled = step;
-            DebuggerMainForm.stepRoundToolStripButton.Enabled = step;
-            DebuggerMainForm.stepBackToolStripButton.Enabled = step;
+            MainForm.stepAnyToolStripMenuItem.Enabled = stepOrStart;
+            MainForm.stepAnyToolStripButton.Enabled = stepOrStart;
+            MainForm.stepThreadToolStripMenuItem.Enabled = step;
+            MainForm.stepThreadToolStripButton.Enabled = step;
+            MainForm.stepRoundToolStripButton.Enabled = step;
+            MainForm.stepBackToolStripButton.Enabled = step;
 
             bool pause = live && !Engine.IsPaused;
-            DebuggerMainForm.pauseToolStripButton.Enabled = pause;
-            DebuggerMainForm.pauseToolStripMenuItem.Enabled = live;
+            MainForm.pauseToolStripButton.Enabled = pause;
+            MainForm.pauseToolStripMenuItem.Enabled = live;
             if (live)
             {
                 if (pause)
                 {
-                    DebuggerMainForm.pauseToolStripMenuItem.Text = "Pause";
+                    MainForm.pauseToolStripMenuItem.Text = "Pause";
                 }
                 else
                 {
-                    DebuggerMainForm.pauseToolStripMenuItem.Text = "Resume";
+                    MainForm.pauseToolStripMenuItem.Text = "Resume";
                 }
             }
         }
@@ -97,14 +89,14 @@ namespace nMars.IDE.Debugger
             if (finished)
             {
                 EndWatch();
-                IDEApplication.ActiveProject.Project.EngineOptions.Brake = executeBrake;
+                ActiveProject.Project.EngineOptions.Brake = executeBrake;
             }
             else
             {
                 PauseWatch();
             }
             base.OnEngineStopped(finished);
-            IDEApplication.RefreshControls();
+            RefreshControls();
         }
 
         protected override void OnAfterStartEngine(bool justContinue, bool onlyInit)
@@ -124,30 +116,30 @@ namespace nMars.IDE.Debugger
 
         public void Run(int brake)
         {
-            IDEApplication.ActiveProject.Project.EngineOptions.Brake = brake;
+            ActiveProject.Project.EngineOptions.Brake = brake;
             Run();
         }
 
         public void Run()
         {
-            if (IDEApplication.ActiveProject.Documents.Count == 0)
+            if (ActiveProject.Documents.Count == 0)
                 return;
 
-            Project = IDEApplication.ActiveProject.Project;
-            Components = IDEApplication.ActiveSolution.Components;
+            Project = ActiveProject.Project;
+            Components = ActiveSolution.Components;
             Start(false);
-            IDEApplication.RefreshControls();
+            RefreshControls();
         }
 
         public override bool Step()
         {
             if (Engine == null || !Engine.IsLive)
             {
-                IDEApplication.ActiveProject.Project.EngineOptions.Brake = slowRunBrake;
-                Project = IDEApplication.ActiveProject.Project;
-                Components = IDEApplication.ActiveSolution.Components;
+                ActiveProject.Project.EngineOptions.Brake = slowRunBrake;
+                Project = ActiveProject.Project;
+                Components = ActiveSolution.Components;
                 Start(true);
-                IDEApplication.RefreshControls();
+                RefreshControls();
                 return true;
             }
             else
@@ -177,7 +169,7 @@ namespace nMars.IDE.Debugger
             bool res = base.Pause();
             if (res)
             {
-                IDEApplication.RefreshControls();
+                RefreshControls();
             }
             return res;
         }
@@ -188,7 +180,7 @@ namespace nMars.IDE.Debugger
             if (res)
             {
                 ResumeWatch();
-                IDEApplication.RefreshControls();
+                RefreshControls();
             }
             return res;
         }
@@ -212,12 +204,12 @@ namespace nMars.IDE.Debugger
                 DebugMemoryListing.ActivateControl();
                 DebugMemoryGraph.ActivateControl();
             }
-            DebuggerMainForm.timerDebugWatch.Enabled = true;
+            MainForm.timerDebugWatch.Enabled = true;
         }
 
         public void PauseWatch()
         {
-            DebuggerMainForm.timerDebugWatch.Enabled = false;
+            MainForm.timerDebugWatch.Enabled = false;
             lock (Engine)
             {
                 DebugOverview.Pause();
@@ -234,7 +226,7 @@ namespace nMars.IDE.Debugger
                 DebugMemoryListing.Resume();
                 DebugMemoryGraph.Resume();
             }
-            DebuggerMainForm.timerDebugWatch.Enabled = true;
+            MainForm.timerDebugWatch.Enabled = true;
         }
 
         public void WatchTick()
@@ -253,7 +245,7 @@ namespace nMars.IDE.Debugger
 
         private void EndWatch()
         {
-            DebuggerMainForm.timerDebugWatch.Enabled = false;
+            MainForm.timerDebugWatch.Enabled = false;
             lock (Engine)
             {
                 DebugOverview.Detach();
@@ -281,10 +273,7 @@ namespace nMars.IDE.Debugger
         public DebugOverview DebugOverview;
         public DebugMemoryListing DebugMemoryListing;
         public DebugMemoryGraph DebugMemoryGraph;
-        public DebuggerMainForm DebuggerMainForm;
-        public MainForm MainForm;
 
-        public static IDEDebuggerApplication Instance;
 
         #endregion
     }

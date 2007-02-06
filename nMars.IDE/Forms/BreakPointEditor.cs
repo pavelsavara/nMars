@@ -1,14 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using nMars.IDE.Debugger.Controls;
+using nMars.IDE.Controls;
 using nMars.RedCode;
 
-namespace nMars.IDE.Debugger.Forms
+namespace nMars.IDE.Forms
 {
     public partial class BreakPointEditor : Form
     {

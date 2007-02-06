@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using nMars.IDE.Controls;
 using nMars.RedCode;
 
-namespace nMars.IDE.Debugger.Controls
+namespace nMars.IDE.Controls
 {
     public partial class ExecuteAddressBreakPointEditor : IDEFrame
     {

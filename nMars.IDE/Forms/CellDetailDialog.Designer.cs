@@ -1,4 +1,4 @@
-namespace nMars.IDE.Debugger.Forms
+namespace nMars.IDE.Forms
 {
     partial class CellDetailDialog
     {

@@ -61,6 +61,42 @@
     <Compile Include="Controls\Console.Designer.cs">
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CoreGridInteractive.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CoreGridInteractive.Designer.cs">
+      <DependentUpon>CoreGridInteractive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CoreListingInteractive.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CoreListingInteractive.Designer.cs">
+      <DependentUpon>CoreListingInteractive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryGraph.Designer.cs">
+      <DependentUpon>DebugMemoryGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryListing.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugMemoryListing.Designer.cs">
+      <DependentUpon>DebugMemoryListing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugOverview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugOverview.Designer.cs">
+      <DependentUpon>DebugOverview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DebugWarriorOverview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebugWarriorOverview.Designer.cs">
+      <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ExecuteAddressBreakPointEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -97,11 +133,21 @@
     <Compile Include="Forms\BreakPointEditor.Designer.cs">
       <DependentUpon>BreakPointEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CellDetailDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CellDetailDialog.Designer.cs">
+      <DependentUpon>CellDetailDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DebuggerMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="IDEApplication.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\RedCodeProject.cs" />
     <Compile Include="Core\RedCodeSolution.cs" />
     <Compile Include="Core\WarriorDocument.cs" />
+    <Compile Include="IDEApplicationDebugger.cs" />
     <Compile Include="Properties\IDESettings.cs" />
     <Compile Include="Properties\IDESettings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -133,6 +179,30 @@
       <SubType>Designer</SubType>
       <DependentUpon>Console.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CoreGridInteractive.resx">
+      <DependentUpon>CoreGridInteractive.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CoreListingInteractive.resx">
+      <DependentUpon>CoreListingInteractive.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugMemoryGraph.resx">
+      <DependentUpon>DebugMemoryGraph.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugMemoryListing.resx">
+      <DependentUpon>DebugMemoryListing.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugOverview.resx">
+      <DependentUpon>DebugOverview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebugWarriorOverview.resx">
+      <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ExecuteAddressBreakPointEditor.resx">
       <DependentUpon>ExecuteAddressBreakPointEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -161,6 +231,10 @@
       <DependentUpon>BreakPointEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CellDetailDialog.resx">
+      <DependentUpon>CellDetailDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -184,11 +258,28 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>IDESettings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\About.html" />
+    <Content Include="Resources\Back.ico" />
+    <Content Include="Resources\Execute.ico" />
     <Content Include="Resources\IDEsmall.ico" />
+    <Content Include="Resources\Pause.ico" />
+    <Content Include="Resources\Run.ico" />
+    <Content Include="Resources\RunF.ico" />
+    <Content Include="Resources\RunFF.ico" />
+    <Content Include="Resources\Step.ico" />
+    <Content Include="Resources\StepRound.ico" />
+    <Content Include="Resources\StepThread.ico" />
+    <Content Include="Resources\Stop.ico" />
     <None Include="Resources\IDE.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\nMars.Debugger\nMars.Debugger.csproj">
+      <Project>{49520670-73DE-4A0B-B2F4-E9FDE6BA4D2E}</Project>
+      <Name>nMars.Debugger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nMars.Graphics\nMars.Graphics.csproj">
+      <Project>{B39B9FDE-DBBD-4118-85BC-48E6508FC76F}</Project>
+      <Name>nMars.Graphics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\nMars.RedCode\nMars.RedCode.csproj">
       <Project>{34EFF84C-F16E-45A3-B40E-6EFB9978608F}</Project>
       <Name>nMars.RedCode</Name>

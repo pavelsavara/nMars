@@ -84,7 +84,7 @@ namespace nMars.IDE.Controls
             this.tbOut.Size = new System.Drawing.Size(806, 347);
             this.tbOut.TabIndex = 1;
             // 
-            // Console
+            // ConsoleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

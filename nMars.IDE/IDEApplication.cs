@@ -15,17 +15,22 @@ using nMars.RedCode.Modules;
 
 namespace nMars.IDE
 {
-    public class IDEApplication
+    public partial class IDEApplication
     {
         #region Construction
+
+        public IDEApplication()
+        {
+            Instance = this;
+        }
 
         public int Main(string[] args)
         {
             //basic components
             MainForm = new MainForm();
 
-            Console = new Console();
-            Console.Attach(MainForm.tabBottom, "Console");
+            ConsoleControl = new Console();
+            ConsoleControl.Attach(MainForm.tabBottom, "Console");
 
             SolutionExplorer = new SolutionExplorer();
             SolutionExplorer.Attach(MainForm.tabExplorers, "Solution");
@@ -34,6 +39,7 @@ namespace nMars.IDE
             Settings.Reload();
 
             //plugins
+            LoadDebugger();
             LoadPlugins();
 
             //recent projects
@@ -64,7 +70,7 @@ namespace nMars.IDE
 
             //run
             MainForm.RefreshRecent();
-            IDEApplication.RefreshControls();
+            RefreshControls();
             Application.Run(MainForm);
 
             //shutdown
@@ -72,10 +78,11 @@ namespace nMars.IDE
 
             //unload plugins
             UnloadPlugins();
+            UnloadDebugger();
             return 0;
         }
 
-        public static bool ClosingApplication()
+        public bool ClosingApplication()
         {
             foreach (IEditor editor in Editors)
             {
@@ -89,19 +96,19 @@ namespace nMars.IDE
             return res;
         }
 
-        public static void RefreshControls()
+        public void RefreshControls()
         {
-            bool openEditor = IDEApplication.ActiveEditor != null;
-            bool openWarrior = openEditor && IDEApplication.ActiveEditor.Document is WarriorDocument;
+            bool openEditor = ActiveEditor != null;
+            bool openWarrior = openEditor && ActiveEditor.Document is WarriorDocument;
             MainForm.saveWarriorToolStripMenuItem.Enabled = openWarrior;
             MainForm.compileWarriorToolStripMenuItem.Enabled = openWarrior;
             MainForm.closeWarriorToolStripMenuItem.Enabled = openWarrior;
             MainForm.lbDocClose.Visible = openEditor;
 
-            bool warrior = IDEApplication.ActiveEditor != null;
+            bool warrior = ActiveEditor != null;
             MainForm.compileWarriorToolStripMenuItem.Enabled = warrior;
 
-            RefreshPluginControls();
+            RefreshControlsDebugger();
             //? SolutionExplorer.ReloadSolution();
         }
 
@@ -109,7 +116,7 @@ namespace nMars.IDE
 
         #region Plugins
 
-        private static void UnloadPlugins()
+        private void UnloadPlugins()
         {
             foreach (IIDEPlugin plugin in IdePlugins)
             {
@@ -117,7 +124,7 @@ namespace nMars.IDE
             }
         }
 
-        private static void LoadPlugins()
+        private void LoadPlugins()
         {
             if (Settings.KnownComponents==null)
             {
@@ -125,7 +132,6 @@ namespace nMars.IDE
                 known.Add("nMars.Parser");
                 known.Add("nMars.Engine-StepBack");
                 known.Add("nMars.Debugger");
-                known.Add("nMars.IDE.Debugger");
                 known.Add("nMars.ShellPy");
                 Settings["KnownComponents"] = known;
             }
@@ -149,11 +155,12 @@ namespace nMars.IDE
                     }
                 }
             }
+            Shells.Add(this);
         }
 
-        private static void InitShells()
+        private void InitShells()
         {
-            IConsole console = Console.GetAsyncWrapper();
+            IConsole console = ConsoleControl.GetAsyncWrapper();
             foreach (IShell shell in Shells)
             {
                 shell.Engine = ActiveSolution.Components.AsyncEngineWrapper;
@@ -164,19 +171,11 @@ namespace nMars.IDE
             }
         }
 
-        private static void RefreshPluginControls()
-        {
-            foreach (IIDEPlugin plugin in IdePlugins)
-            {
-                plugin.RefreshControls();
-            }
-        }
-
         #endregion
 
         #region Documents
 
-        public static void SaveAll()
+        public void SaveAll()
         {
             foreach (IEditor editor in Editors)
             {
@@ -186,14 +185,14 @@ namespace nMars.IDE
             RefreshControls();
         }
 
-        public static void OpenNewWarrior()
+        public void OpenNewWarrior()
         {
             WarriorDocument warrior = WarriorDocument.New();
             warrior.Open();
             RefreshControls();
         }
 
-        public static void OpenExistingWarrior()
+        public void OpenExistingWarrior()
         {
             MainForm.openDialog.Title = "Open existing warriors";
             MainForm.openDialog.Multiselect = true;
@@ -211,26 +210,26 @@ namespace nMars.IDE
             RefreshControls();
         }
 
-        public static void ActivateDocument(Document document)
+        public void ActivateDocument(Document document)
         {
             document.Open();
             RefreshControls();
         }
 
-        public static void OpenExistingWarrior(string filename)
+        public void OpenExistingWarrior(string filename)
         {
             WarriorDocument.Load(filename).Open();
             RefreshControls();
         }
 
-        public static bool SaveDocument(Document doc)
+        public bool SaveDocument(Document doc)
         {
             bool res = doc.Save();
             RefreshControls();
             return res;
         }
 
-        public static void CloseDocument(Document doc)
+        public void CloseDocument(Document doc)
         {
             if (doc.Closing())
             {
@@ -239,7 +238,7 @@ namespace nMars.IDE
             RefreshControls();
         }
 
-        public static void AddExistingWarrior(RedCodeProject project)
+        public void AddExistingWarrior(RedCodeProject project)
         {
             MainForm.openDialog.Title = "Open existing warriors";
             MainForm.openDialog.Multiselect = true;
@@ -257,13 +256,13 @@ namespace nMars.IDE
             RefreshControls();
         }
 
-        public static void AddNewWarrior(RedCodeProject project)
+        public void AddNewWarrior(RedCodeProject project)
         {
             WarriorDocument.New(project).Open();
             RefreshControls();
         }
 
-        public static void RemoveWarrior(WarriorDocument warrior, bool delete)
+        public void RemoveWarrior(WarriorDocument warrior, bool delete)
         {
             if (warrior.Closing())
             {
@@ -277,13 +276,13 @@ namespace nMars.IDE
         }
 
 
-        public static void AddIntoProject(ProjectDocument document)
+        public void AddIntoProject(ProjectDocument document)
         {
             ActiveProject.Add(document);
             RefreshControls();
         }
 
-        public static void RemoveFromProject(ProjectDocument document)
+        public void RemoveFromProject(ProjectDocument document)
         {
             document.Project.Remove(document, false);
             RefreshControls();
@@ -293,19 +292,19 @@ namespace nMars.IDE
 
         #region Projects
 
-        public static void AddNewProject()
+        public void AddNewProject()
         {
             RedCodeProject.New(ActiveSolution);
             RefreshControls();
         }
 
-        public static void RemoveProject(RedCodeProject project, bool delete)
+        public void RemoveProject(RedCodeProject project, bool delete)
         {
             ActiveSolution.Remove(project, delete);
             RefreshControls();
         }
 
-        public static void AddExistingProject()
+        public void AddExistingProject()
         {
             MainForm.openDialog.Title = "Add existing project";
             MainForm.openDialog.Multiselect = false;
@@ -320,21 +319,21 @@ namespace nMars.IDE
             RefreshControls();
         }
 
-        public static bool SaveProject(RedCodeProject project)
+        public bool SaveProject(RedCodeProject project)
         {
             bool res = project.Save();
             RefreshControls();
             return res;
         }
 
-        public static void SetProjectActive(RedCodeProject project)
+        public void SetProjectActive(RedCodeProject project)
         {
             ActiveProject = project;
             RefreshControls();
         }
 
 
-        public static bool SaveSolution()
+        public bool SaveSolution()
         {
             bool res=ActiveSolution.Save();
             if (res)
@@ -345,7 +344,7 @@ namespace nMars.IDE
             return res;
         }
 
-        private static void AddRecentProject(string filename)
+        private void AddRecentProject(string filename)
         {
             int idx = Settings.RecentProjects.IndexOf(filename);
             if (idx != -1 && idx != (Settings.RecentProjects.Count - 1))
@@ -357,7 +356,7 @@ namespace nMars.IDE
             MainForm.RefreshRecent();
         }
 
-        public static void OpenSolution()
+        public void OpenSolution()
         {
             if (ActiveSolution.Closing())
             {
@@ -377,7 +376,7 @@ namespace nMars.IDE
             RefreshControls();
         }
 
-        public static void OpenSolution(string fileName)
+        public void OpenSolution(string fileName)
         {
             if (ActiveSolution==null || ActiveSolution.Closing())
             {
@@ -387,7 +386,7 @@ namespace nMars.IDE
             }
         }
         
-        public static void LoadSolution(string fileName)
+        public void LoadSolution(string fileName)
         {
             if (File.Exists(fileName))
             {
@@ -407,7 +406,7 @@ namespace nMars.IDE
             }
         }
 
-        public static void CloseSolution()
+        public void CloseSolution()
         {
             if (ActiveSolution == null || ActiveSolution.Closing())
             {
@@ -418,7 +417,7 @@ namespace nMars.IDE
             RefreshControls();
         }
 
-        private static void NewSolution(string[] args)
+        private void NewSolution(string[] args)
         {
             ActiveSolution = RedCodeSolution.New();
             AddNewProject();
@@ -427,7 +426,7 @@ namespace nMars.IDE
             {
                 bool interactive;
                 string saveProjectFile;
-                ActiveProject.Project = CommandLine.Prepare(args, ActiveSolution.Components, Console, out interactive, out saveProjectFile);
+                ActiveProject.Project = CommandLine.Prepare(args, ActiveSolution.Components, ConsoleControl, out interactive, out saveProjectFile);
             }
             SolutionExplorer.ReloadSolution();
             RefreshControls();
@@ -437,7 +436,7 @@ namespace nMars.IDE
 
         #region Compile & Run
 
-        public static void Compile(WarriorDocument warrior)
+        public void Compile(WarriorDocument warrior)
         {
             if (warrior == null)
                 return;
@@ -447,19 +446,19 @@ namespace nMars.IDE
 
             if (warrior.Project!=null)
             {
-                ActiveSolution.Components.Parser.Parse(warrior.Project.Project, Console);
+                ActiveSolution.Components.Parser.Parse(warrior.Project.Project, ConsoleControl);
             }
             else
             {
                 Project tmpProj=new Project(Rules.DefaultRules, warrior.FileName);
                 tmpProj.ParserOptions = ParserOptions.Ide;
-                ActiveSolution.Components.Parser.Parse(tmpProj, Console);
+                ActiveSolution.Components.Parser.Parse(tmpProj, ConsoleControl);
             }
             
             RefreshControls();
         }
 
-        public static void Compile(RedCodeProject project)
+        public void Compile(RedCodeProject project)
         {
             foreach (IEditor editor in Editors)
             {
@@ -469,7 +468,7 @@ namespace nMars.IDE
                 }
             }
 
-            ActiveSolution.Components.Parser.Parse(ActiveProject.Project, Console);
+            ActiveSolution.Components.Parser.Parse(ActiveProject.Project, ConsoleControl);
             
             RefreshControls();
         }
@@ -478,7 +477,7 @@ namespace nMars.IDE
 
         #region Variables
 
-        public static RedCodeSolution ActiveSolution
+        public RedCodeSolution ActiveSolution
         {
             get
             {
@@ -499,7 +498,8 @@ namespace nMars.IDE
                 }
             }
         }
-        public static RedCodeProject ActiveProject
+        
+        public RedCodeProject ActiveProject
         {
             get
             {
@@ -514,25 +514,27 @@ namespace nMars.IDE
                 }
             }
         }
-        private static RedCodeProject activeProject = null;
-        public static RedCodeSolution activeSolution = null;
+
+        private RedCodeProject activeProject = null;
+        public RedCodeSolution activeSolution = null;
 
         //editors
-        public static List<IEditor> Editors = new List<IEditor>();
-        public static IEditor ActiveEditor;
+        public List<IEditor> Editors = new List<IEditor>();
+        public IEditor ActiveEditor;
 
         //UI
-        public static SolutionExplorer SolutionExplorer;
-        public static Console Console;
-        public static MainForm MainForm;
+        public SolutionExplorer SolutionExplorer;
+        public Console ConsoleControl;
+        public MainForm MainForm;
         
         //setting
-        internal static IDESettings Settings;
+        internal IDESettings Settings;
 
         //plugins
-        private static List<IIDEPlugin> IdePlugins=new List<IIDEPlugin>();
-        private static List<IShell> Shells = new List<IShell>();
+        private List<IIDEPlugin> IdePlugins=new List<IIDEPlugin>();
+        private List<IShell> Shells = new List<IShell>();
 
+        public static IDEApplication Instance;
         #endregion
     }
 }

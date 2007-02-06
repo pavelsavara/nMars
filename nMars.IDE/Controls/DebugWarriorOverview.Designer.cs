@@ -1,4 +1,3 @@
-using nMars.IDE.Debugger.Controls;
 
 namespace nMars.IDE.Controls
 {
@@ -33,7 +32,7 @@ namespace nMars.IDE.Controls
             this.components = new System.ComponentModel.Container();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.panelRight = new System.Windows.Forms.Panel();
-            this.coreList = new nMars.IDE.Debugger.Controls.CoreListingInteractive(this.components);
+            this.coreList = new nMars.IDE.Controls.CoreListingInteractive(this.components);
             this.panelTop = new System.Windows.Forms.Panel();
             this.textBoxTasks = new System.Windows.Forms.TextBox();
             this.textBoxLastInstruction = new System.Windows.Forms.TextBox();
