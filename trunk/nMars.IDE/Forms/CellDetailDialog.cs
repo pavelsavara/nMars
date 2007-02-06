@@ -5,7 +5,7 @@
 
 using System.Windows.Forms;
 
-namespace nMars.IDE.Debugger.Forms
+namespace nMars.IDE.Forms
 {
     public partial class CellDetailDialog : Form
     {

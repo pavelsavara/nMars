@@ -15,8 +15,12 @@ namespace nMars.IDE.Forms
         public MainForm()
         {
             InitializeComponent();
+            InitializeComponentDebug();
             Icon = nMars.IDE.Properties.Resources.IDEsmall;
+            IDEApplication = IDEApplication.Instance;
         }
+
+        private IDEApplication IDEApplication;
 
         public void RefreshRecent()
         {
@@ -30,14 +34,6 @@ namespace nMars.IDE.Forms
                 recentProjectsToolStripMenuItem.DropDownItems.Add(it);
             }
         }
-        public System.ComponentModel.IContainer Components
-        {
-            get
-            {
-                return components;
-            }
-        }
-
 
         #region Cycle documents
 

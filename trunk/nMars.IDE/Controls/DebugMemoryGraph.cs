@@ -6,7 +6,7 @@
 using System.Windows.Forms;
 using nMars.IDE.Controls;
 
-namespace nMars.IDE.Debugger.Controls
+namespace nMars.IDE.Controls
 {
     public partial class DebugMemoryGraph : IDEFrame, IDebugWatch
     {
@@ -20,7 +20,7 @@ namespace nMars.IDE.Debugger.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, name);
-            coreGrid.Attach(IDEDebuggerApplication.Instance.Engine);
+            coreGrid.Attach(IDEApplication.Instance.Engine);
         }
 
         public override void Detach()

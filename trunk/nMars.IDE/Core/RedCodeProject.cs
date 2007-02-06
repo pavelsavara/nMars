@@ -90,7 +90,7 @@ namespace nMars.IDE.Core
             {
                 res = true;
             }
-            IDEApplication.SolutionExplorer.ReloadSolution();
+            IDEApplication.Instance.SolutionExplorer.ReloadSolution();
             return res;
         }
 
@@ -130,10 +130,10 @@ namespace nMars.IDE.Core
             if (Editor != null)
             {
                 Editor.Detach();
-                IDEApplication.Editors.Remove(Editor);
+                IDEApplication.Instance.Editors.Remove(Editor);
                 Editor = null;
             }
-            IDEApplication.SolutionExplorer.ReloadSolution();
+            IDEApplication.Instance.SolutionExplorer.ReloadSolution();
         }
 
         public override void Open()
@@ -141,7 +141,7 @@ namespace nMars.IDE.Core
             if (Editor == null)
             {
                 Editor = new ProjectEditor(this);
-                Editor.Attach(IDEApplication.MainForm.tabDocuments, Name);
+                Editor.Attach(IDEApplication.Instance.MainForm.tabDocuments, Name);
             }
             else
             {
@@ -157,7 +157,7 @@ namespace nMars.IDE.Core
                 Project.WarriorFiles.Add(document.FileName);
                 document.Project = this;
                 IsModified = true;
-                IDEApplication.SolutionExplorer.ReloadSolution();
+                IDEApplication.Instance.SolutionExplorer.ReloadSolution();
                 Project.Rules.WarriorsCount++;
             }
         }
@@ -168,7 +168,7 @@ namespace nMars.IDE.Core
             Documents.Remove(document.FileName);
             Project.WarriorFiles.Remove(document.FileName);
             IsModified = true;
-            IDEApplication.SolutionExplorer.ReloadSolution();
+            IDEApplication.Instance.SolutionExplorer.ReloadSolution();
             Project.Rules.WarriorsCount--;
             if (delete && File.Exists(document.FileName))
             {
@@ -363,7 +363,7 @@ namespace nMars.IDE.Core
         private void FirePropertyChanged(string propertyName)
         {
             IsModified = true;
-            IDEApplication.SolutionExplorer.ReloadSolution();
+            IDEApplication.Instance.SolutionExplorer.ReloadSolution();
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

@@ -1,4 +1,4 @@
-namespace nMars.IDE.Debugger.Controls
+namespace nMars.IDE.Controls
 {
     partial class ExecuteAddressBreakPointEditor
     {

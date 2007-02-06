@@ -20,7 +20,7 @@ namespace nMars.IDE.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, document.Name);
-            IDEApplication.Editors.Insert(0, this);
+            IDEApplication.Instance.Editors.Insert(0, this);
             ActivateControl();
         }
 
@@ -28,10 +28,10 @@ namespace nMars.IDE.Controls
         public override void ActivateControl()
         {
             base.ActivateControl();
-            if (IDEApplication.ActiveEditor != this)
+            if (IDEApplication.Instance.ActiveEditor != this)
             {
-                IDEApplication.ActiveEditor = this;
-                IDEApplication.MainForm.CycleDocuments(true);
+                IDEApplication.Instance.ActiveEditor = this;
+                IDEApplication.Instance.MainForm.CycleDocuments(true);
             }
             textBox.Focus();
         }
@@ -39,9 +39,9 @@ namespace nMars.IDE.Controls
         public override void DeactivateControl()
         {
             base.DeactivateControl();
-            if (IDEApplication.ActiveEditor == this)
+            if (IDEApplication.Instance.ActiveEditor == this)
             {
-                IDEApplication.ActiveEditor = null;
+                IDEApplication.Instance.ActiveEditor = null;
             }
         }
 
@@ -99,7 +99,7 @@ namespace nMars.IDE.Controls
             if (!document.IsModified)
             {
                 document.IsModified = true;
-                IDEApplication.RefreshControls();
+                IDEApplication.Instance.RefreshControls();
                 PageName = document.Name;
             }
         }

@@ -6,7 +6,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using nMars.IDE.Core;
-using nMars.IDE.Debugger.Forms;
+using nMars.IDE.Forms;
 using nMars.RedCode;
 
 namespace nMars.IDE.Controls
@@ -24,7 +24,7 @@ namespace nMars.IDE.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, project.Name);
-            IDEApplication.Editors.Insert(0, this);
+            IDEApplication.Instance.Editors.Insert(0, this);
             redCodeProjectBindingSource.DataSource = project;
             breakPointsBindingSource.DataSource = project.Project.BreakPoints;
             ActivateControl();
@@ -34,19 +34,19 @@ namespace nMars.IDE.Controls
         public override void ActivateControl()
         {
             base.ActivateControl();
-            if (IDEApplication.ActiveEditor != this)
+            if (IDEApplication.Instance.ActiveEditor != this)
             {
-                IDEApplication.ActiveEditor = this;
-                IDEApplication.MainForm.CycleDocuments(true);
+                IDEApplication.Instance.ActiveEditor = this;
+                IDEApplication.Instance.MainForm.CycleDocuments(true);
             }
         }
 
         public override void DeactivateControl()
         {
             base.DeactivateControl();
-            if (IDEApplication.ActiveEditor == this)
+            if (IDEApplication.Instance.ActiveEditor == this)
             {
-                IDEApplication.ActiveEditor = null;
+                IDEApplication.Instance.ActiveEditor = null;
             }
         }
 

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using nMars.IDE.Controls;
 using nMars.RedCode;
 
-namespace nMars.IDE.Debugger.Controls
+namespace nMars.IDE.Controls
 {
     public partial class DebugMemoryListing : IDEFrame, IDebugWatch
     {
@@ -20,10 +20,10 @@ namespace nMars.IDE.Debugger.Controls
         public override void Attach(TabControl aFrame, string name)
         {
             base.Attach(aFrame, name);
-            CoreListView view = new CoreListView(IDEDebuggerApplication.Instance.Engine);
+            CoreListView view = new CoreListView(IDEApplication.Instance.Engine);
             coreList.View = view;
-            coreList.Attach(IDEDebuggerApplication.Instance.Engine);
-            CoreSize = IDEDebuggerApplication.Instance.Engine.CoreSize;
+            coreList.Attach(IDEApplication.Instance.Engine);
+            CoreSize = IDEApplication.Instance.Engine.CoreSize;
             ShowAddress(0);
         }
 
@@ -37,7 +37,7 @@ namespace nMars.IDE.Debugger.Controls
 
         public void RepaintView()
         {
-            IRunningInstruction instruction = IDEDebuggerApplication.Instance.Engine.NextInstruction;
+            IRunningInstruction instruction = IDEApplication.Instance.Engine.NextInstruction;
             int nextAddress;
             if (instruction == null)
             {
@@ -77,7 +77,7 @@ namespace nMars.IDE.Debugger.Controls
                 if (checkBoxRelative.Checked)
                 {
                     //relative to current instruction
-                    address += IDEDebuggerApplication.Instance.Engine.NextInstruction.Address;
+                    address += IDEApplication.Instance.Engine.NextInstruction.Address;
                 }
                 coreList.MarkedAddress = address;
                 coreList.TopIndex = address + CoreSize / 2 - 5;

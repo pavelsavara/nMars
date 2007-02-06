@@ -16,7 +16,10 @@ namespace nMars.IDE.Controls
         public SolutionExplorer()
         {
             InitializeComponent();
+            IDEApplication = IDEApplication.Instance;
         }
+
+        private IDEApplication IDEApplication;
 
         public void ReloadSolution()
         {
