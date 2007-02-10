@@ -16,14 +16,12 @@ copy ..\nMars\Bin\Release\nMars.exe.config %VER%%APPENDBUILD%\%VER%%APPENDBUILD%
 mkdir %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\ReadMe.txt %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\Changes.txt %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
-copy ..\nMars\Packages.txt %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\License.txt %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\Bin\Release\nMars.RedCode.dll %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\Bin\Release\nMars.Parser.dll %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\Bin\Release\nMars.Engine.dll %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\Bin\Release\nMars.Graphics.dll %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\Bin\Release\nMars.Debugger.dll %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
-copy ..\nMars\Bin\Release\nMars.IDE.Debugger.dll %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\Bin\Release\nMars.exe %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\Bin\Release\nMars.IDE.exe %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
 copy ..\nMars\Bin\Release\nMars.exe.config %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsIDE
@@ -46,4 +44,4 @@ zip -r -9 nMarsShellPy.%VER%%APPENDBUILD%.bin.zip %VER%%APPENDBUILD%.nMarsShellP
 zip -r -9 nMarsTest.%VER%%APPENDBUILD%.win.zip %VER%%APPENDBUILD%.nMarsTest
 cd ..
 
-copy ..\nMars\Bin\Release\nMars.msi %VER%%APPENDBUILD%\nMarsIDE.%VER%%APPENDBUILD%.win.msi
+copy ..\nMars\Bin\Release\nMars.msi %VER%%APPENDBUILD%\nMarsFull.%VER%%APPENDBUILD%.win.msi

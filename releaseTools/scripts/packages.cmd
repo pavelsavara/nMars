@@ -1,7 +1,7 @@
 @echo off
 call %~dp0\ver.cmd
 
-rem svn export https://nmars.svn.sourceforge.net/svnroot/nmars/trunk %VER%%APPENDBUILD%.nMarsSources
+svn export https://nmars.svn.sourceforge.net/svnroot/nmars/trunk %VER%%APPENDBUILD%\%VER%%APPENDBUILD%.nMarsSources
 
 
 cd %VER%%APPENDBUILD%
