@@ -66,6 +66,7 @@ namespace nMars.IDE.Forms
             this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusbar = new System.Windows.Forms.StatusStrip();
             this.toolbar = new System.Windows.Forms.ToolStrip();
+            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.executeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.runFastToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.runNormalToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -76,7 +77,6 @@ namespace nMars.IDE.Forms
             this.pauseToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.stepBackToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.stopToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.fileToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
@@ -399,6 +399,16 @@ namespace nMars.IDE.Forms
             this.toolbar.TabIndex = 3;
             this.toolbar.Text = "toolStrip1";
             // 
+            // saveToolStripButton
+            // 
+            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveToolStripButton.Image = global::nMars.IDE.Properties.Resources.Save;
+            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripButton.Name = "saveToolStripButton";
+            this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.saveToolStripButton.Text = "toolStripButton1";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
+            // 
             // executeToolStripButton
             // 
             this.executeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -447,6 +457,7 @@ namespace nMars.IDE.Forms
             this.stepRoundToolStripButton.Name = "stepRoundToolStripButton";
             this.stepRoundToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.stepRoundToolStripButton.Text = "Step Round";
+            this.stepRoundToolStripButton.Visible = false;
             this.stepRoundToolStripButton.Click += new System.EventHandler(this.stepRoundToolStripButton_Click);
             // 
             // stepThreadToolStripButton
@@ -457,6 +468,7 @@ namespace nMars.IDE.Forms
             this.stepThreadToolStripButton.Name = "stepThreadToolStripButton";
             this.stepThreadToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.stepThreadToolStripButton.Text = "Step Thread";
+            this.stepThreadToolStripButton.Visible = false;
             // 
             // stepAnyToolStripButton
             // 
@@ -497,16 +509,6 @@ namespace nMars.IDE.Forms
             this.stopToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.stopToolStripButton.Text = "Stop";
             this.stopToolStripButton.Click += new System.EventHandler(this.stopToolStripButton_Click);
-            // 
-            // saveToolStripButton
-            // 
-            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveToolStripButton.Image = global::nMars.IDE.Properties.Resources.Save;
-            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.saveToolStripButton.Text = "toolStripButton1";
-            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // splitContainerOuter
             // 

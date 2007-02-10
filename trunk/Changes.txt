@@ -1,5 +1,12 @@
+02/10/2007 - nMars0.9.0
+  - new warrior template
+  - breakpoint on doubleclick to cell
+  - initialization of round moved to start next step for IDE
+
 02/06/2007 - merged IDE and IDE.Debugger components
+
 02/06/2007 - nMars0.8.4 - tag version before merge IDE and IDE.Debugger components
+
 02/04/2007 - step-back fixes
   - unit test step-back feature
   - step-back fixed, pspace history

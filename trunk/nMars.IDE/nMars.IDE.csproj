@@ -62,11 +62,13 @@
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CoreGridInteractive.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CoreGridInteractive.Designer.cs">
       <DependentUpon>CoreGridInteractive.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CoreListingInteractive.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CoreListingInteractive.Designer.cs">
       <DependentUpon>CoreListingInteractive.cs</DependentUpon>
