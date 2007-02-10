@@ -43,6 +43,7 @@
 <strong>-ue .ext </strong> Dump warriors to files with extension
 <strong>-uo      </strong> Dump warriror format with offset [off]
 <strong>-ul      </strong> Dump warriror format with labels [off]
+<strong>-up      </strong> Dump warriror format with expressions [off]
 <strong>-uc      </strong> Dump warriror format with comments [off]
 <strong>-ux      </strong> Dump warriror format xml</pre>
       

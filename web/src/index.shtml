@@ -15,6 +15,15 @@
         <li>Source code could be checked out from <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/"> subversion repository</a> or <a href="http://nmars.svn.sourceforge.net/viewvc/nmars/trunk/">browsed</a></li>
         
     </ul>
+  <br/>
+    <div class="Pic">
+      <a href="screens/ide-editor.png">
+        <img src="screens/ide-editor-s.png" alt="nMars editor"/>
+      </a>
+      <a href="screens/ide-debugger-4.png">
+        <img src="screens/ide-debugger-4s.png" alt="nMars debugger"/>
+      </a>
+    </div>
 
     <h2>Features</h2>
     <ul>
@@ -69,7 +78,7 @@
     <br/>
     <br/>
 
-    <p style="text-align:right; padding-right: 25%"><strong>Pavel Savara</strong></p>
+    <p style="text-align:right; padding-right: 25%"><strong>Pavel Šavara</strong></p>
     <br/>
     <br/>
 

@@ -4,7 +4,8 @@
 
 	<h1>nMars redcode parser</h1>
     <h2>Parser structure</h2>
-    <p>Below are structures of parser. File is parsed by LALR, statements and expressions are produced. Then are statements turned to warrior instructions.</p>
+    <p>Below are structures of parser. File is parsed by LALR <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/nMars.Parser/Properties/RedCode.grm">grammar</a>, statements and expressions are produced. 
+      Then are statements turned to warrior instructions.</p>
     <div class="Pic">
       <img src="diagrams/Parser.png" alt="nMars redcode parser"/>
     </div>
@@ -14,6 +15,7 @@
 <br/> - EQU substitutions 
 <br/>   - instructions in EQU
 <br/> - registers in-place assignments (k=k+1)
+<br/>Big differece is that this parser works with EQU as with functions, but pMars as with macros. If you wrap expression with brackets, you will be sure that they will behave same.
 <br/>Is based on <a href="http://www.devincook.com/goldparser/">GOLD parser</a> by Devin Cook
 <br/>And <a href="http://www.xs4all.nl/~rvanloen/goldparser.html">Calitha .NET Engine</a> for GOLD parser by Robert van Loenhout which was little bit modified.
 	</p>
