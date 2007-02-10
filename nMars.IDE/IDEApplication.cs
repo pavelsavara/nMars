@@ -4,8 +4,10 @@
 // 2006 Pavel Savara
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using System.Net;
 using nMars.IDE.Controls;
 using nMars.IDE.Core;
 using nMars.IDE.Forms;
@@ -100,7 +102,8 @@ namespace nMars.IDE
         {
             bool openEditor = ActiveEditor != null;
             bool openWarrior = openEditor && ActiveEditor.Document is WarriorDocument;
-            MainForm.saveWarriorToolStripMenuItem.Enabled = openWarrior;
+            MainForm.saveWarriorToolStripMenuItem.Enabled = openEditor;
+            MainForm.saveToolStripButton.Enabled = openEditor;
             MainForm.compileWarriorToolStripMenuItem.Enabled = openWarrior;
             MainForm.closeWarriorToolStripMenuItem.Enabled = openWarrior;
             MainForm.lbDocClose.Visible = openEditor;
@@ -169,6 +172,57 @@ namespace nMars.IDE
                 shell.Project = ActiveProject.Project;
                 shell.Attach(console, Shells);
             }
+        }
+
+        #endregion
+
+        #region Misc
+
+        public void CheckNewVersion(bool silent)
+        {
+            string myVersion = ModuleRegister.GetVersion(typeof(Warrior));
+            string latestVersion = GetNewVersion();
+            if (myVersion.Equals(latestVersion))
+            {
+                if (silent)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show(MainForm, "Your version " + myVersion + " is up to date.", "Check for Update",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                DialogResult result =
+                    MessageBox.Show(MainForm,
+                                    "New version " + latestVersion +
+                                    " is available for download. Would you like to navigate to download page ?",
+                                    "Check for Update", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                if (result == DialogResult.Yes)
+                {
+                    Process.Start("http://nmars.sourceforge.net/download.php");
+                }
+            }
+        }
+
+        public string GetNewVersion()
+        {
+            HttpWebRequest request = (HttpWebRequest)
+                        WebRequest.Create("https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/nMars.ver");
+            // execute the request
+            HttpWebResponse response = (HttpWebResponse)
+                request.GetResponse();
+
+            // we will read data via the response stream
+            Stream resStream = response.GetResponseStream();
+            StreamReader sr=new StreamReader(resStream);
+            string latestVersion = sr.ReadToEnd().Trim(' ', '\n', '\r');
+            sr.Close();
+
+            return latestVersion;
         }
 
         #endregion

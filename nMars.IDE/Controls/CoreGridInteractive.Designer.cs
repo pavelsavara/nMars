@@ -30,11 +30,12 @@ namespace nMars.IDE.Controls
         {
             this.SuspendLayout();
             // 
-            // DebugCoreGrid
+            // CoreGridInteractive
             // 
-            this.Name = "DebugCoreGrid";
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DebugCoreGrid_MouseClick);
-            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DebugCoreGrid_MouseDoubleClick);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.Name = "CoreGridInteractive";
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CoreGridInteractive_MouseClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.CoreGridInteractive_DoubleClick);
             this.ResumeLayout(false);
 
         }

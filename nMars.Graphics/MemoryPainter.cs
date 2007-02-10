@@ -30,11 +30,11 @@ namespace nMars.Graphics
             tooltipText.Append(instruction.ToString());
             if (source != null)
             {
-                tooltipText.Append("\nCopy from: ");
+                tooltipText.Append("\r\nCopy from: ");
                 if (owner != null)
                 {
                     tooltipText.Append(owner.Name);
-                    tooltipText.Append("\n");
+                    tooltipText.Append("\r\n");
                 }
                 tooltipText.Append(source.GetLine(ParserOptions.Full, false).Trim());
             }
@@ -44,18 +44,18 @@ namespace nMars.Graphics
             {
                 if (evnt.Died!=null)
                 {
-                    tooltipText.Append("\n");
+                    tooltipText.Append("\r\n");
                     tooltipText.Append("Died: ");
                     tooltipText.Append(evnt.Died.Name);
                 }
                 else
                 {
-                    tooltipText.Append("\nDied");
+                    tooltipText.Append("\r\nDied");
                 }
             }
             else if (evnt.Died!=null)
             {
-                tooltipText.Append("\nLast death: ");
+                tooltipText.Append("\r\nLast death: ");
                 tooltipText.Append(evnt.Died.Name);
             }
 
@@ -64,53 +64,53 @@ namespace nMars.Graphics
             {
                 if (evnt.Executed != null)
                 {
-                    tooltipText.Append("\nExecuted by: ");
+                    tooltipText.Append("\r\nExecuted by: ");
                     tooltipText.Append(evnt.Executed.Name);
                 }
                 else
                 {
-                    tooltipText.Append("\nExecuted");
+                    tooltipText.Append("\r\nExecuted");
                 }
             }
             else if (evnt.Executed != null)
             {
-                tooltipText.Append("\nLast execution by: ");
+                tooltipText.Append("\r\nLast execution by: ");
                 tooltipText.Append(evnt.Executed.Name);
             }
 
             //write instruction
             if ((evnt.Event & InstructionEvent.WrittenInstruction) != 0)
             {
-                tooltipText.Append("\nInstruction written by: ");
+                tooltipText.Append("\r\nInstruction written by: ");
                 tooltipText.Append(evnt.WrittenInstruction.Name);
             }
             else if (evnt.WrittenInstruction != null)
             {
-                tooltipText.Append("\nInstruction last written by: ");
+                tooltipText.Append("\r\nInstruction last written by: ");
                 tooltipText.Append(evnt.WrittenInstruction.Name);
             }
 
             //write data
             if ((evnt.Event & InstructionEvent.WrittenData) != 0)
             {
-                tooltipText.Append("\nData written by: ");
+                tooltipText.Append("\r\nData written by: ");
                 tooltipText.Append(evnt.WrittenData.Name);
             }
             else if (evnt.WrittenData != null)
             {
-                tooltipText.Append("\nData last written by: ");
+                tooltipText.Append("\r\nData last written by: ");
                 tooltipText.Append(evnt.WrittenData.Name);
             }
 
             //read
             if ((evnt.Event & InstructionEvent.Read) != 0)
             {
-                tooltipText.Append("\nRead by: ");
+                tooltipText.Append("\r\nRead by: ");
                 tooltipText.Append(evnt.Read.Name);
             }
             else if (evnt.Read != null)
             {
-                tooltipText.Append("\nLast read by: ");
+                tooltipText.Append("\r\nLast read by: ");
                 tooltipText.Append(evnt.Read.Name);
             }
 

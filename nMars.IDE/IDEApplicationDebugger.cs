@@ -78,13 +78,12 @@ namespace nMars.IDE
         /// <summary>
         /// Redirection thru MainForm
         /// </summary>
-        delegate void boolDelegate(bool logical);
-        protected override void onEngineStoppedAsync(bool finished)
+        protected override void onEngineStoppedAsync(bool finished, BreakPoint breakPoint, string reason)
         {
-            MainForm.Invoke(new boolDelegate(OnEngineStopped), finished);
+            MainForm.Invoke(new EngineStoppedCallback(OnEngineStopped), finished, breakPoint, reason);
         }
 
-        protected override void OnEngineStopped(bool finished)
+        protected override void OnEngineStopped(bool finished, BreakPoint breakpoint, string reason)
         {
             if (finished)
             {
@@ -95,7 +94,7 @@ namespace nMars.IDE
             {
                 PauseWatch();
             }
-            base.OnEngineStopped(finished);
+            base.OnEngineStopped(finished, breakpoint, reason);
             RefreshControls();
         }
 
@@ -262,8 +261,20 @@ namespace nMars.IDE
 
         public void EditCell(int address)
         {
-            //TODO breakpoints + cell values, 
-            // dialog and tabs ?
+            bool wasRunning = !Engine.IsPaused;
+            if (wasRunning)
+            {
+                Pause();
+            }
+            CellDetailDialog editor=new CellDetailDialog();
+            editor.Address = address;
+            editor.Engine = Engine;
+            editor.Project = Project;
+            editor.ShowDialog();
+            if (wasRunning)
+            {
+                Continue();
+            }
         }
 
         #endregion

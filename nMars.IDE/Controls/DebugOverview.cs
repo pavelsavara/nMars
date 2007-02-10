@@ -35,7 +35,7 @@ namespace nMars.IDE.Controls
 
         public void RepaintView()
         {
-            textBoxCycle.Text = IDEApplication.Instance.Engine.Cycles + "/" +
+            textBoxCycle.Text = IDEApplication.Instance.Engine.Cycle + "/" +
                                 IDEApplication.Instance.Engine.CyclesLeft;
             textBoxRound.Text = IDEApplication.Instance.Engine.Round + "/" +
                                 IDEApplication.Instance.Engine.Project.Rules.Rounds;

@@ -28,7 +28,7 @@ namespace pMars.DllWrapper
         public void BeginMatch(IProject aProject)
         {
             project = aProject;
-            cycles = 0;
+            cycle = 0;
             rules = project.Rules;
             results = new MatchResult(project);
             string[] names = new string[project.Warriors.Count];
@@ -104,13 +104,13 @@ namespace pMars.DllWrapper
             dllCoreLoaded = false;
             dllTasksLoaded = false;
             dllWarriorsLoaded = false;
-            cycles++;
+            cycle++;
 
             if (lastStepResult > StepResult.Continue)
             {
                 if (lastStepResult != StepResult.Finished)
                 {
-                    cycles = 0;
+                    cycle = 0;
                 }
                 else
                 {
@@ -284,9 +284,9 @@ namespace pMars.DllWrapper
             get { return Marshal.ReadInt32(dllCyclesLeft); }
         }
 
-        public int Cycles
+        public int Cycle
         {
-            get { return cycles; }
+            get { return cycle; }
         }
 
         public int Round
@@ -403,7 +403,7 @@ namespace pMars.DllWrapper
 
         private MatchResult results;
         private Rules rules;
-        protected int cycles;
+        protected int cycle;
         string errFile;
         private IRunningInstruction lastInstruction = null;
         private IProject project;

@@ -24,7 +24,7 @@ namespace nMars.Engine
         {
             base.InitializeRound();
 
-            cycles = 0;
+            cycle = 0;
             cyclesLeft = rules.MaxCycles * rules.WarriorsCount;
 
             liveWarriors = new Queue<EngineWarrior>();
@@ -81,9 +81,9 @@ namespace nMars.Engine
             get { return round; }
         }
 
-        public int Cycles
+        public int Cycle
         {
-            get { return cycles; }
+            get { return cycle; }
         }
 
         public int CyclesLeft
@@ -221,7 +221,7 @@ namespace nMars.Engine
 
         protected Queue<EngineWarrior> liveWarriors;
         private int starter;
-        protected int cycles;
+        protected int cycle;
         protected int cyclesLeft;
         protected int round;
         protected MatchResult results;

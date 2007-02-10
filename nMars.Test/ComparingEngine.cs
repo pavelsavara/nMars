@@ -148,7 +148,7 @@ namespace nMars.Test
 
         private bool Step(Check check)
         {
-            bool stop = (check.Step == 1) && (engineOne.Round == check.Round) && (check.ToCycle <= engineOne.Cycles + 1);
+            bool stop = (check.Step == 1) && (engineOne.Round == check.Round) && (check.ToCycle <= engineOne.Cycle + 1);
             if (stop)
             {
                 // set debuger breakpoint here, this will stop before error ocurs
@@ -156,9 +156,9 @@ namespace nMars.Test
             }
             StepResult resOne = engineOne.NextStep();
             StepResult resTwo = engineTwo.NextStep();
-            bool range = (engineOne.Cycles >= check.FromCycle && engineOne.Cycles <= check.ToCycle &&
+            bool range = (engineOne.Cycle >= check.FromCycle && engineOne.Cycle <= check.ToCycle &&
                           engineOne.Round == check.Round);
-            bool step = (check.Step != 1) && (engineOne.Cycles % check.Step == 0) && (engineOne.Round >= check.Round);
+            bool step = (check.Step != 1) && (engineOne.Cycle % check.Step == 0) && (engineOne.Round >= check.Round);
 
             CheapCheck(resOne, resTwo, check, range);
             if (stop || step || range || resOne == StepResult.NextRound)
@@ -213,25 +213,25 @@ namespace nMars.Test
                 throw new EngineDifferException("StepRes",
                                                 new Check(0, origCheck.FromCycle, origCheck.ToCycle, origCheck.Step / 2));
             }
-            if (engineOne.Cycles != engineTwo.Cycles)
+            if (engineOne.Cycle != engineTwo.Cycle)
             {
-                throw new EngineDifferException("Cycle", new Check(engineOne.Round, engineOne.Cycles, precise));
+                throw new EngineDifferException("Cycle", new Check(engineOne.Round, engineOne.Cycle, precise));
             }
             if (engineOne.Round != engineTwo.Round)
             {
-                throw new EngineDifferException("Round", new Check(engineOne.Round, engineOne.Cycles, precise));
+                throw new EngineDifferException("Round", new Check(engineOne.Round, engineOne.Cycle, precise));
             }
             if (engineOne.LiveWarriorsCount != engineTwo.LiveWarriorsCount)
             {
-                throw new EngineDifferException("Died", new Check(engineOne.Round, engineOne.Cycles, precise));
+                throw new EngineDifferException("Died", new Check(engineOne.Round, engineOne.Cycle, precise));
             }
             if (engineOne.CyclesLeft != engineTwo.CyclesLeft)
             {
-                throw new EngineDifferException("CyclesLeft", new Check(engineOne.Round, engineOne.Cycles, precise));
+                throw new EngineDifferException("CyclesLeft", new Check(engineOne.Round, engineOne.Cycle, precise));
             }
             if (engineOne.NextWarriorIndex != engineTwo.NextWarriorIndex)
             {
-                throw new EngineDifferException("Cheating", new Check(engineOne.Round, engineOne.Cycles, precise));
+                throw new EngineDifferException("Cheating", new Check(engineOne.Round, engineOne.Cycle, precise));
             }
         }
 
@@ -243,7 +243,7 @@ namespace nMars.Test
                 IInstruction iTwo = engineTwo[a];
                 if (!iOne.Equals(iTwo))
                 {
-                    throw new EngineDifferException("Core", new Check(engineOne.Round, engineOne.Cycles, precise));
+                    throw new EngineDifferException("Core", new Check(engineOne.Round, engineOne.Cycle, precise));
                 }
             }
             IList<IPSpace> psapacesOne = engineOne.PSpaces;
@@ -252,21 +252,21 @@ namespace nMars.Test
             {
                 if (!psapacesOne[w].Equals(psapacesTwo[w]))
                 {
-                    throw new EngineDifferException("PSpaces", new Check(engineOne.Round, engineOne.Cycles, precise));
+                    throw new EngineDifferException("PSpaces", new Check(engineOne.Round, engineOne.Cycle, precise));
                 }
 
                 if (engineOne.LastResults[w] != engineTwo.LastResults[w])
                 {
-                    throw new EngineDifferException("LastResult", new Check(engineOne.Round, engineOne.Cycles, precise));
+                    throw new EngineDifferException("LastResult", new Check(engineOne.Round, engineOne.Cycle, precise));
                 }
                 if (engineOne.PSPaceIndexes[w] != engineTwo.PSPaceIndexes[w])
                 {
                     throw new EngineDifferException("PSPaceIndexes",
-                                                    new Check(engineOne.Round, engineOne.Cycles, precise));
+                                                    new Check(engineOne.Round, engineOne.Cycle, precise));
                 }
                 if (engineOne.Warriors[w].Pin != engineTwo.Warriors[w].Pin)
                 {
-                    throw new EngineDifferException("Pin", new Check(engineOne.Round, engineOne.Cycles, precise));
+                    throw new EngineDifferException("Pin", new Check(engineOne.Round, engineOne.Cycle, precise));
                 }
                 IEnumerable<int> tasksOne = engineOne.Tasks[w];
                 IEnumerable<int> tasksTwo = engineTwo.Tasks[w];
@@ -281,18 +281,18 @@ namespace nMars.Test
                         if (!enumerator2.MoveNext())
                         {
                             throw new EngineDifferException("Task Died",
-                                                            new Check(engineOne.Round, engineOne.Cycles, precise));
+                                                            new Check(engineOne.Round, engineOne.Cycle, precise));
                         }
                         if (enumerator1.Current != enumerator2.Current)
                         {
                             throw new EngineDifferException("Bad IP",
-                                                            new Check(engineOne.Round, engineOne.Cycles, precise));
+                                                            new Check(engineOne.Round, engineOne.Cycle, precise));
                         }
                     }
                     if (enumerator2.MoveNext())
                     {
                         throw new EngineDifferException("Task Died",
-                                                        new Check(engineOne.Round, engineOne.Cycles, precise));
+                                                        new Check(engineOne.Round, engineOne.Cycle, precise));
                     }
                 }
                 finally

@@ -62,13 +62,11 @@
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CoreGridInteractive.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CoreGridInteractive.Designer.cs">
       <DependentUpon>CoreGridInteractive.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CoreListingInteractive.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CoreListingInteractive.Designer.cs">
       <DependentUpon>CoreListingInteractive.cs</DependentUpon>
@@ -97,12 +95,6 @@
     <Compile Include="Controls\DebugWarriorOverview.Designer.cs">
       <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ExecuteAddressBreakPointEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ExecuteAddressBreakPointEditor.Designer.cs">
-      <DependentUpon>ExecuteAddressBreakPointEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\IDEPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -127,20 +119,11 @@
     <Compile Include="Controls\IDEFrame.Designer.cs">
       <DependentUpon>IDEFrame.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\BreakPointEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\BreakPointEditor.Designer.cs">
-      <DependentUpon>BreakPointEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\CellDetailDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\CellDetailDialog.Designer.cs">
       <DependentUpon>CellDetailDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\DebuggerMainForm.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="IDEApplication.cs" />
     <Compile Include="Core\Document.cs" />
@@ -203,10 +186,6 @@
       <DependentUpon>DebugWarriorOverview.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ExecuteAddressBreakPointEditor.resx">
-      <DependentUpon>ExecuteAddressBreakPointEditor.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ProjectEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProjectEditor.cs</DependentUpon>
@@ -226,10 +205,6 @@
     <EmbeddedResource Include="Controls\TextEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TextEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BreakPointEditor.resx">
-      <DependentUpon>BreakPointEditor.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CellDetailDialog.resx">
       <DependentUpon>CellDetailDialog.cs</DependentUpon>
@@ -265,11 +240,13 @@
     <Content Include="Resources\Run.ico" />
     <Content Include="Resources\RunF.ico" />
     <Content Include="Resources\RunFF.ico" />
+    <None Include="Resources\Save.ico" />
     <Content Include="Resources\Step.ico" />
     <Content Include="Resources\StepRound.ico" />
     <Content Include="Resources\StepThread.ico" />
     <Content Include="Resources\Stop.ico" />
     <None Include="Resources\IDE.ico" />
+    <EmbeddedResource Include="Resources\template.red" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nMars.Debugger\nMars.Debugger.csproj">

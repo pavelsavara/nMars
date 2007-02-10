@@ -67,6 +67,7 @@ namespace nMars.Engine
                 evnt.Event |= InstructionEvent.WrittenData;
             }
             evnt.Version = ++version;
+            evnt.Cycle = cycle;
         }
 
         protected override void BeforeRead(int address, Column column)
@@ -78,6 +79,8 @@ namespace nMars.Engine
             evnt.Touched = activeWarrior;
             evnt.Read = activeWarrior;
             evnt.Version = ++version;
+            evnt.Cycle = cycle;
+            evnt.Level = CoreEventsLevel.Clean;
         }
 
         protected override void Died(int address)
@@ -89,6 +92,7 @@ namespace nMars.Engine
             evnt.Touched = activeWarrior;
             evnt.Died = activeWarrior;
             evnt.Version = ++version;
+            evnt.Cycle = cycle;
         }
 
         protected override void PerformInstruction(int address)
@@ -100,6 +104,7 @@ namespace nMars.Engine
             evnt.Touched = activeWarrior;
             evnt.Executed = activeWarrior;
             evnt.Version = ++version;
+            evnt.Cycle = cycle;
         }
 
         protected CoreEventRecord[] coreEvents;

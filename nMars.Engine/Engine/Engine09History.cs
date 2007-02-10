@@ -65,7 +65,7 @@ namespace nMars.Engine
         protected override void InitializeCycle(int Ip)
         {
             base.InitializeCycle(Ip);
-            CurrentEvent = new EngineEvent(core[Ip], cycles, cyclesLeft, Ip, activeWarrior, lastStepResult);
+            CurrentEvent = new EngineEvent(core[Ip], cycle, cyclesLeft, Ip, activeWarrior, lastStepResult);
         }
 
         protected override void FinalizeCycle()

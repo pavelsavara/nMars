@@ -72,6 +72,12 @@ namespace nMars.RedCode
             get { return WarriorFiles; }
         }
 
+
+        BreakPoints IProject.BreakPoints
+        {
+            get { return BreakPoints; }
+        }
+
         #endregion
 
         #region Persistence

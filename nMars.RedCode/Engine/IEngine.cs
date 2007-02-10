@@ -105,7 +105,7 @@ namespace nMars.RedCode
     public interface IStatusView
     {
         int Round { get; }
-        int Cycles { get; }
+        int Cycle { get; }
         int CyclesLeft { get; }
         int LiveWarriorsCount { get; }
         int WarriorsCount { get; }
@@ -151,18 +151,6 @@ namespace nMars.RedCode
         bool CanStepBack { get; }
     }
 
-    public class CheckBreakEventArgs : EventArgs
-    {
-        public bool Break = false;
-    }
-
-    public delegate void CheckBreak(CheckBreakEventArgs args);
-
-    public interface IBreakpointsEngine
-    {
-        event CheckBreak CheckBreak;
-    }
-
     public interface IStuntEngine
     {
         /// <summary>
@@ -171,9 +159,9 @@ namespace nMars.RedCode
         int Brake { get; set;}
     }
     
-    public delegate void EngineStoppedCallback(bool finished);
+    public delegate void EngineStoppedCallback(bool finished, BreakPoint breakpoint, string reason);
 
-    public interface IAsyncEngine : IStepEngine, IStepBackEngine, IBreakpointsEngine, IStuntEngine, ITaskView,
+    public interface IAsyncEngine : IStepEngine, IStepBackEngine, IStuntEngine, ITaskView,
                                        ITimeView, ICoreView, IStatusView, IExtendedStepEngine, ICoreEvents
     {
         void BeginMatch(IProject project, EngineStoppedCallback callback);
@@ -240,6 +228,7 @@ namespace nMars.RedCode
         public IRunningWarrior Executed;
         public IRunningWarrior Touched;
         public long Version;
+        public long Cycle = -1;
     }
 
     public interface ICoreEvents
