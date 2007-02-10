@@ -1,0 +1,29 @@
+pMARS is a team project, and we're always glad to see it ported to new
+machines, operating systems and graphical environments. If you want your
+code contributions to be incorporated into future pMARS release, please
+follow these simple guidelines:
+
+    * before you start changing the main files, request a copy of the most
+        recent code. Reason for letting us know about your changes ahead of 
+        time is that someone else may already be working on it.
+        CVS: http://sourceforge.net/projects/corewar
+
+    * don't send patches or diffs to the main files, but rather the entire
+        file. This is related to the previous point: you are unlikely to
+        have an up-to-date copy of the source.
+
+    * new display code should go in seperate *disp.[ch] files to keep the
+        source modular. For consistency, try to maintain the "look-and-feel"
+        of preexisting displays and user-interfaces and use similar variable
+        naming and formatting conventions.
+
+    * use a descriptive preprocessor symbol to bracket your code additions
+        to the main files. Try not to use a compiler-predefined symbol
+        (__SYMBOL__), but rather come up with a name yourself and add a
+        section to config.h that automatically #defines your symbol if a
+        compiler-predefined symbol is defined. This makes it easier to adapt
+        your code to a different compiler that happens not to predefine the
+        same symbol.
+
+    * in general, follow the examples of previous contributors, and if you
+        have any questions, let us know.
