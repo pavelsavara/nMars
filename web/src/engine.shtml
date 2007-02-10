@@ -2,7 +2,7 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>Engine - Core simulator</h1>
+	<h1>nMars - Engine - Core simulator</h1>
 
     <h2>Engine structure</h2>
     <p>Below is structure of engine. It is made in layers, where higher layer is derived from layer below and extends it's behavior.</p>

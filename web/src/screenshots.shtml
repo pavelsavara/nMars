@@ -2,7 +2,7 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>nMars - Corewars MARS for .NET</h1>
+	<h1>nMars - Screen shots</h1>
   <ul>
   	<li><a href="screens/ide-debugger-1.png">nMars IDE in debug mode</a>, showing write events (green/yellow meteorites)</li>
   	<li><a href="screens/ide-debugger-2.png">nMars IDE in debug mode</a>, showing tooltip info</li>

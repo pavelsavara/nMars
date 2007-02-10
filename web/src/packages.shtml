@@ -2,7 +2,7 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>nMars release packages</h1>
+	<h1>nMars - release packages</h1>
     <h2>Summary</h2>
     <ul>
       <li>Runtime platform is .NET 2.0 or Mono.</li>

@@ -2,7 +2,7 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>Site Map</h1>
+	<h1>nMars - Site Map</h1>
 	<ul>
     <li><a href="index.shtml">nMars</a> Home</li>
     <li><a href="http://sourceforge.net/projects/nmars">SourceForge.net</a>

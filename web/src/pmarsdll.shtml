@@ -2,7 +2,7 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>pMars DLL and Wrapper</h1>
+	<h1>nMars - pMars DLL and Wrapper</h1>
 	<p>
 <br/> - I included pMARS 0.9.2 modified by M Joonas Pihlaja.
 <br/> - I modularized it and wrapped into DLL and .NET component

@@ -1,7 +1,7 @@
 ﻿<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
-<h1>Corewars</h1>
+<h1>nMars - Corewars info</h1>
 <p>Corewars is a programming game in which two or more battle programs (called warriors) compete for the control of the 
 MARS virtual computer (Memory Array Redcode Simulator). 
 These battle programs are written in an abstract assembly language called Redcode. 
@@ -10,7 +10,7 @@ leaving your program in sole possession of the machine. [from wikipedia] </p>
 
 <p>If you are stil not sure what corewars is follow links below, but return back :-)</p>
 
-<h2>Core</h2>
+<h2>Core sites</h2>
 <ul>
   <li><a href="http://www.koth.org/">King Of The Hill</a></li>
 </ul>

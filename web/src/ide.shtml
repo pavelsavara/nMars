@@ -1,7 +1,7 @@
 <!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
-    <h1>nMars IDE</h1>
+    <h1>nMars - IDE</h1>
 
     <h2>Overview</h2>
     <ul>
@@ -62,6 +62,8 @@
           <li>future: double click will edit cell</li>
           <li>UI and engine are asynchronous, engine could change speed</li>
       </ul></li>
+      <li>Single click on cell will focus it in memory listing</li>
+      <li>Double click on cell will open breakpoints editor</li>
       <li>There is console/shell which could execute textual commands</li>
       <li>Shell could be extended by nMarsShellPy module with IronPython</li>
     </ul>

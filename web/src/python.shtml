@@ -2,7 +2,7 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>Python shell extension</h1>
+	<h1>nMars - Python shell extension</h1>
 	<p>Page will be written soon.</p>
 </div>
 <!--#include virtual="footer" -->
