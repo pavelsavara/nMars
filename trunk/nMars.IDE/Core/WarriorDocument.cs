@@ -4,8 +4,10 @@
 // 2006 Pavel Savara
 
 using System.IO;
+using System.Reflection;
 using nMars.IDE.Controls;
 using nMars.RedCode;
+using nMars.RedCode.Modules;
 
 namespace nMars.IDE.Core
 {
@@ -107,6 +109,24 @@ namespace nMars.IDE.Core
                     StreamReader sr = new StreamReader(FileName);
                     Editor.EditedText = sr.ReadToEnd();
                     sr.Close();
+                }
+                else
+                {
+                    string templateOverride = Path.Combine(ModuleRegister.BasePath,"template.red");
+                    if (File.Exists(templateOverride))
+                    {
+                        StreamReader sr = new StreamReader(templateOverride);
+                        Editor.EditedText = sr.ReadToEnd();
+                        sr.Close();
+                    }
+                    else
+                    {
+                        Assembly assembly = typeof(WarriorDocument).Assembly;
+                        Stream template = assembly.GetManifestResourceStream("nMars.IDE.Resources.template.red");
+                        StreamReader reader = new StreamReader(template);
+                        Editor.EditedText = reader.ReadToEnd();
+                        reader.Close();
+                    }
                 }
                 //?? IsModified = false;
                 Editor.Attach(IDEApplication.Instance.MainForm.tabDocuments, Name);

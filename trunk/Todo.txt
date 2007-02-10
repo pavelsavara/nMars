@@ -45,7 +45,6 @@ unsorted
  - Debuger
    - all pmars commands, -k missing, score formula
    - convert pmars startup macros
-   - add breakpoints, persistent
    - python tab completion
    - clear display (pbt)
    
@@ -61,7 +60,6 @@ unsorted
    - submit to hill feature
    - Project/solution editors
    - Mono - Moma
-   - new warrior template
    - syntax highliting
    - parser, focus after click on errors
  
@@ -94,8 +92,4 @@ unsorted
  
  - pMars
    - disable pSpace commandline option
-
-
- - TODO 0.9
-   - breakpoints
    

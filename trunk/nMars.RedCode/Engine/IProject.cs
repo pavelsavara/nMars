@@ -40,6 +40,11 @@ namespace nMars.RedCode
         ParserOptions ParserOptions { get; set; }
 
         /// <summary>
+        /// Breakpoints
+        /// </summary>
+        BreakPoints BreakPoints { get; }
+
+        /// <summary>
         /// Save/serialize project to file
         /// </summary>
         /// <param name="filename">filename should have extension .nmproj</param>

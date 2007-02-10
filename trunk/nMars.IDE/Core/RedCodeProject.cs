@@ -21,6 +21,8 @@ namespace nMars.IDE.Core
             Project=new Project();
             Project.ParserOptions = ParserOptions.Ide;
             Project.EngineOptions.StatusLine = true;
+            Project.EngineOptions.InitRoundBefore = true;
+            Project.Rules.WarriorsCount = 0;
         }
 
         private RedCodeProject(string aFileName)
@@ -45,7 +47,6 @@ namespace nMars.IDE.Core
         {
             RedCodeProject project = new RedCodeProject();
             ProjectCounter++;
-            project.Project.Rules.WarriorsCount = 0;
             project.FileName = "NewProject" + ProjectCounter + ".nmproj";
             project.IsNew = true;
             project.IsModified = false;

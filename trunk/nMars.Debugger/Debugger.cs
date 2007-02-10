@@ -29,6 +29,7 @@ namespace nMars.Debugger
                     else
                     {
                         Engine = components.AsyncEngineWrapper;
+                        project.EngineOptions.InitRoundBefore = true;
                         Engine.BeginMatch(project, onEngineStoppedAsync);
                         if (onlyInit)
                             console.WriteLine(startString);
@@ -64,12 +65,12 @@ namespace nMars.Debugger
         /// <summary>
         /// Redirection thru MainForm on derived class
         /// </summary>
-        protected virtual void onEngineStoppedAsync(bool finished)
+        protected virtual void onEngineStoppedAsync(bool finished, BreakPoint breakPoint, string reason)
         {
-            OnEngineStopped(finished);
+            OnEngineStopped(finished, breakPoint, reason);
         }
 
-        protected virtual void OnEngineStopped(bool finished)
+        protected virtual void OnEngineStopped(bool finished, BreakPoint breakpoint, string reason)
         {
             if (Engine == null)
                 return;
@@ -82,7 +83,15 @@ namespace nMars.Debugger
             }
             else
             {
-                console.WriteLine(pausedString);
+                if (breakpoint!=null)
+                {
+                    console.WriteLine(breakString);
+                    console.WriteLine("Reason: " + reason);
+                }
+                else
+                {
+                    console.WriteLine(pausedString);
+                }
             }
         }
 
@@ -139,7 +148,7 @@ namespace nMars.Debugger
             if (Engine == null || !Engine.IsPaused)
                 return false;
 
-            if (Engine.LastStepResult == StepResult.Finished && Engine.Cycles!=0)
+            if (Engine.LastStepResult == StepResult.Finished && Engine.Cycle!=0)
             {
                 Engine.Continue(false);
             }
@@ -340,6 +349,7 @@ namespace nMars.Debugger
         const string startString = "=Start=";
         const string runningString = "=Running=";
         const string pausedString = "=Paused=";
+        const string breakString = "=Breakpoint=";
         const string backString = "=Back=";
         const string stopString = "=Stop=";
         const string stepString = "=Step=";

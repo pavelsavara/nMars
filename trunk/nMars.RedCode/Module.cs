@@ -16,7 +16,7 @@ namespace nMars.RedCode
         static Module()
         {
             ModuleRegister.Register(new Module());
-            ModuleRegister.Register(new ASyncModule());
+            ModuleRegister.Register(new AsyncModule());
         }
 
         #endregion
@@ -34,7 +34,7 @@ namespace nMars.RedCode
         }
     }
 
-    class ASyncModule : BaseModule, IEngineWrapperModule
+    class AsyncModule : BaseModule, IEngineWrapperModule
     {
         public IEngine CreateEngine(IEngine engine)
         {

@@ -351,7 +351,7 @@ namespace nMars.RedCode
             console.WriteLine("Rules:");
             console.WriteLine("  -r #      Rounds to play [1]");
             console.WriteLine("  -s #      Size of core [8000]");
-            console.WriteLine("  -c #      Cycles until tie [80000]");
+            console.WriteLine("  -c #      Cycle until tie [80000]");
             console.WriteLine("  -p #      Max. processes [8000]");
             console.WriteLine("  -l #      Max. warrior length [100]");
             console.WriteLine("  -d #      Min. warriors distance");

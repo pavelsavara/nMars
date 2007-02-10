@@ -31,6 +31,9 @@ namespace nMars.RedCode
         [XmlIgnore]
         public Random Random = new Random();
 
+        [XmlIgnore]
+        public bool InitRoundBefore = false;
+
         [XmlAttribute]
         public int Brake = 0;
 

@@ -16,6 +16,7 @@ namespace nMars.RedCode
         Continue = 0,
         NextRound = 1,
         Finished = 2,
+        Start = 3,
     }
 
     [ComVisible(true)]

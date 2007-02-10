@@ -17,7 +17,7 @@ namespace nMars.Engine
                 throw new InvalidOperationException("Cannot step back now");
             EngineEvent e = History.Pop();
 
-            cycles = e.Cycles;
+            cycle = e.Cycles;
             cyclesLeft = e.CyclesLeft;
             int lastTask = e.Warrior.Tasks.Count;
             int liveLastRound = liveWarriors.Count;
@@ -64,6 +64,18 @@ namespace nMars.Engine
                 core[ei.Address].ValueB = ei.ValueB;
                 core[ei.Address].OriginalOwner = ei.OriginalOwner;
                 core[ei.Address].OriginalInstruction = ei.OriginalInstruction;
+
+                CoreEventRecord evnt = CoreEvents[ei.Address];
+                evnt.Event = InstructionEvent.None;
+                evnt.Cycle = cycle;
+                evnt.Touched = null;
+                evnt.Executed = null;
+                evnt.Read = null;
+                evnt.Died = null;
+                evnt.WrittenData = null;
+                evnt.WrittenInstruction = null;
+                evnt.Version = ++version;
+                evnt.Level = CoreEventsLevel.Clean;
             }
 
             if (e.PSpaceAddress!=-1)

@@ -26,11 +26,15 @@ namespace nMars.Engine
             InitializeRound();
 
             results = new MatchResult(project);
-            lastStepResult = StepResult.Finished;
+            lastStepResult = StepResult.Start;
         }
 
         public StepResult NextStep()
         {
+            if (Project.EngineOptions.InitRoundBefore && lastStepResult == StepResult.NextRound)
+            {
+                InitRound();
+            }
             if (round >= rules.Rounds)
             {
                 return StepResult.Finished;
@@ -52,7 +56,8 @@ namespace nMars.Engine
             {
                 stepResult = StepResult.NextRound;
             }
-            if (stepResult == StepResult.NextRound)
+            lastStepResult = stepResult;
+            if (lastStepResult == StepResult.NextRound)
             {
                 for (int w = 0; w < rules.WarriorsCount; w++)
                 {
@@ -68,18 +73,25 @@ namespace nMars.Engine
                     }
                 }
                 FinalizeRound();
-                round++;
-                if (round >= rules.Rounds)
+                if (!Project.EngineOptions.InitRoundBefore)
                 {
-                    stepResult = StepResult.Finished;
-                }
-                else
-                {
-                    InitializeRound();
+                    InitRound();
                 }
             }
-            lastStepResult = stepResult;
-            return stepResult;
+            return lastStepResult;
+        }
+
+        private void InitRound()
+        {
+            round++;
+            if (round >= rules.Rounds)
+            {
+                lastStepResult = StepResult.Finished;
+            }
+            else
+            {
+                InitializeRound();
+            }
         }
 
         public MatchResult EndMatch(ISimpleOutput console)
@@ -124,7 +136,7 @@ namespace nMars.Engine
                 cyclesLeft = cyclesLeft - 1 - (cyclesLeft - 1) / (LiveWarriorsCount + 1);
             }
             cyclesLeft--;
-            cycles++;
+            cycle++;
             FinalizeCycle();
         }
 

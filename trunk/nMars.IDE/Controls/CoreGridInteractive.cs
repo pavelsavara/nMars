@@ -15,7 +15,7 @@ namespace nMars.IDE.Controls
             InitializeComponent();
         }
 
-        private void DebugCoreGrid_MouseClick(object sender, MouseEventArgs e)
+        private void CoreGridInteractive_MouseClick(object sender, MouseEventArgs e)
         {
             int address = GetAddress(e.X, e.Y);
             if (address == -1)
@@ -23,7 +23,7 @@ namespace nMars.IDE.Controls
             IDEApplication.Instance.ShowAddress(address);
         }
 
-        private void DebugCoreGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void CoreGridInteractive_DoubleClick(object sender, MouseEventArgs e)
         {
             int address = GetAddress(e.X, e.Y);
             if (address == -1)
