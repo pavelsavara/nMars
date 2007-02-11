@@ -2,13 +2,106 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-	<h1>nMars - pMars DLL and Wrapper</h1>
-	<p>
-<br/> - I included pMARS 0.9.2 modified by M Joonas Pihlaja.
-<br/> - I modularized it and wrapped into DLL and .NET component
-<br/> - I'm prepared to merge it back to pMARS CVS as 0.9.3 in near future if owners allow
+	<h1>pMars - SLD, DLL and Wrapper</h1>
+<pre>
+- I included pMARS 0.9.2 <a href="http://www.cs.helsinki.fi/u/jpihlaja/cw/pmars-sdl/">modified by M Joonas Pihlaja</a> to use <a href="http://www.libsdl.org/index.php">SDL</a>.
+- I modularized it and <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/pMars/">wrapped into DLL</a> and <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/pMars.DllWrapper/">.NET component</a>
+- I'm prepared to merge it back to <a href="http://corewar.sourceforge.net/">pMARS</a> CVS as 0.9.3 in near future if owners allow
+- Binaries are ready for <a href="http://sourceforge.net/project/showfiles.php?group_id=174312&package_id=214071">download</a>
+</pre>
 	  
-	  </p>
-	<p>Page will be extended soon.</p>
+ <h2>Joonas's changes</h2>
+<pre>
+Joonas's version can be downloaded at <a href="http://www.cs.helsinki.fi/u/jpihlaja/cw/pmars-sdl/">http://www.cs.helsinki.fi/u/jpihlaja/cw/pmars-sdl/</a>
+Multiplatform SDL library is there <a href="http://www.libsdl.org/index.php">http://www.libsdl.org/index.php</a>
+  
+Joonas made following changes:
+    a) almost all changes are in SDLGRAPHX #ifdef blocks
+    b) added #endif comments like #endif  /* XWINGRAPHX */
+    c) added open_macro_file() in cdb.c
+    d) in config.h defined DIR_SEPARATOR macro
+    e) in sim.c replaced #ifdef TRACEGRAPHX with #ifndef SERVER
+    f) in sim.c warrior initialization
+          *tempPtr2 = W->position + W->offset;
+        changed to
+          *tempPtr2 = (W->position + W->offset) % coreSize;
+          *tempPtr2 = *tempPtr2 < 0 ? *tempPtr2 + coreSize : *tempPtr2;
+        meaning is: wrap around start offset bigger than core, and negative too
+    g) Makefile added sdldisp.c, $(EXESUFFIX), SDL libraries
+    h) Added new files
+     - fnt16.c
+     - Makefile.mingw
+     - pmars.mac
+     - SDL_main.c
+     - sdldisp.c
+     - stddisp.c
+     
+I compiled it for Win32 and Linux and it works well. You can download SDL version for windows from Joonas's or nMars pages and try it.
+I like all those changes, so I'm proposing to commit it into oficial trunk!
+</pre>
+
+ <h2>My changes</h2>
+<pre>
+a) asm.c added initialization
+  warrior[curWarrior].pSpaceIDNumber = UNSHARED;
+b) config.h support for WIN32 build
+c) global.h + cdb.c published totalscore value for reporting status from DLL
+d) global.h redirected STDOUT in case of DLL build to stderr and used this macro on various places
+e) global.h - exported functions
+f) pmars.c
+   - added pspace_finalize() function
+   - re-factored parts of body() into body_load(), body_results()
+   - introduced body_finalize() - memory/state cleanup for reuse
+   - introduced pspace_finalize() - memory/state cleanup for reuse
+g) sim.c
+   - broken simulator1() into parts
+      - init_core(),
+      - init_round(),
+      - run_step()
+      - finalize_round()
+      - finalize_core()
+   - wrapped it into
+      - begin_match()
+      - step_match()
+      - end_match()
+   - and finaly summed in simulator1() again
+   - all changes were done as in place as possible to ease comparison with previous version.
+   - there are _NO_ behavioral changes
+
+h) sim.c during refactoring I did
+   - globalized some variables to be share among all new functions
+   - moved variables initialization to function where it belongs
+   - run_step() is returning value, so no more goto from while{} region
+      // 0 next step
+      // 1 next round
+      // 2 end match
+   - there are _NO_ behavioral changes
+
+i) DLL API
+   Parser
+   - warrior_struct* pMarsParse() + pMarsFreeParsed()
+
+   Engine
+   - pMarsBeginMatch() - exports begin_match() from sim.c
+     pMarsStepMatch()  - exports step_match()  from sim.c
+     pMarsEndMatch()   - exports end_match()   from sim.c
+
+   - pMarsResultsMatch(), - compute results
+   - pMarsWatchMatch()    - export pointers to internal structures
+
+j) added files
+   build.sh                             - build helper for unixes
+   MakefileConsole, pMarsConsole.vcproj - Non-GUI setup
+   MakefileSDL, pMarsSDL.vcproj         - SDL setup
+   MakefileServer,pMarsServer.vcproj    - Non-GUI, Non-debugger setup
+   pMarsDll.vcproj                      - Non-GUI, Non-debugger, exported API
+   pMarsVersion.rc                      - version for exe/dll header
+   pMarsDll.h                           - API / header file for DLL
+     - pointers/memory exported are owned by DLL
+     - DLL is _NOT_ thread safe, because of pmars implementation nature
+   pMarsDll.cpp                         - implementation of API
+     - only thing to notice here is, that all output is redirected to stderr which is redirected to file. We need silent DLL.
+   SDL.txt                              - info about SDL
+</pre>
 </div>
 <!--#include virtual="footer" -->
