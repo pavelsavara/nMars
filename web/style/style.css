@@ -1,7 +1,7 @@
 body {
 	margin:0px;
 	padding:0px;
-	font-family:verdana, arial, helvetica, sans-serif;
+	font:11px/20px verdana, arial, helvetica, sans-serif;
 	color:#0;
 	background-color:white;
 	}
@@ -95,4 +95,10 @@ a:visited {color:#07a;}
 Pic {
 	margin-left: 16px;
 	vertical-align: top
+}
+
+#navbar-iframe {
+   height: 0px;
+   visibility: hidden;
+   display: none;
 }
