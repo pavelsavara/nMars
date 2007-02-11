@@ -12,11 +12,9 @@
 
 	<p>Targeting to be full ICWS '94 RedCode specification compliant.
 <br/>Current implementation doesn't support (yet)
-<br/> - EQU substitutions 
-<br/>   - instructions in EQU
+<br/> - EQU macro substitutions (now it works like functions)
 <br/> - registers in-place assignments (k=k+1)
-<br/>Big differece is that this parser works with EQU as with functions, but pMars as with macros. If you wrap expression with brackets, you will be sure that they will behave same.
-<br/>Is based on <a href="http://www.devincook.com/goldparser/">GOLD parser</a> by Devin Cook
+<br/>It's based on <a href="http://www.devincook.com/goldparser/">GOLD parser</a> by Devin Cook
 <br/>And <a href="http://www.xs4all.nl/~rvanloen/goldparser.html">Calitha .NET Engine</a> for GOLD parser by Robert van Loenhout which was little bit modified.
 	</p>
 
