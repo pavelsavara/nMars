@@ -2,25 +2,35 @@
 ;author Pavel Savara
 ;name Train
 
-slow   EQU       5
-tweak  EQU       0
-       SPL       start2
+slow   EQU       3
+tweak1 EQU       0
+tweak2 EQU       0
 
 start1     
+       SPL       sl1
+       SPL       start3
+       SPL       start2
+       NOP
+       JMP       loco                    ; 1 jpm to loco
+
+sl1    
        SPL       1
        SPL       1                       ; 2 tasks
        JMP       loco                    ; 4 jpm to loco
 
+
 start2
-       SPL       start3
+       SPL       sl2
        SPL       1
-       JMP       engine+1,}0             ;2 tasks to engine & blade
+       JMP       engine+2,}0             ;3 tasks to blade, engine , boiler 
+sl2    JMP       -1 
+      
 
 ;passangers
 start3
-       SPL       1                       ;2  tasks 
-       SPL       1                       ;4  tasks 
-       SPL       1                       ;8  tasks 
+       NOP       1                       ;2  tasks 
+       NOP       1                       ;4  tasks 
+       NOP       1                       ;8  tasks 
 
        SPL       b
 a      SPL       a2
@@ -34,14 +44,16 @@ b2     JMP       tail+3+slow
 wheel  DAT       blade+1,blade+2         ; counter for loco
        DAT       blade+2,blade+3         ; reset counter
 loco   MOV.I     {wheel,<wheel           ; 4 tasks running here
-engine MOV.I     tail,coal               ; roll wagon tasks
-blade  ADD.AB    #tweak,coal             ; tweak wagon tasks
-
-tail   MOV.I     >1,1000                ; tail
-       MOV.I     >1,3000                ; second class
-       MOV.I     >1,5000                ; dining-car
-       MOV.I     >1,7000                ; first class
-coal   MOV.I     >1,1000                ; coal car
+engine MOV.I     tail-1,coal-1           ; roll wagon tasks
+boiler ADD.AB    #tweak1,coal-2
+blade  ADD.AB    #tweak2,coal-2          ; tweak wagon tasks
+       DAT       0,0                     ;fender
+       DAT       0,0                     ;fender
+tail   NOP.I     >1,}100                ; tail
+       NOP.I     >1,}300                ; second class
+       NOP.I     >1,}500                ; dining-car
+       NOP.I     >1,}700                ; first class
+coal   NOP.I     >1,}100                ; coal car
 
     
 
