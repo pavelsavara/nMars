@@ -33,7 +33,7 @@ namespace nMars.IDE
 
         public void RefreshControlsDebugger()
         {
-            bool warrior = ActiveProject!=null && ActiveProject.WarriorsCount > 0;
+            bool warrior = ActiveProject!=null && ActiveProject.Project.WarriorFiles.Count > 0;
             bool live = Engine != null && Engine.IsLive;
             bool canRun = (!live || Engine.IsPaused) && warrior;
             MainForm.runSlowToolStripMenuItem.Enabled = canRun || (live && Brake != slowRunBrake);
