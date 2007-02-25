@@ -51,7 +51,6 @@ namespace nMars.Graphics.Controls
 
         public ICoreBindingView View;
         protected IAsyncEngine engine = null;
-        private long maxVersion;
 
         private int nextAddress = -1;
         public int MarkedAddress = -1;
@@ -63,10 +62,10 @@ namespace nMars.Graphics.Controls
             }
             set
             {
-                if (value<0)
+                if (value >= (View.Count - maxItems))
+                    value = (View.Count - maxItems);
+                if (value < 0)
                     value = 0;
-                if (value >= View.Count - +maxItems)
-                    value = View.Count - +maxItems;
 
                 scrollBar.Value = value;
                 topIndex = value;
@@ -231,12 +230,18 @@ namespace nMars.Graphics.Controls
 
         private void CoreListing_MouseWheel(object sender, MouseEventArgs e)
         {
-            TopIndex -= e.Delta / ItemHeight;
+            lock(engine)
+            {
+                TopIndex -= e.Delta / ItemHeight;
+            }
         }
 
         private void scrollBar_Scroll(object sender, ScrollEventArgs e)
         {
-            TopIndex = e.NewValue;
+            lock (engine)
+            {
+                TopIndex = e.NewValue;
+            }
         }
 
         private void CoreListing_MouseEnter(object sender, EventArgs e)
