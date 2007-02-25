@@ -45,14 +45,15 @@ wheel  DAT       blade+1,blade+2         ; counter for loco
        DAT       blade+2,blade+3         ; reset counter
 loco   MOV.I     {wheel,<wheel           ; 4 tasks running here
 engine MOV.I     tail-1,coal-1           ; roll wagon tasks
-boiler DIV.AB    #20,coal-1              ; tweak wagon tasks
-blade  MUL.AB    #20,coal-1              ; tweak wagon tasks
+boiler DIV.A     #20,coal-1              ; tweak wagon tasks
+blade  MUL.A     #20,coal-1              ; tweak wagon tasks
        DAT       0,0                     ;fender
-tail   NOP.I     >1, 500                 ; tail
-       NOP.I     >1,2500                 ; second class
-       NOP.I     >1,4500                 ; dining-car
-       NOP.I     >1,6500                 ; first class
-coal   NOP.I     >1,8500                 ; coal car
+       DAT       0,0                     ;fender
+tail   MOV.I     500 ,}1                 ; tail
+       MOV.I     2500,}1                 ; second class
+       MOV.I     4500,}1                 ; dining-car
+       MOV.I     6500,}1                 ; first class
+coal   MOV.I     8500,}1                 ; coal car
 
     
 
