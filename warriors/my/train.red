@@ -3,8 +3,13 @@
 ;name Train
 
 slow   EQU       3
-tweak1 EQU       0
-tweak2 EQU       0
+len    EQU       25
+shi    EQU       10
+
+
+tweak1 EQU       CORESIZE/len
+tweak2 EQU       tweak1-1
+tweak3 EQU       shi
 
 start1     
        SPL       sl1
@@ -44,9 +49,9 @@ wheel  DAT       blade+1,blade+2         ; counter for loco
        DAT       blade+2,blade+3         ; reset counter
 loco   MOV.I     {wheel,<wheel           ; 4 tasks running here
 engine MOV.I     tail-1,coal-1           ; roll wagon tasks
-door   ADD.A     #26,coal-1              ; tweak wagon tasks
-boiler DIV.A     #13,coal-1              ; tweak wagon tasks
-blade  MUL.A     #13,coal-1              ; tweak wagon tasks
+door   DIV.A     #tweak1,coal-1          ; tweak wagon tasks
+boiler MUL.A     #tweak2,coal-1          ; tweak wagon tasks
+blade  ADD.A     #tweak3,coal-1          ; tweak wagon tasks
        DAT       0,0                     ;fender
        DAT       0,0                     ;fender
 tail   MOV.I     500 ,}1                 ; tail
