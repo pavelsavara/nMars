@@ -29,7 +29,7 @@ namespace nMars.Graphics.Controls
                 else
                 {
                     int address = View[index];
-                    toolTip.SetToolTip(this, MemoryPainter.GetTooltip(engine, address));
+                    toolTip.SetToolTip(this, MemoryPainter.GetMemoryTooltip(engine, address));
                 }
             }
         }

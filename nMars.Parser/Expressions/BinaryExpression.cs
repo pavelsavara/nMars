@@ -4,6 +4,7 @@
 // 2006 Pavel Savara
 
 using System;
+using com.calitha.goldparser;
 using nMars.RedCode;
 
 namespace nMars.Parser.Expressions
@@ -32,7 +33,8 @@ namespace nMars.Parser.Expressions
             CompareNe,
         }
 
-        public BinaryExpression(Expression left, Expression right, BinaryOperation operation)
+        public BinaryExpression(Location location, Expression left, Expression right, BinaryOperation operation)
+            : base(location)
         {
             this.left = left;
             this.right = right;
@@ -58,14 +60,14 @@ namespace nMars.Parser.Expressions
                 case BinaryOperation.Divide:
                     if (r == 0)
                     {
-                        parser.WriteError("Divide by zero during evaluation of " + ToString());
+                        parser.WriteError("Divide by zero during evaluation of " + ToString() + " at " + Location, Location);
                         return 0;
                     }
                     return l / r;
                 case BinaryOperation.Modulo:
                     if (r == 0)
                     {
-                        parser.WriteError("Divide by zero during evaluation of " + ToString());
+                        parser.WriteError("Divide by zero during evaluation of " + ToString() + " at " + Location, Location);
                         return 0;
                     }
                     return l % r;

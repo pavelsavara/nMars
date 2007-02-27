@@ -65,6 +65,11 @@ namespace nMars.RedCode
         public string FileName;
         public int Line;
         public int Column;
+
+        public override string ToString()
+        {
+            return Message;
+        }
     }
 
     /// <summary>

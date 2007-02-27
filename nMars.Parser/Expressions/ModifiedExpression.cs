@@ -3,13 +3,15 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using com.calitha.goldparser;
 using nMars.RedCode;
 
 namespace nMars.Parser.Expressions
 {
     public class ModifiedExpression : Expression
     {
-        public ModifiedExpression(Expression original, Mode mode)
+        public ModifiedExpression(Location location, Expression original, Mode mode)
+            : base(location)
         {
             Original = original;
             Mode = mode;

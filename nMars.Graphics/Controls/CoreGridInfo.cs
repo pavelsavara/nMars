@@ -25,7 +25,7 @@ namespace nMars.Graphics.Controls
 
             lock (engine)
             {
-                toolTip.SetToolTip(this, MemoryPainter.GetTooltip(engine, address));
+                toolTip.SetToolTip(this, MemoryPainter.GetMemoryTooltip(engine, address));
             }
         }
     }
