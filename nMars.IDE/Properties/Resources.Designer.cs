@@ -123,6 +123,13 @@ namespace nMars.IDE.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap SaveAll {
+            get {
+                object obj = ResourceManager.GetObject("SaveAll", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Step {
             get {
                 object obj = ResourceManager.GetObject("Step", resourceCulture);

@@ -236,6 +236,7 @@
       <LastGenOutput>IDESettings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Resources\Back.ico" />
+    <None Include="Resources\SaveAll.ico" />
     <Content Include="Resources\Execute.ico" />
     <Content Include="Resources\IDEsmall.ico" />
     <Content Include="Resources\Pause.ico" />
