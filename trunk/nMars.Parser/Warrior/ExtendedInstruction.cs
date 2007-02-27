@@ -121,7 +121,7 @@ namespace nMars.Parser.Warrior
                 if (options.Expressions)
                     c += 19;
                 if (sb.Length < c)
-                    sb.Length = c;
+                    sb.Append(' ', c);
                 sb.Append(";");
                 sb.Append(Comment);
             }
