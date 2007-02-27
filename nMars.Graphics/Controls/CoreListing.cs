@@ -37,14 +37,6 @@ namespace nMars.Graphics.Controls
         {
             if (engine==null)
                 return;
-            if (engine.NextInstruction!=null)
-            {
-                nextAddress = engine.NextInstruction.Address;
-            }
-            else
-            {
-                nextAddress = -1;
-            }
             scrollBar.Maximum = View.Count;
             PaintAll();
         }
@@ -52,9 +44,9 @@ namespace nMars.Graphics.Controls
         public ICoreBindingView View;
         protected IAsyncEngine engine = null;
 
-        private int nextAddress = -1;
+        public int NextIndex = -1;
         public int MarkedAddress = -1;
-        public  int TopIndex
+        public int TopIndex
         {
             get
             {
@@ -82,12 +74,12 @@ namespace nMars.Graphics.Controls
 
         [Category("Appearance")]
         [DefaultValue(false)]
-        public bool PaintNextAddress
+        public bool PaintNextInstruction
         {
-            get { return paintNextAddress; }
-            set { paintNextAddress = value; }
+            get { return paintNextInstruction; }
+            set { paintNextInstruction = value; }
         }
-        private bool paintNextAddress = false;
+        private bool paintNextInstruction = false;
 
         [Category("Appearance")]
         [DefaultValue(false)]
@@ -167,7 +159,7 @@ namespace nMars.Graphics.Controls
             bounds = new Rectangle(0, (index - TopIndex) * ItemHeight, Width - scrollBar.Width, ItemHeight);
             Brush myBrush;
 
-            if (PaintNextAddress && address == nextAddress)
+            if (PaintNextInstruction && index == NextIndex)
             {
                 graphics.FillRectangle(Brushes.DarkRed, bounds);
                 myBrush = Brushes.White;

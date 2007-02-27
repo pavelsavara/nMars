@@ -126,6 +126,7 @@ namespace nMars.IDE
 
             Project = ActiveProject.Project;
             Components = ActiveSolution.Components;
+            SaveAll();
             Start(false);
             RefreshControls();
         }
@@ -137,6 +138,7 @@ namespace nMars.IDE
                 ActiveProject.Project.EngineOptions.Brake = slowRunBrake;
                 Project = ActiveProject.Project;
                 Components = ActiveSolution.Components;
+                SaveAll();
                 Start(true);
                 RefreshControls();
                 return true;

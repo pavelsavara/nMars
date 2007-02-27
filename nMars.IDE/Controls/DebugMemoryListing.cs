@@ -42,11 +42,14 @@ namespace nMars.IDE.Controls
             if (instruction == null)
             {
                 nextAddress = -1;
+                coreList.NextIndex = -1;
             }
             else
             {
                 nextAddress = instruction.Address;
+                coreList.NextIndex = nextAddress + CoreSize / 2;
             }
+
             if (checkBoxAutoIP.Checked)
             {
                 coreList.TopIndex = nextAddress + CoreSize / 2 - 5;
