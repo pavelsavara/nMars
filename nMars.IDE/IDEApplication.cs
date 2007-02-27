@@ -94,6 +94,12 @@ namespace nMars.IDE
                 }
             }
             bool res=SaveSolution();
+            if (res==false)
+            {
+                DialogResult result = MessageBox.Show("There are unsaved data, would you like to quit anyway ?", "Unsaved data",
+                                                      MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                res = (result == DialogResult.Yes);
+            }
             RefreshControls();
             return res;
         }
