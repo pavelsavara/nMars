@@ -21,28 +21,39 @@ namespace nMars.IDE.Controls
             Dock = DockStyle.Fill;
             warriorIndex = aWarriorIndex;
             panel.Controls.Add(this, aWarriorIndex, 0);
-            groupBox.Text = IDEApplication.Instance.Engine.Warriors[aWarriorIndex].Name + " by " +
-                            IDEApplication.Instance.Engine.Warriors[aWarriorIndex].Author;
-            view = new TaskListCoreView(IDEApplication.Instance.Engine, aWarriorIndex);
+            engine = IDEApplication.Instance.Engine;
+            groupBox.Text = engine.Warriors[aWarriorIndex].Name + " by " +
+                            engine.Warriors[aWarriorIndex].Author;
+            view = new TaskListCoreView(engine, aWarriorIndex);
             coreList.View = view;
-            coreList.Attach(IDEApplication.Instance.Engine);
-
+            coreList.Attach(engine);
+            coreList.PaintNextInstruction = true;
         }
 
         public void RepaintView()
         {
-            IRunningWarrior rw = IDEApplication.Instance.Engine.RunningWarriors[warriorIndex];
+            IRunningWarrior rw = engine.RunningWarriors[warriorIndex];
             textBoxTasks.Text = rw.TasksCount + "/" + rw.DeadTasksCount;
             if (rw.PrevInstruction != null)
                 textBoxLastInstruction.Text = rw.PrevInstruction.ToString();
             else
                 textBoxLastInstruction.Text = null;
 
-            coreList.RepaintView();
             view.Update();
+            if (engine.NextWarriorIndex == warriorIndex)
+            {
+                coreList.NextIndex = 0;
+            }
+            else
+            {
+                coreList.NextIndex = -1;
+            }
+            
+            coreList.RepaintView();
         }
 
         private int warriorIndex;
+        private IAsyncEngine engine;
         private TaskListCoreView view;
     }
 

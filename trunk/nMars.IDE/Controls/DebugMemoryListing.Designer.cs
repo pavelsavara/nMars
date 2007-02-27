@@ -97,7 +97,7 @@ namespace nMars.IDE.Controls
             this.coreList.Location = new System.Drawing.Point(0, 38);
             this.coreList.Name = "coreList";
             this.coreList.PaintMarkedIndex = true;
-            this.coreList.PaintNextAddress = true;
+            this.coreList.PaintNextInstruction = true;
             this.coreList.Size = new System.Drawing.Size(199, 494);
             this.coreList.TabIndex = 3;
             // 
