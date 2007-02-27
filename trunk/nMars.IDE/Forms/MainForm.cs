@@ -115,6 +115,11 @@ namespace nMars.IDE.Forms
             IDEApplication.SaveAll();
         }
 
+        private void saveAllToolStripButton_Click(object sender, EventArgs e)
+        {
+            IDEApplication.SaveAll();
+        }
+
         private void openExistingWarriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IDEApplication.OpenExistingWarrior();

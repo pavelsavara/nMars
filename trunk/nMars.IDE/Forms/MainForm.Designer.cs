@@ -87,6 +87,7 @@ namespace nMars.IDE.Forms
             this.tabBottom = new nMars.IDE.Controls.IDEPanel();
             this.tabExplorers = new nMars.IDE.Controls.IDEPanel();
             this.timerDebugWatch = new System.Windows.Forms.Timer(this.components);
+            this.saveAllToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.mainMenu.SuspendLayout();
             this.toolbar.SuspendLayout();
             this.splitContainerOuter.Panel1.SuspendLayout();
@@ -381,6 +382,7 @@ namespace nMars.IDE.Forms
             // toolbar
             // 
             this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveAllToolStripButton,
             this.saveToolStripButton,
             this.executeToolStripButton,
             this.runFastToolStripButton,
@@ -589,6 +591,16 @@ namespace nMars.IDE.Forms
             this.timerDebugWatch.Interval = 150;
             this.timerDebugWatch.Tick += new System.EventHandler(this.timerDebugWatch_Tick);
             // 
+            // saveAllToolStripButton
+            // 
+            this.saveAllToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveAllToolStripButton.Image = global::nMars.IDE.Properties.Resources.SaveAll;
+            this.saveAllToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveAllToolStripButton.Name = "saveAllToolStripButton";
+            this.saveAllToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.saveAllToolStripButton.Text = "Save All";
+            this.saveAllToolStripButton.Click += new System.EventHandler(this.saveAllToolStripButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -677,6 +689,7 @@ namespace nMars.IDE.Forms
         public ToolStripMenuItem runToolStripMenuItem;
         public ToolStripMenuItem checkForUpdateToolStripMenuItem;
         public ToolStripButton saveToolStripButton;
+        public ToolStripButton saveAllToolStripButton;
     
     }
 }
