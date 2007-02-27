@@ -78,7 +78,7 @@ namespace nMars.RedCode
 
         public static ParserOptions Full
         {
-            get { return new ParserOptions(false, true, true, true, true, true, false, false, false); }
+            get { return new ParserOptions(true, true, true, true, true, true, false, false, false); }
         }
 
         public static ParserOptions NoExpressions
