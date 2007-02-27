@@ -482,7 +482,7 @@ namespace nMars.Parser
                     if (endSymbol < 2)
                         endSymbol = 2;
                     labels = (List<LabelName>)token.Tokens[1].UserObject;
-                    labels.Add(new LabelName("#end#"));
+                    labels.Add(new LabelName(token.Tokens[1].Location, "#end#"));
                     statement = new EquStatement(null, token.Location);
                     statement.Labels = labels;
                     return statement;
@@ -500,7 +500,7 @@ namespace nMars.Parser
                     if (endSymbol < 2)
                         endSymbol = 2;
                     labels = (List<LabelName>)token.Tokens[1].UserObject;
-                    labels.Add(new LabelName("#end#"));
+                    labels.Add(new LabelName(token.Tokens[1].Location, "#end#"));
                     statement = new EquStatement(null, token.Location);
                     statement.Labels = labels;
                     return statement;
@@ -511,7 +511,7 @@ namespace nMars.Parser
                     if (endSymbol < 2)
                         endSymbol = 2;
                     labels = (List<LabelName>)token.Tokens[1].UserObject;
-                    labels.Add(new LabelName("#end#"));
+                    labels.Add(new LabelName(token.Tokens[1].Location, "#end#"));
                     statement = new EquStatement(null, token.Location);
                     statement.Labels = labels;
                     return statement;
@@ -528,7 +528,7 @@ namespace nMars.Parser
                     Mode mode = (Mode)token.Tokens[2].UserObject;
                     if (mode!=null && mode!=Mode.NULL)
                     {
-                        expression = new ModifiedExpression(expression, mode);
+                        expression = new ModifiedExpression(token.Tokens[2].Location, expression, mode);
                     }
                     equ = new EquStatement(expression, token.Location);
                     equ.Labels = labels;
@@ -564,7 +564,7 @@ namespace nMars.Parser
                         labell = token.Tokens[0].UserObject.ToString();
                     }
                     // CheckName(labell, token.Tokens[0].Location);                
-                    return new LabelName(labell);
+                    return new LabelName(token.Tokens[0].Location, labell);
 
                 case (int)RuleConstants.RULE_LABEL_LABEL_AMP:
                     // <Label> ::= Label & <Modifier>
@@ -573,7 +573,7 @@ namespace nMars.Parser
                     {
                         labell = token.Tokens[2].UserObject.ToString();
                     }
-                    return new ComposedLabelName((string)token.Tokens[0].UserObject, labell);
+                    return new ComposedLabelName(token.Tokens[0].Location, (string)token.Tokens[0].UserObject, labell);
 
                 case (int)RuleConstants.RULE_LABEL_AMP_LABEL:
                     // <Label> ::= <Modifier> & Label
@@ -582,17 +582,17 @@ namespace nMars.Parser
                     {
                         labell = token.Tokens[0].UserObject.ToString();
                     }
-                    return new ComposedLabelName(labell, (string)token.Tokens[2].UserObject);
+                    return new ComposedLabelName(token.Tokens[0].Location, labell, (string)token.Tokens[2].UserObject);
 
                 case (int)RuleConstants.RULE_LABEL_LABEL:
                     // <Label> ::= Label
                     labell = (string)token.Tokens[0].UserObject;
                     // CheckName(labell, token.Tokens[0].Location);
-                    return new LabelName(labell);
+                    return new LabelName(token.Tokens[0].Location, labell);
 
                 case (int)RuleConstants.RULE_LABEL_LABEL_AMP_LABEL:
                     // <Label> ::= Label & Label
-                    return new ComposedLabelName((string)token.Tokens[0].UserObject, (string)token.Tokens[2].UserObject);
+                    return new ComposedLabelName(token.Tokens[0].Location, (string)token.Tokens[0].UserObject, (string)token.Tokens[2].UserObject);
 
                 case (int)RuleConstants.RULE_LABELSOPTIONAL2:
                     //<LabelsOptional> ::= 
@@ -890,7 +890,8 @@ namespace nMars.Parser
                 case (int)RuleConstants.RULE_EXPRESSION_QUESTION_COLON:
                     //<Expression> ::= <Or Exp> ? <Expression> : <Expression>
                     return
-                        new TernaryExpression((Expression)token.Tokens[0].UserObject,
+                        new TernaryExpression(token.Tokens[1].Location, 
+                                              (Expression)token.Tokens[0].UserObject,
                                               (Expression)token.Tokens[2].UserObject,
                                               (Expression)token.Tokens[4].UserObject,
                                               TernaryExpression.TernaryOperation.If);
@@ -898,41 +899,47 @@ namespace nMars.Parser
                 case (int)RuleConstants.RULE_OREXP_PIPEPIPE:
                     //<Or Exp> ::= <Or Exp> || <And Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject, BinaryExpression.BinaryOperation.Or);
 
                 case (int)RuleConstants.RULE_ANDEXP_AMPAMP:
                     //<And Exp> ::= <And Exp> && <BinOr Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.And);
 
                 case (int)RuleConstants.RULE_BINOREXP_PIPE:
                     //<BinOr Exp> ::= <BinOr Exp> | <BinXor Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.BinOr);
 
                 case (int)RuleConstants.RULE_BINXOREXP_CARET:
                     //<BinXor Exp> ::= <BinXor Exp> ^ <BinAnd Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.BinXor);
 
                 case (int)RuleConstants.RULE_BINANDEXP_AMPAMPAMP:
                     // <BinAnd Exp> ::= <BinAnd Exp> &&& <Equate Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.BinAnd);
 
                 case (int)RuleConstants.RULE_EQUATEEXP_EQEQ:
                     //<Equate Exp> ::= <Equate Exp> == <Compare Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.CompareEq);
 
@@ -942,91 +949,104 @@ namespace nMars.Parser
                 case (int)RuleConstants.RULE_EQUATEEXP_EXCLAMEQ:
                     //<Equate Exp> ::= <Equate Exp> != <Compare Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.CompareNe);
 
                 case (int)RuleConstants.RULE_COMPAREEXP_LT:
                     //<Compare Exp> ::= <Compare Exp> < <Shift Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.CompareLt);
 
                 case (int)RuleConstants.RULE_COMPAREEXP_GT:
                     //<Compare Exp> ::= <Compare Exp> > <Shift Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.CompareGt);
 
                 case (int)RuleConstants.RULE_COMPAREEXP_LTEQ:
                     //<Compare Exp> ::= <Compare Exp> <= <Shift Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.CompareLe);
 
                 case (int)RuleConstants.RULE_COMPAREEXP_GTEQ:
                     //<Compare Exp> ::= <Compare Exp> >= <Shift Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.CompareGe);
 
                 case (int)RuleConstants.RULE_SHIFTEXP_LTLT:
                     //<Shift Exp> ::= <Shift Exp> << <Add Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.Shl);
 
                 case (int)RuleConstants.RULE_SHIFTEXP_GTGT:
                     //<Shift Exp> ::= <Shift Exp> >> <Add Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.Shr);
 
                 case (int)RuleConstants.RULE_ADDEXP_PLUS:
                     //<Expression> ::= <Expression> + <Mult Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.Plus);
 
                 case (int)RuleConstants.RULE_ADDEXP_MINUS:
                     //<Expression> ::= <Expression> - <Mult Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.Minus);
 
                 case (int)RuleConstants.RULE_MULTEXP_TIMES:
                     //<Mult Exp> ::= <Mult Exp> * <Negate Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.Multiply);
 
                 case (int)RuleConstants.RULE_MULTEXP_DIV:
                     //<Mult Exp> ::= <Mult Exp> / <Negate Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.Divide);
 
                 case (int)RuleConstants.RULE_MULTEXP_PERCENT:
                     //<Mult Exp> ::= <Mult Exp> % <Negate Exp>
                     return
-                        new BinaryExpression((Expression)token.Tokens[0].UserObject,
+                        new BinaryExpression(token.Tokens[1].Location,
+                                             (Expression)token.Tokens[0].UserObject,
                                              (Expression)token.Tokens[2].UserObject,
                                              BinaryExpression.BinaryOperation.Modulo);
 
                 case (int)RuleConstants.RULE_NEGATEEXP_MINUS:
                     //<Negate Exp> ::= - <Value>
                     return
-                        new UnaryExpression((Expression)token.Tokens[1].UserObject,
+                        new UnaryExpression(token.Tokens[0].Location,
+                                            (Expression)token.Tokens[1].UserObject,
                                             UnaryExpression.UnaryOperation.Negate);
                 case (int)RuleConstants.RULE_NEGATEEXP_PLUS:
                     //<Negate Exp> ::= + <Value>
@@ -1034,12 +1054,12 @@ namespace nMars.Parser
 
                 case (int)RuleConstants.RULE_VALUE_INTEGER:
                     //<Value> ::= Integer
-                    return new Value((string)token.Tokens[0].UserObject);
+                    return new Value(token.Tokens[0].Location, (string)token.Tokens[0].UserObject);
 
                 case (int)RuleConstants.RULE_VALUE_LPARAN_RPARAN:
                     //<Value> ::= ( <Expression> )
                     return
-                        new UnaryExpression((Expression)token.Tokens[1].UserObject,
+                        new UnaryExpression(token.Tokens[0].Location, (Expression)token.Tokens[1].UserObject,
                                             UnaryExpression.UnaryOperation.Brackets);
 
                     #endregion
@@ -1055,7 +1075,7 @@ namespace nMars.Parser
             forrof.Labels = statementlabels;
             forrof.Add(statement);
 
-            LabelName l = new LabelName("#forof" + rofforCounter);
+            LabelName l = new LabelName(expression.Location, "#forof" + rofforCounter);
             if (statementlabels.Count > 0)
             {
                 l = statementlabels[statementlabels.Count - 1];

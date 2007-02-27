@@ -3,14 +3,16 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using com.calitha.goldparser;
+
 namespace nMars.Parser.Expressions
 {
     public class ComposedLabelName : LabelName
     {
-        public ComposedLabelName(string labelName, string parameter)
-            : base(labelName)
+        public ComposedLabelName(Location location, string labelName, string parameter)
+            : base(location, labelName)
         {
-            this.parameter = new LabelName(parameter);
+            this.parameter = new LabelName(location, parameter);
         }
 
         protected LabelName parameter;

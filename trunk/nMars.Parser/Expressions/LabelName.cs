@@ -3,13 +3,15 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using com.calitha.goldparser;
 using nMars.RedCode;
 
 namespace nMars.Parser.Expressions
 {
     public class LabelName : Expression
     {
-        public LabelName(string name)
+        public LabelName(Location location, string name)
+            : base(location)
         {
             this.name = name;
         }
@@ -26,7 +28,7 @@ namespace nMars.Parser.Expressions
         {
             if (inEval)
             {
-                parser.WriteError("Cyclic definition of function : " + name);
+                parser.WriteError("Cyclic definition of function : " + name + " at " + Location, Location);
                 return 0;
             }
             try
@@ -47,14 +49,14 @@ namespace nMars.Parser.Expressions
                 Expression ex = parser.variables[fullName];
                 if (ex == this)
                 {
-                    parser.WriteError("Label not yet resolved: " + fullName);
+                    parser.WriteError("Label not yet resolved: " + fullName + " at " + Location, Location);
                     return 0;
                 }
                 return ex.Evaluate(parser, currentAddress);
             }
             else
             {
-                parser.WriteError("Label not defined: " + fullName);
+                parser.WriteError("Label not defined: " + fullName + " at " + Location, Location);
                 return 0;
             }
         }
@@ -67,14 +69,14 @@ namespace nMars.Parser.Expressions
                 Expression ex = parser.variables[fullName];
                 if (ex == this)
                 {
-                    parser.WriteError("Label not yet resolved: " + fullName);
+                    parser.WriteError("Label not yet resolved: " + fullName + " at " + Location, Location);
                     return 0;
                 }
                 return ex.GetMode(parser, currentAddress);
             }
             else
             {
-                parser.WriteError("Label not defined: " + fullName);
+                parser.WriteError("Label not defined: " + fullName + " at " + Location, Location);
                 return 0;
             }
         }

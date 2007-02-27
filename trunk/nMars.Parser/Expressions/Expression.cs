@@ -3,12 +3,18 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using com.calitha.goldparser;
 using nMars.RedCode;
 
 namespace nMars.Parser.Expressions
 {
     public abstract class Expression
     {
+        public Expression(Location location)
+        {
+            Location = location;
+        }
+        
         public abstract int Evaluate(WarriorParser parser, int currentAddress);
         public abstract Mode GetMode(WarriorParser parser, int currentAddress);
 
@@ -17,6 +23,8 @@ namespace nMars.Parser.Expressions
             int raw = Evaluate(parser, currentAddress);
             return Instruction.Wrap(raw, coreSize);
         }
+
+        public Location Location;
 
     }
 }

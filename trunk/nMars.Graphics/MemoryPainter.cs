@@ -19,7 +19,7 @@ namespace nMars.Graphics
 
     public class MemoryPainter
     {
-        public static string GetTooltip(IAsyncEngine engine, int address)
+        public static string GetMemoryTooltip(IAsyncEngine engine, int address)
         {
             IRunningInstruction instruction = engine[address]; 
             CoreEventRecord evnt = engine.CoreEvents[address];

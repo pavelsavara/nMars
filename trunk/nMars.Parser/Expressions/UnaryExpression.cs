@@ -4,6 +4,7 @@
 // 2006 Pavel Savara
 
 using System;
+using com.calitha.goldparser;
 using nMars.RedCode;
 
 namespace nMars.Parser.Expressions
@@ -16,7 +17,8 @@ namespace nMars.Parser.Expressions
             Brackets,
         }
 
-        public UnaryExpression(Expression sub, UnaryOperation operation)
+        public UnaryExpression(Location location, Expression sub, UnaryOperation operation)
+            : base(location)
         {
             this.sub = sub;
             this.operation = operation;

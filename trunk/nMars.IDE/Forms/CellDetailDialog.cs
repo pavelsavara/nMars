@@ -25,7 +25,7 @@ namespace nMars.IDE.Forms
         {
             textBoxAddress.Text = Address.ToString();
             textBoxCell.Text = Engine[Address].GetLine(ParserOptions.Pure, false);
-            textBoxInfo.Text = MemoryPainter.GetTooltip(Engine, Address);
+            textBoxInfo.Text = MemoryPainter.GetMemoryTooltip(Engine, Address);
             breakpoint = CoreEventBreakpoint.FindByAddress(Project.BreakPoints, Address);
             if (breakpoint!=null)
             {

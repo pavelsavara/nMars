@@ -4,6 +4,7 @@
 // 2006 Pavel Savara
 
 using System;
+using com.calitha.goldparser;
 using nMars.RedCode;
 
 namespace nMars.Parser.Expressions
@@ -15,7 +16,8 @@ namespace nMars.Parser.Expressions
             If,
         }
 
-        public TernaryExpression(Expression left, Expression middle, Expression right, TernaryOperation operation)
+        public TernaryExpression(Location location, Expression left, Expression middle, Expression right, TernaryOperation operation)
+            : base(location)
         {
             this.operation = operation;
             this.left = left;
