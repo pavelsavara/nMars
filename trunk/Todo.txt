@@ -64,9 +64,10 @@ unsorted
    - syntax highliting
    - parser, focus after click on errors
  
- - Hill/Competition
+ - Hill/Competition/Tournaments
    - look for other implementations
    - Tuc's scripts ?
+   - pTools
    
  - Optimizer/Evolver/ScreenSaver
    - project for each generation
