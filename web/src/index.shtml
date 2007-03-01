@@ -48,16 +48,17 @@
 
     <h2>History</h2>
     <ul>
-        <li>02/10/2007 - nMars0.9 - IDE with breakpoints</li>
+        <li>02/28/2007 - nMars0.9.1 - bug fixes</li>
+        <li>02/10/2007 - nMars0.9   - IDE with breakpoints</li>
         <li>01/13/2007 - nMars0.8.3 - IDE preview released</li>
-        <li>11/19/2006 - nMars0.8 - debugger</li>
-        <li>11/13/2006 - nMars0.7 - going public, overview documents, posted to group</li>
-        <li>11/13/2006 - nMars0.6 - engine unit test</li>
-        <li>11/08/2006 - nMars0.5 - more binaries</li>
-        <li>11/03/2006 - nMars0.4 - pMars included</li>
-        <li>09/28/2006 - nMars0.3 - first binary on released</li>
-        <li>09/17/2006 - nMars0.2 - Parser more powerfull</li>
-        <li>08/12/2006 - nMars0.1 - First version</li>
+        <li>11/19/2006 - nMars0.8   - debugger</li>
+        <li>11/13/2006 - nMars0.7   - going public, overview documents, posted to group</li>
+        <li>11/13/2006 - nMars0.6   - engine unit test</li>
+        <li>11/08/2006 - nMars0.5   - more binaries</li>
+        <li>11/03/2006 - nMars0.4   - pMars included</li>
+        <li>09/28/2006 - nMars0.3   - first binary on released</li>
+        <li>09/17/2006 - nMars0.2   - Parser more powerfull</li>
+        <li>08/12/2006 - nMars0.1   - First version</li>
     </ul>
     <p>Complete list of <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Changes.txt">changes</a></p>
 
