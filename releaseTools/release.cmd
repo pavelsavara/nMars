@@ -5,5 +5,5 @@ call scripts\assemblyVersion.cmd
 call scripts\build.cmd
 call scripts\package.cmd
 rem call scripts\packagep.cmd
-rem call scripts\packages.cmd
+call scripts\packages.cmd
 rem call scripts\tag.cmd
