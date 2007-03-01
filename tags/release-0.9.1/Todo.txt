@@ -1,0 +1,97 @@
+  Ideas & ToDo
+--------------------
+unsorted
+
+ - Let's talk about specification of evolvers, IDE and hill engine
+   - feature requests, ideas, opinions
+   - design of interfaces of component
+ 
+ - Wrap existing engines
+   - create module similar to pMars.DllWrapper around existing engines
+   - we will get unit tests for it for free
+   - fMars, qMars or any fast one
+   - pMars.so - same as pMArs.dll but for Linux
+   - SWIG ?
+ 
+ - Documentation & Home page
+   - Currently there is only basic info about nMars, let's extend it
+   - I feel we need some Wiki for CoreWars
+   - There is page on wikipedia, but that's not vehicle for more focused content
+   - Anyone should be able to update pages about strategies, software links, personal corewars pages, warriors library
+   - Let's update content on koth.org
+   - blog
+   - Sandcastle doc update
+   - book in DocBook ?
+   - Article for root.cz  
+   - ICWS 2007 to describe real behavior of pMars
+ 
+ - Unit tests
+   - Other engines
+   - test stepback
+   
+ - Parser
+   - test other rules, warrior count, rounds ...
+   - random test
+   - check PSpace validation
+   - implement registers a-z , asignment ?  
+   - 'for expression rof' as if - end if, metadata (org) inside block
+   - multiline EQU, with instructions
+
+ - Engine
+   - score formula
+   - Permutate option
+   - read/write limit ?
+
+ - Debuger
+   - all pmars commands, -k missing, score formula
+   - convert pmars startup macros
+   - python tab completion
+   - clear display (pbt)
+   - step thread & step round
+   
+ - RedCode lib
+   - dump core interface, start naming convention, for rof compression
+
+ - IDE
+   - tutorials
+   - remote debug 
+   - remote watch - watch hill
+   - cell editor
+   - projects: Base, Warriors, Evolver, Optimizer
+   - submit to hill feature
+   - Project/solution editors
+   - Mono - Moma
+   - syntax highliting
+   - parser, focus after click on errors
+ 
+ - Hill/Competition/Tournaments
+   - look for other implementations
+   - Tuc's scripts ?
+   - pTools
+   
+ - Optimizer/Evolver/ScreenSaver
+   - project for each generation
+   - look for other implementations
+   - score / rank expression
+   - genealogical tree against cheating
+   - distributed/screensaver
+   - Webservices, proxy
+   - Teams
+
+ - Build
+   - include doc
+
+ - Blind engine & hack quest
+   - prompts
+   - remote debug
+   - DAT or NOP as blind instruction
+
+ - Newbie hill rules
+
+ - Fast engine
+   - faster core engine - array of C# delegates as implementation of instructions
+   - same in C++
+ 
+ - pMars
+   - disable pSpace commandline option
+   

@@ -1,0 +1,61 @@
+.\" mts.6 by Stefan Strack
+.\" $Id: mts.6,v 1.1 1995/05/31 04:33:28 stst Exp stst $
+.\"
+.TH MTS 6 "April 10, 1994" "PMARS PROJECT"
+.ad b
+.SH NAME
+mts \- MARS tournament scheduler
+.SH SYNOPSIS
+.I mts
+.SH DESCRIPTION
+.I Mts
+is a scheduler for corewar tournaments. It runs either a round-robin
+(all warriors fight each other) or a set of battles where the first
+warrior fights the remaining warriors in turn. A rank listing similar
+to KotH's is produced at the end.
+.I Mts
+prompts for all tournament parameters and the warrior list; input can
+be saved to a file which can later be redirected as in
+.I mts
+\< inputfile.
+You can also specify "inputfile" on the command line.
+.LP
+.I Mts
+is a generic scheduler, i.e. it works with many different corewar interpreters
+(MARSs). The MARS should run non-interactively and accept options and the
+name of two warrior files on the command line. The MARS should also echo the
+result of a battle to stdout. The output contains either three integers in a
+row which are interpreted as wins1, wins2, and ties, or four integers which
+are interpreted as wins1, ties, wins2, ties. The former format is produced
+by pMARS, mercury2 and c88; the latter by KotH and pMARS -k.
+.LP
+.I Mts
+has an auto-recovery feature. If aborted by Ctrl-C, kill or logout, it saves
+intermediate results to the file
+.I _recover.mts.
+If
+.I mts
+finds this file in the current directory when restarted, it continues with
+the aborted tournament.
+.SH BUGS
+.I Mts
+does not work with the curses display version of
+.I pMARS,
+because the curses screen output goes to stdout and clobbers the battle
+result.
+.PP
+Unless
+.I pMARS
+was compiled with the SERVER option turned on, ^C will not terminate
+the program, but enter the debugger. So, if you use ^C to abort
+.I mts,
+you also need to enter "quit" in order to terminate
+.I pMARS
+with a functional debugger.
+.PP
+Don't use the
+.I pMARS
+-o (order result) option, as this will confuse
+.I mts.
+.SH AUTHOR
+Stefan Strack (stst@vuse.vanderbilt.edu)
