@@ -21,9 +21,16 @@ namespace nMars.Console
             }
             catch (Exception ex)
             {
-                System.Console.Error.WriteLine(ex.Message);
-                System.Console.Error.WriteLine();
                 System.Console.Error.WriteLine(ex.StackTrace);
+                do
+                {
+                    System.Console.Error.WriteLine();
+                    System.Console.Error.WriteLine(ex.GetType().ToString());
+                    System.Console.Error.WriteLine(ex.Message);
+                    ex = ex.InnerException;
+                    if (ex == null)
+                        break;
+                } while (true);
                 return -255;
             }
         }
