@@ -38,8 +38,9 @@
         <li>IDE projects containning setup of rules and options</li>
         <li>IDE has familiar look and feel</li>
         <li>Graphical debugger is asynchronous to UI, so it can run at any speed, still painting core state.</li>
-        <li>Debugger shell could be extended with IronPython</li>
+        <li>Debugger is extended with IronPython shell</li>
         <li>Debugger core views are packed with information about events and status of each cell</li>
+        <li>Debugger is capable of step back during gebugging</li>
         <li>All configuration is XML driven</li>
         <li>Target platform is .NET 2.0 or Mono</li>
         <li>All components but IDE are running on Mono, porting IDE is goal.</li>
@@ -67,7 +68,7 @@
         <li>Q2/2007 - nMars1.0 - stabilization</li>
     </ul>
     <ul>
-        <li>??/???? - nMars1.1 - round robin, hill</li>
+        <li>??/???? - nMars1.1 - round robin, hill, tournaments</li>
         <li>??/???? - nMars1.2 - wrap fast engine</li>
         <li>??/???? - nMars1.3 - evolver, optimizer</li>
     </ul>
@@ -78,10 +79,10 @@
         <li>??/???? - nMars2.? - redcode syntax extensions</li>
     </ul>
     <p>Complete list of <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Todo.txt">wishes</a></p>
-    <br/>
-    <br/>
 
-    <p style="text-align:right; padding-right: 25%"><strong>Pavel Šavara</strong></p>
+    <h2>Feedback</h2>
+    <p><a href="feedback.shtml">Feedback</a> is really appreciated.</p>
+    <p style="padding-left: 25%"><strong>Pavel Šavara</strong></p>
     <br/>
     <br/>
 
