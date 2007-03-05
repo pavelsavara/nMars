@@ -154,6 +154,8 @@ namespace nMars.RedCode
             throw new ArgumentException();
         }
 
+        public const int ModeCount = 8;
+
         public static bool IsPostInc(Mode mode)
         {
             switch (mode)
@@ -223,5 +225,33 @@ namespace nMars.RedCode
                     throw new ArgumentException();
             }
         }
+
+        public static string ToAbrev(Mode mode)
+        {
+            switch (mode)
+            {
+                case Mode.Direct:
+                    return "Di";
+                case Mode.Immediate:
+                    return "Im";
+                case Mode.IndirectA:
+                    return "Ai";
+                case Mode.IndirectB:
+                    return "Bi";
+                case Mode.PostIncIndirectA:
+                    return "Ap";
+                case Mode.PostIncIndirectB:
+                    return "Bp";
+                case Mode.PreDecIndirectA:
+                    return "Am";
+                case Mode.PreDecIndirectB:
+                    return "Bm";
+                case Mode.NULL:
+                    return "";
+                default:
+                    throw new ArgumentException();
+            }
+        }
+    
     }
 }

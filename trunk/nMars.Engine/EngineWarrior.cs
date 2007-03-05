@@ -9,7 +9,7 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public class EngineWarrior : IRunningWarrior
+    public sealed class EngineWarrior : IRunningWarrior
     {
         public EngineWarrior(IWarrior warrior, EngineCore core, int index)
         {
@@ -25,33 +25,18 @@ namespace nMars.Engine
             }
             Tasks = new Queue<int>();
             this.core = core;
-            LastResult = core.rules.CoreSize - 1;
         }
 
         #region PSpace
 
         public int GetPSpaceValue(int address)
         {
-            if (address != 0)
-            {
-                return PSpace.Memory[address];
-            }
-            else
-            {
-                return LastResult;
-            }
+            return PSpace.Memory[address];
         }
 
         public void SetPSpaceValue(int address, int value)
         {
-            if (address != 0)
-            {
-                PSpace.Memory[address] = value;
-            }
-            else
-            {
-                LastResult = value;
-            }
+            PSpace.Memory[address] = value;
         }
 
         #endregion
@@ -216,7 +201,7 @@ namespace nMars.Engine
 
         int IRunningWarrior.LastResult
         {
-            get { return LastResult; }
+            get { return PSpace.Memory[0]; }
         }
 
         int IRunningWarrior.PSpaceIndex
@@ -250,7 +235,6 @@ namespace nMars.Engine
         public PSpace PSpace = null;
         private EngineCore core;
         private int loadAddress = 0;
-        public int LastResult;
         public int DeadTasksCount;
         public EngineInstruction PrevInstruction;
 

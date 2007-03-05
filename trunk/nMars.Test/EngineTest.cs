@@ -33,6 +33,11 @@ namespace nMars.Test
         {
             IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
             IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Engine-StepBack") as IExtendedStepEngine;
+
+            /*
+            IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("nMars.Engine") as IExtendedStepEngine;
+            IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Fngine") as IExtendedStepEngine;
+             */
             return new ComparingEngine(engineOne, engineTwo);
         }
 

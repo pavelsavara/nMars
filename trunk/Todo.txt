@@ -63,6 +63,7 @@ unsorted
    - Mono - Moma
    - syntax highliting
    - parser, focus after click on errors
+   - usage statistic ?
  
  - Hill/Competition/Tournaments
    - look for other implementations

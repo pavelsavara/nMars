@@ -49,11 +49,6 @@ namespace nMars.RedCode
         MatchResult EndMatch(ISimpleOutput console);
 
         /// <summary>
-        /// returns result of last step
-        /// </summary>
-        StepResult LastStepResult { get; }
-
-        /// <summary>
         /// return current project
         /// </summary>
         IProject Project { get; }
@@ -161,8 +156,7 @@ namespace nMars.RedCode
     
     public delegate void EngineStoppedCallback(bool finished, BreakPoint breakpoint, string reason);
 
-    public interface IAsyncEngine : IStepEngine, IStepBackEngine, IStuntEngine, ITaskView,
-                                       ITimeView, ICoreView, IStatusView, IExtendedStepEngine, ICoreEvents
+    public interface IAsyncEngine : IDebuggerEngine, IStuntEngine
     {
         void BeginMatch(IProject project, EngineStoppedCallback callback);
         void Run(IProject project, EngineStoppedCallback callback);
@@ -178,10 +172,11 @@ namespace nMars.RedCode
     public interface IDebuggerEngine : IStepEngine, IStepBackEngine, ITaskView,
                                        ITimeView, ICoreView, IStatusView, IExtendedStepEngine, ICoreEvents
     {
+        StepResult LastStepResult { get; }
     }
 
 
-    public interface ICoreDump : ITaskView, IStatusView, IScoreView
+    public interface ICoreDump : ITaskView, IStatusView, IScoreView, ICoreView
     {
         IRunningInstruction this[int address] { get; }
         int CoreSize { get; }

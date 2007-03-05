@@ -49,6 +49,44 @@ namespace nMars.RedCode
 
         #region Public methods
 
+        public int Code
+        {
+            get
+            {
+                return GetCode(Operation, Modifier, ModeA, ModeB);
+            }
+        }
+
+        public string FunctionName
+        {
+            get
+            {
+                return GetName(Operation, Modifier, ModeA, ModeB);
+            }
+        }
+
+        public static int GetCode(Operation Operation, Modifier Modifier, Mode ModeA, Mode ModeB)
+        {
+            int o = (int)Operation;
+            //int oc = OperationHelper.OperationCount;
+
+            int m = (int)Modifier;
+            int mc = ModifierHelper.ModifierCount;
+
+            int a = (int)ModeA;
+            int ac = ModeHelper.ModeCount;
+
+            int b = (int)ModeB;
+            int bc = ModeHelper.ModeCount;
+
+            return ((o * mc + m) * ac + a) * bc + b;
+        }
+
+        public static string GetName(Operation Operation, Modifier Modifier, Mode ModeA, Mode ModeB)
+        {
+            return Operation + "_" + Modifier + "_" + ModeHelper.ToAbrev(ModeA) + ModeHelper.ToAbrev(ModeB);
+        }
+
         public static int Mod(int raw, int coreSize)
         {
             int res = raw % coreSize;

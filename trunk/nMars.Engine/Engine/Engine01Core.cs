@@ -20,8 +20,8 @@ namespace nMars.Engine
 
         protected virtual void InitializeRound()
         {
-            core = new EngineInstruction[rules.CoreSize];
-            for (int a = 0; a < rules.CoreSize; a++)
+            core = new EngineInstruction[coreSize];
+            for (int a = 0; a < coreSize; a++)
             {
                 core[a] = new EngineInstruction(a, null);
             }
@@ -37,16 +37,16 @@ namespace nMars.Engine
 
         public int CoreSize
         {
-            get { return rules.CoreSize; }
+            get { return coreSize; }
         }
 
-        public IRunningInstruction this[int address]
+        public virtual IRunningInstruction this[int address]
         {
             get { return core[mod(address)]; }
             set { core[mod(address)] = new EngineInstruction(value, address); }
         }
 
-        public int this[int address, Column column]
+        public virtual int this[int address, Column column]
         {
             get
             {

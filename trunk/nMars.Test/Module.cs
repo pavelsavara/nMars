@@ -6,6 +6,7 @@
 using System;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
+using nMars.RedCode.Utils;
 
 namespace nMars.Test
 {
@@ -49,10 +50,7 @@ namespace nMars.Test
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex.Message);
-                Console.Error.WriteLine();
-                Console.Error.WriteLine(ex.StackTrace);
-                return -255;
+                return ExceptionHandler.DumpException(ex);
             }
         }
 

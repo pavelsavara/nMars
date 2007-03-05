@@ -85,6 +85,7 @@
     <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="Basic\Rules.cs" />
     <Compile Include="Engine\CoreBindingList.cs" />
+    <Compile Include="Utils\ExceptionHandler.cs" />
     <Compile Include="Utils\IConsole.cs" />
     <Compile Include="Utils\Mono.cs" />
     <Compile Include="Utils\SerializableDictionary.cs" />
