@@ -69,6 +69,7 @@ unsorted
    - look for other implementations
    - Tuc's scripts ?
    - pTools
+   - main warrior against alll others (Doug)
    
  - Optimizer/Evolver/ScreenSaver
    - project for each generation
