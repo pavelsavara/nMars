@@ -69,7 +69,7 @@ namespace nMars.Engine
                     }
                     else
                     {
-                        int positions = rules.CoreSize + 1 - (rules.MinDistance << 1);
+                        int positions = coreSize + 1 - (rules.MinDistance << 1);
                         warriors[1].LoadAddress = rules.MinDistance + seed % positions;
                         seed = Rng(seed);
                     }
@@ -101,8 +101,8 @@ namespace nMars.Engine
             for (int a = 0; a < warrior.Length; a++)
             {
                 IInstruction instruction = warrior[a];
-                if (instruction.ValueA >= rules.CoreSize || instruction.ValueA <= 0 - rules.CoreSize ||
-                    instruction.ValueB >= rules.CoreSize || instruction.ValueB <= 0 - rules.CoreSize)
+                if (instruction.ValueA >= coreSize || instruction.ValueA <= 0 - coreSize ||
+                    instruction.ValueB >= coreSize || instruction.ValueB <= 0 - coreSize)
                 {
                     throw new RulesException("operand value out of core size");
                 }
@@ -143,6 +143,7 @@ namespace nMars.Engine
                 if (pSpaces[warriors[w].PSpaceIndex] == null)
                     pSpaces[warriors[w].PSpaceIndex] = new PSpace(rules.PSpaceSize);
                 warriors[w].PSpace = pSpaces[warriors[w].PSpaceIndex];
+                warriors[w].PSpace.Memory[0] = coreSize - 1;
             }
         }
 
@@ -170,7 +171,7 @@ namespace nMars.Engine
             do
             {
                 /* generate */
-                warriors[pos].LoadAddress = ((seed = Rng(seed)) % (rules.CoreSize - 2 * rules.MinDistance + 1)) +
+                warriors[pos].LoadAddress = ((seed = Rng(seed)) % (coreSize - 2 * rules.MinDistance + 1)) +
                                             rules.MinDistance;
                 /* test for overlap */
                 for (i = 1; i < pos; ++i)
@@ -209,7 +210,7 @@ namespace nMars.Engine
         {
             int i, j;
             int temp;
-            int room = rules.CoreSize - rules.MinDistance * rules.WarriorsCount + 1;
+            int room = coreSize - rules.MinDistance * rules.WarriorsCount + 1;
             for (i = 1; i < rules.WarriorsCount; i++)
             {
                 temp = (seed = Rng(seed)) % room;

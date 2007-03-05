@@ -32,39 +32,17 @@ namespace nMars.Engine
 
         #region Accessors
 
-        new public int this[int address, Column column]
+        public override int this[int address, Column column]
         {
             get
             {
                 BeforeRead(address, column);
-                if ((Column.A & column) != Column.None)
-                {
-                    return core[mod(address)].ValueA;
-                }
-                else if ((Column.B & column) != Column.None)
-                {
-                    return core[mod(address)].ValueB;
-                }
-                else
-                {
-                    throw new ArgumentException("Bad register");
-                }
+                return base[address, column];
             }
             set
             {
                 BeforeWrite(address, column);
-                if ((Column.A & column) != Column.None)
-                {
-                    core[mod(address)].ValueA = value;
-                }
-                else if ((Column.B & column) != Column.None)
-                {
-                    core[mod(address)].ValueB = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Bad register");
-                }
+                base[address, column] = value;
                 AfterWrite(address, column);
             }
         }

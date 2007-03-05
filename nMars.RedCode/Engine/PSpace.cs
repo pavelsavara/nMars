@@ -23,7 +23,8 @@ namespace nMars.RedCode
         {
             PSpace ps = obj as PSpace;
             if (ps.Memory.Length != Memory.Length) return false;
-            for (int i = 0; i < Memory.Length; i++)
+            //ignore 0 index (lastresult)
+            for (int i = 1; i < Memory.Length; i++)
             {
                 if (ps.Memory[i] != Memory[i]) return false;
             }

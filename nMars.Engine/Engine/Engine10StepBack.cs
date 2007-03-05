@@ -9,7 +9,7 @@ using nMars.RedCode;
 
 namespace nMars.Engine
 {
-    public class EngineStepBack : EngineHistory, IStepBackEngine, IDebuggerEngine
+    public sealed class EngineStepBack : EngineHistory, IStepBackEngine, IDebuggerEngine
     {
         public StepResult PrevStep()
         {

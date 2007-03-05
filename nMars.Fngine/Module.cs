@@ -4,28 +4,17 @@
 // 2006 Pavel Savara
 
 using System;
-using System.Collections.Generic;
-using nMars.Console.Properties;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
-using nMars.RedCode.Utils;
 
-namespace nMars.Console
+namespace nMars.Fngine
 {
-    class Module : BaseModule, IModule
+    class Module : BaseModule, IEngineModule
     {
-        static int Main(string[] args)
+        public IEngine CreateEngine()
         {
-            try
-            {
-                return ConsoleApplication.ConsoleMain(args);
-            }
-            catch (Exception ex)
-            {
-                return ExceptionHandler.DumpException(ex);
-            }
+            return new Fngine.Fngine();
         }
-
 
         #region Module registration
 

@@ -16,6 +16,7 @@ namespace nMars.Engine
         protected virtual void InitializeMatch(IProject project)
         {
             rules = project.Rules;
+            coreSize = rules.CoreSize;
         }
 
         protected virtual void FinalizeMatch()
@@ -35,12 +36,12 @@ namespace nMars.Engine
 
         public int wrap(int value)
         {
-            return Instruction.Wrap(value, rules.CoreSize);
+            return Instruction.Wrap(value, coreSize);
         }
 
-        internal int mod(int value)
+        internal protected int mod(int value)
         {
-            return Instruction.Mod(value, rules.CoreSize);
+            return Instruction.Mod(value, coreSize);
         }
 
         /// <returns>T- should die</returns>
@@ -50,15 +51,15 @@ namespace nMars.Engine
             {
                 case Operation.ADD:
                     res = a + b;
-                    if (res >= rules.CoreSize) res -= rules.CoreSize;
+                    if (res >= coreSize) res -= coreSize;
                     break;
                 case Operation.SUB:
                     res = a - b;
-                    if (res < 0) res += rules.CoreSize;
+                    if (res < 0) res += coreSize;
                     break;
                 case Operation.MUL:
                     res = a * b;
-                    res %= rules.CoreSize;
+                    res %= coreSize;
                     break;
                 case Operation.MOD:
                     if (b == 0) return true;
@@ -78,7 +79,8 @@ namespace nMars.Engine
 
         #region Variables
 
-        internal Rules rules;
+        protected internal Rules rules;
+        protected internal int coreSize;
 
         #endregion
     }

@@ -11,8 +11,8 @@ namespace nMars.Engine
     {
         public MatchResult Run(IProject project, ISimpleOutput console)
         {
-            BeginMatch(project);
             StepResult stepResult;
+            BeginMatch(project);
             do
             {
                 stepResult = NextStep();
@@ -27,70 +27,71 @@ namespace nMars.Engine
 
             results = new MatchResult(project);
             lastStepResult = StepResult.Start;
+            initBefore = Project.EngineOptions.InitRoundBefore;
+            rounds = rules.Rounds;
         }
 
         public StepResult NextStep()
         {
-            if (Project.EngineOptions.InitRoundBefore && lastStepResult == StepResult.NextRound)
+            
+            if (initBefore && lastStepResult == StepResult.NextRound)
             {
                 InitRound();
             }
-            if (round >= rules.Rounds)
+            if (round >= rounds)
             {
                 return StepResult.Finished;
             }
 
             PerformInstruction();
 
-            StepResult stepResult = StepResult.Continue;
+            lastStepResult = StepResult.Continue;
             if (LiveWarriorsCount == 1 && WarriorsCount > 1)
             {
                 liveWarriors.Peek().Result = RoundResult.Win;
-                stepResult = StepResult.NextRound;
+                lastStepResult = StepResult.NextRound;
+                NextRound();
             }
-            else if (LiveWarriorsCount == 0)
+            else if (LiveWarriorsCount == 0 || cyclesLeft == 0)
             {
-                stepResult = StepResult.NextRound;
-            }
-            else if (cyclesLeft == 0)
-            {
-                stepResult = StepResult.NextRound;
-            }
-            lastStepResult = stepResult;
-            if (lastStepResult == StepResult.NextRound)
-            {
-                for (int w = 0; w < rules.WarriorsCount; w++)
-                {
-                    EngineWarrior warrior = warriors[w];
-                    results.results[w, round] = warrior.Result;
-                    if (warrior.Result != RoundResult.Loss)
-                    {
-                        warrior.LastResult = LiveWarriorsCount;
-                    }
-                    else
-                    {
-                        warrior.LastResult = 0;
-                    }
-                }
-                FinalizeRound();
-                if (!Project.EngineOptions.InitRoundBefore)
-                {
-                    InitRound();
-                }
+                lastStepResult = StepResult.NextRound;
+                NextRound();
             }
             return lastStepResult;
         }
 
-        private void InitRound()
+        protected void InitRound()
         {
             round++;
-            if (round >= rules.Rounds)
+            if (round >= rounds)
             {
                 lastStepResult = StepResult.Finished;
             }
             else
             {
                 InitializeRound();
+            }
+        }
+
+        protected void NextRound()
+        {
+            for (int w = 0; w < rules.WarriorsCount; w++)
+            {
+                EngineWarrior warrior = warriors[w];
+                results.results[w, round] = warrior.Result;
+                if (warrior.Result != RoundResult.Loss)
+                {
+                    warrior.PSpace[0] = LiveWarriorsCount;
+                }
+                else
+                {
+                    warrior.PSpace[0] = 0;
+                }
+            }
+            FinalizeRound();
+            if (!Project.EngineOptions.InitRoundBefore)
+            {
+                InitRound();
             }
         }
 
@@ -117,33 +118,35 @@ namespace nMars.Engine
             get { return lastStepResult; }
         }
 
-        protected void PerformInstruction()
+        protected virtual void PerformInstruction()
         {
             EngineWarrior warrior = liveWarriors.Dequeue();
-            activeWarrior = warrior;
             int insructionPointer = warrior.Tasks.Dequeue();
+
+            activeWarrior = warrior;
             InitializeCycle(insructionPointer);
 
             PerformInstruction(insructionPointer);
 
             if (warrior.LiveTasks > 0)
             {
-                liveWarriors.Enqueue(activeWarrior);
+                liveWarriors.Enqueue(warrior);
             }
             else
             {
                 warrior.Result = RoundResult.Loss;
                 cyclesLeft = cyclesLeft - 1 - (cyclesLeft - 1) / (LiveWarriorsCount + 1);
             }
+            FinalizeCycle();
             cyclesLeft--;
             cycle++;
-            FinalizeCycle();
         }
 
         #region Variables
 
         protected StepResult lastStepResult;
-
+        private bool initBefore;
+        private int rounds;
         #endregion
     }
 }

@@ -14,16 +14,23 @@ namespace nMars.IDE
         [STAThread]
         public static int Main(string[] args)
         {
-            System.Windows.Forms.Application.EnableVisualStyles();
-            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-
-            if (Mono.IsMonoRuntime)
+            try
             {
-                Console.WriteLine("Running on mono, some features will be disabled.");
-            }
+                System.Windows.Forms.Application.EnableVisualStyles();
+                System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
-            IDEApplication app = new IDEApplication();
-            return app.Main(args);
+                if (Mono.IsMonoRuntime)
+                {
+                    Console.WriteLine("Running on mono, some features will be disabled.");
+                }
+
+                IDEApplication app = new IDEApplication();
+                return app.Main(args);
+            }
+            catch(Exception ex)
+            {
+                return ExceptionHandler.DumpException(ex);
+            }
         }
 
         #region Module registration

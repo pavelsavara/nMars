@@ -123,6 +123,12 @@ namespace nMars.RedCode
         NULL,
     }
 
+    public class ModifierHelper
+    {
+        public const int ModifierCount = 8;
+    }
+
+
     [Flags]
     public enum Column
     {

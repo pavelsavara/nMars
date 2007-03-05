@@ -39,8 +39,8 @@ namespace nMars.Engine
         protected override void InitializeRound()
         {
             base.InitializeRound();
-            coreEvents = new CoreEventRecord[Project.Rules.CoreSize];
-            for (int a = 0; a < Project.Rules.CoreSize; a++)
+            coreEvents = new CoreEventRecord[coreSize];
+            for (int a = 0; a < coreSize; a++)
             {
                 coreEvents[a] = new CoreEventRecord();
             }
