@@ -116,8 +116,10 @@ namespace nMars.RedCode
             if (a.Modifier != b.Modifier) return false;
             if (a.ModeA != b.ModeA) return false;
             if (a.ModeB != b.ModeB) return false;
-            if (Mod(a.ValueA, coreSize) != Mod(b.ValueA, coreSize)) return false;
-            if (Mod(a.ValueB, coreSize) != Mod(b.ValueB, coreSize)) return false;
+            if (a.ValueA != b.ValueA) return false;
+            if (a.ValueB != b.ValueB) return false;
+            //weak if (Mod(a.ValueA, coreSize) != Mod(b.ValueA, coreSize)) return false;
+            //weak if (Mod(a.ValueB, coreSize) != Mod(b.ValueB, coreSize)) return false;
             return true;
         }
 

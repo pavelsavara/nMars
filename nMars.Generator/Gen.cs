@@ -184,17 +184,17 @@ namespace nMars.Generator
                     sb.AppendLine(@"ip++;");
                     break;
                 case Operation.SPL:
-                    /*
+                    sb.AppendLine(@"
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
                         warrior.Tasks.Enqueue(mod(ip + 1));
-                        ip = reg_AdrA; // as second to queue
+                        ip = reg_AdrA;
                         Split(reg_AdrA);
                     }
                     else
                     {
                         ip++;
-                    }*/
+                    }");
                     break;
                 case Operation.JMP:
                     sb.AppendLine(@"ip = reg_AdrA;");
@@ -447,6 +447,7 @@ namespace nMars.Generator
                             break;
                         case Modifier.I:
                             sb.AppendLine(@"Operations[reg_AdrB] = Operations[reg_AdrA];");
+                            sb.AppendLine(@"core[reg_AdrB].Modifier = Modifier.NULL;");
                             sb.AppendLine(@"ValuesA[reg_AdrB] = reg_AA_Value;");
                             sb.AppendLine(@"ValuesB[reg_AdrB] = reg_IR_ValueA;");
                             break;

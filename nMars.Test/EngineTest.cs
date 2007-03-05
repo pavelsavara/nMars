@@ -31,13 +31,15 @@ namespace nMars.Test
 
         public static IEngine CreateEngineInternal()
         {
-            IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
-            IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Engine-StepBack") as IExtendedStepEngine;
-
             /*
             IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("nMars.Engine") as IExtendedStepEngine;
             IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Fngine") as IExtendedStepEngine;
              */
+
+            /*
+             */
+            IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
+            IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Engine-StepBack") as IExtendedStepEngine;
             return new ComparingEngine(engineOne, engineTwo);
         }
 
@@ -64,7 +66,7 @@ namespace nMars.Test
             Console.WriteLine("Pair");
             Init();
             LoadRunPair(
-                Path.Combine(basePath, @"imt1\metcalf1.red"),
+                Path.Combine(basePath, @"0test\1.red"),
                 Path.Combine(basePath, @"pycorewar\Koenigstuhl\94\aggression.red"), 0);
             Console.WriteLine("\nDone");
         }
