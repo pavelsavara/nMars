@@ -32,6 +32,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = reg_IR_ValueB;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -64,6 +75,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[direct];
                     reg_AdrB = direct;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -98,6 +120,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -130,6 +163,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -165,6 +209,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -198,6 +253,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -230,6 +296,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -265,6 +342,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -297,6 +385,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -333,6 +432,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -368,6 +478,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -402,6 +523,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -439,6 +571,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -474,6 +617,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -508,6 +662,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -545,6 +710,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -577,6 +753,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -613,6 +800,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -648,6 +846,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -682,6 +891,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -719,6 +939,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -754,6 +985,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -788,6 +1030,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -825,6 +1078,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -857,6 +1121,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -893,6 +1168,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -928,6 +1214,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -962,6 +1259,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -999,6 +1307,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1034,6 +1353,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1068,6 +1398,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1105,6 +1446,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1138,6 +1490,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1175,6 +1538,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1211,6 +1585,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1246,6 +1631,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1284,6 +1680,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1320,6 +1727,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1355,6 +1773,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1393,6 +1822,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1425,6 +1865,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1461,6 +1912,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1496,6 +1958,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1530,6 +2003,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1567,6 +2051,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1602,6 +2097,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1636,6 +2142,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1673,6 +2190,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1705,6 +2233,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1741,6 +2280,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1776,6 +2326,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1810,6 +2371,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1847,6 +2419,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1882,6 +2465,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1916,6 +2510,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -1953,6 +2558,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -1986,6 +2602,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2023,6 +2650,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2059,6 +2697,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2094,6 +2743,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2132,6 +2792,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2168,6 +2839,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2203,6 +2885,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2241,6 +2934,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2271,6 +2975,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2305,6 +3020,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2338,6 +3064,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2370,6 +3107,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2405,6 +3153,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2438,6 +3197,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2470,6 +3240,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2505,6 +3286,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2537,6 +3329,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2573,6 +3376,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2608,6 +3422,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2642,6 +3467,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2679,6 +3515,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2714,6 +3561,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2748,6 +3606,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2785,6 +3654,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2817,6 +3697,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2853,6 +3744,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2888,6 +3790,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2922,6 +3835,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -2959,6 +3883,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -2994,6 +3929,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3028,6 +3974,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3065,6 +4022,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3097,6 +4065,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3133,6 +4112,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3168,6 +4158,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3202,6 +4203,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3239,6 +4251,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3274,6 +4297,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3308,6 +4342,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3345,6 +4390,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3378,6 +4434,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3415,6 +4482,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3451,6 +4529,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3486,6 +4575,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3524,6 +4624,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3560,6 +4671,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3595,6 +4717,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3633,6 +4766,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3665,6 +4809,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3701,6 +4856,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3736,6 +4902,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3770,6 +4947,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3807,6 +4995,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3842,6 +5041,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3876,6 +5086,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3913,6 +5134,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -3945,6 +5177,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -3981,6 +5224,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4016,6 +5270,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4050,6 +5315,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4087,6 +5363,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4122,6 +5409,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4156,6 +5454,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4193,6 +5502,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4226,6 +5546,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4263,6 +5594,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4299,6 +5641,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4334,6 +5687,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4372,6 +5736,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4408,6 +5783,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4443,6 +5829,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4481,6 +5878,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4511,6 +5919,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4545,6 +5964,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4578,6 +6008,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4610,6 +6051,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4645,6 +6097,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4678,6 +6141,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4710,6 +6184,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4745,6 +6230,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4777,6 +6273,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4813,6 +6320,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4848,6 +6366,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4882,6 +6411,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -4919,6 +6459,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4954,6 +6505,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -4988,6 +6550,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5025,6 +6598,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5057,6 +6641,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5093,6 +6688,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5128,6 +6734,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5162,6 +6779,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5199,6 +6827,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5234,6 +6873,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5268,6 +6918,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5305,6 +6966,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5337,6 +7009,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5373,6 +7056,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5408,6 +7102,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5442,6 +7147,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5479,6 +7195,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5514,6 +7241,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5548,6 +7286,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5585,6 +7334,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5618,6 +7378,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5655,6 +7426,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5691,6 +7473,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5726,6 +7519,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5764,6 +7568,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5800,6 +7615,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5835,6 +7661,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5873,6 +7710,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5905,6 +7753,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -5941,6 +7800,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -5976,6 +7846,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6010,6 +7891,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6047,6 +7939,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6082,6 +7985,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6116,6 +8030,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6153,6 +8078,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6185,6 +8121,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6221,6 +8168,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6256,6 +8214,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6290,6 +8259,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6327,6 +8307,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6362,6 +8353,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6396,6 +8398,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6433,6 +8446,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6466,6 +8490,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6503,6 +8538,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6539,6 +8585,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6574,6 +8631,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6612,6 +8680,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6648,6 +8727,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6683,6 +8773,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6721,6 +8822,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6751,6 +8863,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6785,6 +8908,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6818,6 +8952,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6850,6 +8995,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6885,6 +9041,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6918,6 +9085,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -6950,6 +9128,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -6985,6 +9174,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7017,6 +9217,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7053,6 +9264,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7088,6 +9310,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7122,6 +9355,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7159,6 +9403,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7194,6 +9449,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7228,6 +9494,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7265,6 +9542,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7297,6 +9585,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7333,6 +9632,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7368,6 +9678,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7402,6 +9723,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7439,6 +9771,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7474,6 +9817,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7508,6 +9862,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7545,6 +9910,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7577,6 +9953,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7613,6 +10000,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7648,6 +10046,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7682,6 +10091,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7719,6 +10139,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7754,6 +10185,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7788,6 +10230,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7825,6 +10278,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7858,6 +10322,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -7895,6 +10370,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7931,6 +10417,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -7966,6 +10463,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8004,6 +10512,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8040,6 +10559,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8075,6 +10605,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8113,6 +10654,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8145,6 +10697,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8181,6 +10744,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8216,6 +10790,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8250,6 +10835,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8287,6 +10883,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8322,6 +10929,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8356,6 +10974,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8393,6 +11022,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8425,6 +11065,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8461,6 +11112,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8496,6 +11158,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8530,6 +11203,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8567,6 +11251,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8602,6 +11297,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8636,6 +11342,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8673,6 +11390,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8706,6 +11434,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8743,6 +11482,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8779,6 +11529,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8814,6 +11575,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8852,6 +11624,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8888,6 +11671,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8923,6 +11717,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -8961,6 +11766,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -8991,6 +11807,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9025,6 +11852,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9058,6 +11896,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9090,6 +11939,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9125,6 +11985,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9158,6 +12029,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9190,6 +12072,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9225,6 +12118,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9257,6 +12161,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9293,6 +12208,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9328,6 +12254,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9362,6 +12299,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9399,6 +12347,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9434,6 +12393,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9468,6 +12438,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9505,6 +12486,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9537,6 +12529,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9573,6 +12576,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9608,6 +12622,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9642,6 +12667,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9679,6 +12715,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9714,6 +12761,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9748,6 +12806,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9785,6 +12854,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9817,6 +12897,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9853,6 +12944,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9888,6 +12990,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9922,6 +13035,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -9959,6 +13083,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -9994,6 +13129,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10028,6 +13174,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10065,6 +13222,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10098,6 +13266,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10135,6 +13314,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10171,6 +13361,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10206,6 +13407,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10244,6 +13456,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10280,6 +13503,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10315,6 +13549,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10353,6 +13598,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10385,6 +13641,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10421,6 +13688,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10456,6 +13734,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10490,6 +13779,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10527,6 +13827,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10562,6 +13873,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10596,6 +13918,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10633,6 +13966,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10665,6 +14009,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10701,6 +14056,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10736,6 +14102,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10770,6 +14147,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10807,6 +14195,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10842,6 +14241,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10876,6 +14286,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10913,6 +14334,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -10946,6 +14378,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -10983,6 +14426,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11019,6 +14473,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11054,6 +14519,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11092,6 +14568,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11128,6 +14615,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11163,6 +14661,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11201,6 +14710,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11231,6 +14751,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11265,6 +14796,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11298,6 +14840,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11330,6 +14883,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11365,6 +14929,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11398,6 +14973,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11430,6 +15016,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11465,6 +15062,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11497,6 +15105,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11533,6 +15152,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11568,6 +15198,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11602,6 +15243,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11639,6 +15291,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11674,6 +15337,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11708,6 +15382,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11745,6 +15430,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11777,6 +15473,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11813,6 +15520,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11848,6 +15566,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11882,6 +15611,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -11919,6 +15659,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11954,6 +15705,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -11988,6 +15750,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12025,6 +15798,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12057,6 +15841,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12093,6 +15888,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12128,6 +15934,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12162,6 +15979,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12199,6 +16027,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12234,6 +16073,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12268,6 +16118,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12305,6 +16166,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12338,6 +16210,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12375,6 +16258,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12411,6 +16305,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12446,6 +16351,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12484,6 +16400,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12520,6 +16447,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12555,6 +16493,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12593,6 +16542,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12625,6 +16585,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12661,6 +16632,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12696,6 +16678,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12730,6 +16723,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12767,6 +16771,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12802,6 +16817,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12836,6 +16862,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12873,6 +16910,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12905,6 +16953,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -12941,6 +17000,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -12976,6 +17046,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13010,6 +17091,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13047,6 +17139,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13082,6 +17185,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13116,6 +17230,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13153,6 +17278,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13186,6 +17322,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13223,6 +17370,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13259,6 +17417,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13294,6 +17463,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13332,6 +17512,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13368,6 +17559,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13403,6 +17605,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13441,6 +17654,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13471,6 +17695,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13505,6 +17740,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13538,6 +17784,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13570,6 +17827,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13605,6 +17873,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13638,6 +17917,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13670,6 +17960,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13705,6 +18006,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13737,6 +18049,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13773,6 +18096,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13808,6 +18142,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13842,6 +18187,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13879,6 +18235,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13914,6 +18281,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -13948,6 +18326,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -13985,6 +18374,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14017,6 +18417,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14053,6 +18464,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14088,6 +18510,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14122,6 +18555,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14159,6 +18603,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14194,6 +18649,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14228,6 +18694,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14265,6 +18742,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14297,6 +18785,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14333,6 +18832,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14368,6 +18878,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14402,6 +18923,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14439,6 +18971,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14474,6 +19017,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14508,6 +19062,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14545,6 +19110,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14578,6 +19154,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14615,6 +19202,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14651,6 +19249,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14686,6 +19295,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14724,6 +19344,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14760,6 +19391,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14795,6 +19437,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14833,6 +19486,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14865,6 +19529,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -14901,6 +19576,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14936,6 +19622,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -14970,6 +19667,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -15007,6 +19715,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15042,6 +19761,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15076,6 +19806,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -15113,6 +19854,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15145,6 +19897,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -15181,6 +19944,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15216,6 +19990,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15250,6 +20035,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -15287,6 +20083,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15322,6 +20129,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15356,6 +20174,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -15393,6 +20222,17 @@ namespace nMars.Fngine.Fngine
                     ValuesA[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15426,6 +20266,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = ip;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -15463,6 +20314,17 @@ namespace nMars.Fngine.Fngine
                     reg_AdrB = direct;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15499,6 +20361,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15534,6 +20407,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -15572,6 +20456,17 @@ namespace nMars.Fngine.Fngine
                     ValuesB[direct]++;
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15607,6 +20502,17 @@ namespace nMars.Fngine.Fngine
                     reg_AB_Value = ValuesA[reg_AdrB];
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }
@@ -15644,6 +20550,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
+
                 warrior.Tasks.Enqueue(mod(ip));
         }
 
@@ -15680,6 +20597,17 @@ namespace nMars.Fngine.Fngine
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     ValuesA[direct]++;
                     
+
+                    if (warrior.LiveTasks + 1 < rules.MaxProcesses)
+                    {
+                        warrior.Tasks.Enqueue(mod(ip + 1));
+                        ip = reg_AdrA;
+                        Split(reg_AdrA);
+                    }
+                    else
+                    {
+                        ip++;
+                    }
 
                 warrior.Tasks.Enqueue(mod(ip));
         }

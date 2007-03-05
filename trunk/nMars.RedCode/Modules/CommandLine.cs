@@ -96,7 +96,54 @@ namespace nMars.RedCode
             {
                 if (components.Engine != null)
                 {
-                    components.Engine.Run(project, console);
+                    switch (project.EngineOptions.EngineMode)
+                    {
+                        case EngineMode.Match:
+                            components.Engine.Run(project, console);
+                            break;
+                        case EngineMode.TournamentNoSelf:
+                        case EngineMode.TournamentWithSelf:
+                            if (project.Warriors.Count < 2)
+                            {
+                                console.ErrorWriteLine("Tournament mode could be run only with two or more warriors");
+                                return;
+                            }
+                                
+                            for (int wa = 0; wa < project.Warriors.Count; wa++)
+                            {
+                                int st = wa;
+                                if (project.EngineOptions.EngineMode == EngineMode.TournamentNoSelf)
+                                    st++;
+                                for (int wb = st; wb < project.Warriors.Count; wb++)
+                                {
+                                    Project p = new Project(project.Rules);
+                                    p.EngineOptions = new EngineOptions(project.EngineOptions);
+                                    p.EngineOptions.EngineMode = EngineMode.Match;
+                                    p.Warriors.Add(project.Warriors[wa]);
+                                    p.Warriors.Add(project.Warriors[wb]);
+                                    components.Engine.Run(p, console);
+                                }
+                            }
+                            break;
+                        case EngineMode.FirstVersusOthers:
+                            if (project.Warriors.Count < 2)
+                            {
+                                console.ErrorWriteLine("First versus others mode could be run only with two or more warriors");
+                                return;
+                            }
+                            for (int wa = 1; wa < project.Warriors.Count; wa++)
+                            {
+                                Project p = new Project(project.Rules);
+                                p.EngineOptions = project.EngineOptions;
+                                p.EngineOptions.EngineMode = EngineMode.Match;
+                                p.Warriors.Add(project.Warriors[0]);
+                                p.Warriors.Add(project.Warriors[wa]);
+                                components.Engine.Run(p, console);
+                            }
+                            break;
+                        default:
+                            throw new ArgumentException("Unknown engine mode");
+                    }
                 }
                 else
                 {
@@ -152,6 +199,9 @@ namespace nMars.RedCode
                     case "-e":
                         interactive = true;
                         break;
+                    case "-k":
+                        project.EngineOptions.KOTHFormat = true;
+                        break;
                     case "-p":
                         ReadNumber(args, ref p, out project.Rules.MaxProcesses);
                         break;
@@ -172,6 +222,21 @@ namespace nMars.RedCode
                         break;
                     case "-S":
                         ReadNumber(args, ref p, out project.Rules.PSpaceSize);
+                        break;
+                    case "-xp":
+                        project.Rules.EnablePSpace = false;
+                        break;
+                    case "-mm":
+                        project.EngineOptions.EngineMode = EngineMode.Match;
+                        break;
+                    case "-mt":
+                        project.EngineOptions.EngineMode = EngineMode.TournamentNoSelf;
+                        break;
+                    case "-ms":
+                        project.EngineOptions.EngineMode = EngineMode.TournamentWithSelf;
+                        break;
+                    case "-mf":
+                        project.EngineOptions.EngineMode = EngineMode.FirstVersusOthers;
                         break;
                     case "-ue":
                         if (args.Length < p + 1)
@@ -348,6 +413,12 @@ namespace nMars.RedCode
             console.WriteLine("  -nE name  Change engine component");
             console.WriteLine("  -v        Component versions");
             console.WriteLine("");
+            console.WriteLine("Mode:");
+            console.WriteLine("  -mm       Match mode [default]");
+            console.WriteLine("  -mt       Tournament without self fight mode");
+            console.WriteLine("  -ms       Tournament with self fight mode");
+            console.WriteLine("  -mf       First versus all other mode");
+            console.WriteLine("");
             console.WriteLine("Rules:");
             console.WriteLine("  -r #      Rounds to play [1]");
             console.WriteLine("  -s #      Size of core [8000]");
@@ -357,6 +428,7 @@ namespace nMars.RedCode
             console.WriteLine("  -d #      Min. warriors distance");
             console.WriteLine("  -S #      Size of P-space [500]");
             console.WriteLine("  -f #      Fixed position series");
+            console.WriteLine("  -xp       Disable P-space");
             console.WriteLine("");
             console.WriteLine("Dumps:");
             console.WriteLine("  -b        Brief/silent parser mode");
@@ -364,6 +436,7 @@ namespace nMars.RedCode
             console.WriteLine("  -bl       No logo");
             console.WriteLine("  -bs       No status");
             console.WriteLine("  -br       No match results");
+            console.WriteLine("  -k        Output in KotH format");
             console.WriteLine("  -ue .ext  Dump warriors to files with extension");
             console.WriteLine("  -um       Dump format with metainfo [off]");
             console.WriteLine("  -uo       Dump format with offset [off]");

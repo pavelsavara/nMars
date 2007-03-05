@@ -14368,6 +14368,7 @@ ip++;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14405,6 +14406,7 @@ ip++;
                     reg_AdrB = direct;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14442,6 +14444,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14479,6 +14482,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14517,6 +14521,7 @@ ip++;
                     ValuesB[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14554,6 +14559,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14591,6 +14597,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14629,6 +14636,7 @@ ip++;
                     ValuesA[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14666,6 +14674,7 @@ ip++;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14705,6 +14714,7 @@ ip++;
                     reg_AdrB = direct;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14744,6 +14754,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14783,6 +14794,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14823,6 +14835,7 @@ ip++;
                     ValuesB[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14862,6 +14875,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14901,6 +14915,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14941,6 +14956,7 @@ ip++;
                     ValuesA[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -14978,6 +14994,7 @@ ip++;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15017,6 +15034,7 @@ ip++;
                     reg_AdrB = direct;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15056,6 +15074,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15095,6 +15114,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15135,6 +15155,7 @@ ip++;
                     ValuesB[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15174,6 +15195,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15213,6 +15235,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15253,6 +15276,7 @@ ip++;
                     ValuesA[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15290,6 +15314,7 @@ ip++;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15329,6 +15354,7 @@ ip++;
                     reg_AdrB = direct;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15368,6 +15394,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15407,6 +15434,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15447,6 +15475,7 @@ ip++;
                     ValuesB[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15486,6 +15515,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15525,6 +15555,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15565,6 +15596,7 @@ ip++;
                     ValuesA[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15603,6 +15635,7 @@ ip++;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15643,6 +15676,7 @@ ip++;
                     reg_AdrB = direct;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15683,6 +15717,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15723,6 +15758,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15764,6 +15800,7 @@ ip++;
                     ValuesB[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15804,6 +15841,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15844,6 +15882,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15885,6 +15924,7 @@ ip++;
                     ValuesA[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15922,6 +15962,7 @@ ip++;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -15961,6 +16002,7 @@ ip++;
                     reg_AdrB = direct;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16000,6 +16042,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16039,6 +16082,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16079,6 +16123,7 @@ ip++;
                     ValuesB[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16118,6 +16163,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16157,6 +16203,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16197,6 +16244,7 @@ ip++;
                     ValuesA[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16234,6 +16282,7 @@ ip++;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16273,6 +16322,7 @@ ip++;
                     reg_AdrB = direct;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16312,6 +16362,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16351,6 +16402,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16391,6 +16443,7 @@ ip++;
                     ValuesB[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16430,6 +16483,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16469,6 +16523,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16509,6 +16564,7 @@ ip++;
                     ValuesA[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16547,6 +16603,7 @@ ip++;
                     reg_IR_ValueB = reg_IR_ValueB;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16587,6 +16644,7 @@ ip++;
                     reg_AdrB = direct;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16627,6 +16685,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16667,6 +16726,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16708,6 +16768,7 @@ ip++;
                     ValuesB[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16748,6 +16809,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16788,6 +16850,7 @@ ip++;
                     reg_IR_ValueB = ValuesB[reg_AdrB];
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;
@@ -16829,6 +16892,7 @@ ip++;
                     ValuesA[direct]++;
                     
 Operations[reg_AdrB] = Operations[reg_AdrA];
+core[reg_AdrB].Modifier = Modifier.NULL;
 ValuesA[reg_AdrB] = reg_AA_Value;
 ValuesB[reg_AdrB] = reg_IR_ValueA;
 ip++;

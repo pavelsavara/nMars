@@ -53,8 +53,8 @@ namespace nMars.Parser.Statements
             else
             {
                 instruction = (ExtendedInstruction)warrior.Instructions[currentAddress];
-                instruction.ValueA = A.Expression.Evaluate(parser, currentAddress, coreSize);
-                instruction.ValueB = B.Expression.Evaluate(parser, currentAddress, coreSize);
+                instruction.ValueA = Instruction.Mod(A.Expression.Evaluate(parser, currentAddress, coreSize), coreSize);
+                instruction.ValueB = Instruction.Mod(B.Expression.Evaluate(parser, currentAddress, coreSize), coreSize);
                 instruction.ExpressionA = A.Expression.ToString();
                 instruction.ExpressionB = B.Expression.ToString();
                 if (instruction.ModeA == Mode.NULL)

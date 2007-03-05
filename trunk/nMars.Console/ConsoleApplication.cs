@@ -56,6 +56,11 @@ namespace nMars.Console
             }
             else
             {
+                if (project.EngineOptions.EngineMode != EngineMode.Match)
+                {
+                    project.Rules.WarriorsCount = 2;
+                }
+
                 ParseResult result = CommandLine.Parse(components, console, project);
                 if (result == null || !result.Succesfull)
                     return -2;

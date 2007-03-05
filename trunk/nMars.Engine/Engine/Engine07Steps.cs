@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using nMars.RedCode;
 
 namespace nMars.Engine
@@ -22,6 +23,9 @@ namespace nMars.Engine
 
         public void BeginMatch(IProject project)
         {
+            if (project.EngineOptions.EngineMode != EngineMode.Match)
+                throw new InvalidOperationException("This engine mode is supported only by method run");
+
             InitializeMatch(project);
             InitializeRound();
 

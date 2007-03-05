@@ -37,8 +37,11 @@ namespace nMars.Fngine.Fngine
                 int adr = mod(address);
                 core[adr].ValueA = ValuesA[adr];
                 core[adr].ValueB = ValuesB[adr];
-                GetOperation(Operations[adr], out core[adr].Operation, out core[adr].Modifier,
-                                       out core[adr].ModeA, out core[adr].ModeB);
+                if (core[adr].Modifier == Modifier.NULL)
+                {
+                    GetOperation(Operations[adr], out core[adr].Operation, out core[adr].Modifier,
+                                           out core[adr].ModeA, out core[adr].ModeB);
+                }
                 return core[adr];
             }
             set { throw new NotImplementedException(); }

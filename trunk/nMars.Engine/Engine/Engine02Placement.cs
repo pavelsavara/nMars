@@ -101,8 +101,8 @@ namespace nMars.Engine
             for (int a = 0; a < warrior.Length; a++)
             {
                 IInstruction instruction = warrior[a];
-                if (instruction.ValueA >= coreSize || instruction.ValueA <= 0 - coreSize ||
-                    instruction.ValueB >= coreSize || instruction.ValueB <= 0 - coreSize)
+                if (instruction.ValueA >= coreSize || instruction.ValueA < 0 ||
+                    instruction.ValueB >= coreSize || instruction.ValueB < 0 )
                 {
                     throw new RulesException("operand value out of core size");
                 }
