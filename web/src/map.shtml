@@ -1,4 +1,4 @@
-<!--#include virtual="header" -->
+﻿<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
 
@@ -8,7 +8,7 @@
     <li><a href="http://sourceforge.net/projects/nmars">SourceForge.net</a>
       <ul>
       <li><a href="http://sourceforge.net/project/showfiles.php?group_id=174312">Downloads</a></li>
-      <li><a href="http://sourceforge.net/tracker/?func=add&group_id=174312&atid=868732">Bugzilla</a></li>
+      <li><a href="http://sourceforge.net/tracker/?func=add&amp;group_id=174312&amp;atid=868732">Bugzilla</a></li>
     </ul></li>
 
     <li>Users

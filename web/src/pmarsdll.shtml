@@ -1,4 +1,4 @@
-<!--#include virtual="header" -->
+﻿<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
 
@@ -7,7 +7,7 @@
 - I included pMARS 0.9.2 <a href="http://www.cs.helsinki.fi/u/jpihlaja/cw/pmars-sdl/">modified by M Joonas Pihlaja</a> to use <a href="http://www.libsdl.org/index.php">SDL</a>.
 - I modularized it and <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/pMars/">wrapped into DLL</a> and <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/pMars.DllWrapper/">.NET component</a>
 - I'm prepared to merge it back to <a href="http://corewar.sourceforge.net/">pMARS</a> CVS as 0.9.3 in near future if owners allow
-- Binaries are ready for <a href="http://sourceforge.net/project/showfiles.php?group_id=174312&package_id=214071">download</a>
+- Binaries are ready for <a href="http://sourceforge.net/project/showfiles.php?group_id=174312&amp;package_id=214071">download</a>
 </pre>
 	  
  <h2>Joonas's changes</h2>

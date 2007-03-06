@@ -1,4 +1,4 @@
-<!--#include virtual="header" -->
+﻿<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
 
@@ -11,7 +11,7 @@
         <li>Under cover are running <a href="parser.shtml">Parser</a>, <a href="engine.shtml">Engine</a> and <a href="debugger.shtml">Debugger</a> components</li>
         <li>It can be ensembled with <a href="python.shtml">Python shell</a>, <a href="tests.shtml">Unit tests</a> and <a href="pmarsdll.shtml">pMars wrapper</a> components</li>
         <li>All <a href="components.shtml">components</a> share common <a href="library.shtml">nMars.RedCode</a> library.</li>
-        <li>You can <a href="http://sourceforge.net/project/showfiles.php?group_id=174312&package_id=199883">download</a> several <a href="packages.shtml">packages</a>.</li>
+        <li>You can <a href="http://sourceforge.net/project/showfiles.php?group_id=174312&amp;package_id=199883">download</a> several <a href="packages.shtml">packages</a>.</li>
         <li>Source code could be checked out from <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/"> subversion repository</a> or <a href="http://nmars.svn.sourceforge.net/viewvc/nmars/trunk/">browsed</a></li>
         
     </ul>
@@ -82,7 +82,7 @@
 
     <h2>Feedback</h2>
     <p><a href="feedback.shtml">Feedback</a> is really appreciated.</p>
-    <p style="padding-left: 25%"><strong>Pavel �avara</strong></p>
+    <p style="padding-left: 25%"><strong>Pavel Šavara</strong></p>
     <br/>
     <br/>
 
