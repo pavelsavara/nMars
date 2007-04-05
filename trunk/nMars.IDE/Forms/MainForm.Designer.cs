@@ -1,4 +1,4 @@
-// This file is part of nMars - Corewars MARS for .NET 
+// This file is part of nMars - Core War MARS for .NET 
 // Whole solution including it's license could be found at
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
@@ -611,7 +611,7 @@ namespace nMars.IDE.Forms
             this.Controls.Add(this.statusbar);
             this.Controls.Add(this.mainMenu);
             this.Name = "MainForm";
-            this.Text = "nMars - Corewars MARS for .NET ";
+            this.Text = "nMars - Core War MARS for .NET ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.mainMenu.ResumeLayout(false);
