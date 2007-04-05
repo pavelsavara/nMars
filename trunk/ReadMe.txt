@@ -1,5 +1,5 @@
 
-    nMars - Corewars MARS for .NET
+    nMars - Core War MARS for .NET
     
 ---------------------------------------
 
@@ -9,7 +9,7 @@ Please start here for full info:
 http://nmars.sourceforge.net/
 
 
-More info about Corewars can be found here 
+More info about Core War can be found here 
 --------------------
 http://www.koth.org/
 http://groups.google.com/group/rec.games.corewar

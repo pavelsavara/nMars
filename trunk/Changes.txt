@@ -1,3 +1,4 @@
+04/05/2007 - corewars renamed to Core Wars
 03/05/2007 - Fngine, testing, tournament
   - loading always positive numbers to core
   - disable P-space command line option
