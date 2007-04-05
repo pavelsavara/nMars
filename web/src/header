@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>nMars - Corewars MARS for .NET</title>
+  <title>nMars - Core War MARS for .NET</title>
   <meta name="keywords" content="nMars Mars pMars redcode core war corewars wars compiler koth king hill program programming game evolution fight VM IDE .NET C#"/>
-  <meta name="description" content="nMars is engine, compiler and IDE for programming game called Corewars."/>
+  <meta name="description" content="nMars is engine, compiler and IDE for programming game called Core War."/>
   <meta name="robots" content="all, follow"/>
   <meta name="creator" content="Pavel (dot) Savara (at) gmail (dot) com"/>
   <link rel="shortcut icon" href="http://nmars.sourceforge.net/pics/favicon.ico" type="image/x-icon"/>

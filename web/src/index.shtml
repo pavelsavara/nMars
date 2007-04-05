@@ -2,8 +2,8 @@
 <!--#include virtual="menu" -->
 <div id="Content">
 
-    <h1>nMars - Corewars MARS for .NET</h1>
-    <p>nMars is engine, compiler and IDE for programming game called <a href="links.shtml">Corewars</a>. </p>
+    <h1>nMars - Core War MARS for .NET</h1>
+    <p>nMars is engine, compiler and IDE for programming game called <a href="links.shtml">Core War</a>. </p>
     
     <h2>Overview</h2>
     <ul>
