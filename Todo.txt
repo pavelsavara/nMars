@@ -15,9 +15,9 @@ unsorted
  
  - Documentation & Home page
    - Currently there is only basic info about nMars, let's extend it
-   - I feel we need some Wiki for CoreWars
+   - I feel we need some Wiki for Core War
    - There is page on wikipedia, but that's not vehicle for more focused content
-   - Anyone should be able to update pages about strategies, software links, personal corewars pages, warriors library
+   - Anyone should be able to update pages about strategies, software links, personal Core War pages, warriors library
    - Let's update content on koth.org
    - blog
    - Sandcastle doc update
