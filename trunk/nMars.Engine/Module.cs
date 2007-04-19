@@ -29,6 +29,21 @@ namespace nMars.Engine
         #endregion
     }
 
+    class ObserverModule : BaseModule, IEngineModule
+    {
+        public IEngine CreateEngine()
+        {
+            EngineObserver observer = new EngineObserver();
+            observer.Module = this;
+            return observer;
+        }
+
+        public override string Name
+        {
+            get { return typeof(Module).Namespace + "-Observer"; }
+        }
+    }
+
     class StepBackModule : BaseModule, IEngineModule
     {
         public IEngine CreateEngine()

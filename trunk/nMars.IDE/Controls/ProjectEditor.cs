@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using nMars.IDE.Core;
@@ -18,6 +19,7 @@ namespace nMars.IDE.Controls
             project = aProject;
             project.Editor = this;
             InitializeComponent();
+            comboBoxMode.Items.AddRange(Enum.GetNames(typeof(EngineMode)));
         }
         private RedCodeProject project;
 
@@ -70,6 +72,11 @@ namespace nMars.IDE.Controls
             {
                 return project;
             }
+        }
+
+        private void comboBoxMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

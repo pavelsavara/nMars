@@ -37,6 +37,7 @@ namespace nMars.IDE.Controls
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageRules = new System.Windows.Forms.TabPage();
+            this.comboBoxMode = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxCoreSize = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -83,6 +84,7 @@ namespace nMars.IDE.Controls
             // 
             // tabPageRules
             // 
+            this.tabPageRules.Controls.Add(this.comboBoxMode);
             this.tabPageRules.Controls.Add(this.label7);
             this.tabPageRules.Controls.Add(this.textBoxCoreSize);
             this.tabPageRules.Controls.Add(this.label6);
@@ -106,6 +108,16 @@ namespace nMars.IDE.Controls
             this.tabPageRules.TabIndex = 0;
             this.tabPageRules.Text = "Rules";
             this.tabPageRules.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxMode
+            // 
+            this.comboBoxMode.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.redCodeProjectBindingSource, "EngineMode", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null));
+            this.comboBoxMode.FormattingEnabled = true;
+            this.comboBoxMode.Location = new System.Drawing.Point(81, 214);
+            this.comboBoxMode.Name = "comboBoxMode";
+            this.comboBoxMode.Size = new System.Drawing.Size(100, 21);
+            this.comboBoxMode.TabIndex = 16;
+            this.comboBoxMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxMode_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -282,5 +294,6 @@ namespace nMars.IDE.Controls
         private TextBox textBoxPSpaceSize;
         private Label label7;
         private TextBox textBoxCoreSize;
+        private ComboBox comboBoxMode;
     }
 }
