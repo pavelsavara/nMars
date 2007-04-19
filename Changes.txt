@@ -1,4 +1,5 @@
-04/05/2007 - corewars renamed to Core Wars
+04/19/2007 - nMars0.9.2 - bugfix release
+04/05/2007 - corewars renamed to Core Wars (as requested by William R. Buckley)
 03/05/2007 - Fngine, testing, tournament
   - loading always positive numbers to core
   - disable P-space command line option
