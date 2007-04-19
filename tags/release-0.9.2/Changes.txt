@@ -1,0 +1,126 @@
+04/19/2007 - nMars0.9.2 - bugfix release
+04/05/2007 - corewars renamed to Core Wars (as requested by William R. Buckley)
+03/05/2007 - Fngine, testing, tournament
+  - loading always positive numbers to core
+  - disable P-space command line option
+  - koth format command line option - first step, just option
+  - tournament, first vs others engine mode draft
+  
+02/10/2007 - nMars0.9.1 - bugfix release
+  - tooltip fixed
+  - active instruction marked red in warrior overview
+  - location for more parser errors (expressions)
+  - autosave before run
+  - quit without save dialog
+  - bug in debug warrior overview repainting
+
+02/10/2007 - nMars0.9.0
+  - new warrior template
+  - breakpoint on doubleclick to cell
+  - initialization of round moved to start next step for IDE
+
+02/06/2007 - merged IDE and IDE.Debugger components
+
+02/06/2007 - nMars0.8.4 - tag version before merge IDE and IDE.Debugger components
+
+02/04/2007 - step-back fixes
+  - unit test step-back feature
+  - step-back fixed, pspace history
+
+01/15/2007 - parser improovements
+  - all before ;redcode as comment
+  - asserts
+  - for 0 comment rof
+  - all after end ignore
+  - mode as part of equ allowed
+  - org expression
+  - + sign
+  - pMars.DllWrapper fixed error messages
+  
+01/13/2007 - nMars0.8.3 - IDE split
+  - IDE was wplit to IDE, graphics, debuger, debugger.ide
+  - MONO proof of concept - result: posible, lot of problems with WinForms, screenshot of debugging
+  - Shells and debuggers
+  
+06/01/2007 - nMars0.8.2 - Refactoring
+  - IProject is vehicle for IParser as well for IEngine 
+  - Project now contains WarriorFiles and can be saved/loaded to .nmproj , also from pmars config files
+  - nMars.exe is new commandline replacement, some new options, hooks for plugins added, configurable components
+  - Parser and Engine are no more executables
+  - signed assemblies
+  - Async Engine moved to RedCode assembly
+  - IDE is now showing tootip info about each cell, including last events
+  - console debugger is broken now
+  - nMars.Engine bugs in instructions fixed
+  - Unit test is producing .nmproj setup for failed tests and can be drive by commandline
+  - executed 100k matches on combinations of 5k different warriors to test Engine compatibility with pMars. No open issue.
+  - started work on documentation comments in code
+  - Parser is now returning result structure with list messages, including positions in files
+  - pMars.DllWrapper parser is converting error to result structure too, + memory leaks fixed, WARRIORS count is set from rules
+  - pMars.dll a-z registry cleanup in dll mode, long filenames buffer overflow fixed
+  - class ComponentSetup renamed to ComponentLoader and simplified
+
+12/23/2006 - nMars0.8.1 - IDE
+  - IDE framework
+  - fast GUI debug watches
+  - async engine layer
+  - project, solution
+  - IDE editor
+  - engine layers and iterfaces extended
+
+11/19/2006 - nMars0.8 - debugger
+  - console debugger
+  - IronPython extension for debugger
+  - fixed bugs in engine
+  - building step back infrastructure
+  - building coredump infrastructure
+  
+11/13/2006 - nMars0.7 - going public
+  - documentation
+  - exception handling
+  - XML dump
+  
+11/13/2006 - nMars0.6 - engine unit test
+  - refactored engine
+  - pMars.dll silent
+  - enhanced unit test
+    - command line
+    - comparer engine
+  - dump match results
+  - droped module dependencies
+  - fixed bugs in engine
+     - PSpace support
+     - adresssing bugs in engine
+
+11/08/2006 - nMars0.5 - more binaries
+  - simplified modules
+  - modules loading by name
+  - engine commandline
+  - IProject introduced
+  - version info in binaries
+  - release tools in svn
+  
+11/03/2006 - nMars0.4 - pMars included
+  - included pMars circa 0.9.2, with SDL display from M Joonas Pihlaja
+  - modularized pMars and wrapped into Windows DLL
+  - used pMars.dll as validator for unit tests
+  - enhanced SimpleEngine compatiblity, fixed bugs
+  - extended interfaces in namespace RedCode
+
+09/28/2006 - nMars0.3 - first binary released
+  - Parser more pmarsv compatible
+  - mono supported
+  - comments parsed
+  - unit tests
+  - pmarsv wrapper
+  
+09/17/2006 - nMars0.2 - Parser more powerfull
+  - more expression operations
+  - label can be A B I ... <Modifier>
+  - dynamic label names name & order
+  - locations to pareser errors
+  - 2 pass label&variable evaluation
+  - unit test skeleton
+  - exaple warriors in directory rc
+
+08/12/2006 - nMars0.1 - First version
