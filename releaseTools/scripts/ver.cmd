@@ -1,7 +1,7 @@
 @echo off
 set MAJOR=0
 set MINOR=9
-set BUILD=1
+set BUILD=2
 set REV=0
 set VER=%MAJOR%.%MINOR%
 set APPENDBUILD=.%BUILD%
