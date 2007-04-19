@@ -27,7 +27,7 @@ namespace pMars.DllWrapper
 
         public void BeginMatch(IProject aProject)
         {
-            if (project.EngineOptions.EngineMode != EngineMode.Match)
+            if (aProject.EngineOptions.EngineMode != EngineMode.Match)
                 throw new NotSupportedException("This engine mode is not supported by pMars");
 
             project = aProject;
