@@ -6,6 +6,7 @@
 using System;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
+using nMars.RedCode.Utils;
 
 namespace nMars.Screensaver
 {
@@ -13,8 +14,30 @@ namespace nMars.Screensaver
     {
         public static int Main(string[] args)
         {
-            return 0;
+            string param = "/s";
+            if (args.Length>0)
+                param = args[0];
+            switch(param)
+            {
+                case "/s":
 
+                    try
+                    {
+                        return ScreensaverApplication.ScreensaverMain();
+                    }
+                    catch (Exception ex)
+                    {
+                        return ExceptionHandler.DumpException(ex);
+                    }
+                    
+                    
+                    break;
+                case "/p":
+                    break;
+                case "/c":
+                    break;
+            }
+            return 0;
         }
 
         #region Module registration

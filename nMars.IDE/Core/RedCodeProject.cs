@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -333,6 +334,20 @@ namespace nMars.IDE.Core
             set
             {
                 CheckPropertyChanged("PSpaceSize", ref Project.Rules.PSpaceSize, ref value);
+            }
+        }
+
+        public string EngineMode
+        {
+            get
+            {
+                return Project.EngineOptions.EngineMode.ToString();
+            }
+            set
+            {
+                string old = Project.EngineOptions.EngineMode.ToString();
+                Project.EngineOptions.EngineMode = (EngineMode)Enum.Parse(typeof(EngineMode), value);
+                CheckPropertyChanged("EngineMode", ref old, ref value);
             }
         }
 
