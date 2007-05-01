@@ -526,7 +526,7 @@ namespace nMars.Parser
                     labels = (List<LabelName>)token.Tokens[0].UserObject;
                     expression = (Expression)token.Tokens[3].UserObject;
                     Mode mode = (Mode)token.Tokens[2].UserObject;
-                    if (mode!=null && mode!=Mode.NULL)
+                    if (mode!=Mode.NULL)
                     {
                         expression = new ModifiedExpression(token.Tokens[2].Location, expression, mode);
                     }

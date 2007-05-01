@@ -20,7 +20,6 @@ namespace nMars.RedCode
     /// <summary>
     /// Command for application shell
     /// </summary>
-    /// <param name="commandLine">command line</param>
     public delegate void ConsoleCommandEntered(string commandLine, ref bool processed, ref bool quit);
 
     public interface IShellPrompt

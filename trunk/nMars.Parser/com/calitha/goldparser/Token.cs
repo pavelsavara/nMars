@@ -99,6 +99,7 @@ namespace com.calitha.goldparser
         /// </summary>
         /// <param name="rule">The reduction rule.</param>
         /// <param name="tokens">The tokens that are reduced.</param>
+        /// <param name="location"></param>
         public NonterminalToken(Rule rule, Token[] tokens, Location location)
         {
             this.rule = rule;

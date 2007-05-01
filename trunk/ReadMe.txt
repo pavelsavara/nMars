@@ -20,6 +20,25 @@ Download
 https://sourceforge.net/project/showfiles.php?group_id=174312
 
 
+Building
+--------------------
+- Zero needs
+  * run buildMinimal.cmd
+  
+- Minimal
+  * You will need VS2005 (C#) or SharpDevelop
+  * run nMars.snk.cmd to create your private key
+  * Open and build nMarsMinimal.sln
+  
+- Full
+  * You will need VS2005 (C# and C++)
+  * NUnit 2.x (http://www.nunit.org/)
+  * IronPython 1.1 (http://www.codeplex.com/IronPython)
+  * SDL SDK (http://www.libsdl.org/) to subdirectory .\pMars\src\SDL 
+  * run nMars.snk.cmd to create your private key
+  * Open and build nMars.sln
+
+
 License
 --------------------
 nMars is Licensed under GNU Lesser General Public License

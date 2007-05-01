@@ -33,6 +33,7 @@ namespace com.calitha.goldparser
         /// <param name="tokenizer">A tokenizer.</param>
         /// <param name="states">The LALR states.</param>
         /// <param name="startState">The starting state.</param>
+        /// <param name="symbols"></param>
         public LALRParser(IStringTokenizer tokenizer, StateCollection states, State startState, SymbolCollection symbols)
         {
             this.tokenizer = tokenizer;

@@ -115,5 +115,10 @@ namespace nMars.RedCode
             if (Version != r2.Version) return false;
             return true;
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
