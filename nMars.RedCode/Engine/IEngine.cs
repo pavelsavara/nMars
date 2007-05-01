@@ -178,8 +178,6 @@ namespace nMars.RedCode
 
     public interface ICoreDump : ITaskView, IStatusView, IScoreView, ICoreView
     {
-        IRunningInstruction this[int address] { get; }
-        int CoreSize { get; }
     }
 
     public interface ICoreLoad
