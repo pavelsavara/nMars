@@ -29,9 +29,6 @@ namespace nMars.Screensaver
                     {
                         return ExceptionHandler.DumpException(ex);
                     }
-                    
-                    
-                    break;
                 case "/p":
                     break;
                 case "/c":

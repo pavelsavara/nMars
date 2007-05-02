@@ -26,6 +26,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <PlatformTarget>x86</PlatformTarget>
+    <NoWarn>0219,0168</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\bin\Release\nMars.Fngine.XML</DocumentationFile>
     <PlatformTarget>x86</PlatformTarget>
+    <NoWarn>0219,0168</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mono|AnyCPU' ">
     <OutputPath>..\bin\Mono\</OutputPath>

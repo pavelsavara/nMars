@@ -216,7 +216,6 @@ namespace nMars.Generator
                     engine.BeginMatch(project);
                     engine.NextStep();
                 }
-                throw new NotImplementedException();
             }
 
             List<ExtendedInstruction> check=new List<ExtendedInstruction>();
