@@ -77,7 +77,7 @@ namespace nMars.Fngine.Fngine
             }
         }
 
-        internal int CoreSize;
+        new internal int CoreSize;
         internal int[] ValuesA;
         internal int[] ValuesB;
         internal Fn[] Operations;

@@ -25,12 +25,11 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -61,8 +60,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -99,8 +98,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -137,8 +136,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -175,8 +174,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -214,8 +213,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -252,8 +251,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -290,8 +289,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -335,8 +334,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -655,8 +653,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -975,8 +972,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -1296,8 +1292,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -1623,8 +1618,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -1943,8 +1937,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -2264,8 +2257,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -2585,12 +2577,11 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -2621,8 +2612,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -2659,8 +2650,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -2697,8 +2688,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -2735,8 +2726,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -2774,8 +2765,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -2812,8 +2803,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -2850,8 +2841,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -2895,8 +2886,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -3215,8 +3205,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -3535,8 +3524,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -3856,8 +3844,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -4183,8 +4170,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -4503,8 +4489,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -4824,8 +4809,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -5145,12 +5129,11 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -5181,8 +5164,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -5219,8 +5202,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -5257,8 +5240,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -5295,8 +5278,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -5334,8 +5317,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -5372,8 +5355,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -5410,8 +5393,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -5455,8 +5438,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -5775,8 +5757,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -6095,8 +6076,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -6416,8 +6396,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -6743,8 +6722,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -7063,8 +7041,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -7384,8 +7361,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value);
 if (jump)
                         ip += 2;
@@ -7705,12 +7681,11 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -7741,8 +7716,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -7779,8 +7754,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -7817,8 +7792,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -7855,8 +7830,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -7894,8 +7869,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -7932,8 +7907,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -7970,8 +7945,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -8015,8 +7990,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -8335,8 +8309,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -8655,8 +8628,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -8976,8 +8948,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -9303,8 +9274,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -9623,8 +9593,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -9944,8 +9913,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_IR_ValueA);
 if (jump)
                         ip += 2;
@@ -10265,12 +10233,11 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -10302,8 +10269,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -10341,8 +10308,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -10380,8 +10347,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -10419,8 +10386,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -10459,8 +10426,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -10498,8 +10465,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -10537,8 +10504,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -10583,8 +10550,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -10911,8 +10877,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -11239,8 +11204,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -11568,8 +11532,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -11903,8 +11866,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -12231,8 +12193,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -12560,8 +12521,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -12889,12 +12849,11 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value &&
                                     reg_AB_Value > reg_IR_ValueA);
 if (jump)
@@ -12926,8 +12885,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -12965,8 +12924,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -13004,8 +12963,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -13043,8 +13002,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -13083,8 +13042,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -13122,8 +13081,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -13161,8 +13120,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -13207,8 +13166,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value &&
                                     reg_AB_Value > reg_IR_ValueA);
 if (jump)
@@ -13535,8 +13493,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value &&
                                     reg_AB_Value > reg_IR_ValueA);
 if (jump)
@@ -13863,8 +13820,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value &&
                                     reg_AB_Value > reg_IR_ValueA);
 if (jump)
@@ -14192,8 +14148,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value &&
                                     reg_AB_Value > reg_IR_ValueA);
 if (jump)
@@ -14527,8 +14482,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value &&
                                     reg_AB_Value > reg_IR_ValueA);
 if (jump)
@@ -14855,8 +14809,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value &&
                                     reg_AB_Value > reg_IR_ValueA);
 if (jump)
@@ -15184,8 +15137,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_IR_ValueB > reg_AA_Value &&
                                     reg_AB_Value > reg_IR_ValueA);
 if (jump)
@@ -15513,12 +15465,11 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -15550,8 +15501,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -15589,8 +15540,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -15628,8 +15579,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -15667,8 +15618,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -15707,8 +15658,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -15746,8 +15697,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -15785,8 +15736,8 @@ if (jump)
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -15831,8 +15782,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -16159,8 +16109,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -16487,8 +16436,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -16816,8 +16764,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -17151,8 +17098,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -17479,8 +17425,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)
@@ -17808,8 +17753,7 @@ if (jump)
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 jump = (reg_AB_Value > reg_AA_Value &&
                                     reg_IR_ValueB > reg_IR_ValueA);
 if (jump)

@@ -25,12 +25,11 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -67,8 +66,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -111,8 +110,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -155,8 +154,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -199,8 +198,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -244,8 +243,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -288,8 +287,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -332,8 +331,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -383,8 +382,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -751,8 +749,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -1119,8 +1116,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -1488,8 +1484,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -1863,8 +1858,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -2231,8 +2225,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -2600,8 +2593,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -2969,12 +2961,11 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -3011,8 +3002,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -3055,8 +3046,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -3099,8 +3090,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -3143,8 +3134,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -3188,8 +3179,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -3232,8 +3223,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -3276,8 +3267,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -3327,8 +3318,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -3695,8 +3685,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -4063,8 +4052,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -4432,8 +4420,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -4807,8 +4794,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -5175,8 +5161,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -5544,8 +5529,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -5913,12 +5897,11 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -5955,8 +5938,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -5999,8 +5982,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -6043,8 +6026,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -6087,8 +6070,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -6132,8 +6115,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -6176,8 +6159,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -6220,8 +6203,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -6271,8 +6254,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -6639,8 +6621,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -7007,8 +6988,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -7376,8 +7356,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -7751,8 +7730,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -8119,8 +8097,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -8488,8 +8465,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -8857,12 +8833,11 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -8899,8 +8874,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -8943,8 +8918,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -8987,8 +8962,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -9031,8 +9006,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -9076,8 +9051,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -9120,8 +9095,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -9164,8 +9139,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -9215,8 +9190,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -9583,8 +9557,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -9951,8 +9924,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -10320,8 +10292,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -10695,8 +10666,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -11063,8 +11033,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -11432,8 +11401,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -11801,12 +11769,11 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -11843,8 +11810,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -11887,8 +11854,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -11931,8 +11898,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -11975,8 +11942,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -12020,8 +11987,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -12064,8 +12031,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -12108,8 +12075,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -12159,8 +12126,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -12527,8 +12493,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -12895,8 +12860,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -13264,8 +13228,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -13639,8 +13602,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -14007,8 +13969,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -14376,8 +14337,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -14745,12 +14705,11 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -14787,8 +14746,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -14831,8 +14790,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -14875,8 +14834,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -14919,8 +14878,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -14964,8 +14923,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -15008,8 +14967,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -15052,8 +15011,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -15103,8 +15062,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -15471,8 +15429,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -15839,8 +15796,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -16208,8 +16164,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -16583,8 +16538,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -16951,8 +16905,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -17320,8 +17273,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -17689,12 +17641,11 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -17731,8 +17682,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -17775,8 +17726,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -17819,8 +17770,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -17863,8 +17814,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -17908,8 +17859,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -17952,8 +17903,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -17996,8 +17947,8 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -18047,8 +17998,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -18415,8 +18365,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -18783,8 +18732,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -19152,8 +19100,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -19527,8 +19474,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -19895,8 +19841,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {
@@ -20264,8 +20209,7 @@ namespace nMars.Fngine.Fngine
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 
                     if (warrior.LiveTasks + 1 < rules.MaxProcesses)
                     {

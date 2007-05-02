@@ -161,9 +161,13 @@ namespace nMars.Generator
                     "); return;
                 case Mode.Immediate:
                     sb.AppendLine(@"
-                    "+indirect+@" = ip;
-                    "+IR_X+@" = reg_IR_ValueB;
-                    "); return;
+                    " + indirect + @" = ip;");
+                    if (IR_X != "reg_IR_ValueB")
+                    {
+                        sb.AppendLine(IR_X+@" = reg_IR_ValueB;");    
+                    }
+                    sb.AppendLine();
+                    return;
                 default:
                     throw new InvalidOperationException("Unknown Mode");
             }

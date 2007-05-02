@@ -25,12 +25,11 @@ namespace nMars.Fngine.Fngine
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 ip++;
@@ -67,8 +66,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -111,8 +110,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -155,8 +154,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -199,8 +198,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -244,8 +243,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -288,8 +287,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -332,8 +331,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -383,8 +382,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 ip++;
@@ -751,8 +749,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 ip++;
@@ -1119,8 +1116,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 ip++;
@@ -1488,8 +1484,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 ip++;
@@ -1863,8 +1858,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 ip++;
@@ -2231,8 +2225,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 ip++;
@@ -2600,8 +2593,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 ip++;
@@ -2969,12 +2961,11 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_IR_ValueA;
 ip++;
@@ -3011,8 +3002,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -3055,8 +3046,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -3099,8 +3090,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -3143,8 +3134,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -3188,8 +3179,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -3232,8 +3223,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -3276,8 +3267,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -3327,8 +3318,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_IR_ValueA;
 ip++;
@@ -3695,8 +3685,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_IR_ValueA;
 ip++;
@@ -4063,8 +4052,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_IR_ValueA;
 ip++;
@@ -4432,8 +4420,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_IR_ValueA;
 ip++;
@@ -4807,8 +4794,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_IR_ValueA;
 ip++;
@@ -5175,8 +5161,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_IR_ValueA;
 ip++;
@@ -5544,8 +5529,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_IR_ValueA;
 ip++;
@@ -5913,12 +5897,11 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 ip++;
@@ -5955,8 +5938,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -5999,8 +5982,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -6043,8 +6026,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -6087,8 +6070,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -6132,8 +6115,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -6176,8 +6159,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -6220,8 +6203,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -6271,8 +6254,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 ip++;
@@ -6639,8 +6621,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 ip++;
@@ -7007,8 +6988,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 ip++;
@@ -7376,8 +7356,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 ip++;
@@ -7751,8 +7730,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 ip++;
@@ -8119,8 +8097,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 ip++;
@@ -8488,8 +8465,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 ip++;
@@ -8857,12 +8833,11 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_IR_ValueA;
 ip++;
@@ -8899,8 +8874,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -8943,8 +8918,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -8987,8 +8962,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -9031,8 +9006,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -9076,8 +9051,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -9120,8 +9095,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -9164,8 +9139,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -9215,8 +9190,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_IR_ValueA;
 ip++;
@@ -9583,8 +9557,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_IR_ValueA;
 ip++;
@@ -9951,8 +9924,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_IR_ValueA;
 ip++;
@@ -10320,8 +10292,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_IR_ValueA;
 ip++;
@@ -10695,8 +10666,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_IR_ValueA;
 ip++;
@@ -11063,8 +11033,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_IR_ValueA;
 ip++;
@@ -11432,8 +11401,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_IR_ValueA == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_IR_ValueA;
 ip++;
@@ -11801,12 +11769,11 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -11845,8 +11812,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -11891,8 +11858,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -11937,8 +11904,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -11983,8 +11950,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -12030,8 +11997,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -12076,8 +12043,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -12122,8 +12089,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -12175,8 +12142,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -12559,8 +12525,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -12943,8 +12908,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -13328,8 +13292,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -13719,8 +13682,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -14103,8 +14065,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -14488,8 +14449,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -14873,12 +14833,11 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -14917,8 +14876,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -14963,8 +14922,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -15009,8 +14968,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -15055,8 +15014,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -15102,8 +15061,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -15148,8 +15107,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -15194,8 +15153,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -15247,8 +15206,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -15631,8 +15589,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -16015,8 +15972,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -16400,8 +16356,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -16791,8 +16746,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -17175,8 +17129,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -17560,8 +17513,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesB[reg_AdrB] = reg_IR_ValueB / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -17945,12 +17897,11 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -17989,8 +17940,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AB_Value = ValuesA[direct];
@@ -18035,8 +17986,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -18081,8 +18032,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesB[direct]));
@@ -18127,8 +18078,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesB[direct]);
@@ -18174,8 +18125,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -18220,8 +18171,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + (--ValuesA[direct]));
@@ -18266,8 +18217,8 @@ ip++;
             reg_AB_Value = reg_IR_ValueA;
 
                     reg_AdrA = ip;
-                    reg_IR_ValueA = reg_IR_ValueB;
-                    
+reg_IR_ValueA = reg_IR_ValueB;
+
 
                     direct = mod(reg_IR_ValueBCpy + ip);
                     reg_AdrB = mod(direct + ValuesA[direct]);
@@ -18319,8 +18270,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -18703,8 +18653,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -19087,8 +19036,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -19472,8 +19420,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -19863,8 +19810,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -20247,8 +20193,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
@@ -20632,8 +20577,7 @@ ip++;
                     
 
                     reg_AdrB = ip;
-                    reg_IR_ValueB = reg_IR_ValueB;
-                    
+
 if (reg_AA_Value == 0) die = true;
 else ValuesA[reg_AdrB] = reg_AB_Value / reg_AA_Value;
 if (reg_IR_ValueA == 0) die = true;
