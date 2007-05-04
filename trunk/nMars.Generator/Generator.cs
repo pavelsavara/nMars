@@ -17,11 +17,6 @@ namespace nMars.Generator
         {
             foreach (Operation operation in Enum.GetValues(typeof(Operation)))
             {
-                /*if (operation==Operation.NOP ||
-                    operation==Operation.DAT ||
-                    operation==Operation.LDP ||
-                    operation==Operation.STP )
-                    continue;*/
                 foreach (Modifier modifier in Enum.GetValues(typeof(Modifier)))
                 {
                     if (modifier == Modifier.NULL)

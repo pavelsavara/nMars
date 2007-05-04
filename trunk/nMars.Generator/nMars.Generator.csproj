@@ -32,7 +32,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\nMars.Generator.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mono|AnyCPU' ">
     <OutputPath>..\bin\Mono\</OutputPath>
@@ -53,8 +54,8 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Delegates.cs" />
-    <Compile Include="EngineTest.cs" />
     <Compile Include="Gen.cs" />
+    <Compile Include="GenCs.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
