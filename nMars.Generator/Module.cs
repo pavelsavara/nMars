@@ -13,7 +13,7 @@ namespace nMars.Generator
         public static int Main(string[] args)
         {
             //EngineTest et=new EngineTest();
-            Gen et = new Gen();
+            GenCS et = new GenCS();
             et.Generate();
             return 0;
         }

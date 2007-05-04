@@ -31,15 +31,15 @@ namespace nMars.Test
 
         public static IEngine CreateEngineInternal()
         {
-            /*
-            IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("nMars.Engine") as IExtendedStepEngine;
+            IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
             IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Fngine") as IExtendedStepEngine;
+            /*
              */
 
             /*
-             */
             IExtendedStepEngine engineOne = ModuleRegister.CreateEngine("pMars.DllWrapper") as IExtendedStepEngine;
             IExtendedStepEngine engineTwo = ModuleRegister.CreateEngine("nMars.Engine-StepBack") as IExtendedStepEngine;
+             */
             return new ComparingEngine(engineOne, engineTwo);
         }
 

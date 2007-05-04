@@ -47,6 +47,17 @@ namespace nMars.Engine
             }
         }
 
+        protected int dec(ref int value)
+        {
+            value = mod(value - 1);
+            return value;
+        }
+
+        protected void inc(ref int value)
+        {
+            value = mod(value + 1);
+        }
+
         protected int dec(int address, Column column)
         {
             int val = mod(this[address, column] - 1);
