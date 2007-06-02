@@ -7,6 +7,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using nMars.RedCode;
+using nMars.RedCode.Utils;
 
 namespace nMars.Graphics.Controls
 {
@@ -15,6 +16,18 @@ namespace nMars.Graphics.Controls
         public CoreGrid()
         {
             InitializeComponent();
+            if (!Mono.IsMonoRuntime)
+            {
+                InitializeNonMono();
+            }
+        }
+
+        private void InitializeNonMono()
+        {
+#if !MONO
+            this.DoubleBuffered = true;
+            this.ClientSizeChanged += new System.EventHandler(this.CoreGrid_ClientSizeChanged);
+#endif
         }
 
         public int GetAddress(int x, int y)
@@ -37,7 +50,12 @@ namespace nMars.Graphics.Controls
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            //empty
+#if !MONO
+            if (Mono.IsMonoRuntime)
+                base.OnPaintBackground(e);
+#else
+            base.OnPaintBackground(e);
+#endif
         }
 
         /// <summary>

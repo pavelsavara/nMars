@@ -34,11 +34,9 @@ namespace nMars.Graphics.Controls
             // 
             this.BackColor = System.Drawing.Color.Black;
             this.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "CoreGrid";
             this.Size = new System.Drawing.Size(383, 280);
-            this.ClientSizeChanged += new System.EventHandler(this.CoreGrid_ClientSizeChanged);
             this.ResumeLayout(false);
 
         }
