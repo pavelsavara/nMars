@@ -141,7 +141,7 @@ namespace nMars.IDE.Core
 
         public override void Open()
         {
-            if (!Mono.IsMonoRuntime)
+            if (!MonoCheck.IsMonoRuntime)
             {
                 InitializeNonMono();
             }

@@ -19,7 +19,7 @@ namespace nMars.IDE
                 System.Windows.Forms.Application.EnableVisualStyles();
                 System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
-                if (Mono.IsMonoRuntime)
+                if (MonoCheck.IsMonoRuntime)
                 {
                     Console.WriteLine("Running on mono, some features will be disabled.");
                 }
