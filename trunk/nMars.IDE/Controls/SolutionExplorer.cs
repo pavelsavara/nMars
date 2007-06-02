@@ -56,13 +56,13 @@ namespace nMars.IDE.Controls
                             war.Tag = document.Value;
                         }
                         proj.Nodes.Add(war);
-                        if (!Mono.IsMonoRuntime)
+                        if (!MonoCheck.IsMonoRuntime)
                         {
                             InitializeNonMono(war, document.Key);
                         }
                     }
                 }
-                if (!Mono.IsMonoRuntime)
+                if (!MonoCheck.IsMonoRuntime)
                 {
                     InitializeNonMono(proj, project.Key);
                 }

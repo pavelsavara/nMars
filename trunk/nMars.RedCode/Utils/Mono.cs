@@ -10,9 +10,9 @@ namespace nMars.RedCode.Utils
     /// <summary>
     /// Mono Helper class
     /// </summary>
-    public class Mono
+    public class MonoCheck
     {
-        static Mono()
+        static MonoCheck()
         {
             Type t = Type.GetType("Mono.Runtime");
             if (t != null)

@@ -16,7 +16,7 @@ namespace nMars.Graphics.Controls
         public CoreGrid()
         {
             InitializeComponent();
-            if (!Mono.IsMonoRuntime)
+            if (!MonoCheck.IsMonoRuntime)
             {
                 InitializeNonMono();
             }
@@ -51,7 +51,7 @@ namespace nMars.Graphics.Controls
         protected override void OnPaintBackground(PaintEventArgs e)
         {
 #if !MONO
-            if (Mono.IsMonoRuntime)
+            if (MonoCheck.IsMonoRuntime)
                 base.OnPaintBackground(e);
 #else
             base.OnPaintBackground(e);
