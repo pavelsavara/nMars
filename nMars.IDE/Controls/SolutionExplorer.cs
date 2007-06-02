@@ -76,7 +76,7 @@ namespace nMars.IDE.Controls
         private static void InitializeNonMono(TreeNode node, string text)
         {
 #if !MONO
-            war.ToolTipText = text;
+            node.ToolTipText = text;
 #endif
         }
 
