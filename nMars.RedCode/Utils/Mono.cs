@@ -12,6 +12,15 @@ namespace nMars.RedCode.Utils
     /// </summary>
     public class Mono
     {
+        static Mono()
+        {
+            Type t = Type.GetType("Mono.Runtime");
+            if (t != null)
+                isRunningMono = true;
+            else
+                isRunningMono = false;
+        }
+
         /// <summary>
         /// Returns true if we are running on MONO runtime
         /// </summary>
@@ -19,13 +28,10 @@ namespace nMars.RedCode.Utils
         {
             get
             {
-                Type t = Type.GetType("Mono.Runtime");
-                if (t != null)
-                    return true;
-                else
-                    return false;
+                return isRunningMono;
             }
         }
 
+        private static bool isRunningMono;
     }
 }
