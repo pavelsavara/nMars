@@ -16,19 +16,7 @@
         "Entry"
         {
         "MsmKey" = "8:_00F0818101C23AA3677160E50B0A0F43"
-        "OwnerKey" = "8:_1209AE3A2C2C4DA6B822842EDB582C03"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_00F0818101C23AA3677160E50B0A0F43"
-        "OwnerKey" = "8:_A5F068BCC6F847968ECF3523661D8DE9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_00F0818101C23AA3677160E50B0A0F43"
-        "OwnerKey" = "8:_F41F9B7E8B864D969B7856CE18B07D79"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -52,6 +40,12 @@
         "Entry"
         {
         "MsmKey" = "8:_00F0818101C23AA3677160E50B0A0F43"
+        "OwnerKey" = "8:_A5F068BCC6F847968ECF3523661D8DE9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_00F0818101C23AA3677160E50B0A0F43"
         "OwnerKey" = "8:_598096B87AA24B47A9340325FF6D01CE"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -64,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_00F0818101C23AA3677160E50B0A0F43"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1209AE3A2C2C4DA6B822842EDB582C03"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -171,12 +165,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F41F9B7E8B864D969B7856CE18B07D79"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F45B19C5F2F542C682DFE293754FBF69"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -202,7 +190,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_198EB67D5EED4DA2BF39B91AB27ECD09"
+        "OwnerKey" = "8:_1209AE3A2C2C4DA6B822842EDB582C03"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E517504C0FB64BB28A84D96284EC05EA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D255B88FB066A4E612CB8EC08657A400"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DDA35AC81EED4005BA13C2D3003F150D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DAB0D1BE1B6A4A32BD0988A884A7D356"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -226,30 +238,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F41F9B7E8B864D969B7856CE18B07D79"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E517504C0FB64BB28A84D96284EC05EA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DDA35AC81EED4005BA13C2D3003F150D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DAB0D1BE1B6A4A32BD0988A884A7D356"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_598096B87AA24B47A9340325FF6D01CE"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -262,7 +250,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1209AE3A2C2C4DA6B822842EDB582C03"
+        "OwnerKey" = "8:_198EB67D5EED4DA2BF39B91AB27ECD09"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_00F0818101C23AA3677160E50B0A0F43"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -385,7 +379,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:nMars.Parser, Version=0.8.5.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nMars.Parser, Version=0.9.2.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_1209AE3A2C2C4DA6B822842EDB582C03"
@@ -416,7 +410,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:nMars.Engine, Version=0.8.5.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nMars.Engine, Version=0.9.2.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_198EB67D5EED4DA2BF39B91AB27ECD09"
@@ -498,7 +492,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:nMars.RedCode, Version=0.8.5.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nMars.RedCode, Version=0.9.2.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_55BD03CB0C15421C9C3D68675D8E2110"
@@ -529,7 +523,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:nMars.Debugger, Version=0.8.5.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nMars.Debugger, Version=0.9.2.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_598096B87AA24B47A9340325FF6D01CE"
@@ -606,7 +600,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:nMars.ShellPy, Version=0.8.5.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nMars.ShellPy, Version=0.9.2.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_A5F068BCC6F847968ECF3523661D8DE9"
@@ -683,7 +677,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:nMars, Version=0.8.5.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nMars, Version=0.9.2.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_DAB0D1BE1B6A4A32BD0988A884A7D356"
@@ -714,7 +708,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:nMars.IDE, Version=0.8.5.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nMars.IDE, Version=0.9.2.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_DDA35AC81EED4005BA13C2D3003F150D"
@@ -745,7 +739,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:nMars.Graphics, Version=0.8.5.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nMars.Graphics, Version=0.9.2.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_E517504C0FB64BB28A84D96284EC05EA"
@@ -796,37 +790,6 @@
             {
             "SourcePath" = "8:..\\ReadMe.txt"
             "TargetName" = "8:ReadMe.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_C4330B7CDDEF4D1F8464AF98B910FD6B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F41F9B7E8B864D969B7856CE18B07D79"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:nMars.Screensaver, Version=0.8.5.0, Culture=neutral, PublicKeyToken=01460a3745c5c530, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_F41F9B7E8B864D969B7856CE18B07D79"
-                    {
-                    "Name" = "8:nMars.scr"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Bin\\Release\\nMars.scr"
-            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C4330B7CDDEF4D1F8464AF98B910FD6B"
             "Condition" = "8:"
