@@ -14,8 +14,11 @@ namespace nMars.RedCode
 
     public class CoreEventBreakpoint : BreakPoint
     {
-        CoreEventBreakpoint()
+        public CoreEventBreakpoint()
         {
+#if !MONO
+            throw new InvalidOperationException("Do not use this constructor");
+#endif
         }
 
         public static CoreEventBreakpoint FindByAddress(BreakPoints breakPoints, int address)
