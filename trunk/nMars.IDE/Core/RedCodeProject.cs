@@ -10,6 +10,7 @@ using System.IO;
 using System.Xml.Serialization;
 using nMars.IDE.Controls;
 using nMars.RedCode;
+using nMars.RedCode.Utils;
 
 namespace nMars.IDE.Core
 {
@@ -140,6 +141,15 @@ namespace nMars.IDE.Core
 
         public override void Open()
         {
+            if (!Mono.IsMonoRuntime)
+            {
+                InitializeNonMono();
+            }
+        }
+
+        private void InitializeNonMono()
+        {
+#if !MONO
             if (Editor == null)
             {
                 Editor = new ProjectEditor(this);
@@ -149,6 +159,7 @@ namespace nMars.IDE.Core
             {
                 Editor.ActivateControl();
             }
+#endif
         }
 
         public void Add(ProjectDocument document)
