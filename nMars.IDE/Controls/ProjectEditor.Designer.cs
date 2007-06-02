@@ -4,6 +4,7 @@ using nMars.IDE.Core;
 
 namespace nMars.IDE.Controls
 {
+#if !MONO
     partial class ProjectEditor
     {
         /// <summary> 
@@ -296,4 +297,5 @@ namespace nMars.IDE.Controls
         private TextBox textBoxCoreSize;
         private ComboBox comboBoxMode;
     }
+#endif
 }

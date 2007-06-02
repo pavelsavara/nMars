@@ -12,6 +12,7 @@ using nMars.RedCode;
 
 namespace nMars.IDE.Controls
 {
+#if !MONO
     public partial class ProjectEditor : IDEFrame, IEditor
     {
         public ProjectEditor(RedCodeProject aProject)
@@ -79,4 +80,5 @@ namespace nMars.IDE.Controls
 
         }
     }
+#endif
 }
