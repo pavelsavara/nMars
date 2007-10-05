@@ -42,13 +42,13 @@
         <li>Debugger core views are packed with information about events and status of each cell</li>
         <li>Debugger is capable of step back during gebugging</li>
         <li>All configuration is XML driven</li>
-        <li>Target platform is .NET 2.0 or Mono</li>
-        <li>All components but IDE are running on Mono, porting IDE is goal.</li>
+        <li>Target platform is .NET 2.0 or Mono 1.2.4</li>
         <li>Licensed under <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/License.txt">LGPL</a></li>
     </ul>
 
     <h2>History</h2>
     <ul>
+        <li>06/03/2007 - nMars0.9.4 - IDE on Mono/Linux</li>
         <li>02/28/2007 - nMars0.9.1 - bug fixes</li>
         <li>02/10/2007 - nMars0.9   - IDE with breakpoints</li>
         <li>01/13/2007 - nMars0.8.3 - IDE preview released</li>

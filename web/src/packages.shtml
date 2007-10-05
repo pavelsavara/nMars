@@ -9,28 +9,23 @@
       <li>Binary packages for download are <a href="http://sourceforge.net/project/showfiles.php?group_id=174312">here</a></li>
     </ul>
     
-    <h2>nMarsConsole.X.Y.Z.bin.zip</h2>
+    <h2>nMarsConsole.X.Y.Z.zip</h2>
     <ul>
       <li>This binary package contains nMars with <a href="console.shtml">command-line</a> interface. It's very similar to pMars.</li>
       <li>It could run on both platforms .NET 2.0 and Mono</li>
       <li>It contains <a href="parser.shtml">parser</a>, <a href="engine.shtml">engine</a> and <a href="debugger.shtml">debugger</a></li>
     </ul>
 
-    <h2>nMarsIDE.X.Y.Z.win.zip</h2>
+    <h2>nMars.X.Y.Z.zip</h2>
     <ul>
       <li>This binary package contains nMars with both <a href="console.shtml">command-line</a> and <a href="IDE.shtml">graphical</a> interface.</li>
-      <li>It is currently running only on .NET 2.0. Mono is future goal.</li>
+      <li>It is currently running only on .NET 2.0. and Mono 1.2.4 or better.</li>
       <li>It contains integrated <a href="editor.shtml">editor</a>, <a href="graphics.shtml">graphical</a> extension to <a href="debugger.shtml">debugger</a></li>
       <li>It's running on top of <a href="parser.shtml">parser</a> and <a href="engine.shtml">engine</a></li>
     </ul>
     
-    <h2>nMarsFull.X.Y.Z.win.msi</h2>
+    <h2>nMars.X.Y.Z.win.msi</h2>
     <p>Is Windows MSI installer with same content as nMarsIDE package above plus IronPython extension.</p>
-
-    <h2>nMarsShellPy.X.Y.Z.bin.zip</h2>
-    <ul>
-      <li>This binary package enhances previous packages with embeded <a href="python.shtml">python</a> scripting language for debugger or IDE shell.</li>
-    </ul>
 
     <h2>nMarsTest.X.Y.Z.win.zip</h2>
     <ul>
