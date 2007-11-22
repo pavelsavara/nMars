@@ -5,7 +5,7 @@
 	<h1>nMars - release packages</h1>
     <h2>Summary</h2>
     <ul>
-      <li>Runtime platform is .NET 2.0 or Mono.</li>
+      <li>Runtime platform is .NET 2.0 or Mono in the future.</li>
       <li>Binary packages for download are <a href="http://sourceforge.net/project/showfiles.php?group_id=174312">here</a></li>
     </ul>
     
