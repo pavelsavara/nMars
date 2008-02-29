@@ -8,6 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 using nMars.IDE.Core;
 using nMars.IDE.Properties;
+using nMars.RedCode.Utils;
 
 namespace nMars.IDE.Forms
 {
@@ -25,13 +26,16 @@ namespace nMars.IDE.Forms
         public void RefreshRecent()
         {
             recentProjectsToolStripMenuItem.DropDownItems.Clear();
-            foreach (string project in IDEApplication.Settings.RecentProjects)
+            if (!MonoCheck.IsMonoRuntime)
             {
-                ToolStripMenuItem it = new ToolStripMenuItem(Path.GetFileNameWithoutExtension(project));
-                it.Tag = project;
-                it.ToolTipText = project;
-                it.Click += new EventHandler(it_Click);
-                recentProjectsToolStripMenuItem.DropDownItems.Add(it);
+                foreach (string project in IDEApplication.Settings.RecentProjects)
+                {
+                    ToolStripMenuItem it = new ToolStripMenuItem(Path.GetFileNameWithoutExtension(project));
+                    it.Tag = project;
+                    it.ToolTipText = project;
+                    it.Click += new EventHandler(it_Click);
+                    recentProjectsToolStripMenuItem.DropDownItems.Add(it);
+                }
             }
         }
 

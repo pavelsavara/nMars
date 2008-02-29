@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
+using nMars.RedCode.Utils;
 
 namespace nMars.IDE.Core
 {
@@ -18,8 +19,16 @@ namespace nMars.IDE.Core
         public RedCodeSolution()
         {
             solution=new Solution();
-            solution.Components.ParserName = IDEApplication.Instance.Settings.DefaultParser;
-            solution.Components.EngineName = IDEApplication.Instance.Settings.DefaultEngine;
+            if (!MonoCheck.IsMonoRuntime)
+            {
+                solution.Components.ParserName = IDEApplication.Instance.Settings.DefaultParser;
+                solution.Components.EngineName = IDEApplication.Instance.Settings.DefaultEngine;
+            }
+            else
+            {
+                solution.Components.ParserName = "nMars.Parser";
+                solution.Components.EngineName = "nMars.Engine-StepBack";
+            }
         }
 
         #endregion

@@ -14,6 +14,7 @@ using nMars.IDE.Forms;
 using nMars.IDE.Properties;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
+using nMars.RedCode.Utils;
 
 namespace nMars.IDE
 {
@@ -36,16 +37,19 @@ namespace nMars.IDE
 
             SolutionExplorer = new SolutionExplorer();
             SolutionExplorer.Attach(MainForm.tabExplorers, "Solution");
-            
-            Settings=new IDESettings();
-            Settings.Reload();
+
+            if (!MonoCheck.IsMonoRuntime)
+            {
+                Settings = new IDESettings();
+                Settings.Reload();
+            }
 
             //plugins
             LoadDebugger();
             LoadPlugins();
 
             //recent projects
-            if (Settings.RecentProjects == null)
+            if (Settings !=null && Settings.RecentProjects == null)
             {
                 Settings.RecentProjects = new List<string>();
             }
@@ -56,7 +60,7 @@ namespace nMars.IDE
             }
             else
             {
-                if (Settings.RecentProjects.Count != 0
+                if (Settings != null && Settings.RecentProjects.Count != 0
                     && Settings.LoadRecentProject 
                     && File.Exists(Settings.RecentProjects[Settings.RecentProjects.Count - 1]))
                 {
@@ -76,7 +80,10 @@ namespace nMars.IDE
             Application.Run(MainForm);
 
             //shutdown
-            Settings.Save();
+            if (!MonoCheck.IsMonoRuntime)
+            {
+                Settings.Save();
+            }
 
             //unload plugins
             UnloadPlugins();
@@ -135,32 +142,35 @@ namespace nMars.IDE
 
         private void LoadPlugins()
         {
-            if (Settings.KnownComponents==null)
+            if (Settings != null)
             {
-                List<string> known = new List<string>();
-                known.Add("nMars.Parser");
-                known.Add("nMars.Engine-StepBack");
-                known.Add("nMars.Debugger");
-                known.Add("nMars.ShellPy");
-                Settings["KnownComponents"] = known;
-            }
-
-            foreach (string component in Settings.KnownComponents)
-            {
-                IModule module = ModuleRegister.FindModule(component);
-                IIDEPluginModule ideModule = module as IIDEPluginModule;
-                if (ideModule != null)
+                if (Settings.KnownComponents == null)
                 {
-                    IIDEPlugin plugin = ideModule.CreateIDEPlugin();
-                    IdePlugins.Add(plugin);
-                    plugin.Load();
+                    List<string> known = new List<string>();
+                    known.Add("nMars.Parser");
+                    known.Add("nMars.Engine-StepBack");
+                    known.Add("nMars.Debugger");
+                    known.Add("nMars.ShellPy");
+                    Settings["KnownComponents"] = known;
                 }
-                IShellModule shellModule = module as IShellModule;
-                if (shellModule != null)
+
+                foreach (string component in Settings.KnownComponents)
                 {
-                    if (shellModule.Name != "nMars.Debugger")
+                    IModule module = ModuleRegister.FindModule(component);
+                    IIDEPluginModule ideModule = module as IIDEPluginModule;
+                    if (ideModule != null)
                     {
-                        Shells.Add(shellModule.CreateShell());
+                        IIDEPlugin plugin = ideModule.CreateIDEPlugin();
+                        IdePlugins.Add(plugin);
+                        plugin.Load();
+                    }
+                    IShellModule shellModule = module as IShellModule;
+                    if (shellModule != null)
+                    {
+                        if (shellModule.Name != "nMars.Debugger")
+                        {
+                            Shells.Add(shellModule.CreateShell());
+                        }
                     }
                 }
             }
@@ -406,14 +416,17 @@ namespace nMars.IDE
 
         private void AddRecentProject(string filename)
         {
-            int idx = Settings.RecentProjects.IndexOf(filename);
-            if (idx != -1 && idx != (Settings.RecentProjects.Count - 1))
+            if (Settings != null)
             {
-                Settings.RecentProjects.RemoveAt(idx);
+                int idx = Settings.RecentProjects.IndexOf(filename);
+                if (idx != -1 && idx != (Settings.RecentProjects.Count - 1))
+                {
+                    Settings.RecentProjects.RemoveAt(idx);
+                }
+                Settings.RecentProjects.Add(ActiveSolution.FileName);
+                Settings.Save();
+                MainForm.RefreshRecent();
             }
-            Settings.RecentProjects.Add(ActiveSolution.FileName);
-            Settings.Save();
-            MainForm.RefreshRecent();
         }
 
         public void OpenSolution()
@@ -458,7 +471,7 @@ namespace nMars.IDE
             }
             else
             {
-                if (Settings.RecentProjects.Contains(fileName))
+                if (Settings != null && Settings.RecentProjects.Contains(fileName))
                 {
                     Settings.RecentProjects.Remove(fileName);
                     MainForm.RefreshRecent();
