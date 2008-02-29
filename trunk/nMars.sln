@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.RedCode", "nMars.RedCode\nMars.RedCode.csproj", "{34EFF84C-F16E-45A3-B40E-6EFB9978608F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nMars.Parser", "nMars.Parser\nMars.Parser.csproj", "{DD04BC83-CC0A-4F52-A70B-FDB4C0991E3D}"
