@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using nMars.Console.Properties;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
+using nMars.RedCode.Utils;
 
 namespace nMars.Console
 {
@@ -15,14 +16,24 @@ namespace nMars.Console
         public static int ConsoleMain(string[] args)
         {
             WrappedConsole console = new WrappedConsole();
-
             ConsoleCfg consoleConfig = new ConsoleCfg();
-            consoleConfig.Reload();
+            if (!MonoCheck.IsMonoRuntime)
+            {
+                consoleConfig.Reload();
+            }
             LoadPlugins(consoleConfig);
 
             ComponentLoader components = new ComponentLoader();
-            components.ParserName = consoleConfig.DefaultParser;
-            components.EngineName = consoleConfig.DefaultEngine;
+            if (!MonoCheck.IsMonoRuntime)
+            {
+                components.ParserName = consoleConfig.DefaultParser;
+                components.EngineName = consoleConfig.DefaultEngine;
+            }
+            else
+            {
+                components.ParserName = "nMars.Parser";
+                components.EngineName = "nMars.Engine";
+            }
 
             bool interactive;
             string saveProjectFile;

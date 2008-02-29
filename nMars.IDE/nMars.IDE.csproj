@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BB9036EA-050A-4ECD-B857-CB022275A7C5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -69,13 +69,11 @@
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CoreGridInteractive.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CoreGridInteractive.Designer.cs">
       <DependentUpon>CoreGridInteractive.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CoreListingInteractive.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CoreListingInteractive.Designer.cs">
       <DependentUpon>CoreListingInteractive.cs</DependentUpon>
