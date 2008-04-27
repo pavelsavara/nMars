@@ -58,26 +58,19 @@ namespace nMars.IDE.Controls
                         proj.Nodes.Add(war);
                         if (!MonoCheck.IsMonoRuntime)
                         {
-                            InitializeNonMono(war, document.Key);
+                            war.ToolTipText = document.Key;
                         }
                     }
                 }
                 if (!MonoCheck.IsMonoRuntime)
                 {
-                    InitializeNonMono(proj, project.Key);
+                    proj.ToolTipText = project.Key;
                 }
                 root.Nodes.Add(proj);
             }
             tree.Nodes.Add(root);
             tree.ExpandAll();
             tree.EndUpdate();
-        }
-
-        private static void InitializeNonMono(TreeNode node, string text)
-        {
-#if !MONO
-            node.ToolTipText = text;
-#endif
         }
 
         #region Project events

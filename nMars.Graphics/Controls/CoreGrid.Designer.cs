@@ -37,6 +37,8 @@ namespace nMars.Graphics.Controls
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "CoreGrid";
             this.Size = new System.Drawing.Size(383, 280);
+            this.DoubleBuffered = true;
+            this.ClientSizeChanged += new System.EventHandler(this.CoreGrid_ClientSizeChanged);
             this.ResumeLayout(false);
 
         }

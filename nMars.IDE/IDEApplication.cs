@@ -3,6 +3,7 @@
 // http://sourceforge.net/projects/nmars/
 // 2006 Pavel Savara
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -15,6 +16,7 @@ using nMars.IDE.Properties;
 using nMars.RedCode;
 using nMars.RedCode.Modules;
 using nMars.RedCode.Utils;
+using Console=nMars.IDE.Controls.Console;
 
 namespace nMars.IDE
 {
@@ -49,20 +51,19 @@ namespace nMars.IDE
             LoadPlugins();
 
             //recent projects
-            if (Settings !=null && Settings.RecentProjects == null)
+            if (Settings != null && Settings.RecentProjects == null)
             {
                 Settings.RecentProjects = new List<string>();
             }
 
-            if (args.Length>0)
+            if (args.Length > 0)
             {
                 NewSolution(args);
             }
             else
             {
-                if (Settings != null && Settings.RecentProjects.Count != 0
-                    && Settings.LoadRecentProject 
-                    && File.Exists(Settings.RecentProjects[Settings.RecentProjects.Count - 1]))
+                if (Settings != null && Settings.RecentProjects.Count != 0 && Settings.LoadRecentProject &&
+                    File.Exists(Settings.RecentProjects[Settings.RecentProjects.Count - 1]))
                 {
                     LoadSolution(Settings.RecentProjects[Settings.RecentProjects.Count - 1]);
                 }
