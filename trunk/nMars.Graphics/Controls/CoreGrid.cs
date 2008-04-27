@@ -16,18 +16,6 @@ namespace nMars.Graphics.Controls
         public CoreGrid()
         {
             InitializeComponent();
-            if (!MonoCheck.IsMonoRuntime)
-            {
-                InitializeNonMono();
-            }
-        }
-
-        private void InitializeNonMono()
-        {
-#if !MONO
-            this.DoubleBuffered = true;
-            this.ClientSizeChanged += new System.EventHandler(this.CoreGrid_ClientSizeChanged);
-#endif
         }
 
         public int GetAddress(int x, int y)
