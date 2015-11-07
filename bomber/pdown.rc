@@ -1,0 +1,121 @@
+;redcode-94nop
+;name Piltdown (2003)
+;author Philip Thorne
+;strategy 20020824 First hill appreance [with QB]
+;strategy 20030706 Piltdown 1-Shot Bomber + QS
+;strategy          Cleaned-up for publiction.
+;bench jun03=127.17#1000 w=151#100
+;optimax stn
+;assert ((STEP%(MSIZ)) == 0)
+;assert ((CURLINE%MSIZ) == 0)
+;assert ((CURLINE%MSIZ) == 0)
+;assert ((CURLINE%MSIZ) == 0)
+;assert ((CURLINE%MSIZ) == 0)
+;Basic clear is per Geist [nice S/D switch] with tweakings.
+;Previous clear was Quiz-based. No real diff in results.
+;assert ((CURLINE%MSIZ) == 0)
+;assert ((CURLINE%MSIZ) == 0)
+;--
+;--
+       ORG      START
+       MOV.B  #  2512, * -1256     
+       DJN.F  $    -8, <     6     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       MOV.I  @     1, }    -9     
+       MOV.I  $    -9, >   -10     
+       ADD.F  $    38, @    -1     
+       JMZ.B  $    -3, $  2732     
+       SPL.B  $    36, $  2731     
+       SUB.B  @    -1, $    28     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $  3333, $  1213     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     1, $    13     
+       SPL.B  #    65, $    13     
+       DAT.F  $     0, $     0     
+       SPL.B  #  1255, } -1257     
+       MOV.I  *    -4, >    -8     
+       MOV.I  *    -5, >    -9     
+       DJN.F  $    -2, }    -5     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     1, $  3762     
+       DAT.F  $     1, $  2253     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       MOV.A  #  1488, $  1188     
+       MOV.I  <  3333, $    -1     
+       JMP.B  $   -61, {     0     
+       DAT.F  {    32, $  1199     
+START  SNE.I  $ -2415, $ -3468     
+       SEQ.I  <    26, $ -2082     
+       JMP.B  $    15, }    17     
+       SNE.I  $  -194, $   262     
+       SEQ.I  <    -5, $  1649     
+       JMP.B  $    12, }    12     
+       SNE.I  $  2359, $  2815     
+       SEQ.I  <   -15, $ -3798     
+       DJN.A  $     9, {     9     
+       SNE.I  $   848, $  1304     
+       SEQ.I  <   -17, $  2691     
+       DJN.A  $     6, *     0     
+       SNE.I  $   589, $  2554     
+       SEQ.I  <    12, $  3940     
+       JMP.B  $     3, {     5     
+       SNE.I  $  -922, $  -466     
+       JMZ.F  $   -20, <    10     
+       MUL.B  *     2, $     4     
+       SNE.I  <   -25, @     3     
+       ADD.B  $     7, $     2     
+       MOV.I  $   -21, @     1     
+       MOV.I  $   -22, } -1388     
+       SUB.AB #     7, @    -4     
+       DJN.B  $    -3, #    16     
+       DJN.F  $   -28, #     0     
+       SPL.B  $     1, $  1965     
+       SPL.B  $     1, $   456     
+       SPL.B  $     1, $ -1053     
+

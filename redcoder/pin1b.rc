@@ -1,0 +1,5 @@
+	PIN	123
+       ORG      START
+START  STP.AB #     1, #     1     
+       JMP.B  $     0, $     0     
+

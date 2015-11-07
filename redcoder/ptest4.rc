@@ -1,0 +1,29 @@
+;Program "P-Space test #1" (length 25) by "Anonymous"
+
+       ORG      START
+START  STP.AB #   543, #   123     
+       STP.AB #   111, #   332     
+       STP.AB #   331, #   543     
+       LDP.AB #   123, #   332     
+       SEQ.F  $     1, $    -1     
+       DAT.F  $   123, $   543     
+       LDP.A  #   123, #   332     
+       SEQ.F  $     1, $    -1     
+       DAT.F  $   543, $   332     
+       LDP.BA #   332, #   123     
+       SEQ.F  $     1, $    -1     
+       DAT.F  $   543, $   123     
+       LDP.B  #   332, #   123     
+       SEQ.F  $     1, $    -1     
+       DAT.F  $   332, $   543     
+       LDP.F  #   332, #   123     
+       SEQ.F  $     1, $    -1     
+       DAT.F  $   332, $   543     
+       LDP.X  #   332, #   123     
+       SEQ.F  $     1, $    -1     
+       DAT.F  $   332, $   543     
+       LDP.I  #   332, #   123     
+       SEQ.F  $     1, $    -1     
+       DAT.F  $   332, $   543     
+       JMP.B  $     0, $     0     
+

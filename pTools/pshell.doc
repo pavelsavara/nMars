@@ -1,0 +1,176 @@
+_______________________________________
+pShell - a menuing frontend for pMARS and MTS
+
+    pShell provides a user-friendly interface for pMARS and the MTS
+    tournament scheduler running on DOS systems. See pmars.doc and
+    pshell.doc for more information on these programs. pShell is menu and
+    form-based, so you don't have to remember all those pMARS command line
+    switches. You have to have the executables pmars.exe, pmarsv.exe and
+    mts.exe in the same directory as pshell.exe.
+
+    When you start up pShell, you'll see a menu bar with these items:
+
+    File    Edit    Run     Options     Tournament  sHell   Setup   eXit
+
+    You select an item or call up a submenu by pressing the highlighted
+    (capital) letter or using arrow keys and <Enter>.
+
+    ___________________
+    File
+
+        Load            opens a directory viewer from which you select
+                        warriors to be run by either pMARS or MTS. You stop
+                        loading by pressing <Escape>.  This command simply
+                        collects file names to be given to pMARS when you
+                        select Run (or Tournament/Run), so you won't get
+                        any assembly error messages at this point. pMARS
+                        can run up to 36 warriors at the same time. MTS can
+                        schedule round-robin tournaments of up to 200
+                        warriors.
+
+        Unload          allows you to remove warrior file names from the
+                        list of warriors to be run.
+
+        Clear           unloads all warriors.
+
+        First warrior   lets you select the first warrior to be run by 
+                        pMARS or MTS.  First and second warriors are 
+                        "special" because editing them is only a function 
+                        key away.
+
+        Second warrior  see above.
+
+        Os shell        invokes the command interpreter so you can do file 
+                        maintenance without exiting pShell.
+
+    ___________________
+    Edit
+
+        First warrior   calls up a file editor (specified under
+                        "psHell/Editor") with the file name of your first
+                        warrior selected by "File/Load" or "File/First
+                        warrior".
+
+        Second warrior  see above.
+
+        Edit            opens a pick list of your selected warrior files
+                        from which you can choose one to edit.
+
+        edit Capture    calls up the editor with the name of the results
+                        capture file (see "psHell/Capture file").
+
+    ___________________
+    Run
+
+        starts pMARS with the options specified under Options and with the
+        warriors loaded by "File/Load" or "File/[First|Second] warrior".
+
+    ___________________
+    Options
+
+        opens up a menu from which you can change the pMARS options, like
+        core size, display mode, etc.. If you select
+        "Options/Display/None", the fast pmars.exe will be run, otherwise
+        the slower display version pmarsv.exe.  See pmars.doc for more
+        information on what the options do.
+
+    ___________________
+    Tournament
+
+        This is the part that controls the MTS tournament scheduler. MTS
+        runs round-robin matches (every warrior fights against everyone
+        else) similar to the "King of the Hill" e-mail tournaments, or one
+        warrior fights against a group of warriors in turn. The latter
+        "first against rest" mode is useful if you want to test your
+        working code against some benchmark warriors. More information on
+        MTS is in mts.doc.
+            Use the file selection menu items under "File"
+        to select warriors for the tournament. The same warrior list is
+        used by both pMARS ("Run") and MTS ("Tournament/Run").
+
+        Run             invokes MTS.
+
+
+        Scores          calls up your editor with the MTS score output file
+                        scores.mts so you can look at it.
+
+        Options         allows you to change MTS options.
+
+    ___________________
+    psHell
+
+        This form lets you change some of the pShell internal options.
+
+        F9 command      is the command executed when you press F9.
+
+        F9 parameters   are the command line parameters.
+
+        F10 command/parameters  do the same for the F10 key.
+
+                        When you press F9 or F10, pShell issues
+                        "command" "parameters" warrior-list
+                        to the operating  system, where "warrior-list"
+                        consists of the file names of all loaded warriors.
+                        You can use F9/F10 as a shorthand for producing 
+                        disassembly output, test-assembly only, etc..
+
+        Editor          is the fully qualified path to your favorite 
+                        editor, including any command line options that the
+                        editor might need to load a file specified on the 
+                        command line.
+
+        Redcode path    is where your warriors are. The default is the
+                        current directory.
+
+        Mask            is a wildcard file specification that matches your
+                        warrior files. Default: "*.red".
+
+        Capture in file is used to capture the results report of pMARS
+                        which usually appears on screen. pShell captures
+                        pMARS output by simply redirecting standard output
+                        (pmars ... >> capture.txt). Be careful when running
+                        the no-display pMARS executable (pmars.exe) with
+                        capturing enabled: cdb debugger output also goes to
+                        stdout, so if you enter cdb, you won't see anything
+                        on-screen.
+
+    ___________________
+    Setup
+
+        pShell can save and restore its internal state, that is pMARS,
+        MTS and its own options. If the configuration file pshell.cfg is
+        present at start-up, pShell will initialize all options from it.
+
+        Load setup      lets you select a *.cfg file.
+
+        Save setup      saves the current configuration to a specified file.
+
+        Include warriors
+                        if this option is selected, the selected warrior
+                        list is included in the configuration.
+
+        Autosave        with autosave enabled, pShell saves its
+                        configuration to pshell.cfg when exiting.
+
+    ___________________
+    Function keys
+
+        Function keys F1 through F7 have preassigned functions, F9 and F10
+        are user-definable ("psHell/[F9|F10].."). Function keys only work
+        at the top menu level, i.e. when none of the pull-down menus have
+        been activated.
+        
+        F1  =   Edit/First warrior
+        F2  =   Edit/Second warrior
+        F3  =   File/First warrior
+        F4  =   File/Second warrior
+        F5  =   File/Load
+        F6  =   File/Unload
+        F7  =   File/Clear
+
+_______________________
+Implementation
+
+        pShell was written in Turbo Pascal by Nandor Sieben. Direct
+        suggestions and comments to Nandor.Sieben@asu.edu. The 
+        documentation was written by Stefan Strack.

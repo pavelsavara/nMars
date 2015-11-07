@@ -1,0 +1,4 @@
+       ORG      START
+START  SPL.B  $     1, $     0
+       SPL.B  $  1234, $     0
+       MOV.I  >    -1, }    -1

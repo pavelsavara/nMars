@@ -1,0 +1,116 @@
+;redcode-94
+;name Silver Talon 1.2
+;author Edgar
+;strategy scan with transparent decoy
+;assert 1
+;My best single-strategy warrior to date. It uses continous carpet and
+;scanning much like many other scanners on the hill, but the thing I
+;think makes it different is that the carpet itself is composed of 
+;SPLs with differing b-fields, what (at least in theory) should enable
+;Silver Talon to score better against other scanners (it triggers their 
+;bombing routines, and one-shots are mostly helpless agains Silver 
+;Talon), but at the cost of 
+;reduced effectiveness against stones (SPL #1,#1 would slow them down...)
+;but this warrior is going to lose against stones anyway, and with my 
+;luck the hill is crawling with stones at the moment :(
+;the decoy
+;the actual warrior. Execution starts at loop
+;boot pointers
+       ORG      START
+       SPL.B  #     1, #     1     
+       SPL.B  #     1, @     1     
+       SPL.B  #     1, }     1     
+       SPL.B  #     1, {     1     
+       SPL.B  #    -4, #     1     
+       SPL.B  #     1, <     1     
+       SPL.B  #     1, *     1     
+       SPL.B  #     1, >     1     
+       SPL.B  #     1, #     1     
+       SPL.B  #     1, @     1     
+       SPL.B  #     1, }     1     
+       SPL.B  #     1, {     1     
+       SPL.B  #    -4, #     1     
+       SPL.B  #     1, <     1     
+       SPL.B  #     1, *     1     
+       SPL.B  #     1, >     1     
+       SPL.B  #     1, #     1     
+       SPL.B  #     1, @     1     
+       SPL.B  #     1, }     1     
+       SPL.B  #     1, {     1     
+       SPL.B  #    -4, #     1     
+       SPL.B  #     1, <     1     
+       SPL.B  #     1, *     1     
+       SPL.B  #     1, >     1     
+       SPL.B  #     1, #     1     
+       SPL.B  #     1, @     1     
+       SPL.B  #     1, }     1     
+       SPL.B  #     1, {     1     
+       SPL.B  #    -4, #     1     
+       SPL.B  #     1, <     1     
+       SPL.B  #     1, *     1     
+       SPL.B  #     1, >     1     
+       SPL.B  #     1, #     1     
+       SPL.B  #     1, @     1     
+       SPL.B  #     1, }     1     
+       SPL.B  #     1, {     1     
+       SPL.B  #    -4, #     1     
+       SPL.B  #     1, <     1     
+       SPL.B  #     1, *     1     
+       SPL.B  #     1, >     1     
+       SPL.B  #     1, #     1     
+       SPL.B  #     1, @     1     
+       SPL.B  #     1, }     1     
+       SPL.B  #     1, {     1     
+       SPL.B  #    -4, #     1     
+       SPL.B  #     1, <     1     
+       SPL.B  #     1, *     1     
+       SPL.B  #     1, >     1     
+       SPL.B  #     1, #     1     
+       SPL.B  #     1, @     1     
+       SPL.B  #     1, }     1     
+       SPL.B  #     1, {     1     
+       SPL.B  #    -4, #     1     
+       SPL.B  #     1, <     1     
+       SPL.B  #     1, *     1     
+       SPL.B  #     1, >     1     
+       SPL.B  #     1, #     1     
+       SPL.B  #     1, @     1     
+       SPL.B  #     1, }     1     
+       SPL.B  #     1, {     1     
+       SPL.B  #    -4, #     1     
+       SPL.B  #     1, <     1     
+       SPL.B  #     1, *     1     
+       SPL.B  #     1, >     1     
+       SPL.B  #     1, #     1     
+       SPL.B  #     1, @     1     
+       SPL.B  #     1, }     1     
+       SPL.B  #     1, {     1     
+       SPL.B  #    -4, #     1     
+       SPL.B  #     1, <     1     
+       SPL.B  #     1, *     1     
+       SPL.B  #     1, >     1     
+       SPL.B  #    -4, $ -3000     
+       MOV.I  $    -1, >    -1     
+       ADD.F  $     4, $     1     
+       SEQ.I  }     4, $     0     
+       MOV.B  $    -1, @    -3     
+       DJN.B  $    -4, #   999     
+       SPL.B  #  -152, >  -152     
+       MOV.I  $     2, >   -12     
+       DJN.F  $    -1, >   -13     
+       DAT.F  $     1, #    18     
+       DAT.F  $ -1995, $ -2004     
+       DAT.F  $     0, $    -1     
+START  MOV.I  <    -1, {    -2     
+       MOV.I  <    -2, {    -3     
+       MOV.I  <    -3, {    -4     
+       MOV.I  <    -4, {    -5     
+       MOV.I  <    -5, {    -6     
+       MOV.I  <    -6, {    -7     
+       MOV.I  <    -7, {    -8     
+       MOV.I  <    -8, {    -9     
+       MOV.I  <    -9, {   -10     
+       MOV.I  <   -10, {   -11     
+       SPL.B  @   -12, $     0     
+       MOV.I  $     0, $   -13     
+

@@ -1,0 +1,25 @@
+;redcode-94x
+;name Warrior #528 / Generation #15
+;author Evolution
+;assert CORESIZE==800
+SPL.I {162,<103
+SPL.AB #616,$664
+SEQ.I <15,>709
+SPL.AB #616,$664
+SPL.AB #616,$664
+MUL.X {17,}201
+JMN.BA <660,$2
+SNE.A }14,@80
+SPL.AB #616,$664
+SPL.AB #616,$664
+SPL.AB #616,$664
+SEQ.AB >6,>672
+SLT.I }4,@25
+SPL.AB #616,$664
+SPL.AB #616,$664
+MOV.I >7,}4
+DAT.F <18,<78
+SUB.F $118,}133
+SLT.AB @454,$16
+DJN.AB {1,<530
+END 9

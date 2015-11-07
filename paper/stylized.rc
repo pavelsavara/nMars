@@ -1,0 +1,113 @@
+;redcode-94
+;name Stylized Euphoria
+;author Ken Espiritu
+;strategy qscan -> paper/imp
+;strategy q^4 -> Fixed variant
+;strategy SPL carpet resistant silk
+;strategy computer optimized against the following warriors:
+;strategy goonie,Draken Fire,Zooom,QHSA,Mini-Blur,Iron Curtain,
+;strategy Win!,Mini-HSA,Seven-Eleven,Torch t18,One-pass Blur,QHSA2
+;assert 1
+;optimax pap
+       ORG      START
+START  SEQ.I  $  -421, $   738     
+       JMP.B  $    23, {  -415     
+       SNE.I  $ -1255, $ -2145     
+       SEQ.I  <    83, $ -1699     
+       JMP.B  $    19, }    21     
+       SNE.I  $  -618, $   541     
+       SEQ.I  <    25, $   988     
+       JMP.B  $    16, }    16     
+       SNE.I  $  3859, $ -2982     
+       SEQ.I  <    12, $ -2535     
+       DJN.A  $    13, {    13     
+       SNE.I  $  1808, $  2967     
+       SEQ.I  <    10, $  3414     
+       JMP.B  $    10, {    10     
+       SNE.I  $  2829, $ -1963     
+       SEQ.I  <    69, $ -1517     
+       JMP.B  $     7, {     9     
+       SEQ.I  $  3722, $ -1072     
+       DJN.B  $     5, {     7     
+       SNE.I  $   776, $  1935     
+       SEQ.I  <    65, $  2381     
+       JMP.B  $     2, $ -3705     
+       DJN.F  $    62, #  2246     
+       MUL.B  *     2, $     4     
+       SNE.I  {    -2, @     3     
+       ADD.B  $    60, $     2     
+       MOV.I  $     5, @     1     
+       MOV.I  $     4, *  -448     
+       SUB.AB #     7, $    -1     
+       DJN.B  $    -3, #    11     
+       DJN.F  $    54, #     0     
+       DAT.F  {    67, #  -195     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       SPL.B  $     2, {  3208     
+       SPL.B  $     2, {  1159     
+       SPL.B  $     1, {  -890     
+       MOV.I  {     3, {     2     
+       MOV.I  {     2, {     1     
+       SPL.B  $  3352, } -1419     
+       SPL.B  @    10, }  -782     
+       MOV.I  }    -1, >    -1     
+       MOV.I  }    -2, >    -2     
+       SPL.B  @     0, {  2023     
+       MOV.I  }    -1, >    -1     
+       SPL.B  @     0, }  1879     
+       MOV.I  }    -1, >    -1     
+       MOV.I  # -3399, } -1429     
+       MOV.I  #  2908, } -3819     
+       MOV.I  #  1169, }   772     
+

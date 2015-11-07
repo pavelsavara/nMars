@@ -1,0 +1,15 @@
+;Program "P-Space test #1" (length 11) by "Anonymous"
+
+       ORG      START
+START  LDP.AB #     0, #     0     
+       SNE.AB #    -1, $    -1     
+       JMP.B  $     6, $     0     
+       LDP.AB #   499, #     0     
+       SNE.AB $    -1, $    -1     
+       DJN.A  $    -2, $    -2     
+       JMZ.A  $     4, $    -3     
+       DAT.F  $     1, $     1     
+       STP.B  #     0, #   499     
+       DJN.B  $    -1, $    -1     
+       JMP.B  $     0, $     0     
+

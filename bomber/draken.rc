@@ -1,0 +1,120 @@
+;redcode-94 test
+;name Draken Fire
+;author Ben Ford
+;strategy q^3 -> incendiary bomber
+;assert CORESIZE==8000
+;optimax stn
+;    -+)>] 0/1 cycles [(<+-
+;    -+>)] 2 cycles [(<+-
+;	seq	qd+qf+63*qs,	qf+63*qs   ; B*(D-1)
+;	djn.b	qslow,	{qslow
+;	seq	qd+qf+5*qs,	qf+5*qs    ; E+1
+;	jmp	>qfast,	>qtab
+;	seq	qd+qf+70*qs,	qf+70*qs   ; B*D
+;	jmp	qslow,	{qslow
+;	seq	qd+qf+77*qs,	qf+77*qs   ; B*F
+;	jmp	qslow,	}qslow
+;	seq	qd+qf+4*qs,	qf+4*qs    ; E
+;	jmp	>qfast,	{qd+qf+4*qs+qi
+       ORG      START
+       MOV.I  <     9, {     9     
+       MOV.I  <     8, {     8     
+       MOV.I  <     7, {     7     
+       MOV.I  <     6, {     6     
+       MOV.I  <     5, {     5     
+       MOV.I  <     4, {     4     
+       MOV.I  <     3, {     3     
+       MOV.I  <     2, {     2     
+       MOV.I  <     1, {     1     
+       DJN.F  $ -3989, #    10     
+       SPL.B  #  1000, $ -3772     
+       MOV.I  $    -1, @   334     
+       MOV.I  $     5, @    -1     
+       ADD.AB # -3896, $    -2     
+       JMP.B  $    -3, >  3776     
+       MOV.I  $     3, >    -9     
+       DJN.F  $    -1, >   -10     
+       MOV.I  $  3773, >  3773     
+       DAT.F  >  2667, >    13     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  <    15, <    10     
+       DAT.F  <     7, <     4     
+       DAT.F  <    13, <    11     
+       DAT.F  {     1, {    67     
+START  SEQ.I  $ -3852, $   149     
+       JMP.B  $    45, { -3846     
+       SEQ.I  $ -3254, $   747     
+       JMP.B  $    42, { -3248     
+       SEQ.I  $ -2456, $  1545     
+       JMP.B  $    40, {    40     
+       SEQ.I  $ -2558, $  1443     
+       DJN.A  $    38, {    38     
+       SEQ.I  $ -3360, $   641     
+       JMP.B  $    36, {   -12     
+       SEQ.I  $ -2662, $  1339     
+       JMP.B  $    34, }    34     
+       SEQ.I  $ -3164, $   837     
+       JMP.B  $    32, }   -16     
+       SEQ.I  $ -3066, $   935     
+       DJN.B  >    30, {    29     
+       SEQ.I  $ -2168, $  1833     
+       DJN.F  $    27, $   -20     
+       SEQ.I  $  1230, $ -2769     
+       JMP.B  $    25, }    26     
+       SEQ.I  $  2628, $ -1371     
+       DJN.A  $    23, }    23     
+       SEQ.I  $ -2974, $  1027     
+       JMP.B  >    22, {    21     
+       SEQ.I  $  -776, $  3225     
+       JMP.B  $    19, }   -28     
+       SEQ.I  $ -2878, $  1123     
+       JMP.B  >    18, }    17     
+       SEQ.I  $ -1880, $  2121     
+       JMP.B  $    15, <   -32     
+       SEQ.I  $  2018, $ -1981     
+       JMP.B  $    13, {    14     
+       SEQ.I  $  -484, $  3517     
+       JMP.B  $    11, >   -36     
+       SEQ.I  $ -1586, $  2415     
+       JMP.B  $     9, {   -38     
+       SEQ.I  $   -88, $  3913     
+       DJN.B  $     7, }     8     
+       SEQ.I  $  1610, $ -2389     
+       DJN.A  $     5, {     6     
+       SEQ.I  $ -3692, $   309     
+       JMP.B  >     4, <   -44     
+       SNE.I  $ -1194, $  2807     
+       JMZ.B  $   -90, $ -1205     
+       MUL.B  $   -47, $     5     
+       MUL.AB $   -48, @    -1     
+       SNE.I  >  3456, @     3     
+       ADD.AB #  3999, $     2     
+       MOV.I  $   -49, @     1     
+       MOV.I  $   -50, @   100     
+       SUB.AB #     7, $    -1     
+       DJN.B  $    -3, #    11     
+       JMP.B  *    -9, <  1234     
+

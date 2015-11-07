@@ -1,0 +1,26 @@
+;redcode-94x
+;name Warrior #699
+;author Evolution
+;strategy ??? Random ???
+;assert CORESIZE==800
+DJN.BA >16,<11
+SPL.AB #616,$664
+MUL.AB {17,{96
+SEQ.I <15,>709
+JMP.B >1,{7
+MUL.X {17,}201
+JMZ.AB @294,>16
+SNE.A }14,@80
+SPL.AB #616,$664
+SPL.AB #616,$664
+SPL.AB #616,$664
+SEQ.AB >6,>672
+SEQ.AB >6,>672
+SLT.I }4,@25
+SPL.AB #616,$664
+SPL.AB #616,$664
+MOV.I >7,}4
+DJN.B }310,}374
+DAT.F <18,<78
+SUB.F $118,}133
+END 13

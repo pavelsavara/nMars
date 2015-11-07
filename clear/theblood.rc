@@ -1,0 +1,122 @@
+;redcode-94
+;name The Bloodhound
+;author Ian Sutton
+;strategy A one shot.  No Pspace this time, but assorted other sneaky tricks.
+;strategy v1.0
+;strategy v1.1 Same as v1.0 but commented
+;optimax clr
+;assert CORESIZE == 8000
+; ----------one shot-----------
+; We put this before the slow scan code, otherwise we fall easy prey
+; to some other scanners like The Machine
+; ----------"quick" (slow) scan--------------
+; scan core mod qstep at 0.8c
+; could trim a few instructions here, for additional anti Q resistance
+; bomb 4 times each way mod 15
+; similarly to probe's Q scan.
+; Maybe worthwhile skipping bombing code if it took us a long time to
+; find the enemy. (Save about 20 cycles, less vulnerable to other Qs)
+; slow boot takes 20 cycles instead of ~15, but
+; is worth it for brevity.
+       ORG      START
+       DAT.F  $   517, $   502     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  #   -85, $    16     
+       DAT.F  #   -85, $    16     
+       SPL.B  #   -85, $    16     
+       DAT.F  $     0, $     0     
+       ADD.F  $     4, $    -7     
+       SNE.I  *    -8, @    -8     
+       JMP.B  $    -2, $     0     
+       SUB.AB #    14, $   -10     
+       SPL.B  #    30, >    30     
+       MOV.I  @     2, >   -12     
+       MOV.I  @     1, >   -13     
+       DJN.B  $    -2, {    -9     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  #     1, $     1     
+       DAT.F  $   236, $   341     
+       DAT.F  $    15, $   -15     
+       DAT.F  $   210, $   210     
+       ADD.F  $    -1, $    -3     
+START  SNE.I  *    -4, @    -4     
+       ADD.F  $    -3, $    -5     
+       SNE.I  *    -6, @    -6     
+       DJN.B  $    -4, #    12     
+       JMZ.B  $   -64, $    -1     
+       JMZ.F  $     5, *    -9     
+       MOV.AB $   -10, $   -10     
+       JMP.B  $     4, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       MOV.BA $   -14, $   -14     
+       MOV.I  $   -16, @   -15     
+       ADD.F  $   -15, $   -16     
+       MOV.I  $   -18, @   -17     
+       MOV.I  $   -19, *   -18     
+       DJN.B  $    -3, #     4     
+       ADD.F  $   -18, $   -20     
+       JMN.F  $   -77, @   -21     
+       MOV.I  >     5, >   -22     
+       MOV.I  >     4, >   -23     
+       MOV.I  >     3, >   -24     
+       DJN.B  $    -3, #     5     
+       SUB.AB #     7, $   -26     
+       JMP.B  @   -27, $   -91     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+

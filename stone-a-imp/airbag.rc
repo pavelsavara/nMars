@@ -1,0 +1,110 @@
+;redcode-94
+;name airBag
+;author Paulsson
+;strategy First vers., I'm realy supprised over the scores :-)
+;strategy 1/2 c bomber, d-clear and airbag (?)
+;strategy July 7, 1996
+;for Planar, stone,imp,cclear,other
+;assert 1
+;optimax sai
+       ORG      START
+       DAT.F  $     0, $    24     
+       DAT.F  $   -20, $    20     
+       DAT.F  $   -20, $    20     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       SPL.B  #   255, $   255     
+       MOV.I  $    -4, >    -6     
+       DJN.F  $    -1, >    -7     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+START  SPL.B  $    41, $     0     
+       ADD.F  $   -20, $     1     
+       MOV.I  $    23, *   108     
+       JMZ.F  $    -2, >    22     
+       JMP.B  $    62, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     1, $     2     
+       DAT.F  $     0, $     0     
+       DAT.F  $    85, $     1     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       MOV.I  $   -15, @   -39     
+       MOV.I  $   -16, *   -40     
+       JMZ.F  $    -2, <   -18     
+       JMP.B  $    17, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       SPL.B  $   -80, $     0     
+       SPL.B  #     0, $     0     
+       ADD.A  #  2668, $     1     
+       JMP.B  $ -2660, $     0     
+       DAT.F  $     0, $     0     
+       SPL.B  $   -85, $     0     
+       SPL.B  #     0, $     0     
+       ADD.A  #  2668, $     1     
+       JMP.B  $ -2666, $     0     
+       DAT.F  $     0, $     0     
+       MOV.I  #  2667, *     0     
+       MOV.I  #  2667, *     0     
+       MOV.I  #  2667, *     0     
+       MOV.I  #  2667, *     0     
+

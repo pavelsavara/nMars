@@ -1,0 +1,1 @@
+START	JMP	0

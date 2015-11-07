@@ -1,0 +1,114 @@
+;redcode-94nop
+;author Lukasz Grabun
+;assert (CORESIZE==8000)
+;name Thunderstrike
+;strategy Q^4 -> Stone/Imp
+; -- imp constants
+; -- imp launcher
+; -- stone constants
+; -- stone
+; -- boot
+; -- qscan constants
+; -- qscan
+       ORG      START
+       DAT.F  {    87, # -3871     
+       SPL.B  #     4, #     5     
+       SUB.F  # -2668, $     2     
+       MOV.I  $     2, }    -2     
+       JMP.B  $  2665, > -2666     
+       MOV.I  #     0, $  2667     
+       SPL.B  #  3510, < -3510     
+       MOV.I  {  3510, < -3553     
+       MOV.I  $     5, @    -1     
+       ADD.F  $    -3, $    -2     
+       DJN.F  $    -3, < -3514     
+       MOV.I  $     2, >   -11     
+       DJN.F  $    -1, >   -12     
+       DAT.F  > -2665, $    47     
+       MOV.I  $    -1, $   822     
+       MOV.I  {    -1, <    -1     
+       MOV.I  {    -2, <    -2     
+       SPL.B  }     2, } -1852     
+       SPL.B  *     1, } -3145     
+       SPL.B  $     0, }  3562     
+       MOV.I  {    -6, <    -6     
+       MOV.I  <   -20, {     3     
+       DJN.B  @    -8, #     5     
+       JMP.B  $ -1690, # -1610     
+       DAT.F  $ -1686, # -2903     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+START  SEQ.I  $ -1131, $  3724     
+       JMP.B  $    21, { -1125     
+       SNE.I  $  2351, $ -2087     
+       SEQ.I  <   -55, $  -933     
+       JMP.B  $    17, }    19     
+       SNE.I  $  2896, $  -249     
+       SEQ.I  <   -77, $   906     
+       JMP.B  $    14, }    14     
+       SNE.I  $ -2823, $  2032     
+       SEQ.I  <   -57, $  3187     
+       DJN.A  $    11, {    11     
+       SNE.I  $  3882, $   737     
+       SEQ.I  <   -59, $  1892     
+       JMP.B  $     8, {     8     
+       SNE.I  $ -3077, $  3071     
+       SEQ.I  <   -69, $ -3775     
+       JMP.B  $     5, {     7     
+       SEQ.I  $  -768, $ -2622     
+       DJN.B  $     3, {     5     
+       SNE.I  $  3626, $   481     
+       JMZ.F  $   -77, <   -73     
+       MUL.B  *     2, $     4     
+       SNE.I  *   -69, @     3     
+       ADD.B  $   -76, $     2     
+       MOV.I  $   -95, @     1     
+       MOV.I  $   -96, } -1156     
+       SUB.AB #     7, @    -4     
+       DJN.B  $    -3, #    16     
+       JMP.B  $   -85, $     0     
+

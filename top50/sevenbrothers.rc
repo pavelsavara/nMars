@@ -1,0 +1,16 @@
+;redcode-94
+;name Seven Brothers
+;author David Moore
+;assert CORESIZE==8000
+       ORG      START
+START  SPL.B  $     1, $     0     
+       SPL.B  $     1, $     0     
+       MOV.I  $    -1, $     0     
+       SPL.B  @     0, $  2365     
+       MOV.I  }    -1, >    -1     
+       SPL.B  @     0, $ -1142     
+       MOV.I  }    -1, >    -1     
+       SPL.B  @     0, $ -2285     
+       MOV.I  }    -1, >    -1     
+       MOV.I  #     1, $  1143     
+

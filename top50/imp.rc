@@ -1,0 +1,2 @@
+;assert 1
+mov.i # 1, $ 1

@@ -1,0 +1,111 @@
+;redcode-94 verbose
+;name Gigolo
+;author Core Warrior staff
+;strategy q^2 -> stone/imp
+;strategy Rosebud stone, Probe qscan, Impfinity imps
+;strategy v 0.2 new qscan
+;assert CORESIZE == 8000 
+;optimax sai
+;-break
+       ORG      START
+       DAT.F  $  2000, $   400     
+       DAT.F  $   800, $   200     
+       DAT.F  $ -3400, $   600     
+       SPL.B  #    12, $   -12     
+       ADD.A  $    -3, $    -3     
+       ADD.A  @    -1, $     6     
+       ADD.BA *    -2, @    -1     
+       SNE.I  $    -9, *     4     
+       ADD.A  #   100, $     3     
+       MOV.I  $    56, *     2     
+       ADD.AB $     1, $     1     
+       MOV.I  $  1805, $     6     
+       ADD.F  $    -9, $    -1     
+       MOV.I  $    52, *    -2     
+       DJN.B  $    -3, #     8     
+       JMP.B  $    41, }  2600     
+START  SEQ.I  $  1800, $  1900     
+       JMP.B  $   -10, }  1849     
+       SEQ.I  $  1998, $  2098     
+       JMP.B  $   -13, }  2047     
+       SEQ.I  $ -3604, $ -3504     
+       JMP.B  $   -15, {   -15     
+       SEQ.I  $  2194, $  2294     
+       JMP.B  $   -17, {   -19     
+       SEQ.I  $  2392, $  2492     
+       JMP.B  $   -19, }   -21     
+       SEQ.I  $  2590, $  2690     
+       JMP.B  >   -21, }  2639     
+       SEQ.I  $  2788, $  2888     
+       JMP.B  $   -24, }  2837     
+       SEQ.I  $  2986, $  3086     
+       JMP.B  $   -26, {   -27     
+       SEQ.I  $  3184, $  3284     
+       JMP.B  $   -28, }   -29     
+       SEQ.I  $  3782, $  3882     
+       JMP.B  >   -29, <   -31     
+       SEQ.I  $  3980, $ -3920     
+       JMP.B  $   -32, <   -33     
+       SEQ.I  $ -3822, $ -3722     
+       DJN.F  $   -34, $   -35     
+       SEQ.I  $ -1624, $ -1524     
+       JMP.B  >   -35, >   -37     
+       SEQ.I  $ -1426, $ -1326     
+       JMP.B  $   -38, >   -39     
+       SEQ.I  $ -2828, $ -2728     
+       JMP.B  $   -40, {   -39     
+       SEQ.I  $  3370, $  3470     
+       JMP.B  <   -41, }  3419     
+       SEQ.I  $  3568, $  3668     
+       JMP.B  $   -45, }  3617     
+       SEQ.I  $ -3234, $ -3134     
+       JMP.B  $   -47, <   -47     
+       SEQ.I  $ -3036, $ -2936     
+       JMP.B  $   -49, {   -49     
+       SEQ.I  $ -2238, $ -2138     
+       DJN.F  <   -49, $   -51     
+       SPL.B  $    10, } -2040     
+       MOV.I  $    42, @     7     
+       MOV.I  {    41, {     6     
+       MOV.I  {    40, {     5     
+       MOV.I  {    39, {     4     
+       MOV.I  {    38, {     3     
+       MOV.I  {    37, {     2     
+       SPL.B  *     1, <  4000     
+       DIV.F  #  3310, #  3312     
+       DAT.F  }     1, >     1     
+       SPL.B  $    15, } -1850     
+       MOV.I  {     8, <     8     
+       MOV.I  {     7, <     7     
+       MOV.I  {     6, <     6     
+       MOV.I  {     5, <     5     
+       MOV.I  $     9, $   366     
+       SPL.B  *    -8, } -1656     
+       JMP.B  @     2, >  -375     
+       DAT.F  $     0, $     0     
+       DAT.F  $     5, $  2462     
+       SPL.B  #     1, >     3     
+       SPL.B  $  3235, {  1336     
+       ADD.F  #  2668, $    -1     
+       MOV.I  $ -2099, $ -2101     
+       MOV.I  #  2667, *     0     
+       MOV.I  {     7, <     7     
+       MOV.I  {     6, <     6     
+       MOV.I  {     5, <     5     
+       MOV.I  {     4, <     4     
+       MOV.I  $     8, $  3019     
+       JMP.B  @     2, >  -390     
+       DAT.F  $     0, $     0     
+       DAT.F  $     5, $ -2806     
+       SPL.B  #     1, >     3     
+       SPL.B  $   490, {  1337     
+       ADD.F  #  2668, $    -1     
+       MOV.I  $ -2177, $ -2179     
+       MOV.I  #  2667, *     0     
+       SPL.B  #     0, $     0     
+       SPL.B  #   845, <  -845     
+       MOV.I  >   845, $  -844     
+       ADD.F  $    -2, $    -1     
+       DJN.F  $    -2, <  -848     
+       DAT.F  $     0, #    -9     
+

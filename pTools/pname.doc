@@ -1,0 +1,14 @@
+pName is an automatic warrior naming program. It reads filenames from   
+standard input and renames the read files using the ;name lines in      
+the warriors. In case there is no ;name file it uses the original 
+filename. The resulting file names are shorter than 8 charachters and   
+have the .red extension. The primary use of this program is to convert  
+warriors to the DOS platform. Another purpose is to make the filenames 
+standard which could be useful in case of a future huge warrior archive.
+I hope it's going to grow into a warrior maintenance tool.
+Recommended usage on the DOS platform is 
+dir /B *.red | pname
+which will rename all the warriors in the current directory.
+Please make a copy of your warriors before doing so in case of trouble.
+Please write suggestions to nandor.sieben@asu.edu .
+

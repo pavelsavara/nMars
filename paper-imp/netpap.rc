@@ -1,0 +1,131 @@
+;redcode-94nop
+;name Netpaper test 1.07
+;author David Houston
+;strategy Q^4.5
+;strategy boot
+;strategy Paper carrying mov/mov/add bomber
+;strategy Vortex launched imps
+;password Weirding
+;kill Netpaper
+;assert CORESIZE == 8000
+;optimax pwi
+;-----------------------------------------------------
+;-----------------------------------------------------
+; Vortex imps
+;-----------------------------------------------------
+; Boot
+;-----------------------------------------------------
+; Netpaper!
+;-----------------------------------------------------
+; Blank space
+;-----------------------------------------------------
+;Q^5 scan
+; qy * (qz-1) = 1
+;q0 mutation
+;q1 mutation
+;no mutation
+;qz mutation
+;q0 mutation
+;no mutation
+       ORG      START
+       DAT.F  >   -87, >  2593     
+       SPL.B  #     0, < -1972     
+       ADD.X  $     3, $     1     
+       DJN.F  $ -2668, <  2102     
+       DAT.F  $     0, $     0     
+       MOV.I  #  -787, $  2667     
+       SPL.B  $     2, <  2431     
+       SPL.B  $     2, <  2404     
+       SPL.B  $     1, <  2377     
+       MOV.I  <     4, {     4     
+       SPL.B  $     1, $     0     
+       MOV.I  <     1, {     1     
+       SPL.B  $   523, $    12     
+       JMP.B  $  1049, $    -7     
+       SPL.B  @     0, {   101     
+       MOV.I  }    -1, >    -1     
+       SPL.B  @     0, <  1040     
+       MOV.I  }    -1, >    -1     
+       MOV.I  $     5, >  -306     
+       MOV.I  $     4, <  1039     
+       ADD.AB #   387, $  2078     
+       MOV.I  {    -5, <     1     
+       DJN.F  @     0, >  3392     
+       DAT.F  >  2667, >  1861     
+       DAT.F  $  -100, <  1945     
+       DAT.F  $  -100, <  1918     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+       DAT.F  $     0, $     0     
+START  SNE.I  $  -435, $  1969     
+       SEQ.I  <   -66, $ -3070     
+       JMP.B  $    25, }    25     
+       SNE.I  $ -1088, $  1316     
+       SEQ.I  <   -44, $ -3723     
+       JMP.B  $    22, {    22     
+       SNE.I  $ -1065, $  1339     
+       SEQ.I  <   -48, $ -3700     
+       DJN.A  $    19, {    19     
+       SNE.I  $  -652, $  1725     
+       SEQ.I  <   -67, $ -3315     
+       JMP.B  $    16, }    18     
+       SNE.I  $  -603, $  1828     
+       SEQ.I  <   -72, $ -3212     
+       JMP.B  $    13, {    15     
+       SNE.I  $  -632, $  1772     
+       SEQ.I  <   -74, $ -3268     
+       JMP.B  $    10, $     0     
+       SEQ.I  >    13, $  -546     
+       JMP.B  $     9, <    12     
+       SEQ.I  $ -2901, $  -498     
+       JMP.B  $     6, }     6     
+       SEQ.I  $  3772, $ -1825     
+       JMP.B  $     4, {     4     
+       SEQ.I  $  3823, $ -1774     
+       DJN.A  $     2, {     2     
+       JMZ.F  $   -85, $  -875     
+       MUL.B  *     2, $     4     
+       SNE.I  {   -68, @     3     
+       ADD.B  $   -87, $     2     
+       MOV.I  $   -95, @     1     
+       MOV.I  $   -96, } -2962     
+       SUB.AB #    -7, $    -1     
+       DJN.B  $    -3, #    14     
+       JMP.B  $   -93, $     0     
+

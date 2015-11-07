@@ -1,0 +1,93 @@
+.\" mopt.6 by Stefan Strack
+.\" $Id: mopt.6,v 1.0 1994/05/21 21:39:48 stst Exp stst $
+.\"
+.de EX      \"Begin example
+.ne 5
+.if n .sp 1
+.if t .sp .5
+.nf
+.in +5n
+..
+.de EE      \"End example
+.fi
+.in -5n
+.if n .sp 1
+.if t .sp .5
+..
+.TH MOPT 6 "May 15, 1994" "PMARS PROJECT"
+.ad b
+.SH NAME
+mopt \- multiple constant optimizer
+.SH SYNOPSIS
+.I mopt
+.SH DESCRIPTION
+.I Mopt
+finds "optimal" combinations of scanning or bombing constants for corewar
+warriors. In contrast to other popular optimizers (optima, corestep)
+which optimize for a single step value,
+.I mopt
+is useful for optimizing complex bombing/scanning patterns of stones and
+cmp-scanners. The program asks for core size, target size, and up to 10 increment/offset
+pairs.
+"Increment" is the distance between two consecutive bombs/scans;
+"offset" is the position of the first bomb/scan relative to zero.
+Increments and offsets can be simply numbers or "generators" that provide a
+stream of numbers. If at least one generator is specified,
+.I mopt
+will find the 20 best combinations of increment/offset pairs, otherwise it
+will report the score for the specified increment/offset combination.
+Generators have a syntax similar to for-loops in the C language
+(see examples below) and use single letter variables A through Z. You don't
+have to use them in sequence, i.e. A for increment generator #1, B for offset
+generator #2 etc..
+.SH EXAMPLES
+1) Suppose we have a stone:
+.EX
+        spl #A,<B
+        add -1,1
+        mov <-2,-2
+        jmp -2
+.EE
+and we want to find optimal values for increments A and B:
+.EX
+Coresize: 8000 <enter>
+Increment value or generator #1: a=4,a<8000,a=a+4 <enter>
+   Offset value or generator #2: 0 <enter>
+Increment value or generator #2: b=1,b<8000,b=b+2 <enter>
+   Offset value or generator #3: <enter>
+.EE
+2) Now a carpet-bombing cmp-scanner:
+.EX
+        sub incr,1
+        cmp 0,C
+        ...
+incr    spl #-A,<-B
+        ...
+
+Coresize: 8000 <enter>
+Increment value or generator #1: a=2,a<4000,a=a+4 <enter>
+   Offset value or generator #2: c=10,c<15,c=c+1 <enter>
+Increment value or generator #2: b=a <enter>
+   Offset value or generator #3: <enter>
+.EE
+3) Lastly, a spl/jmp bombing cmp-scanner:
+.EX
+        sub incr,1
+        cmp 0,C      ;C is A/2
+        ...
+incr    spl #-A,<-B
+        ...
+
+Coresize: 8000 <enter>
+Increment value or generator #1: a=2,a<4000,a=a+4 <enter>
+   Offset value or generator #2: c=a/2 <enter>
+Increment value or generator #2: b=a <enter>
+   Offset value or generator #3: <enter>
+.EE
+.SH ALGORITHM
+Scoring is based on Nandor Sieben's
+iterative optima algorithm with two modifications:
+A variable gap cut-off ("target size") is used
+and early gaps weigh more than late gaps.
+.SH AUTHOR
+Stefan Strack (stst@vuse.vanderbilt.edu)
