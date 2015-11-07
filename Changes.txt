@@ -1,3 +1,9 @@
+11/07/2015 - nMars0.9.6 
+- moved to github
+- Upgraded to VS 2015
+- Upgraded to .NET 4.0
+- dropped Python module
+
 04/19/2007 - nMars0.9.4 - IDE is running on Linux - Mono 1.2.4
   - still lot of issues on Mono, but we are able to run
   
