@@ -1,4 +1,4 @@
-﻿<!--#include virtual="header" -->
+<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
 
@@ -13,20 +13,11 @@
   <li>Code review: I'm used to use some parts of extreme programming, code review is one. 
     If you can spend some time to review my code I will be very happy.
     Please drop me an email before you start, so I can tell you what needs your attention.</li>
-  <li>Links: If you like my effort, please add link to your pages to <a href="http://nmars.sourceforge.net/">http://nmars.sourceforge.net/</a></li>
-</ul>
-<p>Looking forward to hear you opinion, Thanks !</p>
-
-<h2>Developement Tasks</h2>
-<ul>
-    <li>Please see <a href="index.shtml">Road map</a></li>
-    <li>and <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Todo.txt">TODO list</a></li>
-    <li>Code contribution: I'm open for code contribution to nMars, send me an email to agree on it.</li>
 </ul>
 
 <h2>Contact</h2>
-<p>Project home is currently at <a href="http://nmars.sourceforge.net/">http://nmars.sourceforge.net/</a>
-<br/>Source code can be found at <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/">https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/</a>
+<p>Project home is currently at <a href="https://pavelsavara.github.io/nMars/">https://pavelsavara.github.io/nMars/</a>
+<br/>Source code can be found at <a href="https://github.com/pavelsavara/nMars">https://github.com/pavelsavara/nMars</a>
 </p>
 <p>
   <div class="Pic">

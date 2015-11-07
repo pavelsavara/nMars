@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -8,10 +8,10 @@
   <meta name="description" content="nMars is engine, compiler and IDE for programming game called Core War."/>
   <meta name="robots" content="all, follow"/>
   <meta name="creator" content="Pavel (dot) Savara (at) gmail (dot) com"/>
-  <link rel="shortcut icon" href="http://nmars.sourceforge.net/pics/favicon.ico" type="image/x-icon"/>
-  <script type='text/javascript' src='http://nmars.sourceforge.net/style/menu.js'></script>
-	<link rel="stylesheet" href="http://nmars.sourceforge.net/style/style.css"/>
-	<link rel="stylesheet" href="http://nmars.sourceforge.net/style/menu.css"/>
+  <link rel="shortcut icon" href="https://pavelsavara.github.io/nMars/pics/favicon.ico" type="image/x-icon"/>
+  <script type='text/javascript' src='https://pavelsavara.github.io/nMars/style/menu.js'></script>
+	<link rel="stylesheet" href="https://pavelsavara.github.io/nMars/style/style.css"/>
+	<link rel="stylesheet" href="https://pavelsavara.github.io/nMars/style/menu.css"/>
 </head>
 <body>
 

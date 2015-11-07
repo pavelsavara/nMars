@@ -1,31 +1,23 @@
-﻿<div id="Logo">
-  <a href="http://nmars.sourceforge.net/" title="nMars - Core War MARS for .NET">
-    <img src="http://nmars.sourceforge.net/pics/nMars.png" alt="nMars logo"/>
+<div id="Logo">
+  <a href="https://pavelsavara.github.io/nMars/" title="nMars - Core War MARS for .NET">
+    <img src="https://pavelsavara.github.io/nMars/pics/nMars.png" alt="nMars logo"/>
   </a>
 </div>
 <div id="Menu">
   <br/>
   <div class="suckerdiv">
     <ul id="nMarsNavigation">
-      <li class="MenuLi"><a href="http://nmars.sourceforge.net/index.shtml">nMars</a></li>
-      <li class="MenuLi"><a href="http://nmars.sourceforge.net/pmarsdll.shtml">pMars</a></li>
+      <li class="MenuLi"><a href="https://pavelsavara.github.io/nMars/index.shtml">nMars</a></li>
+      <li class="MenuLi"><a href="https://pavelsavara.github.io/nMars/pmarsdll.shtml">pMars</a></li>
       <li class="MenuLi"><a href="http://nmars.blogspot.com/">News</a></li>
       <li class="MenuLi"><a href="http://sourceforge.net/project/showfiles.php?group_id=174312">Downloads</a></li>
-      <li class="MenuLi"><a href="http://nmars.sourceforge.net/screenshots.shtml">Screenshots</a></li>
-      <li class="MenuLi"><a href="http://nmars.sourceforge.net/packages.shtml">Packages</a></li>
-      <li class="MenuLi"><a href="http://nmars.sourceforge.net/doc.shtml">Documents</a></li>
-      <li class="MenuLi"><a href="http://nmars.sourceforge.net/links.shtml">Links</a></li>
-      <li class="MenuLi"><a href="http://nmars.sourceforge.net/map.shtml">Site map</a></li>
-      <li class="MenuLi"><a href="http://nmars.sourceforge.net/feedback.shtml">Feedback</a></li>
+      <li class="MenuLi"><a href="https://pavelsavara.github.io/nMars/screenshots.shtml">Screenshots</a></li>
+      <li class="MenuLi"><a href="https://pavelsavara.github.io/nMars/packages.shtml">Packages</a></li>
+      <li class="MenuLi"><a href="https://pavelsavara.github.io/nMars/doc.shtml">Documents</a></li>
+      <li class="MenuLi"><a href="https://pavelsavara.github.io/nMars/links.shtml">Links</a></li>
+      <li class="MenuLi"><a href="https://pavelsavara.github.io/nMars/map.shtml">Site map</a></li>
+      <li class="MenuLi"><a href="https://pavelsavara.github.io/nMars/feedback.shtml">Feedback</a></li>
     </ul>
   </div>
   <br/>
-  <a href="http://sourceforge.net/projects/nmars" title="Hosted on SourceForge.net">
-    <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=174312&amp;type=1" width="88" height="31" alt="SourceForge.net" />
-  </a>
-  <br/>
-  <a href="http://nmars.blogspot.com/feeds/posts/default" title="XML Atom feed">
-    <img src="http://www.ane-kolin.cz/zamboch/rssicon.gif" alt="RSS" />
-  </a>
-  
 </div>
