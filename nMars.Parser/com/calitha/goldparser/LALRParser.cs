@@ -1,5 +1,6 @@
 using System;
 using com.calitha.goldparser.lalr;
+using Action = com.calitha.goldparser.lalr.Action;
 
 namespace com.calitha.goldparser
 {

@@ -1,2 +1,2 @@
 rem to generate nMars.snk this file run :
-"C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin\sn.exe" -k nMars.snk
+"c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\sn.exe" -k nMars.snk

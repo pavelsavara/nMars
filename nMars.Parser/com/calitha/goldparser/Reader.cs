@@ -5,6 +5,7 @@ using com.calitha.goldparser.content;
 using com.calitha.goldparser.dfa;
 using com.calitha.goldparser.lalr;
 using com.calitha.goldparser.structure;
+using Action = com.calitha.goldparser.lalr.Action;
 using DFA = com.calitha.goldparser.dfa;
 using State=com.calitha.goldparser.dfa.State;
 using StateCollection=com.calitha.goldparser.dfa.StateCollection;
