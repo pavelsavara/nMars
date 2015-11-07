@@ -1,4 +1,4 @@
-﻿<!--#include virtual="header" -->
+<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
 
@@ -8,6 +8,5 @@ Are included to verify that my implementation is working same as original pMars.
 Currently engine is 100% compatible.
 Parser should be polished a bit.
 	  </p>
-	<p>Page will be extended soon.</p>
 </div>
 <!--#include virtual="footer" -->

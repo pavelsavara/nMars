@@ -28,12 +28,7 @@
       <li><a href="Library.html">nMars.RedCode</a> library</li>
       <li><a href="engine.html">nMars.Engine</a> component</li>
       <li><a href="parser.html">nMars.Parser</a> component</li>
-      <li><a href="python.html">nMars.ShellPy</a> component</li>
       <li><a href="pmarsdll.html">pMars DLL &amp; Wrapper</a> components</li>
-      <li><a href="graphics.html">nMars.Graphics</a> component</li>
-      <li><a href="debugger.html">nMars.Debugger</a> component</li>
-      <li><a href="tests.html">nMars.Test</a> component</li>
-      <li><a href="editor.html">nMars.IDE</a> component</li>
     </ul></li>
   </ul>
 

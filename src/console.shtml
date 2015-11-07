@@ -1,4 +1,4 @@
-﻿<!--#include virtual="header" -->
+<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
 
@@ -59,8 +59,5 @@
       <p>Interactive:<br/>
       <pre>nMars.exe -b -e aeka.red flashpaper.red</pre>
       </p>
-
-    <h2>Implementation</h2>
-  	<p>Section will be written soon.</p>
 </div>
 <!--#include virtual="footer" -->
