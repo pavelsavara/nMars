@@ -1,4 +1,4 @@
-﻿<!--#include virtual="header" -->
+<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
 
@@ -6,27 +6,27 @@
 	
   <h2>Usage</h2>
   <ul>
-    <li>Read about nMars <a href="console.shtml">console interface</a> similar to pMars.</li>
-    <li>Read about nMars superior <a href="ide.shtml">graphical IDE</a> </li>
+    <li>Read about nMars <a href="console.html">console interface</a> similar to pMars.</li>
+    <li>Read about nMars superior <a href="ide.html">graphical IDE</a> </li>
   </ul>
 
   <h2>Developing and Extending</h2>
   <ul>
-    <li>Read overview about <a href="components.shtml">Components</a></li>
+    <li>Read overview about <a href="components.html">Components</a></li>
     <li>Look at <a href="doc/Index.html">Generated doc</a> for nMars sources</li>
   </ul>
 
   <h2>List of Modules</h2>
   <ul>
-    <li><a href="Library.shtml">nMars.RedCode</a> library</li>
-    <li><a href="engine.shtml">nMars.Engine</a> component</li>
-    <li><a href="parser.shtml">nMars.Parser</a> component</li>
-    <li><a href="python.shtml">nMars.ShellPy</a> component</li>
-    <li><a href="pmarsdll.shtml">pMars DLL &amp; Wrapper</a> components</li>
-    <li><a href="graphics.shtml">nMars.Graphics</a> component</li>
-    <li><a href="debugger.shtml">nMars.Debugger</a> component</li>
-    <li><a href="tests.shtml">nMars.Test</a> component</li>
-    <li><a href="editor.shtml">nMars.IDE</a> component</li>
+    <li><a href="Library.html">nMars.RedCode</a> library</li>
+    <li><a href="engine.html">nMars.Engine</a> component</li>
+    <li><a href="parser.html">nMars.Parser</a> component</li>
+    <li><a href="python.html">nMars.ShellPy</a> component</li>
+    <li><a href="pmarsdll.html">pMars DLL &amp; Wrapper</a> components</li>
+    <li><a href="graphics.html">nMars.Graphics</a> component</li>
+    <li><a href="debugger.html">nMars.Debugger</a> component</li>
+    <li><a href="tests.html">nMars.Test</a> component</li>
+    <li><a href="editor.html">nMars.IDE</a> component</li>
   </ul>
 </div>
 <!--#include virtual="footer" -->

@@ -1,10 +1,10 @@
-﻿<!--#include virtual="header" -->
+<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
 
 	<h1>nMars - Site Map</h1>
 	<ul>
-    <li><a href="index.shtml">nMars</a> Home</li>
+    <li><a href="index.html">nMars</a> Home</li>
     <li><a href="http://sourceforge.net/projects/nmars">SourceForge.net</a>
       <ul>
       <li><a href="http://sourceforge.net/project/showfiles.php?group_id=174312">Downloads</a></li>
@@ -13,27 +13,27 @@
 
     <li>Users
       <ul>
-      <li><a href="doc.shtml">Documentation</a> overview</li>
-      <li><a href="console.shtml"> Console</a></li>
-      <li><a href="ide.shtml"> IDE</a></li>
-      <li><a href="components.shtml">Screenshots</a></li>
-      <li><a href="packages.shtml">Packages</a></li>
-      <li><a href="feedback.shtml">Feedback</a></li>
-      <li><a href="links.shtml">Links</a> to other Core War sites</li>
+      <li><a href="doc.html">Documentation</a> overview</li>
+      <li><a href="console.html"> Console</a></li>
+      <li><a href="ide.html"> IDE</a></li>
+      <li><a href="components.html">Screenshots</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="links.html">Links</a> to other Core War sites</li>
     </ul></li>
 
     <li>Developers
       <ul>
-      <li><a href="components.shtml">Components</a></li>
-      <li><a href="Library.shtml">nMars.RedCode</a> library</li>
-      <li><a href="engine.shtml">nMars.Engine</a> component</li>
-      <li><a href="parser.shtml">nMars.Parser</a> component</li>
-      <li><a href="python.shtml">nMars.ShellPy</a> component</li>
-      <li><a href="pmarsdll.shtml">pMars DLL &amp; Wrapper</a> components</li>
-      <li><a href="graphics.shtml">nMars.Graphics</a> component</li>
-      <li><a href="debugger.shtml">nMars.Debugger</a> component</li>
-      <li><a href="tests.shtml">nMars.Test</a> component</li>
-      <li><a href="editor.shtml">nMars.IDE</a> component</li>
+      <li><a href="components.html">Components</a></li>
+      <li><a href="Library.html">nMars.RedCode</a> library</li>
+      <li><a href="engine.html">nMars.Engine</a> component</li>
+      <li><a href="parser.html">nMars.Parser</a> component</li>
+      <li><a href="python.html">nMars.ShellPy</a> component</li>
+      <li><a href="pmarsdll.html">pMars DLL &amp; Wrapper</a> components</li>
+      <li><a href="graphics.html">nMars.Graphics</a> component</li>
+      <li><a href="debugger.html">nMars.Debugger</a> component</li>
+      <li><a href="tests.html">nMars.Test</a> component</li>
+      <li><a href="editor.html">nMars.IDE</a> component</li>
     </ul></li>
   </ul>
 
