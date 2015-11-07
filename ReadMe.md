@@ -12,7 +12,7 @@ http://www.koth.org/
 http://groups.google.com/group/rec.games.corewar
 
 ### Download 
-https://sourceforge.net/projects/nmars/files/nMars/
+https://github.com/pavelsavara/nMars/releases/
 
 ### License
 nMars is Licensed under GNU Lesser General Public License
