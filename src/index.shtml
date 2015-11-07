@@ -13,7 +13,7 @@
         <li>It can be ensembled with <a href="python.html">Python shell</a>, <a href="tests.html">Unit tests</a> and <a href="pmarsdll.html">pMars wrapper</a> components</li>
         <li>All <a href="components.html">components</a> share common <a href="library.html">nMars.RedCode</a> library.</li>
         <li>You can <a href="http://sourceforge.net/project/showfiles.php?group_id=174312&amp;package_id=199883">download</a> several <a href="packages.html">packages</a>.</li>
-        <li>Source code could be checked out from <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/"> subversion repository</a> or <a href="http://nmars.svn.sourceforge.net/viewvc/nmars/trunk/">browsed</a></li>
+        <li>Source code could be checked out from <a href="https://github.com/pavelsavara/nMars"> git repository</a> or <a href="http://nmars.svn.sourceforge.net/viewvc/nmars/trunk/">browsed</a></li>
 
     </ul>
 
@@ -32,7 +32,7 @@
     <ul>
         <li>It's well architected, around solid interfaces, extensible and reusable</li>
         <li>Engine is 100% compatible with pMars and ICWS94</li>
-        <li>Parser is LALR <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/nMars.Parser/Properties/RedCode.grm">grammar</a> driven</li>
+        <li>Parser is LALR <a href="https://github.com/pavelsavara/nMars/blob/master/nMars.Parser/Properties/RedCode.grm">grammar</a> driven</li>
         <li>nMars is unit tested against pMars</li>
         <li>Supports most pMars commandline switches</li>
         <li>IDE supports projects and solutions as a setup frame for your warriors</li>
@@ -44,7 +44,7 @@
         <li>Debugger is capable of step back during gebugging</li>
         <li>All configuration is XML driven</li>
         <li>Target platform is .NET 2.0 or Mono in the future</li>
-        <li>Licensed under <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/License.txt">LGPL</a></li>
+        <li>Licensed under <a href="https://github.com/pavelsavara/nMars/blob/master/License.txt">LGPL</a></li>
     </ul>
 
     <h2>History</h2>
@@ -62,7 +62,7 @@
         <li>09/17/2006 - nMars0.2   - Parser more powerfull</li>
         <li>08/12/2006 - nMars0.1   - First version</li>
     </ul>
-    <p>Complete list of <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Changes.txt">changes</a></p>
+    <p>Complete list of <a href="https://github.com/pavelsavara/nMars/blob/master/Changes.txt">changes</a></p>
 
 </div>
 <!--#include virtual="footer" -->
