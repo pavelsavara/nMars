@@ -1,0 +1,136 @@
+﻿<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+<h1>nMars - Core War info</h1>
+<p>Core War is a programming game in which two or more battle programs (called warriors) compete for the control of the 
+MARS virtual computer (Memory Array Redcode Simulator). 
+These battle programs are written in an abstract assembly language called Redcode. 
+The object of the game is to cause all processes of the opposing program(s) to terminate, 
+leaving your program in sole possession of the machine. [from wikipedia] </p>
+
+<p>If you are stil not sure what Core War is follow links below, but return back :-)</p>
+
+<h2>Core sites</h2>
+<ul>
+  <li><a href="http://www.koth.org/">King Of The Hill</a></li>
+</ul>
+<ul>
+  <li><a href="http://www.corewar.info/">Fizmo's pages</a></li>
+  <li><a href="http://corewar.co.uk/">John Metcalf's pages</a></li>
+  <li><a href="http://bio.freelogy.org/wiki/REC.GAMES.COREWAR.FAQ">FAQ</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Corewars">Wikipedia overview</a></li>
+  
+</ul>
+
+<h2>News and Groups</h2>
+<ul>
+  <li><a href="http://groups.google.com/group/rec.games.corewar">Browse rec.games.corewars group</a></li>
+</ul>
+<ul>
+  <li><a href="mailto:listproc@koth.org?body=subscribe corewar-l (name)">Subscribe rec.games.corewars group</a></li>
+  <li><a href="irc://irc.koth.org">Chat on irc.koth.org</a>, <a href="http://harald.ist.org/ares/irc/">web interface</a></li>
+  <li><a href="http://corewar.home.pipeline.com/rss/rss.html">Koth RSS</a> - feeds with results from koth.org</li>
+  <li><a href="http://harald.ist.org/weblog/">Harald's blog</a></li>
+  <li><a href="http://martin.ankerl.com/category/corewars/">Martin's blog</a></li>
+<!--
+  <li><a href="http://nmars.blogspot.com/">Pavel's blog</a></li>
+-->
+  
+</ul>
+
+<h2>Hills</h2>
+<ul>
+  <li><a href="http://www.koth.org/">King Of The Hill</a></li>
+  <br>
+  <li><a href="http://sal.math.ualberta.ca/">SAL</a></li>
+  <li><a href="http://www.ociw.edu/~birk/COREWAR/koenigstuhl.html">Koenigstuhl</a></li>
+  <li><a href="http://pauillac.inria.fr/~doligez/corewar/olympus/">Mount Olympus</a></li>
+</ul>
+
+<h2>Software</h2>
+<ul>
+  <li><a href="http://redcoder.sourceforge.net/?p=whichmars">Which Mars ?</a> - (Will 'Varfar') - guide thru various MARS implementations.</li>
+</ul>
+<ul>
+  <li><a href="http://corewar.sourceforge.net/">pMars</a> - reference implementation of M.A.R.S.
+  <a href="http://sourceforge.net/project/showfiles.php?group_id=174312&amp;package_id=214071">Download</a> binaries hosted here.
+  </li>
+  <li><a href="http://www.cs.helsinki.fi/u/jpihlaja/exhaust/exhaust.html">Exhaust</a> - (M Joonas Pihlaja) - </li>
+  <li><a href="http://corewar.co.uk/ankerl/exhaust-ma.htm">Exhaust-ma</a> - (Martin Ankerl) - </li>
+  <li><a href="http://martin.ankerl.com/category/corewars/">exMars</a> - (Martin Ankerl) - </li>
+  <li><a href="http://corewar.co.uk/ankerl/qmars.htm">qMars</a> - (Martin Ankerl) - engine written with C++ templates.</li>
+  <li><a href="http://www.geocities.com/corewin2/">Corewin</a> - (Chip Wendell) - GUI IDE for Windows </li>
+  <li><a href="http://harald.ist.org/ares/">ARES</a> - (Harald) - GUI IDE for Windows written in delphi.</li>
+  <li><a href="http://corewar.co.uk/ankerl/yace.htm">Yace</a> - (Martin Ankerl) - evolver</li>
+  <li><a href="http://www.v-lo.krakow.pl/~michal/fmars.html">fMars</a> - (Michal Janeczek) -</li>
+  <li><a href="http://corewars.jgutzeit.de/index.en.html">PyCorewar</a> - (Jens Gutzeit) -</li>
+  <li><a href="http://redcoder.sourceforge.net/">Redcoder</a> - (Will 'Varfar') -</li>
+  <li><a href="http://www.corewar.info/optimax/">Optimax</a> - (Sascha Zapf) - constant optimizer</li>
+  <li><a href="http://sourceforge.net/projects/corewars/">Corewars</a> - (Walter Hofmann) - GTK</li>
+  <li><a href="http://cre.sourceforge.net/index.htm">CRE</a> - (Loren Jamison) - evolver</li>
+  <!--
+  <li><a href=""></a></li>
+  -->
+</ul>
+
+<h2>People</h2>
+<ul>
+  <li><a href="http://corewar.co.uk/whoswho.htm">Who is Who</a></li>
+</ul>
+<ul>
+  <li><a href="http://corewar.co.uk/">John Metcalf</a></li>
+  <li><a href="http://www.corewar.info/">Christian Schmidt</a> [Fizmo]</li>
+  <li><a href="http://martin.ankerl.com/category/corewars/">Martin Ankerl</a> [Martinus], 
+      <a href="http://corewar.co.uk/ankerl/">archived</a></li>
+  <li><a href="http://www.cs.helsinki.fi/u/jpihlaja/cw/">M Joonas Pihlaja</a></li>
+  <li><a href="http://corewars.jgutzeit.de/index.en.html">Jens Gutzeit</a> [Fluffy]</li>
+  <li><a href="http://www.ociw.edu/~birk/COREWAR/">Christoph Birk</a></li>
+  <li><a href="http://www.v-lo.krakow.pl/~michal/fmars.html">Michal Janeczek</a></li>
+  <li><a href="http://www.estadium.ya.com/neogryzor/corewars.htm">German Labarga</a> [Neogryzor]</li>
+  <li><a href="http://www.redcode.nl/">Roy van Rijn</a></li>
+  <li><a href="http://harald.ist.org/ares/">Harald Markus Wirth</a></li>
+  <li><a href="http://www.ecst.csuchico.edu/~pizza/koth/">Thomas H. Davies</a></li>
+  <li><a href="http://ezmo.com/jason/projects/corewar/corewar.html">Jason</a></li>
+  <li><a href="http://corewar.home.pipeline.com/">Philip Thorne</a> [Waknuk]</li>
+  <li><a href="http://koti.mbnet.fi/mizcu/corewars/index.htm">Mizcu</a></li>
+  <li><a href="http://www.knf.pw.edu.pl/~adamow/corewar/">Lukasz Adamowski</a></li>
+  <li><a href="http://www.infionline.net/~wtnewton/corewar/evol/">Jason Boer</a></li>
+  <li><a href="http://www.shadowmagic.org.uk/corewar/">Philip Kendall</a> [Pak21]</li>
+  <li><a href="http://www.math.ualberta.ca/~bvowk/corewar.html">Barkley Vowk</a> [Bvowk]</li>
+  <li><a href="http://datagram.redcode.nl/">Datagram</a> [Datagram]</li>
+  <li><a href="http://bio.freelogy.org/wiki/Coreworld">Alexander Wait</a> [Sasha]</li>
+  <li><a href="http://vyznev.net/corewar/">Ilmari Karonen</a></li>
+  <li><a href="http://corewar.co.uk/knight/index.htm">Phil Knight</a></li>
+  <li><a href="http://www.infionline.net/~wtnewton/corewar/">Terry Newton</a></li>
+  <li><a href="http://www.firetrench.com/corewar/">John Everitt</a></li>
+  <li><a href="http://cw-evolver.sourceforge.net/">Miha Vitorovic</a> [Mike5]</li>
+  <li><a href="http://users.erols.com/dbhillis/">Dave Hillis</a></li>
+  <li><a href="http://www.geocities.com/CapeCanaveral/Launchpad/6898/evolving.html">Ryan Coleman</a></li>
+  <li><a href="http://www.ecst.csuchico.edu/~pizza/koth/evolving_warriors.html">John Perry</a></li>
+  <li><a href="http://www.mynetcologne.de/~nc-zapfsa/">Sascha Zapf</a></li>
+  <li><a href="http://grabun.com/corewar/">Lukasz Grabun</a></li>
+  <!--
+  -->
+</ul>
+
+<h2>Documentation</h2>
+<ul>
+  <li><a href="http://www.koth.org/info/icws94.html">ICWS94</a> - draft of standard. But current implementation of pMars is stronger rule.</li>
+  <li><a href="http://www.corewar.info/lexicon/94draft.htm">ICWS94</a> - Overview</li>
+  
+</ul>
+
+<h2>Archives</h2>
+<ul>
+  <li><a href="ftp://ftp.koth.org/pub/corewar/">ftp.koth.org</a></li>
+</ul>
+
+<h2>Warrior collections</h2>
+<ul>
+  <li><a href="http://www.ociw.edu/~birk/COREWAR/koenigstuhl.html">Koenigstuhl</a> - look for .tar files</li>
+</ul>
+
+<p>List is not yet satisfactory, if you missing your favorite site here, please let me know.</p>
+
+</div>
+<!--#include virtual="footer" -->

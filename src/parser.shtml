@@ -1,0 +1,24 @@
+﻿<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+
+	<h1>nMars - redcode parser</h1>
+    <h2>Parser structure</h2>
+    <p>Below are structures of parser. File is parsed by LALR <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/nMars.Parser/Properties/RedCode.grm">grammar</a>, statements and expressions are produced. 
+      Then are statements turned to warrior instructions.</p>
+    <div class="Pic">
+      <img src="diagrams/Parser.png" alt="nMars redcode parser"/>
+    </div>
+
+	<p>Targeting to be full ICWS '94 RedCode specification compliant.
+<br/>Current implementation doesn't support (yet)
+<br/> - EQU macro substitutions (now it works like functions)
+<br/> - registers in-place assignments (k=k+1)
+<br/>It's based on <a href="http://www.devincook.com/goldparser/">GOLD parser</a> by Devin Cook
+<br/>And <a href="http://www.xs4all.nl/~rvanloen/goldparser.html">Calitha .NET Engine</a> for GOLD parser by Robert van Loenhout which was little bit modified.
+	</p>
+
+	<p>Page will be extended soon.</p>
+
+</div>
+<!--#include virtual="footer" -->

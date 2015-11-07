@@ -1,0 +1,107 @@
+﻿<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+
+    <h1>nMars - Core War MARS for .NET</h1>
+    <p>nMars is engine, compiler and IDE for programming game called <a href="links.shtml">Core War</a>. </p>
+    
+    <h2>Overview</h2>
+    <ul>
+        <li>nMars has <a href="console.shtml">console interface</a> and <a href="ide.shtml">graphical IDE</a></li>
+        <li>Under cover are running <a href="parser.shtml">Parser</a>, <a href="engine.shtml">Engine</a> and <a href="debugger.shtml">Debugger</a> components</li>
+        <li>It can be ensembled with <a href="python.shtml">Python shell</a>, <a href="tests.shtml">Unit tests</a> and <a href="pmarsdll.shtml">pMars wrapper</a> components</li>
+        <li>All <a href="components.shtml">components</a> share common <a href="library.shtml">nMars.RedCode</a> library.</li>
+        <li>You can <a href="http://sourceforge.net/project/showfiles.php?group_id=174312&amp;package_id=199883">download</a> several <a href="packages.shtml">packages</a>.</li>
+        <li>Source code could be checked out from <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/"> subversion repository</a> or <a href="http://nmars.svn.sourceforge.net/viewvc/nmars/trunk/">browsed</a></li>
+        
+    </ul>
+
+    <h2>Screen shots</h2>
+    <div class="Pic">
+      <a href="screens/ide-editor.png">
+        <img src="screens/ide-editor-s.png" alt="nMars editor"/>
+      </a>
+      <a href="screens/ide-debugger-4.png">
+        <img src="screens/ide-debugger-4s.png" alt="nMars debugger"/>
+      </a>
+    </div>
+    <a href="screenshots.shtml">More screenshots</a>
+
+    <h2>Features</h2>
+    <ul>
+        <li>It's well architected, around solid interfaces, extensible and reusable</li>
+        <li>Engine is 100% compatible with pMars and ICWS94</li>
+        <li>Parser is LALR <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/nMars.Parser/Properties/RedCode.grm">grammar</a> driven</li>
+        <li>nMars is unit tested against pMars</li>
+        <li>Supports most pMars commandline switches</li>
+        <li>IDE supports projects and solutions as a setup frame for your warriors</li>
+        <li>IDE projects containning setup of rules and options</li>
+        <li>IDE has familiar look and feel</li>
+        <li>Graphical debugger is asynchronous to UI, so it can run at any speed, still painting core state.</li>
+        <li>Debugger is extended with IronPython shell</li>
+        <li>Debugger core views are packed with information about events and status of each cell</li>
+        <li>Debugger is capable of step back during gebugging</li>
+        <li>All configuration is XML driven</li>
+        <li>Target platform is .NET 2.0 or Mono in the future</li>
+        <li>Licensed under <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/License.txt">LGPL</a></li>
+    </ul>
+
+    <h2>History</h2>
+    <ul>
+        <li>06/03/2007 - nMars0.9.4 - IDE on Mono/Linux (currently doesn't work on Mono again :-(</li>
+        <li>02/28/2007 - nMars0.9.1 - bug fixes</li>
+        <li>02/10/2007 - nMars0.9   - IDE with breakpoints</li>
+        <li>01/13/2007 - nMars0.8.3 - IDE preview released</li>
+        <li>11/19/2006 - nMars0.8   - debugger</li>
+        <li>11/13/2006 - nMars0.7   - going public, overview documents, posted to group</li>
+        <li>11/13/2006 - nMars0.6   - engine unit test</li>
+        <li>11/08/2006 - nMars0.5   - more binaries</li>
+        <li>11/03/2006 - nMars0.4   - pMars included</li>
+        <li>09/28/2006 - nMars0.3   - first binary on released</li>
+        <li>09/17/2006 - nMars0.2   - Parser more powerfull</li>
+        <li>08/12/2006 - nMars0.1   - First version</li>
+    </ul>
+    <p>Complete list of <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Changes.txt">changes</a></p>
+
+    <h2>Road map</h2>
+    <ul>
+        <li>Q2/2007 - nMars1.0 - stabilization</li>
+    </ul>
+    <ul>
+        <li>??/???? - nMars1.1 - round robin, hill, tournaments</li>
+        <li>??/???? - nMars1.2 - wrap fast engine</li>
+        <li>??/???? - nMars1.3 - evolver, optimizer</li>
+    </ul>
+    <ul>
+        <li>??/???? - nMars?.? - screensaver</li>
+        <li>??/???? - nMars?.? - syntax highliting in IDE</li>
+        <li>??/???? - nMars?.? - click on error in IDE</li>
+        <li>??/???? - nMars2.? - redcode syntax extensions</li>
+    </ul>
+    <p>Complete list of <a href="https://nmars.svn.sourceforge.net/svnroot/nmars/trunk/Todo.txt">wishes</a></p>
+
+    <h2>Feedback</h2>
+    <p><a href="feedback.shtml">Feedback</a> is really appreciated.</p>
+    <p style="padding-left: 25%"><strong>Pavel Šavara</strong></p>
+    <br/>
+    <br/>
+
+
+<div id="ImpRing">
+  <a
+  href="http://vyznev.net/corewar/impring/?op=prev&amp;id=nmars"
+  ><img src="pics/cwir-prev.png"
+  alt="&lt;PREV " /></a><a
+  href="http://vyznev.net/corewar/impring/"
+  ><img src="pics/cwir-list.png"
+  alt=" LIST " /></a><a
+  href="http://vyznev.net/corewar/impring/?op=rand&amp;id=nmars"
+  ><img src="pics/cwir-rand.png"
+  alt=" RAND " /></a><a
+  href="http://vyznev.net/corewar/impring/?op=next&amp;id=nmars"
+  ><img src="pics/cwir-next.png"
+  alt=" NEXT&gt;" /></a>
+</div>
+
+</div>
+<!--#include virtual="footer" -->

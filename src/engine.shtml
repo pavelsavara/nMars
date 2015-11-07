@@ -1,0 +1,22 @@
+﻿<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+
+	<h1>nMars - Engine - Core simulator</h1>
+
+    <h2>Engine structure</h2>
+    <p>Below is structure of engine. It is made in layers, where higher layer is derived from layer below and extends it's behavior.</p>
+    <div class="Pic">
+      <img src="diagrams/Engine.png" alt="nMars engine"/>
+    </div>
+
+	<p>Is full ICWS '94 RedCode specification compliant and pMars compatible.
+<br/>Basic idea is to be easily comprehensible and maintainable.
+<br/>There is no effort to make it fast.
+<br/>It is 100% compatible with pMars 0.9.2, see unit tests.
+<br/>This implementation support interfaces for watching, debugging - still in developement.
+	  </p>
+	<p>Page will be extended soon.</p>
+
+</div>
+<!--#include virtual="footer" -->

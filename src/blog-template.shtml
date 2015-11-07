@@ -1,0 +1,277 @@
+﻿<!--#include virtual="header" -->
+<!--#include virtual="menu" -->
+<div id="Content">
+<!-- ********************************************************************* -->
+
+<b:include data='blog' name='all-head-content'/>
+<b:skin><![CDATA[]]></b:skin>
+
+<div id='outer-wrapper'>
+  <b:section class='main' id='main' showaddelement='yes'>
+    <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog'>
+      
+      <b:includable id='main' var='top'>
+        <!-- posts -->
+        <div class='blog-posts'>
+
+          <b:include data='top' name='status-message'/>
+
+          <b:loop values='data:posts' var='post'>
+            <b:if cond='data:post.dateHeader'>
+              <a expr:href='data:post.url'>
+                <h2>
+                  <data:post.title/>
+                </h2>
+              </a>
+            </b:if>
+            <b:include data='post' name='post'/>
+            <b:if cond='data:blog.pageType == "item"'>
+              <b:include data='post' name='comments'/>
+            </b:if>
+          </b:loop>
+        </div>
+
+        <!-- navigation -->
+        <b:include name='nextprev'/>
+
+      </b:includable>
+
+      <b:includable id='postQuickEdit' var='post'>
+        <b:if cond='data:post.editUrl'>
+          <span expr:class='"item-control " + data:post.adminClass'>
+            <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg'>
+              <span class='quick-edit-icon'>&#160;</span>
+            </a>
+          </span>
+        </b:if>
+      </b:includable>
+
+      <b:includable id='comments' var='post'>
+        <div class='comments' id='comments'>
+          <a name='comments'/>
+          <b:if cond='data:post.allowComments'>
+            <h4>
+              <b:if cond='data:post.numComments == 1'>
+                1 <data:commentLabel/>:
+                <b:else/>
+                <data:post.numComments/> <data:commentLabelPlural/>:
+              </b:if>
+            </h4>
+
+            <dl id='comments-block'>
+              <b:loop values='data:post.comments' var='comment'>
+                <dt class='comment-author' expr:id='"comment-" + data:comment.id'>
+                  <a expr:name='"comment-" + data:comment.id'/>
+                  <b:if cond='data:comment.authorUrl'>
+                    <a expr:href='data:comment.authorUrl' rel='nofollow'>
+                      <data:comment.author/>
+                    </a>
+                    <b:else/>
+                    <data:comment.author/>
+                  </b:if>
+                  <data:commentPostedByMsg/>
+                </dt>
+                <dd class='comment-body'>
+                  <b:if cond='data:comment.isDeleted'>
+                    <span class='deleted-comment'>
+                      <data:comment.body/>
+                    </span>
+                    <b:else/>
+                    <p>
+                      <data:comment.body/>
+                    </p>
+                  </b:if>
+                </dd>
+                <dd class='comment-footer'>
+                  <span class='comment-timestamp'>
+                    <a expr:href='"#comment-" + data:comment.id' title='comment permalink'>
+                      <data:comment.timestamp/>
+                    </a>
+                    <b:include data='comment' name='commentDeleteIcon'/>
+                  </span>
+                </dd>
+              </b:loop>
+            </dl>
+
+            <p class='comment-footer'>
+              <a expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>
+                <data:postCommentMsg/>
+              </a>
+            </p>
+          </b:if>
+
+          <div id='backlinks-container'>
+            <div expr:id='data:widget.instanceId + "_backlinks-container"'>
+              <b:if cond='data:post.showBacklinks'>
+                <b:include data='post' name='backlinks'/>
+              </b:if>
+            </div>
+          </div>
+        </div>
+      </b:includable>
+
+      <b:includable id='backlinkDeleteIcon' var='backlink'>
+        <span expr:class='"item-control " + data:backlink.adminClass'>
+          <a expr:href='data:backlink.deleteUrl' expr:title='data:top.deleteBacklinkMsg'>
+            <span class='delete-comment-icon'>&#160;</span>
+          </a>
+        </span>
+      </b:includable>
+
+      <b:includable id='backlinks' var='post'>
+        <a name='links'/>
+        <h4>
+          <data:post.backlinksLabel/>
+        </h4>
+        <b:if cond='data:post.numBacklinks != 0'>
+          <dl class='comments-block' id='comments-block'>
+            <b:loop values='data:post.backlinks' var='backlink'>
+              <div class='collapsed-backlink backlink-control'>
+                <dt class='comment-title'>
+                  <span class='backlink-toggle-zippy'>&#160;</span>
+                  <a expr:href='data:backlink.url' rel='nofollow'>
+                    <data:backlink.title/>
+                  </a>
+                  <b:include data='backlink' name='backlinkDeleteIcon'/>
+                </dt>
+                <dd class='comment-body collapseable'>
+                  <data:backlink.snippet/>
+                </dd>
+                <dd class='comment-footer collapseable'>
+                  <span class='comment-author'>
+                    <data:post.authorLabel/>
+                    <data:backlink.author/>
+                  </span>
+                  <span class='comment-timestamp'>
+                    <data:post.timestampLabel/>
+                    <data:backlink.timestamp/>
+                  </span>
+                </dd>
+              </div>
+            </b:loop>
+          </dl>
+        </b:if>
+        <p class='comment-footer'>
+          <a class='comment-link' expr:href='data:post.createLinkUrl' expr:id='data:widget.instanceId + "_backlinks-create-link"' target='_blank'>
+            <data:post.createLinkLabel/>
+          </a>
+        </p>
+      </b:includable>
+
+      <b:includable id='post' var='post'>
+        <div>
+          <a expr:name='data:post.id'/>
+
+          <div>
+            <p><data:post.body/></p>
+            <div style='clear: both;'/>
+            <!-- clear for photos floats -->
+          </div>
+          <div class='post-footer'>
+            <p class='post-footer-line post-footer-line-1'>
+              <span class='post-timestamp'>
+                <b:if cond='data:top.showTimestamp'>
+                  <b:if cond='data:post.url'>
+                    <a class='timestamp-link' expr:href='data:post.url' title='permanent link'>
+                      <data:post.dateHeader/>
+                      <data:top.timestampLabel/>
+                      <data:post.timestamp/>
+                    </a>
+                  </b:if>
+                </b:if>
+              </span>
+              <span class='post-comment-link'>
+                <b:if cond='data:blog.pageType != "item"'>
+
+                  <b:if cond='data:post.allowComments'>
+                    <a class='comment-link' expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>
+                      <b:if cond='data:post.numComments == 1'>
+                        1 <data:top.commentLabel/><b:else/><data:post.numComments/> <data:top.commentLabelPlural/>
+                      </b:if>
+                    </a>
+                  </b:if>
+                </b:if>
+              </span>
+              <span class='post-icons'>
+                <!-- email post links -->
+                <b:if cond='data:post.emailPostUrl'>
+                  <span class='item-action'>
+                    <a expr:href='data:post.emailPostUrl' expr:title='data:top.emailPostMsg'>
+                      <span class='email-post-icon'>&#160;</span>
+                    </a>
+                  </span>
+                </b:if>
+
+              </span>
+            </p>
+          </div>
+        </div>
+      </b:includable>
+
+      <b:includable id='status-message'>
+        <b:if cond='data:navMessage'>
+          <div class='status-msg-wrap'>
+            <div class='status-msg-body'>
+              <data:navMessage/>
+            </div>
+            <div class='status-msg-border'>
+              <div class='status-msg-bg'>
+                <div class='status-msg-hidden'>
+                  <data:navMessage/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style='clear: both;'/>
+        </b:if>
+      </b:includable>
+
+      <b:includable id='nextprev'>
+        <div class='blog-pager' id='blog-pager'>
+          <b:if cond='data:newerPageUrl'>
+            <span id='blog-pager-newer-link'>
+              <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + "_blog-pager-newer-link"' expr:title='data:newerPageTitle'>
+                <data:newerPageTitle/>
+              </a>
+            </span>
+          </b:if>
+
+          <b:if cond='data:olderPageUrl'>
+            <span id='blog-pager-older-link'>
+              <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + "_blog-pager-older-link"' expr:title='data:olderPageTitle'>
+                <data:olderPageTitle/>
+              </a>
+            </span>
+          </b:if>
+
+          <b:if cond='data:blog.homepageUrl != data:blog.url'>
+            <a class='home-link' expr:href='data:blog.homepageUrl'>
+              <data:homeMsg/>
+            </a>
+            <b:else/>
+            <b:if cond='data:newerPageUrl'>
+              <a class='home-link' expr:href='data:blog.homepageUrl'>
+                <data:homeMsg/>
+              </a>
+            </b:if>
+          </b:if>
+
+        </div>
+        <div class='clear'/>
+      </b:includable>
+
+      <b:includable id='commentDeleteIcon' var='comment'>
+        <span expr:class='"item-control " + data:comment.adminClass'>
+          <a expr:href='data:comment.deleteUrl' expr:title='data:top.deleteCommentMsg'>
+            <span class='delete-comment-icon'>&#160;</span>
+          </a>
+        </span>
+      </b:includable>
+      
+    </b:widget>
+  </b:section>
+</div>
+
+<!-- ********************************************************************* -->
+</div>
+<!--#include virtual="footer" -->
