@@ -4,20 +4,7 @@
 
 	<h1>nMars.RedCode Library</h1>
 
-    <h2>Overview</h2>
-    <ul>
-      <li>This is central library of nMars.</li>
-      <li>It contains basic types 
-      <a href="doc/html/T_nMars_RedCode_Instruction.htm">Instruction</a>,
-      <a href="doc/html/T_nMars_RedCode_Warrior.htm">Warrior</a>,
-      <a href="doc/html/T_nMars_RedCode_Project.htm">Project</a> etc.
-      </li>
-      <li>It contains interfaces 
-      <a href="doc/html/T_nMars_RedCode_IParser.htm">IParser</a>,
-      <a href="doc/html/T_nMars_RedCode_IEngine.htm">IEngine</a> 
-      and other <a href="components.html">components</a>
-      </li>
-    </ul>
+    This is central library of nMars.
 
     <h2>Warrior structure</h2>
     <p>Below is structure of Warrior and Instruction.</p>

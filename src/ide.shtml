@@ -1,4 +1,4 @@
-﻿<!--#include virtual="header" -->
+<!--#include virtual="header" -->
 <!--#include virtual="menu" -->
 <div id="Content">
     <h1>nMars - IDE</h1>
@@ -65,7 +65,6 @@
       <li>Single click on cell will focus it in memory listing</li>
       <li>Double click on cell will open breakpoints editor</li>
       <li>There is console/shell which could execute textual commands</li>
-      <li>Shell could be extended by nMarsShellPy module with IronPython</li>
     </ul>
 </div>
 <!--#include virtual="footer" -->
