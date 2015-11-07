@@ -1,1 +1,0 @@
-SDL-devel-1.2.15-VC
