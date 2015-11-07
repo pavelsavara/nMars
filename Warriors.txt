@@ -1,6 +1,0 @@
-Create subdirectory Warriors in this directory and place your warriors which you want to use with nMars here.
-For example for unit tests.
-Collection of warriror I found on internet can be checked out using subversion from
-https://nmars.svn.sourceforge.net/svnroot/nmars/warriors
-It could be done running command in this directory
-svn co https://nmars.svn.sourceforge.net/svnroot/nmars/warriors Warriors

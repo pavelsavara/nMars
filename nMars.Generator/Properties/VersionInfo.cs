@@ -1,1 +1,0 @@
-link ../../nMars.RedCode/Properties/VersionInfo.cs
