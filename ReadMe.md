@@ -1,11 +1,12 @@
 # nMars - Core War MARS for .NET
 
 ### Home
-Please start here for full info: 
+Project home is currently at
+https://github.com/pavelsavara/nMars
+
+Here are simple pages i created for the project long ago 
 https://pavelsavara.github.io/nMars/
 
-Project home is currently at
-https://pavelsavara.github.io/nMars/
 
 ### More info
 http://www.koth.org/
