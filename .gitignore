@@ -1,5 +1,11 @@
-packages/**
+**/packages/**
 **/obj/**
 **/Debug*/**
+**/*.o
 **/*.*sdf
 **/Release*/**
+**/.vs/**
+**/*.vcxproj.user
+pMars/src/pmars-c
+pMars/src/pmars-cs
+pMars/src/pMarsBinary*/**

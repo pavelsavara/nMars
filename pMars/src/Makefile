@@ -17,8 +17,9 @@ CC = gcc			# req. for linux
 # (7)   -DPERMUTATE                         enables -P switch
 # (8)   -DSDLGRAPHX     1                   SDL graphics (generic)
 
-#DBG = -g -W -Wall -pg
-CFLAGS = -O4 -fomit-frame-pointer $(DBG) -DSERVER -DEXT94 -DPERMUTATE $(INC)
+CFLAGS = -O4 -DEXT94 -DPERMUTATE -DSERVER -DPMARSDLL_EXPORTS
+
+# CFLAGS = -O -DEXT94 -DPERMUTATE -DSDLGRAPHX $(INC)
 LFLAGS = -x
 # LIB = -lcurses -ltermlib		# enable this one for curses display
 # LIB = -lvgagl -lvga			# enable this one for Linux/SVGA
@@ -26,7 +27,7 @@ LFLAGS = -x
 # INC = `sdl-config --cflags`		# enable this one for SDL graphics
 # LIB = `sdl-config --libs`		# enable this one for SDL graphics
 
-EXESUFFIX=
+EXESUFFIX=-cs
 .SUFFIXES: .o .c .c~ .man .doc .6
 MAINFILE = pmars$(EXESUFFIX)
 
@@ -64,3 +65,4 @@ $(OBJ1) $(OBJ2) $(OBJ3): Makefile config.h global.h
 
 clean:
 	rm -f $(OBJ1) $(OBJ2) $(OBJ3) core
+
